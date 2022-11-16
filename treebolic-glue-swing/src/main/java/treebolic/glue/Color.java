@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+
 package treebolic.glue;
 
 import java.io.IOException;
@@ -5,6 +9,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Color, embeds awt's Color
+ *
+ * @author Bernard Bou
+ */
 public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 {
 	private static final long serialVersionUID = 5704334480899935769L;
@@ -83,24 +92,8 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 	@Override
 	public void parse(final String string)
 	{
-		this.color = java.awt.Color.decode("0x" + string); //$NON-NLS-1$
+		this.color = java.awt.Color.decode("0x" + string); 
 	}
-
-	// @Override
-	// public Color makeBrighter()
-	// {
-	// if (this.color == null)
-	// return null;
-	// return new Color(this.color.brighter());
-	// }
-	//
-	// @Override
-	// public Color makeDarker()
-	// {
-	// if (this.color == null)
-	// return null;
-	// return new Color(this.color.darker());
-	// }
 
 	private static final float DARKERFACTOR = 0.85F;
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+
 package treebolic.glue;
 
 import java.awt.event.InputEvent;
@@ -5,6 +9,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+/**
+ * EventListener
+ *
+ * @author Bernard Bou
+ */
 public abstract class EventListener implements MouseListener, MouseMotionListener, treebolic.glue.iface.EventListener
 {
 	// MouseListener;

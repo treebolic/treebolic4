@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+
 package treebolic.glue;
 
 import java.awt.BasicStroke;
@@ -11,6 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+/**
+ * Graphics, embeds awt's Graphics
+ *
+ * @author Bernard Bou
+ */
 public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 {
 	static public final int PLAIN = 0;
@@ -23,13 +32,13 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 
 	static private final float[] DOTPATTERN = { 1, 3 };
 
-	static private Stroke solidStroke = new BasicStroke(1.0F, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F);
+	static private final Stroke solidStroke = new BasicStroke(1.0F, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F);
 
-	static private Stroke dotStroke = new BasicStroke(1.0F, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F, Graphics.DOTPATTERN, 0);
+	static private final Stroke dotStroke = new BasicStroke(1.0F, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F, Graphics.DOTPATTERN, 0);
 
-	static private Stroke dashStroke = new BasicStroke(1.0F, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F, Graphics.DASHPATTERN, 0);
+	static private final Stroke dashStroke = new BasicStroke(1.0F, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F, Graphics.DASHPATTERN, 0);
 
-	static private Map<Float, Font> fontCache = new HashMap<Float, Font>();
+	static private final Map<Float, Font> fontCache = new HashMap<>();
 
 	/**
 	 * Graphics2D context
@@ -64,7 +73,7 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 		this.g.setPaintMode();
 		this.g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		this.font = null;
-		this.transformStack = new Stack<AffineTransform>();
+		this.transformStack = new Stack<>();
 	}
 
 	public Graphics(final java.awt.Graphics graphics)

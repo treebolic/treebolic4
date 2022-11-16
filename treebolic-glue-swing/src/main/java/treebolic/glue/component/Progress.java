@@ -1,13 +1,7 @@
-/**
- * Title : Treebolic
- * Description : Treebolic
- * Version : 3.x
- * Copyright : (c) 2001-2014
- * Terms of use : see license agreement at http://treebolic.sourceforge.net/en/license.htm
- * Author : Bernard Bou
- *
- * Update : Mon Mar 10 00:00:00 CEST 2008
+/*
+ * Copyright (c) 2022. Bernard Bou
  */
+
 package treebolic.glue.component;
 
 import java.awt.Color;
@@ -23,7 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 /**
- * Progress panel
+ * Progress panel, derived from JPanel
  *
  * @author Bernard Bou
  */
@@ -34,12 +28,14 @@ public class Progress extends JPanel implements Component, treebolic.glue.iface.
 	/**
 	 * Stop icon
 	 */
-	static private Icon stopIcon = new ImageIcon(Progress.class.getResource("images/progress_stop.png")); //$NON-NLS-1$
+	@SuppressWarnings("ConstantConditions")
+	static private final Icon stopIcon = new ImageIcon(Progress.class.getResource("images/progress_stop.png"));
 
 	/**
 	 * Working icon
 	 */
-	static private Icon workingIcon = new ImageIcon(Progress.class.getResource("images/progress_wait.gif")); //$NON-NLS-1$
+	@SuppressWarnings("ConstantConditions")
+	static private final Icon workingIcon = new ImageIcon(Progress.class.getResource("images/progress_wait.gif"));
 
 	/**
 	 * Progress bar
@@ -59,8 +55,7 @@ public class Progress extends JPanel implements Component, treebolic.glue.iface.
 	/**
 	 * Constructor
 	 *
-	 * @param handle
-	 *        Handle required for component creation (unused)
+	 * @param handle Opaque handle required for component creation
 	 */
 	public Progress(final Object handle)
 	{
@@ -75,8 +70,8 @@ public class Progress extends JPanel implements Component, treebolic.glue.iface.
 		this.progress.setVisible(false);
 
 		this.label = new JLabel();
-		this.label.setText("Treebolic"); //$NON-NLS-1$
-		this.label.setFont(Constants.FONT_PROGRESS_LABEL); 
+		this.label.setText("Treebolic");
+		this.label.setFont(Constants.FONT_PROGRESS_LABEL);
 		this.label.setPreferredSize(Constants.DIM_PROGRESS);
 		this.label.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
 		this.label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -84,8 +79,8 @@ public class Progress extends JPanel implements Component, treebolic.glue.iface.
 		this.label.setHorizontalTextPosition(SwingConstants.CENTER);
 
 		this.text = new JLabel();
-		this.text.setText(Messages.getString("Progress.starting")); //$NON-NLS-1$
-		this.text.setFont(Constants.FONT_PROGRESS_TEXT); 
+		this.text.setText(Messages.getString("Progress.starting"));
+		this.text.setFont(Constants.FONT_PROGRESS_TEXT);
 		this.text.setPreferredSize(Constants.DIM_PROGRESS_TEXT);
 		this.text.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
 		this.text.setBackground(Color.BLUE);
@@ -101,23 +96,16 @@ public class Progress extends JPanel implements Component, treebolic.glue.iface.
 	/**
 	 * Put message
 	 *
-	 * @param message
-	 *        message
+	 * @param message message
 	 */
 	@Override
 	public void put(final String message, final boolean fail)
 	{
-		final Runnable routine = new Runnable()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void run()
-			{
-				Progress.this.text.setText(message);
-				Progress.this.label.setIcon(fail ? Progress.stopIcon : Progress.workingIcon);
-				Progress.this.progress.setValue(fail ? 0 : Progress.this.progress.getValue() + 10);
-				Progress.this.progress.setVisible(Progress.this.progress.getValue() > 0);
-			}
+		final Runnable routine = () -> {
+			Progress.this.text.setText(message);
+			Progress.this.label.setIcon(fail ? Progress.stopIcon : Progress.workingIcon);
+			Progress.this.progress.setValue(fail ? 0 : Progress.this.progress.getValue() + 10);
+			Progress.this.progress.setVisible(Progress.this.progress.getValue() > 0);
 		};
 		SwingUtilities.invokeLater(routine);
 	}

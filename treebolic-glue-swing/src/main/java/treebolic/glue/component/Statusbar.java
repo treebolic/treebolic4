@@ -1,13 +1,7 @@
-/**
- * Title : Treebolic
- * Description : Treebolic
- * Version : 3.x
- * Copyright : (c) 2001-2014
- * Terms of use : see license agreement at http://treebolic.sourceforge.net/en/license.htm
- * Author : Bernard Bou
- *
- * Update : Mon Mar 10 00:00:00 CEST 2008
+/*
+ * Copyright (c) 2022. Bernard Bou
  */
+
 package treebolic.glue.component;
 
 import java.awt.Container;
@@ -15,7 +9,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -41,7 +34,7 @@ import treebolic.glue.Color;
 import treebolic.glue.iface.component.Converter;
 
 /**
- * Status bar
+ * Status bar, derived from JToolbar
  *
  * @author Bernard Bou
  */
@@ -49,9 +42,9 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 {
 	private static final long serialVersionUID = 1L;
 
-	static public boolean HAS_SEARCH = true;
+	static public final boolean HAS_SEARCH = true;
 
-	static public enum ImageIndices
+	public enum ImageIndices
 	{
 		INFO, LINK, FAIL
 	}
@@ -59,10 +52,11 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	/*
 	 * Icon array
 	 */
-	static ImageIcon[] icons = new ImageIcon[] { new ImageIcon(Toolbar.class.getResource("images/status_info.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/status_linking.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/status_mounting.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/status_searching.png")), //$NON-NLS-1$
+	@SuppressWarnings("ConstantConditions")
+	static final ImageIcon[] icons = new ImageIcon[] { new ImageIcon(Toolbar.class.getResource("images/status_info.png")),
+			new ImageIcon(Toolbar.class.getResource("images/status_linking.png")), 
+			new ImageIcon(Toolbar.class.getResource("images/status_mounting.png")), 
+			new ImageIcon(Toolbar.class.getResource("images/status_searching.png")), 
 	};
 
 	/**
@@ -112,6 +106,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	/**
 	 * Toggle input button
 	 */
+	@SuppressWarnings("FieldCanBeLocal")
 	private JToggleButton searchToggleButton;
 
 	/**
@@ -124,7 +119,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	 */
 	private StyleSheet styleSheet;
 
-	static private SimpleAttributeSet contentStyle = new SimpleAttributeSet();
+	static private final SimpleAttributeSet contentStyle = new SimpleAttributeSet();
 
 	static
 	{
@@ -155,47 +150,37 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	{
 		// enlarge/shrink buttons
 		final JButton moreButton = new JButton();
-		moreButton.setIcon(new ImageIcon(Statusbar.class.getResource("images/status_plus.png"))); //$NON-NLS-1$
+		//noinspection ConstantConditions
+		moreButton.setIcon(new ImageIcon(Statusbar.class.getResource("images/status_plus.png")));
 		moreButton.setContentAreaFilled(false);
 		moreButton.setFocusable(false);
 		moreButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		moreButton.addActionListener(new java.awt.event.ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent e)
+		moreButton.addActionListener(e -> {
+			final Dimension size = Statusbar.this.contentPane.getPreferredSize();
+			final int h = size.height + Statusbar.CONTENTINCREMENT;
+			if (h <= Statusbar.CONTENTMAXIMUM)
 			{
-				final Dimension size = Statusbar.this.contentPane.getPreferredSize();
-				final int h = size.height + Statusbar.CONTENTINCREMENT;
-				if (h <= Statusbar.CONTENTMAXIMUM)
-				{
-					size.height = h;
-					Statusbar.this.contentPane.setPreferredSize(size);
-					final Container container = getParent();
-					container.validate();
-				}
+				size.height = h;
+				Statusbar.this.contentPane.setPreferredSize(size);
+				final Container container = getParent();
+				container.validate();
 			}
 		});
 		final JButton lessButton = new JButton();
-		lessButton.setIcon(new ImageIcon(Statusbar.class.getResource("images/status_minus.png"))); //$NON-NLS-1$
+		//noinspection ConstantConditions
+		lessButton.setIcon(new ImageIcon(Statusbar.class.getResource("images/status_minus.png")));
 		lessButton.setContentAreaFilled(false);
 		lessButton.setFocusable(false);
 		lessButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		lessButton.addActionListener(new java.awt.event.ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent e)
+		lessButton.addActionListener(e -> {
+			final Dimension size = Statusbar.this.contentPane.getPreferredSize();
+			final int h = size.height - Statusbar.CONTENTINCREMENT;
+			if (h >= Statusbar.CONTENTMINIMUM)
 			{
-				final Dimension size = Statusbar.this.contentPane.getPreferredSize();
-				final int h = size.height - Statusbar.CONTENTINCREMENT;
-				if (h >= Statusbar.CONTENTMINIMUM)
-				{
-					size.height = h;
-					Statusbar.this.contentPane.setPreferredSize(size);
-					final Container container = getParent();
-					container.validate();
-				}
+				size.height = h;
+				Statusbar.this.contentPane.setPreferredSize(size);
+				final Container container = getParent();
+				container.validate();
 			}
 		});
 
@@ -213,14 +198,14 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 		this.labelTextField.setEditable(false);
 		this.labelTextField.setBackground(Color.WHITE.color);
 		this.labelTextField.setBorder(BorderFactory.createLineBorder(Color.GRAY.color));
-		this.labelTextField.setToolTipText(Messages.getString("Statusbar.tooltip_label")); //$NON-NLS-1$
+		this.labelTextField.setToolTipText(Messages.getString("Statusbar.tooltip_label")); 
 		this.labelTextField.setPreferredSize(Constants.DIM_STATUS_LABEL);
 
 		// content
 		this.contentTextPane = new JTextPane();
-		this.contentTextPane.setContentType("text/html; charset=UTF-8"); //$NON-NLS-1$
+		this.contentTextPane.setContentType("text/html; charset=UTF-8"); 
 		this.contentTextPane.setEditable(false);
-		this.contentTextPane.setToolTipText(Messages.getString("Statusbar.tooltip_content")); //$NON-NLS-1$
+		this.contentTextPane.setToolTipText(Messages.getString("Statusbar.tooltip_content")); 
 		this.contentTextPane.setPreferredSize(Constants.DIM_STATUS_CONTENT);
 
 		// stylesheet
@@ -281,7 +266,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	@Override
 	public void setStyle(final String style)
 	{
-		final String[] rules = style.split("\n"); //$NON-NLS-1$
+		final String[] rules = style.split("\n"); 
 		for (final String rule : rules)
 		{
 			this.styleSheet.addRule(rule);
@@ -341,11 +326,6 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 		// style
 		final StyledDocument styledDocument = this.contentTextPane.getStyledDocument();
 		styledDocument.setCharacterAttributes(0, styledDocument.getLength(), Statusbar.contentStyle, false);
-	}
-
-	{
-		// TODO Auto-generated method stub
-
 	}
 
 	/**

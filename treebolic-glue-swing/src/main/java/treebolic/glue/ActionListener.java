@@ -1,7 +1,14 @@
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+
 package treebolic.glue;
 
 import java.awt.event.ActionEvent;
 
+/**
+ * Action listener, derived from awt's ActionListener
+ */
 public abstract class ActionListener implements java.awt.event.ActionListener, treebolic.glue.iface.ActionListener
 {
 	@Override

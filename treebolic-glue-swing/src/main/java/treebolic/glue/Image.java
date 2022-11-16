@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+
 package treebolic.glue;
 
 import java.awt.image.BufferedImage;
@@ -11,6 +15,11 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Image, embeds awt's Image
+ *
+ * @author Bernard Bou
+ */
 public class Image implements treebolic.glue.iface.Image, Serializable
 {
 	private static final long serialVersionUID = -6088374866767037559L;
@@ -20,8 +29,7 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	/**
 	 * Constructor from AWT image
 	 *
-	 * @param image
-	 *        AWT image
+	 * @param image AWT image
 	 */
 	public Image(final java.awt.Image image)
 	{
@@ -31,10 +39,9 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	/**
 	 * Make image
 	 *
-	 * @param resource
-	 *        resource url
+	 * @param resource resource url
 	 * @return Image
-	 * @throws IOException
+	 * @throws IOException io exception
 	 */
 	static public Image make(final URL resource) throws IOException
 	{
@@ -44,8 +51,7 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	/**
 	 * Make image (caught exeption returns null)
 	 *
-	 * @param resource
-	 *        resource url
+	 * @param resource resource url
 	 * @return Image
 	 */
 	static public Image try_make(final URL resource)
@@ -64,7 +70,9 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	public int getWidth()
 	{
 		if (this.image == null)
+		{
 			return 0;
+		}
 		return this.image.getWidth(null);
 	}
 
@@ -72,7 +80,9 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	public int getHeight()
 	{
 		if (this.image == null)
+		{
 			return 0;
+		}
 		return this.image.getHeight(null);
 	}
 
@@ -86,7 +96,7 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	private void writeObject(final ObjectOutputStream out) throws IOException
 	{
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ImageIO.write((BufferedImage) this.image, "png", baos); //$NON-NLS-1$
+		ImageIO.write((BufferedImage) this.image, "png", baos);
 		final byte[] imageBytes = baos.toByteArray();
 		out.writeObject(imageBytes);
 	}

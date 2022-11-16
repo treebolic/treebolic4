@@ -1,14 +1,22 @@
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+
 package treebolic.glue.component;
 
 import java.awt.Cursor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
 import treebolic.glue.EventListener;
 import treebolic.glue.Graphics;
 
+
+/**
+ * Surface, derived from JPanle
+ *
+ * @author Bernard Bou
+ */
 public abstract class Surface extends javax.swing.JPanel implements Component, treebolic.glue.iface.component.Surface<Graphics, EventListener>
 {
 	private static final long serialVersionUID = 7546424810791062316L;
@@ -53,15 +61,7 @@ public abstract class Surface extends javax.swing.JPanel implements Component, t
 		{
 			if (GestureDetector.timer == null)
 			{
-				GestureDetector.timer = new Timer(GestureDetector.HOTNODETIMESLICE, new ActionListener()
-				{
-					@SuppressWarnings("synthetic-access")
-					@Override
-					public void actionPerformed(final ActionEvent e)
-					{
-						GestureDetector.this.listener.onLongHover();
-					}
-				});
+				GestureDetector.timer = new Timer(GestureDetector.HOTNODETIMESLICE, e -> GestureDetector.this.listener.onLongHover());
 			}
 			GestureDetector.timer.setRepeats(true);
 
@@ -168,11 +168,11 @@ public abstract class Surface extends javax.swing.JPanel implements Component, t
 		super.setCursor(awtCursor);
 	}
 
-//	@Override
-//	public void setToolTipText(final String string)
-//	{
-//		super.setToolTipText(string);
-//	}
+	//	@Override
+	//	public void setToolTipText(final String string)
+	//	{
+	//		super.setToolTipText(string);
+	//	}
 
 	@Override
 	public void addEventListener(final EventListener listener)

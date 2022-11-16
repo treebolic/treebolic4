@@ -1,10 +1,16 @@
-/**
- *
+/*
+ * Copyright (c) 2022. Bernard Bou
  */
+
 package treebolic.glue;
 
 import treebolic.glue.component.Component;
 
+/**
+ * Graphics, embeds awt's Image
+ *
+ * @author Bernard Bou
+ */
 public class GraphicsCache implements treebolic.glue.iface.GraphicsCache<Graphics>
 {
 	private final java.awt.Image image;

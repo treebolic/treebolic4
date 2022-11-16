@@ -1,8 +1,17 @@
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+
 package treebolic.glue.component;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+/**
+ * Container, derived from JPanel
+ *
+ * @author Bernard Bou
+ */
 public class Container extends javax.swing.JPanel implements Component, treebolic.glue.iface.component.Container<Component>
 {
 	private static final long serialVersionUID = 5343097039212596542L;
@@ -10,7 +19,7 @@ public class Container extends javax.swing.JPanel implements Component, treeboli
 	/**
 	 * Constructor
 	 *
-	 * @param handle
+	 * @param handle Opaque handle required for component creation
 	 */
 	public Container(final Object handle)
 	{
@@ -25,16 +34,16 @@ public class Container extends javax.swing.JPanel implements Component, treeboli
 		Object constraints = null;
 		switch (position)
 		{
-		case PANE:
-		case VIEW:
-			constraints = BorderLayout.CENTER;
-			break;
-		case TOOLBAR:
-			constraints = BorderLayout.EAST;
-			break;
-		case STATUSBAR:
-			constraints = BorderLayout.SOUTH;
-			break;
+			case PANE:
+			case VIEW:
+				constraints = BorderLayout.CENTER;
+				break;
+			case TOOLBAR:
+				constraints = BorderLayout.EAST;
+				break;
+			case STATUSBAR:
+				constraints = BorderLayout.SOUTH;
+				break;
 		}
 		add((java.awt.Component) component, constraints);
 	}

@@ -1,13 +1,7 @@
-/**
- * Title : Treebolic
- * Description : Treebolic
- * Version : 3.x
- * Copyright : (c) 2001-2014
- * Terms of use : see license agreement at http://treebolic.sourceforge.net/en/license.htm
- * Author : Bernard Bou
- *
- * Update : Mon Mar 10 00:00:00 CEST 2008
+/*
+ * Copyright (c) 2022. Bernard Bou
  */
+
 package treebolic.glue.component;
 
 import javax.swing.ImageIcon;
@@ -17,7 +11,7 @@ import javax.swing.JPopupMenu;
 import treebolic.glue.ActionListener;
 
 /**
- * Popup context menu
+ * Popup context menu, derived from JPopupMenu
  *
  * @author Bernard Bou
  */
@@ -25,7 +19,7 @@ public class PopupMenu extends JPopupMenu implements treebolic.glue.iface.compon
 {
 	private static final long serialVersionUID = 1L;
 
-	static public enum ImageIndices
+	public enum ImageIndices
 	{
 		IMAGE_CANCEL, IMAGE_INFO, IMAGE_FOCUS, IMAGE_LINK, IMAGE_MOUNT, IMAGE_GOTO, IMAGE_SEARCH
 	}
@@ -33,33 +27,27 @@ public class PopupMenu extends JPopupMenu implements treebolic.glue.iface.compon
 	/**
 	 * Icon array
 	 */
-	static ImageIcon[] icons = new ImageIcon[] { 
-			new ImageIcon(PopupMenu.class.getResource("images/menu_cancel.png")), //$NON-NLS-1$
-			new ImageIcon(PopupMenu.class.getResource("images/menu_info.png")), //$NON-NLS-1$
-			new ImageIcon(PopupMenu.class.getResource("images/menu_focus.png")), //$NON-NLS-1$
-			new ImageIcon(PopupMenu.class.getResource("images/menu_link.png")), //$NON-NLS-1$
-			new ImageIcon(PopupMenu.class.getResource("images/menu_mount.png")), //$NON-NLS-1$
-			new ImageIcon(PopupMenu.class.getResource("images/menu_goto.png")), //$NON-NLS-1$
-			new ImageIcon(PopupMenu.class.getResource("images/menu_search.png")), //$NON-NLS-1$
+	@SuppressWarnings("ConstantConditions")
+	static final ImageIcon[] icons = new ImageIcon[]{ //
+			new ImageIcon(PopupMenu.class.getResource("images/menu_cancel.png")), //
+			new ImageIcon(PopupMenu.class.getResource("images/menu_info.png")), //
+			new ImageIcon(PopupMenu.class.getResource("images/menu_focus.png")), //
+			new ImageIcon(PopupMenu.class.getResource("images/menu_link.png")), //
+			new ImageIcon(PopupMenu.class.getResource("images/menu_mount.png")), //
+			new ImageIcon(PopupMenu.class.getResource("images/menu_goto.png")), //
+			new ImageIcon(PopupMenu.class.getResource("images/menu_search.png")), //
 	};
 
 	/**
 	 * Labels
-	 * indexes are public 
+	 * indexes are public
 	 */
-	static public String[] labels = Messages.getStrings(
-			"PopupMenu.label_cancel", //$NON-NLS-1$
-			"PopupMenu.label_info", //$NON-NLS-1$
-			"PopupMenu.label_focus", //$NON-NLS-1$
-			"PopupMenu.label_link", //$NON-NLS-1$
-			"PopupMenu.label_mount", //$NON-NLS-1$
-			"PopupMenu.label_unmount", //$NON-NLS-1$
-			"PopupMenu.label_goto", //$NON-NLS-1$
-			"PopupMenu.label_search" //$NON-NLS-1$
-	);
+	static public String[] labels = Messages.getStrings("PopupMenu.label_cancel", "PopupMenu.label_info", "PopupMenu.label_focus", "PopupMenu.label_link", "PopupMenu.label_mount", "PopupMenu.label_unmount", "PopupMenu.label_goto", "PopupMenu.label_search");
 
 	/**
 	 * Constructor
+	 *
+	 * @param handle Opaque handle required for component creation
 	 */
 	protected PopupMenu(final Object handle)
 	{
@@ -74,14 +62,7 @@ public class PopupMenu extends JPopupMenu implements treebolic.glue.iface.compon
 		{
 			menuItem.setIcon(PopupMenu.icons[imageIndex]);
 		}
-		menuItem.addActionListener(new java.awt.event.ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent e)
-			{
-				listener.actionPerformed(null);
-			}
-		});
+		menuItem.addActionListener(e -> listener.actionPerformed(null));
 		add(menuItem);
 	}
 

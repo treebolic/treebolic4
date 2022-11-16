@@ -1,5 +1,14 @@
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+
 package treebolic.glue;
 
+/**
+ * Worker, embeds swing's SwingWorker
+ *
+ * @author Bernard Bou
+ */
 public abstract class Worker extends javax.swing.SwingWorker<Void, Void> implements treebolic.glue.iface.Worker
 {
 	@Override
@@ -28,7 +37,7 @@ public abstract class Worker extends javax.swing.SwingWorker<Void, Void> impleme
 	 * @see javax.swing.SwingWorker#doInBackground()
 	 */
 	@Override
-	public Void doInBackground() throws Exception
+	public Void doInBackground()
 	{
 		job();
 		return null;

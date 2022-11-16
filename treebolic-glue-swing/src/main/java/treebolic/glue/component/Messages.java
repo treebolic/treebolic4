@@ -1,12 +1,5 @@
-/**
- * Title : Treebolic
- * Description : Treebolic
- * Version : 3.x
- * Copyright : (c) 2001-2014
- * Terms of use : see license agreement at http://treebolic.fungi.sourceforge.net/en/license.htm
- * Author : Bernard Bou
- *
- * Update : 21 juin 08
+/*
+ * Copyright (c) 2022. Bernard Bou
  */
 
 package treebolic.glue.component;
@@ -15,13 +8,13 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- * Language dependency
- * 
+ * Language dependency, bundle reader
+ *
  * @author Bernard Bou
  */
-public class Messages
+class Messages
 {
-	private static final String BUNDLE_NAME = "treebolic.glue.component.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "treebolic.glue.component.messages";
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 

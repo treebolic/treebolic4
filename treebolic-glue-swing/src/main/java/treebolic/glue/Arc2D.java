@@ -1,5 +1,14 @@
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+
 package treebolic.glue;
 
+/**
+ * Arc2D, derived from awt's Arc2D
+ *
+ * @author Bernard Bou
+ */
 public class Arc2D extends java.awt.geom.Arc2D.Double implements treebolic.glue.iface.Arc2D<Point2D>
 {
 	private static final long serialVersionUID = -8430455905667334344L;
@@ -65,6 +74,6 @@ public class Arc2D extends java.awt.geom.Arc2D.Double implements treebolic.glue.
 	@Override
 	public String toString()
 	{
-		return String.format("arc2d x=%.0f y=%.0f w=%.0f, h=%.0f, s=%.1f°, e=%.1f° ccw=%s", this.x, this.y, this.width, this.height, this.start, this.extent, this.counterclockwise); //$NON-NLS-1$
+		return String.format("arc2d x=%.0f y=%.0f w=%.0f, h=%.0f, s=%.1f°, e=%.1f° ccw=%s", this.x, this.y, this.width, this.height, this.start, this.extent, this.counterclockwise); 
 	}
 }

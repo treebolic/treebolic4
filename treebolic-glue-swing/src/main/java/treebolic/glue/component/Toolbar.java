@@ -1,13 +1,7 @@
-/**
- * Title : Treebolic
- * Description : Treebolic
- * Version : 3.x
- * Copyright : (c) 2001-2014
- * Terms of use : see license agreement at http://treebolic.sourceforge.net/en/license.htm
- * Author : Bernard Bou
- *
- * Update : Mon Mar 10 00:00:00 CEST 2008
+/*
+ * Copyright (c) 2022. Bernard Bou
  */
+
 package treebolic.glue.component;
 
 import javax.swing.ImageIcon;
@@ -19,7 +13,7 @@ import javax.swing.SwingConstants;
 import treebolic.glue.ActionListener;
 
 /**
- * Tool bar
+ * Toolbar, derived from JToolbar
  *
  * @author Bernard Bou
  */
@@ -36,7 +30,7 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 	 */
 	static public Button[] toolbar()
 	{
-		return new Button[] { Button.HOME, //
+		return new Button[]{Button.HOME, //
 				Button.ZOOMIN, Button.ZOOMOUT, Button.ZOOMONE, Button.SEPARATOR, //
 				Button.SCALEUP, Button.SCALEDOWN, Button.SCALEONE, Button.SEPARATOR, //
 				Button.RADIAL, Button.SOUTH, Button.NORTH, Button.EAST, Button.WEST, Button.SEPARATOR, //
@@ -74,7 +68,9 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 		public int getSelectedIconIndex()
 		{
 			if (isToggle())
+			{
 				return ordinal() + 4;
+			}
 			return -1;
 		}
 
@@ -82,12 +78,12 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 		{
 			switch (this)
 			{
-			case ARCEDGE:
-			case TOOLTIP:
-			case TOOLTIPCONTENT:
-			case FOCUSHOVER:
-				return true;
-			default:
+				case ARCEDGE:
+				case TOOLTIP:
+				case TOOLTIPCONTENT:
+				case FOCUSHOVER:
+					return true;
+				default:
 			}
 			return false;
 		}
@@ -106,60 +102,59 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 	/**
 	 * Icon array
 	 */
-	static ImageIcon[] icons = new ImageIcon[] { 
-			new ImageIcon(PopupMenu.class.getResource("images/toolbar_home.png")), //$NON-NLS-1$
+	@SuppressWarnings("ConstantConditions")
+	static final ImageIcon[] icons = new ImageIcon[]{new ImageIcon(PopupMenu.class.getResource("images/toolbar_home.png")), //
 
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_radial.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_north.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_south.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_east.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_west.png")), //$NON-NLS-1$
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_radial.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_north.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_south.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_east.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_west.png")), //
 
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_expand.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_shrink.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_expand_reset.png")), //$NON-NLS-1$
-			
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_widen.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_narrow.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_widen_reset.png")), //$NON-NLS-1$
-			
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_expand_widen_reset.png")), //$NON-NLS-1$
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_expand.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_shrink.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_expand_reset.png")), //
 
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_zoomin.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_zoomout.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_zoomone.png")), //$NON-NLS-1$
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_widen.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_narrow.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_widen_reset.png")), //
 
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_scaleup.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_scaledown.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_scaleone.png")), //$NON-NLS-1$
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_expand_widen_reset.png")), //
 
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_arc.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_nodetooltip.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_nodetooltipcontent.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_hoverfocus.png")), //$NON-NLS-1$
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_zoomin.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_zoomout.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_zoomone.png")), //
 
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_no_arc.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_no_nodetooltip.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_no_nodetooltipcontent.png")), //$NON-NLS-1$
-			new ImageIcon(Toolbar.class.getResource("images/toolbar_no_hoverfocus.png")), //$NON-NLS-1$
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_scaleup.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_scaledown.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_scaleone.png")), //
+
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_arc.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_nodetooltip.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_nodetooltipcontent.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_hoverfocus.png")), //
+
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_no_arc.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_no_nodetooltip.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_no_nodetooltipcontent.png")), //
+			new ImageIcon(Toolbar.class.getResource("images/toolbar_no_hoverfocus.png")), //
 	};
 
 	/**
 	 * Toolbar tooltips
 	 */
-	static public String[] tooltips = Messages.getStrings( //
-			"Toolbar_tooltip_reset", //$NON-NLS-1$
-			"Toolbar_tooltip_radial", "Toolbar_tooltip_north", "Toolbar_tooltip_south", "Toolbar_tooltip_east", "Toolbar_tooltip_west", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+	static public final String[] tooltips = Messages.getStrings( //
+			"Toolbar_tooltip_reset", //
+			"Toolbar_tooltip_radial", "Toolbar_tooltip_north", "Toolbar_tooltip_south", "Toolbar_tooltip_east", "Toolbar_tooltip_west", //
 
-			"Toolbar_tooltip_expand", "Toolbar_tooltip_shrink", "Toolbar_tooltip_expand_reset", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			"Toolbar_tooltip_widen", "Toolbar_tooltip_narrow", "Toolbar_tooltip_widen_reset", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			"Toolbar_tooltip_expand_widen_reset", //$NON-NLS-1$
-			"Toolbar_tooltip_zoomin", "Toolbar_tooltip_zoomout", "Toolbar_tooltip_zoomreset", // $NON-NLS-1$,$NON-NLS-2$,$NON-NLS-3$ //$NON-NLS-3$
-			"Toolbar_tooltip_scaleup", "Toolbar_tooltip_scaledown", "Toolbar_tooltip_scalereset", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			"Toolbar_tooltip_expand", "Toolbar_tooltip_shrink", "Toolbar_tooltip_expand_reset", //
+			"Toolbar_tooltip_widen", "Toolbar_tooltip_narrow", "Toolbar_tooltip_widen_reset", //
+			"Toolbar_tooltip_expand_widen_reset", //
+			"Toolbar_tooltip_zoomin", "Toolbar_tooltip_zoomout", "Toolbar_tooltip_zoomreset", "Toolbar_tooltip_scaleup", "Toolbar_tooltip_scaledown", "Toolbar_tooltip_scalereset", //
 
-			"Toolbar_tooltip_arcline", //$NON-NLS-1$
-			"Toolbar_tooltip_tooltip", "Toolbar_tooltip_tooltipcontent", //$NON-NLS-1$ //$NON-NLS-2$
-			"Toolbar_tooltip_hoverfocus" //$NON-NLS-1$
+			"Toolbar_tooltip_arcline", //
+			"Toolbar_tooltip_tooltip", "Toolbar_tooltip_tooltipcontent", //
+			"Toolbar_tooltip_hoverfocus" //
 	);
 
 	// C O N S T R U C T O R
@@ -187,14 +182,7 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 		final JButton button = new JButton();
 		button.setBorder(null);
 		button.setToolTipText(toolTip);
-		button.addActionListener(new java.awt.event.ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent e)
-			{
-				listener.actionPerformed(null);
-			}
-		});
+		button.addActionListener(e -> listener.actionPerformed(null));
 		button.setIcon(Toolbar.icons[iconIndex]);
 		add(button);
 	}
@@ -213,14 +201,7 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 		final JToggleButton button = new JToggleButton();
 		button.setBorder(null);
 		button.setToolTipText(toolTip);
-		button.addActionListener(new java.awt.event.ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent e)
-			{
-				listener.actionPerformed(null);
-			}
-		});
+		button.addActionListener(e -> listener.actionPerformed(null));
 		button.setIcon(Toolbar.icons[iconIndex]);
 		button.setSelectedIcon(Toolbar.icons[selectedIconIndex]);
 		button.setSelected(!state);

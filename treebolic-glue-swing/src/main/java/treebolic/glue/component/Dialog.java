@@ -1,6 +1,7 @@
-/**
- *
+/*
+ * Copyright (c) 2022. Bernard Bou
  */
+
 package treebolic.glue.component;
 
 import java.awt.Dimension;
@@ -17,9 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkEvent.EventType;
-import javax.swing.event.HyperlinkListener;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
@@ -27,7 +26,7 @@ import treebolic.glue.iface.ActionListener;
 import treebolic.glue.iface.component.Converter;
 
 /**
- * WebDialog
+ * Dialog, derived from JDialog
  *
  * @author Bernard Bou
  */
@@ -56,14 +55,14 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 	{
 		super();
 
-		setTitle("Treebolic"); //$NON-NLS-1$
+		setTitle("Treebolic"); 
 
 		this.headerLabel = new JLabel();
 		this.headerLabel.setFont(Constants.FONT_WEB_HEADER);
 
 		this.contentPane = new JEditorPane();
 		this.contentPane.setEditable(false);
-		this.contentPane.setContentType("text/html"); //$NON-NLS-1$
+		this.contentPane.setContentType("text/html");
 
 		// stylesheet
 		final HTMLEditorKit kit = new HTMLEditorKit();
@@ -80,15 +79,8 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 		this.contentComponent = new JScrollPane(this.contentPane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		this.contentComponent.setPreferredSize(null);
 
-		final JButton oKButton = new JButton(Messages.getString("WebDialog.ok")); //$NON-NLS-1$
-		oKButton.addActionListener(new java.awt.event.ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent e)
-			{
-				setVisible(false);
-			}
-		});
+		final JButton oKButton = new JButton(Messages.getString("WebDialog.ok")); 
+		oKButton.addActionListener(e -> setVisible(false));
 
 		final JPanel commandPanel = new JPanel();
 		commandPanel.setLayout(new FlowLayout());
@@ -137,27 +129,22 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 	@Override
 	public void setListener(final ActionListener actionListener)
 	{
-		this.contentPane.addHyperlinkListener(new HyperlinkListener()
-		{
-			@Override
-			public void hyperlinkUpdate(final HyperlinkEvent event)
+		this.contentPane.addHyperlinkListener(event -> {
+			if (event.getEventType() == EventType.ACTIVATED)
 			{
-				if (event.getEventType() == EventType.ACTIVATED)
+				String target;
+				final URL url = event.getURL();
+				if (url != null)
 				{
-					String target = null;
-					final URL url = event.getURL();
-					if (url != null)
-					{
-						target = url.toString();
-					}
-					else
-					{
-						target = event.getDescription();
-					}
-					if (target != null)
-					{
-						actionListener.onAction(target);
-					}
+					target = url.toString();
+				}
+				else
+				{
+					target = event.getDescription();
+				}
+				if (target != null)
+				{
+					actionListener.onAction(target);
 				}
 			}
 		});
@@ -231,7 +218,7 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 	@Override
 	public void setStyle(final String style)
 	{
-		final String[] rules = style.split("\n"); //$NON-NLS-1$
+		final String[] rules = style.split("\n"); 
 		for (final String rule : rules)
 		{
 			this.styleSheet.addRule(rule);

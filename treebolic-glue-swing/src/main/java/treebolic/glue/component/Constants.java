@@ -1,11 +1,5 @@
-/**
- * Title : Treebolic
- * Description: Treebolic
- * Version: 3.x
- * Copyright : (c) 2001-2014
- * Terms of use : see license agreement at http://treebolic.sourceforge.net/en/license.htm
- * Author : Bernard Bou
- * Update : Jan 8, 2016
+/*
+ * Copyright (c) 2022. Bernard Bou
  */
 
 package treebolic.glue.component;
@@ -14,9 +8,11 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 /**
- * @author bbou
+ * Constants
+ *
+ * @author Bernard Bou
  */
-public class Constants
+class Constants
 {
 	public static final Dimension DIM_CONTAINER = new Dimension(900, 900);
 
@@ -33,10 +29,10 @@ public class Constants
 	public static final Dimension DIM_STATUS_CONTENT = new Dimension(400, 34);
 
 	public static final String FONT_FAMILY = Font.SANS_SERIF;
-	
-	public static final Font FONT_PROGRESS_LABEL = new Font(FONT_FAMILY, Font.BOLD, 20); 
 
-	public static final Font FONT_PROGRESS_TEXT = new Font(FONT_FAMILY, Font.PLAIN, 10); 
+	public static final Font FONT_PROGRESS_LABEL = new Font(FONT_FAMILY, Font.BOLD, 20);
 
-	public static final Font FONT_WEB_HEADER = new Font(FONT_FAMILY, Font.BOLD, 16); 
+	public static final Font FONT_PROGRESS_TEXT = new Font(FONT_FAMILY, Font.PLAIN, 10);
+
+	public static final Font FONT_WEB_HEADER = new Font(FONT_FAMILY, Font.BOLD, 16);
 }

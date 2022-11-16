@@ -1,12 +1,7 @@
-/**
- * Title : Treebolic
- * Description : Treebolic
- * Version : 3.x
- * Copyright :	(c) 2001-2014
- * Terms of use : see license agreement at http://treebolic.sourceforge.net/en/license.htm
- * Author : Bernard Bou
- *
+/*
+ * Copyright (c) 2022. Bernard Bou
  */
+
 package treebolic.glue.component;
 
 import java.awt.ComponentOrientation;
@@ -16,7 +11,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
@@ -30,43 +24,45 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 /**
- * Import dialog
+ * Search dialog, derived from JDialog
  *
  * @author Bernard Bou
  */
-public class SearchDialog extends JDialog
+class SearchDialog extends JDialog
 {
 	private static final long serialVersionUID = 1L;
 
 	// SCOPE
 
-	static private String[] scopeLabels = new String[] { Messages.getString("SearchDialog.label"), Messages.getString("SearchDialog.content"), Messages.getString("SearchDialog.link"), Messages.getString("SearchDialog.id"), }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+	static private final String[] scopeLabels = new String[] { Messages.getString("SearchDialog.label"), Messages.getString("SearchDialog.content"), Messages.getString("SearchDialog.link"), Messages.getString("SearchDialog.id"), };
 
 	// to avoid dependency on SearchScope
-	static private Object[] scopeValues = new String[] { "LABEL", "CONTENT", "LINK", "ID" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+	static private final Object[] scopeValues = new String[] { "LABEL", "CONTENT", "LINK", "ID" };
 
 	/**
 	 * Icon array
 	 */
-	static ImageIcon[] scopeIcons = new ImageIcon[] { new ImageIcon(SearchDialog.class.getResource("images/search_label.png")), //$NON-NLS-1$
-			new ImageIcon(SearchDialog.class.getResource("images/search_content.png")), //$NON-NLS-1$
-			new ImageIcon(SearchDialog.class.getResource("images/search_link.png")), //$NON-NLS-1$
-			new ImageIcon(SearchDialog.class.getResource("images/search_id.png")), //$NON-NLS-1$
+	@SuppressWarnings("ConstantConditions")
+	static final ImageIcon[] scopeIcons = new ImageIcon[] { new ImageIcon(SearchDialog.class.getResource("images/search_label.png")),
+			new ImageIcon(SearchDialog.class.getResource("images/search_content.png")), 
+			new ImageIcon(SearchDialog.class.getResource("images/search_link.png")), 
+			new ImageIcon(SearchDialog.class.getResource("images/search_id.png")), 
 	};
 
 	// MODE
 
-	static private String[] modeLabels = new String[] { Messages.getString("SearchDialog.startswith"), Messages.getString("SearchDialog.equals"), Messages.getString("SearchDialog.includes") }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	static private final String[] modeLabels = new String[] { Messages.getString("SearchDialog.startswith"), Messages.getString("SearchDialog.equals"), Messages.getString("SearchDialog.includes") };
 
 	// to avoid dependency on SearchMode
-	static private Object[] modeValues = new String[] { "STARTSWITH", "EQUALS", "INCLUDES" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	static private final Object[] modeValues = new String[] { "STARTSWITH", "EQUALS", "INCLUDES" };
 
 	/**
 	 * Icon array
 	 */
-	static ImageIcon[] modeIcons = new ImageIcon[] { new ImageIcon(SearchDialog.class.getResource("images/search_startswith.png")), //$NON-NLS-1$
-			new ImageIcon(SearchDialog.class.getResource("images/search_equals.png")), //$NON-NLS-1$
-			new ImageIcon(SearchDialog.class.getResource("images/search_includes.png")), //$NON-NLS-1$
+	@SuppressWarnings("ConstantConditions")
+	static final ImageIcon[] modeIcons = new ImageIcon[] { new ImageIcon(SearchDialog.class.getResource("images/search_startswith.png")),
+			new ImageIcon(SearchDialog.class.getResource("images/search_equals.png")), 
+			new ImageIcon(SearchDialog.class.getResource("images/search_includes.png")), 
 	};
 
 	// V A L U E S
@@ -91,42 +87,27 @@ public class SearchDialog extends JDialog
 	/**
 	 * Buttons
 	 */
-	protected JRadioButton[] scopeButtons;
+	protected final JRadioButton[] scopeButtons;
 
 	/**
 	 * Buttons
 	 */
-	protected JRadioButton[] modeButtons;
+	protected final JRadioButton[] modeButtons;
 
 	/**
 	 * Data panel
 	 */
-	protected JPanel dataPanel;
+	protected final JPanel dataPanel;
 
 	/**
 	 * Scope listener
 	 */
-	protected ActionListener scopeListener = new ActionListener()
-	{
-		@Override
-		public void actionPerformed(ActionEvent event)
-		{
-			SearchDialog.this.scopeValue = event.getActionCommand();
-
-		}
-	};
+	protected final ActionListener scopeListener = event -> SearchDialog.this.scopeValue = event.getActionCommand();
 
 	/**
 	 * Mode listener
 	 */
-	protected ActionListener modeListener = new ActionListener()
-	{
-		@Override
-		public void actionPerformed(ActionEvent event)
-		{
-			SearchDialog.this.modeValue = event.getActionCommand();
-		}
-	};
+	protected final ActionListener modeListener = event -> SearchDialog.this.modeValue = event.getActionCommand();
 
 	/**
 	 * Constructor
@@ -180,8 +161,8 @@ public class SearchDialog extends JDialog
 		}
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("SearchDialog.ok")); //$NON-NLS-1$
-		final JButton cancelButton = new JButton(Messages.getString("SearchDialog.cancel")); //$NON-NLS-1$
+		final JButton oKButton = new JButton(Messages.getString("SearchDialog.ok")); 
+		final JButton cancelButton = new JButton(Messages.getString("SearchDialog.cancel")); 
 
 		// buttons panel
 		this.dataPanel = new JPanel();
@@ -204,23 +185,11 @@ public class SearchDialog extends JDialog
 		commandPanel.add(cancelButton);
 		commandPanel.add(oKButton);
 
-		oKButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final ActionEvent event)
-			{
-				SearchDialog.this.ok = true;
-				setVisible(false);
-			}
+		oKButton.addActionListener(event -> {
+			SearchDialog.this.ok = true;
+			setVisible(false);
 		});
-		cancelButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final ActionEvent event)
-			{
-				setVisible(false);
-			}
-		});
+		cancelButton.addActionListener(event -> setVisible(false));
 
 		// assemble
 		final JPanel panel = new JPanel();
@@ -268,21 +237,4 @@ public class SearchDialog extends JDialog
 		}
 		super.setVisible(flag);
 	}
-
-	// static public void main(final String[] args)
-	// {
-	// UIManager.put("swing.boldMetal", false); //$NON-NLS-1$
-	// final SearchDialog dialog = new SearchDialog("LABEL", "STARTSWITH", Messages.getString("SearchDialog.title"), //$NON-NLS-1$ //$NON-NLS-2$
-	// //$NON-NLS-3$
-	// Messages.getString("SearchDialog.prompt")); //$NON-NLS-1$
-	// dialog.setModal(true);
-	// dialog.setVisible(true);
-	// dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-	// if (dialog.ok)
-	// {
-	// System.out.println(dialog.scopeValue);
-	// System.out.println(dialog.modeValue);
-	// }
-	// System.exit(0);
-	// }
 }
