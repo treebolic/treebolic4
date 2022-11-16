@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0">
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color BLACK" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color BLUE" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color CYAN" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color DARK_GRAY" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color GREEN" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color LIGHT_GRAY" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color MAGENTA" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color ORANGE" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color PINK" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color RED" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color YELLOW" />
+    </entry_points>
+    <pattern value="treebolic.glue.Worker" method="doInBackground" />
+    <pattern value="treebolic.glue.Worker" method="job" />
+    <pattern value="treebolic.glue.Worker" />
+    <pattern value="treebolic.glue.component.Surface" method="Surface" />
+    <pattern value="treebolic.glue.Rectangle2D" method="Rectangle2D" />
+    <pattern value="treebolic.glue.Point2D" method="Point2D" />
+    <pattern value="treebolic.glue.Point" method="Point" />
+    <pattern value="treebolic.glue.Image" method="try_make" />
+    <pattern value="treebolic.glue.Image" method="make" />
+    <pattern value="treebolic.glue.Animator" method="Animator" />
+    <pattern value="treebolic.glue.Arc2D" method="Arc2D" />
+    <pattern value="treebolic.glue.GraphicsCache" method="GraphicsCache" />
+    <pattern value="treebolic.glue.component.Container" method="Container" />
+    <pattern value="treebolic.glue.component.Dialog" method="Dialog" />
+    <pattern value="treebolic.glue.Color" method="Color" />
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
