@@ -820,27 +820,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 			final Object instance = constructor.newInstance(args);
 			return (IProvider) instance;
 		}
-		catch (@NonNull final ClassNotFoundException e)
-		{
-			this.context.warn(Messages.getString("Widget.warn_err_provider_create") + e);
-		}
-		catch (@NonNull final NoSuchMethodException e)
-		{
-			this.context.warn(Messages.getString("Widget.warn_err_provider_create") + e);
-		}
-		catch (@NonNull final IllegalAccessException e)
-		{
-			this.context.warn(Messages.getString("Widget.warn_err_provider_create") + e);
-		}
-		catch (@NonNull final InstantiationException e)
-		{
-			this.context.warn(Messages.getString("Widget.warn_err_provider_create") + e);
-		}
-		catch (@NonNull final IllegalArgumentException e)
-		{
-			this.context.warn(Messages.getString("Widget.warn_err_provider_create") + e);
-		}
-		catch (@NonNull final InvocationTargetException e)
+		catch (@NonNull final ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException | IllegalArgumentException | InvocationTargetException e)
 		{
 			this.context.warn(Messages.getString("Widget.warn_err_provider_create") + e);
 		}

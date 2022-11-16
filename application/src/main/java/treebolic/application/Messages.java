@@ -15,7 +15,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- * Language dependency
+ * Language dependency, bundle reader
  * 
  * @author Bernard Bou
  */

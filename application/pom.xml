@@ -34,7 +34,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.treebolic</groupId>
-			<artifactId>treebolic-glue</artifactId>
+			<artifactId>treebolic-glue-swing</artifactId>
 			<version>4.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>

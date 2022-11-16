@@ -9,8 +9,7 @@
  */
 package treebolic.application;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -71,7 +70,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		this.widget = makeWidget();
 
 		// assemble
-		container.add(this.widget, BorderLayout.CENTER);
+		container.add((Component)this.widget, BorderLayout.CENTER);
 
 		// show
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
