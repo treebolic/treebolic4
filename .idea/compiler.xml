@@ -6,9 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="studio" />
         <module name="treebolic-glue-iface" />
         <module name="treebolic-loadbalancer" />
         <module name="treebolic-iface" />
+        <module name="application" />
         <module name="treebolic-graph" />
         <module name="treebolic-mutable" />
         <module name="treebolic-view" />

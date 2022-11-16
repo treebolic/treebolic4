@@ -20,6 +20,8 @@
 		<module>treebolic-graph</module>
 		<module>treebolic-annotations</module>
 		<module>treebolic-glue-swing</module>
+		<module>studio</module>
+		<module>application</module>
 	</modules>
 
 	<properties>
