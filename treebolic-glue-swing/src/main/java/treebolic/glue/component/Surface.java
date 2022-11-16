@@ -13,7 +13,7 @@ import treebolic.glue.Graphics;
 
 
 /**
- * Surface, derived from JPanle
+ * Surface, derived from JPanel
  *
  * @author Bernard Bou
  */
@@ -94,10 +94,10 @@ public abstract class Surface extends javax.swing.JPanel implements Component, t
 	/**
 	 * Constructor
 	 *
-	 * @param handle
+	 * @param ignoredHandle
 	 *        Handle required for component creation (unused)
 	 */
-	public Surface(final Object handle)
+	public Surface(final Object ignoredHandle)
 	{
 		super();
 		setLayout(null);
@@ -112,7 +112,6 @@ public abstract class Surface extends javax.swing.JPanel implements Component, t
 	@Override
 	abstract public void paint(final Graphics g);
 
-	// @Override
 	// public void repaint();
 
 	@Override
@@ -168,11 +167,7 @@ public abstract class Surface extends javax.swing.JPanel implements Component, t
 		super.setCursor(awtCursor);
 	}
 
-	//	@Override
-	//	public void setToolTipText(final String string)
-	//	{
-	//		super.setToolTipText(string);
-	//	}
+	//	public void setToolTipText(final String string);
 
 	@Override
 	public void addEventListener(final EventListener listener)

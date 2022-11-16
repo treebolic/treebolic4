@@ -4,20 +4,10 @@
 
 package treebolic.glue.component;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.net.URL;
 
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JEditorPane;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.*;
 import javax.swing.event.HyperlinkEvent.EventType;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
@@ -155,17 +145,7 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 	 */
 	public void center()
 	{
-		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		final Dimension componentSize = getSize();
-		if (componentSize.height > screenSize.height)
-		{
-			componentSize.height = screenSize.height;
-		}
-		if (componentSize.width > screenSize.width)
-		{
-			componentSize.width = screenSize.width;
-		}
-		setLocation((screenSize.width - componentSize.width) / 2, (screenSize.height - componentSize.height) / 2);
+		Utils.center(this);
 	}
 
 	/*

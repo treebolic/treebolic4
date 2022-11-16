@@ -19,9 +19,9 @@ public class Container extends javax.swing.JPanel implements Component, treeboli
 	/**
 	 * Constructor
 	 *
-	 * @param handle Opaque handle required for component creation
+	 * @param ignoredHandle Opaque handle required for component creation
 	 */
-	public Container(final Object handle)
+	public Container(final Object ignoredHandle)
 	{
 		super();
 		setLayout(new BorderLayout());

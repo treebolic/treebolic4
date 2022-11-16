@@ -47,9 +47,9 @@ public class PopupMenu extends JPopupMenu implements treebolic.glue.iface.compon
 	/**
 	 * Constructor
 	 *
-	 * @param handle Opaque handle required for component creation
+	 * @param ignoredHandle Opaque handle required for component creation
 	 */
-	protected PopupMenu(final Object handle)
+	protected PopupMenu(final Object ignoredHandle)
 	{
 		super();
 	}

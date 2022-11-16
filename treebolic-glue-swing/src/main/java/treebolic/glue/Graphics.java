@@ -329,29 +329,33 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 
 	// H E L P E R
 
-	static public int convertStyleToAwt(final int style)
-	{
-		switch (style)
-		{
-		case Graphics.PLAIN:
-			return Font.PLAIN;
-		case Graphics.BOLD:
-			return Font.BOLD;
-		default:
-			return -1;
-		}
-	}
+// --Commented out by Inspection START (11/16/22, 2:29 PM):
+//	static public int convertStyleToAwt(final int style)
+//	{
+//		switch (style)
+//		{
+//		case Graphics.PLAIN:
+//			return Font.PLAIN;
+//		case Graphics.BOLD:
+//			return Font.BOLD;
+//		default:
+//			return -1;
+//		}
+//	}
+// --Commented out by Inspection STOP (11/16/22, 2:29 PM)
 
-	static public int convertStyleFromAwt(final int style)
-	{
-		switch (style)
-		{
-		case Font.PLAIN:
-			return Graphics.PLAIN;
-		case Font.BOLD:
-			return Graphics.BOLD;
-		default:
-			return -1;
-		}
-	}
+// --Commented out by Inspection START (11/16/22, 2:28 PM):
+//	static public int convertStyleFromAwt(final int style)
+//	{
+//		switch (style)
+//		{
+//		case Font.PLAIN:
+//			return Graphics.PLAIN;
+//		case Font.BOLD:
+//			return Graphics.BOLD;
+//		default:
+//			return -1;
+//		}
+//	}
+// --Commented out by Inspection STOP (11/16/22, 2:28 PM)
 }

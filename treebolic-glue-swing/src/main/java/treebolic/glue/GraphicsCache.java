@@ -15,7 +15,7 @@ public class GraphicsCache implements treebolic.glue.iface.GraphicsCache<Graphic
 {
 	private final java.awt.Image image;
 
-	public GraphicsCache(final Component component, final Graphics graphics, final int width, final int height)
+	public GraphicsCache(final Component component, final Graphics ignoredGraphics, final int width, final int height)
 	{
 		final java.awt.Component awtComponent = (java.awt.Component) component;
 		this.image = awtComponent.createImage(width, height);

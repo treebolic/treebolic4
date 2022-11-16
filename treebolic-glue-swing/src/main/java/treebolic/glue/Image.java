@@ -49,7 +49,7 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	}
 
 	/**
-	 * Make image (caught exeption returns null)
+	 * Make image (caught exception returns null)
 	 *
 	 * @param resource resource url
 	 * @return Image

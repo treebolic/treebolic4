@@ -93,6 +93,7 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 			return tooltips[ordinal()];
 		}
 
+		@SuppressWarnings("SameReturnValue")
 		public boolean getState()
 		{
 			return false;
@@ -162,9 +163,9 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 	/**
 	 * Constructor
 	 *
-	 * @param handle Handle required for component creation (unused)
+	 * @param ignoredHandle Handle required for component creation (unused)
 	 */
-	public Toolbar(final Object handle)
+	public Toolbar(final Object ignoredHandle)
 	{
 		super(SwingConstants.VERTICAL);
 		setFloatable(true);

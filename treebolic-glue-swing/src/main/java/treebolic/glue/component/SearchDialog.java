@@ -4,24 +4,10 @@
 
 package treebolic.glue.component;
 
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.*;
 
 /**
  * Search dialog, derived from JDialog
@@ -208,17 +194,7 @@ class SearchDialog extends JDialog
 	 */
 	public void center()
 	{
-		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		final Dimension componentSize = getSize();
-		if (componentSize.height > screenSize.height)
-		{
-			componentSize.height = screenSize.height;
-		}
-		if (componentSize.width > screenSize.width)
-		{
-			componentSize.width = screenSize.width;
-		}
-		setLocation((screenSize.width - componentSize.width) / 2, (screenSize.height - componentSize.height) / 2);
+		Utils.center(this);
 	}
 
 	/*

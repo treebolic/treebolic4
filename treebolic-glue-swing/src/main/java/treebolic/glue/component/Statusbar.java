@@ -115,7 +115,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	private SearchTool searchTool;
 
 	/**
-	 * Content CSS styke
+	 * Content CSS style
 	 */
 	private StyleSheet styleSheet;
 
@@ -131,9 +131,9 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	/**
 	 * Constructor
 	 *
-	 * @param handle Handle required for component creation (unused)
+	 * @param ignoredHandle Handle required for component creation (unused)
 	 */
-	public Statusbar(final Object handle)
+	public Statusbar(final Object ignoredHandle)
 	{
 		super(SwingConstants.HORIZONTAL);
 		setLayout(new GridBagLayout());

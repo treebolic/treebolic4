@@ -55,9 +55,9 @@ public class Progress extends JPanel implements Component, treebolic.glue.iface.
 	/**
 	 * Constructor
 	 *
-	 * @param handle Opaque handle required for component creation
+	 * @param ignoredHandle Opaque handle required for component creation
 	 */
-	public Progress(final Object handle)
+	public Progress(final Object ignoredHandle)
 	{
 		super();
 
