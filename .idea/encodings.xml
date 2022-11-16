@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-annotations/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-annotations/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-glue-iface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-glue-iface/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-glue-swing/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-glue-swing/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-glue/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-glue/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-graph/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-graph/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-iface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-iface/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-loadbalancer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-loadbalancer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-model/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-mutable/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-mutable/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-view/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-view/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

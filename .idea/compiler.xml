@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="treebolic-glue-iface" />
+        <module name="treebolic-loadbalancer" />
+        <module name="treebolic-iface" />
+        <module name="treebolic-graph" />
+        <module name="treebolic-mutable" />
+        <module name="treebolic-view" />
+        <module name="treebolic-model" />
+        <module name="treebolic-annotations" />
+        <module name="treebolic-glue" />
+        <module name="treebolic-glue-swing" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
