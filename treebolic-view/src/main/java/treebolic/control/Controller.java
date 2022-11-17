@@ -909,7 +909,7 @@ public class Controller extends Commander
 		assert this.view != null;
 		assert this.model != null;
 		final Complex euclideanLocation = this.view.viewToUnitCircle(vx, vy);
-		return Finder.findNodeAt(this.model.tree.getRoot(), euclideanLocation);
+		return Finder.findNodeAt(this.model.tree.getRoot(), euclideanLocation, this.view.getFinderDistanceEpsilonFactor());
 	}
 
 	// F O C U S

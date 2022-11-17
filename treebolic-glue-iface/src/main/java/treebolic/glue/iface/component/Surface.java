@@ -76,4 +76,11 @@ public interface Surface<G, L>
 	 * @param flag whether to fire hover events
 	 */
 	void setFireHover(final boolean flag);
+
+	/**
+	 * Get factor used when evaluating min distance of node finder
+	 * Best results depend on platform.
+	 * @return factor used when evaluating min distance of node finder
+	 */
+	float getFinderDistanceEpsilonFactor();
 }

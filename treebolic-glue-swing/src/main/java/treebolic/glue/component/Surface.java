@@ -24,7 +24,7 @@ public abstract class Surface extends javax.swing.JPanel implements Component, t
 	/**
 	 * Error margin when finding node
 	 */
-	static public final float FINDERRORMARGINFACTOR = 1.5F;
+	static public final float FIND_DISTANCE_EPSILON_FACTOR = 1.5F;
 
 	/**
 	 * Hover linger detector
@@ -175,5 +175,11 @@ public abstract class Surface extends javax.swing.JPanel implements Component, t
 		this.eventListener = listener;
 		super.addMouseListener(listener);
 		super.addMouseMotionListener(listener);
+	}
+
+	@Override
+	public float getFinderDistanceEpsilonFactor()
+	{
+		return FIND_DISTANCE_EPSILON_FACTOR;
 	}
 }

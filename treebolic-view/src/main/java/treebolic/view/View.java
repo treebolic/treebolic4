@@ -695,7 +695,7 @@ public class View extends Surface
 	public INode findNode(final int vx, final int vy)
 	{
 		final Complex euclideanLocation = this.painter.viewToUnitCircle(vx, vy, this.width, this.height);
-		return Finder.findNodeAt(this.model.tree.getRoot(), euclideanLocation);
+		return Finder.findNodeAt(this.model.tree.getRoot(), euclideanLocation, getFinderDistanceEpsilonFactor());
 	}
 
 	/**

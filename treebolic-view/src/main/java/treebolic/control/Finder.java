@@ -24,12 +24,13 @@ public class Finder
 	/**
 	 * Find node nearest to point
 	 *
-	 * @param start start node (only descendants are considered)
-	 * @param point point
+	 * @param start                 start node (only descendants are considered)
+	 * @param point                 point
+	 * @param distanceEpsilonFactor distance epsilon factor, contributes to computing epsilon distance below which the node is not found (platform dependent)
 	 * @return node if found, null otherwise
 	 */
 	@Nullable
-	static public INode findNodeAt(@Nullable final INode start, @NonNull final Complex point)
+	static public INode findNodeAt(@Nullable final INode start, @NonNull final Complex point, final float distanceEpsilonFactor)
 	{
 		if (start == null)
 		{
@@ -46,7 +47,7 @@ public class Finder
 		{
 			for (final INode child : children)
 			{
-				final INode targetNode = Finder.findNodeAt(child, point);
+				final INode targetNode = Finder.findNodeAt(child, point, 1.F);
 				if (targetNode != null)
 				{
 					final Location targetLocation = targetNode.getLocation();
@@ -64,7 +65,7 @@ public class Finder
 			}
 		}
 
-		if (resultLocation.euclidean.radius * resultLocation.euclidean.radius * Surface.FINDERRORMARGINFACTOR <= distance)
+		if (resultLocation.euclidean.radius * resultLocation.euclidean.radius * distanceEpsilonFactor <= distance)
 		{
 			return null;
 		}

@@ -16,15 +16,9 @@ import treebolic.glue.NotImplementedException;
 public abstract class Surface implements Component, treebolic.glue.iface.component.Surface<Graphics, EventListener>
 {
 	/**
-	 * Error margin when finding node
-	 */
-	static public final float FINDERRORMARGINFACTOR = 1.5F;
-
-	/**
 	 * Constructor
 	 *
-	 * @param handle
-	 *        Handle required for component creation (unused)
+	 * @param handle Handle required for component creation (unused)
 	 */
 	public Surface(final Object handle)
 	{
@@ -72,6 +66,12 @@ public abstract class Surface implements Component, treebolic.glue.iface.compone
 
 	@Override
 	public void setToolTipText(String message)
+	{
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public float getFinderDistanceEpsilonFactor()
 	{
 		throw new NotImplementedException();
 	}
