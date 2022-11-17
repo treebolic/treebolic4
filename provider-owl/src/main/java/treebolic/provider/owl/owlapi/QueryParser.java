@@ -1,12 +1,5 @@
-/**
- * Title : Treebolic provider
- * Description : Treebolic Provider
- * Version : 3.x
- * Copyright : (c) 2001-2014
- * Terms of use : see license agreement at http://treebolic.sourceforge.net/en/license.htm
- * Author : Bernard Bou
- *
- * Update : Jul 10, 2014
+/*
+ * Copyright (c) 2022. Bernard Bou
  */
 
 package treebolic.provider.owl.owlapi;
@@ -16,13 +9,12 @@ import java.util.Set;
 import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxEditorParser;
 import org.semanticweb.owlapi.expression.OWLEntityChecker;
 import org.semanticweb.owlapi.expression.ShortFormEntityChecker;
-import org.semanticweb.owlapi.model.OWLClassExpression;
-import org.semanticweb.owlapi.model.OWLDataFactory;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntaxParserImpl;
+import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProvider;
 import org.semanticweb.owlapi.util.BidirectionalShortFormProviderAdapter;
 import org.semanticweb.owlapi.util.ShortFormProvider;
+import org.semanticweb.owlapi.util.mansyntax.ManchesterOWLSyntaxParser;
 
 class QueryParser
 {
@@ -33,10 +25,8 @@ class QueryParser
 	/**
 	 * Constructs a DLQueryParser using the specified ontology and short form provider to map entity IRIs to short names.
 	 *
-	 * @param rootOntology
-	 *        The root ontology. This essentially provides the domain vocabulary for the query.
-	 * @param shortFormProvider
-	 *        A short form provider to be used for mapping back and forth between entities and their short names (renderings).
+	 * @param rootOntology      The root ontology. This essentially provides the domain vocabulary for the query.
+	 * @param shortFormProvider A short form provider to be used for mapping back and forth between entities and their short names (renderings).
 	 */
 	public QueryParser(final OWLOntology rootOntology, final ShortFormProvider shortFormProvider)
 	{
@@ -51,16 +41,18 @@ class QueryParser
 	/**
 	 * Parses a class expression string to obtain a class expression.
 	 *
-	 * @param classExpressionString
-	 *        The class expression string
+	 * @param classExpressionString The class expression string
 	 * @return The corresponding class expression if the class expression string is malformed or contains unknown entity names.
 	 */
 	public OWLClassExpression parseClassExpression(final String classExpressionString)
 	{
-		final OWLDataFactory dataFactory = this.rootOntology.getOWLOntologyManager().getOWLDataFactory();
 
-		// Set up the real parser
-		final ManchesterOWLSyntaxEditorParser parser = new ManchesterOWLSyntaxEditorParser(dataFactory, classExpressionString);
+		// Set up the parser
+		final OWLOntologyManager manager = this.rootOntology.getOWLOntologyManager();
+		final OWLDataFactory dataFactory = manager.getOWLDataFactory();
+		final OntologyConfigurator configurator = manager.getOntologyConfigurator();
+		final ManchesterOWLSyntaxParser parser = new ManchesterOWLSyntaxParserImpl(configurator, dataFactory);
+		parser.setStringToParse(classExpressionString);
 		parser.setDefaultOntology(this.rootOntology);
 
 		// Specify an entity checker that wil be used to check a class expression contains the correct names.

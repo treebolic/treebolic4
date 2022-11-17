@@ -1,10 +1,5 @@
-/**
- * Title : Treebolic OWL provider
- * Description : Treebolic OWL provider
- * Version : 3.x
- * Copyright : (c) 2001-2014
- * Terms of use: see license agreement at http://treebolic.sourceforge.net/en/license.htm
- * Author : Bernard Bou
+/*
+ * Copyright (c) 2022. Bernard Bou
  */
 package treebolic.provider.owl.owlapi;
 
@@ -704,8 +699,8 @@ public class OwlModelFactory
 	/**
 	 * Walk classes in iterator
 	 *
-	 * @param parentClassNode treebolic parent node to attach to
-	 * @param owlClasses class iterator
+	 * @param parentClassNode   treebolic parent node to attach to
+	 * @param owlClasses        class iterator
 	 * @param ontologyUrlString URL string
 	 */
 	public void visitClasses(final TreeMutableNode parentClassNode, final Iterator<OWLClass> owlClasses, final String ontologyUrlString)
@@ -810,7 +805,7 @@ public class OwlModelFactory
 	/**
 	 * Walk properties in iterator
 	 *
-	 * @param parentNode treebolic parent node to attach to
+	 * @param parentNode    treebolic parent node to attach to
 	 * @param owlProperties property iterator
 	 */
 	public void visitProperties(final TreeMutableNode parentNode, final Set<OWLObjectProperty> owlProperties)
@@ -858,7 +853,7 @@ public class OwlModelFactory
 	/**
 	 * Walk instances in iterator
 	 *
-	 * @param parentNode treebolic parent node to attach to
+	 * @param parentNode     treebolic parent node to attach to
 	 * @param owlIndividuals individual iterator
 	 */
 	public void visitInstances(final TreeMutableNode parentNode, final Set<OWLNamedIndividual> owlIndividuals)
@@ -934,9 +929,9 @@ public class OwlModelFactory
 	 *
 	 * @param ontologyDocumentUrl document url
 	 * @return ontology
-	 * @throws MalformedURLException
-	 * @throws IOException
-	 * @throws OWLOntologyCreationException
+	 * @throws MalformedURLException        malformed url exception
+	 * @throws IOException                  io exception
+	 * @throws OWLOntologyCreationException owl ontology creation exception
 	 */
 	private OWLOntology getOntology(final String ontologyDocumentUrl) throws MalformedURLException, IOException, OWLOntologyCreationException
 	{
@@ -1019,7 +1014,7 @@ public class OwlModelFactory
 	/**
 	 * Get node label
 	 *
-	 * @param labelKey label key
+	 * @param labelKey   label key
 	 * @param labelValue label value
 	 */
 	private String getLabel(final String labelKey, final String labelValue)
@@ -1030,7 +1025,7 @@ public class OwlModelFactory
 	/**
 	 * Get node color
 	 *
-	 * @param colorKey forecolor key
+	 * @param colorKey   forecolor key
 	 * @param colorValue forecolor value
 	 * @return color
 	 */

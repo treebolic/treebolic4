@@ -1,12 +1,5 @@
-/**
- * Title : Treebolic
- * Description : Treebolic Provider
- * Version : 3.x
- * Copyright : (c) 2001-2014
- * Terms of use : see license agreement at http://treebolic.sourceforge.net/en/license.htm
- * Author : Bernard Bou
- *
- * Update : Jul 10, 2014
+/*
+ * Copyright (c) 2022. Bernard Bou
  */
 
 package treebolic.provider.owl.owlapi;
