@@ -8,7 +8,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>${groupId}</groupId>
+		<groupId>io.github.treebolic</groupId>
 		<artifactId>treebolic</artifactId>
 		<version>${revision}</version>
 	</parent>
@@ -24,18 +24,18 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>${groupId}</groupId>
+			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-mutable</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>${groupId}</groupId>
+			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-glue</artifactId>
 			<version>${revision}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>${groupId}</groupId>
+			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-annotations</artifactId>
 			<version>${revision}</version>
 		</dependency>

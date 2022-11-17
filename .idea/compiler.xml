@@ -18,8 +18,12 @@
         <module name="treebolic-graph" />
         <module name="treebolic-view" />
         <module name="treebolic-annotations" />
+        <module name="provider-owl" />
         <module name="treebolic-glue" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="owl-application" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

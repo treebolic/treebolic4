@@ -9,7 +9,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>treebolic</artifactId>
-		<groupId>${groupId}</groupId>
+		<groupId>io.github.treebolic</groupId>
 		<version>${revision}</version>
 	</parent>
 
@@ -23,23 +23,23 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>${groupId}</groupId>
+			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-model</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>${groupId}</groupId>
+			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-mutable</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>${groupId}</groupId>
+			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-glue</artifactId>
 			<version>${revision}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>${groupId}</groupId>
+			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-annotations</artifactId>
 			<version>${revision}</version>
 		</dependency>

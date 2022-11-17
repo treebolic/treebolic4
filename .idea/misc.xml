@@ -16,7 +16,6 @@
     </entry_points>
     <pattern value="treebolic.glue.Worker" method="doInBackground" />
     <pattern value="treebolic.glue.Worker" method="job" />
-    <pattern value="treebolic.glue.Worker" />
     <pattern value="treebolic.glue.component.Surface" method="Surface" />
     <pattern value="treebolic.glue.Rectangle2D" method="Rectangle2D" />
     <pattern value="treebolic.glue.Point2D" method="Point2D" />
@@ -38,7 +37,14 @@
         <option value="$PROJECT_DIR$/treebolic-glue-swing/pom.xml" />
         <option value="$PROJECT_DIR$/treebolic-glue/pom.xml" />
         <option value="$PROJECT_DIR$/treebolic-annotations/pom.xml" />
+        <option value="$PROJECT_DIR$/provider-owl/pom.xml" />
+        <option value="$PROJECT_DIR$/application-owl/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/provider-xml/owl-application/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">

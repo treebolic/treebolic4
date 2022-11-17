@@ -44,19 +44,15 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 
 	static public final boolean HAS_SEARCH = true;
 
-	public enum ImageIndices
-	{
-		INFO, LINK, FAIL
-	}
-
 	/*
 	 * Icon array
 	 */
 	@SuppressWarnings("ConstantConditions")
-	static final ImageIcon[] icons = new ImageIcon[] { new ImageIcon(Toolbar.class.getResource("images/status_info.png")),
-			new ImageIcon(Toolbar.class.getResource("images/status_linking.png")), 
-			new ImageIcon(Toolbar.class.getResource("images/status_mounting.png")), 
-			new ImageIcon(Toolbar.class.getResource("images/status_searching.png")), 
+	static final ImageIcon[] icons = new ImageIcon[] { //
+			new ImageIcon(Statusbar.class.getResource("images/status_info.png")), //
+			new ImageIcon(Statusbar.class.getResource("images/status_linking.png")), //
+			new ImageIcon(Statusbar.class.getResource("images/status_mounting.png")), //
+			new ImageIcon(Statusbar.class.getResource("images/status_searching.png")), //
 	};
 
 	/**

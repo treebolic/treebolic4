@@ -10,10 +10,11 @@
 	<parent>
 		<artifactId>treebolic</artifactId>
 		<groupId>io.github.treebolic</groupId>
-		<version>${revision}</version>
+		<version>4.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>application</artifactId>
+	<artifactId>application-owl</artifactId>
+	<packaging>pom</packaging>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>
@@ -24,22 +25,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-view</artifactId>
+			<artifactId>application</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-model</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-glue-swing</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-annotations</artifactId>
+			<artifactId>provider-owl</artifactId>
 			<version>${revision}</version>
 		</dependency>
 	</dependencies>

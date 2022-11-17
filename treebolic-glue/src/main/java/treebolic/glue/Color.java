@@ -45,6 +45,11 @@ public class Color implements treebolic.glue.iface.Color<Color>
 		throw new NotImplementedException();
 	}
 
+	public Color(int rgb)
+	{
+		throw new NotImplementedException();
+	}
+
 	@Override
 	public void set(final int r, final int g, final int b)
 	{
