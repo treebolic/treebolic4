@@ -978,12 +978,12 @@ public class Painter extends AbstractPainter
 	 */
 	private void drawArc(@NonNull final Arc2D arc2D, final Point2D fromAnchor, final Point2D toAnchor, final int style)
 	{
-		final int x = (int) arc2D.x;
-		final int y = (int) arc2D.y;
-		final int w = (int) arc2D.width;
-		final int h = (int) arc2D.height;
-		final float start = (float) arc2D.start;
-		final float extent = (float) arc2D.extent;
+		final int x = (int) arc2D.getX();
+		final int y = (int) arc2D.getY();
+		final int w = (int) arc2D.getWidth();
+		final int h = (int) arc2D.getHeight();
+		final float start = (float) arc2D.getAngleStart();
+		final float extent = (float) arc2D.getAngleExtent();
 
 		if ((style & (IEdge.STROKEMASK | IEdge.STROKEWIDTHMASK)) != 0)
 		{

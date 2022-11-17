@@ -44,7 +44,7 @@ public class Graph
 	}
 
 	/**
-	 * Returns a unmodifiable {@code Collection} of all nodes of this graph. The result is unmodifiable because any deletions in the collection would leave
+	 * Returns an unmodifiable {@code Collection} of all nodes of this graph. The result is unmodifiable because any deletions in the collection would leave
 	 * the graph in an undefined state. To delete or add a node, the methods in this class must be used.
 	 *
 	 * @return the nodes of the graph.
@@ -56,7 +56,7 @@ public class Graph
 	}
 
 	/**
-	 * Returns a unmodifiable {@code Collection} of all the edges of this graph. The result is unmodifiable because any deletions in the collection would
+	 * Returns an unmodifiable {@code Collection} of all the edges of this graph. The result is unmodifiable because any deletions in the collection would
 	 * leave the graph in an undefined state. To delete or add an edge, the methods in this class must be used.
 	 *
 	 * @return the edges of the graph.
@@ -139,7 +139,7 @@ public class Graph
 	}
 
 	/**
-	 * Returns a unmodifiable {@code Map} of all edges of this graph. The result is unmodifiable because any deletions in the collection would leave the
+	 * Returns an unmodifiable {@code Map} of all edges of this graph. The result is unmodifiable because any deletions in the collection would leave the
 	 * graph in an undefined state. To delete or add an edge, the methods in this class must be used.
 	 *
 	 * @return the edges of the graph.
@@ -298,7 +298,7 @@ public class Graph
 				}
 			}
 
-			// follow each non edge starting from this node
+			// follow each non-edge starting from this node
 			for (GraphEdge edge : getNonTreeEdges(node))
 			{
 				// get node at other end of the edge

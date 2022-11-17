@@ -140,7 +140,7 @@ public class Laf
 	 *
 	 * @param lafName laf name
 	 * @return true if successful
-	 * @throws UnsupportedLookAndFeelException
+	 * @throws UnsupportedLookAndFeelException unsupported laf
 	 */
 	static public boolean setLookAndFeel(final String lafName) throws UnsupportedLookAndFeelException
 	{
@@ -167,25 +167,9 @@ public class Laf
 			final Object instance = constructor.newInstance(args);
 			return (LookAndFeel) instance;
 		}
-		catch (final ClassNotFoundException nfe)
+		catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException nfe)
 		{
 			nfe.printStackTrace();
-		}
-		catch (final NoSuchMethodException nsme)
-		{
-			nsme.printStackTrace();
-		}
-		catch (final InvocationTargetException ite)
-		{
-			ite.printStackTrace();
-		}
-		catch (final IllegalAccessException iae)
-		{
-			iae.printStackTrace();
-		}
-		catch (final InstantiationException ie)
-		{
-			ie.printStackTrace();
 		}
 		return null;
 	}
@@ -195,15 +179,11 @@ public class Laf
 	 *
 	 * @param lafName laf name
 	 * @return true if successful
-	 * @throws UnsupportedLookAndFeelException
 	 */
 	static public boolean setCustomTheme(final String lafName)
 	{
 		final MetalTheme theme = Laf.makeCustomTheme();
-		if (theme != null)
-		{
-			Laf.setCurrentTheme(lafName, theme);
-		}
+		Laf.setCurrentTheme(lafName, theme);
 		return true;
 	}
 
@@ -221,7 +201,6 @@ public class Laf
 			final Class<?>[] argsClass = new Class[] { MetalTheme.class };
 			final Method method = clazz.getMethod("setCurrentTheme", argsClass); //$NON-NLS-1$
 			method.invoke(null, theme);
-			return;
 		}
 		catch (final Exception e)
 		{

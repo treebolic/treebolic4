@@ -9,8 +9,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>treebolic</artifactId>
-		<groupId>org.treebolic</groupId>
-		<version>4.0-SNAPSHOT</version>
+		<groupId>${groupId}</groupId>
+		<version>${revision}</version>
 	</parent>
 
 	<artifactId>application</artifactId>
@@ -23,25 +23,24 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.treebolic</groupId>
+			<groupId>${groupId}</groupId>
 			<artifactId>treebolic-view</artifactId>
-			<version>4.0-SNAPSHOT</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.treebolic</groupId>
+			<groupId>${groupId}</groupId>
 			<artifactId>treebolic-model</artifactId>
-			<version>4.0-SNAPSHOT</version>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.treebolic</groupId>
+			<groupId>${groupId}</groupId>
 			<artifactId>treebolic-glue-swing</artifactId>
-			<version>4.0-SNAPSHOT</version>
-			<scope>provided</scope>
+			<version>${revision}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.treebolic</groupId>
+			<groupId>${groupId}</groupId>
 			<artifactId>treebolic-annotations</artifactId>
-			<version>4.0-SNAPSHOT</version>
+			<version>${revision}</version>
 		</dependency>
 	</dependencies>
 

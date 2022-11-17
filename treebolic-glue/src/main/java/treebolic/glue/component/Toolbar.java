@@ -28,9 +28,9 @@ public class Toolbar implements Component, treebolic.glue.iface.component.Toolba
 	/**
 	 * Constructor
 	 *
-	 * @param handle Handle required for component creation (unused)
+	 * @param ignoredHandle Handle required for component creation (unused)
 	 */
-	public Toolbar(final Object handle)
+	public Toolbar(final Object ignoredHandle)
 	{
 		throw new NotImplementedException();
 	}

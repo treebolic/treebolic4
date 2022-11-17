@@ -37,7 +37,7 @@ public class Mounter
 			return false;
 		}
 
-		// mounting mountpoint must be non null
+		// mounting mountpoint must be non-null
 		final MountPoint mountPoint = mountingNode.getMountPoint();
 		if (mountPoint == null)
 		{
@@ -85,7 +85,7 @@ public class Mounter
 
 		// STATE
 
-		// cross reference mounting node and mounted
+		// cross-reference mounting node and mounted
 		mountedMountPoint.mountingNode = mountingNode;
 		mountingMountPoint.mountedNode = mountedNode;
 
@@ -140,7 +140,7 @@ public class Mounter
 			return null;
 		}
 
-		// mounting mountpoint must be non null
+		// mounting mountpoint must be non-null
 		mountPoint = mountingNode.getMountPoint();
 		if (mountPoint == null)
 		{
@@ -177,7 +177,7 @@ public class Mounter
 
 		// STATE
 
-		// cross reference mounting node and mounted
+		// cross-reference mounting node and mounted
 		mountedMountPoint.mountingNode = null;
 		mountingMountPoint.mountedNode = null;
 
@@ -206,7 +206,7 @@ public class Mounter
 		{
 			for (final INode childNode : mountedNodeChildren)
 			{
-				// if mounted mount point having edges
+				// if mounted mountpoint has edges
 				final MountPoint mountPoint = childNode.getMountPoint();
 				//noinspection InstanceofConcreteClass
 				if (mountPoint instanceof MountPoint.Mounted)

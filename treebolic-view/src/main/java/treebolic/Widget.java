@@ -88,7 +88,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 	 * Default provider
 	 */
 	@SuppressWarnings("WeakerAccess")
-	static public final String DEFAULT_PROVIDER = "treebolic.provider.xml.dom.Provider";
+	static public final String DEFAULT_PROVIDER = "treebolic.provider.xml.Provider";
 
 	// V E R S I O N
 
@@ -339,12 +339,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 			final Model model = deSerializer.deserialize();
 			init(model);
 		}
-		catch (@NonNull final IOException exception)
-		{
-			progress(Messages.getString("Widget.progress_err_serialized_create") + ' ' + '<' + serFile + '>' + ' ' + exception, true);
-			exception.printStackTrace();
-		}
-		catch (@NonNull final ClassNotFoundException exception)
+		catch (@NonNull final IOException | ClassNotFoundException exception)
 		{
 			progress(Messages.getString("Widget.progress_err_serialized_create") + ' ' + '<' + serFile + '>' + ' ' + exception, true);
 			exception.printStackTrace();

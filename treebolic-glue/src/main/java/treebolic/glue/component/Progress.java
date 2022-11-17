@@ -15,9 +15,9 @@ public class Progress implements Component, treebolic.glue.iface.component.Progr
 	/**
 	 * Constructor
 	 *
-	 * @param handle Opaque handle required for component creation
+	 * @param ignoredHandle Opaque handle required for component creation
 	 */
-	public Progress(final Object handle)
+	public Progress(final Object ignoredHandle)
 	{
 		throw new NotImplementedException();
 	}

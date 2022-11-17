@@ -221,7 +221,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Make menu bar
 	 *
-	 * @return tool bar
+	 * @return toolbar
 	 */
 	protected JToolBar makeToolBar()
 	{

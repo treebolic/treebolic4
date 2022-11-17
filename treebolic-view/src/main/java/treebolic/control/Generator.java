@@ -11,7 +11,7 @@ import treebolic.annotations.NonNull;
 
 /**
  * This class allows specifying Python generator-like sequences. For examples, see the JUnit test case. The implementation uses a separate Thread to produce the
- * sequence items. This is certainly not as fast as eg. a for-loop, but not horribly slow either. On a machine with a dual core i5 CPU @ 2.67 GHz, 1000 items
+ * sequence items. This is certainly not as fast as e.g. a for-loop, but not horribly slow either. On a machine with a dual-core i5 CPU @ 2.67 GHz, 1000 items
  * can be produced in &lt; 0.03s. By overriding finalize(), the class takes care not to leave any Threads running longer than necessary.
  *
  * @param <T> type of objects

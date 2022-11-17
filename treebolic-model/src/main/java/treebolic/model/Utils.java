@@ -422,7 +422,7 @@ public class Utils
 		if (str != null)
 		{
 			int i = str.lastIndexOf(' ');
-			if (i != -1 && i < str.length())
+			if (i != -1)
 			{
 				try
 				{

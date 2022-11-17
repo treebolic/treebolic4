@@ -21,11 +21,23 @@ public class Arc2D extends java.awt.geom.Arc2D.Double implements treebolic.glue.
 		super.setArcType(java.awt.geom.Arc2D.OPEN);
 	}
 
+	// public double getX();
+
+ 	// public double getY();
+
+	// public double getWidth();
+
+	// public double getHeight();
+
 	// public void setFrameFromCenter(final double x1, final double y1, final double x2, final double y2);
 
 	// public void setAngleExtent(final double extent);
 
 	// public void setAngleStart(final double start);
+
+	// public double getAngleStart();
+
+	// public double getAngleExtent();
 
 	@Override
 	public void setAngles(final Point2D from, final Point2D to)
@@ -43,10 +55,6 @@ public class Arc2D extends java.awt.geom.Arc2D.Double implements treebolic.glue.
 
 	// public double getCenterY();
 
-	// public double getHeight();
-
-	// public double getWidth();
-
 	@Override
 	public Point2D getStartPoint()
 	{
@@ -58,10 +66,6 @@ public class Arc2D extends java.awt.geom.Arc2D.Double implements treebolic.glue.
 	{
 		return new Point2D(super.getEndPoint());
 	}
-
-	// public double getAngleStart();
-
-	// public double getAngleExtent();
 
 	// public boolean containsAngle(final double angle);
 

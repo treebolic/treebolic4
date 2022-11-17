@@ -128,7 +128,7 @@ public class MountPoint implements Serializable
 				final INode mountedNode = mountingMountPoint.mountedNode;
 				if (mountedNode != null)
 				{
-					// mounted mountpoint must be non null
+					// mounted mountpoint must be non-null
 					mountPoint = mountedNode.getMountPoint();
 					if (mountPoint != null)
 					{
@@ -159,7 +159,7 @@ public class MountPoint implements Serializable
 					final INode mountingNode = mountedMountPoint.mountingNode;
 					if (mountingNode != null)
 					{
-						// mounting mountpoint must be non null
+						// mounting mountpoint must be non-null
 						mountPoint = mountingNode.getMountPoint();
 						if (mountPoint != null)
 						{

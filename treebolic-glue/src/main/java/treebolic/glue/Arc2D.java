@@ -11,17 +11,31 @@ package treebolic.glue;
  */
 public class Arc2D implements treebolic.glue.iface.Arc2D<Point2D>
 {
-	public float x;
-
-	public float y;
-
-	public float width;
-	public float height;
-
-	public float start;
-	public float extent;
-
 	public Arc2D()
+	{
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public double getX()
+	{
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public double getY()
+	{
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public double getWidth()
+	{
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public double getHeight()
 	{
 		throw new NotImplementedException();
 	}
@@ -46,18 +60,6 @@ public class Arc2D implements treebolic.glue.iface.Arc2D<Point2D>
 
 	@Override
 	public double getCenterY()
-	{
-		throw new NotImplementedException();
-	}
-
-	@Override
-	public double getWidth()
-	{
-		throw new NotImplementedException();
-	}
-
-	@Override
-	public double getHeight()
 	{
 		throw new NotImplementedException();
 	}

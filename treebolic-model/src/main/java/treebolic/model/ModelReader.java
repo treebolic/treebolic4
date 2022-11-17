@@ -56,11 +56,7 @@ public class ModelReader
 		{
 			return deserialize();
 		}
-		catch (@NonNull final ClassNotFoundException ignored)
-		{
-			//
-		}
-		catch (@NonNull final IOException ignored)
+		catch (@NonNull final ClassNotFoundException | IOException ignored)
 		{
 			//
 		}

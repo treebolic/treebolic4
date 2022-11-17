@@ -14,6 +14,34 @@ import treebolic.annotations.NonNull;
 public interface Arc2D<P>
 {
 	/**
+	 * Get x
+	 *
+	 * @return x
+	 */
+	double getX();
+
+	/**
+	 * Get y
+	 *
+	 * @return y
+	 */
+	double getY();
+
+	/**
+	 * Get width of the framing rectangle
+	 *
+	 * @return width
+	 */
+	double getWidth();
+
+	/**
+	 * Height of the framing rectangle
+	 *
+	 * @return height
+	 */
+	double getHeight();
+
+	/**
 	 * Set frame from center and one corner
 	 *
 	 * @param x  x-center
@@ -46,20 +74,6 @@ public interface Arc2D<P>
 	double getCenterY();
 
 	/**
-	 * Get width
-	 *
-	 * @return width
-	 */
-	double getWidth();
-
-	/**
-	 * Height
-	 *
-	 * @return height
-	 */
-	double getHeight();
-
-	/**
 	 * Get start point
 	 *
 	 * @return start point
@@ -76,30 +90,30 @@ public interface Arc2D<P>
 	P getEndPoint();
 
 	/**
-	 * Get angle extent
+	 * Get angular extent of the arc in degrees.
 	 *
-	 * @return angle extent
+	 * @return angle extent of the arc in degrees
 	 */
 	double getAngleExtent();
 
 	/**
-	 * Set angle extent
+	 * Set angular extent of the arc in degrees.
 	 *
-	 * @param extent angle extent
+	 * @param extent angle extent of the arc in degrees
 	 */
 	void setAngleExtent(final double extent);
 
 	/**
-	 * Get angle start
+	 * The starting angle of the arc in degrees.
 	 *
-	 * @return angle start
+	 * @return starting angle of the arc in degrees.
 	 */
 	double getAngleStart();
 
 	/**
-	 * Set angle start
+	 * Set starting angle of the arc in degrees.
 	 *
-	 * @param start angle start
+	 * @param start starting angle of the arc in degrees.
 	 */
 	void setAngleStart(final double start);
 

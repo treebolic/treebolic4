@@ -686,7 +686,7 @@ public abstract class AbstractPainter extends Mapper
 	/**
 	 * Set scale images flag
 	 *
-	 * @param flag true true if images are scaled
+	 * @param flag true if images are scaled
 	 */
 	public void setScaleImages(@Nullable final Boolean flag)
 	{

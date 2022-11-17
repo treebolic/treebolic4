@@ -91,14 +91,14 @@ public interface INode extends Serializable
 	void setChildrenWeight(final double weight);
 
 	/**
-	 * Get least weight
+	 * Get the least weight
 	 *
 	 * @return least weight
 	 */
 	double getMinWeight();
 
 	/**
-	 * Set least weight
+	 * Set the least weight
 	 *
 	 * @param weight least weight
 	 */

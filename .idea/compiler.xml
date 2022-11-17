@@ -9,15 +9,16 @@
         <module name="studio" />
         <module name="treebolic-glue-iface" />
         <module name="treebolic-loadbalancer" />
+        <module name="treebolic-mutable" />
+        <module name="provider-xml" />
+        <module name="treebolic-model" />
+        <module name="treebolic-glue-swing" />
         <module name="treebolic-iface" />
         <module name="application" />
         <module name="treebolic-graph" />
-        <module name="treebolic-mutable" />
         <module name="treebolic-view" />
-        <module name="treebolic-model" />
         <module name="treebolic-annotations" />
         <module name="treebolic-glue" />
-        <module name="treebolic-glue-swing" />
       </profile>
     </annotationProcessing>
   </component>

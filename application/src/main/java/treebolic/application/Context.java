@@ -268,19 +268,14 @@ public class Context implements IContext
 				System.out.println(Messages.getString("Context.linkto") + uri); //$NON-NLS-1$
 
 				// we are likely to be on the popup handler
-				SwingUtilities.invokeLater(new Runnable()
-				{
-					@Override
-					public void run()
+				SwingUtilities.invokeLater(() -> {
+					try
 					{
-						try
-						{
-							Desktop.getDesktop().browse(uri);
-						}
-						catch (IOException e)
-						{
-							System.err.println(e.getMessage() + ':' + linkUrl);
-						}
+						Desktop.getDesktop().browse(uri);
+					}
+					catch (IOException e)
+					{
+						System.err.println(e.getMessage() + ':' + linkUrl);
 					}
 				});
 				return true;
