@@ -27,30 +27,6 @@ import treebolic.view.View;
  */
 public class PopupMenu extends treebolic.glue.component.PopupMenu
 {
-	// private static final long serialVersionUID = 6316113839021843464L;
-
-	/**
-	 * Indexes to labels
-	 */
-	@SuppressWarnings("WeakerAccess")
-	static public final int LABEL_CANCEL = 0;
-	@SuppressWarnings("WeakerAccess")
-	static public final int LABEL_INFO = 1;
-	@SuppressWarnings("WeakerAccess")
-	static public final int LABEL_FOCUS = 2;
-	@SuppressWarnings("WeakerAccess")
-	static public final int LABEL_LINKTO = 3;
-	@SuppressWarnings("WeakerAccess")
-	static public final int LABEL_MOUNT = 4;
-	@SuppressWarnings("WeakerAccess")
-	static public final int LABEL_UNMOUNT = 5;
-	@SuppressWarnings("WeakerAccess")
-	static public final int LABEL_GOTO = 6;
-	@SuppressWarnings("WeakerAccess")
-	static public final int LABEL_SEARCH = 7;
-
-	// static String[] labels defined in glue for localization
-
 	/**
 	 * Constructor
 	 */
@@ -59,8 +35,6 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 	{
 		super(view);
 	}
-
-	// public void show(final Component parent, final int x, final int y)
 
 	/**
 	 * Make popup menu
@@ -78,8 +52,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 		final PopupMenu popupMenu = new PopupMenu(view);
 
 		// info
-		assert labels != null;
-		popupMenu.addItem(labels[LABEL_INFO], ImageIndices.IMAGE_INFO.ordinal(), new ActionListener()
+		popupMenu.addItem(LabelIndices.LABEL_INFO.ordinal(), ImageIndices.IMAGE_INFO.ordinal(), new ActionListener()
 		{
 			@SuppressWarnings("SameReturnValue")
 			@Override
@@ -91,7 +64,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 		});
 
 		// focus
-		popupMenu.addItem(labels[LABEL_FOCUS], ImageIndices.IMAGE_FOCUS.ordinal(), new ActionListener()
+		popupMenu.addItem(LabelIndices.LABEL_FOCUS.ordinal(), ImageIndices.IMAGE_FOCUS.ordinal(), new ActionListener()
 		{
 			@SuppressWarnings("SameReturnValue")
 			@Override
@@ -107,7 +80,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 		if (mountPoint != null)
 		{
 			@SuppressWarnings("InstanceofConcreteClass") final boolean isMounted = mountPoint instanceof MountPoint.Mounted;
-			popupMenu.addItem(labels[isMounted ? LABEL_UNMOUNT : LABEL_MOUNT], ImageIndices.IMAGE_MOUNT.ordinal(), new ActionListener()
+			popupMenu.addItem(isMounted ? LabelIndices.LABEL_UNMOUNT.ordinal() : LabelIndices.LABEL_MOUNT.ordinal(), ImageIndices.IMAGE_MOUNT.ordinal(), new ActionListener()
 			{
 				@SuppressWarnings("SameReturnValue")
 				@Override
@@ -122,7 +95,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 		// link
 		if (PopupMenu.isURL(node.getLink()))
 		{
-			popupMenu.addItem(labels[LABEL_LINKTO], ImageIndices.IMAGE_LINK.ordinal(), new ActionListener()
+			popupMenu.addItem(LabelIndices.LABEL_LINKTO.ordinal(), ImageIndices.IMAGE_LINK.ordinal(), new ActionListener()
 			{
 				@SuppressWarnings("SameReturnValue")
 				@Override
@@ -151,16 +124,18 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 							// illegal combination
 							continue;
 						}
-						menuLabel = prepend ? labels[LABEL_GOTO] + ' ' + menuItem.label : menuItem.label;
+						menuLabel = prepend ? LabelIndices.LABEL_GOTO.ordinal() + ' ' + menuItem.label : menuItem.label;
 						break;
+
 					case SEARCH:
 						if (controller.getSearchTarget(menuItem.target, node) == null)
 						{
 							// illegal combination
 							continue;
 						}
-						menuLabel = prepend ? labels[LABEL_SEARCH] + ' ' + menuItem.label : menuItem.label;
+						menuLabel = prepend ? LabelIndices.LABEL_SEARCH.ordinal() + ' ' + menuItem.label : menuItem.label;
 						break;
+
 					default:
 						break;
 				}
@@ -195,7 +170,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 		}
 
 		// cancel
-		popupMenu.addItem(labels[LABEL_CANCEL], ImageIndices.IMAGE_CANCEL.ordinal(), new ActionListener()
+		popupMenu.addItem(LabelIndices.LABEL_CANCEL.ordinal(), ImageIndices.IMAGE_CANCEL.ordinal(), new ActionListener()
 		{
 			@SuppressWarnings("SameReturnValue")
 			@Override

@@ -19,13 +19,9 @@ public class PopupMenu extends JPopupMenu implements treebolic.glue.iface.compon
 {
 	private static final long serialVersionUID = 1L;
 
-	public enum ImageIndices
-	{
-		IMAGE_CANCEL, IMAGE_INFO, IMAGE_FOCUS, IMAGE_LINK, IMAGE_MOUNT, IMAGE_GOTO, IMAGE_SEARCH
-	}
-
 	/**
-	 * Icon array
+	 * Icon array as per ImageIndices ordinals:
+	 * IMAGE_CANCEL, IMAGE_INFO, IMAGE_FOCUS, IMAGE_LINK, IMAGE_MOUNT, IMAGE_GOTO, IMAGE_SEARCH
 	 */
 	@SuppressWarnings("ConstantConditions")
 	static final ImageIcon[] icons = new ImageIcon[]{ //
@@ -39,10 +35,19 @@ public class PopupMenu extends JPopupMenu implements treebolic.glue.iface.compon
 	};
 
 	/**
-	 * Labels
-	 * indexes are public
+	 * Labels as per LabelIndices ordinals:
+	 * LABEL_CANCEL, LABEL_INFO, LABEL_FOCUS, LABEL_LINKTO, LABEL_MOUNT, LABEL_UNMOUNT, LABEL_GOTO, LABEL_SEARCH
 	 */
-	static public String[] labels = Messages.getStrings("PopupMenu.label_cancel", "PopupMenu.label_info", "PopupMenu.label_focus", "PopupMenu.label_link", "PopupMenu.label_mount", "PopupMenu.label_unmount", "PopupMenu.label_goto", "PopupMenu.label_search");
+	static final String[] labels = Messages.getStrings( //
+			"PopupMenu.label_cancel", //
+			"PopupMenu.label_info", //
+			"PopupMenu.label_focus", //
+			"PopupMenu.label_link", //
+			"PopupMenu.label_mount", //
+			"PopupMenu.label_unmount", //
+			"PopupMenu.label_goto", //
+			"PopupMenu.label_search" //
+	);
 
 	/**
 	 * Constructor
@@ -64,6 +69,12 @@ public class PopupMenu extends JPopupMenu implements treebolic.glue.iface.compon
 		}
 		menuItem.addActionListener(e -> listener.actionPerformed(null));
 		add(menuItem);
+	}
+
+	@Override
+	public void addItem(final int labelIndex, final int imageIndex, final ActionListener listener)
+	{
+		addItem(labels[labelIndex], imageIndex, listener);
 	}
 
 	@Override

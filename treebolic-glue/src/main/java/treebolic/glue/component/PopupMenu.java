@@ -13,17 +13,6 @@ import treebolic.glue.NotImplementedException;
  */
 public class PopupMenu implements treebolic.glue.iface.component.PopupMenu<Component, ActionListener>
 {
-	public enum ImageIndices
-	{
-		IMAGE_CANCEL, IMAGE_INFO, IMAGE_FOCUS, IMAGE_LINK, IMAGE_MOUNT, IMAGE_GOTO, IMAGE_SEARCH
-	}
-
-	/**
-	 * Labels
-	 * indexes are public
-	 */
-	static public String[] labels = null;
-
 	/**
 	 * Constructor
 	 *
@@ -36,6 +25,12 @@ public class PopupMenu implements treebolic.glue.iface.component.PopupMenu<Compo
 
 	@Override
 	public void addItem(final String label, final int imageIndex, final ActionListener listener)
+	{
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public void addItem(final int labelIndex, final int imageIndex, final ActionListener listener)
 	{
 		throw new NotImplementedException();
 	}

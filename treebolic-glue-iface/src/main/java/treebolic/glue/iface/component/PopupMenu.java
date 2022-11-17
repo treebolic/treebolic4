@@ -11,16 +11,39 @@ package treebolic.glue.iface.component;
  */
 public interface PopupMenu<C, L>
 {
-	// protected PopupMenu();
+	/**
+	 * Indexes to labels
+	 */
+	enum LabelIndices
+	{
+		LABEL_CANCEL, LABEL_INFO, LABEL_FOCUS, LABEL_LINKTO, LABEL_MOUNT, LABEL_UNMOUNT, LABEL_GOTO, LABEL_SEARCH
+	}
+
+	/**
+	 * Indexes to images
+	 */
+	enum ImageIndices
+	{
+		IMAGE_CANCEL, IMAGE_INFO, IMAGE_FOCUS, IMAGE_LINK, IMAGE_MOUNT, IMAGE_GOTO, IMAGE_SEARCH
+	}
 
 	/**
 	 * Add item
 	 *
-	 * @param label    label
-	 * @param image    image
-	 * @param listener listener
+	 * @param label      label String
+	 * @param imageIndex image index (as per ImageIndices ordinals)
+	 * @param listener   listener
 	 */
-	void addItem(final String label, final int image, final L listener);
+	void addItem(final String label, final int imageIndex, final L listener);
+
+	/**
+	 * Add item
+	 *
+	 * @param labelIndex label index (as per LabelIndices ordinals)
+	 * @param imageIndex image index (as per ImageIndices ordinals)
+	 * @param listener   listener
+	 */
+	void addItem(final int labelIndex, final int imageIndex, final L listener);
 
 	/**
 	 * Popup component at position
