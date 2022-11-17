@@ -63,7 +63,7 @@ public class OwlModelFactory
 	// L O A D B A L A N C I N G
 
 	/**
-	 * LoadBalancer : Max children nodes at level 0, 1 .. n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for level i to n.
+	 * LoadBalancer : Max children nodes at level 0, 1 ... n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for level i to n.
 	 */
 	static private final int[] MAX_AT_LEVEL = {8, 3};
 
@@ -462,13 +462,13 @@ public class OwlModelFactory
 			}
 			catch (final Exception e)
 			{
-				System.err.println("Owl:" + e.toString());
+				System.err.println("Owl:" + e);
 				return null;
 			}
 		}
 
 		// root
-		OWLClass owlClass = null;
+		OWLClass owlClass;
 		if (classIri != null || classShortForm != null)
 		{
 			// parse
@@ -666,7 +666,7 @@ public class OwlModelFactory
 	 */
 	public Map<String, String> parseUrl(final String ontologyUrlString0)
 	{
-		final Map<String, String> map = new HashMap<String, String>();
+		final Map<String, String> map = new HashMap<>();
 
 		String ontologyUrlString = ontologyUrlString0;
 
@@ -735,15 +735,12 @@ public class OwlModelFactory
 		final String owlClassId = OwlModelFactory.getName(ownClassShortForm);
 		final Set<OWLAnnotation> annotations = null; // owlClass.getAnnotations(this.ontology)
 		// comment
-		final StringBuffer comment = new StringBuffer();
-		comment.append(owlClass.getIRI().toString());
-		comment.append("<br>");
-		comment.append(annotationsToString(annotations));
+		String comment = owlClass.getIRI().toString() + "<br>" + annotationsToString(annotations);
 
 		// node
 		final TreeMutableNode owlClassNode = new TreeMutableNode(parentOwlClassNode, owlClassId);
 		owlClassNode.setLabel(owlClassId);
-		owlClassNode.setContent(comment.toString());
+		owlClassNode.setContent(comment);
 		owlClassNode.setBackColor(this.classBackColor);
 		owlClassNode.setForeColor(this.classForeColor);
 		if (this.classImageFile != null)
@@ -909,7 +906,7 @@ public class OwlModelFactory
 			return "";
 		}
 
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 		for (final OWLAnnotation annotation : annotations)
 		{
 			if (annotation.getValue() instanceof OWLLiteral)
@@ -935,25 +932,9 @@ public class OwlModelFactory
 	 */
 	private OWLOntology getOntology(final String ontologyDocumentUrl) throws MalformedURLException, IOException, OWLOntologyCreationException
 	{
-		InputStream is = null;
-		try
+		try(InputStream is = new URL(ontologyDocumentUrl).openStream())
 		{
-			is = new URL(ontologyDocumentUrl).openStream();
 			return this.manager.loadOntologyFromOntologyDocument(new StreamDocumentSource(is));
-		}
-		finally
-		{
-			if (is != null)
-			{
-				try
-				{
-					is.close();
-				}
-				catch (final IOException e)
-				{
-					//
-				}
-			}
 		}
 	}
 

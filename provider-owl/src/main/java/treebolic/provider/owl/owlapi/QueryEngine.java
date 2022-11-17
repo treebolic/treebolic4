@@ -4,23 +4,17 @@
 
 package treebolic.provider.owl.owlapi;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
-
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLClassExpression;
-import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
-import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class QueryEngine
 {
@@ -33,9 +27,7 @@ public class QueryEngine
 	/**
 	 * Constructs a DLQueryEngine. This will answer "DL queries" using the specified reasoner.
 	 *
-	 * @param ontology
-	 *        The ontology
-	 * @throws OWLOntologyCreationException
+	 * @param ontology The ontology
 	 */
 	public QueryEngine(final OWLOntology ontology)
 	{
@@ -55,10 +47,8 @@ public class QueryEngine
 	/**
 	 * Gets the superclasses of a class expression
 	 *
-	 * @param classExpression
-	 *        The class expression.
-	 * @param direct
-	 *        Specifies whether direct superclasses should be returned or not.
+	 * @param classExpression The class expression.
+	 * @param direct          Specifies whether direct superclasses should be returned or not.
 	 * @return The superclasses of the specified class expression If there was a problem parsing the class expression.
 	 */
 	public Set<OWLClass> getSuperClasses(final OWLClassExpression classExpression, final boolean direct)
@@ -70,8 +60,7 @@ public class QueryEngine
 	/**
 	 * Gets the equivalent classes of a class expression
 	 *
-	 * @param classExpression
-	 *        The class expression.
+	 * @param classExpression The class expression.
 	 * @return The equivalent classes of the specified class expression If there was a problem parsing the class expression.
 	 */
 	public Set<OWLClass> getEquivalentClasses(final OWLClassExpression classExpression)
@@ -92,10 +81,8 @@ public class QueryEngine
 	/**
 	 * Gets the subclasses of a class expression
 	 *
-	 * @param classExpression
-	 *        The class expression.
-	 * @param direct
-	 *        Specifies whether direct subclasses should be returned or not.
+	 * @param classExpression The class expression.
+	 * @param direct          Specifies whether direct subclasses should be returned or not.
 	 * @return The subclasses of the specified class expression If there was a problem parsing the class expression.
 	 */
 	public Set<OWLClass> getSubClasses(final OWLClassExpression classExpression, final boolean direct)
@@ -107,10 +94,8 @@ public class QueryEngine
 	/**
 	 * Gets the instances of a class expression
 	 *
-	 * @param classExpression
-	 *        The class expression.
-	 * @param direct
-	 *        Specifies whether direct instances should be returned or not.
+	 * @param classExpression The class expression.
+	 * @param direct          Specifies whether direct instances should be returned or not.
 	 * @return The instances of the specified class expression If there was a problem parsing the class expression.
 	 */
 	public Set<OWLNamedIndividual> getInstances(final OWLClassExpression classExpression, final boolean direct)
@@ -122,20 +107,20 @@ public class QueryEngine
 	/**
 	 * Gets the properties of a class expression
 	 *
-	 * @param owlClass
-	 *        The class
-	 * @param direct
-	 *        Specifies whether direct instances should be returned or not.
+	 * @param owlClass The class
+	 * @param direct   Specifies whether direct instances should be returned or not.
 	 * @return The instances of the specified class expression If there was a problem parsing the class expression.
 	 */
 	public Set<OWLObjectProperty> getProperties(final OWLClass owlClass, final boolean direct)
 	{
 		if (!this.ontology.containsClassInSignature(owlClass.getIRI()))
-			// throw new RuntimeException("Class not in signature of the ontology");
+		// throw new RuntimeException("Class not in signature of the ontology");
+		{
 			return null;
+		}
 
 		// System.out.println("Properties of " + owlClass);
-		final Set<OWLObjectProperty> owlClassProperties = new HashSet<OWLObjectProperty>();
+		final Set<OWLObjectProperty> owlClassProperties = new HashSet<>();
 		for (final OWLObjectProperty owlProperty : this.owlProperties)
 		{
 			final boolean test = hasProperty(owlClass, owlProperty);
@@ -173,7 +158,9 @@ public class QueryEngine
 	{
 		final Iterator<OWLClass> it = getTopClasses();
 		if (!it.hasNext())
+		{
 			return null;
+		}
 		return it.next();
 	}
 }
