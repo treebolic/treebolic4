@@ -694,43 +694,18 @@ public class OwlModelFactory
 	// V I S I T   N O D E S
 
 	/**
-	 * Walk classes in iterator
+	 * Walk classes in stream
 	 *
 	 * @param parentClassNode   treebolic parent node to attach to
-	 * @param owlClasses        class iterator
+	 * @param owlClasses        class stream
 	 * @param ontologyUrlString URL string
 	 */
-	public void visitClasses(final TreeMutableNode parentClassNode, final Iterator<OWLClass> owlClasses, final String ontologyUrlString)
-	{
-		final List<INode> childNodes = new ArrayList<>();
-		while (owlClasses.hasNext())
-		{
-			final OWLClass owlClass = owlClasses.next();
-			if (owlClass.isOWLNothing())
-			{
-				continue;
-			}
-			// System.out.println(this.shortFormProvider.getShortForm(owlClass) + " class=" + " " + owlClass);
-
-			// node
-			final TreeMutableNode owlClassNode = visitClass(null, owlClass, ontologyUrlString);
-			childNodes.add(owlClassNode);
-
-			// recurse
-			final Stream<OWLClass> owlSubClasses = this.engine.getSubClasses(owlClass);
-			visitClasses(owlClassNode, owlSubClasses, ontologyUrlString);
-		}
-
-		// balance load
-		final List<INode> balancedNodes = this.loadBalancer.buildHierarchy(childNodes, 0);
-		parentClassNode.addChildren(balancedNodes);
-	}
-
 	public void visitClasses(final TreeMutableNode parentClassNode, final Stream<OWLClass> owlClasses, final String ontologyUrlString)
 	{
 		final List<INode> childNodes = owlClasses //
 
 				.filter(owlClass -> !owlClass.isOWLNothing()) //
+				.sorted() //
 				.map(owlClass -> {
 
 					// node
@@ -915,6 +890,7 @@ public class OwlModelFactory
 	public void visitProperties(final TreeMutableNode parentNode, final Stream<OWLObjectProperty> owlProperties)
 	{
 		final List<INode> childNodes = owlProperties //
+				.peek(System.out::println) //
 				.map(owlProperty -> {
 					final String owlPropertyShortForm = this.shortFormProvider.getShortForm(owlProperty);
 					final String owlPropertyId = OwlModelFactory.getName(owlPropertyShortForm);
