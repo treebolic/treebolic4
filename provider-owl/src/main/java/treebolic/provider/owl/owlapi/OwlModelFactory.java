@@ -588,8 +588,8 @@ public class OwlModelFactory
 					decorateInstances(instancesNode);
 
 					// instances
-					final Stream<OWLIndividual> instances = this.engine.getInstances(owlClass);
-					visitInstances(instancesNode, instances);
+					final Stream<OWLNamedIndividual> instances = this.engine.getInstances(owlClass);
+					visitInstances(instancesNode, instances.sorted());
 
 					return new Tree(owlClassNode, null);
 				}
@@ -606,7 +606,7 @@ public class OwlModelFactory
 					decorateProperties(propertiesNode);
 
 					// properties
-					final Set<OWLObjectProperty> properties = this.engine.getProperties(owlClass, true);
+					final Stream<OWLObjectProperty> properties = this.engine.getProperties(owlClass);
 					visitProperties(propertiesNode, properties);
 
 					return new Tree(owlClassNode, null);
@@ -628,11 +628,11 @@ public class OwlModelFactory
 					decorateProperties(propertiesNode);
 
 					// instances
-					final Stream<OWLIndividual> instances = this.engine.getInstances(owlClass);
-					visitInstances(instancesNode, instances);
+					final Stream<OWLNamedIndividual> instances = this.engine.getInstances(owlClass);
+					visitInstances(instancesNode, instances.sorted());
 
 					// properties
-					final Set<OWLObjectProperty> properties = this.engine.getProperties(owlClass, true);
+					final Stream<OWLObjectProperty> properties = this.engine.getProperties(owlClass);
 					visitProperties(propertiesNode, properties);
 
 					return new Tree(owlClassNode, null);
@@ -717,9 +717,32 @@ public class OwlModelFactory
 			childNodes.add(owlClassNode);
 
 			// recurse
-			final Set<OWLClass> owlSubClasses = this.engine.getSubClasses(owlClass, true);
-			visitClasses(owlClassNode, owlSubClasses.iterator(), ontologyUrlString);
+			final Stream<OWLClass> owlSubClasses = this.engine.getSubClasses(owlClass);
+			visitClasses(owlClassNode, owlSubClasses, ontologyUrlString);
 		}
+
+		// balance load
+		final List<INode> balancedNodes = this.loadBalancer.buildHierarchy(childNodes, 0);
+		parentClassNode.addChildren(balancedNodes);
+	}
+
+	public void visitClasses(final TreeMutableNode parentClassNode, final Stream<OWLClass> owlClasses, final String ontologyUrlString)
+	{
+		final List<INode> childNodes = owlClasses //
+
+				.filter(owlClass -> !owlClass.isOWLNothing()) //
+				.map(owlClass -> {
+
+					// node
+					final TreeMutableNode owlClassNode = visitClass(null, owlClass.asOWLClass(), ontologyUrlString);
+
+					// recurse
+					final Stream<OWLClass> owlSubClasses = this.engine.getSubClasses(owlClass);
+					visitClasses(owlClassNode, owlSubClasses, ontologyUrlString);
+
+					return owlClassNode;
+				}) //
+				.collect(toList());
 
 		// balance load
 		final List<INode> balancedNodes = this.loadBalancer.buildHierarchy(childNodes, 0);
@@ -754,11 +777,13 @@ public class OwlModelFactory
 		if (!owlClass.isOWLThing())
 		{
 			// get instances or properties
-			final Set<OWLNamedIndividual> instances = this.engine.getInstances(owlClass, true);
-			final Set<OWLObjectProperty> properties = this.engine.getProperties(owlClass, true);
+			final Stream<OWLNamedIndividual> instances = this.engine.getInstances(owlClass);
+			final boolean hasInstances = instances.findAny().isPresent();
+			final Stream<OWLObjectProperty> properties = this.engine.getProperties(owlClass.asOWLClass());
+			final boolean hasProperties = properties.findAny().isPresent();
 
 			// instances+properties mountpoint
-			if (instances != null && !instances.isEmpty() && properties != null && !properties.isEmpty())
+			if (hasInstances && hasProperties)
 			{
 				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
 				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=instances_properties";
@@ -766,7 +791,7 @@ public class OwlModelFactory
 			}
 
 			// instances mountpoint
-			else if (instances != null && !instances.isEmpty())
+			else if (hasInstances)
 			{
 				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
 				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=instances";
@@ -774,7 +799,7 @@ public class OwlModelFactory
 			}
 
 			// properties mountpoint
-			else if (properties != null && !properties.isEmpty())
+			else if (hasProperties)
 			{
 				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
 				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=properties";
@@ -791,61 +816,21 @@ public class OwlModelFactory
 		final TreeMutableNode owlClassNode = visitClass(parentOwlClassNode, owlClass, ontologyUrlString);
 
 		// recurse
-		final Set<OWLClass> owlSubClasses = this.engine.getSubClasses(owlClass, true);
-		visitClasses(owlClassNode, owlSubClasses.iterator(), ontologyUrlString);
+		final Stream<OWLClass> owlSubClasses = this.engine.getSubClasses(owlClass);
+		visitClasses(owlClassNode, owlSubClasses.sorted(), ontologyUrlString);
 
 		return owlClassNode;
 	}
 
 	/**
-	 * Walk instances in iterator
+	 * Walk instances in stream
 	 *
 	 * @param parentNode     treebolic parent node to attach to
-	 * @param owlIndividuals individual iterator
+	 * @param owlIndividuals individual stream
 	 */
-	public void visitInstances(final TreeMutableNode parentNode, final Set<OWLNamedIndividual> owlIndividuals)
-	{
-		final List<INode> childNodes = new ArrayList<>();
-		for (final OWLNamedIndividual owlIndividual : owlIndividuals)
-		{
-			final String owlIndividualPropertyShortForm = this.shortFormProvider.getShortForm(owlIndividual);
-			final String owlIndividualId = OwlModelFactory.getName(owlIndividualPropertyShortForm);
-			final Stream<OWLClassExpression> types = this.engine.getTypes(owlIndividual);
-			final Stream<OWLAnnotation> annotations = this.engine.getAnnotations(owlIndividual);
-
-			final MutableNode owlInstanceNode = new MutableNode(null, owlIndividualId);
-			owlInstanceNode.setLabel(owlIndividualId);
-			owlInstanceNode.setContent(types + "<br>" + annotationsToString(annotations) + "<br>" + typesToString(types));
-			owlInstanceNode.setBackColor(this.instanceBackColor);
-			owlInstanceNode.setForeColor(this.instanceForeColor);
-			if (this.instanceImageFile != null)
-			{
-				owlInstanceNode.setImageFile(this.instanceImageFile);
-			}
-			else
-			{
-				owlInstanceNode.setImageIndex(ImageIndices.INSTANCE.ordinal());
-			}
-			owlInstanceNode.setEdgeStyle(this.instanceEdgeStyle);
-			owlInstanceNode.setEdgeColor(this.instanceEdgeColor);
-			if (this.instanceEdgeImageFile != null)
-			{
-				owlInstanceNode.setEdgeImageFile(this.instanceEdgeImageFile);
-			}
-
-			childNodes.add(owlInstanceNode);
-		}
-
-		// balance load
-		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
-		parentNode.addChildren(balancedNodes);
-	}
-
-	public void visitInstances(final TreeMutableNode parentNode, final Stream<OWLIndividual> owlIndividuals)
+	public void visitInstances(final TreeMutableNode parentNode, final Stream<OWLNamedIndividual> owlIndividuals)
 	{
 		final List<INode> childNodes = owlIndividuals //
-				.filter(individual -> !individual.isAnonymous()) //
-				.map(AsOWLNamedIndividual::asOWLNamedIndividual) //
 				.map(owlNamedIndividual -> {
 
 					final String owlIndividualPropertyShortForm = this.shortFormProvider.getShortForm(owlNamedIndividual);
@@ -921,6 +906,41 @@ public class OwlModelFactory
 			// final ExtendedIterator owlSubProperties = owlProperty.listSubProperties(true);
 			// walkProperties(owlPropertyNode, owlSubProperties);
 		}
+
+		// balance load
+		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
+		parentNode.addChildren(balancedNodes);
+	}
+
+	public void visitProperties(final TreeMutableNode parentNode, final Stream<OWLObjectProperty> owlProperties)
+	{
+		final List<INode> childNodes = owlProperties //
+				.map(owlProperty -> {
+					final String owlPropertyShortForm = this.shortFormProvider.getShortForm(owlProperty);
+					final String owlPropertyId = OwlModelFactory.getName(owlPropertyShortForm);
+
+					final MutableNode propertyNode = new MutableNode(null, owlPropertyId);
+					propertyNode.setLabel(owlPropertyId);
+					propertyNode.setBackColor(this.propertyBackColor);
+					propertyNode.setForeColor(this.propertyForeColor);
+					propertyNode.setEdgeStyle(this.propertyEdgeStyle);
+					propertyNode.setEdgeColor(this.propertyEdgeColor);
+					if (this.propertyImageFile != null)
+					{
+						propertyNode.setImageFile(this.propertyImageFile);
+					}
+					else
+					{
+						propertyNode.setImageIndex(ImageIndices.PROPERTY.ordinal());
+					}
+					if (this.propertyEdgeImageFile != null)
+					{
+						propertyNode.setEdgeImageFile(this.propertyEdgeImageFile);
+					}
+
+					return propertyNode;
+				}) //
+				.collect(toList());
 
 		// balance load
 		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
