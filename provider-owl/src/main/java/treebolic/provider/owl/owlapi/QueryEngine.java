@@ -10,11 +10,10 @@ import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
+import org.semanticweb.owlapi.search.EntitySearcher;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class QueryEngine
 {
@@ -43,6 +42,15 @@ public class QueryEngine
 		// Object properties
 		this.owlProperties = this.ontology.getObjectPropertiesInSignature();
 	}
+
+	// E N T I T I E S
+
+	public Stream<OWLAnnotation> getAnnotations(final OWLEntity entity)
+	{
+		return EntitySearcher.getAnnotations(entity, this.ontology);
+	}
+
+	// C L A S S E S
 
 	/**
 	 * Gets the superclasses of a class expression
@@ -104,6 +112,11 @@ public class QueryEngine
 		return new TreeSet<>(individuals.getFlattened());
 	}
 
+	public Stream<OWLIndividual> getInstances(final OWLClassExpression classExpression)
+	{
+		return EntitySearcher.getInstances(classExpression, this.ontology);
+	}
+
 	/**
 	 * Gets the properties of a class expression
 	 *
@@ -114,8 +127,8 @@ public class QueryEngine
 	public Set<OWLObjectProperty> getProperties(final OWLClass owlClass, final boolean direct)
 	{
 		if (!this.ontology.containsClassInSignature(owlClass.getIRI()))
-		// throw new RuntimeException("Class not in signature of the ontology");
 		{
+			// throw new RuntimeException("Class not in signature of the ontology");
 			return null;
 		}
 
@@ -162,5 +175,12 @@ public class QueryEngine
 			return null;
 		}
 		return it.next();
+	}
+
+	// I N D I V I D U A L S
+
+	public Stream<OWLClassExpression> getTypes(final OWLIndividual owlIndividual)
+	{
+		return EntitySearcher.getTypes(owlIndividual, this.ontology);
 	}
 }

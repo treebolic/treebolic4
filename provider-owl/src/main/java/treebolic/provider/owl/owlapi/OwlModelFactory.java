@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.StreamDocumentSource;
@@ -21,6 +23,7 @@ import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.util.ShortFormProvider;
 import org.semanticweb.owlapi.util.SimpleShortFormProvider;
 
+import treebolic.annotations.NonNull;
 import treebolic.glue.Color;
 import treebolic.glue.Image;
 import treebolic.model.IEdge;
@@ -373,6 +376,77 @@ public class OwlModelFactory
 		initialize();
 	}
 
+	/**
+	 * Initialize from properties
+	 */
+	void initialize()
+	{
+		this.rootBackColor = getColor("root.backcolor", Color.ORANGE);
+		this.rootForeColor = getColor("root.forecolor", Color.BLACK);
+		this.rootImageFile = getImageFile("root.image");
+		this.rootLabel = getLabel("root.label", "Thing");
+
+		this.classBackColor = getColor("class.backcolor", OwlModelFactory.defaultClassBackColor);
+		this.classForeColor = getColor("class.forecolor", Color.BLACK);
+		this.classImageFile = getImageFile("class.image");
+
+		this.classWithPropertiesBackColor = getColor("class.withprops.backcolor", OwlModelFactory.defaultClassBackColor);
+		this.classWithPropertiesForeColor = getColor("class.withprops.forecolor", Color.MAGENTA);
+		this.classWithPropertiesImageFile = getImageFile("class.withprops.image");
+
+		this.classWithInstancesBackColor = getColor("class.withinstances.backcolor", OwlModelFactory.defaultClassBackColor);
+		this.classWithInstancesForeColor = getColor("class.withinstances.forecolor", Color.BLUE);
+		this.classWithInstancesImageFile = getImageFile("class.withinstances.image");
+
+		this.propertiesLabel = getLabel("properties.label", "properties");
+		this.propertiesBackColor = getColor("properties.backcolor", Color.WHITE);
+		this.propertiesForeColor = getColor("properties.forecolor", Color.MAGENTA);
+		this.propertiesImageFile = getImageFile("properties.image");
+
+		this.propertyBackColor = getColor("property.backcolor", Color.WHITE);
+		this.propertyForeColor = getColor("property.forecolor", Color.MAGENTA);
+		this.propertyImageFile = getImageFile("property.image");
+
+		this.instancesLabel = getLabel("instances.label", "instances");
+		this.instancesBackColor = getColor("instances.backcolor", Color.WHITE);
+		this.instancesForeColor = getColor("instances.forecolor", Color.BLUE);
+		this.instancesImageFile = getImageFile("instances.image");
+
+		this.instanceBackColor = getColor("instance.backcolor", Color.WHITE);
+		this.instanceForeColor = getColor("instance.forecolor", Color.BLUE);
+		this.instanceImageFile = getImageFile("instance.image");
+
+		OwlModelFactory.images = new Image[]{ //
+				Image.make(Provider.class.getResource("images/root.png")), // ROOT
+				Image.make(Provider.class.getResource("images/class.png")), // CLASS
+				Image.make(Provider.class.getResource("images/classwithproperties.png")), // CLASSWITHPROPERTIES
+				Image.make(Provider.class.getResource("images/properties.png")), // PROPERTIES
+				Image.make(Provider.class.getResource("images/property.png")), // PROPERTY
+				Image.make(Provider.class.getResource("images/classwithinstances.png")), // CLASSWITHINSTANCES
+				Image.make(Provider.class.getResource("images/instances.png")), // INSTANCES
+				Image.make(Provider.class.getResource("images/instance.png")), // INSTANCE
+				Image.make(Provider.class.getResource("images/branch.png")), // BRANCH
+				Image.make(Provider.class.getResource("images/branch2.png")), // BRANCH2
+		};
+	}
+
+	/**
+	 * Get ontology
+	 *
+	 * @param ontologyDocumentUrl document url
+	 * @return ontology
+	 * @throws MalformedURLException        malformed url exception
+	 * @throws IOException                  io exception
+	 * @throws OWLOntologyCreationException owl ontology creation exception
+	 */
+	private OWLOntology getOntology(final String ontologyDocumentUrl) throws MalformedURLException, IOException, OWLOntologyCreationException
+	{
+		try (InputStream is = new URL(ontologyDocumentUrl).openStream())
+		{
+			return this.manager.loadOntologyFromOntologyDocument(new StreamDocumentSource(is));
+		}
+	}
+
 	// P A R S E
 
 	/**
@@ -562,6 +636,246 @@ public class OwlModelFactory
 		}
 	}
 
+	/**
+	 * Make tree
+	 *
+	 * @param ontologyUrlString0 url string
+	 * @return tree if successful
+	 */
+	public Map<String, String> parseUrl(final String ontologyUrlString0)
+	{
+		final Map<String, String> map = new HashMap<>();
+
+		String ontologyUrlString = ontologyUrlString0;
+
+		// parameter and url
+		String parameters = null;
+		final int index = ontologyUrlString.indexOf('?');
+		if (index != -1)
+		{
+			parameters = ontologyUrlString.substring(index + 1);
+			ontologyUrlString = ontologyUrlString.substring(0, index);
+		}
+		map.put("url", ontologyUrlString);
+
+		// parameters
+		if (parameters != null)
+		{
+			final String[] fields = parameters.split("&");
+			for (final String field : fields)
+			{
+				final String[] nameValue = field.split("=");
+				if (nameValue.length > 1)
+				{
+					map.put(nameValue[0], nameValue[1]);
+				}
+			}
+		}
+		return map;
+	}
+
+	// V I S I T   N O D E S
+
+	/**
+	 * Walk classes in iterator
+	 *
+	 * @param parentClassNode   treebolic parent node to attach to
+	 * @param owlClasses        class iterator
+	 * @param ontologyUrlString URL string
+	 */
+	public void visitClasses(final TreeMutableNode parentClassNode, final Iterator<OWLClass> owlClasses, final String ontologyUrlString)
+	{
+		final List<INode> childNodes = new ArrayList<>();
+		while (owlClasses.hasNext())
+		{
+			final OWLClass owlClass = owlClasses.next();
+			if (owlClass.isOWLNothing())
+			{
+				continue;
+			}
+			// System.out.println(this.shortFormProvider.getShortForm(owlClass) + " class=" + " " + owlClass);
+
+			// node
+			final TreeMutableNode owlClassNode = visitClass(null, owlClass, ontologyUrlString);
+			childNodes.add(owlClassNode);
+
+			// recurse
+			final Set<OWLClass> owlSubClasses = this.engine.getSubClasses(owlClass, true);
+			visitClasses(owlClassNode, owlSubClasses.iterator(), ontologyUrlString);
+		}
+
+		// balance load
+		final List<INode> balancedNodes = this.loadBalancer.buildHierarchy(childNodes, 0);
+		parentClassNode.addChildren(balancedNodes);
+	}
+
+	public TreeMutableNode visitClass(final INode parentOwlClassNode, final OWLClass owlClass, final String ontologyUrlString)
+	{
+		final String ownClassShortForm = this.shortFormProvider.getShortForm(owlClass);
+		final String owlClassId = OwlModelFactory.getName(ownClassShortForm);
+		final Stream<OWLAnnotation> annotations = this.engine.getAnnotations(owlClass);
+
+		// comment
+		String comment = owlClass.getIRI().toString() + "<br>" + annotationsToString(annotations);
+
+		// node
+		final TreeMutableNode owlClassNode = new TreeMutableNode(parentOwlClassNode, owlClassId);
+		owlClassNode.setLabel(owlClassId);
+		owlClassNode.setContent(comment);
+		owlClassNode.setBackColor(this.classBackColor);
+		owlClassNode.setForeColor(this.classForeColor);
+		if (this.classImageFile != null)
+		{
+			owlClassNode.setImageFile(this.classImageFile);
+		}
+		else
+		{
+			owlClassNode.setImageIndex(ImageIndices.CLASS.ordinal());
+		}
+
+		// mounts
+		if (!owlClass.isOWLThing())
+		{
+			// get instances or properties
+			final Set<OWLNamedIndividual> instances = this.engine.getInstances(owlClass, true);
+			final Set<OWLObjectProperty> properties = this.engine.getProperties(owlClass, true);
+
+			// instances+properties mountpoint
+			if (instances != null && !instances.isEmpty() && properties != null && !properties.isEmpty())
+			{
+				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
+				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=instances_properties";
+				owlClassNode.setMountPoint(mountingPoint);
+			}
+
+			// instances mountpoint
+			else if (instances != null && !instances.isEmpty())
+			{
+				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
+				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=instances";
+				owlClassNode.setMountPoint(mountingPoint);
+			}
+
+			// properties mountpoint
+			else if (properties != null && !properties.isEmpty())
+			{
+				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
+				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=properties";
+				owlClassNode.setMountPoint(mountingPoint);
+			}
+		}
+
+		// if (owlClass.listDeclaredProperties(true).hasNext())
+		return owlClassNode;
+	}
+
+	public MutableNode visitClassAndSubclasses(final INode parentOwlClassNode, final OWLClass owlClass, final String ontologyUrlString)
+	{
+		final TreeMutableNode owlClassNode = visitClass(parentOwlClassNode, owlClass, ontologyUrlString);
+
+		// recurse
+		final Set<OWLClass> owlSubClasses = this.engine.getSubClasses(owlClass, true);
+		visitClasses(owlClassNode, owlSubClasses.iterator(), ontologyUrlString);
+
+		return owlClassNode;
+	}
+
+	/**
+	 * Walk instances in iterator
+	 *
+	 * @param parentNode     treebolic parent node to attach to
+	 * @param owlIndividuals individual iterator
+	 */
+	public void visitInstances(final TreeMutableNode parentNode, final Set<OWLNamedIndividual> owlIndividuals)
+	{
+		final List<INode> childNodes = new ArrayList<>();
+		for (final OWLNamedIndividual owlIndividual : owlIndividuals)
+		{
+			final String owlIndividualPropertyShortForm = this.shortFormProvider.getShortForm(owlIndividual);
+			final String owlIndividualId = OwlModelFactory.getName(owlIndividualPropertyShortForm);
+			final Stream<OWLClassExpression> types = this.engine.getTypes(owlIndividual);
+			final Stream<OWLAnnotation> annotations = this.engine.getAnnotations(owlIndividual);
+
+			final MutableNode owlInstanceNode = new MutableNode(null, owlIndividualId);
+			owlInstanceNode.setLabel(owlIndividualId);
+			owlInstanceNode.setContent(types + "<br>" + annotationsToString(annotations) + "<br>" + typesToString(types));
+			owlInstanceNode.setBackColor(this.instanceBackColor);
+			owlInstanceNode.setForeColor(this.instanceForeColor);
+			if (this.instanceImageFile != null)
+			{
+				owlInstanceNode.setImageFile(this.instanceImageFile);
+			}
+			else
+			{
+				owlInstanceNode.setImageIndex(ImageIndices.INSTANCE.ordinal());
+			}
+
+			// owlPropertyNode.setContent(owlProperty.getComment("en"));
+			owlInstanceNode.setEdgeStyle(OwlModelFactory.instanceEdgeStyle);
+			owlInstanceNode.setEdgeColor(OwlModelFactory.instanceEdgeColor);
+			if (OwlModelFactory.instanceEdgeImageFile != null)
+			{
+				owlInstanceNode.setEdgeImageFile(OwlModelFactory.instanceEdgeImageFile);
+			}
+
+			childNodes.add(owlInstanceNode);
+		}
+
+		// balance load
+		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
+		parentNode.addChildren(balancedNodes);
+	}
+
+	/**
+	 * Walk properties in iterator
+	 *
+	 * @param parentNode    treebolic parent node to attach to
+	 * @param owlProperties property iterator
+	 */
+	public void visitProperties(final TreeMutableNode parentNode, final Set<OWLObjectProperty> owlProperties)
+	{
+		final List<INode> childNodes = new ArrayList<>();
+		for (final OWLObjectProperty owlProperty : owlProperties)
+		{
+			final String owlPropertyShortForm = this.shortFormProvider.getShortForm(owlProperty);
+			final String owlPropertyId = OwlModelFactory.getName(owlPropertyShortForm);
+
+			final MutableNode owlPropertyNode = new MutableNode(null, owlPropertyId);
+			owlPropertyNode.setLabel(owlPropertyId);
+			// owlPropertyNode.setContent(owlProperty.getComment("en"));
+			owlPropertyNode.setBackColor(this.propertyBackColor);
+			owlPropertyNode.setForeColor(this.propertyForeColor);
+			if (this.propertyImageFile != null)
+			{
+				owlPropertyNode.setImageFile(this.propertyImageFile);
+			}
+			else
+			{
+				owlPropertyNode.setImageIndex(ImageIndices.PROPERTY.ordinal());
+			}
+
+			// owlPropertyNode.setContent(owlProperty.getComment("en"));
+			owlPropertyNode.setEdgeStyle(OwlModelFactory.propertyEdgeStyle);
+			owlPropertyNode.setEdgeColor(OwlModelFactory.propertyEdgeColor);
+			if (OwlModelFactory.propertyEdgeImageFile != null)
+			{
+				owlPropertyNode.setEdgeImageFile(OwlModelFactory.propertyEdgeImageFile);
+			}
+
+			childNodes.add(owlPropertyNode);
+
+			// // recurse
+			// final ExtendedIterator owlSubProperties = owlProperty.listSubProperties(true);
+			// walkProperties(owlPropertyNode, owlSubProperties);
+		}
+
+		// balance load
+		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
+		parentNode.addChildren(balancedNodes);
+	}
+
+	// D E C O R A T E
+
 	private MutableNode decorateRoot(final MutableNode node)
 	{
 		if (node.getLabel() == null)
@@ -658,339 +972,7 @@ public class OwlModelFactory
 		return node;
 	}
 
-	/**
-	 * Make tree
-	 *
-	 * @param ontologyUrlString0 url string
-	 * @return tree if successful
-	 */
-	public Map<String, String> parseUrl(final String ontologyUrlString0)
-	{
-		final Map<String, String> map = new HashMap<>();
-
-		String ontologyUrlString = ontologyUrlString0;
-
-		// parameter and url
-		String parameters = null;
-		final int index = ontologyUrlString.indexOf('?');
-		if (index != -1)
-		{
-			parameters = ontologyUrlString.substring(index + 1);
-			ontologyUrlString = ontologyUrlString.substring(0, index);
-		}
-		map.put("url", ontologyUrlString);
-
-		// parameters
-		if (parameters != null)
-		{
-			final String[] fields = parameters.split("&");
-			for (final String field : fields)
-			{
-				final String[] nameValue = field.split("=");
-				if (nameValue.length > 1)
-				{
-					map.put(nameValue[0], nameValue[1]);
-				}
-			}
-		}
-		return map;
-	}
-
-	/**
-	 * Walk classes in iterator
-	 *
-	 * @param parentClassNode   treebolic parent node to attach to
-	 * @param owlClasses        class iterator
-	 * @param ontologyUrlString URL string
-	 */
-	public void visitClasses(final TreeMutableNode parentClassNode, final Iterator<OWLClass> owlClasses, final String ontologyUrlString)
-	{
-		final List<INode> childNodes = new ArrayList<>();
-		while (owlClasses.hasNext())
-		{
-			final OWLClass owlClass = owlClasses.next();
-			if (owlClass.isOWLNothing())
-			{
-				continue;
-			}
-			// System.out.println(this.shortFormProvider.getShortForm(owlClass) + " class=" + " " + owlClass);
-
-			// node
-			final TreeMutableNode owlClassNode = visitClass(null, owlClass, ontologyUrlString);
-			childNodes.add(owlClassNode);
-
-			// recurse
-			final Set<OWLClass> owlSubClasses = this.engine.getSubClasses(owlClass, true);
-			visitClasses(owlClassNode, owlSubClasses.iterator(), ontologyUrlString);
-		}
-
-		// balance load
-		final List<INode> balancedNodes = this.loadBalancer.buildHierarchy(childNodes, 0);
-		parentClassNode.addChildren(balancedNodes);
-	}
-
-	public TreeMutableNode visitClass(final INode parentOwlClassNode, final OWLClass owlClass, final String ontologyUrlString)
-	{
-		final String ownClassShortForm = this.shortFormProvider.getShortForm(owlClass);
-		final String owlClassId = OwlModelFactory.getName(ownClassShortForm);
-		final Set<OWLAnnotation> annotations = null; // owlClass.getAnnotations(this.ontology)
-		// comment
-		String comment = owlClass.getIRI().toString() + "<br>" + annotationsToString(annotations);
-
-		// node
-		final TreeMutableNode owlClassNode = new TreeMutableNode(parentOwlClassNode, owlClassId);
-		owlClassNode.setLabel(owlClassId);
-		owlClassNode.setContent(comment);
-		owlClassNode.setBackColor(this.classBackColor);
-		owlClassNode.setForeColor(this.classForeColor);
-		if (this.classImageFile != null)
-		{
-			owlClassNode.setImageFile(this.classImageFile);
-		}
-		else
-		{
-			owlClassNode.setImageIndex(ImageIndices.CLASS.ordinal());
-		}
-
-		// mounts
-		if (!owlClass.isOWLThing())
-		{
-			// get instances or properties
-			final Set<OWLNamedIndividual> instances = this.engine.getInstances(owlClass, true);
-			final Set<OWLObjectProperty> properties = this.engine.getProperties(owlClass, true);
-
-			// instances+properties mountpoint
-			if (instances != null && !instances.isEmpty() && properties != null && !properties.isEmpty())
-			{
-				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
-				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=instances_properties";
-				owlClassNode.setMountPoint(mountingPoint);
-			}
-
-			// instances mountpoint
-			else if (instances != null && !instances.isEmpty())
-			{
-				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
-				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=instances";
-				owlClassNode.setMountPoint(mountingPoint);
-			}
-
-			// properties mountpoint
-			else if (properties != null && !properties.isEmpty())
-			{
-				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
-				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=properties";
-				owlClassNode.setMountPoint(mountingPoint);
-			}
-		}
-
-		// if (owlClass.listDeclaredProperties(true).hasNext())
-		return owlClassNode;
-	}
-
-	public MutableNode visitClassAndSubclasses(final INode parentOwlClassNode, final OWLClass owlClass, final String ontologyUrlString)
-	{
-		final TreeMutableNode owlClassNode = visitClass(parentOwlClassNode, owlClass, ontologyUrlString);
-
-		// recurse
-		final Set<OWLClass> owlSubClasses = this.engine.getSubClasses(owlClass, true);
-		visitClasses(owlClassNode, owlSubClasses.iterator(), ontologyUrlString);
-
-		return owlClassNode;
-	}
-
-	/**
-	 * Walk properties in iterator
-	 *
-	 * @param parentNode    treebolic parent node to attach to
-	 * @param owlProperties property iterator
-	 */
-	public void visitProperties(final TreeMutableNode parentNode, final Set<OWLObjectProperty> owlProperties)
-	{
-		final List<INode> childNodes = new ArrayList<>();
-		for (final OWLObjectProperty owlProperty : owlProperties)
-		{
-			final String owlPropertyShortForm = this.shortFormProvider.getShortForm(owlProperty);
-			final String owlPropertyId = OwlModelFactory.getName(owlPropertyShortForm);
-
-			final MutableNode owlPropertyNode = new MutableNode(null, owlPropertyId);
-			owlPropertyNode.setLabel(owlPropertyId);
-			// owlPropertyNode.setContent(owlProperty.getComment("en"));
-			owlPropertyNode.setBackColor(this.propertyBackColor);
-			owlPropertyNode.setForeColor(this.propertyForeColor);
-			if (this.propertyImageFile != null)
-			{
-				owlPropertyNode.setImageFile(this.propertyImageFile);
-			}
-			else
-			{
-				owlPropertyNode.setImageIndex(ImageIndices.PROPERTY.ordinal());
-			}
-
-			// owlPropertyNode.setContent(owlProperty.getComment("en"));
-			owlPropertyNode.setEdgeStyle(OwlModelFactory.propertyEdgeStyle);
-			owlPropertyNode.setEdgeColor(OwlModelFactory.propertyEdgeColor);
-			if (OwlModelFactory.propertyEdgeImageFile != null)
-			{
-				owlPropertyNode.setEdgeImageFile(OwlModelFactory.propertyEdgeImageFile);
-			}
-
-			childNodes.add(owlPropertyNode);
-
-			// // recurse
-			// final ExtendedIterator owlSubProperties = owlProperty.listSubProperties(true);
-			// walkProperties(owlPropertyNode, owlSubProperties);
-		}
-
-		// balance load
-		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
-		parentNode.addChildren(balancedNodes);
-	}
-
-	/**
-	 * Walk instances in iterator
-	 *
-	 * @param parentNode     treebolic parent node to attach to
-	 * @param owlIndividuals individual iterator
-	 */
-	public void visitInstances(final TreeMutableNode parentNode, final Set<OWLNamedIndividual> owlIndividuals)
-	{
-		final List<INode> childNodes = new ArrayList<>();
-		for (final OWLNamedIndividual owlIndividual : owlIndividuals)
-		{
-			final String owlIndividualPropertyShortForm = this.shortFormProvider.getShortForm(owlIndividual);
-			final String owlIndividualId = OwlModelFactory.getName(owlIndividualPropertyShortForm);
-			final Set<OWLClassExpression> types = owlIndividual.getNestedClassExpressions(); // owlIndividual.getTypes(this.ontology).toString()
-			final Set<OWLAnnotation> annotations = null; // owlIndividual.getAnnotations(this.ontology))
-
-			final MutableNode owlInstanceNode = new MutableNode(null, owlIndividualId);
-			owlInstanceNode.setLabel(owlIndividualId);
-			owlInstanceNode.setContent(types + "<br>" + annotationsToString(annotations));
-			owlInstanceNode.setBackColor(this.instanceBackColor);
-			owlInstanceNode.setForeColor(this.instanceForeColor);
-			if (this.instanceImageFile != null)
-			{
-				owlInstanceNode.setImageFile(this.instanceImageFile);
-			}
-			else
-			{
-				owlInstanceNode.setImageIndex(ImageIndices.INSTANCE.ordinal());
-			}
-
-			// owlPropertyNode.setContent(owlProperty.getComment("en"));
-			owlInstanceNode.setEdgeStyle(OwlModelFactory.instanceEdgeStyle);
-			owlInstanceNode.setEdgeColor(OwlModelFactory.instanceEdgeColor);
-			if (OwlModelFactory.instanceEdgeImageFile != null)
-			{
-				owlInstanceNode.setEdgeImageFile(OwlModelFactory.instanceEdgeImageFile);
-			}
-
-			childNodes.add(owlInstanceNode);
-		}
-
-		// balance load
-		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
-		parentNode.addChildren(balancedNodes);
-	}
-
-	/**
-	 * Annotations to string
-	 *
-	 * @param annotations set of annotations
-	 * @return string
-	 */
-	private String annotationsToString(final Set<OWLAnnotation> annotations)
-	{
-		if (annotations == null)
-		{
-			return "";
-		}
-
-		final StringBuilder sb = new StringBuilder();
-		for (final OWLAnnotation annotation : annotations)
-		{
-			if (annotation.getValue() instanceof OWLLiteral)
-			{
-				final OWLLiteral val = (OWLLiteral) annotation.getValue();
-				String str = val.getLiteral();
-				str = str.replaceAll("\n", "");
-				sb.append(str);
-				sb.append("<br>");
-			}
-		}
-		return sb.toString();
-	}
-
-	/**
-	 * Get ontology
-	 *
-	 * @param ontologyDocumentUrl document url
-	 * @return ontology
-	 * @throws MalformedURLException        malformed url exception
-	 * @throws IOException                  io exception
-	 * @throws OWLOntologyCreationException owl ontology creation exception
-	 */
-	private OWLOntology getOntology(final String ontologyDocumentUrl) throws MalformedURLException, IOException, OWLOntologyCreationException
-	{
-		try(InputStream is = new URL(ontologyDocumentUrl).openStream())
-		{
-			return this.manager.loadOntologyFromOntologyDocument(new StreamDocumentSource(is));
-		}
-	}
-
-	/**
-	 * Initialize from properties
-	 */
-	void initialize()
-	{
-		this.rootBackColor = getColor("root.backcolor", Color.ORANGE);
-		this.rootForeColor = getColor("root.forecolor", Color.BLACK);
-		this.rootImageFile = getImageFile("root.image");
-		this.rootLabel = getLabel("root.label", "Thing");
-
-		this.classBackColor = getColor("class.backcolor", OwlModelFactory.defaultClassBackColor);
-		this.classForeColor = getColor("class.forecolor", Color.BLACK);
-		this.classImageFile = getImageFile("class.image");
-
-		this.classWithPropertiesBackColor = getColor("class.withprops.backcolor", OwlModelFactory.defaultClassBackColor);
-		this.classWithPropertiesForeColor = getColor("class.withprops.forecolor", Color.MAGENTA);
-		this.classWithPropertiesImageFile = getImageFile("class.withprops.image");
-
-		this.classWithInstancesBackColor = getColor("class.withinstances.backcolor", OwlModelFactory.defaultClassBackColor);
-		this.classWithInstancesForeColor = getColor("class.withinstances.forecolor", Color.BLUE);
-		this.classWithInstancesImageFile = getImageFile("class.withinstances.image");
-
-		this.propertiesLabel = getLabel("properties.label", "properties");
-		this.propertiesBackColor = getColor("properties.backcolor", Color.WHITE);
-		this.propertiesForeColor = getColor("properties.forecolor", Color.MAGENTA);
-		this.propertiesImageFile = getImageFile("properties.image");
-
-		this.propertyBackColor = getColor("property.backcolor", Color.WHITE);
-		this.propertyForeColor = getColor("property.forecolor", Color.MAGENTA);
-		this.propertyImageFile = getImageFile("property.image");
-
-		this.instancesLabel = getLabel("instances.label", "instances");
-		this.instancesBackColor = getColor("instances.backcolor", Color.WHITE);
-		this.instancesForeColor = getColor("instances.forecolor", Color.BLUE);
-		this.instancesImageFile = getImageFile("instances.image");
-
-		this.instanceBackColor = getColor("instance.backcolor", Color.WHITE);
-		this.instanceForeColor = getColor("instance.forecolor", Color.BLUE);
-		this.instanceImageFile = getImageFile("instance.image");
-
-		OwlModelFactory.images = new Image[]{ //
-				Image.make(Provider.class.getResource("images/root.png")), // ROOT
-				Image.make(Provider.class.getResource("images/class.png")), // CLASS
-				Image.make(Provider.class.getResource("images/classwithproperties.png")), // CLASSWITHPROPERTIES
-				Image.make(Provider.class.getResource("images/properties.png")), // PROPERTIES
-				Image.make(Provider.class.getResource("images/property.png")), // PROPERTY
-				Image.make(Provider.class.getResource("images/classwithinstances.png")), // CLASSWITHINSTANCES
-				Image.make(Provider.class.getResource("images/instances.png")), // INSTANCES
-				Image.make(Provider.class.getResource("images/instance.png")), // INSTANCE
-				Image.make(Provider.class.getResource("images/branch.png")), // BRANCH
-				Image.make(Provider.class.getResource("images/branch2.png")), // BRANCH2
-		};
-	}
+	// H E L P E R S
 
 	/**
 	 * Get node label
@@ -1027,15 +1009,13 @@ public class OwlModelFactory
 		return this.properties == null ? null : this.properties.getProperty(imageKey);
 	}
 
-	// N A M E
-
 	/**
 	 * Get name
 	 *
 	 * @param uriString uri string
 	 * @return name
 	 */
-	static public String getName(final String uriString)
+	static String getName(final String uriString)
 	{
 		if (uriString != null)
 		{
@@ -1046,5 +1026,34 @@ public class OwlModelFactory
 			}
 		}
 		return uriString;
+	}
+
+	/**
+	 * Annotations to string
+	 *
+	 * @param annotations stream of annotations
+	 * @return string
+	 */
+	private static String annotationsToString(@NonNull final Stream<OWLAnnotation> annotations)
+	{
+		return annotations //
+				.filter(a -> a.getValue() instanceof OWLLiteral) //
+				.map(a -> (OWLLiteral) a.getValue()) //
+				.map(OWLLiteral::getLiteral) //
+				.map(s -> s.replaceAll("\n", "")) //
+				.collect(Collectors.joining("<br>"));
+	}
+
+	/**
+	 * Types to string
+	 *
+	 * @param types stream of types
+	 * @return string
+	 */
+	private static String typesToString(@NonNull final Stream<OWLClassExpression> types)
+	{
+		return types //
+				.map(Object::toString) //
+				.collect(Collectors.joining("<br>"));
 	}
 }
