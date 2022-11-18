@@ -5,14 +5,14 @@
 package treebolic.provider.owl.owlapi;
 
 import org.semanticweb.owlapi.model.*;
-import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 import org.semanticweb.owlapi.search.EntitySearcher;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public class QueryEngine
@@ -35,35 +35,16 @@ public class QueryEngine
 		// Create a reasoner factory.
 		final OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
 
-		// We need to create an instance of OWLReasoner. An OWLReasoner provides/ the basic query functionality that we need do our query answering
-		// for example the ability obtain the subclasses of a class etc.
+		// We need to create an instance of OWLReasoner.
+		// An OWLReasoner provides/ the basic query functionality that we need to
+		// do our query answering for example the ability obtain the subclasses of a class etc.
 		this.reasoner = reasonerFactory.createReasoner(this.ontology);
 
 		// Object properties
 		this.owlProperties = this.ontology.getObjectPropertiesInSignature();
 	}
 
-	// E N T I T I E S
-
-	public Stream<OWLAnnotation> getAnnotations(final OWLEntity entity)
-	{
-		return EntitySearcher.getAnnotations(entity, this.ontology);
-	}
-
 	// C L A S S E S
-
-	/**
-	 * Gets the superclasses of a class expression
-	 *
-	 * @param classExpression The class expression.
-	 * @param direct          Specifies whether direct superclasses should be returned or not.
-	 * @return The superclasses of the specified class expression If there was a problem parsing the class expression.
-	 */
-	public Set<OWLClass> getSuperClasses(final OWLClassExpression classExpression, final boolean direct)
-	{
-		final NodeSet<OWLClass> superClasses = this.reasoner.getSuperClasses(classExpression, direct);
-		return superClasses.getFlattened();
-	}
 
 	/**
 	 * Gets the equivalent classes of a class expression
@@ -71,79 +52,59 @@ public class QueryEngine
 	 * @param classExpression The class expression.
 	 * @return The equivalent classes of the specified class expression If there was a problem parsing the class expression.
 	 */
-	public Set<OWLClass> getEquivalentClasses(final OWLClassExpression classExpression)
+	public Stream<OWLClass> getEquivalentClasses(final OWLClassExpression classExpression)
 	{
-		final Node<OWLClass> equivalentClasses = this.reasoner.getEquivalentClasses(classExpression);
-		Set<OWLClass> result;
-		if (classExpression.isAnonymous())
-		{
-			result = equivalentClasses.getEntities();
-		}
-		else
-		{
-			result = equivalentClasses.getEntitiesMinus(classExpression.asOWLClass());
-		}
-		return result;
+		return this.reasoner.equivalentClasses(classExpression);
 	}
+
+	/**
+	 * Gets the superclasses of a class expression
+	 *
+	 * @param classExpression The class expression.
+	 * @return The superclasses of the specified class expression If there was a problem parsing the class expression.
+	 */
+	public Stream<OWLClass> getSuperClasses(final OWLClassExpression classExpression)
+	{
+		return this.reasoner.superClasses(classExpression, true);
+	}
+
+	// subclasses
 
 	/**
 	 * Gets the subclasses of a class expression
 	 *
-	 * @param classExpression The class expression.
-	 * @param direct          Specifies whether direct subclasses should be returned or not.
+	 * @param owlClass The class expression.
 	 * @return The subclasses of the specified class expression If there was a problem parsing the class expression.
 	 */
-	public Set<OWLClass> getSubClasses(final OWLClassExpression classExpression, final boolean direct)
+	public Stream<OWLClass> getSubClasses(final OWLClass owlClass)
 	{
-		final NodeSet<OWLClass> subClasses = this.reasoner.getSubClasses(classExpression, direct);
-		return new TreeSet<>(subClasses.getFlattened());
+		return this.reasoner.subClasses(owlClass, true);
 	}
+
+	// instances
 
 	/**
 	 * Gets the instances of a class expression
 	 *
-	 * @param classExpression The class expression.
-	 * @param direct          Specifies whether direct instances should be returned or not.
-	 * @return The instances of the specified class expression If there was a problem parsing the class expression.
+	 * @param owlClass The class expression.
+	 * @return The instances of the specified class expression.
 	 */
-	public Set<OWLNamedIndividual> getInstances(final OWLClassExpression classExpression, final boolean direct)
+	public Stream<OWLNamedIndividual> getInstances(final OWLClass owlClass)
 	{
-		final NodeSet<OWLNamedIndividual> individuals = this.reasoner.getInstances(classExpression, direct);
-		return new TreeSet<>(individuals.getFlattened());
+		return this.reasoner.instances(owlClass, true);
 	}
 
-	public Stream<OWLIndividual> getInstances(final OWLClassExpression classExpression)
-	{
-		return EntitySearcher.getInstances(classExpression, this.ontology);
-	}
+	// properties
 
 	/**
 	 * Gets the properties of a class expression
 	 *
 	 * @param owlClass The class
-	 * @param direct   Specifies whether direct instances should be returned or not.
-	 * @return The instances of the specified class expression If there was a problem parsing the class expression.
+	 * @return The instances of the specified class expression. Null if there was a problem parsing the class expression.
 	 */
-	public Set<OWLObjectProperty> getProperties(final OWLClass owlClass, final boolean direct)
+	public Stream<OWLObjectProperty> getProperties(final OWLClass owlClass)
 	{
-		if (!this.ontology.containsClassInSignature(owlClass.getIRI()))
-		{
-			// throw new RuntimeException("Class not in signature of the ontology");
-			return null;
-		}
-
-		// System.out.println("Properties of " + owlClass);
-		final Set<OWLObjectProperty> owlClassProperties = new HashSet<>();
-		for (final OWLObjectProperty owlProperty : this.owlProperties)
-		{
-			final boolean test = hasProperty(owlClass, owlProperty);
-			if (test)
-			{
-				// System.out.println(" property " + owlProperty);
-				owlClassProperties.add(owlProperty);
-			}
-		}
-		return owlClassProperties;
+		return this.owlProperties.stream().filter(p -> hasProperty(owlClass, p));
 	}
 
 	private boolean hasProperty(final OWLClass owlClass, final OWLObjectPropertyExpression prop)
@@ -151,6 +112,8 @@ public class QueryEngine
 		final NodeSet<OWLClass> owlClasses = this.reasoner.getObjectPropertyDomains(prop, true);
 		return owlClasses.containsEntity(owlClass);
 	}
+
+	// top classes
 
 	/**
 	 * Top classes
@@ -182,5 +145,12 @@ public class QueryEngine
 	public Stream<OWLClassExpression> getTypes(final OWLIndividual owlIndividual)
 	{
 		return EntitySearcher.getTypes(owlIndividual, this.ontology);
+	}
+
+	// E N T I T I E S
+
+	public Stream<OWLAnnotation> getAnnotations(final OWLEntity entity)
+	{
+		return EntitySearcher.getAnnotations(entity, this.ontology);
 	}
 }
