@@ -37,6 +37,8 @@ import treebolic.model.TreeMutableNode;
 import treebolic.model.Utils;
 import treebolic.provider.LoadBalancer;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * OWL model factory
  *
@@ -53,7 +55,7 @@ public class OwlModelFactory
 
 	public enum ImageIndices
 	{
-		ROOT, CLASS, CLASSWITHPROPERTIES, PROPERTIES, PROPERTY, CLASSWITHINSTANCES, INSTANCES, INSTANCE, BRANCH, BRANCH2
+		ROOT, CLASS, CLASSWITHINSTANCES, INSTANCES, INSTANCE, CLASSWITHPROPERTIES, PROPERTIES, PROPERTY, BRANCH, BRANCH2
 	}
 
 	static Image[] images;
@@ -135,12 +137,14 @@ public class OwlModelFactory
 	 */
 	static private final int LOADBALANCING2_EDGE_STYLE = IEdge.DASH | /* IEdge.FROMDEF | IEdge.FROMCIRCLE | */IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.STROKEDEF | IEdge.TODEF;
 
-	// M E M B E RS
+	// D E C O R A T I O N   M E M B E R S
 
 	/**
 	 * Properties
 	 */
 	private final Properties properties;
+
+	// class
 
 	/**
 	 * Class back color
@@ -158,6 +162,21 @@ public class OwlModelFactory
 	private String classImageFile;
 
 	/**
+	 * Class with instances fore color
+	 */
+	private Color classWithInstancesBackColor;
+
+	/**
+	 * Class with instances fore color
+	 */
+	private Color classWithInstancesForeColor;
+
+	/**
+	 * Class with properties image
+	 */
+	private String classWithInstancesImageFile;
+
+	/**
 	 * Class with properties fore color
 	 */
 	private Color classWithPropertiesBackColor;
@@ -172,20 +191,7 @@ public class OwlModelFactory
 	 */
 	private String classWithPropertiesImageFile;
 
-	/**
-	 * Class with instances fore color
-	 */
-	private Color classWithInstancesBackColor;
-
-	/**
-	 * Class with instances fore color
-	 */
-	private Color classWithInstancesForeColor;
-
-	/**
-	 * Class with properties image
-	 */
-	private String classWithInstancesImageFile;
+	// root
 
 	/**
 	 * Root label
@@ -207,55 +213,7 @@ public class OwlModelFactory
 	 */
 	private String rootImageFile;
 
-	/**
-	 * Properties label
-	 */
-	private String propertiesLabel;
-
-	/**
-	 * Properties fore color
-	 */
-	private Color propertiesForeColor;
-
-	/**
-	 * Properties fore color
-	 */
-	private Color propertiesBackColor;
-
-	/**
-	 * Properties image
-	 */
-	private String propertiesImageFile;
-
-	/**
-	 * Property fore color
-	 */
-	private Color propertyForeColor;
-
-	/**
-	 * Property fore color
-	 */
-	private Color propertyBackColor;
-
-	/**
-	 * Property image
-	 */
-	private String propertyImageFile;
-
-	/**
-	 * Property edge color
-	 */
-	static private Color propertyEdgeColor;
-
-	/**
-	 * Property edge style
-	 */
-	static private Integer propertyEdgeStyle;
-
-	/**
-	 * Property edge image file
-	 */
-	static private String propertyEdgeImageFile;
+	// instances
 
 	/**
 	 * Instances label
@@ -295,17 +253,71 @@ public class OwlModelFactory
 	/**
 	 * Instance edge color
 	 */
-	static private Color instanceEdgeColor;
+	private Color instanceEdgeColor;
 
 	/**
 	 * Instance edge style
 	 */
-	static private Integer instanceEdgeStyle;
+	private Integer instanceEdgeStyle;
 
 	/**
 	 * Instance edge image file
 	 */
-	static private String instanceEdgeImageFile;
+	private String instanceEdgeImageFile;
+
+	// properties
+
+	/**
+	 * Properties label
+	 */
+	private String propertiesLabel;
+
+	/**
+	 * Properties fore color
+	 */
+	private Color propertiesForeColor;
+
+	/**
+	 * Properties fore color
+	 */
+	private Color propertiesBackColor;
+
+	/**
+	 * Properties image
+	 */
+	private String propertiesImageFile;
+
+	/**
+	 * Property fore color
+	 */
+	private Color propertyForeColor;
+
+	/**
+	 * Property fore color
+	 */
+	private Color propertyBackColor;
+
+	/**
+	 * Property image
+	 */
+	private String propertyImageFile;
+
+	/**
+	 * Property edge color
+	 */
+	private Color propertyEdgeColor;
+
+	/**
+	 * Property edge style
+	 */
+	private Integer propertyEdgeStyle;
+
+	/**
+	 * Property edge image file
+	 */
+	private String propertyEdgeImageFile;
+
+	// M E M B E R S
 
 	/**
 	 * Entities are named using IRIs. These are usually too long for use in user interfaces. To solve this problem, and so a query can be written using short
@@ -398,15 +410,6 @@ public class OwlModelFactory
 		this.classWithInstancesForeColor = getColor("class.withinstances.forecolor", Color.BLUE);
 		this.classWithInstancesImageFile = getImageFile("class.withinstances.image");
 
-		this.propertiesLabel = getLabel("properties.label", "properties");
-		this.propertiesBackColor = getColor("properties.backcolor", Color.WHITE);
-		this.propertiesForeColor = getColor("properties.forecolor", Color.MAGENTA);
-		this.propertiesImageFile = getImageFile("properties.image");
-
-		this.propertyBackColor = getColor("property.backcolor", Color.WHITE);
-		this.propertyForeColor = getColor("property.forecolor", Color.MAGENTA);
-		this.propertyImageFile = getImageFile("property.image");
-
 		this.instancesLabel = getLabel("instances.label", "instances");
 		this.instancesBackColor = getColor("instances.backcolor", Color.WHITE);
 		this.instancesForeColor = getColor("instances.forecolor", Color.BLUE);
@@ -414,17 +417,30 @@ public class OwlModelFactory
 
 		this.instanceBackColor = getColor("instance.backcolor", Color.WHITE);
 		this.instanceForeColor = getColor("instance.forecolor", Color.BLUE);
+		this.instanceEdgeColor = getColor("instance.edgecolor", Color.BLUE);
 		this.instanceImageFile = getImageFile("instance.image");
+		this.instanceEdgeImageFile = getImageFile("instance.edge.image");
+
+		this.propertiesLabel = getLabel("properties.label", "properties");
+		this.propertiesBackColor = getColor("properties.backcolor", Color.WHITE);
+		this.propertiesForeColor = getColor("properties.forecolor", Color.MAGENTA);
+		this.propertiesImageFile = getImageFile("properties.image");
+
+		this.propertyBackColor = getColor("property.backcolor", Color.WHITE);
+		this.propertyForeColor = getColor("property.forecolor", Color.MAGENTA);
+		this.propertyEdgeColor = getColor("property.edge.color", Color.MAGENTA);
+		this.propertyImageFile = getImageFile("property.image");
+		this.propertyEdgeImageFile = getImageFile("property.edge.image");
 
 		OwlModelFactory.images = new Image[]{ //
 				Image.make(Provider.class.getResource("images/root.png")), // ROOT
 				Image.make(Provider.class.getResource("images/class.png")), // CLASS
-				Image.make(Provider.class.getResource("images/classwithproperties.png")), // CLASSWITHPROPERTIES
-				Image.make(Provider.class.getResource("images/properties.png")), // PROPERTIES
-				Image.make(Provider.class.getResource("images/property.png")), // PROPERTY
 				Image.make(Provider.class.getResource("images/classwithinstances.png")), // CLASSWITHINSTANCES
 				Image.make(Provider.class.getResource("images/instances.png")), // INSTANCES
 				Image.make(Provider.class.getResource("images/instance.png")), // INSTANCE
+				Image.make(Provider.class.getResource("images/classwithproperties.png")), // CLASSWITHPROPERTIES
+				Image.make(Provider.class.getResource("images/properties.png")), // PROPERTIES
+				Image.make(Provider.class.getResource("images/property.png")), // PROPERTY
 				Image.make(Provider.class.getResource("images/branch.png")), // BRANCH
 				Image.make(Provider.class.getResource("images/branch2.png")), // BRANCH2
 		};
@@ -465,6 +481,7 @@ public class OwlModelFactory
 		final Settings settings = new Settings();
 		settings.hasToolbarFlag = true;
 		settings.hasStatusbarFlag = true;
+		settings.focus = "AsymmetricRelation"; //TODO
 		settings.orientation = OwlModelFactory.asTree ? "south" : "radial";
 		settings.hasToolbarFlag = true;
 		settings.backColor = new Color(0xffffe0);
@@ -495,9 +512,9 @@ public class OwlModelFactory
 		}
 
 		// cache property features from settings
-		OwlModelFactory.propertyEdgeStyle = settings.edgeStyle;
-		OwlModelFactory.propertyEdgeColor = settings.edgeColor;
-		OwlModelFactory.propertyEdgeImageFile = settings.defaultEdgeImage;
+		this.propertyEdgeStyle = settings.edgeStyle;
+		this.propertyEdgeColor = settings.edgeColor;
+		this.propertyEdgeImageFile = settings.defaultEdgeImage;
 
 		return new Model(tree, settings, OwlModelFactory.images);
 	}
@@ -571,7 +588,7 @@ public class OwlModelFactory
 					decorateInstances(instancesNode);
 
 					// instances
-					final Set<OWLNamedIndividual> instances = this.engine.getInstances(owlClass, true);
+					final Stream<OWLIndividual> instances = this.engine.getInstances(owlClass);
 					visitInstances(instancesNode, instances);
 
 					return new Tree(owlClassNode, null);
@@ -611,7 +628,7 @@ public class OwlModelFactory
 					decorateProperties(propertiesNode);
 
 					// instances
-					final Set<OWLNamedIndividual> instances = this.engine.getInstances(owlClass, true);
+					final Stream<OWLIndividual> instances = this.engine.getInstances(owlClass);
 					visitInstances(instancesNode, instances);
 
 					// properties
@@ -809,17 +826,56 @@ public class OwlModelFactory
 			{
 				owlInstanceNode.setImageIndex(ImageIndices.INSTANCE.ordinal());
 			}
-
-			// owlPropertyNode.setContent(owlProperty.getComment("en"));
-			owlInstanceNode.setEdgeStyle(OwlModelFactory.instanceEdgeStyle);
-			owlInstanceNode.setEdgeColor(OwlModelFactory.instanceEdgeColor);
-			if (OwlModelFactory.instanceEdgeImageFile != null)
+			owlInstanceNode.setEdgeStyle(this.instanceEdgeStyle);
+			owlInstanceNode.setEdgeColor(this.instanceEdgeColor);
+			if (this.instanceEdgeImageFile != null)
 			{
-				owlInstanceNode.setEdgeImageFile(OwlModelFactory.instanceEdgeImageFile);
+				owlInstanceNode.setEdgeImageFile(this.instanceEdgeImageFile);
 			}
 
 			childNodes.add(owlInstanceNode);
 		}
+
+		// balance load
+		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
+		parentNode.addChildren(balancedNodes);
+	}
+
+	public void visitInstances(final TreeMutableNode parentNode, final Stream<OWLIndividual> owlIndividuals)
+	{
+		final List<INode> childNodes = owlIndividuals //
+				.filter(individual -> !individual.isAnonymous()) //
+				.map(AsOWLNamedIndividual::asOWLNamedIndividual) //
+				.map(owlNamedIndividual -> {
+
+					final String owlIndividualPropertyShortForm = this.shortFormProvider.getShortForm(owlNamedIndividual);
+					final String owlIndividualId = getName(owlIndividualPropertyShortForm);
+					final Stream<OWLClassExpression> types = this.engine.getTypes(owlNamedIndividual);
+					final Stream<OWLAnnotation> annotations = this.engine.getAnnotations(owlNamedIndividual);
+
+					final MutableNode instanceNode = new MutableNode(null, owlIndividualId);
+					instanceNode.setLabel(owlIndividualId);
+					instanceNode.setContent(typesToString(types) + "<br>" + annotationsToString(annotations) + "<br>");
+
+					instanceNode.setBackColor(this.instanceBackColor);
+					instanceNode.setForeColor(this.instanceForeColor);
+					if (this.instanceImageFile != null)
+					{
+						instanceNode.setImageFile(this.instanceImageFile);
+					}
+					else
+					{
+						instanceNode.setImageIndex(ImageIndices.INSTANCE.ordinal());
+					}
+					instanceNode.setEdgeStyle(this.instanceEdgeStyle);
+					instanceNode.setEdgeColor(this.instanceEdgeColor);
+					if (this.instanceEdgeImageFile != null)
+					{
+						instanceNode.setEdgeImageFile(this.instanceEdgeImageFile);
+					}
+					return instanceNode;
+				}) //
+				.collect(toList());
 
 		// balance load
 		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
@@ -842,9 +898,10 @@ public class OwlModelFactory
 
 			final MutableNode owlPropertyNode = new MutableNode(null, owlPropertyId);
 			owlPropertyNode.setLabel(owlPropertyId);
-			// owlPropertyNode.setContent(owlProperty.getComment("en"));
 			owlPropertyNode.setBackColor(this.propertyBackColor);
 			owlPropertyNode.setForeColor(this.propertyForeColor);
+			owlPropertyNode.setEdgeStyle(this.propertyEdgeStyle);
+			owlPropertyNode.setEdgeColor(this.propertyEdgeColor);
 			if (this.propertyImageFile != null)
 			{
 				owlPropertyNode.setImageFile(this.propertyImageFile);
@@ -853,13 +910,9 @@ public class OwlModelFactory
 			{
 				owlPropertyNode.setImageIndex(ImageIndices.PROPERTY.ordinal());
 			}
-
-			// owlPropertyNode.setContent(owlProperty.getComment("en"));
-			owlPropertyNode.setEdgeStyle(OwlModelFactory.propertyEdgeStyle);
-			owlPropertyNode.setEdgeColor(OwlModelFactory.propertyEdgeColor);
-			if (OwlModelFactory.propertyEdgeImageFile != null)
+			if (this.propertyEdgeImageFile != null)
 			{
-				owlPropertyNode.setEdgeImageFile(OwlModelFactory.propertyEdgeImageFile);
+				owlPropertyNode.setEdgeImageFile(this.propertyEdgeImageFile);
 			}
 
 			childNodes.add(owlPropertyNode);
