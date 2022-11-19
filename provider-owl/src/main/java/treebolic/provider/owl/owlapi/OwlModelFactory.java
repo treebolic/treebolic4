@@ -481,7 +481,7 @@ public class OwlModelFactory
 		final Settings settings = new Settings();
 		settings.hasToolbarFlag = true;
 		settings.hasStatusbarFlag = true;
-		settings.focus = "AsymmetricRelation"; //TODO
+		settings.focus = "AsymmetricRelation"; //TODO remove focus
 		settings.orientation = OwlModelFactory.asTree ? "south" : "radial";
 		settings.hasToolbarFlag = true;
 		settings.backColor = new Color(0xffffe0);
@@ -736,6 +736,7 @@ public class OwlModelFactory
 		// node
 		final TreeMutableNode owlClassNode = new TreeMutableNode(parentOwlClassNode, owlClassId);
 		owlClassNode.setLabel(owlClassId);
+		owlClassNode.setTarget(owlClassId);
 		owlClassNode.setContent(comment);
 		owlClassNode.setBackColor(this.classBackColor);
 		owlClassNode.setForeColor(this.classForeColor);
@@ -815,6 +816,7 @@ public class OwlModelFactory
 
 					final MutableNode instanceNode = new MutableNode(null, owlIndividualId);
 					instanceNode.setLabel(owlIndividualId);
+					instanceNode.setTarget(owlIndividualId);
 					instanceNode.setContent(typesToString(types) + "<br>" + annotationsToString(annotations) + "<br>");
 
 					instanceNode.setBackColor(this.instanceBackColor);
@@ -856,26 +858,27 @@ public class OwlModelFactory
 			final String owlPropertyShortForm = this.shortFormProvider.getShortForm(owlProperty);
 			final String owlPropertyId = OwlModelFactory.getName(owlPropertyShortForm);
 
-			final MutableNode owlPropertyNode = new MutableNode(null, owlPropertyId);
-			owlPropertyNode.setLabel(owlPropertyId);
-			owlPropertyNode.setBackColor(this.propertyBackColor);
-			owlPropertyNode.setForeColor(this.propertyForeColor);
-			owlPropertyNode.setEdgeStyle(this.propertyEdgeStyle);
-			owlPropertyNode.setEdgeColor(this.propertyEdgeColor);
+			final MutableNode propertyNode = new MutableNode(null, owlPropertyId);
+			propertyNode.setLabel(owlPropertyId);
+			propertyNode.setTarget(owlPropertyId);
+			propertyNode.setBackColor(this.propertyBackColor);
+			propertyNode.setForeColor(this.propertyForeColor);
+			propertyNode.setEdgeStyle(this.propertyEdgeStyle);
+			propertyNode.setEdgeColor(this.propertyEdgeColor);
 			if (this.propertyImageFile != null)
 			{
-				owlPropertyNode.setImageFile(this.propertyImageFile);
+				propertyNode.setImageFile(this.propertyImageFile);
 			}
 			else
 			{
-				owlPropertyNode.setImageIndex(ImageIndices.PROPERTY.ordinal());
+				propertyNode.setImageIndex(ImageIndices.PROPERTY.ordinal());
 			}
 			if (this.propertyEdgeImageFile != null)
 			{
-				owlPropertyNode.setEdgeImageFile(this.propertyEdgeImageFile);
+				propertyNode.setEdgeImageFile(this.propertyEdgeImageFile);
 			}
 
-			childNodes.add(owlPropertyNode);
+			childNodes.add(propertyNode);
 
 			// // recurse
 			// final ExtendedIterator owlSubProperties = owlProperty.listSubProperties(true);
