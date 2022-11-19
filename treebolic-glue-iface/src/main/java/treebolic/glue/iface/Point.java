@@ -11,7 +11,17 @@ package treebolic.glue.iface;
  */
 public interface Point
 {
+	/**
+	 * Get x
+	 *
+	 * @return x
+	 */
 	int x();
 
+	/**
+	 * Get y
+	 *
+	 * @return y
+	 */
 	int y();
 }

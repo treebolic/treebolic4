@@ -9,6 +9,8 @@ import treebolic.glue.iface.ActionListener;
 /**
  * Glue interface for Statusbar
  *
+ * @param <C> component type
+ * @param <L> platform action listener type
  * @author Bernard Bou
  */
 public interface Statusbar<C, L>

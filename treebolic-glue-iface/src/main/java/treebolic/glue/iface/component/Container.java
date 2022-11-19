@@ -7,18 +7,31 @@ package treebolic.glue.iface.component;
 /**
  * Glue interface for Container
  *
+ * @param <C> platform component type
  * @author Bernard Bou
  */
 public interface Container<C>
 {
 	// POSITIONS
 
+	/**
+	 * Position as pane
+	 */
 	int PANE = 0;
 
+	/**
+	 * Position as view
+	 */
 	int VIEW = 1;
 
+	/**
+	 * Position as toolbar
+	 */
 	int TOOLBAR = 2;
 
+	/**
+	 * Position as status bar
+	 */
 	int STATUSBAR = 3;
 
 	/**

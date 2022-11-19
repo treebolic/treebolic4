@@ -7,6 +7,8 @@ package treebolic.glue.iface;
 /**
  * Glue interface for Rectangle2D
  *
+ * @param <P> platform point type
+ * @param <R> platform rectangle type
  * @author Bernard Bou
  */
 public interface Rectangle2D<P, R>
@@ -89,12 +91,24 @@ public interface Rectangle2D<P, R>
 	 */
 	boolean intersects(final R rect);
 
+	/**
+	 * Parameter for outcode (): bottom
+	 */
 	int OUT_BOTTOM = 1;
 
+	/**
+	 * Parameter for outcode (): left
+	 */
 	int OUT_LEFT = 2;
 
+	/**
+	 * Parameter for outcode (): right
+	 */
 	int OUT_RIGHT = 4;
 
+	/**
+	 * Parameter for outcode (): top
+	 */
 	int OUT_TOP = 8;
 
 	/**

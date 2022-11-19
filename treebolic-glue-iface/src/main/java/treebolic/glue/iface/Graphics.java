@@ -228,10 +228,19 @@ public interface Graphics<C, I>
 
 	// S T R O K E
 
+	/**
+	 * Solid style
+	 */
 	int SOLID = 1;
 
+	/**
+	 * Dot style
+	 */
 	int DOT = 2;
 
+	/**
+	 * Dash style
+	 */
 	int DASH = 3;
 
 	/**

@@ -10,6 +10,7 @@ import treebolic.annotations.NonNull;
  * Glue interface for GraphicsCache
  *
  * @author Bernard Bou
+ * @param <G> platform graphics context
  */
 public interface GraphicsCache<G>
 {

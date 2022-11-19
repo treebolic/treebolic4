@@ -7,6 +7,8 @@ package treebolic.glue.iface.component;
 /**
  * Glue interface for Surface (basis to view)
  *
+ * @param <G> platform graphics context type
+ * @param <L> platform action listener type
  * @author Bernard Bou
  */
 public interface Surface<G, L>
@@ -80,6 +82,7 @@ public interface Surface<G, L>
 	/**
 	 * Get factor used when evaluating min distance of node finder
 	 * Best results depend on platform.
+	 *
 	 * @return factor used when evaluating min distance of node finder
 	 */
 	@SuppressWarnings("SameReturnValue")

@@ -7,6 +7,7 @@ package treebolic.glue.iface.component;
 /**
  * Glue interface for Toolbar
  *
+ * @param <L> platform action listener type
  * @author Bernard Bou
  */
 public interface Toolbar<L>

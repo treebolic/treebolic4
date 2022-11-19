@@ -7,6 +7,8 @@ package treebolic.glue.iface.component;
 /**
  * Glue interface for PopupMenu
  *
+ * @param <C> component type
+ * @param <L> platform action listener
  * @author Bernard Bou
  */
 public interface PopupMenu<C, L>

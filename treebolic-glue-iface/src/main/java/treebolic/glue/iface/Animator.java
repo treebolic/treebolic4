@@ -7,6 +7,7 @@ package treebolic.glue.iface;
 /**
  * Glue interface for Animator
  *
+ * @param <A> platform action listener
  * @author Bernard Bou
  */
 public interface Animator<A>
