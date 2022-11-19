@@ -104,6 +104,7 @@ public class Persist
 	 *        settings to persist
 	 * @return true if successful
 	 */
+	@SuppressWarnings("UnusedReturnValue")
 	static public boolean saveSettings(final String persistFile, final Properties settings)
 	{
 		try

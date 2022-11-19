@@ -837,7 +837,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 					this.propertyView.dirty = false;
 				}
 			}
-			catch (final IOException | TransformerException exception)
+			catch (final TransformerException exception)
 			{
 				System.err.println(Messages.getString("Controller.err_saving") + file + " " + exception);  
 			}
@@ -1522,7 +1522,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 				this.textView.setText(text);
 				this.textView.setCaretPosition(0);
 			}
-			catch (final IOException | TransformerException exception)
+			catch (final TransformerException exception)
 			{
 				// do nothing
 			}

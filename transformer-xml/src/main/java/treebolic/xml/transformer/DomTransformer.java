@@ -52,10 +52,8 @@ public class DomTransformer
 	/**
 	 * Constructor
 	 *
-	 * @param outputHtmlFlag
-	 *        output as html
-	 * @param dtd
-	 *        dtd id
+	 * @param outputHtmlFlag output as html
+	 * @param dtd            dtd id
 	 */
 	public DomTransformer(final boolean outputHtmlFlag, final String dtd)
 	{
@@ -68,14 +66,11 @@ public class DomTransformer
 	/**
 	 * Transform XML file to XML file using XSLT file
 	 *
-	 * @param inFilePath
-	 *        in file
-	 * @param outFilePath
-	 *        out file
-	 * @param xsltFilePath
-	 *        xslt file
-	 * @throws TransformerException
-	 * @throws IOException
+	 * @param inFilePath   in file
+	 * @param outFilePath  out file
+	 * @param xsltFilePath xslt file
+	 * @throws TransformerException transformer exception
+	 * @throws IOException          io exception
 	 */
 	public void fileToFile(final String inFilePath, final String outFilePath, final String xsltFilePath) throws TransformerException, IOException
 	{
@@ -83,10 +78,10 @@ public class DomTransformer
 		final Source xslSource = new StreamSource(new File(xsltFilePath));
 
 		// in
-		final Source source = inFilePath.equals("-") ? new StreamSource(System.in) : new StreamSource(new File(inFilePath)); 
+		final Source source = inFilePath.equals("-") ? new StreamSource(System.in) : new StreamSource(new File(inFilePath));
 
 		// out
-		final StreamResult result = outFilePath.equals("-") ? new StreamResult(System.out) : new StreamResult(new FileWriter(outFilePath)); 
+		final StreamResult result = outFilePath.equals("-") ? new StreamResult(System.out) : new StreamResult(new FileWriter(outFilePath));
 
 		// transform
 		final TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -97,15 +92,12 @@ public class DomTransformer
 	/**
 	 * Transform DOM document to XML file
 	 *
-	 * @param document
-	 *        is the DOM Document to be output as XML
-	 * @param outputFile
-	 *        is the output file
-	 * @throws TransformerConfigurationException
-	 * @throws TransformerException
-	 * @throws IOException
+	 * @param document   is the DOM Document to be output as XML
+	 * @param outputFile is the output file
+	 * @throws TransformerConfigurationException transformer configuration exception
+	 * @throws TransformerException              transformer exception
 	 */
-	public void documentToFile(final Document document, final File outputFile) throws TransformerConfigurationException, TransformerException, IOException
+	public void documentToFile(final Document document, final File outputFile) throws TransformerConfigurationException, TransformerException
 	{
 		toFile(document, null, outputFile);
 	}
@@ -113,15 +105,12 @@ public class DomTransformer
 	/**
 	 * Transform DOM document to XML file after applying XSL transform
 	 *
-	 * @param document
-	 *        is the DOM Document to be output as XML
-	 * @param xsltUrl
-	 *        is the XSLT source file
-	 * @param outputFile
-	 *        is the output file
-	 * @throws TransformerConfigurationException
-	 * @throws TransformerException
-	 * @throws IOException
+	 * @param document   is the DOM Document to be output as XML
+	 * @param xsltUrl    is the XSLT source file
+	 * @param outputFile is the output file
+	 * @throws TransformerConfigurationException transformer configuration exception
+	 * @throws TransformerException              transformer exception
+	 * @throws IOException                       io exception
 	 */
 	public void documentToFile(final Document document, final URL xsltUrl, final File outputFile) throws TransformerConfigurationException, TransformerException, IOException
 	{
@@ -134,31 +123,26 @@ public class DomTransformer
 	/**
 	 * Transform DOM document to XML string
 	 *
-	 * @param document
-	 *        is the DOM Document to be output as XML
+	 * @param document is the DOM Document to be output as XML
 	 * @return XML String that represents DOM document
-	 * @throws TransformerConfigurationException
-	 * @throws TransformerException
-	 * @throws IOException
+	 * @throws TransformerConfigurationException transformer configuration exception
+	 * @throws TransformerException              transformer exception
 	 */
-	public String documentToString(final Document document) throws TransformerConfigurationException, TransformerException, IOException
+	public String documentToString(final Document document) throws TransformerConfigurationException, TransformerException
 	{
-		return toString(document, (Source) null);
+		return toString(document, null);
 	}
 
 	/**
 	 * Transform DOM document to XML string after applying XSL transformation
 	 *
-	 * @param document
-	 *        is the DOM Document to be output as XML
-	 * @param xsltFile
-	 *        is the XSLT source file
+	 * @param document is the DOM Document to be output as XML
+	 * @param xsltFile is the XSLT source file
 	 * @return XML String that represents DOM document
-	 * @throws TransformerConfigurationException
-	 * @throws TransformerException
-	 * @throws IOException
+	 * @throws TransformerConfigurationException transformer configuration exception
+	 * @throws TransformerException              transformer exception
 	 */
-	public String documentToString(final Document document, final File xsltFile) throws TransformerConfigurationException, TransformerException, IOException
+	public String documentToString(final Document document, final File xsltFile) throws TransformerConfigurationException, TransformerException
 	{
 		final StreamSource xslt = new StreamSource(xsltFile);
 		return toString(document, xslt);
@@ -167,14 +151,12 @@ public class DomTransformer
 	/**
 	 * Transform DOM document to XML string after applying XSL transformation
 	 *
-	 * @param document
-	 *        is the DOM Document to be output as XML
-	 * @param xsltUrl
-	 *        is the XSLT source url
+	 * @param document is the DOM Document to be output as XML
+	 * @param xsltUrl  is the XSLT source url
 	 * @return XML String that represents DOM document
-	 * @throws TransformerConfigurationException
-	 * @throws TransformerException
-	 * @throws IOException
+	 * @throws TransformerConfigurationException transformer configuration exception
+	 * @throws TransformerException              transformer exception
+	 * @throws IOException                       io exception
 	 */
 	public String documentToString(final Document document, final URL xsltUrl) throws TransformerConfigurationException, TransformerException, IOException
 	{
@@ -187,15 +169,12 @@ public class DomTransformer
 	/**
 	 * Transform DOM document to XML stream
 	 *
-	 * @param document
-	 *        is the DOM Document to be output as XML
-	 * @param outputStream
-	 *        is the output stream
-	 * @throws TransformerConfigurationException
-	 * @throws TransformerException
-	 * @throws IOException
+	 * @param document     is the DOM Document to be output as XML
+	 * @param outputStream is the output stream
+	 * @throws TransformerConfigurationException transformer configuration exception
+	 * @throws TransformerException              transformer exception
 	 */
-	public void documentToStream(final Document document, final OutputStream outputStream) throws TransformerConfigurationException, TransformerException, IOException
+	public void documentToStream(final Document document, final OutputStream outputStream) throws TransformerConfigurationException, TransformerException
 	{
 		final StreamResult result = new StreamResult(outputStream);
 		toStream(document, null, result);
@@ -206,14 +185,12 @@ public class DomTransformer
 	/**
 	 * File to document
 	 *
-	 * @param xmlUrl
-	 *        XML document url
-	 * @param xsltUrl
-	 *        XSL url
+	 * @param xmlUrl  XML document url
+	 * @param xsltUrl XSL url
 	 * @return document
-	 * @throws TransformerConfigurationException
-	 * @throws TransformerException
-	 * @throws IOException
+	 * @throws TransformerConfigurationException transformer configuration exception
+	 * @throws TransformerException              transformer exception
+	 * @throws IOException                       io exception
 	 */
 	public Document fileToDocument(final URL xmlUrl, final URL xsltUrl) throws TransformerConfigurationException, TransformerException, IOException
 	{
@@ -225,14 +202,12 @@ public class DomTransformer
 	/**
 	 * Transform DOM document to DOM document
 	 *
-	 * @param document
-	 *        DOM document
-	 * @param xslt
-	 *        XSLT url
+	 * @param document DOM document
+	 * @param xslt     XSLT url
 	 * @return document
-	 * @throws IOException
-	 * @throws TransformerException
-	 * @throws TransformerConfigurationException
+	 * @throws IOException                       io exception
+	 * @throws TransformerException              transformer exception
+	 * @throws TransformerConfigurationException transformer configuration exception
 	 */
 	public Document documentToDocument(final Document document, final URL xslt) throws TransformerConfigurationException, TransformerException, IOException
 	{
@@ -246,16 +221,13 @@ public class DomTransformer
 	/**
 	 * Transform DOM document to XML string
 	 *
-	 * @param document
-	 *        is the DOM Document to be output as XML
-	 * @param xslt
-	 *        is the XSLT source
+	 * @param document is the DOM Document to be output as XML
+	 * @param xslt     is the XSLT source
 	 * @return XML String that represents DOM document
-	 * @throws TransformerConfigurationException
-	 * @throws TransformerException
-	 * @throws IOException
+	 * @throws TransformerConfigurationException transformer configuration exception
+	 * @throws TransformerException              transformer exception
 	 */
-	protected String toString(final Document document, final Source xslt) throws TransformerConfigurationException, TransformerException, IOException
+	protected String toString(final Document document, final Source xslt) throws TransformerConfigurationException, TransformerException
 	{
 		final StringWriter writer = new StringWriter();
 		final StreamResult resultStream = new StreamResult(writer);
@@ -266,17 +238,13 @@ public class DomTransformer
 	/**
 	 * Transform DOM document to XML file
 	 *
-	 * @param document
-	 *        is the DOM Document to be output as XML
-	 * @param xslt
-	 *        is the XSLT source
-	 * @param file
-	 *        output file
-	 * @throws TransformerConfigurationException
-	 * @throws TransformerException
-	 * @throws IOException
+	 * @param document is the DOM Document to be output as XML
+	 * @param xslt     is the XSLT source
+	 * @param file     output file
+	 * @throws TransformerConfigurationException transformer configuration exception
+	 * @throws TransformerException              transformer exception
 	 */
-	protected void toFile(final Document document, final Source xslt, final File file) throws TransformerConfigurationException, TransformerException, IOException
+	protected void toFile(final Document document, final Source xslt, final File file) throws TransformerConfigurationException, TransformerException
 	{
 		final StreamResult resultStream = new StreamResult(file);
 		toStream(document, xslt, resultStream);
@@ -285,47 +253,40 @@ public class DomTransformer
 	/**
 	 * Transform DOM document to stream result
 	 *
-	 * @param document
-	 *        is the DOM Document to be output as XML
-	 * @param xslt
-	 *        is the XSLT source
-	 * @param result
-	 *        is the stream result
-	 * @throws TransformerConfigurationException
-	 * @throws TransformerException
-	 * @throws IOException
+	 * @param document is the DOM Document to be output as XML
+	 * @param xslt     is the XSLT source
+	 * @param result   is the stream result
+	 * @throws TransformerConfigurationException transformer configuration exception
+	 * @throws TransformerException              transformer exception
 	 */
-	protected void toStream(final Document document, final Source xslt, final StreamResult result) throws TransformerConfigurationException, TransformerException, IOException
+	protected void toStream(final Document document, final Source xslt, final StreamResult result) throws TransformerConfigurationException, TransformerException
 	{
 		final DOMSource source = new DOMSource(document);
 
 		// transform
 		final TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		final Transformer transformer = xslt == null ? transformerFactory.newTransformer() : transformerFactory.newTransformer(xslt);
-		transformer.setOutputProperty(javax.xml.transform.OutputKeys.METHOD, this.outputHtml ? "html" : "xml");  
+		transformer.setOutputProperty(javax.xml.transform.OutputKeys.METHOD, this.outputHtml ? "html" : "xml");
 		if (this.dtd != null)
 		{
 			transformer.setOutputProperty(javax.xml.transform.OutputKeys.DOCTYPE_SYSTEM, this.dtd);
 		}
-		transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT, "yes"); 
-		transformer.setOutputProperty(javax.xml.transform.OutputKeys.ENCODING, "UTF8"); 
-		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");  
+		transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT, "yes");
+		transformer.setOutputProperty(javax.xml.transform.OutputKeys.ENCODING, "UTF8");
+		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 		transformer.transform(source, result);
 	}
 
 	/**
 	 * Transform source to document
 	 *
-	 * @param source
-	 *        the source
-	 * @param xslt
-	 *        the XSLT source
+	 * @param source the source
+	 * @param xslt   the XSLT source
 	 * @return document
-	 * @throws TransformerConfigurationException
-	 * @throws TransformerException
-	 * @throws IOException
+	 * @throws TransformerConfigurationException transformer configuration exception
+	 * @throws TransformerException              transformer exception
 	 */
-	protected Document toDocument(final Source source, final Source xslt) throws TransformerConfigurationException, TransformerException, IOException
+	protected Document toDocument(final Source source, final Source xslt) throws TransformerConfigurationException, TransformerException
 	{
 		final DOMResult result = new DOMResult();
 
