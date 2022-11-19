@@ -47,6 +47,8 @@ public class Parser
 
 	/**
 	 * Constructor
+	 *
+	 * @param validate whether to validate XML
 	 */
 	@SuppressWarnings("WeakerAccess")
 	public Parser(@SuppressWarnings("SameParameterValue") final boolean validate)

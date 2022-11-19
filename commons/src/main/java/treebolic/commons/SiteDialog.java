@@ -109,7 +109,7 @@ public class SiteDialog extends JDialog
 		setResizable(true);
 
 		// images
-		final Icon icon = new ImageIcon(SiteDialog.class.getResource("images/sitemake.png")); 
+		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(SiteDialog.class.getResource("images/sitemake.png"));
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
@@ -117,8 +117,8 @@ public class SiteDialog extends JDialog
 		headerLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
 		headerLabel.setText(Messages.getString("SiteDialog.header")); 
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		final Icon fileIcon = new ImageIcon(SiteDialog.class.getResource("images/local.png")); 
-		final Icon httpIcon = new ImageIcon(SiteDialog.class.getResource("images/net.png")); 
+		@SuppressWarnings("ConstantConditions") final Icon fileIcon = new ImageIcon(SiteDialog.class.getResource("images/local.png"));
+		@SuppressWarnings("ConstantConditions") final Icon httpIcon = new ImageIcon(SiteDialog.class.getResource("images/net.png"));
 
 		// mode combo
 		final Object[] options = { Mode.FILE, Mode.NET };

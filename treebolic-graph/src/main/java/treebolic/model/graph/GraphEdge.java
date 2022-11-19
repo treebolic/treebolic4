@@ -43,8 +43,9 @@ public class GraphEdge
 	/**
 	 * Constructor
 	 *
-	 * @param fromNode source node
-	 * @param toNode   destination node
+	 * @param fromNode       source node
+	 * @param toNode         destination node
+	 * @param isTreeEdgeFlag whether this edge is a tree edge
 	 */
 	public GraphEdge(final GraphNode fromNode, final GraphNode toNode, final Boolean isTreeEdgeFlag)
 	{
@@ -89,6 +90,8 @@ public class GraphEdge
 
 	/**
 	 * Whether this edge is tree edge (null=undetermined)
+	 *
+	 * @return whether this edge is tree edge or null if undetermined
 	 */
 	public Boolean getIsTreeEdge()
 	{

@@ -83,7 +83,7 @@ public class ChoiceDialog extends JDialog
 		setResizable(true);
 
 		// images
-		final Icon icon = new ImageIcon(ChoiceDialog.class.getResource("images/open.png")); 
+		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(ChoiceDialog.class.getResource("images/open.png"));
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);

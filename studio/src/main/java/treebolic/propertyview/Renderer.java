@@ -225,17 +225,17 @@ class Renderer extends DefaultTableCellRenderer
 
 			case FONTSIZE:
 				setIcon(this.fontSizeIcon);
-				setText(attributeValue.toString());
+				setText((String) attributeValue);
 				return this;
 
 			case STROKE:
-				setIcon(PropertyView.strokeIcons.get(attributeValue));
+				setIcon(PropertyView.strokeIcons.get((String) attributeValue));
 				setText((String) attributeValue);
 				setForeground(Color.BLUE.color);
 				return this;
 
 			case TERMINATOR:
-				setIcon(PropertyView.terminatorIcons.get(attributeValue));
+				setIcon(PropertyView.terminatorIcons.get((String) attributeValue));
 				setText((String) attributeValue);
 				setForeground(Color.BLUE.color);
 				return this;

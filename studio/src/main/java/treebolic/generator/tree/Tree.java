@@ -67,21 +67,21 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 			//
 		}
 
-//		@Override
-//		protected AbstractLayoutCache.NodeDimensions createNodeDimensions()
-//		{
-//			return new NodeDimensionsHandler()
-//			{
-//				@SuppressWarnings("synthetic-access")
-//				@Override
-//				public Rectangle getNodeDimensions(final Object value, final int row, final int depth, final boolean expanded, final Rectangle size)
-//				{
-//					final Rectangle dimensions = super.getNodeDimensions(value, row, depth, expanded, size);
-//					dimensions.width = MyBasicTreeUI.this.tree.getWidth() - getRowX(row, depth);
-//					return dimensions;
-//				}
-//			};
-//		}
+		//		@Override
+		//		protected AbstractLayoutCache.NodeDimensions createNodeDimensions()
+		//		{
+		//			return new NodeDimensionsHandler()
+		//			{
+		//				@SuppressWarnings("synthetic-access")
+		//				@Override
+		//				public Rectangle getNodeDimensions(final Object value, final int row, final int depth, final boolean expanded, final Rectangle size)
+		//				{
+		//					final Rectangle dimensions = super.getNodeDimensions(value, row, depth, expanded, size);
+		//					dimensions.width = MyBasicTreeUI.this.tree.getWidth() - getRowX(row, depth);
+		//					return dimensions;
+		//				}
+		//			};
+		//		}
 	}
 
 	// C O N S T R U C T
@@ -102,11 +102,11 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		setToggleClickCount(2);
 		setScrollsOnExpand(true);
 		setFont(new java.awt.Font(Font.DIALOG, Font.PLAIN, 10));
-		putClientProperty("JTree.lineStyle", "Horizontal");  
-		setToolTipText("Tree"); 
+		putClientProperty("JTree.lineStyle", "Horizontal");
+		setToolTipText("Tree");
 		setLargeModel(true); // A large model can be used when the cell height is the same for all nodes. The UI will then cache very little information and instead continually message the model.
 		setRowHeight(18);
-		
+
 		// renderer
 		setUI(new MyBasicTreeUI());
 		setCellRenderer(new Renderer());
@@ -154,8 +154,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	/**
 	 * Connect to controller
 	 *
-	 * @param controller
-	 *        controller
+	 * @param controller controller
 	 */
 	public void connect(final Controller controller)
 	{
@@ -171,7 +170,9 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	{
 		final Object root = getModel().getRoot();
 		if (root == null)
+		{
 			return;
+		}
 		final TreePath path = new TreePath(root);
 		expandAll(path);
 	}
@@ -184,7 +185,9 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		final TreeModel model = getModel();
 		final TreeNode root = (TreeNode) model.getRoot();
 		if (root == null)
+		{
 			return;
+		}
 		final DefaultMutableTreeNode[] nodes = { //
 				(DefaultMutableTreeNode) root.getChildAt(0).getChildAt(0).getChildAt(0), // root node
 				(DefaultMutableTreeNode) root.getChildAt(0).getChildAt(1), // edges
@@ -200,8 +203,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	/**
 	 * Expand tree
 	 *
-	 * @param path
-	 *        tree path to expand
+	 * @param path tree path to expand
 	 */
 	public void expandAll(final TreePath path)
 	{
@@ -220,8 +222,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	/**
 	 * Collapse tree
 	 *
-	 * @param path
-	 *        tree path to collapse
+	 * @param path tree path to collapse
 	 */
 	public void collapseAll(final TreePath path)
 	{
@@ -242,10 +243,8 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	/**
 	 * Add node to parent
 	 *
-	 * @param parentNode
-	 *        node
-	 * @param node
-	 *        node
+	 * @param parentNode node
+	 * @param node       node
 	 */
 	public void addToParent(final DefaultMutableTreeNode parentNode, final DefaultMutableTreeNode node)
 	{
@@ -269,10 +268,8 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	/**
 	 * Add node to parent
 	 *
-	 * @param parentNode
-	 *        node
-	 * @param node
-	 *        node
+	 * @param parentNode node
+	 * @param node       node
 	 */
 	public void prependToParent(final DefaultMutableTreeNode parentNode, final DefaultMutableTreeNode node)
 	{
@@ -296,8 +293,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	/**
 	 * Remove from parent
 	 *
-	 * @param node
-	 *        node
+	 * @param node node
 	 */
 	public void removeFromParent(final DefaultMutableTreeNode node)
 	{
@@ -327,11 +323,14 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 
 	/**
 	 * Move node up/down
+	 *
+	 * @param step step
 	 */
 	public void move(int step)
 	{
 		// tree
 		final TreePath selected = getSelectionPath();
+		assert selected != null;
 		DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) selected.getLastPathComponent();
 		DefaultMutableTreeNode parentTreeNode = (DefaultMutableTreeNode) treeNode.getParent();
 		// System.out.println((step>0 ? "down" : "up") + " move " + treeNode);
@@ -340,7 +339,9 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		final Object parentObject = parentTreeNode.getUserObject();
 		final Object object = treeNode.getUserObject();
 		if (!(object instanceof TreeMutableNode) || !(parentObject instanceof TreeMutableNode))
+		{
 			return;
+		}
 
 		// model
 		final DefaultTreeModel model = (DefaultTreeModel) getModel();
@@ -348,7 +349,9 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		int i = parentTreeNode.getIndex(treeNode);
 		int j = i + step;
 		if (j > n - 1 || j < 0)
+		{
 			return;
+		}
 
 		// model remove + add
 		model.removeNodeFromParent(treeNode);
@@ -382,7 +385,9 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		// return if null selection
 		final TreePath path = event.getNewLeadSelectionPath();
 		if (path == null)
+		{
 			return;
+		}
 
 		// get new selected element
 		final Object object = path.getLastPathComponent();
@@ -395,11 +400,11 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	{
 
 		final StringBuilder buffer = new StringBuilder();
-		buffer.append("source:"); 
+		buffer.append("source:");
 		buffer.append(event.getSource());
 		// TreePath path = event.getPath();
 		// buffer.append(path.getLastPathComponent());
-		buffer.append(" changed:"); 
+		buffer.append(" changed:");
 		TreePath[] paths = event.getPaths();
 		for (TreePath path2 : paths)
 		{
@@ -407,7 +412,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 			buffer.append(' ');
 		}
 		TreePath oldPath = event.getOldLeadSelectionPath();
-		buffer.append("old-new:"); 
+		buffer.append("old-new:");
 		if (oldPath != null)
 		{
 			buffer.append(oldPath.getLastPathComponent());
@@ -415,7 +420,9 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		buffer.append('>');
 		TreePath newPath = event.getNewLeadSelectionPath();
 		if (newPath != null)
+		{
 			buffer.append(newPath.getLastPathComponent());
+		}
 
 		return buffer.toString();
 	}
@@ -425,8 +432,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	/**
 	 * Select node
 	 *
-	 * @param node
-	 *        node
+	 * @param node node
 	 */
 	public void fireSelect(final DefaultMutableTreeNode node)
 	{

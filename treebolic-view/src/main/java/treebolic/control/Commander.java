@@ -23,11 +23,104 @@ public abstract class Commander
 	 * Commands
 	 */
 	public enum Command
-	{REFRESH, //
-		HOME, NORTH, SOUTH, EAST, WEST, RADIAL, //
-		ZOOMIN, ZOOMOUT, ZOOMONE, SCALEUP, SCALEDOWN, SCALEONE, //
-		EXPAND, SHRINK, EXPANSIONRESET, WIDEN, NARROW, SWEEPRESET, EXPANSIONSWEEPRESET, //
-		ARCEDGE, TOOLTIP, TOOLTIPCONTENT, FOCUSHOVER}
+	{
+		/**
+		 * Refresh command
+		 */
+		REFRESH,
+		/**
+		 * Home command
+		 */
+		HOME,
+		/**
+		 * North layout command
+		 */
+		NORTH,
+		/**
+		 * South layout command
+		 */
+		SOUTH,
+		/**
+		 * East layout command
+		 */
+		EAST,
+		/**
+		 * West layout command
+		 */
+		WEST,
+		/**
+		 * Radial  layout command
+		 */
+		RADIAL,
+		/**
+		 * Zoom in command
+		 */
+		ZOOMIN,
+		/**
+		 * Zoom out command
+		 */
+		ZOOMOUT,
+		/**
+		 * Reset zoom command
+		 */
+		ZOOMONE,
+		/**
+		 * Scale up command
+		 */
+		SCALEUP,
+		/**
+		 * Scale down command
+		 */
+		SCALEDOWN,
+		/**
+		 * Reset scale command
+		 */
+		SCALEONE,
+		/**
+		 * Exapnd command
+		 */
+		EXPAND,
+		/**
+		 * Shrink command
+		 */
+		SHRINK,
+		/**
+		 * Reset expansion command
+		 */
+		EXPANSIONRESET,
+		/**
+		 * Widen sweep
+		 */
+		WIDEN,
+		/**
+		 * Narrow sweep
+		 */
+		NARROW,
+		/**
+		 * Reset sweep
+		 */
+		SWEEPRESET,
+		/**
+		 * Reset both sweep and expansion
+		 */
+		EXPANSIONSWEEPRESET,
+		/**
+		 * Draw edges as arcs
+		 */
+		ARCEDGE,
+		/**
+		 * Draw tooltips
+		 */
+		TOOLTIP,
+		/**
+		 * Include node content in tooltips
+		 */
+		TOOLTIPCONTENT,
+		/**
+		 * Pocus node when hovered
+		 */
+		FOCUSHOVER
+	}
 
 	/**
 	 * East/West shift step

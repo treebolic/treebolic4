@@ -15,6 +15,9 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Stream;
 
+/**
+ * OWL query engine
+ */
 public class QueryEngine
 {
 	private final OWLOntology ontology;
@@ -142,6 +145,12 @@ public class QueryEngine
 
 	// I N D I V I D U A L S
 
+	/**
+	 * Get class of an individual
+	 *
+	 * @param owlIndividual individual
+	 * @return stream of class expressions
+	 */
 	public Stream<OWLClassExpression> getTypes(final OWLIndividual owlIndividual)
 	{
 		return EntitySearcher.getTypes(owlIndividual, this.ontology);
@@ -149,6 +158,12 @@ public class QueryEngine
 
 	// E N T I T I E S
 
+	/**
+	 * Get entity's annotations
+	 *
+	 * @param entity entity
+	 * @return stream of annotations
+	 */
 	public Stream<OWLAnnotation> getAnnotations(final OWLEntity entity)
 	{
 		return EntitySearcher.getAnnotations(entity, this.ontology);

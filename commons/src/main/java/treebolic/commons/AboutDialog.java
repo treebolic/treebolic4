@@ -93,7 +93,8 @@ public class AboutDialog extends JDialog
 		final JLabel versionLabel = new JLabel(version);
 
 		final JLabel image = new JLabel();
-		image.setIcon(new ImageIcon(AboutDialog.class.getResource("images/logo.png"))); 
+		//noinspection ConstantConditions
+		image.setIcon(new ImageIcon(AboutDialog.class.getResource("images/logo.png")));
 
 		final JButton oKButton = new JButton(Messages.getString("AboutDialog.ok")); 
 		oKButton.addActionListener(e -> setVisible(false));

@@ -25,6 +25,9 @@ public class Traverser extends Generator<INode>
 		boolean match(final INode node);
 	}
 
+	/**
+	 * All matcher
+	 */
 	@SuppressWarnings("WeakerAccess")
 	static public class AllMatcher implements Matcher
 	{
@@ -36,9 +39,15 @@ public class Traverser extends Generator<INode>
 		}
 	}
 
+	/**
+	 * All matcher
+	 */
 	@NonNull
 	static public Matcher ALLMATCHER = new AllMatcher();
 
+	/**
+	 * Selective matcher
+	 */
 	@SuppressWarnings("WeakerAccess")
 	static abstract public class SelectiveMatcher implements Matcher
 	{
@@ -64,6 +73,9 @@ public class Traverser extends Generator<INode>
 		}
 	}
 
+	/**
+	 * Case-sensitive matcher
+	 */
 	@SuppressWarnings("WeakerAccess")
 	static public class CaseMatcher extends SelectiveMatcher
 	{
@@ -140,6 +152,9 @@ public class Traverser extends Generator<INode>
 		}
 	}
 
+	/**
+	 * Case-ignore matcher
+	 */
 	static public class NoCaseMatcher extends SelectiveMatcher
 	{
 		/**
@@ -231,6 +246,7 @@ public class Traverser extends Generator<INode>
 	/**
 	 * Constructor
 	 *
+	 * @param matcher matcher
 	 * @param node start node
 	 */
 	public Traverser(final Matcher matcher, final INode node)

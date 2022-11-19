@@ -39,9 +39,51 @@ public class OwlModelFactory
 
 	// S T A T I C . D A T A
 
+	/**
+	 * Image indices
+	 */
 	public enum ImageIndices
 	{
-		ROOT, CLASS, CLASSWITHINSTANCES, INSTANCES, INSTANCE, CLASSWITHPROPERTIES, PROPERTIES, PROPERTY, BRANCH, BRANCH2
+		/**
+		 * Root
+		 */
+		ROOT,
+		/**
+		 * Class
+		 */
+		CLASS,
+		/**
+		 * Class with instances attached
+		 */
+		CLASSWITHINSTANCES,
+		/**
+		 * Instances
+		 */
+		INSTANCES,
+		/**
+		 * Instance
+		 */
+		INSTANCE,
+		/**
+		 * Class with properties attached
+		 */
+		CLASSWITHPROPERTIES,
+		/**
+		 * Properties
+		 */
+		PROPERTIES,
+		/**
+		 * Property
+		 */
+		PROPERTY,
+		/**
+		 * Load balancing branch
+		 */
+		BRANCH,
+		/**
+		 * Load balancing 2 branch
+		 */
+		BRANCH2
 	}
 
 	static Image[] images;
@@ -354,6 +396,11 @@ public class OwlModelFactory
 
 	// C O N S T R U C T O R
 
+	/**
+	 * Constructor
+	 *
+	 * @param properties properties
+	 */
 	public OwlModelFactory(final Properties properties)
 	{
 		this.properties = properties;
@@ -454,6 +501,7 @@ public class OwlModelFactory
 	/**
 	 * Make model
 	 *
+	 * @param ontologyUrlString ontology URL string
 	 * @return model if successful
 	 */
 	public Model makeModel(final String ontologyUrlString)
@@ -713,6 +761,14 @@ public class OwlModelFactory
 		parentClassNode.addChildren(balancedNodes);
 	}
 
+	/**
+	 * Visit class
+	 *
+	 * @param parentOwlClassNode treebolic parent node to attach to
+	 * @param owlClass           class
+	 * @param ontologyUrlString  ontology URL string
+	 * @return treebolic node
+	 */
 	public TreeMutableNode visitClass(final INode parentOwlClassNode, final OWLClass owlClass, final String ontologyUrlString)
 	{
 		final String ownClassShortForm = this.shortFormProvider.getShortForm(owlClass);
@@ -776,6 +832,14 @@ public class OwlModelFactory
 		return owlClassNode;
 	}
 
+	/**
+	 * Visit classes and subclasses
+	 *
+	 * @param parentOwlClassNode treebolic parent node to attach to
+	 * @param owlClass           class
+	 * @param ontologyUrlString  ontology URL string
+	 * @return treebolic node
+	 */
 	public MutableNode visitClassAndSubclasses(final INode parentOwlClassNode, final OWLClass owlClass, final String ontologyUrlString)
 	{
 		final TreeMutableNode owlClassNode = visitClass(parentOwlClassNode, owlClass, ontologyUrlString);

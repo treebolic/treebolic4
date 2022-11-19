@@ -20,6 +20,9 @@ import treebolic.provider.IProvider;
 import treebolic.provider.IProviderContext;
 import treebolic.provider.ProviderUtils;
 
+/**
+ * XML provider
+ */
 public class Provider implements IProvider
 {
 	// D A T A

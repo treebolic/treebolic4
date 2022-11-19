@@ -3,24 +3,15 @@
  */
 package treebolic.generator;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
@@ -48,18 +39,18 @@ public class ImageListDialog extends ReferenceListDialog
 	public ImageListDialog(final Controller controller)
 	{
 		super(controller);
-		setTitle(Messages.getString("ImageListDialog.title")); 
-		this.label.setText(Messages.getString("ImageListDialog.label")); 
+		setTitle(Messages.getString("ImageListDialog.title"));
+		this.label.setText(Messages.getString("ImageListDialog.label"));
 		this.referenceTable.setRowHeight(32);
 		this.scrollPane.setPreferredSize(new Dimension(300, 320));
 
-		final JButton checkMissingButton = new JButton(Messages.getString("ImageListDialog.missing")); 
+		final JButton checkMissingButton = new JButton(Messages.getString("ImageListDialog.missing"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
 		checkMissingButton.addActionListener(e -> checkMissing());
-		final JButton checkUnusedButton = new JButton(Messages.getString("ImageListDialog.unused")); 
+		final JButton checkUnusedButton = new JButton(Messages.getString("ImageListDialog.unused"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -78,7 +69,7 @@ public class ImageListDialog extends ReferenceListDialog
 	@Override
 	protected void update()
 	{
-		this.label.setText(Messages.getString("ImageListDialog.label")); 
+		this.label.setText(Messages.getString("ImageListDialog.label"));
 		this.imageRepository = this.controller.makeImageRepositoryURL();
 		final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
 		setModel(imageToLocationMap);
@@ -130,22 +121,22 @@ public class ImageListDialog extends ReferenceListDialog
 			{
 				final ParameterModel.Entry entry = (ParameterModel.Entry) value;
 				final String location = entry.value;
-				if (location.startsWith("default") || location.equals("background"))  
+				if (location.startsWith("default") || location.equals("background"))
 				{
 					setBackground(Color.LIGHT_GRAY);
 					setForeground(Color.WHITE);
 				}
-				else if (location.startsWith("node")) 
+				else if (location.startsWith("node"))
 				{
 					setBackground(Color.WHITE);
 					setForeground(Color.BLUE);
 				}
-				else if (location.startsWith("treeedge") || location.startsWith("edge"))  
+				else if (location.startsWith("treeedge") || location.startsWith("edge"))
 				{
 					setBackground(Color.WHITE);
 					setForeground(Color.BLACK);
 				}
-				else if (location.startsWith("unused")) 
+				else if (location.startsWith("unused"))
 				{
 					setBackground(Color.WHITE);
 					setForeground(Color.BLACK);
@@ -173,7 +164,7 @@ public class ImageListDialog extends ReferenceListDialog
 		final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
 		final Set<String> images = imageToLocationMap.keySet();
 
-		if (this.imageRepository.getProtocol().equals("file")) 
+		if (this.imageRepository.getProtocol().equals("file"))
 		{
 			try
 			{
@@ -181,16 +172,20 @@ public class ImageListDialog extends ReferenceListDialog
 				final File file = new File(uri);
 				if (file.isDirectory())
 				{
-					for (final File directoryEntry : file.listFiles())
+					final File[] files = file.listFiles();
+					if (files != null)
 					{
-						final String name = directoryEntry.getName();
-						if (images.contains(name))
+						for (final File directoryEntry : files)
 						{
-							imageToLocationMap.remove(name);
+							final String name = directoryEntry.getName();
+							if (images.contains(name))
+							{
+								imageToLocationMap.remove(name);
+							}
 						}
 					}
 					setModel(imageToLocationMap);
-					this.label.setText(Messages.getString("ImageListDialog.label_missing") + uri); 
+					this.label.setText(Messages.getString("ImageListDialog.label_missing") + uri);
 				}
 			}
 			catch (final URISyntaxException exception)
@@ -210,7 +205,7 @@ public class ImageListDialog extends ReferenceListDialog
 		final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
 		final Set<String> images = imageToLocationMap.keySet();
 
-		if (this.imageRepository.getProtocol().equals("file")) 
+		if (this.imageRepository.getProtocol().equals("file"))
 		{
 			try
 			{
@@ -218,22 +213,26 @@ public class ImageListDialog extends ReferenceListDialog
 				final File file = new File(uri);
 				if (file.isDirectory())
 				{
-					for (final File directoryEntry : file.listFiles())
+					final File[] files = file.listFiles();
+					if (files != null)
 					{
-						if (directoryEntry.isDirectory())
+						for (final File directoryEntry : files)
 						{
-							continue;
-						}
-						final String name = directoryEntry.getName();
-						if (!images.contains(name))
-						{
-							final SortedSet<String> value = new TreeSet<>();
-							value.add(Messages.getString("ImageListDialog.is_unused")); 
-							unusedToLocationMap.put(name, value);
+							if (directoryEntry.isDirectory())
+							{
+								continue;
+							}
+							final String name = directoryEntry.getName();
+							if (!images.contains(name))
+							{
+								final SortedSet<String> value = new TreeSet<>();
+								value.add(Messages.getString("ImageListDialog.is_unused"));
+								unusedToLocationMap.put(name, value);
+							}
 						}
 					}
 					setModel(unusedToLocationMap);
-					this.label.setText(Messages.getString("ImageListDialog.label_unused") + uri); 
+					this.label.setText(Messages.getString("ImageListDialog.label_unused") + uri);
 				}
 			}
 			catch (final URISyntaxException exception)
@@ -246,8 +245,7 @@ public class ImageListDialog extends ReferenceListDialog
 	/**
 	 * Make icon
 	 *
-	 * @param imageFile
-	 *        image file
+	 * @param imageFile image file
 	 * @return icon
 	 */
 	private Icon makeIcon(final String imageFile)

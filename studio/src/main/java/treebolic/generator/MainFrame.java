@@ -40,11 +40,13 @@ public class MainFrame extends JFrame
 	/**
 	 * Tree icon
 	 */
+	@SuppressWarnings("ConstantConditions")
 	static final Icon treeIcon = new ImageIcon(MainFrame.class.getResource("images/treetab.png"));
 
 	/**
 	 * Tree icon
 	 */
+	@SuppressWarnings("ConstantConditions")
 	static final Icon treebolicIcon = new ImageIcon(MainFrame.class.getResource("images/treebolictab.png"));
 
 	/**
@@ -385,7 +387,8 @@ public class MainFrame extends JFrame
 	private JButton makeGlobalsButton(final Controller controller, final String label, final String image, final Controller.Code code)
 	{
 		final JButton button = new JButton();
-		button.setIcon(new ImageIcon(getClass().getResource("images/" + image))); 
+		//noinspection ConstantConditions
+		button.setIcon(new ImageIcon(getClass().getResource("images/" + image)));
 		button.setToolTipText(label);
 		button.setBorder(null);
 		button.setAlignmentX(Component.CENTER_ALIGNMENT);

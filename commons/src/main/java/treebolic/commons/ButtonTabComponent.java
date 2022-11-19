@@ -23,17 +23,20 @@ public class ButtonTabComponent extends JPanel
 	/**
 	 * Default icon
 	 */
-	static private final Icon defaultIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_default.png")); 
+	@SuppressWarnings("ConstantConditions")
+	static private final Icon defaultIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_default.png"));
 
 	/**
 	 * Rollover icon
 	 */
-	static private final Icon rolloverIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_rollover.png")); 
+	@SuppressWarnings("ConstantConditions")
+	static private final Icon rolloverIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_rollover.png"));
 
 	/**
 	 * Pressed icon
 	 */
-	static private final Icon pressedIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_pressed.png")); 
+	@SuppressWarnings("ConstantConditions")
+	static private final Icon pressedIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_pressed.png"));
 
 	/**
 	 * Reference to tabbed pane

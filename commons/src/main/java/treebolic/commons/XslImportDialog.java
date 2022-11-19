@@ -93,7 +93,7 @@ public class XslImportDialog extends JDialog
 		setResizable(true);
 
 		// images
-		final Icon icon = new ImageIcon(XslImportDialog.class.getResource("images/xsl.png")); 
+		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(XslImportDialog.class.getResource("images/xsl.png"));
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);

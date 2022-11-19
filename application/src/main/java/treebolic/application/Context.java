@@ -48,6 +48,11 @@ public class Context implements IContext
 
 	/**
 	 * Constructor
+	 *
+	 * @param application application
+	 * @param source      source
+	 * @param base        base
+	 * @param imageBase   image base
 	 */
 	public Context(final MainFrame application, final String source, final String base, final String imageBase)
 	{
@@ -62,7 +67,7 @@ public class Context implements IContext
 
 	/**
 	 * Get widget
-	 * 
+	 *
 	 * @return widget
 	 */
 	public Widget getWidget()
@@ -95,7 +100,9 @@ public class Context implements IContext
 			{
 				final File file = new File(this.base);
 				if (file.exists() && file.isDirectory())
+				{
 					return file.toURI().toURL();
+				}
 			}
 			catch (final MalformedURLException e)
 			{
@@ -153,7 +160,9 @@ public class Context implements IContext
 			{
 				final File file = new File(this.imageBase);
 				if (file.exists() && file.isDirectory())
+				{
 					return file.toURI().toURL();
+				}
 			}
 			catch (final MalformedURLException e)
 			{
@@ -243,12 +252,7 @@ public class Context implements IContext
 	@Override
 	public String getStyle()
 	{
-		return ".content { }" +
-				".link {color: blue;font-size: small; }" +
-				".mount {color: red;}" +
-				".linking {color: #007D82; font-size: small; }" +
-				".mounting {color: #007D82; font-size: small; }" +
-				".searching {color: #007D82; font-size: small; }";
+		return ".content { }" + ".link {color: blue;font-size: small; }" + ".mount {color: red;}" + ".linking {color: #007D82; font-size: small; }" + ".mounting {color: #007D82; font-size: small; }" + ".searching {color: #007D82; font-size: small; }";
 	}
 
 	/*
@@ -321,7 +325,9 @@ public class Context implements IContext
 		{
 			final Statusbar statusbar = widget.getStatusbar();
 			if (statusbar != null)
+			{
 				return statusbar.get();
+			}
 		}
 		return null;
 	}
@@ -331,8 +337,7 @@ public class Context implements IContext
 	/**
 	 * Make url
 	 *
-	 * @param source
-	 *        source
+	 * @param source source
 	 * @return url
 	 * @throws MalformedURLException malformed URL exception
 	 */
@@ -369,14 +374,15 @@ public class Context implements IContext
 	/**
 	 * Make url
 	 *
-	 * @param source
-	 *        source
+	 * @param source source
 	 * @return url
 	 */
 	protected URL makeURL(final String source)
 	{
 		if (source == null)
+		{
 			return null;
+		}
 
 		// try to consider it well-formed full-fledged url
 		try

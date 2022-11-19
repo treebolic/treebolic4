@@ -170,7 +170,8 @@ public class Menubar extends JMenuBar
 		item.setText(text);
 		if (image != null)
 		{
-			item.setIcon(new ImageIcon(Menubar.class.getResource("images/" + image))); 
+			//noinspection ConstantConditions
+			item.setIcon(new ImageIcon(Menubar.class.getResource("images/" + image)));
 		}
 		if (acceleratorKey != null)
 		{
@@ -200,7 +201,8 @@ public class Menubar extends JMenuBar
 		item.setSelected(state);
 		if (image != null)
 		{
-			item.setIcon(new ImageIcon(Menubar.class.getResource("images/" + image))); 
+			//noinspection ConstantConditions
+			item.setIcon(new ImageIcon(Menubar.class.getResource("images/" + image)));
 		}
 		if (acceleratorKey != null)
 		{

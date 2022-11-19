@@ -29,6 +29,7 @@ public interface IProviderContext
 	 * Put progress
 	 *
 	 * @param message message
+	 * @param fail    whether failure occurred
 	 */
 	void progress(String message, boolean fail);
 }

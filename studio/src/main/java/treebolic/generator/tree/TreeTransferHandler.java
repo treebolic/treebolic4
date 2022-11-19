@@ -288,6 +288,7 @@ public class TreeTransferHandler extends TransferHandler
 		else
 		{
 			final MenuWrapper parentNode = (MenuWrapper) parentObject;
+			assert object instanceof MenuItemWrapper;
 			final MenuItemWrapper node = (MenuItemWrapper) object;
 			final List<MenuItem> menu = parentNode.menu;
 			final MenuItem menuItem = node.menuItem;

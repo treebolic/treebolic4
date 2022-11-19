@@ -38,21 +38,39 @@ public class Painter extends AbstractPainter
 	@SuppressWarnings("WeakerAccess")
 	static public final int DEBUG_OUTERCIRCLE = 0x001;
 
+	/**
+	 * Debug flag to draw node space as a circle
+	 */
 	@SuppressWarnings("WeakerAccess")
 	static public final int DEBUG_NODECIRCLE = 0x002;
 
+	/**
+	 * Debug flag not to draw nodes
+	 */
 	@SuppressWarnings("WeakerAccess")
 	static public final int DEBUG_NONODE = 0x010;
 
+	/**
+	 * Debug flag not to draw node labels
+	 */
 	@SuppressWarnings("WeakerAccess")
 	static public final int DEBUG_NOLABEL = 0x100;
 
+	/**
+	 * Debug flag not to fill node labels
+	 */
 	@SuppressWarnings("WeakerAccess")
 	static public final int DEBUG_NOLABELFILL = 0x200;
 
+	/**
+	 * Debug flag not to draw images
+	 */
 	@SuppressWarnings("WeakerAccess")
 	static public final int DEBUG_NOIMAGE = 0x400;
 
+	/**
+	 * Debug flag
+	 */
 	@SuppressWarnings({"CanBeFinal", "WeakerAccess"})
 	static public int DEBUG = 0; // DEBUG_NOIMAGE // DEBUG_NOLABEL | DEBUG_NOLABELFILL;
 
@@ -106,11 +124,14 @@ public class Painter extends AbstractPainter
 	static public final int NODE_HORIZONTAL_PADDING = 4;
 
 	/**
-	 * y padding for node box
+	 * y padding at the top of node box
 	 */
 	@SuppressWarnings("WeakerAccess")
 	static public final int NODE_TOP_PADDING = 1;
 
+	/**
+	 * y padding at the bottom of node box
+	 */
 	@SuppressWarnings("WeakerAccess")
 	static public final int NODE_BOTTOM_PADDING = 1;
 

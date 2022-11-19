@@ -12,19 +12,110 @@ package treebolic.glue.iface.component;
  */
 public interface Toolbar<L>
 {
+	/**
+	 * Toolbar button index
+	 */
 	enum Button
 	{
+		/**
+		 * Home
+		 */
 		HOME, //
-		NORTH, SOUTH, EAST, WEST, RADIAL, //
-		EXPAND, SHRINK, EXPANSIONRESET, //
-		WIDEN, NARROW, SWEEPRESET, //
+		/**
+		 * North
+		 */
+		NORTH,
+		/**
+		 * South
+		 */
+		SOUTH,
+		/**
+		 * East
+		 */
+		EAST,
+		/**
+		 * West
+		 */
+		WEST,
+		/**
+		 * Radial
+		 */
+		RADIAL, //
+		/**
+		 * Expand
+		 */
+		EXPAND,
+		/**
+		 * Shrink
+		 */
+		SHRINK,
+		/**
+		 * Reset expansion
+		 */
+		EXPANSIONRESET, //
+		/**
+		 * Widen
+		 */
+		WIDEN,
+		/**
+		 * Narrow
+		 */
+		NARROW,
+		/**
+		 * Reset sweep
+		 */
+		SWEEPRESET, //
+		/**
+		 * Reset expansion and sweep
+		 */
 		EXPANSIONSWEEPRESET, //
-		ZOOMIN, ZOOMOUT, ZOOMONE, //
-		SCALEUP, SCALEDOWN, SCALEONE, //
+		/**
+		 * Zoom in
+		 */
+		ZOOMIN,
+		/**
+		 * Zoom out
+		 */
+		ZOOMOUT,
+		/**
+		 * Reset zooming
+		 */
+		ZOOMONE, //
+		/**
+		 * Scale up
+		 */
+		SCALEUP,
+		/**
+		 * Scale down
+		 */
+		SCALEDOWN,
+		/**
+		 * Reset scaling
+		 */
+		SCALEONE, //
+		/**
+		 * Refresh
+		 */
 		REFRESH, //
+		/**
+		 * Render edges as arcs
+		 */
 		ARCEDGE, //
-		TOOLTIP, TOOLTIPCONTENT, //
+		/**
+		 * Use tooltips
+		 */
+		TOOLTIP,
+		/**
+		 * Content in tooltips
+		 */
+		TOOLTIPCONTENT, //
+		/**
+		 * Focus on hover
+		 */
 		FOCUSHOVER, //
+		/**
+		 * Separator
+		 */
 		SEPARATOR
 	}
 

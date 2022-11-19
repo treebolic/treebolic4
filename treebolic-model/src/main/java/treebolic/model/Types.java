@@ -16,7 +16,18 @@ public class Types
 	 */
 	public enum SearchCommand
 	{
-		SEARCH, CONTINUE, RESET
+		/**
+		 * Start search
+		 */
+		SEARCH,
+		/**
+		 * Continue search
+		 */
+		CONTINUE,
+		/**
+		 * Reset search
+		 */
+		RESET
 	}
 
 	/**
@@ -24,7 +35,22 @@ public class Types
 	 */
 	public enum MatchScope
 	{
-		LABEL, CONTENT, LINK, ID
+		/**
+		 * Match labels
+		 */
+		LABEL,
+		/**
+		 * Match contents
+		 */
+		CONTENT,
+		/**
+		 * Match links
+		 */
+		LINK,
+		/**
+		 * Match IDs
+		 */
+		ID
 	}
 
 	/**
@@ -32,6 +58,17 @@ public class Types
 	 */
 	public enum MatchMode
 	{
-		EQUALS, STARTSWITH, INCLUDES
+		/**
+		 * Equals matching
+		 */
+		EQUALS,
+		/**
+		 * Starts-with matching
+		 */
+		STARTSWITH,
+		/**
+		 * Include matching
+		 */
+		INCLUDES
 	}
 }

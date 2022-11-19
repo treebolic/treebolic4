@@ -18,7 +18,38 @@ public interface PopupMenu<C, L>
 	 */
 	enum LabelIndices
 	{
-		LABEL_CANCEL, LABEL_INFO, LABEL_FOCUS, LABEL_LINKTO, LABEL_MOUNT, LABEL_UNMOUNT, LABEL_GOTO, LABEL_SEARCH
+		/**
+		 * Cancel label
+		 */
+		LABEL_CANCEL,
+		/**
+		 * INfo label
+		 */
+		LABEL_INFO,
+		/**
+		 * Focus label
+		 */
+		LABEL_FOCUS,
+		/**
+		 * Link to label
+		 */
+		LABEL_LINKTO,
+		/**
+		 * Mount label
+		 */
+		LABEL_MOUNT,
+		/**
+		 * Unmount label
+		 */
+		LABEL_UNMOUNT,
+		/**
+		 * Goto label
+		 */
+		LABEL_GOTO,
+		/**
+		 * Search label
+		 */
+		LABEL_SEARCH
 	}
 
 	/**
@@ -26,7 +57,34 @@ public interface PopupMenu<C, L>
 	 */
 	enum ImageIndices
 	{
-		IMAGE_CANCEL, IMAGE_INFO, IMAGE_FOCUS, IMAGE_LINK, IMAGE_MOUNT, IMAGE_GOTO, IMAGE_SEARCH
+		/**
+		 * Cancel image
+		 */
+		IMAGE_CANCEL,
+		/**
+		 * Info image
+		 */
+		IMAGE_INFO,
+		/**
+		 * Focus image
+		 */
+		IMAGE_FOCUS,
+		/**
+		 * Link image
+		 */
+		IMAGE_LINK,
+		/**
+		 * Mount image
+		 */
+		IMAGE_MOUNT,
+		/**
+		 * Goto image
+		 */
+		IMAGE_GOTO,
+		/**
+		 * Search image
+		 */
+		IMAGE_SEARCH
 	}
 
 	/**

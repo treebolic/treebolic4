@@ -4,6 +4,9 @@
 
 package treebolic.glue.iface.component;
 
+/**
+ * Function to convert character sequences into a string
+ */
 public interface Converter
 {
 	/**

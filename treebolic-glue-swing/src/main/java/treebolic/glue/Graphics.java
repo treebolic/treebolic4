@@ -34,9 +34,9 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 
 	static private final float SWING_FONT_FACTOR = 1.5F;
 
-	static private final float[] DASHPATTERN = { 10, 4 };
+	static private final float[] DASHPATTERN = {10, 4};
 
-	static private final float[] DOTPATTERN = { 1, 3 };
+	static private final float[] DOTPATTERN = {1, 3};
 
 	static private final Stroke solidStroke = new BasicStroke(1.0F, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F);
 
@@ -82,6 +82,11 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 		this.transformStack = new Stack<>();
 	}
 
+	/**
+	 * Constructor
+	 *
+	 * @param graphics graphics context
+	 */
 	public Graphics(final java.awt.Graphics graphics)
 	{
 		this((Graphics2D) graphics);
@@ -269,15 +274,15 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 		Stroke stroke = null;
 		switch (stroke0)
 		{
-		case treebolic.glue.iface.Graphics.SOLID:
-			stroke = width <= 1 ? Graphics.solidStroke : new BasicStroke(width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F);
-			break;
-		case treebolic.glue.iface.Graphics.DOT:
-			stroke = width <= 1 ? Graphics.dotStroke : new BasicStroke(width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F, Graphics.DOTPATTERN, 0);
-			break;
-		case treebolic.glue.iface.Graphics.DASH:
-			stroke = width <= 1 ? Graphics.dashStroke : new BasicStroke(width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F, Graphics.DASHPATTERN, 0);
-			break;
+			case treebolic.glue.iface.Graphics.SOLID:
+				stroke = width <= 1 ? Graphics.solidStroke : new BasicStroke(width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F);
+				break;
+			case treebolic.glue.iface.Graphics.DOT:
+				stroke = width <= 1 ? Graphics.dotStroke : new BasicStroke(width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F, Graphics.DOTPATTERN, 0);
+				break;
+			case treebolic.glue.iface.Graphics.DASH:
+				stroke = width <= 1 ? Graphics.dashStroke : new BasicStroke(width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0F, Graphics.DASHPATTERN, 0);
+				break;
 		}
 		this.g.setStroke(stroke);
 	}
@@ -335,33 +340,33 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 
 	// H E L P E R
 
-// --Commented out by Inspection START (11/16/22, 2:29 PM):
-//	static public int convertStyleToAwt(final int style)
-//	{
-//		switch (style)
-//		{
-//		case Graphics.PLAIN:
-//			return Font.PLAIN;
-//		case Graphics.BOLD:
-//			return Font.BOLD;
-//		default:
-//			return -1;
-//		}
-//	}
-// --Commented out by Inspection STOP (11/16/22, 2:29 PM)
+	// --Commented out by Inspection START (11/16/22, 2:29 PM):
+	//	static public int convertStyleToAwt(final int style)
+	//	{
+	//		switch (style)
+	//		{
+	//		case Graphics.PLAIN:
+	//			return Font.PLAIN;
+	//		case Graphics.BOLD:
+	//			return Font.BOLD;
+	//		default:
+	//			return -1;
+	//		}
+	//	}
+	// --Commented out by Inspection STOP (11/16/22, 2:29 PM)
 
-// --Commented out by Inspection START (11/16/22, 2:28 PM):
-//	static public int convertStyleFromAwt(final int style)
-//	{
-//		switch (style)
-//		{
-//		case Font.PLAIN:
-//			return Graphics.PLAIN;
-//		case Font.BOLD:
-//			return Graphics.BOLD;
-//		default:
-//			return -1;
-//		}
-//	}
-// --Commented out by Inspection STOP (11/16/22, 2:28 PM)
+	// --Commented out by Inspection START (11/16/22, 2:28 PM):
+	//	static public int convertStyleFromAwt(final int style)
+	//	{
+	//		switch (style)
+	//		{
+	//		case Font.PLAIN:
+	//			return Graphics.PLAIN;
+	//		case Font.BOLD:
+	//			return Graphics.BOLD;
+	//		default:
+	//			return -1;
+	//		}
+	//	}
+	// --Commented out by Inspection STOP (11/16/22, 2:28 PM)
 }

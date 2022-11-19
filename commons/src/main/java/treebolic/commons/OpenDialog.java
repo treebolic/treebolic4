@@ -107,7 +107,7 @@ public class OpenDialog extends JDialog
 		setResizable(true);
 
 		// images
-		final Icon icon = new ImageIcon(OpenDialog.class.getResource("images/open.png")); 
+		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(OpenDialog.class.getResource("images/open.png"));
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);

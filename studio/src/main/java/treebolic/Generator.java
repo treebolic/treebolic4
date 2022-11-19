@@ -14,7 +14,7 @@ import treebolic.generator.MainFrame;
 public class Generator
 {
 	/**
-	 * Version : 3.x
+	 * Version
 	 */
 	static private final String version = "4.0.0";
 

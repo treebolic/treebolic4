@@ -39,6 +39,9 @@ public class Model implements Serializable
 
 	/**
 	 * Constructor
+	 *
+	 * @param tree     tree
+	 * @param settings settings
 	 */
 	public Model(final Tree tree, final Settings settings)
 	{
@@ -49,6 +52,10 @@ public class Model implements Serializable
 
 	/**
 	 * Constructor
+	 *
+	 * @param tree     tree
+	 * @param settings settings
+	 * @param images   images
 	 */
 	public Model(final Tree tree, final Settings settings, @Nullable final Image[] images)
 	{

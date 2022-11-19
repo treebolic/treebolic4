@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 
 /**
  * Language dependency, bundle reader
- * 
+ *
  * @author Bernard Bou
  */
 public class Messages
@@ -23,6 +23,12 @@ public class Messages
 		// do nothing
 	}
 
+	/**
+	 * Get string
+	 *
+	 * @param key key
+	 * @return string value
+	 */
 	public static String getString(final String key)
 	{
 		try

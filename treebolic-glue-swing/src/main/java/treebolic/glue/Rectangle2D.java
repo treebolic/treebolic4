@@ -56,13 +56,13 @@ public class Rectangle2D extends java.awt.geom.Rectangle2D.Double implements tre
 		return super.intersects(rect);
 	}
 
-	public static final int OUT_BOTTOM = 1;
+	/** Outcode: bottom */ public static final int OUT_BOTTOM = 1;
 
-	public static final int OUT_LEFT = 2;
+	/** Outcode: left */ public static final int OUT_LEFT = 2;
 
-	public static final int OUT_RIGHT = 4;
+	/** Outcode: right */ public static final int OUT_RIGHT = 4;
 
-	public static final int OUT_TOP = 8;
+	/** Outcode: top */ public static final int OUT_TOP = 8;
 
 	@Override
 	public int outcode(final Point2D point)

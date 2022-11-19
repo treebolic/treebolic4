@@ -258,7 +258,7 @@ public class TreeView extends JScrollPane
 		else if (parentObject instanceof EdgesWrapper)
 		{
 			final EdgesWrapper wrapper = (EdgesWrapper) parentObject;
-			wrapper.edgeList.remove(object);
+			wrapper.edgeList.remove((IEdge) object);
 		}
 		else if (parentObject instanceof MenuWrapper)
 		{

@@ -105,17 +105,28 @@ public class Renderer extends DefaultTreeCellRenderer
 	static
 	{
 		// icons
-		treebolicIcon = new ImageIcon(Renderer.class.getResource("images/treehome.png")); 
-		treeIcon = new ImageIcon(Renderer.class.getResource("images/treetree.png")); 
-		nodesIcon = new ImageIcon(Renderer.class.getResource("images/treenodes.png")); 
-		rootIcon = new ImageIcon(Renderer.class.getResource("images/treeroot.png")); 
-		nodeIcon = new ImageIcon(Renderer.class.getResource("images/treenode.png")); 
-		nodeSpecialIcon = new ImageIcon(Renderer.class.getResource("images/treenodespecial.png")); 
-		edgesIcon = new ImageIcon(Renderer.class.getResource("images/treeedges.png")); 
-		edgeIcon = new ImageIcon(Renderer.class.getResource("images/treeedge.png")); 
-		toolsIcon = new ImageIcon(Renderer.class.getResource("images/treetools.png")); 
-		menuIcon = new ImageIcon(Renderer.class.getResource("images/treemenuitem.png")); 
-		defaultIcon = new ImageIcon(Renderer.class.getResource("images/treedefault.png")); 
+		//noinspection ConstantConditions
+		treebolicIcon = new ImageIcon(Renderer.class.getResource("images/treehome.png"));
+		//noinspection ConstantConditions
+		treeIcon = new ImageIcon(Renderer.class.getResource("images/treetree.png"));
+		//noinspection ConstantConditions
+		nodesIcon = new ImageIcon(Renderer.class.getResource("images/treenodes.png"));
+		//noinspection ConstantConditions
+		rootIcon = new ImageIcon(Renderer.class.getResource("images/treeroot.png"));
+		//noinspection ConstantConditions
+		nodeIcon = new ImageIcon(Renderer.class.getResource("images/treenode.png"));
+		//noinspection ConstantConditions
+		nodeSpecialIcon = new ImageIcon(Renderer.class.getResource("images/treenodespecial.png"));
+		//noinspection ConstantConditions
+		edgesIcon = new ImageIcon(Renderer.class.getResource("images/treeedges.png"));
+		//noinspection ConstantConditions
+		edgeIcon = new ImageIcon(Renderer.class.getResource("images/treeedge.png"));
+		//noinspection ConstantConditions
+		toolsIcon = new ImageIcon(Renderer.class.getResource("images/treetools.png"));
+		//noinspection ConstantConditions
+		menuIcon = new ImageIcon(Renderer.class.getResource("images/treemenuitem.png"));
+		//noinspection ConstantConditions
+		defaultIcon = new ImageIcon(Renderer.class.getResource("images/treedefault.png"));
 
 		// fonts
 		defaultFont = new Font(Font.DIALOG, Font.PLAIN, 12);

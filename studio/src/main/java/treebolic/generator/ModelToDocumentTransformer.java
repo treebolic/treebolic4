@@ -152,7 +152,7 @@ public class ModelToDocumentTransformer
 
 			// edges
 			final List<IEdge> edges = model.tree.getEdges();
-			if (edges != null && !edges.isEmpty() || model.settings != null && model.settings.edgesAsArcsFlag != null)
+			if (edges != null && !edges.isEmpty() || model.settings.edgesAsArcsFlag != null)
 			{
 				final Element edgesElement = document.createElement("edges"); 
 				treeElement.appendChild(edgesElement);

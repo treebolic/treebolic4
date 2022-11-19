@@ -83,7 +83,8 @@ public class TreeToolbar extends JToolBar
 	{
 		final JButton button = new JButton();
 		button.setToolTipText(tooltip);
-		button.setIcon(new ImageIcon(TreeToolbar.class.getResource("images/" + image))); 
+		//noinspection ConstantConditions
+		button.setIcon(new ImageIcon(TreeToolbar.class.getResource("images/" + image)));
 		return button;
 	}
 

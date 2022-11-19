@@ -24,6 +24,12 @@ public class Messages
 	{
 	}
 
+	/**
+	 * Get string from key
+	 *
+	 * @param key message key
+	 * @return message value
+	 */
 	public static String getString(@NonNull String key)
 	{
 		try

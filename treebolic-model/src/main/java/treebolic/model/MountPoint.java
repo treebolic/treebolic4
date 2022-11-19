@@ -20,6 +20,9 @@ public class MountPoint implements Serializable
 {
 	private static final long serialVersionUID = 8846293010235597970L;
 
+	/**
+	 * Mountpoint in the mounting side
+	 */
 	static public class Mounting extends MountPoint
 	{
 		private static final long serialVersionUID = 5222027905366742742L;
@@ -66,6 +69,9 @@ public class MountPoint implements Serializable
 		}
 	}
 
+	/**
+	 * Mountpoint in the mounted side
+	 */
 	static public class Mounted extends MountPoint
 	{
 		private static final long serialVersionUID = 7749263337626673995L;

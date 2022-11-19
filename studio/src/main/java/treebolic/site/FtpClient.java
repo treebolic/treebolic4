@@ -1051,7 +1051,7 @@ public class FtpClient extends TransferProtocolClient
 	 * GET a file from the FTP server
 	 *
 	 * @param filename name of the file to retrieve
-	 * @return the <code>InputStream</code> to read the file from
+	 * @return the {@code InputStream} to read the file from
 	 * @throws FileNotFoundException if the file can't be opened
 	 */
 	public TelnetInputStream get(final String filename) throws IOException
@@ -1119,7 +1119,7 @@ public class FtpClient extends TransferProtocolClient
 	 * PUT a file to the FTP server
 	 *
 	 * @param filename name of the file to store
-	 * @return the <code>OutputStream</code> to write the file to
+	 * @return the {@code OutputStream} to write the file to
 	 */
 	public TelnetOutputStream put(final String filename) throws IOException
 	{
@@ -1136,7 +1136,7 @@ public class FtpClient extends TransferProtocolClient
 	 * Append to a file on the FTP server
 	 *
 	 * @param filename name of the file to append to
-	 * @return the <code>OutputStream</code> to write the file to
+	 * @return the {@code OutputStream} to write the file to
 	 */
 	public TelnetOutputStream append(final String filename) throws IOException
 	{
@@ -1153,7 +1153,7 @@ public class FtpClient extends TransferProtocolClient
 	/**
 	 * LIST files in the current directory on a remote FTP server
 	 *
-	 * @return the <code>InputStream</code> to read the list from
+	 * @return the {@code InputStream} to read the list from
 	 */
 	public TelnetInputStream list() throws IOException
 	{
@@ -1166,7 +1166,7 @@ public class FtpClient extends TransferProtocolClient
 	 * List (NLST) file names on a remote FTP server
 	 *
 	 * @param path pathname to the directory to list, null for current directory
-	 * @return the <code>InputStream</code> to read the list from
+	 * @return the {@code InputStream} to read the list from
 	 * @throws IOException io exception
 	 */
 	public TelnetInputStream nameList(final String path) throws IOException

@@ -27,6 +27,9 @@ public class Utils
 {
 	// S T Y L E
 
+	/**
+	 * Empty style
+	 */
 	@SuppressWarnings("WeakerAccess")
 	static public final String NONE = "";
 
@@ -35,7 +38,30 @@ public class Utils
 	 */
 	public enum StyleComponent
 	{
-		STROKE, STROKEWIDTH, FROMTERMINATOR, TOTERMINATOR, LINE, HIDDEN
+		/**
+		 * Stroke
+		 */
+		STROKE,
+		/**
+		 * Stroke width
+		 */
+		STROKEWIDTH,
+		/**
+		 * Source tip terminator
+		 */
+		FROMTERMINATOR,
+		/**
+		 * Destination tip terminator
+		 */
+		TOTERMINATOR,
+		/**
+		 * Line edge
+		 */
+		LINE,
+		/**
+		 * Hidden
+		 */
+		HIDDEN
 	}
 
 	// 0000 dddd ttttt tttt ffff ffff 0000 sssh
@@ -821,6 +847,7 @@ public class Utils
 	 * Load properties from URL
 	 *
 	 * @param url url of property file to load from
+	 * @return properties
 	 * @throws IOException io exception
 	 */
 	@NonNull
@@ -830,7 +857,7 @@ public class Utils
 		try (InputStream is = url.openStream())
 		{
 			properties.load(is);
-		return properties;
+			return properties;
 		}
 	}
 
@@ -838,6 +865,7 @@ public class Utils
 	 * Load properties from file location
 	 *
 	 * @param location location of property file to load from
+	 * @return properties
 	 * @throws IOException io exception
 	 */
 	@NonNull

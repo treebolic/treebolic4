@@ -18,31 +18,31 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 {
 	private static final long serialVersionUID = 5704334480899935769L;
 
-	public static final Color WHITE = new Color(java.awt.Color.WHITE);
+	/** White */ public static final Color WHITE = new Color(java.awt.Color.WHITE);
 
-	public static final Color BLACK = new Color(java.awt.Color.BLACK);
+	/** Black */ public static final Color BLACK = new Color(java.awt.Color.BLACK);
 
-	public static final Color RED = new Color(java.awt.Color.RED);
+	/** Red */ public static final Color RED = new Color(java.awt.Color.RED);
 
-	public static final Color GREEN = new Color(java.awt.Color.GREEN);
+	/** Green */ public static final Color GREEN = new Color(java.awt.Color.GREEN);
 
-	public static final Color BLUE = new Color(java.awt.Color.BLUE);
+	/** Blue */ public static final Color BLUE = new Color(java.awt.Color.BLUE);
 
-	public static final Color ORANGE = new Color(java.awt.Color.ORANGE);
+	/** Orange */ public static final Color ORANGE = new Color(java.awt.Color.ORANGE);
 
-	public static final Color YELLOW = new Color(java.awt.Color.YELLOW);
+	/** Yellow */ public static final Color YELLOW = new Color(java.awt.Color.YELLOW);
 
-	public static final Color PINK = new Color(java.awt.Color.PINK);
+	/** Pink */ public static final Color PINK = new Color(java.awt.Color.PINK);
 
-	public static final Color CYAN = new Color(java.awt.Color.CYAN);
+	/** Cyan */ public static final Color CYAN = new Color(java.awt.Color.CYAN);
 
-	public static final Color MAGENTA = new Color(java.awt.Color.MAGENTA);
+	/** Magenta */ public static final Color MAGENTA = new Color(java.awt.Color.MAGENTA);
 
-	public static final Color GRAY = new Color(java.awt.Color.GRAY);
+	/** Grey */ public static final Color GRAY = new Color(java.awt.Color.GRAY);
 
-	public static final Color LIGHT_GRAY = new Color(java.awt.Color.LIGHT_GRAY);
+	/** Light Grey */ public static final Color LIGHT_GRAY = new Color(java.awt.Color.LIGHT_GRAY);
 
-	public static final Color DARK_GRAY = new Color(java.awt.Color.DARK_GRAY);
+	/** Dark grey */ public static final Color DARK_GRAY = new Color(java.awt.Color.DARK_GRAY);
 
 	/**
 	 * AWT color
@@ -69,6 +69,9 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 		this.color = new java.awt.Color(rgb);
 	}
 
+	/**
+	 * No color constructor
+	 */
 	public Color()
 	{
 		this.color = null;

@@ -97,7 +97,56 @@ public class Controller extends Commander
 	 * Event types
 	 */
 	public enum Event
-	{SELECT, HOVER, DRAG, LEAVEDRAG, MOVE, ROTATE, FOCUS, MOUNT, LINK, POPUP, ZOOM, SCALE}
+	{
+		/**
+		 * Select event
+		 */
+		SELECT,
+		/**
+		 * Hover event
+		 */
+		HOVER,
+		/**
+		 * Drag event
+		 */
+		DRAG,
+		/**
+		 * Leave drag event
+		 */
+		LEAVEDRAG,
+		/**
+		 * Move event
+		 */
+		MOVE,
+		/**
+		 * Rotate event
+		 */
+		ROTATE,
+		/**
+		 * Focus event
+		 */
+		FOCUS,
+		/**
+		 * Mount event
+		 */
+		MOUNT,
+		/**
+		 * Link event
+		 */
+		LINK,
+		/**
+		 * Popup event
+		 */
+		POPUP,
+		/**
+		 * Zoom event
+		 */
+		ZOOM,
+		/**
+		 * Scale event
+		 */
+		SCALE
+	}
 
 	/**
 	 * Match scopes
@@ -425,6 +474,13 @@ public class Controller extends Commander
 		}
 	}
 
+	/**
+	 * Get goto target
+	 *
+	 * @param link link
+	 * @param node node
+	 * @return target
+	 */
 	@Nullable
 	public String getGotoTarget(@Nullable final String link, @NonNull final INode node)
 	{
@@ -439,6 +495,13 @@ public class Controller extends Commander
 		return expandedLink;
 	}
 
+	/**
+	 * Get search target
+	 *
+	 * @param matchTarget match target
+	 * @param node        node
+	 * @return target
+	 */
 	@Nullable
 	public String getSearchTarget(@Nullable final String matchTarget, @NonNull final INode node)
 	{
@@ -584,6 +647,7 @@ public class Controller extends Commander
 	 * Get content string
 	 *
 	 * @param contents strings
+	 * @param div      embed in a div tag
 	 * @return html content string
 	 */
 	@NonNull
@@ -615,6 +679,13 @@ public class Controller extends Commander
 		return sb.toString();
 	}
 
+	/**
+	 * Make html
+	 *
+	 * @param divStyle div tag style
+	 * @param contents contents
+	 * @return content as HTML
+	 */
 	@NonNull
 	public static String makeHtml(String divStyle, @NonNull final CharSequence... contents)
 	{
@@ -723,6 +794,13 @@ public class Controller extends Commander
 
 	// P O P U P
 
+	/**
+	 * Pop up
+	 *
+	 * @param x    x
+	 * @param y    y
+	 * @param node node
+	 */
 	@SuppressWarnings("WeakerAccess")
 	public void popup(final int x, final int y, @NonNull final INode node)
 	{
@@ -741,6 +819,7 @@ public class Controller extends Commander
 	 *
 	 * @param command    command
 	 * @param parameters parameters (scope, mode, target, [start])
+	 * @return found node or null
 	 */
 	@Nullable
 	public INode search(@NonNull final SearchCommand command, @NonNull final Object... parameters)

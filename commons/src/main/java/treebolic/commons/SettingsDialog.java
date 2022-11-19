@@ -147,7 +147,7 @@ public class SettingsDialog extends JDialog
 		setResizable(true);
 
 		// images
-		final Icon icon = new ImageIcon(SettingsDialog.class.getResource("images/settings.png")); 
+		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(SettingsDialog.class.getResource("images/settings.png"));
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);

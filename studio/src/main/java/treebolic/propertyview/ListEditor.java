@@ -49,7 +49,7 @@ class ListEditor extends DefaultCellEditor
 				if (ListEditor.this.imageMap == null)
 					return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
-				final ImageIcon icon = ListEditor.this.imageMap.get(value);
+				final ImageIcon icon = ListEditor.this.imageMap.get((String) value);
 				setText(value == null ? PropertyView.defaultString : (String) value);
 				setIcon(icon);
 				setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());

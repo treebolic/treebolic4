@@ -16,6 +16,7 @@ import treebolic.model.*;
 /**
  * Graph converter
  *
+ * @param <T> type of mutable tree node
  * @author Bernard Bou
  */
 @SuppressWarnings("WeakerAccess")

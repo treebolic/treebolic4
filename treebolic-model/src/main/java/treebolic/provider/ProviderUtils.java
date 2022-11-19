@@ -21,6 +21,15 @@ public class ProviderUtils
 {
 	private static final boolean DEBUG = false;
 
+	/**
+	 * Make URL
+	 *
+	 * @param source  source
+	 * @param base    base
+	 * @param extras  extras
+	 * @param context context
+	 * @return url
+	 */
 	@Nullable
 	static public URL makeURL(@Nullable final String source, final URL base, @SuppressWarnings("unused") final Properties extras, @NonNull final IProviderContext context)
 	{

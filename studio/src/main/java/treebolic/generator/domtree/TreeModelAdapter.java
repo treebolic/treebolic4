@@ -30,7 +30,7 @@ public class TreeModelAdapter implements TreeModel
 	/**
 	 * Whether to consider DOM elements
 	 */
-	private boolean elementsOnly;
+	private final boolean elementsOnly;
 
 	/**
 	 * Listener support

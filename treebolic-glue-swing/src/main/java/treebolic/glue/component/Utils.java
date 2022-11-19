@@ -8,10 +8,15 @@ import java.awt.*;
 
 import javax.swing.*;
 
+/**
+ * Common Utilities
+ */
 public class Utils
 {
 	/**
 	 * Center on screen
+	 *
+	 * @param component component
 	 */
 	public static void center(final JDialog component)
 	{

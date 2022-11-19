@@ -157,9 +157,12 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 		StyleConstants.setForeground(Renderer.srcStyle, Color.MAGENTA);
 
 		// images
-		Renderer.nodeIcon = new ImageIcon(Renderer.class.getResource("images/treenode.gif")); 
-		Renderer.edgeIcon = new ImageIcon(Renderer.class.getResource("images/treeedge.gif")); 
-		Renderer.linkIcon = new ImageIcon(Renderer.class.getResource("images/treelink.gif")); 
+		//noinspection ConstantConditions
+		Renderer.nodeIcon = new ImageIcon(Renderer.class.getResource("images/treenode.gif"));
+		//noinspection ConstantConditions
+		Renderer.edgeIcon = new ImageIcon(Renderer.class.getResource("images/treeedge.gif"));
+		//noinspection ConstantConditions
+		Renderer.linkIcon = new ImageIcon(Renderer.class.getResource("images/treelink.gif"));
 	}
 
 	/**
