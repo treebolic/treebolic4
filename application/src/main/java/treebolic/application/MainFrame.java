@@ -44,7 +44,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	{
 		//System.out.println("CLASSPATH=<" + System.getProperty("java.class.path", ".") + ">");
 		this.parameters = makeParameters(args);
-		setTitle("Treebolic"); //$NON-NLS-1$
+		setTitle("Treebolic");
 
 		// menu
 		final JMenuBar menu = makeMenuBar();
@@ -80,10 +80,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	protected Widget makeWidget()
 	{
 		// context parameters
-		final String source = this.parameters.getProperty("source", getSource()); //$NON-NLS-1$
-		final String base = this.parameters.getProperty("base", null); //$NON-NLS-1$
-		final String imageBase = this.parameters.getProperty("images", null); //$NON-NLS-1$
-		final String provider = this.parameters.getProperty("provider", getProvider()); //$NON-NLS-1$
+		final String source = this.parameters.getProperty("source", getSource());
+		final String base = this.parameters.getProperty("base", null);
+		final String imageBase = this.parameters.getProperty("images", null);
+		final String provider = this.parameters.getProperty("provider", getProvider());
 
 		// context parameters
 		final Context context = makeContext(source, base, imageBase);
@@ -92,7 +92,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		final Widget widget = new Widget(context, null);
 
 		// init
-		final String serFile = getParameters().getProperty("ser"); //$NON-NLS-1$
+		final String serFile = getParameters().getProperty("ser");
 		if (serFile == null)
 		{
 			widget.init(provider, source);
@@ -166,17 +166,17 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		final Properties parameters = new Properties();
 		for (final String arg : args)
 		{
-			final String[] pair = arg.split("="); //$NON-NLS-1$
+			final String[] pair = arg.split("=");
 			if (pair.length != 2)
 			{
 				continue;
 			}
 			final String key = pair[0];
 			String value = pair[1];
-			if (value.startsWith("\"")) //$NON-NLS-1$
+			if (value.startsWith("\""))
 			{
 				value = value.substring(1);
-				if (value.endsWith("\"")) //$NON-NLS-1$
+				if (value.endsWith("\""))
 				{
 					value = value.substring(0, value.length() - 1);
 				}
@@ -213,7 +213,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			}
 			catch (final IOException e)
 			{
-				editorPane.setText(Messages.getString("MainFrame.linkerror") + event.getURL()); //$NON-NLS-1$
+				editorPane.setText(Messages.getString("MainFrame.linkerror") + event.getURL());
 			}
 		}
 	}
@@ -252,7 +252,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		// });
 		//
 		// final JMenu helpMenu = new JMenu();
-		// helpMenu.setText(Messages.getString("MainFrame.help")); //$NON-NLS-1$
+		// helpMenu.setText(Messages.getString("MainFrame.help"));
 		// helpMenu.add(aboutMenuItem);
 		//
 		// final JMenuBar menuBar = new JMenuBar();

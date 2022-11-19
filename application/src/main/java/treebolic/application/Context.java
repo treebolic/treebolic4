@@ -55,9 +55,9 @@ public class Context implements IContext
 		this.source = source;
 		this.base = base;
 		this.imageBase = imageBase;
-		// System.out.println("source: " + source); //$NON-NLS-1$
-		// System.out.println("base: " + base); //$NON-NLS-1$
-		// System.out.println("imagebase: " + imageBase); //$NON-NLS-1$
+		// System.out.println("source: " + source);
+		// System.out.println("base: " + base);
+		// System.out.println("imagebase: " + imageBase);
 	}
 
 	/**
@@ -104,9 +104,9 @@ public class Context implements IContext
 
 			// 2-use 'base' parameter as path relative to default
 			String base = this.base;
-			if (!base.endsWith("/")) //$NON-NLS-1$
+			if (!base.endsWith("/"))
 			{
-				base += "/"; //$NON-NLS-1$
+				base += "/";
 			}
 			defaultBase = getDefaultBase();
 			try
@@ -161,9 +161,9 @@ public class Context implements IContext
 			}
 
 			String imageBase = this.imageBase;
-			if (!imageBase.endsWith("/")) //$NON-NLS-1$
+			if (!imageBase.endsWith("/"))
 			{
-				imageBase += "/"; //$NON-NLS-1$
+				imageBase += "/";
 			}
 
 			// 3- use 'images' parameter as relative to document
@@ -190,7 +190,7 @@ public class Context implements IContext
 			}
 
 			// don't know what to do with it
-			System.err.print("Can't handle 'images' parameter: " + imageBase); //$NON-NLS-1$
+			System.err.print("Can't handle 'images' parameter: " + imageBase);
 		}
 
 		// 5- document base + "images/"
@@ -200,7 +200,7 @@ public class Context implements IContext
 			{
 				documentUrl = makeURL(this.source);
 			}
-			return new URL(documentUrl, "images/"); //$NON-NLS-1$
+			return new URL(documentUrl, "images/");
 		}
 		catch (final Exception exception)
 		{
@@ -215,7 +215,7 @@ public class Context implements IContext
 		// {
 		// defaultUrl = getDefaultImagesBase();
 		// }
-		// return new URL(defaultUrl, "images/"); //$NON-NLS-1$
+		// return new URL(defaultUrl, "images/");
 		// }
 		// catch (final Exception exception)
 		// {
@@ -243,12 +243,12 @@ public class Context implements IContext
 	@Override
 	public String getStyle()
 	{
-		return ".content { }" + //$NON-NLS-1$
-				".link {color: blue;font-size: small; }" + //$NON-NLS-1$
-				".mount {color: red;}" + //$NON-NLS-1$
-				".linking {color: #007D82; font-size: small; }" + //$NON-NLS-1$
-				".mounting {color: #007D82; font-size: small; }" + //$NON-NLS-1$
-				".searching {color: #007D82; font-size: small; }"; //$NON-NLS-1$
+		return ".content { }" +
+				".link {color: blue;font-size: small; }" +
+				".mount {color: red;}" +
+				".linking {color: #007D82; font-size: small; }" +
+				".mounting {color: #007D82; font-size: small; }" +
+				".searching {color: #007D82; font-size: small; }";
 	}
 
 	/*
@@ -265,7 +265,7 @@ public class Context implements IContext
 				final File file = new File(linkUrl);
 				boolean exists = file.exists();
 				final URI uri = exists ? file.toURI() : new URI(linkUrl);
-				System.out.println(Messages.getString("Context.linkto") + uri); //$NON-NLS-1$
+				System.out.println(Messages.getString("Context.linkto") + uri);
 
 				// we are likely to be on the popup handler
 				SwingUtilities.invokeLater(() -> {
@@ -295,7 +295,7 @@ public class Context implements IContext
 	@Override
 	public void status(final String string)
 	{
-		System.out.println(Messages.getString("Context.status") + string); //$NON-NLS-1$
+		System.out.println(Messages.getString("Context.status") + string);
 	}
 
 	/*
@@ -305,8 +305,8 @@ public class Context implements IContext
 	@Override
 	public void warn(final String message)
 	{
-		final String[] lines = message.split("\n"); //$NON-NLS-1$
-		JOptionPane.showMessageDialog(null, lines, Messages.getString("Context.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+		final String[] lines = message.split("\n");
+		JOptionPane.showMessageDialog(null, lines, Messages.getString("Context.title"), JOptionPane.WARNING_MESSAGE);
 	}
 
 	/*
@@ -408,14 +408,14 @@ public class Context implements IContext
 	protected URL getDefaultBase()
 	{
 		// base parameter
-		// final String base = getParameters().getProperty("base"); //$NON-NLS-1$
-		// String uRLString = base != null ? base : System.getProperty("user.dir"); //$NON-NLS-1$
-		String uRLString = System.getProperty("user.dir"); //$NON-NLS-1$
+		// final String base = getParameters().getProperty("base");
+		// String uRLString = base != null ? base : System.getProperty("user.dir");
+		String uRLString = System.getProperty("user.dir");
 
 		// tail
-		if (!uRLString.endsWith("/")) //$NON-NLS-1$
+		if (!uRLString.endsWith("/"))
 		{
-			uRLString += "/"; //$NON-NLS-1$
+			uRLString += "/";
 		}
 
 		// make
@@ -449,7 +449,7 @@ public class Context implements IContext
 		final URL base = getDefaultBase();
 		try
 		{
-			return new URL(base, "images/"); //$NON-NLS-1$
+			return new URL(base, "images/");
 		}
 		catch (final MalformedURLException exception)
 		{

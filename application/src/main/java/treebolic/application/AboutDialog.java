@@ -41,7 +41,7 @@ public class AboutDialog extends JDialog
 	private void initialize()
 	{
 		final JLabel title = new JLabel();
-		title.setText(Messages.getString("AboutDialog.title")); //$NON-NLS-1$
+		title.setText(Messages.getString("AboutDialog.title"));
 		title.setFont(new Font(Font.DIALOG, Font.BOLD, 18));
 		title.setOpaque(true);
 		title.setBackground(Color.RED);
@@ -50,19 +50,19 @@ public class AboutDialog extends JDialog
 		title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		final JLabel description = new JLabel();
-		description.setText(Messages.getString("AboutDialog.app")); //$NON-NLS-1$
+		description.setText(Messages.getString("AboutDialog.app"));
 		description.setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
 		description.setHorizontalAlignment(SwingConstants.CENTER);
 		description.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		final JLabel version = new JLabel();
-		version.setText("version 3.9.0"); //$NON-NLS-1$
+		version.setText("version 3.9.0");
 		version.setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
 		version.setHorizontalAlignment(SwingConstants.CENTER);
 		version.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		final JLabel author = new JLabel();
-		author.setText("Bernard Bou <1313ou@gmail.com>"); //$NON-NLS-1$
+		author.setText("Bernard Bou <1313ou@gmail.com>");
 		author.setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
 		author.setHorizontalAlignment(SwingConstants.CENTER);
 		author.setAlignmentX(Component.CENTER_ALIGNMENT);

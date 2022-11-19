@@ -62,7 +62,7 @@ public class DocumentAdapter
 		{
 			if (DocumentAdapter.this.provider == null)
 			{
-				System.err.println("Mount not performed: " + this.mountPoint + " @ " + this.mountingNode);//$NON-NLS-2$
+				System.err.println("Mount not performed: " + this.mountPoint + " @ " + this.mountingNode);
 				return;
 			}
 			final Tree tree = DocumentAdapter.this.provider.makeTree(this.mountPoint.url, DocumentAdapter.this.base, DocumentAdapter.this.parameters, true);

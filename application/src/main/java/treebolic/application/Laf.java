@@ -39,11 +39,11 @@ public class Laf
 		boolean customTheme = false;
 		for (final String arg : args)
 		{
-			if (arg.startsWith("laf=")) //$NON-NLS-1$
+			if (arg.startsWith("laf="))
 			{
 				laf = arg.substring(4);
 			}
-			if (arg.startsWith("theme=")) //$NON-NLS-1$
+			if (arg.startsWith("theme="))
 			{
 				customTheme = Boolean.parseBoolean(arg.substring(6));
 			}
@@ -66,13 +66,13 @@ public class Laf
 			}
 			catch (final UnsupportedLookAndFeelException e)
 			{
-				System.err.println("Unsupported LookAndFeel " + e.getMessage()); //$NON-NLS-1$
+				System.err.println("Unsupported LookAndFeel " + e.getMessage());
 				Laf.setDefault();
 			}
 		}
 		else
 		{
-			if (System.getProperty("swing.defaultlaf") == null) //$NON-NLS-1$
+			if (System.getProperty("swing.defaultlaf") == null)
 			{
 				Laf.setDefault();
 			}
@@ -87,7 +87,7 @@ public class Laf
 	private static float getJavaVersion()
 	{
 		// String version = Runtime.class.getPackage().getImplementationVersion();
-		final String version = System.getProperty("java.version"); //$NON-NLS-1$
+		final String version = System.getProperty("java.version");
 		int pos = 0, count = 0;
 		for (; pos < version.length() && count < 2; pos++)
 		{
@@ -114,14 +114,14 @@ public class Laf
 	private static void setDefault()
 	{
 		final boolean isJava7 = getJavaVersion() >= 1.7F;
-		final String plafName = isJava7 ? "javax.swing.plaf.nimbus.NimbusLookAndFeel" : "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"; // "javax.swing.plaf.metal.MetalLookAndFeel"; //$NON-NLS-1$ //$NON-NLS-2$
+		final String plafName = isJava7 ? "javax.swing.plaf.nimbus.NimbusLookAndFeel" : "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"; // "javax.swing.plaf.metal.MetalLookAndFeel";
 		try
 		{
 			UIManager.setLookAndFeel(plafName);
 		}
 		catch (final Exception e2)
 		{
-			System.err.println("Can't set LookAndFeel"); //$NON-NLS-1$
+			System.err.println("Can't set LookAndFeel");
 		}
 	}
 
@@ -132,7 +132,7 @@ public class Laf
 	 */
 	static public void setBold(final boolean haveBold)
 	{
-		UIManager.put("swing.boldMetal", haveBold); //$NON-NLS-1$
+		UIManager.put("swing.boldMetal", haveBold);
 	}
 
 	/**
@@ -199,12 +199,12 @@ public class Laf
 		{
 			final Class<?> clazz = Class.forName(className);
 			final Class<?>[] argsClass = new Class[] { MetalTheme.class };
-			final Method method = clazz.getMethod("setCurrentTheme", argsClass); //$NON-NLS-1$
+			final Method method = clazz.getMethod("setCurrentTheme", argsClass);
 			method.invoke(null, theme);
 		}
 		catch (final Exception e)
 		{
-			System.err.println("Setting current theme: " + e.getMessage()); //$NON-NLS-1$
+			System.err.println("Setting current theme: " + e.getMessage());
 			MetalLookAndFeel.setCurrentTheme(theme);
 		}
 	}
