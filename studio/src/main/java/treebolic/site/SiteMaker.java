@@ -54,7 +54,7 @@ public abstract class SiteMaker extends Observable
 	/**
 	 * HTML template file
 	 */
-	static public String templateFile = "template.html"; 
+	static public final String templateFile = "template.html";
 
 	// progress
 
@@ -133,12 +133,12 @@ public abstract class SiteMaker extends Observable
 	/**
 	 * HTML file (target)
 	 */
-	protected String htmlFile;
+	protected final String htmlFile;
 
 	/**
 	 * XML file (target)
 	 */
-	protected String xmlFile;
+	protected final String xmlFile;
 
 	/**
 	 * Operation string
@@ -181,6 +181,7 @@ public abstract class SiteMaker extends Observable
 	 *
 	 * @return true if successful
 	 */
+	@SuppressWarnings("UnusedReturnValue")
 	abstract boolean disconnect();
 
 	/**
@@ -191,7 +192,7 @@ public abstract class SiteMaker extends Observable
 	 * @throws MalformedURLException malformed URL exception
 	 * @throws URISyntaxException    URI syntax exception
 	 */
-	abstract boolean changeFolder(String relativeFolder) throws MalformedURLException, URISyntaxException;
+	abstract boolean changeFolder(@SuppressWarnings("SameParameterValue") String relativeFolder) throws MalformedURLException, URISyntaxException;
 
 	/**
 	 * Make output stream
@@ -329,6 +330,7 @@ public abstract class SiteMaker extends Observable
 	 * @param destinations what to replace it with
 	 * @return true if successful
 	 */
+	@SuppressWarnings("UnusedReturnValue")
 	private boolean copyStreamsReplace(final InputStream instream, final OutputStream outstream, final String[] sources, final String[] destinations)
 	{
 		try
@@ -366,6 +368,7 @@ public abstract class SiteMaker extends Observable
 	 * @param outstream output stream
 	 * @return true if successful
 	 */
+	@SuppressWarnings("UnusedReturnValue")
 	static private boolean copyStreams(final InputStream instream, final OutputStream outstream)
 	{
 		try

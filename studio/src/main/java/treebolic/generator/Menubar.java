@@ -193,7 +193,7 @@ public class Menubar extends JMenuBar
 	 *        accelerator key
 	 * @return menu item
 	 */
-	private JCheckBoxMenuItem makeCheckboxItem(final String text, final String image, final Controller.Code command, final KeyStroke acceleratorKey, final boolean state)
+	private JCheckBoxMenuItem makeCheckboxItem(final String text, @SuppressWarnings("SameParameterValue") final String image, final Controller.Code command, @SuppressWarnings("SameParameterValue") final KeyStroke acceleratorKey, final boolean state)
 	{
 		final JCheckBoxMenuItem item = new JCheckBoxMenuItem();
 		item.setText(text);

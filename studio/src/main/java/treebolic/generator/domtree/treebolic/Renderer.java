@@ -178,12 +178,12 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 		this.typeToValueStyleMap.put("a", Renderer.linkValueStyle); 
 
 		// styles for patterns
-		this.patterns.add(this.srcPattern);
-		this.patterns.add(this.fromPattern);
-		this.patterns.add(this.toPattern);
-		this.patternToStyleMap.put(this.srcPattern, Renderer.srcStyle);
-		this.patternToStyleMap.put(this.fromPattern, Renderer.edgeEndsStyle);
-		this.patternToStyleMap.put(this.toPattern, Renderer.edgeEndsStyle);
+		this.patterns.add(srcPattern);
+		this.patterns.add(fromPattern);
+		this.patterns.add(toPattern);
+		this.patternToStyleMap.put(srcPattern, Renderer.srcStyle);
+		this.patternToStyleMap.put(fromPattern, Renderer.edgeEndsStyle);
+		this.patternToStyleMap.put(toPattern, Renderer.edgeEndsStyle);
 
 		// icons for class
 		this.typeToIconMap = new HashMap<>();

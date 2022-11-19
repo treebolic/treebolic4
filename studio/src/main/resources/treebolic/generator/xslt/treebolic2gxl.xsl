@@ -147,7 +147,7 @@
 	</xsl:template>
 
 	<xsl:template match="label">
-		<xsl:param name="context"></xsl:param>
+		<xsl:param name="context"/>
 		<xsl:variable name="attrname">
 			<xsl:choose>
 				<xsl:when test="$context != ''">
@@ -169,7 +169,7 @@
 	</xsl:template>
 
 	<xsl:template match="img">
-		<xsl:param name="context"></xsl:param>
+		<xsl:param name="context"/>
 		<xsl:variable name="attrname">
 			<xsl:choose>
 				<xsl:when test="$context != ''">
@@ -302,7 +302,7 @@
 	</xsl:template>
 
 	<xsl:template match="@*">
-		<xsl:param name="context"></xsl:param>
+		<xsl:param name="context"/>
 		<xsl:variable name="attrname">
 			<xsl:choose>
 				<xsl:when test="$context != ''">

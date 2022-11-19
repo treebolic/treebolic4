@@ -56,7 +56,7 @@ public class AboutDialog extends JDialog
 		description.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		final JLabel version = new JLabel();
-		version.setText("version 3.9.0");
+		version.setText("version 4.0.0");
 		version.setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
 		version.setHorizontalAlignment(SwingConstants.CENTER);
 		version.setAlignmentX(Component.CENTER_ALIGNMENT);

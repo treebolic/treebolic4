@@ -25,7 +25,7 @@ public class EdgesWrapper extends SettingsWrapper
 	/**
 	 * Model (as container of edges list)
 	 */
-	public Model model;
+	public final Model model;
 
 	/**
 	 * Constructor

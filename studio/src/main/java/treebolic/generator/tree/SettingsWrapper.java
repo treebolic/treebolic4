@@ -16,7 +16,7 @@ public class SettingsWrapper
 	/**
 	 * Settings
 	 */
-	public Settings settings;
+	public final Settings settings;
 
 	/**
 	 * Constructor

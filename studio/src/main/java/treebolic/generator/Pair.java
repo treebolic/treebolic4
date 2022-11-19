@@ -31,10 +31,10 @@ public class Pair<T1, T2>
 	/**
 	 * First member of the pair
 	 */
-	public T1 first;
+	public final T1 first;
 
 	/**
 	 * Second member of the pair
 	 */
-	public T2 second;
+	public final T2 second;
 }

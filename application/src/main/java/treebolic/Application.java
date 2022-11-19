@@ -18,7 +18,7 @@ public class Application
 	/**
 	 * Version : 3.x
 	 */
-	static private final String VERSION = "3.9.0";
+	static private final String VERSION = "4.0.0";
 
 	/**
 	 * Get version

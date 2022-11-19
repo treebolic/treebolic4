@@ -5,7 +5,6 @@ package treebolic.site;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.util.StringTokenizer;
 
 import org.w3c.dom.Document;

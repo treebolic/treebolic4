@@ -251,7 +251,8 @@ public class TreeTransferHandler extends TransferHandler
 	 *        destination node
 	 * @return true if successful
 	 */
-	private boolean move(final Tree tree, final TreePath source, final TreePath destination, boolean prepend)
+	@SuppressWarnings("SameReturnValue")
+	private boolean move(final Tree tree, final TreePath source, final TreePath destination, @SuppressWarnings("SameParameterValue") boolean prepend)
 	{
 		// tree
 		final DefaultMutableTreeNode parentTreeNode = (DefaultMutableTreeNode) destination.getLastPathComponent();

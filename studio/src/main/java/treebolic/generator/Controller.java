@@ -220,7 +220,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	/**
 	 * Map component to update action
 	 */
-	public Map<Component, Runnable> updateMap;
+	public final Map<Component, Runnable> updateMap;
 
 	// C O N S T R U C T O R
 
@@ -1629,7 +1629,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 *        filename
 	 * @return url
 	 */
-	private URL makeBasedURL(final String subPath, final String filename)
+	private URL makeBasedURL(@SuppressWarnings("SameParameterValue") final String subPath, final String filename)
 	{
 		if (filename == null)
 			return null;

@@ -31,7 +31,7 @@ class Renderer extends DefaultTableCellRenderer
 	/**
 	 * Color panel
 	 */
-	private JPanel colorPanel;
+	private final JPanel colorPanel;
 
 	/**
 	 * Alternate row column

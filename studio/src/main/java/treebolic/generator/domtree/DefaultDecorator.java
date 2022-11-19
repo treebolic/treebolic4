@@ -18,7 +18,7 @@ public class DefaultDecorator
 	/**
 	 * DOM node
 	 */
-	protected Node node;
+	protected final Node node;
 
 	// C O N S T R U C T
 
@@ -102,21 +102,16 @@ public class DefaultDecorator
 		for (int i = 0; i < list.getLength(); i++)
 		{
 			final Node node = list.item(i);
-			switch (node.getNodeType())
-			{
-				case Node.ENTITY_REFERENCE_NODE:
-			{
-				// content is in the TEXT node under it
+			if (node.getNodeType() == Node.ENTITY_REFERENCE_NODE)
+			{// content is in the TEXT node under it
 				buffer.append(new DefaultDecorator(node));
-				break;
-			}
 				// "value" has the text, same as a text node.
 				// while EntityRef has it in a text node underneath.
 				// (because EntityRef can contain multiple subelements)
 				// convert angle brackets and ampersands for display
-				default:
-			{
-				// ELEMENT_NODE -- handed separately
+			}
+			else
+			{// ELEMENT_NODE -- handed separately
 				// ATTR_TYPE -- not in the DOM tree
 				// ENTITY_TYPE -- does not appear in the DOM
 				// PROCINSTR_TYPE -- not "data"
@@ -126,8 +121,6 @@ public class DefaultDecorator
 				// DOCFRAG_TYPE -- equiv. to "document" for fragments
 				// NOTATION_TYPE -- nothing but binary data in here
 				buffer.append(node.getNodeValue());
-				break;
-			}
 			}
 		}
 		return buffer.toString();

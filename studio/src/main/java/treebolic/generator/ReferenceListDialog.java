@@ -235,17 +235,17 @@ public class ReferenceListDialog extends JDialog
 			/**
 			 * Key
 			 */
-			public String key;
+			public final String key;
 
 			/**
 			 * Value
 			 */
-			public String value;
+			public final String value;
 
 			/**
 			 * Number of values for key
 			 */
-			public int valueCount;
+			public final int valueCount;
 
 			/**
 			 * Constructor
@@ -292,6 +292,7 @@ public class ReferenceListDialog extends JDialog
 		 *        entry
 		 * @return row index
 		 */
+		@SuppressWarnings("UnusedReturnValue")
 		public int newRow(final Entry entry)
 		{
 			this.entries.add(entry);

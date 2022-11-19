@@ -175,7 +175,6 @@ public class FtpClient extends TransferProtocolClient
 			{
 				if (p.result != null && p.depth < BIG)
 				{
-					prefix = false;
 					best = p;
 				}
 				p = p.find(re.charAt(i));
@@ -352,10 +351,10 @@ public class FtpClient extends TransferProtocolClient
 	/* A node in a regular expression finite state machine. */
 	static class RegexpNode
 	{
-		char c;
+		final char c;
 		RegexpNode firstchild;
 		RegexpNode nextsibling;
-		int depth;
+		final int depth;
 		boolean exact;
 		Object result;
 		String re = null;
@@ -441,11 +440,11 @@ public class FtpClient extends TransferProtocolClient
 
 	public static final int FTP_PORT = 21;
 
-	static int FTP_SUCCESS = 1;
+	static final int FTP_SUCCESS = 1;
 
-	static int FTP_TRY_AGAIN = 2;
+	static final int FTP_TRY_AGAIN = 2;
 
-	static int FTP_ERROR = 3;
+	static final int FTP_ERROR = 3;
 
 	/**
 	 * remember the ftp server name because we may need it

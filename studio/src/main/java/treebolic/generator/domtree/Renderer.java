@@ -160,9 +160,9 @@ public class Renderer implements TreeCellRenderer
 
 		// styles for patterns
 		this.patterns = new ArrayList<>();
-		this.patterns.add(this.idPattern);
+		this.patterns.add(idPattern);
 		this.patternToStyleMap = new HashMap<>();
-		this.patternToStyleMap.put(this.idPattern, Renderer.idStyle);
+		this.patternToStyleMap.put(idPattern, Renderer.idStyle);
 	}
 
 	/*

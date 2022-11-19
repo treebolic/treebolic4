@@ -485,7 +485,6 @@ public class MakeSiteDialog extends JDialog
 			// result
 			if (!hasSucceeded)
 			{
-				hasFailed = true;
 				return;
 			}
 		}

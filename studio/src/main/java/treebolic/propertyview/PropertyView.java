@@ -139,7 +139,7 @@ public class PropertyView extends JPanel implements SelectListener
 		/**
 		 * Descriptor
 		 */
-		public AttributeDescriptor descriptor;
+		public final AttributeDescriptor descriptor;
 
 		/**
 		 * Value
@@ -212,7 +212,7 @@ public class PropertyView extends JPanel implements SelectListener
 	/**
 	 * Change notifier
 	 */
-	public ChangeNotifier changeNotifier = new ChangeNotifier();
+	public final ChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
 	 * Handler factory
@@ -498,7 +498,7 @@ public class PropertyView extends JPanel implements SelectListener
 		/**
 		 * Its handler
 		 */
-		public Handler handler;
+		public final Handler handler;
 
 		/**
 		 * Its attributes

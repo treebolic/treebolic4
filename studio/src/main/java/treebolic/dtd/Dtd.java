@@ -78,6 +78,7 @@ public class Dtd
 	 * @param outstream output stream
 	 * @return true if successful
 	 */
+	@SuppressWarnings("UnusedReturnValue")
 	static public boolean copyToUTF8Stream(final OutputStream outstream)
 	{
 		final String str = Dtd.getString();

@@ -16,7 +16,7 @@ public class MenuItemWrapper extends SettingsWrapper
 	/**
 	 * Menu item
 	 */
-	public MenuItem menuItem;
+	public final MenuItem menuItem;
 
 	/**
 	 * Constructor

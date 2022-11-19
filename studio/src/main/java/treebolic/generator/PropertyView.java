@@ -1473,7 +1473,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 * @param idGetter id getter
 	 * @return handler
 	 */
-	private Handler makeHandler(final Object[][] features, final Getter getter, final Setter setter, final IdGetter idGetter)
+	private Handler makeHandler(final Object[][] features, final Getter getter, final Setter setter, @SuppressWarnings("SameParameterValue") final IdGetter idGetter)
 	{
 		Handler handler;
 		handler = new PropertyView.Handler();

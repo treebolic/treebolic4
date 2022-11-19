@@ -40,17 +40,17 @@ public class MainFrame extends JFrame
 	/**
 	 * Tree icon
 	 */
-	static Icon treeIcon = new ImageIcon(MainFrame.class.getResource("images/treetab.png")); 
+	static final Icon treeIcon = new ImageIcon(MainFrame.class.getResource("images/treetab.png"));
 
 	/**
 	 * Tree icon
 	 */
-	static Icon treebolicIcon = new ImageIcon(MainFrame.class.getResource("images/treebolictab.png")); 
+	static final Icon treebolicIcon = new ImageIcon(MainFrame.class.getResource("images/treebolictab.png"));
 
 	/**
 	 * Rendering mode
 	 */
-	static public boolean hasTreebolicRendering = true;
+	static public final boolean hasTreebolicRendering = true;
 
 	/**
 	 * Property view

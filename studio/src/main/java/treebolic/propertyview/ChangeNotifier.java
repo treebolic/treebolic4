@@ -17,7 +17,7 @@ public class ChangeNotifier
 	/**
 	 * Listener list
 	 */
-	protected EventListenerList listeners = new EventListenerList();
+	protected final EventListenerList listeners = new EventListenerList();
 
 	/**
 	 * Constructor

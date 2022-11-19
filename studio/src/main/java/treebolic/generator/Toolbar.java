@@ -29,7 +29,7 @@ public class Toolbar extends JToolBar
 	/**
 	 * Vertical layout
 	 */
-	static public boolean isVertical = true;
+	static public final boolean isVertical = true;
 
 	// C O N S T R U C T O R
 

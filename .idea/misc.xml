@@ -450,6 +450,7 @@
     </option>
   </component>
   <component name="ProjectResources">
+    <resource url="http://www.w3.org/1999/XSL/Transform" location="" />
     <resource url="http://xml.apache.org/xslt" location="" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">

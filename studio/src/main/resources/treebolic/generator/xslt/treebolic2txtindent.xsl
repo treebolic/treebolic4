@@ -6,7 +6,7 @@
 
 <!--TREEBOLIC 2 INDENTED TXT- 2008/07/08 (C) 2002 Author: Bernard Bou -->
 
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fn="http://www.w3.org/2005/xpath-functions">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:output method="text" indent="no" encoding="UTF-8" omit-xml-declaration="yes" />
 
 	<xsl:template match="/">

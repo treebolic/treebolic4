@@ -95,7 +95,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 	/**
 	 * Version : 3.x
 	 */
-	private static final String version = "3.9.0";
+	private static final String version = "4.0.0";
 
 	// C O N T E X T
 
