@@ -67,19 +67,19 @@ public class TextDialog extends JDialog
 	 */
 	protected void initialize()
 	{
-		setTitle(Messages.getString("TextDialog.title")); //$NON-NLS-1$
+		setTitle(Messages.getString("TextDialog.title")); 
 		setResizable(true);
 
 		// text
 		this.textArea = new JTextArea();
 		this.textArea.setLineWrap(true);
-		this.textArea.setToolTipText(Messages.getString("TextDialog.tooltip")); //$NON-NLS-1$
+		this.textArea.setToolTipText(Messages.getString("TextDialog.tooltip")); 
 		final JScrollPane scrollPane = new JScrollPane(this.textArea);
 		scrollPane.setPreferredSize(new Dimension(300, 100));
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("TextDialog.ok")); //$NON-NLS-1$
-		final JButton cancelButton = new JButton(Messages.getString("TextDialog.cancel")); //$NON-NLS-1$
+		final JButton oKButton = new JButton(Messages.getString("TextDialog.ok")); 
+		final JButton cancelButton = new JButton(Messages.getString("TextDialog.cancel")); 
 
 		final JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());

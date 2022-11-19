@@ -36,7 +36,7 @@ public class EdgeDecorator extends ElementDecorator
 	@Override
 	public String getName()
 	{
-		return " " + super.getName() + " "; //$NON-NLS-1$ //$NON-NLS-2$
+		return " " + super.getName() + " ";  
 	}
 
 	/*

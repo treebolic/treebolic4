@@ -27,6 +27,6 @@ public class NodesWrapper extends SettingsWrapper
 	@Override
 	public String toString()
 	{
-		return Messages.getString("NodesWrapper.label"); //$NON-NLS-1$
+		return Messages.getString("NodesWrapper.label"); 
 	}
 }

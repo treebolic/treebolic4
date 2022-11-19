@@ -21,4 +21,16 @@ public class Point implements treebolic.glue.iface.Point
 	{
 		throw new NotImplementedException();
 	}
+
+	@Override
+	public int x()
+	{
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public int y()
+	{
+		throw new NotImplementedException();
+	}
 }

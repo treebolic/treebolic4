@@ -49,28 +49,28 @@ public class Toolbar extends JToolBar
 	 */
 	private void initialize()
 	{
-		final JButton openButton = makeButton(Messages.getString("Toolbar.open"), Messages.getString("Toolbar.tooltip_open"), "open.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final JButton openButton = makeButton(Messages.getString("Toolbar.open"), Messages.getString("Toolbar.tooltip_open"), "open.png");   
 		openButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.OPEN, 0));
 
-		final JButton openHttpButton = makeButton(Messages.getString("Toolbar.open_url"), Messages.getString("Toolbar.tooltip_open_url"), "openurl.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final JButton openHttpButton = makeButton(Messages.getString("Toolbar.open_url"), Messages.getString("Toolbar.tooltip_open_url"), "openurl.png");   
 		openHttpButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.OPENURL, 0));
 
-		final JButton newButton = makeButton(Messages.getString("Toolbar.new"), Messages.getString("Toolbar.tooltip_new"), "newdoc.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final JButton newButton = makeButton(Messages.getString("Toolbar.new"), Messages.getString("Toolbar.tooltip_new"), "newdoc.png");   
 		newButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.NEW, 0));
 
-		final JButton saveButton = makeButton(Messages.getString("Toolbar.save"), Messages.getString("Toolbar.tooltip_save"), "save.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final JButton saveButton = makeButton(Messages.getString("Toolbar.save"), Messages.getString("Toolbar.tooltip_save"), "save.png");   
 		saveButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.SAVE, 0));
 
-		final JButton makeSiteButton = makeButton(Messages.getString("Toolbar.make"), Messages.getString("Toolbar.tooltip_make"), "sitemake.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final JButton makeSiteButton = makeButton(Messages.getString("Toolbar.make"), Messages.getString("Toolbar.tooltip_make"), "sitemake.png");   
 		makeSiteButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.MAKESITE, 0));
 
-		final JButton runSiteButton = makeButton(Messages.getString("Toolbar.run"), Messages.getString("Toolbar.tooltip_run"), "siterun.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final JButton runSiteButton = makeButton(Messages.getString("Toolbar.run"), Messages.getString("Toolbar.tooltip_run"), "siterun.png");   
 		runSiteButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.RUNSITE, 0));
 
-		final JButton helpButton = makeButton(Messages.getString("Toolbar.help"), Messages.getString("Toolbar.tooltip_help"), "help.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final JButton helpButton = makeButton(Messages.getString("Toolbar.help"), Messages.getString("Toolbar.tooltip_help"), "help.png");   
 		helpButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.HELP, 0));
 
-		final JButton updateNodeButton = makeButton(Messages.getString("Toolbar.update"), Messages.getString("Toolbar.tooltip_update"), "refresh.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final JButton updateNodeButton = makeButton(Messages.getString("Toolbar.update"), Messages.getString("Toolbar.tooltip_update"), "refresh.png");   
 		updateNodeButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.UPDATE, 0));
 
 		this.add(openButton);
@@ -98,7 +98,7 @@ public class Toolbar extends JToolBar
 	{
 		final JButton button = new JButton();
 		button.setToolTipText(tooltip);
-		button.setIcon(new ImageIcon(Toolbar.class.getResource("images/" + image))); //$NON-NLS-1$
+		button.setIcon(new ImageIcon(Toolbar.class.getResource("images/" + image))); 
 		return button;
 	}
 

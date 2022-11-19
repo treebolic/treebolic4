@@ -21,7 +21,7 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 	 */
 	public AboutDialog()
 	{
-		super(Messages.getString("AboutDialog.title"), Generator.getVersion()); //$NON-NLS-1$
+		super(Messages.getString("AboutDialog.title"), Generator.getVersion()); 
 	}
 
 	/**

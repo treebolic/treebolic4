@@ -24,8 +24,8 @@ public class IdListDialog extends ReferenceListDialog
 	public IdListDialog(final Controller controller)
 	{
 		super(controller);
-		setTitle(Messages.getString("IdListDialog.title")); //$NON-NLS-1$
-		this.label.setText(Messages.getString("IdListDialog.label")); //$NON-NLS-1$
+		setTitle(Messages.getString("IdListDialog.title")); 
+		this.label.setText(Messages.getString("IdListDialog.label")); 
 		this.scrollPane.setPreferredSize(new Dimension(300, 120));
 	}
 

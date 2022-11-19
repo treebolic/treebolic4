@@ -40,12 +40,12 @@ public class MainFrame extends JFrame
 	/**
 	 * Tree icon
 	 */
-	static Icon treeIcon = new ImageIcon(MainFrame.class.getResource("images/treetab.png")); //$NON-NLS-1$
+	static Icon treeIcon = new ImageIcon(MainFrame.class.getResource("images/treetab.png")); 
 
 	/**
 	 * Tree icon
 	 */
-	static Icon treebolicIcon = new ImageIcon(MainFrame.class.getResource("images/treebolictab.png")); //$NON-NLS-1$
+	static Icon treebolicIcon = new ImageIcon(MainFrame.class.getResource("images/treebolictab.png")); 
 
 	/**
 	 * Rendering mode
@@ -112,7 +112,7 @@ public class MainFrame extends JFrame
 		setVisible(true);
 
 		// open
-		final String documentPath = this.controller.getParameters().getProperty("doc"); //$NON-NLS-1$
+		final String documentPath = this.controller.getParameters().getProperty("doc"); 
 		if (documentPath != null && !documentPath.isEmpty())
 		{
 			this.controller.open(documentPath);
@@ -140,7 +140,7 @@ public class MainFrame extends JFrame
 
 		setJMenuBar(makeMenubar(this.controller));
 		setContentPane(contentPane);
-		setTitle(Messages.getString("MainFrame.title")); //$NON-NLS-1$
+		setTitle(Messages.getString("MainFrame.title")); 
 
 		// connect controller
 		this.controller.connect(this.widget);
@@ -226,13 +226,13 @@ public class MainFrame extends JFrame
 	private JTabbedPane makeTabbedPane(final Controller controller)
 	{
 		this.tabbedPane = new JTabbedPane();
-		//$NON-NLS-1$
+		
 		makeTab(this.tabbedPane, Messages.getString("MainFrame.tab_tree"), MainFrame.treeIcon, makeEditor(controller), MainFrame.this.controller::updateTree);
-		//$NON-NLS-1$
+		
 		makeTab(this.tabbedPane, Messages.getString("MainFrame.tab_view"), MainFrame.treebolicIcon, makeView(controller), MainFrame.this.controller::updateWidget);
-		//$NON-NLS-1$
+		
 		makeTab(this.tabbedPane, Messages.getString("MainFrame.tab_xmltree"), null, new JScrollPane(this.domTreeView), MainFrame.this.controller::updateDom);
-		//$NON-NLS-1$
+		
 		makeTab(this.tabbedPane, Messages.getString("MainFrame.tab_xml"), null, new JScrollPane(this.textView), MainFrame.this.controller::updateText);
 		this.tabbedPane.addChangeListener(controller);
 		this.tabbedPane.addChangeListener(event -> {
@@ -370,10 +370,10 @@ public class MainFrame extends JFrame
 	{
 		final JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
-		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.globals"), "top.png", Controller.Code.SELECTTOP)); //$NON-NLS-1$ //$NON-NLS-2$
-		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.tree"), "tree.png", Controller.Code.SELECTTREE)); //$NON-NLS-1$ //$NON-NLS-2$
-		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.nodes"), "nodes.png", Controller.Code.SELECTNODES)); //$NON-NLS-1$ //$NON-NLS-2$
-		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.edges"), "edges.png", Controller.Code.SELECTEDGES)); //$NON-NLS-1$ //$NON-NLS-2$
+		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.globals"), "top.png", Controller.Code.SELECTTOP));  
+		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.tree"), "tree.png", Controller.Code.SELECTTREE));  
+		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.nodes"), "nodes.png", Controller.Code.SELECTNODES));  
+		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.edges"), "edges.png", Controller.Code.SELECTEDGES));  
 		return panel;
 	}
 
@@ -385,7 +385,7 @@ public class MainFrame extends JFrame
 	private JButton makeGlobalsButton(final Controller controller, final String label, final String image, final Controller.Code code)
 	{
 		final JButton button = new JButton();
-		button.setIcon(new ImageIcon(getClass().getResource("images/" + image))); //$NON-NLS-1$
+		button.setIcon(new ImageIcon(getClass().getResource("images/" + image))); 
 		button.setToolTipText(label);
 		button.setBorder(null);
 		button.setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -47,6 +47,6 @@ public class EdgesWrapper extends SettingsWrapper
 	@Override
 	public String toString()
 	{
-		return Messages.getString("EdgesWrapper.label"); //$NON-NLS-1$
+		return Messages.getString("EdgesWrapper.label"); 
 	}
 }

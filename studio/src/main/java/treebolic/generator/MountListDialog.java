@@ -24,8 +24,8 @@ public class MountListDialog extends ReferenceListDialog
 	public MountListDialog(final Controller controller)
 	{
 		super(controller);
-		setTitle(Messages.getString("MountListDialog.title")); //$NON-NLS-1$
-		this.label.setText(Messages.getString("MountListDialog.label")); //$NON-NLS-1$
+		setTitle(Messages.getString("MountListDialog.title")); 
+		this.label.setText(Messages.getString("MountListDialog.label")); 
 		this.scrollPane.setPreferredSize(new Dimension(300, 120));
 	}
 

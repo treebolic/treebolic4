@@ -56,43 +56,43 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 
 	// N O D E
 
-	static private final String LABEL_NODE_ID = Messages.getString("PropertyView.id"); //$NON-NLS-1$
+	static private final String LABEL_NODE_ID = Messages.getString("PropertyView.id"); 
 
-	static private final String LABEL_NODE_LABEL = Messages.getString("PropertyView.label"); //$NON-NLS-1$
+	static private final String LABEL_NODE_LABEL = Messages.getString("PropertyView.label"); 
 
-	static private final String LABEL_NODE_CONTENT = Messages.getString("PropertyView.content"); //$NON-NLS-1$
+	static private final String LABEL_NODE_CONTENT = Messages.getString("PropertyView.content"); 
 
-	static private final String LABEL_NODE_IMAGE = Messages.getString("PropertyView.image"); //$NON-NLS-1$
+	static private final String LABEL_NODE_IMAGE = Messages.getString("PropertyView.image"); 
 
-	static private final String LABEL_NODE_LINK = Messages.getString("PropertyView.link"); //$NON-NLS-1$
+	static private final String LABEL_NODE_LINK = Messages.getString("PropertyView.link"); 
 
-	static private final String LABEL_NODE_WEIGHT = Messages.getString("PropertyView.weight"); //$NON-NLS-1$
+	static private final String LABEL_NODE_WEIGHT = Messages.getString("PropertyView.weight"); 
 
-	static private final String LABEL_NODE_BACKCOLOR = Messages.getString("PropertyView.backcolor"); //$NON-NLS-1$
+	static private final String LABEL_NODE_BACKCOLOR = Messages.getString("PropertyView.backcolor"); 
 
-	static private final String LABEL_NODE_FORECOLOR = Messages.getString("PropertyView.forecolor"); //$NON-NLS-1$
+	static private final String LABEL_NODE_FORECOLOR = Messages.getString("PropertyView.forecolor"); 
 
-	static private final String LABEL_NODE_EDGE_LABEL = Messages.getString("PropertyView.elabel"); //$NON-NLS-1$
+	static private final String LABEL_NODE_EDGE_LABEL = Messages.getString("PropertyView.elabel"); 
 
-	static private final String LABEL_NODE_EDGE_IMAGE = Messages.getString("PropertyView.eimage"); //$NON-NLS-1$
+	static private final String LABEL_NODE_EDGE_IMAGE = Messages.getString("PropertyView.eimage"); 
 
-	static private final String LABEL_NODE_EDGE_COLOR = Messages.getString("PropertyView.ecolor"); //$NON-NLS-1$
+	static private final String LABEL_NODE_EDGE_COLOR = Messages.getString("PropertyView.ecolor"); 
 
-	static private final String LABEL_NODE_EDGE_STROKE = Messages.getString("PropertyView.estroke"); //$NON-NLS-1$
+	static private final String LABEL_NODE_EDGE_STROKE = Messages.getString("PropertyView.estroke"); 
 
-	static private final String LABEL_NODE_EDGE_STROKEWIDTH = Messages.getString("PropertyView.estrokewidth"); //$NON-NLS-1$
+	static private final String LABEL_NODE_EDGE_STROKEWIDTH = Messages.getString("PropertyView.estrokewidth"); 
 
-	static private final String LABEL_NODE_EDGE_FROMTERMINATOR = Messages.getString("PropertyView.efromterminator"); //$NON-NLS-1$
+	static private final String LABEL_NODE_EDGE_FROMTERMINATOR = Messages.getString("PropertyView.efromterminator"); 
 
-	static private final String LABEL_NODE_EDGE_TOTERMINATOR = Messages.getString("PropertyView.etoterminator"); //$NON-NLS-1$
+	static private final String LABEL_NODE_EDGE_TOTERMINATOR = Messages.getString("PropertyView.etoterminator"); 
 
-	static private final String LABEL_NODE_EDGE_LINE = Messages.getString("PropertyView.eline"); //$NON-NLS-1$
+	static private final String LABEL_NODE_EDGE_LINE = Messages.getString("PropertyView.eline"); 
 
-	static private final String LABEL_NODE_EDGE_HIDDEN = Messages.getString("PropertyView.ehidden"); //$NON-NLS-1$
+	static private final String LABEL_NODE_EDGE_HIDDEN = Messages.getString("PropertyView.ehidden"); 
 
-	static private final String LABEL_NODE_MOUNT_URL = Messages.getString("PropertyView.mounturl"); //$NON-NLS-1$
+	static private final String LABEL_NODE_MOUNT_URL = Messages.getString("PropertyView.mounturl"); 
 
-	static private final String LABEL_NODE_MOUNT_NOW = Messages.getString("PropertyView.mountnow"); //$NON-NLS-1$
+	static private final String LABEL_NODE_MOUNT_NOW = Messages.getString("PropertyView.mountnow"); 
 
 	/**
 	 * Node getter
@@ -187,7 +187,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 				final double weight = node.getWeight();
 				return weight < 0. ? Math.abs(weight) : null;
 			}
-			System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+			System.err.println("Unhandled property: " + propertyName); 
 			return null;
 		}
 	}
@@ -207,7 +207,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		{
 			if (!(object instanceof TreeMutableNode))
 			{
-				System.err.println("Tried to set property '" + propertyName + "' on non-mutable object '" + object + "' instance of " + object.getClass()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				System.err.println("Tried to set property '" + propertyName + "' on non-mutable object '" + object + "' instance of " + object.getClass());   
 				return;
 			}
 
@@ -319,34 +319,34 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else
 			{
-				System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+				System.err.println("Unhandled property: " + propertyName); 
 			}
 		}
 	}
 
 	// E D G E
 
-	static private final String LABEL_EDGE_LABEL = Messages.getString("PropertyView.label"); //$NON-NLS-1$
+	static private final String LABEL_EDGE_LABEL = Messages.getString("PropertyView.label"); 
 
-	static private final String LABEL_EDGE_IMAGE = Messages.getString("PropertyView.image"); //$NON-NLS-1$
+	static private final String LABEL_EDGE_IMAGE = Messages.getString("PropertyView.image"); 
 
-	static private final String LABEL_EDGE_FROM = Messages.getString("PropertyView.from"); //$NON-NLS-1$
+	static private final String LABEL_EDGE_FROM = Messages.getString("PropertyView.from"); 
 
-	static private final String LABEL_EDGE_TO = Messages.getString("PropertyView.to"); //$NON-NLS-1$
+	static private final String LABEL_EDGE_TO = Messages.getString("PropertyView.to"); 
 
-	static private final String LABEL_EDGE_COLOR = Messages.getString("PropertyView.color"); //$NON-NLS-1$
+	static private final String LABEL_EDGE_COLOR = Messages.getString("PropertyView.color"); 
 
-	static private final String LABEL_EDGE_STROKE = Messages.getString("PropertyView.stroke"); //$NON-NLS-1$
+	static private final String LABEL_EDGE_STROKE = Messages.getString("PropertyView.stroke"); 
 
-	static private final String LABEL_EDGE_STROKEWIDTH = Messages.getString("PropertyView.strokewidth"); //$NON-NLS-1$
+	static private final String LABEL_EDGE_STROKEWIDTH = Messages.getString("PropertyView.strokewidth"); 
 
-	static private final String LABEL_EDGE_FROMTERMINATOR = Messages.getString("PropertyView.fromterminator"); //$NON-NLS-1$
+	static private final String LABEL_EDGE_FROMTERMINATOR = Messages.getString("PropertyView.fromterminator"); 
 
-	static private final String LABEL_EDGE_TOTERMINATOR = Messages.getString("PropertyView.toterminator"); //$NON-NLS-1$
+	static private final String LABEL_EDGE_TOTERMINATOR = Messages.getString("PropertyView.toterminator"); 
 
-	static private final String LABEL_EDGE_LINE = Messages.getString("PropertyView.line"); //$NON-NLS-1$
+	static private final String LABEL_EDGE_LINE = Messages.getString("PropertyView.line"); 
 
-	static private final String LABEL_EDGE_HIDDEN = Messages.getString("PropertyView.hidden"); //$NON-NLS-1$
+	static private final String LABEL_EDGE_HIDDEN = Messages.getString("PropertyView.hidden"); 
 
 	/**
 	 * Edge getter
@@ -408,7 +408,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			{
 				return Utils.toTrueBoolean(edge.getStyle(), Utils.StyleComponent.HIDDEN);
 			}
-			System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+			System.err.println("Unhandled property: " + propertyName); 
 			return null;
 		}
 	}
@@ -428,7 +428,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		{
 			if (!(object instanceof TreeMutableEdge))
 			{
-				System.err.println("Tried to set property '" + propertyName + "' on non-mutable object '" + object + "' instance of " + object.getClass()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				System.err.println("Tried to set property '" + propertyName + "' on non-mutable object '" + object + "' instance of " + object.getClass());   
 				return;
 			}
 
@@ -484,7 +484,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else
 			{
-				System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+				System.err.println("Unhandled property: " + propertyName); 
 			}
 		}
 	}
@@ -494,27 +494,27 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 * Top element setter
 	 */
 
-	static private final String LABEL_TOP_TOOLBAR = Messages.getString("PropertyView.toolbar"); //$NON-NLS-1$
+	static private final String LABEL_TOP_TOOLBAR = Messages.getString("PropertyView.toolbar"); 
 
-	static private final String LABEL_TOP_STATUSBAR = Messages.getString("PropertyView.statusbar"); //$NON-NLS-1$
+	static private final String LABEL_TOP_STATUSBAR = Messages.getString("PropertyView.statusbar"); 
 
-	static private final String LABEL_TOP_POPUP = Messages.getString("PropertyView.popup"); //$NON-NLS-1$
+	static private final String LABEL_TOP_POPUP = Messages.getString("PropertyView.popup"); 
 
-	static private final String LABEL_TOP_TOOLTIP = Messages.getString("PropertyView.tooltip"); //$NON-NLS-1$
+	static private final String LABEL_TOP_TOOLTIP = Messages.getString("PropertyView.tooltip"); 
 
-	static private final String LABEL_TOP_TOOLTIP_DISPLAYS_CONTENT = Messages.getString("PropertyView.tooltipcontent"); //$NON-NLS-1$
+	static private final String LABEL_TOP_TOOLTIP_DISPLAYS_CONTENT = Messages.getString("PropertyView.tooltipcontent"); 
 
-	static private final String LABEL_TOP_FOCUS_ON_HOVER = Messages.getString("PropertyView.focushover"); //$NON-NLS-1$
+	static private final String LABEL_TOP_FOCUS_ON_HOVER = Messages.getString("PropertyView.focushover"); 
 
-	static private final String LABEL_TOP_FOCUS = Messages.getString("PropertyView.focus"); //$NON-NLS-1$
+	static private final String LABEL_TOP_FOCUS = Messages.getString("PropertyView.focus"); 
 
-	static private final String LABEL_TOP_X_MOVETO = Messages.getString("PropertyView.xmoveto"); //$NON-NLS-1$
+	static private final String LABEL_TOP_X_MOVETO = Messages.getString("PropertyView.xmoveto"); 
 
-	static private final String LABEL_TOP_Y_MOVETO = Messages.getString("PropertyView.ymoveto"); //$NON-NLS-1$
+	static private final String LABEL_TOP_Y_MOVETO = Messages.getString("PropertyView.ymoveto"); 
 
-	static private final String LABEL_TOP_X_SHIFT = Messages.getString("PropertyView.xshift"); //$NON-NLS-1$
+	static private final String LABEL_TOP_X_SHIFT = Messages.getString("PropertyView.xshift"); 
 
-	static private final String LABEL_TOP_Y_SHIFT = Messages.getString("PropertyView.yshift"); //$NON-NLS-1$
+	static private final String LABEL_TOP_Y_SHIFT = Messages.getString("PropertyView.yshift"); 
 
 	private static class TopGetter implements Getter
 	{
@@ -572,7 +572,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			{
 				return settings.yShift;
 			}
-			System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+			System.err.println("Unhandled property: " + propertyName); 
 			return null;
 		}
 
@@ -640,38 +640,38 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else
 			{
-				System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+				System.err.println("Unhandled property: " + propertyName); 
 			}
 		}
 	}
 
 	// T R E E
 
-	static private final String LABEL_TREE_BACKGROUND_IMAGE = Messages.getString("PropertyView.backimage"); //$NON-NLS-1$
+	static private final String LABEL_TREE_BACKGROUND_IMAGE = Messages.getString("PropertyView.backimage"); 
 
-	static private final String LABEL_TREE_ORIENTATION = Messages.getString("PropertyView.orientation"); //$NON-NLS-1$
+	static private final String LABEL_TREE_ORIENTATION = Messages.getString("PropertyView.orientation"); 
 
-	static private final String LABEL_TREE_EXPANSION = Messages.getString("PropertyView.expansion"); //$NON-NLS-1$
+	static private final String LABEL_TREE_EXPANSION = Messages.getString("PropertyView.expansion"); 
 
-	static private final String LABEL_TREE_SWEEP = Messages.getString("PropertyView.sweep"); //$NON-NLS-1$
+	static private final String LABEL_TREE_SWEEP = Messages.getString("PropertyView.sweep"); 
 
-	static private final String LABEL_TREE_FORECOLOR = Messages.getString("PropertyView.forecolor"); //$NON-NLS-1$
+	static private final String LABEL_TREE_FORECOLOR = Messages.getString("PropertyView.forecolor"); 
 
-	static private final String LABEL_TREE_BACKCOLOR = Messages.getString("PropertyView.backcolor"); //$NON-NLS-1$
+	static private final String LABEL_TREE_BACKCOLOR = Messages.getString("PropertyView.backcolor"); 
 
-	static private final String LABEL_TREE_FONT_FACE = Messages.getString("PropertyView.fontface"); //$NON-NLS-1$
+	static private final String LABEL_TREE_FONT_FACE = Messages.getString("PropertyView.fontface"); 
 
-	static private final String LABEL_TREE_FONT_SIZE = Messages.getString("PropertyView.fontsize"); //$NON-NLS-1$
+	static private final String LABEL_TREE_FONT_SIZE = Messages.getString("PropertyView.fontsize"); 
 
-	static private final String LABEL_TREE_SCALE_FONTS = Messages.getString("PropertyView.scalefonts"); //$NON-NLS-1$
+	static private final String LABEL_TREE_SCALE_FONTS = Messages.getString("PropertyView.scalefonts"); 
 
-	static private final String LABEL_TREE_FONT_SCALER = Messages.getString("PropertyView.fontscaler"); //$NON-NLS-1$
+	static private final String LABEL_TREE_FONT_SCALER = Messages.getString("PropertyView.fontscaler"); 
 
-	static private final String LABEL_TREE_SCALE_IMAGES = Messages.getString("PropertyView.scaleimages"); //$NON-NLS-1$
+	static private final String LABEL_TREE_SCALE_IMAGES = Messages.getString("PropertyView.scaleimages"); 
 
-	static private final String LABEL_TREE_IMAGE_SCALER = Messages.getString("PropertyView.imagescaler"); //$NON-NLS-1$
+	static private final String LABEL_TREE_IMAGE_SCALER = Messages.getString("PropertyView.imagescaler"); 
 
-	static private final String LABEL_TREE_PRESERVE_ORIENTATION = Messages.getString("PropertyView.preserveorientation"); //$NON-NLS-1$
+	static private final String LABEL_TREE_PRESERVE_ORIENTATION = Messages.getString("PropertyView.preserveorientation"); 
 
 	/**
 	 * Tree element setter
@@ -740,7 +740,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			{
 				return settings.preserveOrientationFlag;
 			}
-			System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+			System.err.println("Unhandled property: " + propertyName); 
 			return null;
 		}
 	}
@@ -817,42 +817,42 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else
 			{
-				System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+				System.err.println("Unhandled property: " + propertyName); 
 			}
 		}
 	}
 
 	// N O D E S
 
-	static private final String LABEL_NODES_BACKCOLOR = Messages.getString("PropertyView.backcolor"); //$NON-NLS-1$
+	static private final String LABEL_NODES_BACKCOLOR = Messages.getString("PropertyView.backcolor"); 
 
-	static private final String LABEL_NODES_FORECOLOR = Messages.getString("PropertyView.forecolor"); //$NON-NLS-1$
+	static private final String LABEL_NODES_FORECOLOR = Messages.getString("PropertyView.forecolor"); 
 
-	static private final String LABEL_NODES_BORDER = Messages.getString("PropertyView.border"); //$NON-NLS-1$
+	static private final String LABEL_NODES_BORDER = Messages.getString("PropertyView.border"); 
 
-	static private final String LABEL_NODES_ELLIPSIZE = Messages.getString("PropertyView.ellipsize"); //$NON-NLS-1$
+	static private final String LABEL_NODES_ELLIPSIZE = Messages.getString("PropertyView.ellipsize"); 
 
-	static private final String LABEL_NODES_MAX_LINES = Messages.getString("PropertyView.labelmaxlines"); //$NON-NLS-1$
+	static private final String LABEL_NODES_MAX_LINES = Messages.getString("PropertyView.labelmaxlines"); 
 
-	static private final String LABEL_NODES_EXTRA_LINE_FACTOR = Messages.getString("PropertyView.labelextralinefactor"); //$NON-NLS-1$
+	static private final String LABEL_NODES_EXTRA_LINE_FACTOR = Messages.getString("PropertyView.labelextralinefactor"); 
 
-	static private final String LABEL_NODES_IMAGE = Messages.getString("PropertyView.image"); //$NON-NLS-1$
+	static private final String LABEL_NODES_IMAGE = Messages.getString("PropertyView.image"); 
 
-	static private final String LABEL_NODES_EDGE_IMAGE = Messages.getString("PropertyView.eimage"); //$NON-NLS-1$
+	static private final String LABEL_NODES_EDGE_IMAGE = Messages.getString("PropertyView.eimage"); 
 
-	static private final String LABEL_NODES_EDGE_COLOR = Messages.getString("PropertyView.ecolor"); //$NON-NLS-1$
+	static private final String LABEL_NODES_EDGE_COLOR = Messages.getString("PropertyView.ecolor"); 
 
-	static private final String LABEL_NODES_EDGE_STROKE = Messages.getString("PropertyView.estroke"); //$NON-NLS-1$
+	static private final String LABEL_NODES_EDGE_STROKE = Messages.getString("PropertyView.estroke"); 
 
-	static private final String LABEL_NODES_EDGE_STROKEWIDTH = Messages.getString("PropertyView.estrokewidth"); //$NON-NLS-1$
+	static private final String LABEL_NODES_EDGE_STROKEWIDTH = Messages.getString("PropertyView.estrokewidth"); 
 
-	static private final String LABEL_NODES_EDGE_FROMTERMINATOR = Messages.getString("PropertyView.efromterminator"); //$NON-NLS-1$
+	static private final String LABEL_NODES_EDGE_FROMTERMINATOR = Messages.getString("PropertyView.efromterminator"); 
 
-	static private final String LABEL_NODES_EDGE_TOTERMINATOR = Messages.getString("PropertyView.etoterminator"); //$NON-NLS-1$
+	static private final String LABEL_NODES_EDGE_TOTERMINATOR = Messages.getString("PropertyView.etoterminator"); 
 
-	static private final String LABEL_NODES_EDGE_LINE = Messages.getString("PropertyView.eline"); //$NON-NLS-1$
+	static private final String LABEL_NODES_EDGE_LINE = Messages.getString("PropertyView.eline"); 
 
-	static private final String LABEL_NODES_EDGE_HIDDEN = Messages.getString("PropertyView.ehidden"); //$NON-NLS-1$
+	static private final String LABEL_NODES_EDGE_HIDDEN = Messages.getString("PropertyView.ehidden"); 
 
 	/**
 	 * Nodes getter
@@ -929,7 +929,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			{
 				return settings.labelExtraLineFactor;
 			}
-			System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+			System.err.println("Unhandled property: " + propertyName); 
 			return null;
 		}
 	}
@@ -1012,30 +1012,30 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else
 			{
-				System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+				System.err.println("Unhandled property: " + propertyName); 
 			}
 		}
 	}
 
 	// E D G E S
 
-	static private final String LABEL_EDGES_IMAGE = Messages.getString("PropertyView.image"); //$NON-NLS-1$
+	static private final String LABEL_EDGES_IMAGE = Messages.getString("PropertyView.image"); 
 
-	static private final String LABEL_EDGES_COLOR = Messages.getString("PropertyView.color"); //$NON-NLS-1$
+	static private final String LABEL_EDGES_COLOR = Messages.getString("PropertyView.color"); 
 
-	static private final String LABEL_EDGES_STROKE = Messages.getString("PropertyView.stroke"); //$NON-NLS-1$
+	static private final String LABEL_EDGES_STROKE = Messages.getString("PropertyView.stroke"); 
 
-	static private final String LABEL_EDGES_STROKEWIDTH = Messages.getString("PropertyView.strokewidth"); //$NON-NLS-1$
+	static private final String LABEL_EDGES_STROKEWIDTH = Messages.getString("PropertyView.strokewidth"); 
 
-	static private final String LABEL_EDGES_FROMTERMINATOR = Messages.getString("PropertyView.fromterminator"); //$NON-NLS-1$
+	static private final String LABEL_EDGES_FROMTERMINATOR = Messages.getString("PropertyView.fromterminator"); 
 
-	static private final String LABEL_EDGES_TOTERMINATOR = Messages.getString("PropertyView.toterminator"); //$NON-NLS-1$
+	static private final String LABEL_EDGES_TOTERMINATOR = Messages.getString("PropertyView.toterminator"); 
 
-	static private final String LABEL_EDGES_LINE = Messages.getString("PropertyView.line"); //$NON-NLS-1$
+	static private final String LABEL_EDGES_LINE = Messages.getString("PropertyView.line"); 
 
-	static private final String LABEL_EDGES_HIDDEN = Messages.getString("PropertyView.hidden"); //$NON-NLS-1$
+	static private final String LABEL_EDGES_HIDDEN = Messages.getString("PropertyView.hidden"); 
 
-	static private final String LABEL_EDGES_AS_ARCS = Messages.getString("PropertyView.asarcs"); //$NON-NLS-1$
+	static private final String LABEL_EDGES_AS_ARCS = Messages.getString("PropertyView.asarcs"); 
 
 	/**
 	 * Edges getter
@@ -1088,7 +1088,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			{
 				return settings.edgesAsArcsFlag;
 			}
-			System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+			System.err.println("Unhandled property: " + propertyName); 
 			return null;
 		}
 	}
@@ -1148,24 +1148,24 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else
 			{
-				System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+				System.err.println("Unhandled property: " + propertyName); 
 			}
 		}
 	}
 
 	// M E N U I T E M
 
-	static private final String LABEL_MENUITEM_LABEL = Messages.getString("PropertyView.label"); //$NON-NLS-1$
+	static private final String LABEL_MENUITEM_LABEL = Messages.getString("PropertyView.label"); 
 
-	static private final String LABEL_MENUITEM_LINK = Messages.getString("PropertyView.link"); //$NON-NLS-1$
+	static private final String LABEL_MENUITEM_LINK = Messages.getString("PropertyView.link"); 
 
-	static private final String LABEL_MENUITEM_ACTION = Messages.getString("PropertyView.action"); //$NON-NLS-1$
+	static private final String LABEL_MENUITEM_ACTION = Messages.getString("PropertyView.action"); 
 
-	static private final String LABEL_MENUITEM_MATCH_SCOPE = Messages.getString("PropertyView.scope"); //$NON-NLS-1$
+	static private final String LABEL_MENUITEM_MATCH_SCOPE = Messages.getString("PropertyView.scope"); 
 
-	static private final String LABEL_MENUITEM_MATCH_MODE = Messages.getString("PropertyView.mode"); //$NON-NLS-1$
+	static private final String LABEL_MENUITEM_MATCH_MODE = Messages.getString("PropertyView.mode"); 
 
-	static private final String LABEL_MENUITEM_MATCH_TARGET = Messages.getString("PropertyView.target"); //$NON-NLS-1$
+	static private final String LABEL_MENUITEM_MATCH_TARGET = Messages.getString("PropertyView.target"); 
 
 	/**
 	 * Menu element getter
@@ -1206,7 +1206,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			{
 				return menuItem.matchTarget;
 			}
-			System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+			System.err.println("Unhandled property: " + propertyName); 
 			return null;
 		}
 	}
@@ -1253,7 +1253,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else
 			{
-				System.err.println("Unhandled property: " + propertyName); //$NON-NLS-1$
+				System.err.println("Unhandled property: " + propertyName); 
 			}
 		}
 	}
@@ -1365,7 +1365,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	static final Object[][] treeFeatures = { //
 			{PropertyView.LABEL_TREE_BACKGROUND_IMAGE, PropertyView.AttributeType.IMAGE, false, null}, //
-			{PropertyView.LABEL_TREE_ORIENTATION, PropertyView.AttributeType.TEXT, false, new String[]{"radial", "north", "south", "east", "west"}}, // //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+			{PropertyView.LABEL_TREE_ORIENTATION, PropertyView.AttributeType.TEXT, false, new String[]{"radial", "north", "south", "east", "west"}}, //     
 			{PropertyView.LABEL_TREE_EXPANSION, PropertyView.AttributeType.FLOAT, false, null}, //
 			{PropertyView.LABEL_TREE_SWEEP, PropertyView.AttributeType.FLOAT, false, null}, //
 			{PropertyView.LABEL_TREE_BACKCOLOR, PropertyView.AttributeType.COLOR, false, null}, //

@@ -53,7 +53,7 @@ public class ModelUtils
 	 */
 	static public String makeNodeId()
 	{
-		return "X" + Long.toHexString(ModelUtils.RANDOMIZER.nextLong()); //$NON-NLS-1$
+		return "X" + Long.toHexString(ModelUtils.RANDOMIZER.nextLong()); 
 	}
 
 	// M A K E . D E F A U L T
@@ -66,13 +66,13 @@ public class ModelUtils
 	public static INode makeDefaultTree()
 	{
 		final String[][] data = { //
-				{ "id1", "one\n1", "id11", "eleven\n11", "id12", "twelve\n12", "id13", "thirteen\n13", "id14", "fourteen\n14" }, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$
-				{ "id2", "two\n2", "id21", "twenty-one\n21", "id22", "twenty-two\n22", "id23", "twenty-three\n23" }, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
-				{ "id3", "three\n3", "id31", "thirty-one\n31", "id32", "thirty-two\n32" }, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
-				{ "id4", "four\n4", "id41", "forty-one\n41" }, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				{ "id5", "five\n5" } }; //$NON-NLS-1$ //$NON-NLS-2$
-		final TreeMutableNode root = new TreeMutableNode(null, "root"); //$NON-NLS-1$
-		root.setLabel("root"); //$NON-NLS-1$
+				{ "id1", "one\n1", "id11", "eleven\n11", "id12", "twelve\n12", "id13", "thirteen\n13", "id14", "fourteen\n14" },          //$NON-NLS-10$
+				{ "id2", "two\n2", "id21", "twenty-one\n21", "id22", "twenty-two\n22", "id23", "twenty-three\n23" },        
+				{ "id3", "three\n3", "id31", "thirty-one\n31", "id32", "thirty-two\n32" },      
+				{ "id4", "four\n4", "id41", "forty-one\n41" },    
+				{ "id5", "five\n5" } };  
+		final TreeMutableNode root = new TreeMutableNode(null, "root"); 
+		root.setLabel("root"); 
 		root.setBackColor(Color.ORANGE);
 		root.setForeColor(Color.BLACK);
 		for (final String[] nodeData : data)
@@ -223,7 +223,7 @@ public class ModelUtils
 	{
 		// this node
 		final String oldId = node.getId();
-		final String id = node.getParent() == null ? "root" : prefix; //$NON-NLS-1$
+		final String id = node.getParent() == null ? "root" : prefix; 
 		node.setId(id);
 
 		// record in maps
@@ -237,7 +237,7 @@ public class ModelUtils
 			int i = 0;
 			for (final INode childNode : children)
 			{
-				ModelUtils.normalizeId((TreeMutableNode) childNode, prefix + "-" + i++, idToNodeMap, oldIdToNewIdMap); //$NON-NLS-1$
+				ModelUtils.normalizeId((TreeMutableNode) childNode, prefix + "-" + i++, idToNodeMap, oldIdToNewIdMap); 
 			}
 		}
 	}
@@ -299,25 +299,25 @@ public class ModelUtils
 			imageFile = model.settings.backgroundImageFile;
 			if (imageFile != null && !imageFile.isEmpty())
 			{
-				ModelUtils.putReferenceMapKeyValue(map, imageFile, "background"); //$NON-NLS-1$
+				ModelUtils.putReferenceMapKeyValue(map, imageFile, "background"); 
 			}
 
 			imageFile = model.settings.defaultNodeImage;
 			if (imageFile != null && !imageFile.isEmpty())
 			{
-				ModelUtils.putReferenceMapKeyValue(map, imageFile, "default node"); //$NON-NLS-1$
+				ModelUtils.putReferenceMapKeyValue(map, imageFile, "default node"); 
 			}
 
 			imageFile = model.settings.defaultTreeEdgeImage;
 			if (imageFile != null && !imageFile.isEmpty())
 			{
-				ModelUtils.putReferenceMapKeyValue(map, imageFile, "default tree-edge"); //$NON-NLS-1$
+				ModelUtils.putReferenceMapKeyValue(map, imageFile, "default tree-edge"); 
 			}
 
 			imageFile = model.settings.defaultEdgeImage;
 			if (imageFile != null && !imageFile.isEmpty())
 			{
-				ModelUtils.putReferenceMapKeyValue(map, imageFile, "default edge"); //$NON-NLS-1$
+				ModelUtils.putReferenceMapKeyValue(map, imageFile, "default edge"); 
 			}
 		}
 
@@ -333,7 +333,7 @@ public class ModelUtils
 				imageFile = edge.getImageFile();
 				if (imageFile != null && !imageFile.isEmpty())
 				{
-					ModelUtils.putReferenceMapKeyValue(map, imageFile, "edge:" + edge.getFrom().getId() + "->" + edge.getTo().getId()); //$NON-NLS-1$ //$NON-NLS-2$
+					ModelUtils.putReferenceMapKeyValue(map, imageFile, "edge:" + edge.getFrom().getId() + "->" + edge.getTo().getId());  
 				}
 			}
 		}
@@ -352,12 +352,12 @@ public class ModelUtils
 		String imageFile = node.getImageFile();
 		if (imageFile != null && !imageFile.isEmpty())
 		{
-			ModelUtils.putReferenceMapKeyValue(map, imageFile, "node:" + node.getId()); //$NON-NLS-1$
+			ModelUtils.putReferenceMapKeyValue(map, imageFile, "node:" + node.getId()); 
 		}
 		imageFile = node.getEdgeImageFile();
 		if (imageFile != null && !imageFile.isEmpty())
 		{
-			ModelUtils.putReferenceMapKeyValue(map, imageFile, "treeedge:" + node.getId()); //$NON-NLS-1$
+			ModelUtils.putReferenceMapKeyValue(map, imageFile, "treeedge:" + node.getId()); 
 		}
 
 		// recurse
@@ -399,7 +399,7 @@ public class ModelUtils
 		if (mountPoint instanceof MountPoint.Mounting)
 		{
 			final MountPoint.Mounting mountingPoint = (MountPoint.Mounting) mountPoint;
-			ModelUtils.putReferenceMapKeyValue(map, mountingPoint.url, "node:" + node.getId()); //$NON-NLS-1$
+			ModelUtils.putReferenceMapKeyValue(map, mountingPoint.url, "node:" + node.getId()); 
 		}
 
 		// recurse
@@ -440,7 +440,7 @@ public class ModelUtils
 		final String link = node.getLink();
 		if (link != null && !link.isEmpty())
 		{
-			ModelUtils.putReferenceMapKeyValue(map, link, "node:" + node.getId()); //$NON-NLS-1$
+			ModelUtils.putReferenceMapKeyValue(map, link, "node:" + node.getId()); 
 		}
 
 		// recurse
@@ -481,10 +481,10 @@ public class ModelUtils
 		String id = node.getId();
 		if (id == null || id.isEmpty())
 		{
-			id = "null"; //$NON-NLS-1$
+			id = "null"; 
 		}
 		final INode parent = node.getParent();
-		ModelUtils.putReferenceMapKeyValue(map, id, "label:" + node.getLabel() + " parent:" + (parent == null ? "null" : parent.getId())); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		ModelUtils.putReferenceMapKeyValue(map, id, "label:" + node.getLabel() + " parent:" + (parent == null ? "null" : parent.getId()));   
 
 		// recurse
 		final List<INode> children = node.getChildren();
@@ -524,11 +524,11 @@ public class ModelUtils
 	{
 		try
 		{
-			return URLDecoder.decode(string, "UTF8"); //$NON-NLS-1$
+			return URLDecoder.decode(string, "UTF8"); 
 		}
 		catch (final UnsupportedEncodingException e)
 		{
-			System.err.println("Can't decode " + string + " - " + e); //$NON-NLS-1$ //$NON-NLS-2$
+			System.err.println("Can't decode " + string + " - " + e);  
 		}
 		return string;
 	}
@@ -543,11 +543,11 @@ public class ModelUtils
 	{
 		try
 		{
-			return URLEncoder.encode(string, "UTF8"); //$NON-NLS-1$
+			return URLEncoder.encode(string, "UTF8"); 
 		}
 		catch (final UnsupportedEncodingException e)
 		{
-			System.err.println("Can't decode " + string + " - " + e); //$NON-NLS-1$ //$NON-NLS-2$
+			System.err.println("Can't decode " + string + " - " + e);  
 		}
 		return string;
 	}
@@ -562,7 +562,7 @@ public class ModelUtils
 		final Properties properties = ModelUtils.settingsToProperty(settings);
 		try
 		{
-			properties.store(new FileOutputStream(propertyFile), "TREEBOLIC-SETTINGS"); //$NON-NLS-1$
+			properties.store(new FileOutputStream(propertyFile), "TREEBOLIC-SETTINGS"); 
 		}
 		catch (final IOException e)
 		{

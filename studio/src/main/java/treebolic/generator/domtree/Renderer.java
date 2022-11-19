@@ -83,7 +83,7 @@ public class Renderer implements TreeCellRenderer
 	/**
 	 * Patterns
 	 */
-	private static final Pattern idPattern = Pattern.compile("id=\"([^\"]*)\""); //$NON-NLS-1$
+	private static final Pattern idPattern = Pattern.compile("id=\"([^\"]*)\""); 
 
 	/**
 	 * Pattern list
@@ -118,9 +118,9 @@ public class Renderer implements TreeCellRenderer
 		StyleConstants.setForeground(Renderer.idStyle, Color.BLUE);
 
 		// icons
-		Renderer.elementIcon = new ImageIcon(Renderer.class.getResource("images/treeelement.gif")); //$NON-NLS-1$
-		Renderer.textIcon = new ImageIcon(Renderer.class.getResource("images/treetext.gif")); //$NON-NLS-1$
-		Renderer.defaultIcon = new ImageIcon(Renderer.class.getResource("images/treedefault.gif")); //$NON-NLS-1$
+		Renderer.elementIcon = new ImageIcon(Renderer.class.getResource("images/treeelement.gif")); 
+		Renderer.textIcon = new ImageIcon(Renderer.class.getResource("images/treetext.gif")); 
+		Renderer.defaultIcon = new ImageIcon(Renderer.class.getResource("images/treedefault.gif")); 
 	}
 
 	// components
@@ -192,7 +192,7 @@ public class Renderer implements TreeCellRenderer
 			styledDocument.insertString(0, name, getNameStyle(node));
 			if (value != null)
 			{
-				styledDocument.insertString(nameLength, " ", null); //$NON-NLS-1$
+				styledDocument.insertString(nameLength, " ", null); 
 				styledDocument.insertString(nameLength + 1, value, getValueStyle(node));
 			}
 		}

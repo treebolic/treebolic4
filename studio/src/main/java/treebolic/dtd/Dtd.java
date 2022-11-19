@@ -24,7 +24,7 @@ public class Dtd
 	/**
 	 * DTD file name
 	 */
-	static final String DTD_FILE = "Treebolic.dtd"; //$NON-NLS-1$
+	static final String DTD_FILE = "Treebolic.dtd"; 
 
 	/**
 	 * Get DTD as string
@@ -67,7 +67,7 @@ public class Dtd
 		}
 		catch (final IOException ioe)
 		{
-			System.err.println("Can't find " + uRL + " " + ioe); //$NON-NLS-1$ //$NON-NLS-2$
+			System.err.println("Can't find " + uRL + " " + ioe);  
 			return false;
 		}
 	}
@@ -85,7 +85,7 @@ public class Dtd
 		{
 			return false;
 		}
-		try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(outstream, StandardCharsets.UTF_8), false)) //$NON-NLS-1$
+		try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(outstream, StandardCharsets.UTF_8), false)) 
 		{
 			writer.print(str);
 			return true;

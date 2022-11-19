@@ -24,7 +24,7 @@ public class FileSiteMaker extends SiteMaker
 	/**
 	 * Extra path
 	 */
-	private String xtraPath = ""; //$NON-NLS-1$
+	private String xtraPath = ""; 
 
 	/**
 	 * Constructor
@@ -45,7 +45,7 @@ public class FileSiteMaker extends SiteMaker
 		final File folder = new File(path);
 		if (!folder.exists() || !folder.isDirectory())
 		{
-			throw new FileNotFoundException(path + " not found"); //$NON-NLS-1$
+			throw new FileNotFoundException(path + " not found"); 
 		}
 
 		this.pathUrl = folder.toURI().toURL().toString();
@@ -107,9 +107,9 @@ public class FileSiteMaker extends SiteMaker
 		}
 		// update extra path
 		this.xtraPath = relativeFolder;
-		if (!"".equals(this.xtraPath) && !this.xtraPath.endsWith("/")) //$NON-NLS-1$ //$NON-NLS-2$
+		if (!"".equals(this.xtraPath) && !this.xtraPath.endsWith("/"))  
 		{
-			this.xtraPath += "/"; //$NON-NLS-1$
+			this.xtraPath += "/"; 
 		}
 		return true;
 	}

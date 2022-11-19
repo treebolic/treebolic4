@@ -102,8 +102,8 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		setToggleClickCount(2);
 		setScrollsOnExpand(true);
 		setFont(new java.awt.Font(Font.DIALOG, Font.PLAIN, 10));
-		putClientProperty("JTree.lineStyle", "Horizontal"); //$NON-NLS-1$ //$NON-NLS-2$
-		setToolTipText("Tree"); //$NON-NLS-1$
+		putClientProperty("JTree.lineStyle", "Horizontal");  
+		setToolTipText("Tree"); 
 		setLargeModel(true); // A large model can be used when the cell height is the same for all nodes. The UI will then cache very little information and instead continually message the model.
 		setRowHeight(18);
 		
@@ -377,7 +377,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	@Override
 	public void valueChanged(final TreeSelectionEvent event)
 	{
-		// System.err.println("TREE: selection " + toString(event)); //$NON-NLS-1$
+		// System.err.println("TREE: selection " + toString(event)); 
 
 		// return if null selection
 		final TreePath path = event.getNewLeadSelectionPath();
@@ -395,11 +395,11 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	{
 
 		final StringBuilder buffer = new StringBuilder();
-		buffer.append("source:"); //$NON-NLS-1$
+		buffer.append("source:"); 
 		buffer.append(event.getSource());
 		// TreePath path = event.getPath();
 		// buffer.append(path.getLastPathComponent());
-		buffer.append(" changed:"); //$NON-NLS-1$
+		buffer.append(" changed:"); 
 		TreePath[] paths = event.getPaths();
 		for (TreePath path2 : paths)
 		{
@@ -407,7 +407,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 			buffer.append(' ');
 		}
 		TreePath oldPath = event.getOldLeadSelectionPath();
-		buffer.append("old-new:"); //$NON-NLS-1$
+		buffer.append("old-new:"); 
 		if (oldPath != null)
 		{
 			buffer.append(oldPath.getLastPathComponent());

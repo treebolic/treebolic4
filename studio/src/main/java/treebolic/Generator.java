@@ -16,7 +16,7 @@ public class Generator
 	/**
 	 * Version : 3.x
 	 */
-	static private final String version = "3.9.0"; //$NON-NLS-1$
+	static private final String version = "3.9.0"; 
 
 	/**
 	 * Constructor

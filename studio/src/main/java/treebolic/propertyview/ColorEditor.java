@@ -68,7 +68,7 @@ class ColorEditor extends AbstractCellEditor implements TableCellEditor
 
 		// set up the dialog that the button brings up.
 		this.colorChooser = new JColorChooser();
-		this.colorDialog = JColorChooser.createDialog(this.button, Messages.getString("ColorEditor.prompt_color"), true, // modal //$NON-NLS-1$
+		this.colorDialog = JColorChooser.createDialog(this.button, Messages.getString("ColorEditor.prompt_color"), true, // modal 
 				this.colorChooser,
 				// ok button handler
 				e -> ColorEditor.this.currentColor = new Color(ColorEditor.this.colorChooser.getColor()),

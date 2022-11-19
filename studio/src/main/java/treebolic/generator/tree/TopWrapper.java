@@ -27,6 +27,6 @@ public class TopWrapper extends SettingsWrapper
 	@Override
 	public String toString()
 	{
-		return Messages.getString("TopWrapper.label"); //$NON-NLS-1$
+		return Messages.getString("TopWrapper.label"); 
 	}
 }

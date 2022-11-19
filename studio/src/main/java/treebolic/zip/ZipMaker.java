@@ -54,7 +54,7 @@ public class ZipMaker
 			// XML
 			final ZipEntry ze = new ZipEntry(this.entry);
 			zos.putNextEntry(ze);
-			new DomTransformer(false, "Treebolic.dtd").documentToStream(this.document, zos); //$NON-NLS-1$
+			new DomTransformer(false, "Treebolic.dtd").documentToStream(this.document, zos); 
 			zos.closeEntry();
 
 			// images
@@ -80,7 +80,7 @@ public class ZipMaker
 				}
 				catch (Exception e)
 				{
-					System.err.println("Zip can't include " + imageFileName); //$NON-NLS-1$
+					System.err.println("Zip can't include " + imageFileName); 
 				}
 			}
 		}

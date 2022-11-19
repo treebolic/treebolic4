@@ -53,82 +53,82 @@ class Renderer extends DefaultTableCellRenderer
 	/**
 	 * Mandatory attribute icon
 	 */
-	private final ImageIcon mandatoryIcon = new ImageIcon(Renderer.class.getResource("images/mandatory.png")); //$NON-NLS-1$
+	private final ImageIcon mandatoryIcon = new ImageIcon(Renderer.class.getResource("images/mandatory.png")); 
 
 	/**
 	 * Optional attribute icon
 	 */
-	private final ImageIcon optionalIcon = new ImageIcon(Renderer.class.getResource("images/optional.png")); //$NON-NLS-1$
+	private final ImageIcon optionalIcon = new ImageIcon(Renderer.class.getResource("images/optional.png")); 
 
 	/**
 	 * Attribute icon
 	 */
-	private final ImageIcon attributeIcon = new ImageIcon(Renderer.class.getResource("images/attribute.png")); //$NON-NLS-1$
+	private final ImageIcon attributeIcon = new ImageIcon(Renderer.class.getResource("images/attribute.png")); 
 
 	/**
 	 * Id icon
 	 */
-	private final ImageIcon idIcon = new ImageIcon(Renderer.class.getResource("images/id.png")); //$NON-NLS-1$
+	private final ImageIcon idIcon = new ImageIcon(Renderer.class.getResource("images/id.png")); 
 
 	/**
 	 * Id reference icon
 	 */
-	private final ImageIcon refIdcon = new ImageIcon(Renderer.class.getResource("images/node.png")); //$NON-NLS-1$
+	private final ImageIcon refIdcon = new ImageIcon(Renderer.class.getResource("images/node.png")); 
 
 	/**
 	 * Text icon
 	 */
-	private final ImageIcon textIcon = new ImageIcon(Renderer.class.getResource("images/text.png")); //$NON-NLS-1$
+	private final ImageIcon textIcon = new ImageIcon(Renderer.class.getResource("images/text.png")); 
 
 	/**
 	 * Long text icon
 	 */
-	private final ImageIcon longTextIcon = new ImageIcon(Renderer.class.getResource("images/longtext.png")); //$NON-NLS-1$
+	private final ImageIcon longTextIcon = new ImageIcon(Renderer.class.getResource("images/longtext.png")); 
 
 	/**
 	 * Image icon
 	 */
-	private final ImageIcon imageIcon = new ImageIcon(Renderer.class.getResource("images/image.png")); //$NON-NLS-1$
+	private final ImageIcon imageIcon = new ImageIcon(Renderer.class.getResource("images/image.png")); 
 
 	/**
 	 * Link icon
 	 */
-	private final ImageIcon linkIcon = new ImageIcon(Renderer.class.getResource("images/link.png")); //$NON-NLS-1$
+	private final ImageIcon linkIcon = new ImageIcon(Renderer.class.getResource("images/link.png")); 
 
 	/**
 	 * Color icon
 	 */
-	private final ImageIcon colorIcon = new ImageIcon(Renderer.class.getResource("images/color.png")); //$NON-NLS-1$
+	private final ImageIcon colorIcon = new ImageIcon(Renderer.class.getResource("images/color.png")); 
 
 	/**
 	 * Stroke icon
 	 */
-	private final ImageIcon strokeIcon = new ImageIcon(Renderer.class.getResource("images/stroke.png")); //$NON-NLS-1$
+	private final ImageIcon strokeIcon = new ImageIcon(Renderer.class.getResource("images/stroke.png")); 
 
 	/**
 	 * Terminator icon
 	 */
-	private final ImageIcon terminatorIcon = new ImageIcon(Renderer.class.getResource("images/terminator.png")); //$NON-NLS-1$
+	private final ImageIcon terminatorIcon = new ImageIcon(Renderer.class.getResource("images/terminator.png")); 
 
 	/**
 	 * Font icon
 	 */
-	private final ImageIcon fontIcon = new ImageIcon(Renderer.class.getResource("images/font.png")); //$NON-NLS-1$
+	private final ImageIcon fontIcon = new ImageIcon(Renderer.class.getResource("images/font.png")); 
 
 	/**
 	 * Font size icon
 	 */
-	private final ImageIcon fontSizeIcon = new ImageIcon(Renderer.class.getResource("images/fontsize.png")); //$NON-NLS-1$
+	private final ImageIcon fontSizeIcon = new ImageIcon(Renderer.class.getResource("images/fontsize.png")); 
 
 	/**
 	 * Boolean icon
 	 */
-	private final ImageIcon booleanIcon = new ImageIcon(Renderer.class.getResource("images/boolean.png")); //$NON-NLS-1$
+	private final ImageIcon booleanIcon = new ImageIcon(Renderer.class.getResource("images/boolean.png")); 
 
 	/**
 	 * Floats icon
 	 */
-	private final ImageIcon floatsIcon = new ImageIcon(Renderer.class.getResource("images/floats.png")); //$NON-NLS-1$
+	private final ImageIcon floatsIcon = new ImageIcon(Renderer.class.getResource("images/floats.png")); 
 
 	/**
 	 * Constructor
@@ -241,7 +241,7 @@ class Renderer extends DefaultTableCellRenderer
 				return this;
 
 			default:
-				System.err.println("Renderer doesn't handle this class: " + attribute.descriptor.name + " type:" + attribute.descriptor.type); //$NON-NLS-1$ //$NON-NLS-2$
+				System.err.println("Renderer doesn't handle this class: " + attribute.descriptor.name + " type:" + attribute.descriptor.type);  
 				return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			}
 		}

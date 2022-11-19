@@ -11,9 +11,7 @@ package treebolic.glue.iface;
  */
 public interface Point
 {
-	// public int x;
+	int x();
 
-	// public int y;
-
-	// public Point(final int x, final int y);
+	int y();
 }

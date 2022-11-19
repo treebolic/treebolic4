@@ -29,7 +29,7 @@ class FtpClientX extends FtpClient
 	{
 		try
 		{
-			issueCommandCheck("MKD " + remoteDirectory); //$NON-NLS-1$
+			issueCommandCheck("MKD " + remoteDirectory); 
 		}
 		catch (final IOException e1)
 		{
@@ -39,7 +39,7 @@ class FtpClientX extends FtpClient
 			String pathElement;
 
 			// cd path
-			final StringTokenizer t = new StringTokenizer(remoteDirectory, "/"); //$NON-NLS-1$
+			final StringTokenizer t = new StringTokenizer(remoteDirectory, "/"); 
 			while (t.hasMoreElements())
 			{
 				pathElement = t.nextToken();
@@ -53,7 +53,7 @@ class FtpClientX extends FtpClient
 				{
 					try
 					{
-						issueCommandCheck("MKDIR " + pathElement); //$NON-NLS-1$
+						issueCommandCheck("MKDIR " + pathElement); 
 						cd(pathElement);
 					}
 					catch (final IOException e3)
@@ -74,7 +74,7 @@ class FtpClientX extends FtpClient
 	{
 		try
 		{
-			issueCommandCheck("PASV "); //$NON-NLS-1$
+			issueCommandCheck("PASV "); 
 		}
 		catch (final IOException e1)
 		{
@@ -163,29 +163,29 @@ public class FtpSiteMaker extends SiteMaker
 	{
 		try
 		{
-			notifyOperation(Messages.getString("FtpSiteMaker.opening"), SiteMaker.PROGRESSCONNECT); //$NON-NLS-1$
+			notifyOperation(Messages.getString("FtpSiteMaker.opening"), SiteMaker.PROGRESSCONNECT); 
 			this.client.openServer(this.server);
 
 			try
 			{
-				notifyOperation(Messages.getString("FtpSiteMaker.logging"), SiteMaker.PROGRESSCONNECT + 2); //$NON-NLS-1$
+				notifyOperation(Messages.getString("FtpSiteMaker.logging"), SiteMaker.PROGRESSCONNECT + 2); 
 				this.client.login(this.login, this.password);
 			}
 			catch (final FtpLoginException exception)
 			{
 				this.client.closeServer();
-				throw new IOException("LOGGING IN"); //$NON-NLS-1$
+				throw new IOException("LOGGING IN"); 
 			}
 
-			notifyOperation(Messages.getString("FtpSiteMaker.passive"), SiteMaker.PROGRESSCONNECT + 2); //$NON-NLS-1$
+			notifyOperation(Messages.getString("FtpSiteMaker.passive"), SiteMaker.PROGRESSCONNECT + 2); 
 			this.client.passive();
 
-			notifyOperation(Messages.getString("FtpSiteMaker.binary"), SiteMaker.PROGRESSCONNECT + 3); //$NON-NLS-1$
+			notifyOperation(Messages.getString("FtpSiteMaker.binary"), SiteMaker.PROGRESSCONNECT + 3); 
 			this.client.binary();
 
 			try
 			{
-				notifyOperation("CD " + this.directory, SiteMaker.PROGRESSCONNECT + 4); //$NON-NLS-1$
+				notifyOperation("CD " + this.directory, SiteMaker.PROGRESSCONNECT + 4); 
 				this.client.cd(this.directory);
 			}
 			catch (final IOException exception)
@@ -196,11 +196,11 @@ public class FtpSiteMaker extends SiteMaker
 		}
 		catch (final IOException exception)
 		{
-			notifyOperation(Messages.getString("FtpSiteMaker.err_io") + exception.getMessage(), SiteMaker.PROGRESSCONNECTCOMPLETE); //$NON-NLS-1$
+			notifyOperation(Messages.getString("FtpSiteMaker.err_io") + exception.getMessage(), SiteMaker.PROGRESSCONNECTCOMPLETE); 
 			return false;
 		}
 
-		notifyOperation(Messages.getString("FtpSiteMaker.opened"), SiteMaker.PROGRESSCONNECTCOMPLETE); //$NON-NLS-1$
+		notifyOperation(Messages.getString("FtpSiteMaker.opened"), SiteMaker.PROGRESSCONNECTCOMPLETE); 
 		return true;
 	}
 
@@ -238,9 +238,9 @@ public class FtpSiteMaker extends SiteMaker
 		{
 			try
 			{
-				notifyOperation("MKDIR " + relativeDirectory, SiteMaker.PROGRESSXFERIMAGES + 2); //$NON-NLS-1$
+				notifyOperation("MKDIR " + relativeDirectory, SiteMaker.PROGRESSXFERIMAGES + 2); 
 				this.client.mkdir(relativeDirectory);
-				notifyOperation("CD " + relativeDirectory, SiteMaker.PROGRESSXFERIMAGES + 2); //$NON-NLS-1$
+				notifyOperation("CD " + relativeDirectory, SiteMaker.PROGRESSXFERIMAGES + 2); 
 				this.client.cd(relativeDirectory);
 			}
 			catch (final IOException subException)

@@ -27,6 +27,6 @@ public class ToolsWrapper extends SettingsWrapper
 	@Override
 	public String toString()
 	{
-		return Messages.getString("ToolsWrapper.label"); //$NON-NLS-1$
+		return Messages.getString("ToolsWrapper.label"); 
 	}
 }

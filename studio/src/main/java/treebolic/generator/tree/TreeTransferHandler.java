@@ -41,7 +41,7 @@ public class TreeTransferHandler extends TransferHandler
 	{
 		try
 		{
-			TreeTransferHandler.flavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + DefaultMutableTreeNode.class.getName() + "\""); //$NON-NLS-1$ //$NON-NLS-2$
+			TreeTransferHandler.flavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + DefaultMutableTreeNode.class.getName() + "\"");  
 		}
 		catch (final ClassNotFoundException e)
 		{

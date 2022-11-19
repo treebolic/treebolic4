@@ -25,8 +25,8 @@ public class HtmlView extends JEditorPane implements HyperlinkListener
 	 */
 	public HtmlView()
 	{
-		setText(Messages.getString("HtmlView.init")); //$NON-NLS-1$
-		setContentType("text/html; charset=UTF-8"); //$NON-NLS-1$
+		setText(Messages.getString("HtmlView.init")); 
+		setContentType("text/html; charset=UTF-8"); 
 		setForeground(Color.blue);
 		setEditable(false);
 		addHyperlinkListener(this);
@@ -48,7 +48,7 @@ public class HtmlView extends JEditorPane implements HyperlinkListener
 			}
 			catch (final IOException e)
 			{
-				setText(Messages.getString("HtmlView.err_url") + event.getURL()); //$NON-NLS-1$
+				setText(Messages.getString("HtmlView.err_url") + event.getURL()); 
 			}
 		}
 	}

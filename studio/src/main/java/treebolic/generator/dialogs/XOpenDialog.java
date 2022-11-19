@@ -40,15 +40,15 @@ public class XOpenDialog extends OpenDialog
 	 */
 	static public void main(final String[] args)
 	{
-		UIManager.put("swing.boldMetal", false); //$NON-NLS-1$
+		UIManager.put("swing.boldMetal", false); 
 		final XOpenDialog dialog = new XOpenDialog(null, null, null);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		if (dialog.ok)
 		{
-			System.out.println("provider=" + dialog.provider); //$NON-NLS-1$
-			System.out.println("source=" + dialog.source); //$NON-NLS-1$
+			System.out.println("provider=" + dialog.provider); 
+			System.out.println("source=" + dialog.source); 
 		}
 		System.exit(0);
 	}

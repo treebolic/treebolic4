@@ -433,7 +433,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 */
 	private void populateWithTrueFalse(final JComboBox<String> combo)
 	{
-		populateWithStrings(combo, new String[] { "false", "true" }); //$NON-NLS-1$ //$NON-NLS-2$
+		populateWithStrings(combo, new String[] { "false", "true" });  
 	}
 
 	/**
@@ -444,7 +444,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 */
 	private void populateWithUrls(final JComboBox<String> combo)
 	{
-		populateWithStrings(combo, new String[] { "http://", "ftp://" }); //$NON-NLS-1$ //$NON-NLS-2$
+		populateWithStrings(combo, new String[] { "http://", "ftp://" });  
 	}
 
 	/**
@@ -458,7 +458,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 		final Set<String> ids = this.handler.idGetter.ids();
 		for (final String string : ids)
 		{
-			combo.addItem("#" + string); //$NON-NLS-1$
+			combo.addItem("#" + string); 
 		}
 	}
 
@@ -470,7 +470,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 */
 	private void populateWithFonts(final JComboBox<String> combo)
 	{
-		populateWithStrings(combo, new String[] { "SansSerif", "Serif", "MonoSpaced", "Dialog", "DialogInput" }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+		populateWithStrings(combo, new String[] { "SansSerif", "Serif", "MonoSpaced", "Dialog", "DialogInput" });     
 		final Font[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
 		for (final Font font : fonts)
 		{
@@ -518,7 +518,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	@Override
 	public void editingCanceled(final ChangeEvent e)
 	{
-		// System.out.println("Editor notification: Canceled"); //$NON-NLS-1$
+		// System.out.println("Editor notification: Canceled"); 
 	}
 
 	/*
@@ -528,7 +528,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	@Override
 	public void editingStopped(final ChangeEvent e)
 	{
-		// System.out.println("Editor notification: Stopped"); //$NON-NLS-1$
+		// System.out.println("Editor notification: Stopped"); 
 	}
 
 	// L I S T E N E R S

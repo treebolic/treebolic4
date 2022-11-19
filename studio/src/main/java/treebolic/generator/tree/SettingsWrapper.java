@@ -32,6 +32,6 @@ public class SettingsWrapper
 	@Override
 	public String toString()
 	{
-		return Messages.getString("SettingsWrapper.label"); //$NON-NLS-1$
+		return Messages.getString("SettingsWrapper.label"); 
 	}
 }

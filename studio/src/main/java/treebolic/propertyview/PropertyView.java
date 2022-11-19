@@ -35,7 +35,7 @@ public class PropertyView extends JPanel implements SelectListener
 	/**
 	 * String for default value
 	 */
-	static final String defaultString = Messages.getString("PropertyView.default"); //$NON-NLS-1$
+	static final String defaultString = Messages.getString("PropertyView.default"); 
 
 	// I N T E R F A C E S
 
@@ -125,7 +125,7 @@ public class PropertyView extends JPanel implements SelectListener
 		@Override
 		public String toString()
 		{
-			return String.format("%s (%s)", this.name, this.type); //$NON-NLS-1$
+			return String.format("%s (%s)", this.name, this.type); 
 		}
 	}
 
@@ -159,7 +159,7 @@ public class PropertyView extends JPanel implements SelectListener
 		@Override
 		public String toString()
 		{
-			return String.format("%s=%s", this.descriptor, this.value); //$NON-NLS-1$
+			return String.format("%s=%s", this.descriptor, this.value); 
 		}
 	}
 
@@ -260,7 +260,7 @@ public class PropertyView extends JPanel implements SelectListener
 	/**
 	 * Stoke strings
 	 */
-	static public final String[] strokeStrings = {"solid", "dash", "dot"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	static public final String[] strokeStrings = {"solid", "dash", "dot"};   
 
 	/**
 	 * String to stroke icons
@@ -270,7 +270,7 @@ public class PropertyView extends JPanel implements SelectListener
 	/**
 	 * Terminator strings
 	 */
-	static public final String[] terminatorStrings = {"z", "a", "t", "h", "tf", "c", "cf", "d", "df"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$
+	static public final String[] terminatorStrings = {"z", "a", "t", "h", "tf", "c", "cf", "d", "df"};         
 
 	/**
 	 * String to terminator icon map
@@ -282,19 +282,19 @@ public class PropertyView extends JPanel implements SelectListener
 	 */
 	static
 	{
-		PropertyView.terminatorIcons.put("z", new ImageIcon(PropertyView.class.getResource("images/terminatorz.png"))); //$NON-NLS-1$ //$NON-NLS-2$
-		PropertyView.terminatorIcons.put("a", new ImageIcon(PropertyView.class.getResource("images/terminatora.png"))); //$NON-NLS-1$ //$NON-NLS-2$
-		PropertyView.terminatorIcons.put("h", new ImageIcon(PropertyView.class.getResource("images/terminatorh.png"))); //$NON-NLS-1$ //$NON-NLS-2$
-		PropertyView.terminatorIcons.put("t", new ImageIcon(PropertyView.class.getResource("images/terminatort.png"))); //$NON-NLS-1$ //$NON-NLS-2$
-		PropertyView.terminatorIcons.put("tf", new ImageIcon(PropertyView.class.getResource("images/terminatortf.png"))); //$NON-NLS-1$ //$NON-NLS-2$
-		PropertyView.terminatorIcons.put("c", new ImageIcon(PropertyView.class.getResource("images/terminatorc.png"))); //$NON-NLS-1$ //$NON-NLS-2$
-		PropertyView.terminatorIcons.put("cf", new ImageIcon(PropertyView.class.getResource("images/terminatorcf.png"))); //$NON-NLS-1$ //$NON-NLS-2$
-		PropertyView.terminatorIcons.put("d", new ImageIcon(PropertyView.class.getResource("images/terminatord.png"))); //$NON-NLS-1$ //$NON-NLS-2$
-		PropertyView.terminatorIcons.put("df", new ImageIcon(PropertyView.class.getResource("images/terminatordf.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+		PropertyView.terminatorIcons.put("z", new ImageIcon(PropertyView.class.getResource("images/terminatorz.png")));  
+		PropertyView.terminatorIcons.put("a", new ImageIcon(PropertyView.class.getResource("images/terminatora.png")));  
+		PropertyView.terminatorIcons.put("h", new ImageIcon(PropertyView.class.getResource("images/terminatorh.png")));  
+		PropertyView.terminatorIcons.put("t", new ImageIcon(PropertyView.class.getResource("images/terminatort.png")));  
+		PropertyView.terminatorIcons.put("tf", new ImageIcon(PropertyView.class.getResource("images/terminatortf.png")));  
+		PropertyView.terminatorIcons.put("c", new ImageIcon(PropertyView.class.getResource("images/terminatorc.png")));  
+		PropertyView.terminatorIcons.put("cf", new ImageIcon(PropertyView.class.getResource("images/terminatorcf.png")));  
+		PropertyView.terminatorIcons.put("d", new ImageIcon(PropertyView.class.getResource("images/terminatord.png")));  
+		PropertyView.terminatorIcons.put("df", new ImageIcon(PropertyView.class.getResource("images/terminatordf.png")));  
 
-		PropertyView.strokeIcons.put("solid", new ImageIcon(PropertyView.class.getResource("images/solid.png"))); //$NON-NLS-1$ //$NON-NLS-2$
-		PropertyView.strokeIcons.put("dash", new ImageIcon(PropertyView.class.getResource("images/dash.png"))); //$NON-NLS-1$ //$NON-NLS-2$
-		PropertyView.strokeIcons.put("dot", new ImageIcon(PropertyView.class.getResource("images/dot.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+		PropertyView.strokeIcons.put("solid", new ImageIcon(PropertyView.class.getResource("images/solid.png")));  
+		PropertyView.strokeIcons.put("dash", new ImageIcon(PropertyView.class.getResource("images/dash.png")));  
+		PropertyView.strokeIcons.put("dot", new ImageIcon(PropertyView.class.getResource("images/dot.png")));  
 	}
 
 	// C O N S T R U C T
@@ -326,7 +326,7 @@ public class PropertyView extends JPanel implements SelectListener
 	private void initialize()
 	{
 		this.attributeTable.setToolTipText(null);
-		final JLabel attributesLabel = new JLabel(Messages.getString("PropertyView.attributes")); //$NON-NLS-1$
+		final JLabel attributesLabel = new JLabel(Messages.getString("PropertyView.attributes")); 
 		setLayout(new BorderLayout());
 		this.add(attributesLabel, BorderLayout.NORTH);
 		this.add(new JScrollPane(this.attributeTable), BorderLayout.CENTER);
@@ -451,11 +451,11 @@ public class PropertyView extends JPanel implements SelectListener
 	{
 		try
 		{
-			return URLDecoder.decode(string, "UTF8"); //$NON-NLS-1$
+			return URLDecoder.decode(string, "UTF8"); 
 		}
 		catch (final UnsupportedEncodingException e)
 		{
-			System.err.println("Can't decode " + string + " - " + e); //$NON-NLS-1$ //$NON-NLS-2$
+			System.err.println("Can't decode " + string + " - " + e);  
 		}
 		return string;
 	}
@@ -470,11 +470,11 @@ public class PropertyView extends JPanel implements SelectListener
 	{
 		try
 		{
-			return URLEncoder.encode(string, "UTF8"); //$NON-NLS-1$
+			return URLEncoder.encode(string, "UTF8"); 
 		}
 		catch (final UnsupportedEncodingException e)
 		{
-			System.err.println("Cant decode " + string + " - " + e); //$NON-NLS-1$ //$NON-NLS-2$
+			System.err.println("Cant decode " + string + " - " + e);  
 		}
 		return string;
 	}
@@ -652,15 +652,15 @@ public class PropertyView extends JPanel implements SelectListener
 			switch (x)
 			{
 				case STATUS:
-					return "x"; //$NON-NLS-1$
+					return "x"; 
 				case TYPE:
-					return "t"; //$NON-NLS-1$
+					return "t"; 
 				case NAME:
-					return Messages.getString("PropertyView.name"); //$NON-NLS-1$
+					return Messages.getString("PropertyView.name"); 
 				case VALUE:
-					return Messages.getString("PropertyView.value"); //$NON-NLS-1$
+					return Messages.getString("PropertyView.value"); 
 				default:
-					return ""; //$NON-NLS-1$
+					return ""; 
 			}
 		}
 	}

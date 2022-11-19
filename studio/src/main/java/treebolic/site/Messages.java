@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
  */
 public class Messages
 {
-	private static final String BUNDLE_NAME = "treebolic.site.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "treebolic.site.messages"; 
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 

@@ -24,8 +24,8 @@ public class LinkListDialog extends ReferenceListDialog
 	public LinkListDialog(final Controller controller)
 	{
 		super(controller);
-		setTitle(Messages.getString("LinkListDialog.title")); //$NON-NLS-1$
-		this.label.setText(Messages.getString("LinkListDialog.label")); //$NON-NLS-1$
+		setTitle(Messages.getString("LinkListDialog.title")); 
+		this.label.setText(Messages.getString("LinkListDialog.label")); 
 		this.scrollPane.setPreferredSize(new Dimension(300, 120));
 	}
 

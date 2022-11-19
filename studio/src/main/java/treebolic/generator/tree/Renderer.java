@@ -105,17 +105,17 @@ public class Renderer extends DefaultTreeCellRenderer
 	static
 	{
 		// icons
-		treebolicIcon = new ImageIcon(Renderer.class.getResource("images/treehome.png")); //$NON-NLS-1$
-		treeIcon = new ImageIcon(Renderer.class.getResource("images/treetree.png")); //$NON-NLS-1$
-		nodesIcon = new ImageIcon(Renderer.class.getResource("images/treenodes.png")); //$NON-NLS-1$
-		rootIcon = new ImageIcon(Renderer.class.getResource("images/treeroot.png")); //$NON-NLS-1$
-		nodeIcon = new ImageIcon(Renderer.class.getResource("images/treenode.png")); //$NON-NLS-1$
-		nodeSpecialIcon = new ImageIcon(Renderer.class.getResource("images/treenodespecial.png")); //$NON-NLS-1$
-		edgesIcon = new ImageIcon(Renderer.class.getResource("images/treeedges.png")); //$NON-NLS-1$
-		edgeIcon = new ImageIcon(Renderer.class.getResource("images/treeedge.png")); //$NON-NLS-1$
-		toolsIcon = new ImageIcon(Renderer.class.getResource("images/treetools.png")); //$NON-NLS-1$
-		menuIcon = new ImageIcon(Renderer.class.getResource("images/treemenuitem.png")); //$NON-NLS-1$
-		defaultIcon = new ImageIcon(Renderer.class.getResource("images/treedefault.png")); //$NON-NLS-1$
+		treebolicIcon = new ImageIcon(Renderer.class.getResource("images/treehome.png")); 
+		treeIcon = new ImageIcon(Renderer.class.getResource("images/treetree.png")); 
+		nodesIcon = new ImageIcon(Renderer.class.getResource("images/treenodes.png")); 
+		rootIcon = new ImageIcon(Renderer.class.getResource("images/treeroot.png")); 
+		nodeIcon = new ImageIcon(Renderer.class.getResource("images/treenode.png")); 
+		nodeSpecialIcon = new ImageIcon(Renderer.class.getResource("images/treenodespecial.png")); 
+		edgesIcon = new ImageIcon(Renderer.class.getResource("images/treeedges.png")); 
+		edgeIcon = new ImageIcon(Renderer.class.getResource("images/treeedge.png")); 
+		toolsIcon = new ImageIcon(Renderer.class.getResource("images/treetools.png")); 
+		menuIcon = new ImageIcon(Renderer.class.getResource("images/treemenuitem.png")); 
+		defaultIcon = new ImageIcon(Renderer.class.getResource("images/treedefault.png")); 
 
 		// fonts
 		defaultFont = new Font(Font.DIALOG, Font.PLAIN, 12);
@@ -166,55 +166,55 @@ public class Renderer extends DefaultTreeCellRenderer
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.edgeIcon);
 			setForeground(Color.BLACK);
-			setToolTipText(Messages.getString("Renderer.tooltip_edge")); //$NON-NLS-1$
+			setToolTipText(Messages.getString("Renderer.tooltip_edge")); 
 		}
 		else if (object instanceof TopWrapper)
 		{
-			setText(Messages.getString("Renderer.top")); //$NON-NLS-1$
+			setText(Messages.getString("Renderer.top")); 
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.treebolicIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(Messages.getString("Renderer.tooltip_top")); //$NON-NLS-1$
+			setToolTipText(Messages.getString("Renderer.tooltip_top")); 
 		}
 		else if (object instanceof TreeWrapper)
 		{
-			setText(Messages.getString("Renderer.tree")); //$NON-NLS-1$
+			setText(Messages.getString("Renderer.tree")); 
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.treeIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(Messages.getString("Renderer.tooltip_tree")); //$NON-NLS-1$
+			setToolTipText(Messages.getString("Renderer.tooltip_tree")); 
 		}
 		else if (object instanceof NodesWrapper)
 		{
-			setText(Messages.getString("Renderer.nodes")); //$NON-NLS-1$
+			setText(Messages.getString("Renderer.nodes")); 
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.nodesIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(Messages.getString("Renderer.tooltip_nodes")); //$NON-NLS-1$
+			setToolTipText(Messages.getString("Renderer.tooltip_nodes")); 
 		}
 		else if (object instanceof EdgesWrapper)
 		{
-			setText(Messages.getString("Renderer.edges")); //$NON-NLS-1$
+			setText(Messages.getString("Renderer.edges")); 
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.edgesIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(Messages.getString("Renderer.tooltip_edges")); //$NON-NLS-1$
+			setToolTipText(Messages.getString("Renderer.tooltip_edges")); 
 		}
 		else if (object instanceof ToolsWrapper)
 		{
-			setText(Messages.getString("Renderer.tools")); //$NON-NLS-1$
+			setText(Messages.getString("Renderer.tools")); 
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.toolsIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(Messages.getString("Renderer.tooltip_tools")); //$NON-NLS-1$
+			setToolTipText(Messages.getString("Renderer.tooltip_tools")); 
 		}
 		else if (object instanceof MenuWrapper)
 		{
-			setText(Messages.getString("Renderer.menu")); //$NON-NLS-1$
+			setText(Messages.getString("Renderer.menu")); 
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.menuIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(Messages.getString("Renderer.tooltip_menu")); //$NON-NLS-1$
+			setToolTipText(Messages.getString("Renderer.tooltip_menu")); 
 		}
 		else if (object instanceof MenuItemWrapper)
 		{
@@ -224,15 +224,15 @@ public class Renderer extends DefaultTreeCellRenderer
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.menuIcon);
 			setForeground(Color.BLACK);
-			setToolTipText(Messages.getString("Renderer.tooltip_menuitem")); //$NON-NLS-1$
+			setToolTipText(Messages.getString("Renderer.tooltip_menuitem")); 
 		}
 		else
 		{
-			setText("?"); //$NON-NLS-1$
+			setText("?"); 
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.defaultIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(""); //$NON-NLS-1$
+			setToolTipText(""); 
 		}
 
 		// selection
@@ -257,12 +257,12 @@ public class Renderer extends DefaultTreeCellRenderer
 	private String getNodeTooltip(final String label, final String content)
 	{
 		final StringBuilder buffer = new StringBuilder();
-		buffer.append("<html><strong>Node</strong><br>"); //$NON-NLS-1$
+		buffer.append("<html><strong>Node</strong><br>"); 
 		buffer.append(label);
-		buffer.append("<br>"); //$NON-NLS-1$
+		buffer.append("<br>"); 
 		if (content != null)
 		{
-			buffer.append("<i>"); //$NON-NLS-1$
+			buffer.append("<i>"); 
 			if (content.length() < 16)
 			{
 				buffer.append(content);
@@ -270,11 +270,11 @@ public class Renderer extends DefaultTreeCellRenderer
 			else
 			{
 				buffer.append(content, 0, 16);
-				buffer.append(" ..."); //$NON-NLS-1$
+				buffer.append(" ..."); 
 			}
-			buffer.append("</i>"); //$NON-NLS-1$
+			buffer.append("</i>"); 
 		}
-		buffer.append("</html>"); //$NON-NLS-1$
+		buffer.append("</html>"); 
 		return buffer.toString();
 	}
 }

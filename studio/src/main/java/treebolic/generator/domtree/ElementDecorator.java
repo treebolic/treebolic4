@@ -83,7 +83,7 @@ public class ElementDecorator extends DefaultDecorator
 	 */
 	protected String getAttributes()
 	{
-		StringBuilder result = new StringBuilder(); //$NON-NLS-1$
+		StringBuilder result = new StringBuilder(); 
 		final NamedNodeMap map = getElement().getAttributes();
 		if (map != null)
 		{
@@ -91,10 +91,10 @@ public class ElementDecorator extends DefaultDecorator
 			{
 				if (i != 0)
 				{
-					result.append(" "); //$NON-NLS-1$
+					result.append(" "); 
 				}
 				final Node attribute = map.item(i);
-				result.append(attribute.getNodeName()).append("=\"").append(attribute.getNodeValue()).append("\""); //$NON-NLS-1$ //$NON-NLS-2$
+				result.append(attribute.getNodeName()).append("=\"").append(attribute.getNodeValue()).append("\"");  
 			}
 		}
 		return result.toString();

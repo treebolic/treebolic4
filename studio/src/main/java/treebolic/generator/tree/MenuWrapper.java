@@ -38,6 +38,6 @@ public class MenuWrapper extends SettingsWrapper
 	@Override
 	public String toString()
 	{
-		return Messages.getString("MenuWrapper.label"); //$NON-NLS-1$
+		return Messages.getString("MenuWrapper.label"); 
 	}
 }

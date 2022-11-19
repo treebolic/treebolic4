@@ -48,18 +48,18 @@ public class ImageListDialog extends ReferenceListDialog
 	public ImageListDialog(final Controller controller)
 	{
 		super(controller);
-		setTitle(Messages.getString("ImageListDialog.title")); //$NON-NLS-1$
-		this.label.setText(Messages.getString("ImageListDialog.label")); //$NON-NLS-1$
+		setTitle(Messages.getString("ImageListDialog.title")); 
+		this.label.setText(Messages.getString("ImageListDialog.label")); 
 		this.referenceTable.setRowHeight(32);
 		this.scrollPane.setPreferredSize(new Dimension(300, 320));
 
-		final JButton checkMissingButton = new JButton(Messages.getString("ImageListDialog.missing")); //$NON-NLS-1$
+		final JButton checkMissingButton = new JButton(Messages.getString("ImageListDialog.missing")); 
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
 		checkMissingButton.addActionListener(e -> checkMissing());
-		final JButton checkUnusedButton = new JButton(Messages.getString("ImageListDialog.unused")); //$NON-NLS-1$
+		final JButton checkUnusedButton = new JButton(Messages.getString("ImageListDialog.unused")); 
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -78,7 +78,7 @@ public class ImageListDialog extends ReferenceListDialog
 	@Override
 	protected void update()
 	{
-		this.label.setText(Messages.getString("ImageListDialog.label")); //$NON-NLS-1$
+		this.label.setText(Messages.getString("ImageListDialog.label")); 
 		this.imageRepository = this.controller.makeImageRepositoryURL();
 		final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
 		setModel(imageToLocationMap);
@@ -130,22 +130,22 @@ public class ImageListDialog extends ReferenceListDialog
 			{
 				final ParameterModel.Entry entry = (ParameterModel.Entry) value;
 				final String location = entry.value;
-				if (location.startsWith("default") || location.equals("background")) //$NON-NLS-1$ //$NON-NLS-2$
+				if (location.startsWith("default") || location.equals("background"))  
 				{
 					setBackground(Color.LIGHT_GRAY);
 					setForeground(Color.WHITE);
 				}
-				else if (location.startsWith("node")) //$NON-NLS-1$
+				else if (location.startsWith("node")) 
 				{
 					setBackground(Color.WHITE);
 					setForeground(Color.BLUE);
 				}
-				else if (location.startsWith("treeedge") || location.startsWith("edge")) //$NON-NLS-1$ //$NON-NLS-2$
+				else if (location.startsWith("treeedge") || location.startsWith("edge"))  
 				{
 					setBackground(Color.WHITE);
 					setForeground(Color.BLACK);
 				}
-				else if (location.startsWith("unused")) //$NON-NLS-1$
+				else if (location.startsWith("unused")) 
 				{
 					setBackground(Color.WHITE);
 					setForeground(Color.BLACK);
@@ -173,7 +173,7 @@ public class ImageListDialog extends ReferenceListDialog
 		final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
 		final Set<String> images = imageToLocationMap.keySet();
 
-		if (this.imageRepository.getProtocol().equals("file")) //$NON-NLS-1$
+		if (this.imageRepository.getProtocol().equals("file")) 
 		{
 			try
 			{
@@ -190,7 +190,7 @@ public class ImageListDialog extends ReferenceListDialog
 						}
 					}
 					setModel(imageToLocationMap);
-					this.label.setText(Messages.getString("ImageListDialog.label_missing") + uri); //$NON-NLS-1$
+					this.label.setText(Messages.getString("ImageListDialog.label_missing") + uri); 
 				}
 			}
 			catch (final URISyntaxException exception)
@@ -210,7 +210,7 @@ public class ImageListDialog extends ReferenceListDialog
 		final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
 		final Set<String> images = imageToLocationMap.keySet();
 
-		if (this.imageRepository.getProtocol().equals("file")) //$NON-NLS-1$
+		if (this.imageRepository.getProtocol().equals("file")) 
 		{
 			try
 			{
@@ -228,12 +228,12 @@ public class ImageListDialog extends ReferenceListDialog
 						if (!images.contains(name))
 						{
 							final SortedSet<String> value = new TreeSet<>();
-							value.add(Messages.getString("ImageListDialog.is_unused")); //$NON-NLS-1$
+							value.add(Messages.getString("ImageListDialog.is_unused")); 
 							unusedToLocationMap.put(name, value);
 						}
 					}
 					setModel(unusedToLocationMap);
-					this.label.setText(Messages.getString("ImageListDialog.label_unused") + uri); //$NON-NLS-1$
+					this.label.setText(Messages.getString("ImageListDialog.label_unused") + uri); 
 				}
 			}
 			catch (final URISyntaxException exception)

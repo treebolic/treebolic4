@@ -151,11 +151,11 @@ public class TreeView extends JScrollPane
 			String label = parentNode.getLabel();
 			if (label == null)
 			{
-				label = ""; //$NON-NLS-1$
+				label = ""; 
 			}
 			else
 			{
-				label += "-"; //$NON-NLS-1$
+				label += "-"; 
 			}
 			label += pos;
 

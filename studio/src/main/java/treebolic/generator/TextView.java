@@ -22,7 +22,7 @@ public class TextView extends JTextArea
 	 */
 	public TextView()
 	{
-		setText(Messages.getString("TextView.init")); //$NON-NLS-1$
+		setText(Messages.getString("TextView.init")); 
 		setEditable(false);
 		setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
 		setLineWrap(false);

@@ -323,7 +323,7 @@ public class Controller extends Commander
 			{
 				final Point point = (Point) parameters[0];
 				final INode node = (INode) parameters[1];
-				popup(point.x, point.y, node);
+				popup(point.x(), point.y(), node);
 				break;
 			}
 
@@ -1020,6 +1020,6 @@ public class Controller extends Commander
 	public Complex viewToUnitCircle(@NonNull final Point point)
 	{
 		assert this.view != null;
-		return this.view.viewToUnitCircle(point.x, point.y);
+		return this.view.viewToUnitCircle(point.x(), point.y());
 	}
 }

@@ -236,7 +236,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		this.document = null;
 		this.url = null;
 		this.mode = null;
-		this.settings = Persist.getSettings("treebolic-generator"); //$NON-NLS-1$
+		this.settings = Persist.getSettings("treebolic-generator"); 
 		this.updateMap = new HashMap<>();
 	}
 
@@ -481,7 +481,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			}
 			catch (final IOException e)
 			{
-				view.setText(Messages.getString("Controller.linkto_err") + event.getURL()); //$NON-NLS-1$
+				view.setText(Messages.getString("Controller.linkto_err") + event.getURL()); 
 			}
 		}
 	}
@@ -621,19 +621,19 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			break;
 
 		case SELECTTOP:
-			select("TopWrapper"); //$NON-NLS-1$
+			select("TopWrapper"); 
 			break;
 
 		case SELECTTREE:
-			select("TreeWrapper"); //$NON-NLS-1$
+			select("TreeWrapper"); 
 			break;
 
 		case SELECTNODES:
-			select("NodesWrapper"); //$NON-NLS-1$
+			select("NodesWrapper"); 
 			break;
 
 		case SELECTEDGES:
-			select("EdgesWrapper"); //$NON-NLS-1$
+			select("EdgesWrapper"); 
 			break;
 
 		case ABOUT:
@@ -649,7 +649,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			break;
 
 		default:
-			System.err.println("Unhandled action: " + code); //$NON-NLS-1$
+			System.err.println("Unhandled action: " + code); 
 			break;
 		}
 	}
@@ -662,7 +662,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	public void exit()
 	{
 		checkSave();
-		Persist.saveSettings("treebolic-generator", this.settings); //$NON-NLS-1$
+		Persist.saveSettings("treebolic-generator", this.settings); 
 	}
 
 	/**
@@ -682,7 +682,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	private void open()
 	{
 		checkSave();
-		final String url = FileDialogs.getXmlUrl(this.settings.getProperty("base", ".")); //$NON-NLS-1$//$NON-NLS-2$
+		final String url = FileDialogs.getXmlUrl(this.settings.getProperty("base", ".")); 
 		if (url != null)
 			open(url); // $NON-NLS-1$
 	}
@@ -699,7 +699,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		if (dialog.ok)
 		{
-			open(this.settings.getProperty("openurl")); //$NON-NLS-1$
+			open(this.settings.getProperty("openurl")); 
 		}
 	}
 
@@ -744,7 +744,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	protected EntityResolver makeEntityResolver()
 	{
 		return (publicId, systemId) -> {
-			final URL url = Dtd.class.getResource("Treebolic.dtd"); //$NON-NLS-1$
+			final URL url = Dtd.class.getResource("Treebolic.dtd"); 
 			return new InputSource(url.openStream());
 		};
 	}
@@ -808,11 +808,11 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	private void saveAs()
 	{
-		final String filePath = FileDialogs.getXml(this.settings.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
+		final String filePath = FileDialogs.getXml(this.settings.getProperty("base", "."));  
 		if (filePath == null)
 			return;
 		final File file = new File(filePath);
-		if (file.exists() && !Interact.confirm(new String[] { filePath, Messages.getString("Controller.exists"), Messages.getString("Controller.prompt_overwrite") })) //$NON-NLS-1$ //$NON-NLS-2$
+		if (file.exists() && !Interact.confirm(new String[] { filePath, Messages.getString("Controller.exists"), Messages.getString("Controller.prompt_overwrite") }))  
 			return;
 		save(file);
 	}
@@ -832,14 +832,14 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 				this.document = makeDocument(this.model);
 				if (this.document != null)
 				{
-					new DomTransformer(false, "Treebolic.dtd").documentToFile(this.document, file); //$NON-NLS-1$
+					new DomTransformer(false, "Treebolic.dtd").documentToFile(this.document, file); 
 					this.treeView.dirty = false;
 					this.propertyView.dirty = false;
 				}
 			}
 			catch (final IOException | TransformerException exception)
 			{
-				System.err.println(Messages.getString("Controller.err_saving") + file + " " + exception); //$NON-NLS-1$ //$NON-NLS-2$
+				System.err.println(Messages.getString("Controller.err_saving") + file + " " + exception);  
 			}
 		}
 	}
@@ -850,7 +850,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	private void checkSave()
 	{
 		if (this.treeView.dirty || this.propertyView.dirty)
-			if (Interact.confirm(new String[] { this.url == null ? Messages.getString("Controller.unnamed") : this.url.toString(), Messages.getString("Controller.unsaved"), Messages.getString("Controller.prompt_save") })) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			if (Interact.confirm(new String[] { this.url == null ? Messages.getString("Controller.unnamed") : this.url.toString(), Messages.getString("Controller.unsaved"), Messages.getString("Controller.prompt_save") }))   
 			{
 				if (this.mode != Mode.OPEN || this.url == null)
 				{
@@ -875,8 +875,8 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		if (dialog.ok)
 		{
-			final String xml = this.settings.getProperty("importurl"); //$NON-NLS-1$
-			final String xslt = this.settings.getProperty("importxsl"); //$NON-NLS-1$
+			final String xml = this.settings.getProperty("importurl"); 
+			final String xslt = this.settings.getProperty("importxsl"); 
 			if (xml != null && xslt != null)
 			{
 				this.url = null;
@@ -901,7 +901,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	private void importProvider()
 	{
 		checkSave();
-		final OpenDialog dialog = new OpenDialog(this.settings.getProperty("provider"), this.settings.getProperty("source"), this.settings.getProperty("base")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final OpenDialog dialog = new OpenDialog(this.settings.getProperty("provider"), this.settings.getProperty("source"), this.settings.getProperty("base"));   
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
@@ -915,8 +915,8 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 				final IProvider provider = makeProvider(providerName);
 				if (provider == null)
 				{
-					final String[] lines = { Messages.getString("Controller.provider"), providerName, Messages.getString("Controller.provider_null") }; //$NON-NLS-1$ //$NON-NLS-2$
-					JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+					final String[] lines = { Messages.getString("Controller.provider"), providerName, Messages.getString("Controller.provider_null") };  
+					JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); 
 					return;
 				}
 				provider.setContext(this);
@@ -925,8 +925,8 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 				final Model model = provider.makeModel(source, getBase(), null);
 				if (model == null)
 				{
-					final String[] lines = { Messages.getString("Controller.provider"), providerName, Messages.getString("Controller.model_null_source"), source }; //$NON-NLS-1$ //$NON-NLS-2$
-					JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+					final String[] lines = { Messages.getString("Controller.provider"), providerName, Messages.getString("Controller.model_null_source"), source };  
+					JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); 
 					return;
 				}
 
@@ -934,8 +934,8 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 				final Pair<Model, Map<String, MutableNode>> result = ModelUtils.toMutable(model);
 				if (result.first == null)
 				{
-					final String[] lines = { Messages.getString("Controller.provider"), providerName, Messages.getString("Controller.modelmutable_null_source"), source }; //$NON-NLS-1$ //$NON-NLS-2$
-					JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+					final String[] lines = { Messages.getString("Controller.provider"), providerName, Messages.getString("Controller.modelmutable_null_source"), source };  
+					JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); 
 					return;
 				}
 
@@ -956,9 +956,9 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		if (dialog.ok)
 		{
-			final String exportUrl = this.settings.getProperty("exporturl"); //$NON-NLS-1$
-			final String xsltUrl = this.settings.getProperty("exportxsl"); //$NON-NLS-1$
-			if (exportUrl.startsWith("view:")) //$NON-NLS-1$
+			final String exportUrl = this.settings.getProperty("exporturl"); 
+			final String xsltUrl = this.settings.getProperty("exportxsl"); 
+			if (exportUrl.startsWith("view:")) 
 			{
 				transformToView(exportUrl, xsltUrl);
 			}
@@ -974,13 +974,13 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	private void zipDocument()
 	{
-		final String filePath = FileDialogs.getZip(this.settings.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
+		final String filePath = FileDialogs.getZip(this.settings.getProperty("base", "."));  
 		if (filePath == null)
 			return;
 		final File archive = new File(filePath);
-		if (archive.exists() && !Interact.confirm(new String[] { filePath, Messages.getString("Controller.archive"), Messages.getString("Controller.prompt_overwrite") })) //$NON-NLS-1$ //$NON-NLS-2$
+		if (archive.exists() && !Interact.confirm(new String[] { filePath, Messages.getString("Controller.archive"), Messages.getString("Controller.prompt_overwrite") }))  
 			return;
-		final String entry = Interact.ask2(Messages.getString("Controller.prompt_zipentry"), "model.xml"); //$NON-NLS-1$//$NON-NLS-2$
+		final String entry = Interact.ask2(Messages.getString("Controller.prompt_zipentry"), "model.xml"); 
 		if (entry == null || entry.isEmpty())
 			return;
 		final Document document = makeDocument(this.model);
@@ -996,7 +996,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	private void unzipDocument()
 	{
-		final String filePath = FileDialogs.getZip(this.settings.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
+		final String filePath = FileDialogs.getZip(this.settings.getProperty("base", "."));  
 		if (filePath == null)
 			return;
 		final File archive = new File(filePath);
@@ -1024,10 +1024,10 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		try
 		{
 			final String archiveUrl = archive.toURI().toURL().toString();
-			final String urlString = String.format("jar:%s!/%s", archiveUrl, entry); //$NON-NLS-1$
+			final String urlString = String.format("jar:%s!/%s", archiveUrl, entry); 
 			final URL url = new URL(urlString);
 
-			final String imagesUrlString = String.format("jar:%s!/", archiveUrl); //$NON-NLS-1$
+			final String imagesUrlString = String.format("jar:%s!/", archiveUrl); 
 			final URL imageUrl = new URL(imagesUrlString);
 			this.propertyView.setImageRepository(imageUrl);
 
@@ -1036,7 +1036,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		catch (final Exception exception)
 		{
 			final String[] lines = { exception.toString(), exception.getMessage() };
-			JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+			JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); 
 		}
 	}
 
@@ -1045,11 +1045,11 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	private void serializeModel()
 	{
-		final String filePath = FileDialogs.getSer(this.settings.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
+		final String filePath = FileDialogs.getSer(this.settings.getProperty("base", "."));  
 		if (filePath == null)
 			return;
 		final File file = new File(filePath);
-		if (file.exists() && !Interact.confirm(new String[] { filePath, Messages.getString("Controller.file"), Messages.getString("Controller.prompt_overwrite") })) //$NON-NLS-1$ //$NON-NLS-2$
+		if (file.exists() && !Interact.confirm(new String[] { filePath, Messages.getString("Controller.file"), Messages.getString("Controller.prompt_overwrite") }))  
 			return;
 
 		try
@@ -1059,7 +1059,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		catch (final IOException exception)
 		{
 			final String[] lines = { exception.toString(), exception.getMessage() };
-			JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+			JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); 
 		}
 	}
 
@@ -1069,7 +1069,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	private void deserializeModel()
 	{
 		checkSave();
-		final String filePath = FileDialogs.getSer(this.settings.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
+		final String filePath = FileDialogs.getSer(this.settings.getProperty("base", "."));  
 		if (filePath == null)
 			return;
 		final File file = new File(filePath);
@@ -1087,7 +1087,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		catch (final Exception exception)
 		{
 			final String[] lines = { exception.toString(), exception.getMessage() };
-			JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+			JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); 
 		}
 	}
 
@@ -1099,7 +1099,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		if (this.model == null || this.settings == null)
 			return;
 		final Settings settings = this.model.settings;
-		final String filePath = FileDialogs.getPropertyFile(this.settings.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
+		final String filePath = FileDialogs.getPropertyFile(this.settings.getProperty("base", "."));  
 		if (filePath != null)
 			ModelUtils.saveSettings(settings, filePath); // $NON-NLS-1$
 	}
@@ -1127,7 +1127,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	private void normalizeIds()
 	{
-		final String prefix = Interact.ask2(Messages.getString("Controller.prompt_idprefix"), "id"); //$NON-NLS-1$ //$NON-NLS-2$
+		final String prefix = Interact.ask2(Messages.getString("Controller.prompt_idprefix"), "id");  
 		if (prefix == null)
 			return;
 		this.idToNodeMap = ModelUtils.normalizeIds(this.model, prefix);
@@ -1196,7 +1196,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	{
 		final TextView view = makeTextView();
 		final JComponent component = new JScrollPane(view);
-		this.tabbedPane.addTab("DTD", null, component, null); //$NON-NLS-1$
+		this.tabbedPane.addTab("DTD", null, component, null); 
 		final int index = this.tabbedPane.indexOfComponent(component);
 		this.tabbedPane.setTabComponentAt(index, new ButtonTabComponent(this.tabbedPane));
 		this.tabbedPane.setSelectedIndex(index);
@@ -1246,12 +1246,12 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		if (this.document != null)
 		{
 			// type of view
-			final boolean isHtml = exportUrl.endsWith("html"); //$NON-NLS-1$
+			final boolean isHtml = exportUrl.endsWith("html"); 
 			final JTextComponent view = isHtml ? makeHtmlView(this) : makeTextView();
 			final JComponent component = new JScrollPane(view);
 
 			// tab
-			this.tabbedPane.addTab(Messages.getString("Controller.export"), null, component, null); //$NON-NLS-1$
+			this.tabbedPane.addTab(Messages.getString("Controller.export"), null, component, null); 
 			final int index = this.tabbedPane.indexOfComponent(component);
 			this.tabbedPane.setTabComponentAt(index, new ButtonTabComponent(this.tabbedPane));
 			this.tabbedPane.setToolTipTextAt(index, xsltUrlString);
@@ -1269,12 +1269,12 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			catch (final IOException | TransformerException exception)
 			{
 				final String[] lines = { exception.toString(), exception.getMessage() };
-				JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+				JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); 
 			}
 			return;
 		}
-		final String[] lines = { Messages.getString("Controller.err_document_null") }; //$NON-NLS-1$
-		JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+		final String[] lines = { Messages.getString("Controller.err_document_null") }; 
+		JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); 
 	}
 
 	/**
@@ -1285,11 +1285,11 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		if (this.document != null)
 		{
 			// type of view
-			final boolean isHtml = exportUrl.endsWith("html"); //$NON-NLS-1$
+			final boolean isHtml = exportUrl.endsWith("html"); 
 			try
 			{
 				final File outputFile = Controller.getFile(outputFileUrl);
-				if (outputFile.exists() && !Interact.confirm(new String[] { outputFileUrl, Messages.getString("Controller.file"), Messages.getString("Controller.prompt_overwrite") })) //$NON-NLS-1$ //$NON-NLS-2$
+				if (outputFile.exists() && !Interact.confirm(new String[] { outputFileUrl, Messages.getString("Controller.file"), Messages.getString("Controller.prompt_overwrite") }))  
 					return;
 				final URL xsltUrl = new URL(xsltUrlString);
 				final DomTransformer transformer = new DomTransformer(isHtml, null);
@@ -1298,12 +1298,12 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			catch (final IOException | TransformerException exception)
 			{
 				final String[] lines = { exception.toString(), exception.getMessage() };
-				JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+				JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); 
 			}
 			return;
 		}
-		final String[] lines = { Messages.getString("Controller.err_document_null") }; //$NON-NLS-1$
-		JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+		final String[] lines = { Messages.getString("Controller.err_document_null") }; 
+		JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); 
 	}
 
 	// D I A L O G S
@@ -1344,7 +1344,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		if (dialog.ok)
 		{
-			treebolic.commons.Persist.saveSettings("treebolic-generator", this.settings); //$NON-NLS-1$
+			treebolic.commons.Persist.saveSettings("treebolic-generator", this.settings); 
 			this.propertyView.setImageRepository(makeImageRepositoryURL());
 			updateView();
 		}
@@ -1377,7 +1377,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	private void help()
 	{
-		ExternalBrowser.help(this.settings.getProperty("browser"), this.settings.getProperty("help")); //$NON-NLS-1$ //$NON-NLS-2$
+		ExternalBrowser.help(this.settings.getProperty("browser"), this.settings.getProperty("help"));  
 	}
 
 	/**
@@ -1421,8 +1421,8 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		updateView();
 
 		// title
-		String name = ""; //$NON-NLS-1$
-		String shortTitle = ""; //$NON-NLS-1$
+		String name = ""; 
+		String shortTitle = ""; 
 		switch (this.mode)
 		{
 		case OPEN:
@@ -1435,23 +1435,23 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 				{
 					shortTitle = shortTitle.substring(index + 1);
 				}
-				shortTitle = " - " + shortTitle; //$NON-NLS-1$
+				shortTitle = " - " + shortTitle; 
 			}
 			break;
 		case NEW:
-			name = Messages.getString("Controller.new"); //$NON-NLS-1$
+			name = Messages.getString("Controller.new"); 
 			shortTitle = name;
 			break;
 		case IMPORT:
-			name = Messages.getString("Controller.imported"); //$NON-NLS-1$
+			name = Messages.getString("Controller.imported"); 
 			shortTitle = name;
 			break;
 		case UNZIP:
-			name = Messages.getString("Controller.unzipped"); //$NON-NLS-1$
+			name = Messages.getString("Controller.unzipped"); 
 			shortTitle = name;
 			break;
 		case DESERIALIZE:
-			name = Messages.getString("Controller.deserialized"); //$NON-NLS-1$
+			name = Messages.getString("Controller.deserialized"); 
 			shortTitle = name;
 			break;
 		default:
@@ -1461,7 +1461,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		{
 			this.tabbedPane.setToolTipTextAt(i, name);
 		}
-		this.frame.setTitle(Messages.getString("Controller.title") + " - " + shortTitle); //$NON-NLS-1$ //$NON-NLS-2$
+		this.frame.setTitle(Messages.getString("Controller.title") + " - " + shortTitle);  
 	}
 
 	/**
@@ -1518,7 +1518,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		{
 			try
 			{
-				final String text = new DomTransformer(false, "Treebolic.dtd").documentToString(this.document); //$NON-NLS-1$
+				final String text = new DomTransformer(false, "Treebolic.dtd").documentToString(this.document); 
 				this.textView.setText(text);
 				this.textView.setCaretPosition(0);
 			}
@@ -1575,11 +1575,11 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	public URL makeImageRepositoryURL()
 	{
-		final String imageRepositoryPath = this.settings.getProperty("images"); //$NON-NLS-1$
+		final String imageRepositoryPath = this.settings.getProperty("images"); 
 		if (imageRepositoryPath != null)
 		{
 			File folder = null;
-			if (imageRepositoryPath.startsWith("file")) //$NON-NLS-1$
+			if (imageRepositoryPath.startsWith("file")) 
 			{
 				try
 				{
@@ -1610,7 +1610,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		URL url;
 		try
 		{
-			url = new URL(getBase(), "images"); //$NON-NLS-1$
+			url = new URL(getBase(), "images"); 
 			return url;
 		}
 		catch (final MalformedURLException exception)
@@ -1635,11 +1635,11 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			return null;
 		try
 		{
-			return new URL(getBase(), (subPath == null ? "" : subPath + "/") + filename); //$NON-NLS-1$ //$NON-NLS-2$
+			return new URL(getBase(), (subPath == null ? "" : subPath + "/") + filename);  
 		}
 		catch (final MalformedURLException e)
 		{
-			System.err.println(Messages.getString("Controller.err_badurl") + filename); //$NON-NLS-1$
+			System.err.println(Messages.getString("Controller.err_badurl") + filename); 
 			return null;
 		}
 	}
@@ -1711,7 +1711,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		}
 		catch (final ClassNotFoundException | InvocationTargetException | IllegalArgumentException | InstantiationException | IllegalAccessException | NoSuchMethodException e)
 		{
-			System.err.println("Provider factory: " + e); //$NON-NLS-1$
+			System.err.println("Provider factory: " + e); 
 		}
 		return null;
 	}
@@ -1726,14 +1726,14 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	public URL getBase()
 	{
 		// base parameter
-		final String baseSetting = this.settings.getProperty("base"); //$NON-NLS-1$
-		final String baseParameter = getParameters().getProperty("base"); //$NON-NLS-1$
-		String uRLString = baseSetting != null ? baseSetting : baseParameter != null ? baseParameter : System.getProperty("user.dir"); //$NON-NLS-1$
+		final String baseSetting = this.settings.getProperty("base"); 
+		final String baseParameter = getParameters().getProperty("base"); 
+		String uRLString = baseSetting != null ? baseSetting : baseParameter != null ? baseParameter : System.getProperty("user.dir"); 
 
 		// tail
-		if (!uRLString.endsWith("/")) //$NON-NLS-1$
+		if (!uRLString.endsWith("/")) 
 		{
-			uRLString += "/"; //$NON-NLS-1$
+			uRLString += "/"; 
 		}
 
 		// make
@@ -1783,17 +1783,17 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		final Properties parameters = new Properties();
 		for (final String arg : args)
 		{
-			final String[] pair = arg.split("="); //$NON-NLS-1$
+			final String[] pair = arg.split("="); 
 			if (pair.length != 2)
 			{
 				continue;
 			}
 			final String key = pair[0];
 			String value = pair[1];
-			if (value.startsWith("\"")) //$NON-NLS-1$
+			if (value.startsWith("\"")) 
 			{
 				value = value.substring(1);
-				if (value.endsWith("\"")) //$NON-NLS-1$
+				if (value.endsWith("\"")) 
 				{
 					value = value.substring(0, value.length() - 1);
 				}
@@ -1820,12 +1820,12 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	@Override
 	public String getStyle()
 	{
-		return ".content { }" + //$NON-NLS-1$
-				".link {color: blue;font-size: small; }" + //$NON-NLS-1$
-				".mount {color: red;}" + //$NON-NLS-1$
-				".linking {color: #007D82; font-size: small; }" + //$NON-NLS-1$
-				".mounting {color: #007D82; font-size: small; }" + //$NON-NLS-1$
-				".searching {color: #007D82; font-size: small; }"; //$NON-NLS-1$
+		return ".content { }" + 
+				".link {color: blue;font-size: small; }" + 
+				".mount {color: red;}" + 
+				".linking {color: #007D82; font-size: small; }" + 
+				".mounting {color: #007D82; font-size: small; }" + 
+				".searching {color: #007D82; font-size: small; }"; 
 	}
 
 	/*
@@ -1835,7 +1835,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	@Override
 	public boolean linkTo(final String linkUrl, final String urlTarget)
 	{
-		System.out.println(Messages.getString("Controller.linkto") + linkUrl + " , " + urlTarget); //$NON-NLS-1$ //$NON-NLS-2$
+		System.out.println(Messages.getString("Controller.linkto") + linkUrl + " , " + urlTarget);  
 
 		ExternalBrowser.browse(linkUrl);
 		return true;
@@ -1848,7 +1848,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	@Override
 	public void status(final String string)
 	{
-		System.out.println(Messages.getString("Controller.status") + string); //$NON-NLS-1$
+		System.out.println(Messages.getString("Controller.status") + string); 
 	}
 
 	/*
@@ -1874,8 +1874,8 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	@Override
 	public void warn(final String message)
 	{
-		final String[] lines = message.split("\n"); //$NON-NLS-1$
-		JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+		final String[] lines = message.split("\n"); 
+		JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE); 
 	}
 
 	// P R O V I D E R C O N T E X T

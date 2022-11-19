@@ -35,10 +35,10 @@ public class DomTreeView extends JTree
 		setScrollsOnExpand(true);
 		setDragEnabled(false);
 		setEditable(false);
-		setToolTipText(Messages.getString("DomTreeView.tooltip")); //$NON-NLS-1$
+		setToolTipText(Messages.getString("DomTreeView.tooltip")); 
 		setRowHeight(17);
 		setShowsRootHandles(true);
-		putClientProperty("JTree.lineStyle", "Horizontal"); //$NON-NLS-1$ //$NON-NLS-2$
+		putClientProperty("JTree.lineStyle", "Horizontal");  
 		getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
 		// renderer

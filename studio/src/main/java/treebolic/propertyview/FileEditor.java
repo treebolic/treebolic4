@@ -56,7 +56,7 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor
 		});
 
 		// file chooser
-		final JButton defaultFileButton = new JButton(Messages.getString("FileEditor.default")); //$NON-NLS-1$
+		final JButton defaultFileButton = new JButton(Messages.getString("FileEditor.default")); 
 		defaultFileButton.addActionListener(e -> {
 			FileEditor.this.fileChooser.setSelectedFile(null);
 			Container container = FileEditor.this.fileChooser.getParent();
@@ -73,13 +73,13 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor
 			@Override
 			public boolean accept(final File file)
 			{
-				return file.getName().toLowerCase().endsWith(".gif") || file.getName().toLowerCase().endsWith(".jpg") || file.getName().toLowerCase().endsWith(".png") || file.isDirectory(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				return file.getName().toLowerCase().endsWith(".gif") || file.getName().toLowerCase().endsWith(".jpg") || file.getName().toLowerCase().endsWith(".png") || file.isDirectory();   
 			}
 
 			@Override
 			public String getDescription()
 			{
-				return Messages.getString("FileEditor.image"); //$NON-NLS-1$
+				return Messages.getString("FileEditor.image"); 
 			}
 		});
 		this.fileChooser.addActionListener(e -> {

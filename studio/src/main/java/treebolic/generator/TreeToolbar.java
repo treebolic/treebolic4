@@ -49,17 +49,17 @@ public class TreeToolbar extends JToolBar
 	 */
 	private void initialize()
 	{
-		final JButton newElementButton = makeButton(Messages.getString("TreeToolbar.new"), Messages.getString("TreeToolbar.tooltip_new"), "new.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final JButton newElementButton = makeButton(Messages.getString("TreeToolbar.new"), Messages.getString("TreeToolbar.tooltip_new"), "new.png");   
 		newElementButton.addActionListener(e -> TreeToolbar.this.controller.execute(Controller.Code.NEWELEMENT, 0));
 
-		final JButton deleteElementButton = makeButton(Messages.getString("TreeToolbar.remove"), Messages.getString("TreeToolbar.tooltip_remove"), "delete.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final JButton deleteElementButton = makeButton(Messages.getString("TreeToolbar.remove"), Messages.getString("TreeToolbar.tooltip_remove"), "delete.png");   
 		deleteElementButton.addActionListener(e -> TreeToolbar.this.controller.execute(Controller.Code.REMOVEELEMENT, 0));
 		this.add(newElementButton);
 		this.add(deleteElementButton);
 
-		final JButton expandButton = makeButton(Messages.getString("TreeToolbar.expand"), Messages.getString("TreeToolbar.tooltip_expand"), "expand.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final JButton expandButton = makeButton(Messages.getString("TreeToolbar.expand"), Messages.getString("TreeToolbar.tooltip_expand"), "expand.png");   
 		expandButton.addActionListener(e -> TreeToolbar.this.controller.execute(Controller.Code.EXPANDTREE, 0));
-		final JButton collapseButton = makeButton(Messages.getString("TreeToolbar.collapse"), Messages.getString("TreeToolbar.tooltip_collapse"), "collapse.png"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		final JButton collapseButton = makeButton(Messages.getString("TreeToolbar.collapse"), Messages.getString("TreeToolbar.tooltip_collapse"), "collapse.png");   
 		collapseButton.addActionListener(e -> TreeToolbar.this.controller.execute(Controller.Code.COLLAPSETREE, 0));
 		this.add(newElementButton);
 		this.add(deleteElementButton);
@@ -83,7 +83,7 @@ public class TreeToolbar extends JToolBar
 	{
 		final JButton button = new JButton();
 		button.setToolTipText(tooltip);
-		button.setIcon(new ImageIcon(TreeToolbar.class.getResource("images/" + image))); //$NON-NLS-1$
+		button.setIcon(new ImageIcon(TreeToolbar.class.getResource("images/" + image))); 
 		return button;
 	}
 

@@ -90,17 +90,17 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 	/**
 	 * Src pattern
 	 */
-	private static final Pattern srcPattern = Pattern.compile("src=\"([^\"]*)\""); //$NON-NLS-1$
+	private static final Pattern srcPattern = Pattern.compile("src=\"([^\"]*)\""); 
 
 	/**
 	 * From pattern
 	 */
-	private static final Pattern fromPattern = Pattern.compile("from=\"([^\"]*)\""); //$NON-NLS-1$
+	private static final Pattern fromPattern = Pattern.compile("from=\"([^\"]*)\""); 
 
 	/**
 	 * To pattern
 	 */
-	private static final Pattern toPattern = Pattern.compile("to=\"([^\"]*)\""); //$NON-NLS-1$
+	private static final Pattern toPattern = Pattern.compile("to=\"([^\"]*)\""); 
 
 	// maps
 
@@ -157,9 +157,9 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 		StyleConstants.setForeground(Renderer.srcStyle, Color.MAGENTA);
 
 		// images
-		Renderer.nodeIcon = new ImageIcon(Renderer.class.getResource("images/treenode.gif")); //$NON-NLS-1$
-		Renderer.edgeIcon = new ImageIcon(Renderer.class.getResource("images/treeedge.gif")); //$NON-NLS-1$
-		Renderer.linkIcon = new ImageIcon(Renderer.class.getResource("images/treelink.gif")); //$NON-NLS-1$
+		Renderer.nodeIcon = new ImageIcon(Renderer.class.getResource("images/treenode.gif")); 
+		Renderer.edgeIcon = new ImageIcon(Renderer.class.getResource("images/treeedge.gif")); 
+		Renderer.linkIcon = new ImageIcon(Renderer.class.getResource("images/treelink.gif")); 
 	}
 
 	/**
@@ -169,13 +169,13 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 	{
 		// styles for class
 		this.typeToNameStyleMap = new HashMap<>();
-		this.typeToNameStyleMap.put("node", Renderer.nodeNameStyle); //$NON-NLS-1$
-		this.typeToNameStyleMap.put("edge", Renderer.nodeNameStyle); //$NON-NLS-1$
-		this.typeToNameStyleMap.put("a", Renderer.linkNameStyle); //$NON-NLS-1$
+		this.typeToNameStyleMap.put("node", Renderer.nodeNameStyle); 
+		this.typeToNameStyleMap.put("edge", Renderer.nodeNameStyle); 
+		this.typeToNameStyleMap.put("a", Renderer.linkNameStyle); 
 		this.typeToValueStyleMap = new HashMap<>();
-		this.typeToValueStyleMap.put("node", Renderer.edgeValueStyle); //$NON-NLS-1$
-		this.typeToValueStyleMap.put("edge", Renderer.edgeValueStyle); //$NON-NLS-1$
-		this.typeToValueStyleMap.put("a", Renderer.linkValueStyle); //$NON-NLS-1$
+		this.typeToValueStyleMap.put("node", Renderer.edgeValueStyle); 
+		this.typeToValueStyleMap.put("edge", Renderer.edgeValueStyle); 
+		this.typeToValueStyleMap.put("a", Renderer.linkValueStyle); 
 
 		// styles for patterns
 		this.patterns.add(this.srcPattern);
@@ -187,9 +187,9 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 
 		// icons for class
 		this.typeToIconMap = new HashMap<>();
-		this.typeToIconMap.put("node", Renderer.nodeIcon); //$NON-NLS-1$
-		this.typeToIconMap.put("edge", Renderer.edgeIcon); //$NON-NLS-1$
-		this.typeToIconMap.put("a", Renderer.linkIcon); //$NON-NLS-1$
+		this.typeToIconMap.put("node", Renderer.nodeIcon); 
+		this.typeToIconMap.put("edge", Renderer.edgeIcon); 
+		this.typeToIconMap.put("a", Renderer.linkIcon); 
 	}
 
 	/*

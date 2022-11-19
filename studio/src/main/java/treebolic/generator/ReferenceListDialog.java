@@ -88,7 +88,7 @@ public class ReferenceListDialog extends JDialog
 
 		// reference table
 		this.referenceTable = new JTable();
-		this.referenceTable.setToolTipText(Messages.getString("ReferenceListDialog.tooltip")); //$NON-NLS-1$
+		this.referenceTable.setToolTipText(Messages.getString("ReferenceListDialog.tooltip")); 
 
 		// update
 		update();
@@ -97,13 +97,13 @@ public class ReferenceListDialog extends JDialog
 		this.scrollPane = new JScrollPane(this.referenceTable);
 
 		// buttons
-		final JButton updateButton = new JButton(Messages.getString("ReferenceListDialog.update")); //$NON-NLS-1$
+		final JButton updateButton = new JButton(Messages.getString("ReferenceListDialog.update")); 
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
 		updateButton.addActionListener(e -> update());
-		final JButton cancelButton = new JButton(Messages.getString("ReferenceListDialog.cancel")); //$NON-NLS-1$
+		final JButton cancelButton = new JButton(Messages.getString("ReferenceListDialog.cancel")); 
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -350,9 +350,9 @@ public class ReferenceListDialog extends JDialog
 			switch (x)
 			{
 			case 0:
-				return Messages.getString("ReferenceListDialog.name"); //$NON-NLS-1$
+				return Messages.getString("ReferenceListDialog.name"); 
 			case 1:
-				return Messages.getString("ReferenceListDialog.value"); //$NON-NLS-1$
+				return Messages.getString("ReferenceListDialog.value"); 
 			default:
 				return null;
 			}

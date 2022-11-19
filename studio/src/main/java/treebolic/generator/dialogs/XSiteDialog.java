@@ -39,15 +39,15 @@ public class XSiteDialog extends SiteDialog
 	 */
 	static public void main(final String[] args)
 	{
-		UIManager.put("swing.boldMetal", false); //$NON-NLS-1$
-		final Properties settings = Persist.getSettings("treebolic-generator"); //$NON-NLS-1$
+		UIManager.put("swing.boldMetal", false); 
+		final Properties settings = Persist.getSettings("treebolic-generator"); 
 		final XSiteDialog dialog = new XSiteDialog(settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		if (dialog.ok)
 		{
-			Persist.saveSettings("treebolic-generator", settings); //$NON-NLS-1$
+			Persist.saveSettings("treebolic-generator", settings); 
 		}
 		System.exit(0);
 	}

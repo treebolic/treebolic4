@@ -29,11 +29,11 @@ public class DocumentSearch
 		final Set<String> set = new TreeSet<>();
 
 		// <img>
-		final NodeList nodes = document.getElementsByTagName("img"); //$NON-NLS-1$
+		final NodeList nodes = document.getElementsByTagName("img"); 
 		for (int i = 0; i < nodes.getLength(); i++)
 		{
 			final Element imageElement = (Element) nodes.item(i);
-			final String imageFile = imageElement.getAttribute("src"); //$NON-NLS-1$
+			final String imageFile = imageElement.getAttribute("src"); 
 			if (imageFile != null && !imageFile.isEmpty())
 			{
 				set.add(imageFile);

@@ -77,34 +77,34 @@ public class RunSiteDialog extends JDialog
 	 */
 	private void initialize()
 	{
-		setTitle(Messages.getString("RunSiteDialog.title")); //$NON-NLS-1$
+		setTitle(Messages.getString("RunSiteDialog.title")); 
 		setResizable(true);
 
 		// text fields
 		this.homeTextField = new JTextField(16);
 
 		// images
-		final Icon icon = new ImageIcon(MakeSiteDialog.class.getResource("images/siterun.png")); //$NON-NLS-1$
+		final Icon icon = new ImageIcon(MakeSiteDialog.class.getResource("images/siterun.png")); 
 		final JLabel imageLabel = new JLabel();
 		imageLabel.setIcon(icon);
 		imageLabel.setVerticalTextPosition(SwingConstants.TOP);
 		imageLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-		imageLabel.setText(Messages.getString("RunSiteDialog.header")); //$NON-NLS-1$
+		imageLabel.setText(Messages.getString("RunSiteDialog.header")); 
 		imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// labels
-		final JLabel htmlFileLabel = new JLabel(Messages.getString("RunSiteDialog.file")); //$NON-NLS-1$
+		final JLabel htmlFileLabel = new JLabel(Messages.getString("RunSiteDialog.file")); 
 
 		this.commandLabel = new JLabel();
-		this.commandLabel.setToolTipText(Messages.getString("RunSiteDialog.tooltip_command")); //$NON-NLS-1$
+		this.commandLabel.setToolTipText(Messages.getString("RunSiteDialog.tooltip_command")); 
 		this.commandLabel.setEnabled(false);
 		this.commandLabel.setFont(new Font(Font.DIALOG, Font.ITALIC, 10));
 
 		// buttons
-		final JButton runButton = new JButton(Messages.getString("RunSiteDialog.run")); //$NON-NLS-1$
-		final JButton cancelButton = new JButton(Messages.getString("RunSiteDialog.cancel")); //$NON-NLS-1$
-		final JButton browserButton = new JButton(Messages.getString("RunSiteDialog.browser")); //$NON-NLS-1$
-		final JButton modeButton = new JButton(Messages.getString("RunSiteDialog.mode")); //$NON-NLS-1$
+		final JButton runButton = new JButton(Messages.getString("RunSiteDialog.run")); 
+		final JButton cancelButton = new JButton(Messages.getString("RunSiteDialog.cancel")); 
+		final JButton browserButton = new JButton(Messages.getString("RunSiteDialog.browser")); 
+		final JButton modeButton = new JButton(Messages.getString("RunSiteDialog.mode")); 
 
 		// panels
 		final JPanel dataPanel = new JPanel();
@@ -132,12 +132,12 @@ public class RunSiteDialog extends JDialog
 		cancelButton.addActionListener(e -> setVisible(false));
 
 		browserButton.addActionListener(e -> {
-			final String message = Messages.getString("RunSiteDialog.prompt_exe") + '\n'; //$NON-NLS-1$
-			final String[] lines = message.split("\n"); //$NON-NLS-1$
+			final String message = Messages.getString("RunSiteDialog.prompt_exe") + '\n'; 
+			final String[] lines = message.split("\n"); 
 			final String browser = JOptionPane.showInputDialog(null, lines);
 			if (browser != null && !browser.isEmpty())
 			{
-				RunSiteDialog.this.properties.setProperty("browser", browser); //$NON-NLS-1$
+				RunSiteDialog.this.properties.setProperty("browser", browser); 
 				RunSiteDialog.this.commandLabel.setText(makeCommand());
 			}
 		});
@@ -199,27 +199,27 @@ public class RunSiteDialog extends JDialog
 	private String makeCommand()
 	{
 		String command;
-		command = this.properties.getProperty("browser", ""); //$NON-NLS-1$ //$NON-NLS-2$
+		command = this.properties.getProperty("browser", "");  
 		if (command.isEmpty())
 			return null;
-		command += " "; //$NON-NLS-1$
+		command += " "; 
 
-		final String mode = this.properties.getProperty("mode"); //$NON-NLS-1$
-		if ("NET".equals(mode)) //$NON-NLS-1$
+		final String mode = this.properties.getProperty("mode"); 
+		if ("NET".equals(mode)) 
 		{
-			final String server = this.properties.getProperty("server", ""); //$NON-NLS-1$ //$NON-NLS-2$
-			final String directory = this.properties.getProperty("directory", ""); //$NON-NLS-1$ //$NON-NLS-2$
-			command += "http://" + server + "/"; //$NON-NLS-1$ //$NON-NLS-2$
+			final String server = this.properties.getProperty("server", "");  
+			final String directory = this.properties.getProperty("directory", "");  
+			command += "http://" + server + "/";  
 			if (!directory.isEmpty())
 			{
 				command += directory;
-				command += "/"; //$NON-NLS-1$
+				command += "/"; 
 			}
 			command += this.homeTextField.getText();
 		}
 		else
 		{
-			String path = this.properties.getProperty("path", ""); //$NON-NLS-1$ //$NON-NLS-2$
+			String path = this.properties.getProperty("path", "");  
 			if (!path.endsWith(File.separator))
 			{
 				path += File.separator;
@@ -253,7 +253,7 @@ public class RunSiteDialog extends JDialog
 			}
 			catch (final Exception e)
 			{
-				System.err.println("Cannot run " + command); //$NON-NLS-1$
+				System.err.println("Cannot run " + command); 
 			}
 		}
 	}
@@ -268,7 +268,7 @@ public class RunSiteDialog extends JDialog
 		if (flag)
 		{
 			// read properties into components
-			this.homeTextField.setText(this.properties.getProperty("page")); //$NON-NLS-1$
+			this.homeTextField.setText(this.properties.getProperty("page")); 
 			this.commandLabel.setText(makeCommand());
 
 			pack();
@@ -277,7 +277,7 @@ public class RunSiteDialog extends JDialog
 		else
 		{
 			// update properties from components
-			this.properties.setProperty("page", this.homeTextField.getText()); //$NON-NLS-1$
+			this.properties.setProperty("page", this.homeTextField.getText()); 
 		}
 
 		super.setVisible(flag);
@@ -291,13 +291,13 @@ public class RunSiteDialog extends JDialog
 	 */
 	static public void main(final String[] args)
 	{
-		UIManager.put("swing.boldMetal", false); //$NON-NLS-1$
-		final Properties settings = Persist.getSettings("treebolic-generator"); //$NON-NLS-1$
+		UIManager.put("swing.boldMetal", false); 
+		final Properties settings = Persist.getSettings("treebolic-generator"); 
 		final RunSiteDialog dialog = new RunSiteDialog(settings);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setModal(true);
 		dialog.setVisible(true);
-		Persist.saveSettings("treebolic-generator", settings); //$NON-NLS-1$
+		Persist.saveSettings("treebolic-generator", settings); 
 		System.exit(0);
 	}
 }
