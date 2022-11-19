@@ -52,6 +52,7 @@ public class AnimationTransforms
 	 * @param transformer transform generator
 	 * @param orientation orientation
 	 * @param steps       number of steps
+	 * @return animation transforms
 	 */
 	@NonNull
 	static public AnimationTransforms make(@NonNull final Complex from, @NonNull final Complex to, @NonNull final Transformer transformer, @NonNull final Complex orientation, @SuppressWarnings("SameParameterValue") final int steps)

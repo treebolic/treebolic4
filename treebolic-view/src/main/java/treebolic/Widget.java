@@ -499,6 +499,9 @@ public class Widget extends Container implements IWidget, IProviderContext
 		this.layerOut.layout(model.tree.getRoot());
 	}
 
+	/**
+	 * Init display
+	 */
 	@SuppressWarnings({"WeakerAccess"})
 	public void initDisplay()
 	{

@@ -29,6 +29,8 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 {
 	/**
 	 * Constructor
+	 *
+	 * @param view view
 	 */
 	@SuppressWarnings("WeakerAccess")
 	public PopupMenu(@NonNull final View view)

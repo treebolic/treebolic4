@@ -14,6 +14,11 @@ import treebolic.core.location.Complex;
  */
 public class HyperRadialOrientationPreservingTransform extends HyperTransform
 {
+	/**
+	 * @param from from point
+	 * @param to   to point
+	 * @param root root point
+	 */
 	public HyperRadialOrientationPreservingTransform(@NonNull final Complex from, @NonNull final Complex to, @NonNull final Complex root)
 	{
 		// root->0

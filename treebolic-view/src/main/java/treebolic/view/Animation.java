@@ -11,6 +11,9 @@ import treebolic.annotations.Nullable;
 import treebolic.core.transform.HyperTransform;
 import treebolic.glue.ActionListener;
 
+/**
+ * Animation
+ */
 @SuppressWarnings("WeakerAccess")
 public class Animation extends ActionListener
 {

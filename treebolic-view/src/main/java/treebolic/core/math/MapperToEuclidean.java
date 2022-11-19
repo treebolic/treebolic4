@@ -19,6 +19,9 @@ import treebolic.model.Location;
  */
 public class MapperToEuclidean
 {
+	/**
+	 * Whether to adjust circle
+	 */
 	@SuppressWarnings("WeakerAccess")
 	public static final boolean adjustCircle = true;
 

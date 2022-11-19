@@ -214,8 +214,8 @@ public abstract class Generator<T> implements Iterable<T>
 
 	/**
 	 * Terminate generator
-	 * <p>
-	 * //@throws InterruptedException interrupted exception
+	 *
+	 * @throws InterruptedException interrupted exception
 	 */
 	public void terminate() throws InterruptedException
 	{
