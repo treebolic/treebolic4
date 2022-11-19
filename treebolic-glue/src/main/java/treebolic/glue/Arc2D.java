@@ -11,6 +11,9 @@ package treebolic.glue;
  */
 public class Arc2D implements treebolic.glue.iface.Arc2D<Point2D>
 {
+	/**
+	 * Constructor
+	 */
 	public Arc2D()
 	{
 		throw new NotImplementedException();

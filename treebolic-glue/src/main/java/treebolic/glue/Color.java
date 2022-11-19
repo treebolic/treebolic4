@@ -11,30 +11,69 @@ package treebolic.glue;
  */
 public class Color implements treebolic.glue.iface.Color<Color>
 {
+	/**
+	 * White color
+	 */
 	public static final Color WHITE = null;
 
+	/**
+	 * Black color
+	 */
 	public static final Color BLACK = null;
 
+	/**
+	 * Red color
+	 */
 	public static final Color RED = null;
 
+	/**
+	 * Green color
+	 */
 	public static final Color GREEN = null;
 
+	/**
+	 * Blue color
+	 */
 	public static final Color BLUE = null;
 
+	/**
+	 * Orange color
+	 */
 	public static final Color ORANGE = null;
 
+	/**
+	 * Yellow color
+	 */
 	public static final Color YELLOW = null;
 
+	/**
+	 * Pink color
+	 */
 	public static final Color PINK = null;
 
+	/**
+	 * Cyan color
+	 */
 	public static final Color CYAN = null;
 
+	/**
+	 * Magenta color
+	 */
 	public static final Color MAGENTA = null;
 
+	/**
+	 * Gray color
+	 */
 	public static final Color GRAY = null;
 
+	/**
+	 * Light gray color
+	 */
 	public static final Color LIGHT_GRAY = null;
 
+	/**
+	 * Dark gray color
+	 */
 	public static final Color DARK_GRAY = null;
 
 	/**
@@ -45,6 +84,11 @@ public class Color implements treebolic.glue.iface.Color<Color>
 		throw new NotImplementedException();
 	}
 
+	/**
+	 * Constructor
+	 *
+	 * @param rgb rgb int value
+	 */
 	public Color(int rgb)
 	{
 		throw new NotImplementedException();
