@@ -34,6 +34,8 @@
 		<module>provider-owl</module>
 		<module>application-owl</module>
 		<module>application-xml</module>
+		<module>commons</module>
+		<module>transformer-xml</module>
 	</modules>
 
 	<properties>

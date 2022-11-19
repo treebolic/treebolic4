@@ -24,6 +24,31 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
+			<artifactId>treebolic-mutable</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
+			<artifactId>provider-xml</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
+			<artifactId>transformer-xml</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
+			<artifactId>treebolic-glue-swing</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
+			<artifactId>commons</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-view</artifactId>
 			<version>${revision}</version>
 		</dependency>

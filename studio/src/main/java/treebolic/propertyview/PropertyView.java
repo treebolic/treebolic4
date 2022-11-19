@@ -1,0 +1,667 @@
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+package treebolic.propertyview;
+
+import java.awt.BorderLayout;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
+
+/**
+ * Property view
+ *
+ * @author Bernard Bou
+ */
+public class PropertyView extends JPanel implements SelectListener
+{
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * String for default value
+	 */
+	static final String defaultString = Messages.getString("PropertyView.default"); //$NON-NLS-1$
+
+	// I N T E R F A C E S
+
+	/**
+	 * Attribute type
+	 */
+	public enum AttributeType
+	{
+		NONE, BOOLEAN, INTEGER, FLOAT, FLOATS, LABEL, TEXT, LONGTEXT, COLOR, ID, REFID, IMAGE, LINK, FONTFACE, FONTSIZE, STROKE, TERMINATOR
+	}
+
+	/**
+	 * Set attribute value interface
+	 */
+	public interface Setter
+	{
+		void set(Object object, String attributeName, Object attributeValue);
+	}
+
+	/**
+	 * Get attribute value interface
+	 */
+	public interface Getter
+	{
+		Object get(Object object, String attributeName);
+	}
+
+	/**
+	 * Get object referenced by id interface
+	 */
+	public interface IdGetter
+	{
+		/**
+		 * Get object referenced by id interface
+		 *
+		 * @param id id
+		 * @return object referenced by id
+		 */
+		Object get(String id);
+
+		/**
+		 * Get set of ids
+		 *
+		 * @return set of ids
+		 */
+		Set<String> ids();
+	}
+
+	/**
+	 * Attribute descriptor
+	 *
+	 * @author Bernard Bou
+	 */
+	public static class AttributeDescriptor
+	{
+		/**
+		 * Name
+		 */
+		public String name;
+
+		/**
+		 * Type
+		 */
+		public AttributeType type;
+
+		/**
+		 * Whether attribute value can be changed
+		 */
+		public boolean isReadOnly;
+
+		/**
+		 * Whether the attribute is mandatory in object description
+		 */
+		public boolean isMandatory;
+
+		/**
+		 * Rank value used in sorting
+		 */
+		public int rank;
+
+		/**
+		 * Possible values
+		 */
+		public String[] possibleValues;
+
+
+		@Override
+		public String toString()
+		{
+			return String.format("%s (%s)", this.name, this.type); //$NON-NLS-1$
+		}
+	}
+
+	/**
+	 * Attribute (descriptor and value)
+	 *
+	 * @author Bernard Bou
+	 */
+	public static class Attribute
+	{
+		/**
+		 * Descriptor
+		 */
+		public AttributeDescriptor descriptor;
+
+		/**
+		 * Value
+		 */
+		public Object value;
+
+		/**
+		 * Constructor
+		 *
+		 * @param descriptor descriptor
+		 */
+		public Attribute(final AttributeDescriptor descriptor)
+		{
+			this.descriptor = descriptor;
+		}
+
+		@Override
+		public String toString()
+		{
+			return String.format("%s=%s", this.descriptor, this.value); //$NON-NLS-1$
+		}
+	}
+
+	/**
+	 * Interface giving access to an object's attributes
+	 *
+	 * @author Bernard Bou
+	 */
+	public static class Handler
+	{
+		/**
+		 * Set of attributes descriptors
+		 */
+		public Set<AttributeDescriptor> attributeDescriptors;
+
+		/**
+		 * Set routines
+		 */
+		public Setter setter;
+
+		/**
+		 * Get routines
+		 */
+		public Getter getter;
+
+		/**
+		 * Access to id map
+		 */
+		public IdGetter idGetter;
+	}
+
+	/**
+	 * Get handler for this object
+	 *
+	 * @author Bernard Bou
+	 */
+	public interface HandlerFactory
+	{
+		/**
+		 * Get handler for this object
+		 *
+		 * @param object object
+		 * @return handler for this object
+		 */
+		Handler create(Object object);
+	}
+
+	// D A T A
+
+	/**
+	 * Change notifier
+	 */
+	public ChangeNotifier changeNotifier = new ChangeNotifier();
+
+	/**
+	 * Handler factory
+	 */
+	protected HandlerFactory handlerFactory;
+
+	/**
+	 * Image repository URL
+	 */
+	protected URL imageRepository;
+
+	// components
+
+	/**
+	 * Table
+	 */
+	protected final JTable attributeTable = new JTable();
+
+	// renderer and editor
+
+	/**
+	 * Table renderer
+	 */
+	private final Renderer attributeCellRenderer = new Renderer(this);
+
+	/**
+	 * Table editor
+	 */
+	private final Editor attributeCellEditor = new Editor(this);
+
+	// table columns
+
+	static final int STATUS = 0;
+
+	static final int TYPE = 1;
+
+	static final int NAME = 2;
+
+	static final int VALUE = 3;
+
+	private static final int COLUMNNUMBER = PropertyView.VALUE + 1;
+
+	// strings and icons
+
+	/**
+	 * Stoke strings
+	 */
+	static public final String[] strokeStrings = {"solid", "dash", "dot"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
+	/**
+	 * String to stroke icons
+	 */
+	static public final Map<String, ImageIcon> strokeIcons = new HashMap<>();
+
+	/**
+	 * Terminator strings
+	 */
+	static public final String[] terminatorStrings = {"z", "a", "t", "h", "tf", "c", "cf", "d", "df"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$
+
+	/**
+	 * String to terminator icon map
+	 */
+	static public final Map<String, ImageIcon> terminatorIcons = new HashMap<>();
+
+	/*
+	 * Initialize maps
+	 */
+	static
+	{
+		PropertyView.terminatorIcons.put("z", new ImageIcon(PropertyView.class.getResource("images/terminatorz.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+		PropertyView.terminatorIcons.put("a", new ImageIcon(PropertyView.class.getResource("images/terminatora.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+		PropertyView.terminatorIcons.put("h", new ImageIcon(PropertyView.class.getResource("images/terminatorh.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+		PropertyView.terminatorIcons.put("t", new ImageIcon(PropertyView.class.getResource("images/terminatort.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+		PropertyView.terminatorIcons.put("tf", new ImageIcon(PropertyView.class.getResource("images/terminatortf.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+		PropertyView.terminatorIcons.put("c", new ImageIcon(PropertyView.class.getResource("images/terminatorc.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+		PropertyView.terminatorIcons.put("cf", new ImageIcon(PropertyView.class.getResource("images/terminatorcf.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+		PropertyView.terminatorIcons.put("d", new ImageIcon(PropertyView.class.getResource("images/terminatord.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+		PropertyView.terminatorIcons.put("df", new ImageIcon(PropertyView.class.getResource("images/terminatordf.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+
+		PropertyView.strokeIcons.put("solid", new ImageIcon(PropertyView.class.getResource("images/solid.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+		PropertyView.strokeIcons.put("dash", new ImageIcon(PropertyView.class.getResource("images/dash.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+		PropertyView.strokeIcons.put("dot", new ImageIcon(PropertyView.class.getResource("images/dot.png"))); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+
+	// C O N S T R U C T
+
+	/**
+	 * Constructor
+	 */
+	public PropertyView()
+	{
+		this.handlerFactory = null;
+
+		initialize();
+
+		// attributes
+		this.attributeTable.setRowHeight(24);
+
+		// model
+		this.attributeTable.setModel(new TableModel());
+
+		// renderer and editor
+		setupColumns();
+		setRenderer();
+		setEditor(null);
+	}
+
+	/**
+	 * Initialize
+	 */
+	private void initialize()
+	{
+		this.attributeTable.setToolTipText(null);
+		final JLabel attributesLabel = new JLabel(Messages.getString("PropertyView.attributes")); //$NON-NLS-1$
+		setLayout(new BorderLayout());
+		this.add(attributesLabel, BorderLayout.NORTH);
+		this.add(new JScrollPane(this.attributeTable), BorderLayout.CENTER);
+	}
+
+	/**
+	 * Set up columns
+	 */
+	private void setupColumns()
+	{
+		final TableColumn statusColumn = this.attributeTable.getColumnModel().getColumn(PropertyView.STATUS);
+		statusColumn.setMaxWidth(18);
+
+		final TableColumn typeColumn = this.attributeTable.getColumnModel().getColumn(PropertyView.TYPE);
+		typeColumn.setMaxWidth(18);
+
+		final TableColumn nameColumn = this.attributeTable.getColumnModel().getColumn(PropertyView.NAME);
+		nameColumn.setMaxWidth(250);
+		nameColumn.setMinWidth(150);
+	}
+
+	/**
+	 * Set handler factory
+	 *
+	 * @param handlerFactory handler factory
+	 */
+	public void setHandlerFactory(final HandlerFactory handlerFactory)
+	{
+		this.handlerFactory = handlerFactory;
+	}
+
+	/**
+	 * Set renderer
+	 */
+	private void setRenderer()
+	{
+		final TableColumn statusColumn = this.attributeTable.getColumnModel().getColumn(PropertyView.STATUS);
+		statusColumn.setCellRenderer(this.attributeCellRenderer);
+
+		final TableColumn typeColumn = this.attributeTable.getColumnModel().getColumn(PropertyView.TYPE);
+		typeColumn.setCellRenderer(this.attributeCellRenderer);
+
+		final TableColumn nameColumn = this.attributeTable.getColumnModel().getColumn(PropertyView.NAME);
+		nameColumn.setCellRenderer(this.attributeCellRenderer);
+
+		final TableColumn valueColumn = this.attributeTable.getColumnModel().getColumn(PropertyView.VALUE);
+		valueColumn.setCellRenderer(this.attributeCellRenderer);
+	}
+
+	/**
+	 * Set editor
+	 *
+	 * @param handler handler
+	 */
+	private void setEditor(final Handler handler)
+	{
+		this.attributeCellEditor.setHandler(handler);
+
+		final TableColumn valueColumn = this.attributeTable.getColumnModel().getColumn(PropertyView.VALUE);
+		valueColumn.setCellEditor(this.attributeCellEditor);
+	}
+
+	/**
+	 * Set editor listener
+	 *
+	 * @param listener listener
+	 */
+	public void setCellEditorListener(final CellEditorListener listener)
+	{
+		this.attributeCellEditor.addCellEditorListener(listener);
+	}
+
+	/**
+	 * Set image repository url
+	 *
+	 * @param imageRepository image repository url
+	 */
+	public void setImageRepository(final URL imageRepository)
+	{
+		this.imageRepository = imageRepository;
+	}
+
+	/**
+	 * Get image repository
+	 *
+	 * @return image repository url
+	 */
+	public URL getImageRepository()
+	{
+		return this.imageRepository;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see treebolic.propertyview.SelectListener#onSelected(java.lang.Object)
+	 */
+	@Override
+	public void onSelected(final Object object)
+	{
+		// System.err.println("PROPERTYVIEW: selected " + object);
+
+		// model
+		final Handler handler = this.handlerFactory.create(object);
+		final javax.swing.table.TableModel model = new TableModel(object, handler);
+		this.attributeTable.setModel(model);
+
+		// renderer and editor
+		setupColumns();
+		setRenderer();
+		setEditor(handler);
+	}
+
+	// H E L P E R S
+
+	/**
+	 * Decode encoded URL (for display)
+	 *
+	 * @param string encode URL string
+	 * @return decoded URL string
+	 */
+	static String decode(final String string)
+	{
+		try
+		{
+			return URLDecoder.decode(string, "UTF8"); //$NON-NLS-1$
+		}
+		catch (final UnsupportedEncodingException e)
+		{
+			System.err.println("Can't decode " + string + " - " + e); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		return string;
+	}
+
+	/**
+	 * Encode encoded URL
+	 *
+	 * @param string encode URL string
+	 * @return decoded URL string
+	 */
+	static String encode(final String string)
+	{
+		try
+		{
+			return URLEncoder.encode(string, "UTF8"); //$NON-NLS-1$
+		}
+		catch (final UnsupportedEncodingException e)
+		{
+			System.err.println("Cant decode " + string + " - " + e); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		return string;
+	}
+
+	// A T T R I B U T E M O D E L
+
+	/**
+	 * Table model
+	 *
+	 * @author Bernard Bou
+	 */
+	private class TableModel extends AbstractTableModel
+	{
+		private static final long serialVersionUID = 1L;
+
+		/**
+		 * The selected object
+		 */
+		private final Object selectedObject;
+
+		/**
+		 * Its handler
+		 */
+		public Handler handler;
+
+		/**
+		 * Its attributes
+		 */
+		private Vector<Attribute> attributes;
+
+		/**
+		 * Constructor
+		 */
+		public TableModel()
+		{
+			this.selectedObject = null;
+			this.handler = null;
+		}
+
+		/**
+		 * Constructor
+		 *
+		 * @param object  selected object
+		 * @param handler its handler
+		 */
+		public TableModel(final Object object, final Handler handler)
+		{
+			this.selectedObject = object;
+			this.handler = handler;
+			get();
+		}
+
+		/**
+		 * Get all attribute values
+		 */
+		public void get()
+		{
+			if (this.selectedObject == null || this.handler == null)
+			{
+				this.attributes = null;
+			}
+			else
+			{
+				this.attributes = new Vector<>();
+				for (final AttributeDescriptor attributeDescriptor : this.handler.attributeDescriptors)
+				{
+					final Attribute attribute = new Attribute(attributeDescriptor);
+					attribute.value = this.handler.getter.get(this.selectedObject, attribute.descriptor.name);
+					this.attributes.add(attribute);
+				}
+			}
+		}
+
+		/**
+		 * Set all attribute values
+		 */
+		public void set()
+		{
+			if (this.selectedObject != null)
+			{
+				for (final Attribute attribute : this.attributes)
+				{
+					this.handler.setter.set(this.selectedObject, attribute.descriptor.name, attribute.value);
+				}
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see javax.swing.table.TableModel#getRowCount()
+		 */
+		@Override
+		public int getRowCount()
+		{
+			if (this.attributes == null)
+			{
+				return 0;
+			}
+			return this.attributes.size();
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see javax.swing.table.TableModel#getColumnCount()
+		 */
+		@Override
+		public int getColumnCount()
+		{
+			return PropertyView.COLUMNNUMBER;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see javax.swing.table.AbstractTableModel#isCellEditable(int, int)
+		 */
+		@Override
+		public boolean isCellEditable(final int y, final int x)
+		{
+			if (x == PropertyView.VALUE)
+			{
+				final Attribute row = this.attributes.elementAt(y);
+				return !row.descriptor.isReadOnly;
+			}
+			return false;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see javax.swing.table.TableModel#getValueAt(int, int)
+		 */
+		@Override
+		public Object getValueAt(final int y, final int x)
+		{
+			final Attribute attribute = this.attributes.elementAt(y);
+			switch (x)
+			{
+				case STATUS:
+					return attribute.descriptor.isMandatory;
+				case TYPE:
+					return attribute.descriptor.type;
+				case NAME:
+					return attribute.descriptor.name;
+				case VALUE:
+					return attribute;
+				default:
+					return null;
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object, int, int)
+		 */
+		@Override
+		public void setValueAt(final Object value, final int y, final int x)
+		{
+			// System.out.println(value);
+			if (x == PropertyView.VALUE)
+			{
+				final Attribute attribute0 = (Attribute) value;
+				final Attribute attribute = this.attributes.elementAt(y);
+				attribute.value = attribute0.value;
+				set();
+				PropertyView.this.changeNotifier.fireStateChanged(new ChangeEvent(attribute));
+			}
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see javax.swing.table.AbstractTableModel#getColumnName(int)
+		 */
+		@Override
+		public String getColumnName(final int x)
+		{
+			switch (x)
+			{
+				case STATUS:
+					return "x"; //$NON-NLS-1$
+				case TYPE:
+					return "t"; //$NON-NLS-1$
+				case NAME:
+					return Messages.getString("PropertyView.name"); //$NON-NLS-1$
+				case VALUE:
+					return Messages.getString("PropertyView.value"); //$NON-NLS-1$
+				default:
+					return ""; //$NON-NLS-1$
+			}
+		}
+	}
+}
