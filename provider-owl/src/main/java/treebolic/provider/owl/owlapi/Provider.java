@@ -8,7 +8,6 @@ import java.net.URL;
 import java.util.Properties;
 
 import treebolic.ILocator;
-import treebolic.glue.Image;
 import treebolic.model.Model;
 import treebolic.model.Tree;
 import treebolic.model.Utils;
@@ -24,13 +23,6 @@ import treebolic.provider.ProviderUtils;
 public class Provider implements IProvider
 {
 	// S T A T I C . D A T A
-
-	public enum ImageIndices
-	{
-		FOLDER, FILE,
-	}
-
-	static Image[] images;
 
 	/**
 	 * Provider context

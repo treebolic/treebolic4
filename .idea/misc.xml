@@ -28,6 +28,9 @@
     <pattern value="treebolic.glue.component.Container" method="Container" />
     <pattern value="treebolic.glue.component.Dialog" method="Dialog" />
     <pattern value="treebolic.glue.Color" method="Color" />
+    <pattern value="treebolic.provider.owl.owlapi.OwlModelFactory" method="OwlModelFactory" />
+    <pattern value="treebolic.provider.owl.owlapi.QueryEngine" method="getEquivalentClasses" />
+    <pattern value="treebolic.provider.owl.owlapi.QueryEngine" method="getSuperClasses" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">

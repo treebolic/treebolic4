@@ -3,38 +3,24 @@
  */
 package treebolic.provider.owl.owlapi;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.StreamDocumentSource;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.util.ShortFormProvider;
 import org.semanticweb.owlapi.util.SimpleShortFormProvider;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import treebolic.annotations.NonNull;
 import treebolic.glue.Color;
 import treebolic.glue.Image;
-import treebolic.model.IEdge;
-import treebolic.model.INode;
-import treebolic.model.Model;
-import treebolic.model.MountPoint;
-import treebolic.model.MutableNode;
-import treebolic.model.Settings;
-import treebolic.model.Tree;
-import treebolic.model.TreeMutableNode;
-import treebolic.model.Utils;
+import treebolic.model.*;
 import treebolic.provider.LoadBalancer;
 
 import static java.util.stream.Collectors.toList;
@@ -49,7 +35,7 @@ public class OwlModelFactory
 	/**
 	 * As tree
 	 */
-	static boolean asTree = false;
+	static final boolean asTree = false;
 
 	// S T A T I C . D A T A
 
@@ -63,7 +49,7 @@ public class OwlModelFactory
 	/**
 	 * Default class color
 	 */
-	static Color defaultClassBackColor = new Color(0xffffC0);
+	static final Color defaultClassBackColor = new Color(0xffffC0);
 
 	// L O A D B A L A N C I N G
 
@@ -359,12 +345,12 @@ public class OwlModelFactory
 	/**
 	 * Load balancer (classes)
 	 */
-	protected LoadBalancer loadBalancer;
+	protected final LoadBalancer loadBalancer;
 
 	/**
 	 * Load balancer (properties and instances)
 	 */
-	protected LoadBalancer subLoadBalancer;
+	protected final LoadBalancer subLoadBalancer;
 
 	// C O N S T R U C T O R
 
@@ -512,6 +498,9 @@ public class OwlModelFactory
 		}
 
 		// cache property features from settings
+		this.instanceEdgeStyle = settings.edgeStyle;
+		this.instanceEdgeColor = settings.edgeColor;
+		this.instanceEdgeImageFile = settings.defaultEdgeImage;
 		this.propertyEdgeStyle = settings.edgeStyle;
 		this.propertyEdgeColor = settings.edgeColor;
 		this.propertyEdgeImageFile = settings.defaultEdgeImage;
@@ -821,6 +810,8 @@ public class OwlModelFactory
 
 					instanceNode.setBackColor(this.instanceBackColor);
 					instanceNode.setForeColor(this.instanceForeColor);
+					instanceNode.setEdgeStyle(this.instanceEdgeStyle);
+					instanceNode.setEdgeColor(this.instanceEdgeColor);
 					if (this.instanceImageFile != null)
 					{
 						instanceNode.setImageFile(this.instanceImageFile);
@@ -829,8 +820,6 @@ public class OwlModelFactory
 					{
 						instanceNode.setImageIndex(ImageIndices.INSTANCE.ordinal());
 					}
-					instanceNode.setEdgeStyle(this.instanceEdgeStyle);
-					instanceNode.setEdgeColor(this.instanceEdgeColor);
 					if (this.instanceEdgeImageFile != null)
 					{
 						instanceNode.setEdgeImageFile(this.instanceEdgeImageFile);
@@ -848,48 +837,8 @@ public class OwlModelFactory
 	 * Walk properties in iterator
 	 *
 	 * @param parentNode    treebolic parent node to attach to
-	 * @param owlProperties property iterator
+	 * @param owlProperties property stream
 	 */
-	public void visitProperties(final TreeMutableNode parentNode, final Set<OWLObjectProperty> owlProperties)
-	{
-		final List<INode> childNodes = new ArrayList<>();
-		for (final OWLObjectProperty owlProperty : owlProperties)
-		{
-			final String owlPropertyShortForm = this.shortFormProvider.getShortForm(owlProperty);
-			final String owlPropertyId = OwlModelFactory.getName(owlPropertyShortForm);
-
-			final MutableNode propertyNode = new MutableNode(null, owlPropertyId);
-			propertyNode.setLabel(owlPropertyId);
-			propertyNode.setTarget(owlPropertyId);
-			propertyNode.setBackColor(this.propertyBackColor);
-			propertyNode.setForeColor(this.propertyForeColor);
-			propertyNode.setEdgeStyle(this.propertyEdgeStyle);
-			propertyNode.setEdgeColor(this.propertyEdgeColor);
-			if (this.propertyImageFile != null)
-			{
-				propertyNode.setImageFile(this.propertyImageFile);
-			}
-			else
-			{
-				propertyNode.setImageIndex(ImageIndices.PROPERTY.ordinal());
-			}
-			if (this.propertyEdgeImageFile != null)
-			{
-				propertyNode.setEdgeImageFile(this.propertyEdgeImageFile);
-			}
-
-			childNodes.add(propertyNode);
-
-			// // recurse
-			// final ExtendedIterator owlSubProperties = owlProperty.listSubProperties(true);
-			// walkProperties(owlPropertyNode, owlSubProperties);
-		}
-
-		// balance load
-		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
-		parentNode.addChildren(balancedNodes);
-	}
-
 	public void visitProperties(final TreeMutableNode parentNode, final Stream<OWLObjectProperty> owlProperties)
 	{
 		final List<INode> childNodes = owlProperties //
@@ -900,6 +849,7 @@ public class OwlModelFactory
 
 					final MutableNode propertyNode = new MutableNode(null, owlPropertyId);
 					propertyNode.setLabel(owlPropertyId);
+					propertyNode.setTarget(owlPropertyId);
 					propertyNode.setBackColor(this.propertyBackColor);
 					propertyNode.setForeColor(this.propertyForeColor);
 					propertyNode.setEdgeStyle(this.propertyEdgeStyle);
@@ -947,6 +897,7 @@ public class OwlModelFactory
 		return node;
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateClassWithProperties(final MutableNode node)
 	{
 		node.setBackColor(this.classWithPropertiesBackColor);
@@ -962,6 +913,7 @@ public class OwlModelFactory
 		return node;
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateClassWithInstances(final MutableNode node)
 	{
 		node.setBackColor(this.classWithInstancesBackColor);
@@ -977,6 +929,7 @@ public class OwlModelFactory
 		return node;
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateClassWithInstancesAndProperties(final MutableNode node)
 	{
 		node.setBackColor(this.classWithInstancesBackColor);
@@ -992,6 +945,7 @@ public class OwlModelFactory
 		return node;
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateProperties(final MutableNode node)
 	{
 		node.setLabel(this.propertiesLabel);
@@ -1008,6 +962,7 @@ public class OwlModelFactory
 		return node;
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateInstances(final MutableNode node)
 	{
 		node.setLabel(this.instancesLabel);
