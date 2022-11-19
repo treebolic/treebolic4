@@ -66,6 +66,7 @@ public interface EventListener
 	 *
 	 * @return true if handled
 	 */
+	@SuppressWarnings("UnusedReturnValue")
 	boolean onLongHover();
 
 	/**

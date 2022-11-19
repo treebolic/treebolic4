@@ -10,7 +10,6 @@ import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.core.location.Complex;
 import treebolic.core.math.Distance;
-import treebolic.glue.component.Surface;
 import treebolic.model.INode;
 import treebolic.model.Location;
 

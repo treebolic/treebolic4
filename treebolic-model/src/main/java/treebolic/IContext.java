@@ -38,7 +38,7 @@ public interface IContext extends ILocator
 	 * @param linkTarget link target
 	 * @return true if the context handles the link, false means the current provider will re-init () with the link as source
 	 */
-	boolean linkTo(String linkUrl, String linkTarget);
+	boolean linkTo(String linkUrl, @SuppressWarnings("unused") String linkTarget);
 
 	/**
 	 * Get input

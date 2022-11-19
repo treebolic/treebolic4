@@ -63,7 +63,7 @@ public class HyperTranslation extends Complex
 	 * @param to    target point 0,0 is to be translated to
 	 * @param dummy dummy
 	 */
-	public HyperTranslation(@NonNull final Complex from, @NonNull final Complex to, @SuppressWarnings("SameParameterValue") final boolean dummy)
+	public HyperTranslation(@NonNull final Complex from, @NonNull final Complex to, @SuppressWarnings({"SameParameterValue", "unused"}) final boolean dummy)
 	{
 		// make hyperbolic translation which maps 'from' to 0,0 and 0,0 to 'to'
 		// but this does NOT imply that t(from) = to

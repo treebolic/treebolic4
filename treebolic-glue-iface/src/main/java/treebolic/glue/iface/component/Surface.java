@@ -61,7 +61,7 @@ public interface Surface<G, L>
 	 * @param string tooltip string
 	 */
 	@SuppressWarnings("EmptyMethod")
-	void setToolTipText(final String string);
+	void setToolTipText(@SuppressWarnings("unused") final String string);
 
 	/**
 	 * Add event listener
@@ -82,5 +82,6 @@ public interface Surface<G, L>
 	 * Best results depend on platform.
 	 * @return factor used when evaluating min distance of node finder
 	 */
+	@SuppressWarnings("SameReturnValue")
 	float getFinderDistanceEpsilonFactor();
 }

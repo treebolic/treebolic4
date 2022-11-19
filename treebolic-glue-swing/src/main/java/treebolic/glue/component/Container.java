@@ -7,12 +7,14 @@ package treebolic.glue.component;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+import javax.swing.*;
+
 /**
  * Container, derived from JPanel
  *
  * @author Bernard Bou
  */
-public class Container extends javax.swing.JPanel implements Component, treebolic.glue.iface.component.Container<Component>
+public class Container extends JPanel implements Component, treebolic.glue.iface.component.Container<Component>
 {
 	private static final long serialVersionUID = 5343097039212596542L;
 

@@ -33,7 +33,7 @@ public class Toolbar extends treebolic.glue.component.Toolbar implements Compone
 	 *
 	 * @param handle Handle required for component creation
 	 */
-	public Toolbar(final Controller controller, final boolean hasTooltip, final boolean tooltipDisplaysContent, final boolean arcEdges, final boolean focusOnHover, final Object handle)
+	public Toolbar(final Controller controller, @SuppressWarnings("unused") final boolean hasTooltip, @SuppressWarnings("unused") final boolean tooltipDisplaysContent, @SuppressWarnings("unused") final boolean arcEdges, @SuppressWarnings("unused") final boolean focusOnHover, final Object handle)
 	{
 		super(handle);
 		this.controller = controller;

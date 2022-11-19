@@ -20,7 +20,7 @@ public interface Animator<A>
 	 * @return true if successful
 	 */
 	@SuppressWarnings("SameReturnValue")
-	boolean run(A animation, int steps, int startDelay);
+	boolean run(A animation, @SuppressWarnings("unused") int steps, int startDelay);
 
 	/**
 	 * Running status

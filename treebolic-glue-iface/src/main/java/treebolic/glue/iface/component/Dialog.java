@@ -18,7 +18,7 @@ public interface Dialog
 	 *
 	 * @param handle (opaque) handle
 	 */
-	void setHandle(final Object handle);
+	void setHandle(@SuppressWarnings("unused") final Object handle);
 
 	/**
 	 * Set header and content

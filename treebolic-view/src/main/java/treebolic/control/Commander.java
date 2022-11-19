@@ -608,7 +608,7 @@ public abstract class Commander
 	 * @param command    command
 	 * @param parameters parameters
 	 */
-	public void execute(@NonNull final Command command, final Object... parameters)
+	public void execute(@NonNull final Command command, @SuppressWarnings("unused") final Object... parameters)
 	{
 		switch (command)
 		{

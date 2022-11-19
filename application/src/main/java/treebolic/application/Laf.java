@@ -142,6 +142,7 @@ public class Laf
 	 * @return true if successful
 	 * @throws UnsupportedLookAndFeelException unsupported laf
 	 */
+	@SuppressWarnings({"SameReturnValue", "UnusedReturnValue"})
 	static public boolean setLookAndFeel(final String lafName) throws UnsupportedLookAndFeelException
 	{
 		final LookAndFeel laf = Laf.getLaf(lafName);
@@ -180,6 +181,7 @@ public class Laf
 	 * @param lafName laf name
 	 * @return true if successful
 	 */
+	@SuppressWarnings({"SameReturnValue", "UnusedReturnValue"})
 	static public boolean setCustomTheme(final String lafName)
 	{
 		final MetalTheme theme = Laf.makeCustomTheme();

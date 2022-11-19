@@ -27,12 +27,12 @@ public class MainFrame extends JFrame implements HyperlinkListener
 {
 	private static final long serialVersionUID = 1L;
 
-	protected Widget widget;
+	protected final Widget widget;
 
 	/**
 	 * Parameters
 	 */
-	protected Properties parameters;
+	protected final Properties parameters;
 
 	/**
 	 * Constructor
@@ -64,6 +64,12 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		this.widget = makeWidget();
 
 		// assemble
+		// casting is valid within a Swing runtime where
+		// Widget extends Container
+		// which extends JPanel
+		// which extends JComponent
+		// which extends Component
+		//noinspection ConstantConditions
 		container.add((Component)this.widget, BorderLayout.CENTER);
 
 		// show
@@ -119,6 +125,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * 
 	 * @return default provider
 	 */
+	@SuppressWarnings("SameReturnValue")
 	protected String getProvider()
 	{
 		return null;
@@ -129,6 +136,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * 
 	 * @return default source
 	 */
+	@SuppressWarnings("SameReturnValue")
 	protected String getSource()
 	{
 		return null;
@@ -223,6 +231,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return toolbar
 	 */
+	@SuppressWarnings("SameReturnValue")
 	protected JToolBar makeToolBar()
 	{
 		return null;
@@ -233,6 +242,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return menu bar
 	 */
+	@SuppressWarnings("SameReturnValue")
 	protected JMenuBar makeMenuBar()
 	{
 		return null;

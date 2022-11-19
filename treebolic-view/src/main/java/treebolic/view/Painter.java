@@ -976,7 +976,7 @@ public class Painter extends AbstractPainter
 	 * @param fromAnchor from-anchor
 	 * @param toAnchor   to-anchor
 	 */
-	private void drawArc(@NonNull final Arc2D arc2D, final Point2D fromAnchor, final Point2D toAnchor, final int style)
+	private void drawArc(@NonNull final Arc2D arc2D, @SuppressWarnings("unused") final Point2D fromAnchor, @SuppressWarnings("unused") final Point2D toAnchor, final int style)
 	{
 		final int x = (int) arc2D.getX();
 		final int y = (int) arc2D.getY();

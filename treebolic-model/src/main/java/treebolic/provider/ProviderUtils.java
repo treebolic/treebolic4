@@ -22,7 +22,7 @@ public class ProviderUtils
 	private static final boolean DEBUG = false;
 
 	@Nullable
-	static public URL makeURL(@Nullable final String source, final URL base, final Properties extras, @NonNull final IProviderContext context)
+	static public URL makeURL(@Nullable final String source, final URL base, @SuppressWarnings("unused") final Properties extras, @NonNull final IProviderContext context)
 	{
 		if (source == null)
 		{

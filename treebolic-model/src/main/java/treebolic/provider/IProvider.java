@@ -25,7 +25,7 @@ public interface IProvider
 	 * @param locator locator context
 	 */
 	@SuppressWarnings("EmptyMethod")
-	void setLocator(ILocator locator);
+	void setLocator(@SuppressWarnings("unused") ILocator locator);
 
 	/**
 	 * Called by framework to pass provider context reference (may default to void action if provider does not need it)
@@ -41,7 +41,7 @@ public interface IProvider
 	 * @param handle handle as passed to widget
 	 */
 	@SuppressWarnings("EmptyMethod")
-	void setHandle(Object handle);
+	void setHandle(@SuppressWarnings("unused") Object handle);
 
 	/**
 	 * Make model

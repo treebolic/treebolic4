@@ -11,10 +11,6 @@ package treebolic.glue;
  */
 public class Point implements treebolic.glue.iface.Point
 {
-	public int x;
-
-	public int y;
-
 	/**
 	 * Constructor
 	 *
