@@ -10,7 +10,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
 import java.util.Collection;
 
 import javax.swing.Box;
@@ -54,12 +53,12 @@ public class ChoiceDialog extends JDialog
 	/**
 	 * Combo
 	 */
-	protected JComboBox<String> comboBox;
+	protected final JComboBox<String> comboBox;
 
 	/**
 	 * Data panel
 	 */
-	protected JPanel dataPanel;
+	protected final JPanel dataPanel;
 
 	/**
 	 * Constructor
@@ -84,7 +83,7 @@ public class ChoiceDialog extends JDialog
 		setResizable(true);
 
 		// images
-		final Icon icon = new ImageIcon(ChoiceDialog.class.getResource("images/open.png")); //$NON-NLS-1$
+		final Icon icon = new ImageIcon(ChoiceDialog.class.getResource("images/open.png")); 
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
@@ -103,7 +102,7 @@ public class ChoiceDialog extends JDialog
 			 * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
 			 */
 			@Override
-			public Component getListCellRendererComponent(final JList<? extends Object> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+			public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
 			{
 				String string = (String) value;
 				if (string != null)
@@ -130,8 +129,8 @@ public class ChoiceDialog extends JDialog
 		}
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("ChoiceDialog.ok")); //$NON-NLS-1$
-		final JButton cancelButton = new JButton(Messages.getString("ChoiceDialog.cancel")); //$NON-NLS-1$
+		final JButton oKButton = new JButton(Messages.getString("ChoiceDialog.ok")); 
+		final JButton cancelButton = new JButton(Messages.getString("ChoiceDialog.cancel")); 
 
 		// panels
 		this.dataPanel = new JPanel();
@@ -143,40 +142,23 @@ public class ChoiceDialog extends JDialog
 		buttonPanel.add(cancelButton);
 		buttonPanel.add(oKButton);
 
-		oKButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				ChoiceDialog.this.ok = true;
-				setVisible(false);
-			}
+		oKButton.addActionListener(event -> {
+			ChoiceDialog.this.ok = true;
+			setVisible(false);
 		});
-		cancelButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				setVisible(false);
-			}
-		});
+		cancelButton.addActionListener(event -> setVisible(false));
 
 		if (canAdd)
 		{
-			final JButton addButton = new JButton(Messages.getString("ChoiceDialog.add")); //$NON-NLS-1$
+			final JButton addButton = new JButton(Messages.getString("ChoiceDialog.add")); 
 
 			// action
-			addButton.addActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(final java.awt.event.ActionEvent event)
+			addButton.addActionListener(event -> {
+				final String value1 = ask(Messages.getString("ChoiceDialog.addprompt")); 
+				if (value1 != null && !value1.isEmpty())
 				{
-					final String value = ask(Messages.getString("ChoiceDialog.addprompt")); //$NON-NLS-1$
-					if (value != null && !value.isEmpty())
-					{
-						ChoiceDialog.this.comboBox.addItem(value);
-						ChoiceDialog.this.comboBox.getEditor().setItem(value);
-					}
+					ChoiceDialog.this.comboBox.addItem(value1);
+					ChoiceDialog.this.comboBox.getEditor().setItem(value1);
 				}
 			});
 			this.dataPanel.add(addButton, new GridBagConstraints(1, 3, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 10, 0, 20), 0, 0));
@@ -235,7 +217,7 @@ public class ChoiceDialog extends JDialog
 	 */
 	protected String ask(final String message)
 	{
-		final String[] lines = message.split("\n"); //$NON-NLS-1$
+		final String[] lines = message.split("\n"); 
 		return JOptionPane.showInputDialog(null, lines);
 	}
 }

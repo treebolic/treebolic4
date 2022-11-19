@@ -29,15 +29,15 @@ public class Searcher
 	/**
 	 * Find classes matching pattern in classpath
 	 *
-	 * @param pattern pattern
+	 * @param pattern0 pattern
 	 * @return result set
 	 */
 	static public Set<String> findClasses(final String pattern0)
 	{
 		String pattern = pattern0;
-		final Set<String> list = new TreeSet<String>();
-		pattern = pattern.replaceAll("\\\\.", "/"); //$NON-NLS-1$ //$NON-NLS-2$
-		for (final String fileName : Searcher.findFiles(pattern + "\\.class$").keySet()) //$NON-NLS-1$
+		final Set<String> list = new TreeSet<>();
+		pattern = pattern.replaceAll("\\\\.", "/");  
+		for (final String fileName : Searcher.findFiles(pattern + "\\.class$").keySet()) 
 		{
 			String className = fileName.replace('/', '.');
 			if (File.separatorChar == '\\')
@@ -57,9 +57,9 @@ public class Searcher
 	 */
 	static public Map<String, String> findFiles(final String pattern)
 	{
-		final String pattern2 = File.separatorChar == '/' ? pattern : pattern.replaceAll("/", "\\\\\\\\"); //$NON-NLS-1$ //$NON-NLS-2$
-		final Map<String, String> list = new TreeMap<String, String>();
-		final String classPath = System.getProperty("java.class.path"); //$NON-NLS-1$
+		final String pattern2 = File.separatorChar == '/' ? pattern : pattern.replaceAll("/", "\\\\\\\\");  
+		final Map<String, String> list = new TreeMap<>();
+		final String classPath = System.getProperty("java.class.path"); 
 		final String[] pathElements = classPath.split(File.pathSeparator);
 		for (final String pathElement : pathElements)
 		{
@@ -77,7 +77,7 @@ public class Searcher
 			}
 			catch (final IOException e)
 			{
-				System.err.println("Find files: " + e.toString()); //$NON-NLS-1$
+				System.err.println("Find files: " + e); 
 			}
 		}
 		return list;
@@ -86,19 +86,18 @@ public class Searcher
 	/**
 	 * Find in JAR file
 	 *
-	 * @param file JAR file
+	 * @param file    JAR file
 	 * @param pattern pattern
 	 * @return file with matching file path
-	 * @throws IOException
+	 * @throws IOException io exception
 	 */
 	static private Map<String, String> findInFile(final File file, final String pattern) throws IOException
 	{
-		final Map<String, String> map = new TreeMap<String, String>();
-		if (file.canRead() && file.getAbsolutePath().endsWith(".jar")) //$NON-NLS-1$
+		final Map<String, String> map = new TreeMap<>();
+		if (file.canRead() && file.getAbsolutePath().endsWith(".jar")) 
 		{
-			@SuppressWarnings("resource")
-			final JarFile jar = new JarFile(file);
-			for (final Enumeration<JarEntry> entries = jar.entries(); entries.hasMoreElements();)
+			@SuppressWarnings("resource") final JarFile jar = new JarFile(file);
+			for (final Enumeration<JarEntry> entries = jar.entries(); entries.hasMoreElements(); )
 			{
 				final JarEntry entry = entries.nextElement();
 				if (entry.getName().matches(pattern))
@@ -113,20 +112,19 @@ public class Searcher
 	/**
 	 * Find zip entries
 	 *
-	 * @param file JAR file
+	 * @param file            JAR file
 	 * @param positivePattern pattern
-	 * @param positivePattern pattern
+	 * @param negativePattern pattern
 	 * @return matching entry
-	 * @throws IOException
+	 * @throws IOException io exception
 	 */
 	static public Collection<String> findZipEntries(final File file, final String positivePattern, final String negativePattern) throws IOException
 	{
-		final Collection<String> set = new TreeSet<String>();
+		final Collection<String> set = new TreeSet<>();
 		if (file.canRead())
 		{
-			@SuppressWarnings("resource")
-			final ZipFile zip = new ZipFile(file);
-			for (final Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements();)
+			@SuppressWarnings("resource") final ZipFile zip = new ZipFile(file);
+			for (final Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements(); )
 			{
 				final ZipEntry entry = entries.nextElement();
 				final String name = entry.getName();
@@ -148,27 +146,31 @@ public class Searcher
 	 * Find in directory
 	 *
 	 * @param directory directory
-	 * @param pattern pattern
+	 * @param pattern   pattern
 	 * @return file with matching file path
-	 * @throws IOException
+	 * @throws IOException io exception
 	 */
 	static private Map<String, String> findInDirectory(final File directory, final String pattern, final String pathElement) throws IOException
 	{
-		final Map<String, String> map = new TreeMap<String, String>();
-		for (final File directoryEntry : directory.listFiles())
+		final Map<String, String> map = new TreeMap<>();
+		File[] files = directory.listFiles();
+		if (files != null)
 		{
-			if (directoryEntry.getAbsolutePath().matches(pattern))
+			for (final File directoryEntry : files)
 			{
-				final String fileName = directoryEntry.getAbsolutePath().substring(pathElement.length() + 1);
-				map.put(fileName, pathElement);
-			}
-			else if (directoryEntry.isDirectory())
-			{
-				map.putAll(Searcher.findInDirectory(directoryEntry, pattern, pathElement));
-			}
-			else
-			{
-				map.putAll(Searcher.findInFile(directoryEntry, pattern));
+				if (directoryEntry.getAbsolutePath().matches(pattern))
+				{
+					final String fileName = directoryEntry.getAbsolutePath().substring(pathElement.length() + 1);
+					map.put(fileName, pathElement);
+				}
+				else if (directoryEntry.isDirectory())
+				{
+					map.putAll(Searcher.findInDirectory(directoryEntry, pattern, pathElement));
+				}
+				else
+				{
+					map.putAll(Searcher.findInFile(directoryEntry, pattern));
+				}
 			}
 		}
 		return map;
@@ -193,19 +195,19 @@ public class Searcher
 	 */
 	static public List<String> toUrls(final Map<String, String> map)
 	{
-		final List<String> urls = new ArrayList<String>();
+		final List<String> urls = new ArrayList<>();
 		for (final Map.Entry<String, String> entry : map.entrySet())
 		{
 			final String container = entry.getValue();
 			final String path = entry.getKey();
-			String urlString = null;
-			if (container.endsWith(".jar")) //$NON-NLS-1$
+			String urlString;
+			if (container.endsWith(".jar")) 
 			{
-				urlString = "jar:file:" + container + "!/" + path; //$NON-NLS-1$ //$NON-NLS-2$
+				urlString = "jar:file:" + container + "!/" + path;  
 			}
 			else
 			{
-				urlString = "file:" + container + '/' + path; //$NON-NLS-1$
+				urlString = "file:" + container + '/' + path; 
 			}
 			urls.add(urlString);
 		}
@@ -219,14 +221,14 @@ public class Searcher
 	 */
 	public static void main(final String[] args)
 	{
-		for (final String className : Searcher.findClasses(".*\\.Provider")) //$NON-NLS-1$
+		for (final String className : Searcher.findClasses(".*\\.Provider")) 
 		{
-			System.out.println("PROVIDER CLASS: " + className); //$NON-NLS-1$
+			System.out.println("PROVIDER CLASS: " + className); 
 		}
 
-		for (final Map.Entry<String, String> entry : Searcher.findFiles(".*xsl$").entrySet()) //$NON-NLS-1$
+		for (final Map.Entry<String, String> entry : Searcher.findFiles(".*xsl$").entrySet()) 
 		{
-			System.out.println("XSL FILE: " + entry.getKey() + " @ " + entry.getValue()); //$NON-NLS-1$ //$NON-NLS-2$
+			System.out.println("XSL FILE: " + entry.getKey() + " @ " + entry.getValue());  
 		}
 	}
 }

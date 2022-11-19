@@ -4,8 +4,6 @@
 package treebolic.commons;
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -25,17 +23,17 @@ public class ButtonTabComponent extends JPanel
 	/**
 	 * Default icon
 	 */
-	static private Icon defaultIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_default.png")); //$NON-NLS-1$
+	static private final Icon defaultIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_default.png")); 
 
 	/**
 	 * Rollover icon
 	 */
-	static private Icon rolloverIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_rollover.png")); //$NON-NLS-1$
+	static private final Icon rolloverIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_rollover.png")); 
 
 	/**
 	 * Pressed icon
 	 */
-	static private Icon pressedIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_pressed.png")); //$NON-NLS-1$
+	static private final Icon pressedIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_pressed.png")); 
 
 	/**
 	 * Reference to tabbed pane
@@ -54,7 +52,7 @@ public class ButtonTabComponent extends JPanel
 		super(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
 		if (pane == null)
-			throw new NullPointerException("TabbedPane is null"); //$NON-NLS-1$
+			throw new NullPointerException("TabbedPane is null"); 
 		this.tabbedPane = pane;
 
 		// L A B E L
@@ -85,7 +83,7 @@ public class ButtonTabComponent extends JPanel
 		final JButton button = new JButton();
 
 		// tooltip
-		button.setToolTipText(Messages.getString("ButtonTabComponent.close")); //$NON-NLS-1$
+		button.setToolTipText(Messages.getString("ButtonTabComponent.close")); 
 
 		// transparent
 		button.setContentAreaFilled(false);
@@ -104,17 +102,11 @@ public class ButtonTabComponent extends JPanel
 		button.setPressedIcon(ButtonTabComponent.pressedIcon);
 
 		// close the proper tab by clicking the button
-		button.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent event)
+		button.addActionListener(event -> {
+			final int index = ButtonTabComponent.this.tabbedPane.indexOfTabComponent(ButtonTabComponent.this);
+			if (index != -1)
 			{
-				final int index = ButtonTabComponent.this.tabbedPane.indexOfTabComponent(ButtonTabComponent.this);
-				if (index != -1)
-				{
-					ButtonTabComponent.this.tabbedPane.remove(index);
-				}
+				ButtonTabComponent.this.tabbedPane.remove(index);
 			}
 		});
 

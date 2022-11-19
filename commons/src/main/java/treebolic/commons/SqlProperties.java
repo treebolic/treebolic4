@@ -31,7 +31,7 @@ public class SqlProperties
 		}
 		catch (final IOException e)
 		{
-			System.err.println("Sql: Cannot load <" + url.toString() + ">"); //$NON-NLS-1$ //$NON-NLS-2$
+			System.err.println("Sql: Cannot load <" + url + ">");  
 			return null;
 		}
 	}
@@ -43,7 +43,7 @@ public class SqlProperties
 	{
 		try
 		{
-			properties.store(new FileOutputStream(propertyFile), "TREEBOLIC-SQL"); //$NON-NLS-1$
+			properties.store(new FileOutputStream(propertyFile), "TREEBOLIC-SQL"); 
 		}
 		catch (final IOException e)
 		{
@@ -56,15 +56,15 @@ public class SqlProperties
 	 */
 	static public String toString(final Properties properties)
 	{
-		final StringBuffer buffer = new StringBuffer();
+		final StringBuilder buffer = new StringBuilder();
 		for (final Enumeration<?> it = properties.propertyNames(); it.hasMoreElements();)
 		{
 			final String name = (String) it.nextElement();
 			final String value = properties.getProperty(name);
 			buffer.append(name);
-			buffer.append("="); //$NON-NLS-1$
+			buffer.append("="); 
 			buffer.append(value);
-			buffer.append("\n"); //$NON-NLS-1$
+			buffer.append("\n"); 
 		}
 		return buffer.toString();
 	}

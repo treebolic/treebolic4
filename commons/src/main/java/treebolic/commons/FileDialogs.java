@@ -39,10 +39,8 @@ public class FileDialogs
 		/**
 		 * Constructor
 		 *
-		 * @param filters
-		 *        filters
-		 * @param description
-		 *        description
+		 * @param filters     filters
+		 * @param description description
 		 */
 		public XFileFilter(final String[] filters, final String description)
 		{
@@ -66,10 +64,8 @@ public class FileDialogs
 		/**
 		 * Constructor
 		 *
-		 * @param filters
-		 *        filters
-		 * @param description
-		 *        description
+		 * @param filters     filters
+		 * @param description description
 		 */
 		public RegExprFileFilter(String[] filters, String description)
 		{
@@ -85,8 +81,12 @@ public class FileDialogs
 		{
 			final String name = file.getName().toLowerCase();
 			for (final String filter : this.filters)
+			{
 				if (name.matches(filter))
+				{
 					return true;
+				}
+			}
 			return file.isDirectory();
 		}
 	}
@@ -96,10 +96,8 @@ public class FileDialogs
 		/**
 		 * Constructor
 		 *
-		 * @param extensions
-		 *        extension
-		 * @param description
-		 *        description
+		 * @param extensions  extension
+		 * @param description description
 		 */
 		public NegRegExprFileFilter(String[] extensions, String description)
 		{
@@ -115,8 +113,12 @@ public class FileDialogs
 		{
 			final String name = file.getName().toLowerCase();
 			for (final String filter : this.filters)
+			{
 				if (name.matches(filter))
+				{
 					return false;
+				}
+			}
 			return true;
 		}
 	}
@@ -124,43 +126,42 @@ public class FileDialogs
 	/**
 	 * Executable file filter
 	 */
-	static private FileFilter executableFileFilter = new RegExprFileFilter(new String[] { ".*\\.exe", ".*\\.sh" }, Messages.getString("FileDialogs.exe")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	static private final FileFilter executableFileFilter = new RegExprFileFilter(new String[]{".*\\.exe", ".*\\.sh"}, Messages.getString("FileDialogs.exe"));   
 
 	/**
 	 * XML file filter
 	 */
-	static private FileFilter xmlFileFilter = new RegExprFileFilter(new String[] { ".*\\.xml" }, Messages.getString("FileDialogs.xml")); //$NON-NLS-1$ //$NON-NLS-2$
+	static private final FileFilter xmlFileFilter = new RegExprFileFilter(new String[]{".*\\.xml"}, Messages.getString("FileDialogs.xml"));  
 
 	/**
 	 * XSL file filter
 	 */
-	static private FileFilter xslFileFilter = new RegExprFileFilter(new String[] { ".*\\.xsl", ".*\\.xslt" }, Messages.getString("FileDialogs.xslt")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	static private final FileFilter xslFileFilter = new RegExprFileFilter(new String[]{".*\\.xsl", ".*\\.xslt"}, Messages.getString("FileDialogs.xslt"));   
 
 	/**
 	 * Zip file filter
 	 */
-	static private FileFilter zipFileFilter = new RegExprFileFilter(new String[] { ".*\\.zip", ".*\\.jar" }, Messages.getString("FileDialogs.zip")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	static private final FileFilter zipFileFilter = new RegExprFileFilter(new String[]{".*\\.zip", ".*\\.jar"}, Messages.getString("FileDialogs.zip"));   
 
 	/**
 	 * Ser file filter
 	 */
-	static private FileFilter serFileFilter = new RegExprFileFilter(new String[] { ".*\\.ser", ".*\\.ser\\.zip" }, Messages.getString("FileDialogs.ser")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	static private final FileFilter serFileFilter = new RegExprFileFilter(new String[]{".*\\.ser", ".*\\.ser\\.zip"}, Messages.getString("FileDialogs.ser"));   
 
 	/**
 	 * XSL file filter
 	 */
-	static private FileFilter propertyFileFilter = new RegExprFileFilter(new String[] { ".*\\.properties" }, Messages.getString("FileDialogs.properties")); //$NON-NLS-1$ //$NON-NLS-2$
+	static private final FileFilter propertyFileFilter = new RegExprFileFilter(new String[]{".*\\.properties"}, Messages.getString("FileDialogs.properties"));  
 
 	/**
 	 * Document file filter
 	 */
-	static private FileFilter docFileFilter = new NegRegExprFileFilter(new String[] { ".*\\.png", ".*\\.jpg", ".*\\.gif", ".*\\.html", ".*\\.properties", ".*\\.applet" }, Messages.getString("FileDialogs.doc")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+	static private final FileFilter docFileFilter = new NegRegExprFileFilter(new String[]{".*\\.png", ".*\\.jpg", ".*\\.gif", ".*\\.html", ".*\\.properties", ".*\\.applet"}, Messages.getString("FileDialogs.doc"));       
 
 	/**
 	 * Get executable
 	 *
-	 * @param currentDirectory
-	 *        current directory
+	 * @param currentDirectory current directory
 	 * @return string for executable
 	 */
 	static public String getExec(final String currentDirectory)
@@ -171,8 +172,7 @@ public class FileDialogs
 	/**
 	 * Get property file
 	 *
-	 * @param currentDirectory
-	 *        current directory
+	 * @param currentDirectory current directory
 	 * @return string for property file
 	 */
 	static public String getPropertyFile(final String currentDirectory)
@@ -183,8 +183,7 @@ public class FileDialogs
 	/**
 	 * Get Zip file path
 	 *
-	 * @param currentDirectory
-	 *        current directory
+	 * @param currentDirectory current directory
 	 * @return string for zip file path
 	 */
 	static public String getZip(final String currentDirectory)
@@ -195,8 +194,7 @@ public class FileDialogs
 	/**
 	 * Get Zip file path
 	 *
-	 * @param currentDirectory
-	 *        current directory
+	 * @param currentDirectory current directory
 	 * @return string for zip file path
 	 */
 	static public String getSer(final String currentDirectory)
@@ -207,8 +205,7 @@ public class FileDialogs
 	/**
 	 * Get XML file path
 	 *
-	 * @param currentDirectory
-	 *        current directory
+	 * @param currentDirectory current directory
 	 * @return string for XML file path
 	 */
 	static public String getXml(final String currentDirectory)
@@ -219,8 +216,7 @@ public class FileDialogs
 	/**
 	 * Get file path
 	 *
-	 * @param currentDirectory
-	 *        current directory
+	 * @param currentDirectory current directory
 	 * @return string for any file path
 	 */
 	static public String getAny(final String currentDirectory)
@@ -231,10 +227,8 @@ public class FileDialogs
 	/**
 	 * Get file path
 	 *
-	 * @param currentDirectory
-	 *        current directory
-	 * @param fileFilter
-	 *        file filter
+	 * @param currentDirectory current directory
+	 * @param fileFilter       file filter
 	 * @return string for XML file path
 	 */
 	static private String getFile(final String currentDirectory, final FileFilter fileFilter)
@@ -242,9 +236,13 @@ public class FileDialogs
 		final JFileChooser chooser = FileDialogs.makeFileChooser();
 		FileDialogs.setCurrentDirectory(chooser, currentDirectory);
 		if (fileFilter != null)
+		{
 			chooser.setFileFilter(fileFilter);
+		}
 		else
+		{
 			chooser.setFileFilter(docFileFilter);
+		}
 
 		if (JFileChooser.APPROVE_OPTION == chooser.showOpenDialog(null))
 		{
@@ -263,8 +261,7 @@ public class FileDialogs
 	/**
 	 * Get XML url
 	 *
-	 * @param currentDirectory
-	 *        current directory
+	 * @param currentDirectory current directory
 	 * @return string for XML file url
 	 */
 	static public String getXmlUrl(final String currentDirectory)
@@ -275,8 +272,7 @@ public class FileDialogs
 	/**
 	 * Get XSL url
 	 *
-	 * @param currentDirectory
-	 *        current directory
+	 * @param currentDirectory current directory
 	 * @return string for XSL file url
 	 */
 	static public String getXslUrl(final String currentDirectory)
@@ -287,8 +283,7 @@ public class FileDialogs
 	/**
 	 * Get any url
 	 *
-	 * @param currentDirectory
-	 *        current directory
+	 * @param currentDirectory current directory
 	 * @return string for XML file url
 	 */
 	static public String getAnyUrl(final String currentDirectory)
@@ -299,10 +294,8 @@ public class FileDialogs
 	/**
 	 * Get XML url
 	 *
-	 * @param currentDirectory
-	 *        current directory
-	 * @param fileFilter
-	 *        file filter
+	 * @param currentDirectory current directory
+	 * @param fileFilter       file filter
 	 * @return string for XML file url
 	 */
 	static private String getUrl(final String currentDirectory, final FileFilter fileFilter)
@@ -310,9 +303,13 @@ public class FileDialogs
 		final JFileChooser chooser = FileDialogs.makeFileChooser();
 		FileDialogs.setCurrentDirectory(chooser, currentDirectory);
 		if (fileFilter != null)
+		{
 			chooser.setFileFilter(fileFilter);
+		}
 		else
+		{
 			chooser.setFileFilter(docFileFilter);
+		}
 		if (JFileChooser.APPROVE_OPTION == chooser.showOpenDialog(null))
 		{
 			try
@@ -330,8 +327,7 @@ public class FileDialogs
 	/**
 	 * Get directory
 	 *
-	 * @param currentDirectory
-	 *        current directory
+	 * @param currentDirectory current directory
 	 * @return string for directory path
 	 */
 	static public String getFolder(final String currentDirectory)
@@ -339,7 +335,9 @@ public class FileDialogs
 		final JFileChooser chooser = FileDialogs.makeFolderChooser();
 		FileDialogs.setCurrentDirectory(chooser, currentDirectory);
 		if (JFileChooser.APPROVE_OPTION == chooser.showOpenDialog(null))
+		{
 			return chooser.getSelectedFile().getPath();
+		}
 		return null;
 	}
 
@@ -351,7 +349,7 @@ public class FileDialogs
 	static private JFileChooser makeFileChooser()
 	{
 		final JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle(Messages.getString("FileDialogs.title")); //$NON-NLS-1$
+		chooser.setDialogTitle(Messages.getString("FileDialogs.title")); 
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		return chooser;
 	}
@@ -364,7 +362,7 @@ public class FileDialogs
 	static private JFileChooser makeFolderChooser()
 	{
 		final JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle(Messages.getString("FileDialogs.title")); //$NON-NLS-1$
+		chooser.setDialogTitle(Messages.getString("FileDialogs.title")); 
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setFileFilter(new javax.swing.filechooser.FileFilter()
 		{
@@ -377,7 +375,7 @@ public class FileDialogs
 			@Override
 			public String getDescription()
 			{
-				return Messages.getString("FileDialogs.folder"); //$NON-NLS-1$
+				return Messages.getString("FileDialogs.folder"); 
 			}
 		});
 		return chooser;
@@ -385,19 +383,18 @@ public class FileDialogs
 
 	/**
 	 * Set current directory for file chooser
-	 */
-	/**
-	 * @param chooser
-	 *        file chooser
-	 * @param currentDirectory
-	 *        directory to set as current
+	 *
+	 * @param chooser          file chooser
+	 * @param currentDirectory directory to set as current
 	 */
 	static private void setCurrentDirectory(final JFileChooser chooser, final String currentDirectory)
 	{
 		if (currentDirectory == null || currentDirectory.isEmpty())
+		{
 			return;
+		}
 		File directory = null;
-		if (currentDirectory.startsWith("file:")) //$NON-NLS-1$
+		if (currentDirectory.startsWith("file:")) 
 		{
 			try
 			{

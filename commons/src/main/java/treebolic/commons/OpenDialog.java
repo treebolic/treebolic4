@@ -10,7 +10,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.Set;
 
@@ -95,7 +94,7 @@ public class OpenDialog extends JDialog
 		this.source = source;
 		this.base = base;
 
-		final Set<String> presetProviders = Searcher.findClasses(".*\\.Provider"); //$NON-NLS-1$
+		final Set<String> presetProviders = Searcher.findClasses(".*\\.Provider"); 
 		initialize(presetProviders);
 	}
 
@@ -104,22 +103,22 @@ public class OpenDialog extends JDialog
 	 */
 	protected void initialize(final Collection<String> providers)
 	{
-		setTitle(Messages.getString("OpenDialog.title")); //$NON-NLS-1$
+		setTitle(Messages.getString("OpenDialog.title")); 
 		setResizable(true);
 
 		// images
-		final Icon icon = new ImageIcon(OpenDialog.class.getResource("images/open.png")); //$NON-NLS-1$
+		final Icon icon = new ImageIcon(OpenDialog.class.getResource("images/open.png")); 
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		headerLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-		headerLabel.setText(Messages.getString("OpenDialog.header")); //$NON-NLS-1$
+		headerLabel.setText(Messages.getString("OpenDialog.header")); 
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// labels
-		final JLabel sourceLabel = new JLabel(Messages.getString("OpenDialog.source")); //$NON-NLS-1$
-		final JLabel providerLabel = new JLabel(Messages.getString("OpenDialog.provider")); //$NON-NLS-1$
+		final JLabel sourceLabel = new JLabel(Messages.getString("OpenDialog.source")); 
+		final JLabel providerLabel = new JLabel(Messages.getString("OpenDialog.provider")); 
 
 		// text
 		final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
@@ -134,7 +133,7 @@ public class OpenDialog extends JDialog
 			 * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
 			 */
 			@Override
-			public Component getListCellRendererComponent(final JList<? extends Object> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+			public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
 			{
 				String string = (String) value;
 				if (string != null)
@@ -162,14 +161,14 @@ public class OpenDialog extends JDialog
 		}
 
 		// tooltips
-		this.sourceTextField.setToolTipText(Messages.getString("OpenDialog.tooltip_source")); //$NON-NLS-1$
-		this.providerComboBox.setToolTipText(Messages.getString("OpenDialog.tooltip_provider")); //$NON-NLS-1$
+		this.sourceTextField.setToolTipText(Messages.getString("OpenDialog.tooltip_source")); 
+		this.providerComboBox.setToolTipText(Messages.getString("OpenDialog.tooltip_provider")); 
 
 		// buttons
-		final JButton sourceBrowseButton = new JButton(Messages.getString("OpenDialog.browse")); //$NON-NLS-1$
-		final JButton providerAddButton = new JButton(Messages.getString("OpenDialog.add")); //$NON-NLS-1$
-		final JButton oKButton = new JButton(Messages.getString("OpenDialog.ok")); //$NON-NLS-1$
-		final JButton cancelButton = new JButton(Messages.getString("OpenDialog.cancel")); //$NON-NLS-1$
+		final JButton sourceBrowseButton = new JButton(Messages.getString("OpenDialog.browse")); 
+		final JButton providerAddButton = new JButton(Messages.getString("OpenDialog.add")); 
+		final JButton oKButton = new JButton(Messages.getString("OpenDialog.ok")); 
+		final JButton cancelButton = new JButton(Messages.getString("OpenDialog.cancel")); 
 
 		// panels
 		this.dataPanel = new JPanel();
@@ -187,50 +186,26 @@ public class OpenDialog extends JDialog
 		buttonPanel.add(oKButton);
 
 		// action
-		sourceBrowseButton.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
+		sourceBrowseButton.addActionListener(event -> {
+			final String url = FileDialogs.getAnyUrl(OpenDialog.this.base != null ? OpenDialog.this.base : "."); 
+			if (url != null && !url.isEmpty())
 			{
-				final String url = FileDialogs.getAnyUrl(OpenDialog.this.base != null ? OpenDialog.this.base : "."); //$NON-NLS-1$
-				if (url != null && !url.isEmpty())
-				{
-					OpenDialog.this.sourceTextField.setText(url);
-				}
+				OpenDialog.this.sourceTextField.setText(url);
 			}
 		});
-		providerAddButton.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
+		providerAddButton.addActionListener(event -> {
+			final String provider = ask(Messages.getString("OpenDialog.prompt_provider")); 
+			if (provider != null && !provider.isEmpty())
 			{
-				final String provider = ask(Messages.getString("OpenDialog.prompt_provider")); //$NON-NLS-1$
-				if (provider != null && !provider.isEmpty())
-				{
-					OpenDialog.this.providerComboBox.addItem(provider);
-					OpenDialog.this.providerComboBox.getEditor().setItem(provider);
-				}
+				OpenDialog.this.providerComboBox.addItem(provider);
+				OpenDialog.this.providerComboBox.getEditor().setItem(provider);
 			}
 		});
-		oKButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				OpenDialog.this.ok = true;
-				setVisible(false);
-			}
+		oKButton.addActionListener(event -> {
+			OpenDialog.this.ok = true;
+			setVisible(false);
 		});
-		cancelButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				setVisible(false);
-			}
-		});
+		cancelButton.addActionListener(event -> setVisible(false));
 
 		// assemble
 		final JPanel panel = new JPanel();
@@ -284,7 +259,7 @@ public class OpenDialog extends JDialog
 	 */
 	protected String ask(final String message)
 	{
-		final String[] lines = message.split("\n"); //$NON-NLS-1$
+		final String[] lines = message.split("\n"); 
 		return JOptionPane.showInputDialog(null, lines);
 	}
 
@@ -296,7 +271,7 @@ public class OpenDialog extends JDialog
 	 */
 	protected void inform(final String message)
 	{
-		final String[] lines = message.split("\n"); //$NON-NLS-1$
-		JOptionPane.showMessageDialog(null, lines, Messages.getString("OpenDialog.app"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+		final String[] lines = message.split("\n"); 
+		JOptionPane.showMessageDialog(null, lines, Messages.getString("OpenDialog.app"), JOptionPane.WARNING_MESSAGE); 
 	}
 }

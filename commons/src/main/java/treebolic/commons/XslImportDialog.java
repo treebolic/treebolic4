@@ -10,7 +10,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -44,7 +43,7 @@ public class XslImportDialog extends JDialog
 	/**
 	 * Properties (input/output)
 	 */
-	protected Properties properties;
+	protected final Properties properties;
 
 	/**
 	 * Ok result
@@ -80,11 +79,8 @@ public class XslImportDialog extends JDialog
 	{
 		super();
 		this.properties = properties;
-		final List<String> presetXsls = new ArrayList<String>();
-		for (final String url : Searcher.findFileUrls(".*2treebolic.*\\.xsl$")) //$NON-NLS-1$
-		{
-			presetXsls.add(url);
-		}
+		
+		final List<String> presetXsls = new ArrayList<>(Searcher.findFileUrls(".*2treebolic.*\\.xsl$"));
 		initialize(presetXsls);
 	}
 
@@ -93,22 +89,22 @@ public class XslImportDialog extends JDialog
 	 */
 	protected void initialize(final List<String> presetXsls)
 	{
-		setTitle(Messages.getString("XslImportDialog.title")); //$NON-NLS-1$
+		setTitle(Messages.getString("XslImportDialog.title")); 
 		setResizable(true);
 
 		// images
-		final Icon icon = new ImageIcon(XslImportDialog.class.getResource("images/xsl.png")); //$NON-NLS-1$
+		final Icon icon = new ImageIcon(XslImportDialog.class.getResource("images/xsl.png")); 
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		headerLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-		headerLabel.setText(Messages.getString("XslImportDialog.header")); //$NON-NLS-1$
+		headerLabel.setText(Messages.getString("XslImportDialog.header")); 
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// labels
-		final JLabel importLabel = new JLabel(Messages.getString("XslImportDialog.input")); //$NON-NLS-1$
-		final JLabel xslLabel = new JLabel(Messages.getString("XslImportDialog.xsl")); //$NON-NLS-1$
+		final JLabel importLabel = new JLabel(Messages.getString("XslImportDialog.input")); 
+		final JLabel xslLabel = new JLabel(Messages.getString("XslImportDialog.xsl")); 
 
 		// text
 		final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
@@ -123,7 +119,7 @@ public class XslImportDialog extends JDialog
 			 * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
 			 */
 			@Override
-			public Component getListCellRendererComponent(final JList<? extends Object> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+			public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
 			{
 				String string = (String) value;
 				if (string != null)
@@ -149,14 +145,14 @@ public class XslImportDialog extends JDialog
 		}
 
 		// tooltips
-		this.importTextField.setToolTipText(Messages.getString("XslImportDialog.tooltip_xml")); //$NON-NLS-1$
-		this.xslComboBox.setToolTipText(Messages.getString("XslImportDialog.tooltip_xsl")); //$NON-NLS-1$
+		this.importTextField.setToolTipText(Messages.getString("XslImportDialog.tooltip_xml")); 
+		this.xslComboBox.setToolTipText(Messages.getString("XslImportDialog.tooltip_xsl")); 
 
 		// buttons
-		final JButton importBrowseButton = new JButton(Messages.getString("XslImportDialog.browse")); //$NON-NLS-1$
-		final JButton xslBrowseButton = new JButton(Messages.getString("XslImportDialog.browse")); //$NON-NLS-1$
-		final JButton oKButton = new JButton(Messages.getString("XslImportDialog.ok")); //$NON-NLS-1$
-		final JButton cancelButton = new JButton(Messages.getString("XslImportDialog.cancel")); //$NON-NLS-1$
+		final JButton importBrowseButton = new JButton(Messages.getString("XslImportDialog.browse")); 
+		final JButton xslBrowseButton = new JButton(Messages.getString("XslImportDialog.browse")); 
+		final JButton oKButton = new JButton(Messages.getString("XslImportDialog.ok")); 
+		final JButton cancelButton = new JButton(Messages.getString("XslImportDialog.cancel")); 
 
 		// panels
 		this.dataPanel = new JPanel();
@@ -174,49 +170,25 @@ public class XslImportDialog extends JDialog
 		buttonPanel.add(oKButton);
 
 		// action
-		importBrowseButton.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
+		importBrowseButton.addActionListener(event -> {
+			final String url = FileDialogs.getXmlUrl(XslImportDialog.this.properties.getProperty("base", "."));  
+			if (url != null && !url.isEmpty())
 			{
-				final String url = FileDialogs.getXmlUrl(XslImportDialog.this.properties.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
-				if (url != null && !url.isEmpty())
-				{
-					XslImportDialog.this.importTextField.setText(url);
-				}
+				XslImportDialog.this.importTextField.setText(url);
 			}
 		});
-		xslBrowseButton.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
+		xslBrowseButton.addActionListener(event -> {
+			final String url = FileDialogs.getXslUrl(XslImportDialog.this.properties.getProperty("base", "."));  
+			if (url != null && !url.isEmpty())
 			{
-				final String url = FileDialogs.getXslUrl(XslImportDialog.this.properties.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
-				if (url != null && !url.isEmpty())
-				{
-					XslImportDialog.this.xslComboBox.getEditor().setItem(url);
-				}
+				XslImportDialog.this.xslComboBox.getEditor().setItem(url);
 			}
 		});
-		oKButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				XslImportDialog.this.ok = true;
-				setVisible(false);
-			}
+		oKButton.addActionListener(event -> {
+			XslImportDialog.this.ok = true;
+			setVisible(false);
 		});
-		cancelButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				setVisible(false);
-			}
-		});
+		cancelButton.addActionListener(event -> setVisible(false));
 
 		// assemble
 		final JPanel panel = new JPanel();
@@ -242,8 +214,8 @@ public class XslImportDialog extends JDialog
 			this.ok = false;
 
 			// read properties into components
-			this.importTextField.setText(this.properties.getProperty("importurl")); //$NON-NLS-1$
-			final String value = this.properties.getProperty("importxsl"); //$NON-NLS-1$
+			this.importTextField.setText(this.properties.getProperty("importurl")); 
+			final String value = this.properties.getProperty("importxsl"); 
 			this.xslComboBox.addItem(value);
 			this.xslComboBox.getEditor().setItem(value);
 
@@ -255,8 +227,8 @@ public class XslImportDialog extends JDialog
 			if (this.ok)
 			{
 				// update properties from components
-				this.properties.setProperty("importurl", this.importTextField.getText()); //$NON-NLS-1$
-				this.properties.setProperty("importxsl", (String) this.xslComboBox.getEditor().getItem()); //$NON-NLS-1$
+				this.properties.setProperty("importurl", this.importTextField.getText()); 
+				this.properties.setProperty("importxsl", (String) this.xslComboBox.getEditor().getItem()); 
 			}
 		}
 		super.setVisible(flag);

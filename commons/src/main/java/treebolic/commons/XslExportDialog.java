@@ -10,8 +10,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -38,14 +38,14 @@ public class XslExportDialog extends JDialog
 {
 	static private final long serialVersionUID = 1L;
 
-	static private String[] viewOutputs = { "view:xml", "view:html", "view:text" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	static private final String[] viewOutputs = { "view:xml", "view:html", "view:text" };   
 
 	// V A L U E S
 
 	/**
 	 * Properties (input/output)
 	 */
-	protected Properties properties;
+	protected final Properties properties;
 
 	/**
 	 * Ok result
@@ -82,20 +82,14 @@ public class XslExportDialog extends JDialog
 		super();
 		this.properties = properties;
 
-		final List<String> presetXsls = new ArrayList<String>();
-		for (final String url : Searcher.findFileUrls(".*treebolic2.*\\.xsl$")) //$NON-NLS-1$
-		{
-			presetXsls.add(url);
-		}
+		
+		final List<String> presetXsls = new ArrayList<>(Searcher.findFileUrls(".*treebolic2.*\\.xsl$"));
 
-		final String xSLsProperty = this.properties.getProperty("exportxsls"); //$NON-NLS-1$
+		final String xSLsProperty = this.properties.getProperty("exportxsls"); 
 		if (xSLsProperty != null)
 		{
-			final String[] providers = xSLsProperty.split(":"); //$NON-NLS-1$
-			for (final String provider : providers)
-			{
-				presetXsls.add(provider);
-			}
+			final String[] providers = xSLsProperty.split(":"); 
+			Collections.addAll(presetXsls, providers);
 		}
 
 		initialize(presetXsls, XslExportDialog.viewOutputs);
@@ -104,24 +98,24 @@ public class XslExportDialog extends JDialog
 	/**
 	 * Initialize
 	 */
-	protected void initialize(final List<String> presetXsls, final String[] viewOutputs)
+	protected void initialize(final List<String> presetXsls, @SuppressWarnings("SameParameterValue") final String[] viewOutputs)
 	{
-		setTitle(Messages.getString("XslExportDialog.title")); //$NON-NLS-1$
+		setTitle(Messages.getString("XslExportDialog.title")); 
 		setResizable(true);
 
 		// images
-		final Icon icon = new ImageIcon(XslExportDialog.class.getResource("images/xsl.png")); //$NON-NLS-1$
+		final Icon icon = new ImageIcon(XslExportDialog.class.getResource("images/xsl.png")); 
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		headerLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-		headerLabel.setText(Messages.getString("XslExportDialog.header")); //$NON-NLS-1$
+		headerLabel.setText(Messages.getString("XslExportDialog.header")); 
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// labels
-		final JLabel exportLabel = new JLabel(Messages.getString("XslExportDialog.output")); //$NON-NLS-1$
-		final JLabel xslLabel = new JLabel(Messages.getString("XslExportDialog.xsl")); //$NON-NLS-1$
+		final JLabel exportLabel = new JLabel(Messages.getString("XslExportDialog.output")); 
+		final JLabel xslLabel = new JLabel(Messages.getString("XslExportDialog.xsl")); 
 
 		// text
 		final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
@@ -136,7 +130,7 @@ public class XslExportDialog extends JDialog
 			 * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
 			 */
 			@Override
-			public Component getListCellRendererComponent(final JList<? extends Object> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+			public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
 			{
 				String string = (String) value;
 				if (string != null)
@@ -164,14 +158,14 @@ public class XslExportDialog extends JDialog
 		}
 
 		// tooltips
-		this.exportComboBox.setToolTipText(Messages.getString("XslExportDialog.tooltip_xml")); //$NON-NLS-1$
-		this.xslComboBox.setToolTipText(Messages.getString("XslExportDialog.tooltip_xsl")); //$NON-NLS-1$
+		this.exportComboBox.setToolTipText(Messages.getString("XslExportDialog.tooltip_xml")); 
+		this.xslComboBox.setToolTipText(Messages.getString("XslExportDialog.tooltip_xsl")); 
 
 		// buttons
-		final JButton xmlBrowseButton = new JButton(Messages.getString("XslExportDialog.browse")); //$NON-NLS-1$
-		final JButton xslBrowseButton = new JButton(Messages.getString("XslExportDialog.browse")); //$NON-NLS-1$
-		final JButton oKButton = new JButton(Messages.getString("XslExportDialog.ok")); //$NON-NLS-1$
-		final JButton cancelButton = new JButton(Messages.getString("XslExportDialog.cancel")); //$NON-NLS-1$
+		final JButton xmlBrowseButton = new JButton(Messages.getString("XslExportDialog.browse")); 
+		final JButton xslBrowseButton = new JButton(Messages.getString("XslExportDialog.browse")); 
+		final JButton oKButton = new JButton(Messages.getString("XslExportDialog.ok")); 
+		final JButton cancelButton = new JButton(Messages.getString("XslExportDialog.cancel")); 
 
 		// panels
 		this.dataPanel = new JPanel();
@@ -189,49 +183,25 @@ public class XslExportDialog extends JDialog
 		buttonPanel.add(oKButton);
 
 		// action
-		xmlBrowseButton.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
+		xmlBrowseButton.addActionListener(event -> {
+			final String url = FileDialogs.getXmlUrl(XslExportDialog.this.properties.getProperty("base", "."));  
+			if (url != null && !url.isEmpty())
 			{
-				final String url = FileDialogs.getXmlUrl(XslExportDialog.this.properties.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
-				if (url != null && !url.isEmpty())
-				{
-					XslExportDialog.this.exportComboBox.getEditor().setItem(url);
-				}
+				XslExportDialog.this.exportComboBox.getEditor().setItem(url);
 			}
 		});
-		xslBrowseButton.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
+		xslBrowseButton.addActionListener(event -> {
+			final String url = FileDialogs.getXslUrl(XslExportDialog.this.properties.getProperty("base", "."));  
+			if (url != null && !url.isEmpty())
 			{
-				final String url = FileDialogs.getXslUrl(XslExportDialog.this.properties.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
-				if (url != null && !url.isEmpty())
-				{
-					XslExportDialog.this.xslComboBox.getEditor().setItem(url);
-				}
+				XslExportDialog.this.xslComboBox.getEditor().setItem(url);
 			}
 		});
-		oKButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				XslExportDialog.this.ok = true;
-				setVisible(false);
-			}
+		oKButton.addActionListener(event -> {
+			XslExportDialog.this.ok = true;
+			setVisible(false);
 		});
-		cancelButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				setVisible(false);
-			}
-		});
+		cancelButton.addActionListener(event -> setVisible(false));
 
 		// assemble
 		final JPanel panel = new JPanel();
@@ -257,11 +227,11 @@ public class XslExportDialog extends JDialog
 			this.ok = false;
 
 			// read properties into components
-			final String exportValue = this.properties.getProperty("exporturl"); //$NON-NLS-1$
+			final String exportValue = this.properties.getProperty("exporturl"); 
 			this.exportComboBox.addItem(exportValue);
 			this.exportComboBox.getEditor().setItem(exportValue);
 
-			final String xslValue = this.properties.getProperty("exportxsl"); //$NON-NLS-1$
+			final String xslValue = this.properties.getProperty("exportxsl"); 
 			this.xslComboBox.addItem(xslValue);
 			this.xslComboBox.getEditor().setItem(xslValue);
 
@@ -273,8 +243,8 @@ public class XslExportDialog extends JDialog
 			if (this.ok)
 			{
 				// update properties from components
-				this.properties.setProperty("exporturl", (String) this.exportComboBox.getEditor().getItem()); //$NON-NLS-1$
-				this.properties.setProperty("exportxsl", (String) this.xslComboBox.getEditor().getItem()); //$NON-NLS-1$
+				this.properties.setProperty("exporturl", (String) this.exportComboBox.getEditor().getItem()); 
+				this.properties.setProperty("exportxsl", (String) this.xslComboBox.getEditor().getItem()); 
 			}
 		}
 		super.setVisible(flag);

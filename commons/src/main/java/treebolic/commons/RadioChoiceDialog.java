@@ -36,22 +36,17 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 	 */
 	public String value;
 
-	/**
-	 * Ok result
-	 */
-	public boolean ok;
-
 	// C O M P O N E N T S
 
 	/**
 	 * Buttons
 	 */
-	protected JRadioButton[] buttons;
+	protected final JRadioButton[] buttons;
 
 	/**
 	 * Data panel
 	 */
-	protected JPanel dataPanel;
+	protected final JPanel dataPanel;
 
 	/**
 	 * Constructor
@@ -92,8 +87,8 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 		}
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("RadioChoiceDialog.ok")); //$NON-NLS-1$
-		final JButton cancelButton = new JButton(Messages.getString("RadioChoiceDialog.cancel")); //$NON-NLS-1$
+		final JButton oKButton = new JButton(Messages.getString("RadioChoiceDialog.ok")); 
+		final JButton cancelButton = new JButton(Messages.getString("RadioChoiceDialog.cancel")); 
 
 		// buttons panel
 		this.dataPanel = new JPanel();
@@ -110,23 +105,8 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 		commandPanel.add(cancelButton);
 		commandPanel.add(oKButton);
 
-		oKButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				RadioChoiceDialog.this.ok = true;
-				setVisible(false);
-			}
-		});
-		cancelButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				setVisible(false);
-			}
-		});
+		oKButton.addActionListener(event -> setVisible(false));
+		cancelButton.addActionListener(event -> setVisible(false));
 
 		// assemble
 		final JPanel panel = new JPanel();
@@ -155,7 +135,6 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 	{
 		if (flag)
 		{
-			this.ok = false;
 
 			pack();
 			Utils.center(this);

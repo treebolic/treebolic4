@@ -19,7 +19,7 @@ public class Main
 			if (args.length > 3)
 			{
 				final String flag = args[3];
-				outputHtml = flag.equalsIgnoreCase("html"); //$NON-NLS-1$
+				outputHtml = flag.equalsIgnoreCase("html"); 
 			}
 			String dtd = null;
 			if (args.length > 4)
@@ -31,7 +31,7 @@ public class Main
 		}
 		catch (final Throwable e)
 		{
-			System.err.println("Usage: <source file><result file><xslt file><html|xml|text><dtd>"); //$NON-NLS-1$
+			System.err.println("Usage: <source file><result file><xslt file><html|xml|text><dtd>"); 
 			e.printStackTrace();
 		}
 	}

@@ -4,6 +4,8 @@
 
 package treebolic.commons;
 
+import java.net.URL;
+
 /**
  * DetermineCode base
  *
@@ -18,14 +20,15 @@ public class CodeBase
 	 */
 	static public String getJarLocation()
 	{
-		String urlString = Persist.class.getResource("CodeBase.class").toString(); //$NON-NLS-1$
-		if (urlString != null)
+		URL url = Persist.class.getResource("CodeBase.class"); 
+		if (url != null)
 		{
-			final int index = urlString.lastIndexOf("/treebolic/commons/CodeBase.class"); //$NON-NLS-1$
+			String urlString = url.toString();
+			final int index = urlString.lastIndexOf("/treebolic/commons/CodeBase.class");
 			if (index != -1)
 			{
 				urlString = urlString.substring(0, index);
-				if (urlString.startsWith("jar:")) //$NON-NLS-1$
+				if (urlString.startsWith("jar:")) 
 				{
 					final int index2 = urlString.lastIndexOf('/');
 					urlString = urlString.substring(4, index2);

@@ -21,8 +21,8 @@ public class Interact
 	 */
 	static public void warn(final String message)
 	{
-		final String[] lines = message.split("\n"); //$NON-NLS-1$
-		JOptionPane.showMessageDialog(null, lines, Messages.getString("Interact.title"), JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+		final String[] lines = message.split("\n"); 
+		JOptionPane.showMessageDialog(null, lines, Messages.getString("Interact.title"), JOptionPane.WARNING_MESSAGE); 
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class Interact
 	 */
 	static public boolean confirm(final String[] message)
 	{
-		final int value = JOptionPane.showConfirmDialog(null, message, Messages.getString("Interact.title"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE); //$NON-NLS-1$
+		final int value = JOptionPane.showConfirmDialog(null, message, Messages.getString("Interact.title"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE); 
 		return value == JOptionPane.YES_OPTION;
 	}
 
@@ -47,7 +47,7 @@ public class Interact
 	 */
 	static public String ask2(final String message, final String initial)
 	{
-		final String[] lines = message.split("\n"); //$NON-NLS-1$
+		final String[] lines = message.split("\n"); 
 		return JOptionPane.showInputDialog(null, lines, initial);
 	}
 }

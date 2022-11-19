@@ -20,6 +20,6 @@ public class ProviderDialog extends ChoiceDialog
 	 */
 	public ProviderDialog(final String provider)
 	{
-		super(provider, Searcher.findClasses(".*\\.Provider"), Messages.getString("ProviderDialog.provider"), Messages.getString("ProviderDialog.class"), true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		super(provider, Searcher.findClasses(".*\\.Provider"), Messages.getString("ProviderDialog.provider"), Messages.getString("ProviderDialog.class"), true);   
 	}
 }

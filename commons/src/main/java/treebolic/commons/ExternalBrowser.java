@@ -54,7 +54,7 @@ public class ExternalBrowser
 
 		// help url
 		String helpUrl = helpUrl0;
-		if (!helpUrl.startsWith("file:")) //$NON-NLS-1$
+		if (!helpUrl.startsWith("file:")) 
 		{
 			final File folder = new File(helpUrl);
 			try
@@ -66,11 +66,11 @@ public class ExternalBrowser
 				return;
 			}
 		}
-		if (!helpUrl.endsWith("/")) //$NON-NLS-1$
+		if (!helpUrl.endsWith("/")) 
 		{
-			helpUrl += "/"; //$NON-NLS-1$
+			helpUrl += "/"; 
 		}
-		helpUrl += "index.html"; //$NON-NLS-1$
+		helpUrl += "index.html"; 
 
 		// browse
 		ExternalBrowser.browse(browser, helpUrl);
@@ -91,27 +91,19 @@ public class ExternalBrowser
 				final File file = new File(url);
 				boolean exists = file.exists();
 				final URI uri = exists ? file.toURI() : new URI(url);
-				if (uri != null)
-				{
-					System.out.println(Messages.getString("Context.linkto") + uri); //$NON-NLS-1$
+				System.out.println(Messages.getString("Context.linkto") + uri); 
 
-					// we are likely to be on the popup handler
-					SwingUtilities.invokeLater(new Runnable()
+				// we are likely to be on the popup handler
+				SwingUtilities.invokeLater(() -> {
+					try
 					{
-						@Override
-						public void run()
-						{
-							try
-							{
-								Desktop.getDesktop().browse(uri);
-							}
-							catch (IOException e)
-							{
-								System.err.println(e.getMessage() + ':' + url);
-							}
-						}
-					});
-				}
+						Desktop.getDesktop().browse(uri);
+					}
+					catch (IOException e)
+					{
+						System.err.println(e.getMessage() + ':' + url);
+					}
+				});
 			}
 			catch (URISyntaxException e)
 			{
@@ -128,7 +120,7 @@ public class ExternalBrowser
 	 */
 	static private void run(final String command)
 	{
-		if (command != null && command != null)
+		if (command != null)
 		{
 			try
 			{
@@ -136,7 +128,7 @@ public class ExternalBrowser
 			}
 			catch (final Exception e)
 			{
-				System.err.println("Cannot run " + command + " " + e.toString()); //$NON-NLS-1$ //$NON-NLS-2$
+				System.err.println("Cannot run " + command + " " + e);  
 			}
 		}
 	}

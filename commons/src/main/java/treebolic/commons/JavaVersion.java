@@ -13,8 +13,8 @@ public class JavaVersion
 	/**
 	 * The names of properties
 	 */
-	static private String[] names = new String[] { "java.version", "java.vendor", "java.vendor.url", "java.specification.name", "java.specification.version", "java.specification.vendor", "java.vm.name", "java.vm.version", "java.vm.vendor", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$
-			"java.vm.specification.name", "java.vm.specification.version", "java.vm.specification.vendor" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	static private final String[] names = new String[] { "java.version", "java.vendor", "java.vendor.url", "java.specification.name", "java.specification.version", "java.specification.vendor", "java.vm.name", "java.vm.version", "java.vm.vendor",         
+			"java.vm.specification.name", "java.vm.specification.version", "java.vm.specification.vendor" };   
 
 	/**
 	 * Get property values
@@ -28,18 +28,18 @@ public class JavaVersion
 		String prop;
 		for (int i = 0; i < JavaVersion.names.length; i++)
 		{
-			prop = JavaVersion.names[i] + " : "; //$NON-NLS-1$
+			prop = JavaVersion.names[i] + " : "; 
 			try
 			{
 				prop += System.getProperty(JavaVersion.names[i]);
 			}
 			catch (final SecurityException e)
 			{
-				prop += "<protected>"; //$NON-NLS-1$
+				prop += "<protected>"; 
 			}
 			catch (final Exception e)
 			{
-				prop += "<>"; //$NON-NLS-1$
+				prop += "<>"; 
 			}
 			result[i] = prop;
 		}
@@ -54,11 +54,11 @@ public class JavaVersion
 	static public String getJavaPropsString()
 	{
 		final String[] strings = JavaVersion.getJavaProps();
-		final StringBuffer buffer = new StringBuffer();
+		final StringBuilder buffer = new StringBuilder();
 		for (final String string : strings)
 		{
 			buffer.append(string);
-			buffer.append("\n"); //$NON-NLS-1$
+			buffer.append("\n"); 
 		}
 		return buffer.toString();
 	}
@@ -71,7 +71,7 @@ public class JavaVersion
 	public static float getJavaVersion()
 	{
 		// String version = Runtime.class.getPackage().getImplementationVersion();
-		final String version = System.getProperty("java.version"); //$NON-NLS-1$
+		final String version = System.getProperty("java.version"); 
 		int pos = 0, count = 0;
 		for (; pos < version.length() && count < 2; pos++)
 		{

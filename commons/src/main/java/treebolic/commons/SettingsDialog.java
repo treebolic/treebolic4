@@ -10,7 +10,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
 import java.util.Properties;
 import java.util.Set;
 
@@ -45,7 +44,7 @@ public class SettingsDialog extends JDialog
 	/**
 	 * Properties (input/output)
 	 */
-	protected Properties settings;
+	protected final Properties settings;
 
 	/**
 	 * Ok result
@@ -141,44 +140,30 @@ public class SettingsDialog extends JDialog
 
 	/**
 	 * Initialize
-	 *
-	 * @throws Exception
 	 */
 	protected void initialize()
 	{
-		setTitle(Messages.getString("SettingsDialog.title")); //$NON-NLS-1$
+		setTitle(Messages.getString("SettingsDialog.title")); 
 		setResizable(true);
 
 		// images
-		final Icon icon = new ImageIcon(SettingsDialog.class.getResource("images/settings.png")); //$NON-NLS-1$
+		final Icon icon = new ImageIcon(SettingsDialog.class.getResource("images/settings.png")); 
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		headerLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-		headerLabel.setText(Messages.getString("SettingsDialog.header")); //$NON-NLS-1$
+		headerLabel.setText(Messages.getString("SettingsDialog.header")); 
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("SettingsDialog.ok")); //$NON-NLS-1$
-		oKButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				SettingsDialog.this.ok = true;
-				setVisible(false);
-			}
+		final JButton oKButton = new JButton(Messages.getString("SettingsDialog.ok")); 
+		oKButton.addActionListener(event -> {
+			SettingsDialog.this.ok = true;
+			setVisible(false);
 		});
-		final JButton cancelButton = new JButton(Messages.getString("SettingsDialog.cancel")); //$NON-NLS-1$
-		cancelButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				setVisible(false);
-			}
-		});
+		final JButton cancelButton = new JButton(Messages.getString("SettingsDialog.cancel")); 
+		cancelButton.addActionListener(event -> setVisible(false));
 
 		// panels
 		this.dataPanel = new JPanel();
@@ -194,29 +179,23 @@ public class SettingsDialog extends JDialog
 		if ((this.flags & 1 << SettingsDialog.BASEIDX) != 0)
 		{
 			// label
-			final JLabel workFolderLabel = new JLabel(Messages.getString("SettingsDialog.base")); //$NON-NLS-1$
+			final JLabel workFolderLabel = new JLabel(Messages.getString("SettingsDialog.base")); 
 
 			// input
 			this.baseTextField = new JTextField(32);
 
 			// tooltip
-			this.baseTextField.setToolTipText(Messages.getString("SettingsDialog.tooltip_base")); //$NON-NLS-1$
+			this.baseTextField.setToolTipText(Messages.getString("SettingsDialog.tooltip_base")); 
 
 			// button
-			final JButton baseBrowseButton = new JButton(Messages.getString("SettingsDialog.browse")); //$NON-NLS-1$
+			final JButton baseBrowseButton = new JButton(Messages.getString("SettingsDialog.browse")); 
 
 			// action
-			baseBrowseButton.addActionListener(new ActionListener()
-			{
-				@SuppressWarnings("synthetic-access")
-				@Override
-				public void actionPerformed(final java.awt.event.ActionEvent event)
+			baseBrowseButton.addActionListener(event -> {
+				final String folder = FileDialogs.getFolder(SettingsDialog.this.settings.getProperty("base", "."));  
+				if (folder != null && !folder.isEmpty())
 				{
-					final String folder = FileDialogs.getFolder(SettingsDialog.this.settings.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
-					if (folder != null && !folder.isEmpty())
-					{
-						SettingsDialog.this.baseTextField.setText(folder);
-					}
+					SettingsDialog.this.baseTextField.setText(folder);
 				}
 			});
 
@@ -230,29 +209,23 @@ public class SettingsDialog extends JDialog
 		if ((this.flags & 1 << SettingsDialog.IMAGEBASEIDX) != 0)
 		{
 			// label
-			final JLabel imageBaseFolderLabel = new JLabel(Messages.getString("SettingsDialog.images")); //$NON-NLS-1$
+			final JLabel imageBaseFolderLabel = new JLabel(Messages.getString("SettingsDialog.images")); 
 
 			// input
 			this.imageBaseTextField = new JTextField(32);
 
 			// tooltip
-			this.imageBaseTextField.setToolTipText(Messages.getString("SettingsDialog.tooltip_images")); //$NON-NLS-1$
+			this.imageBaseTextField.setToolTipText(Messages.getString("SettingsDialog.tooltip_images")); 
 
 			// button
-			final JButton imageBaseBrowseButton = new JButton(Messages.getString("SettingsDialog.browse")); //$NON-NLS-1$
+			final JButton imageBaseBrowseButton = new JButton(Messages.getString("SettingsDialog.browse")); 
 
 			// action
-			imageBaseBrowseButton.addActionListener(new ActionListener()
-			{
-				@SuppressWarnings("synthetic-access")
-				@Override
-				public void actionPerformed(final java.awt.event.ActionEvent event)
+			imageBaseBrowseButton.addActionListener(event -> {
+				final String folder = FileDialogs.getFolder(SettingsDialog.this.settings.getProperty("base", "."));  
+				if (folder != null && !folder.isEmpty())
 				{
-					final String folder = FileDialogs.getFolder(SettingsDialog.this.settings.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
-					if (folder != null && !folder.isEmpty())
-					{
-						SettingsDialog.this.imageBaseTextField.setText(folder);
-					}
+					SettingsDialog.this.imageBaseTextField.setText(folder);
 				}
 			});
 
@@ -266,29 +239,23 @@ public class SettingsDialog extends JDialog
 		if ((this.flags & 1 << SettingsDialog.HELPIDX) != 0)
 		{
 			// label
-			final JLabel helpFolderLabel = new JLabel(Messages.getString("SettingsDialog.help")); //$NON-NLS-1$
+			final JLabel helpFolderLabel = new JLabel(Messages.getString("SettingsDialog.help")); 
 
 			// input
 			this.helpTextField = new JTextField(32);
 
 			// tooltip
-			this.helpTextField.setToolTipText(Messages.getString("SettingsDialog.tooltip_help")); //$NON-NLS-1$
+			this.helpTextField.setToolTipText(Messages.getString("SettingsDialog.tooltip_help")); 
 
 			// button
-			final JButton helpBrowseButton = new JButton(Messages.getString("SettingsDialog.browse")); //$NON-NLS-1$
+			final JButton helpBrowseButton = new JButton(Messages.getString("SettingsDialog.browse")); 
 
 			// action
-			helpBrowseButton.addActionListener(new ActionListener()
-			{
-				@SuppressWarnings("synthetic-access")
-				@Override
-				public void actionPerformed(final java.awt.event.ActionEvent event)
+			helpBrowseButton.addActionListener(event -> {
+				final String folder = FileDialogs.getFolder(SettingsDialog.this.settings.getProperty("base", "."));  
+				if (folder != null && !folder.isEmpty())
 				{
-					final String folder = FileDialogs.getFolder(SettingsDialog.this.settings.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
-					if (folder != null && !folder.isEmpty())
-					{
-						SettingsDialog.this.helpTextField.setText(folder);
-					}
+					SettingsDialog.this.helpTextField.setText(folder);
 				}
 			});
 
@@ -302,29 +269,23 @@ public class SettingsDialog extends JDialog
 		if ((this.flags & 1 << SettingsDialog.BROWSERIDX) != 0)
 		{
 			// label
-			final JLabel browserLabel = new JLabel(Messages.getString("SettingsDialog.browser")); //$NON-NLS-1$
+			final JLabel browserLabel = new JLabel(Messages.getString("SettingsDialog.browser")); 
 
 			// input
 			this.browserTextField = new JTextField(32);
 
 			// tooltip
-			this.browserTextField.setToolTipText(Messages.getString("SettingsDialog.tooltip_browser")); //$NON-NLS-1$
+			this.browserTextField.setToolTipText(Messages.getString("SettingsDialog.tooltip_browser")); 
 
 			// button
-			final JButton browserBrowseButton = new JButton(Messages.getString("SettingsDialog.browse")); //$NON-NLS-1$
+			final JButton browserBrowseButton = new JButton(Messages.getString("SettingsDialog.browse")); 
 
 			// action
-			browserBrowseButton.addActionListener(new ActionListener()
-			{
-				@SuppressWarnings("synthetic-access")
-				@Override
-				public void actionPerformed(final java.awt.event.ActionEvent event)
+			browserBrowseButton.addActionListener(event -> {
+				final String folder = FileDialogs.getExec(SettingsDialog.this.settings.getProperty("base", "."));  
+				if (folder != null && !folder.isEmpty())
 				{
-					final String folder = FileDialogs.getExec(SettingsDialog.this.settings.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
-					if (folder != null && !folder.isEmpty())
-					{
-						SettingsDialog.this.browserTextField.setText(folder);
-					}
+					SettingsDialog.this.browserTextField.setText(folder);
 				}
 			});
 
@@ -350,7 +311,7 @@ public class SettingsDialog extends JDialog
 				 * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
 				 */
 				@Override
-				public Component getListCellRendererComponent(final JList<? extends Object> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+				public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
 				{
 					String string = (String) value;
 					if (string != null)
@@ -366,35 +327,26 @@ public class SettingsDialog extends JDialog
 			});
 
 			// providers
-			final Set<String> providers = Searcher.findClasses(".*\\.Provider"); //$NON-NLS-1$
-			if (providers != null)
+			final Set<String> providers = Searcher.findClasses(".*\\.Provider"); 
+			for (final String item : providers)
 			{
-				for (final String item : providers)
-				{
-					this.providerComboBox.addItem(item);
-				}
+				this.providerComboBox.addItem(item);
 			}
 
 			// tooltips
-			this.providerComboBox.setToolTipText(Messages.getString("SettingsDialog.tooltip_provider")); //$NON-NLS-1$
+			this.providerComboBox.setToolTipText(Messages.getString("SettingsDialog.tooltip_provider")); 
 
 			// label
-			final JLabel providerLabel = new JLabel(Messages.getString("SettingsDialog.provider")); //$NON-NLS-1$
+			final JLabel providerLabel = new JLabel(Messages.getString("SettingsDialog.provider")); 
 
 			// button
-			final JButton providerAddButton = new JButton(Messages.getString("SettingsDialog.add")); //$NON-NLS-1$
-			providerAddButton.addActionListener(new ActionListener()
-			{
-				@SuppressWarnings("synthetic-access")
-				@Override
-				public void actionPerformed(final java.awt.event.ActionEvent event)
+			final JButton providerAddButton = new JButton(Messages.getString("SettingsDialog.add")); 
+			providerAddButton.addActionListener(event -> {
+				final String provider = ask(Messages.getString("SettingsDialog.prompt_provider")); 
+				if (provider != null && !provider.isEmpty())
 				{
-					final String provider = ask(Messages.getString("SettingsDialog.prompt_provider")); //$NON-NLS-1$
-					if (provider != null && !provider.isEmpty())
-					{
-						SettingsDialog.this.providerComboBox.addItem(provider);
-						SettingsDialog.this.providerComboBox.getEditor().setItem(provider);
-					}
+					SettingsDialog.this.providerComboBox.addItem(provider);
+					SettingsDialog.this.providerComboBox.getEditor().setItem(provider);
 				}
 			});
 
@@ -425,7 +377,7 @@ public class SettingsDialog extends JDialog
 	 */
 	protected String ask(final String message)
 	{
-		final String[] lines = message.split("\n"); //$NON-NLS-1$
+		final String[] lines = message.split("\n"); 
 		return JOptionPane.showInputDialog(null, lines);
 	}
 
@@ -443,23 +395,23 @@ public class SettingsDialog extends JDialog
 			// read properties into components
 			if ((this.flags & 1 << SettingsDialog.BASEIDX) != 0)
 			{
-				this.baseTextField.setText(this.settings.getProperty("base")); //$NON-NLS-1$
+				this.baseTextField.setText(this.settings.getProperty("base")); 
 			}
 			if ((this.flags & 1 << SettingsDialog.IMAGEBASEIDX) != 0)
 			{
-				this.imageBaseTextField.setText(this.settings.getProperty("images")); //$NON-NLS-1$
+				this.imageBaseTextField.setText(this.settings.getProperty("images")); 
 			}
 			if ((this.flags & 1 << SettingsDialog.HELPIDX) != 0)
 			{
-				this.helpTextField.setText(this.settings.getProperty("help")); //$NON-NLS-1$
+				this.helpTextField.setText(this.settings.getProperty("help")); 
 			}
 			if ((this.flags & 1 << SettingsDialog.BROWSERIDX) != 0)
 			{
-				this.browserTextField.setText(this.settings.getProperty("browser")); //$NON-NLS-1$
+				this.browserTextField.setText(this.settings.getProperty("browser")); 
 			}
 			if ((this.flags & 1 << SettingsDialog.PROVIDERIDX) != 0)
 			{
-				final String provider = this.settings.getProperty("provider"); //$NON-NLS-1$
+				final String provider = this.settings.getProperty("provider"); 
 				this.providerComboBox.getEditor().setItem(provider);
 			}
 			pack();
@@ -472,23 +424,23 @@ public class SettingsDialog extends JDialog
 				// update properties from components
 				if ((this.flags & 1 << SettingsDialog.BASEIDX) != 0)
 				{
-					this.settings.setProperty("base", this.baseTextField.getText()); //$NON-NLS-1$
+					this.settings.setProperty("base", this.baseTextField.getText()); 
 				}
 				if ((this.flags & 1 << SettingsDialog.IMAGEBASEIDX) != 0)
 				{
-					this.settings.setProperty("images", this.imageBaseTextField.getText()); //$NON-NLS-1$
+					this.settings.setProperty("images", this.imageBaseTextField.getText()); 
 				}
 				if ((this.flags & 1 << SettingsDialog.HELPIDX) != 0)
 				{
-					this.settings.setProperty("help", this.helpTextField.getText()); //$NON-NLS-1$
+					this.settings.setProperty("help", this.helpTextField.getText()); 
 				}
 				if ((this.flags & 1 << SettingsDialog.BROWSERIDX) != 0)
 				{
-					this.settings.setProperty("browser", this.browserTextField.getText()); //$NON-NLS-1$
+					this.settings.setProperty("browser", this.browserTextField.getText()); 
 				}
 				if ((this.flags & 1 << SettingsDialog.PROVIDERIDX) != 0)
 				{
-					this.settings.setProperty("provider", (String) this.providerComboBox.getEditor().getItem()); //$NON-NLS-1$
+					this.settings.setProperty("provider", (String) this.providerComboBox.getEditor().getItem()); 
 				}
 			}
 		}
@@ -497,15 +449,15 @@ public class SettingsDialog extends JDialog
 
 	static public void main(final String[] args)
 	{
-		UIManager.put("swing.boldMetal", false); //$NON-NLS-1$
-		final Properties settings = Persist.getSettings("treebolic-browser"); //$NON-NLS-1$
+		UIManager.put("swing.boldMetal", false); 
+		final Properties settings = Persist.getSettings("treebolic-browser"); 
 		final SettingsDialog dialog = new SettingsDialog(settings, SettingsDialog.PROVIDER | SettingsDialog.BASE);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		if (dialog.ok)
 		{
-			Persist.saveSettings("treebolic-browser", settings); //$NON-NLS-1$
+			Persist.saveSettings("treebolic-browser", settings); 
 		}
 		System.exit(0);
 	}

@@ -15,26 +15,27 @@ import java.net.URLDecoder;
  */
 public class Where
 {
+	@SuppressWarnings("UnusedReturnValue")
 	static public String makeBaseLocation()
 	{
 		// base=parent(classes)/database
 		final URL uRL = Where.class.getProtectionDomain().getCodeSource().getLocation();
-		System.out.println("url " + uRL); //$NON-NLS-1$
+		System.out.println("url " + uRL); 
 		final String location0 = Where.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-		System.out.println("path " + location0); //$NON-NLS-1$
+		System.out.println("path " + location0); 
 		try
 		{
-			final String location = URLDecoder.decode(location0, "UTF-8"); //$NON-NLS-1$
-			System.out.println("decoded " + location); //$NON-NLS-1$
+			final String location = URLDecoder.decode(location0, "UTF-8"); 
+			System.out.println("decoded " + location); 
 			final String parent = new File(location).getParent();
-			System.out.println("parent " + parent); //$NON-NLS-1$
-			final File dir = new File(parent, "database/"); //$NON-NLS-1$
-			System.out.println("database " + dir); //$NON-NLS-1$
+			System.out.println("parent " + parent); 
+			final File dir = new File(parent, "database/"); 
+			System.out.println("database " + dir); 
 			return dir.getAbsolutePath();
 		}
 		catch (UnsupportedEncodingException exception)
 		{
-			System.err.println(exception);
+			exception.printStackTrace();
 		}
 		return null;
 	}

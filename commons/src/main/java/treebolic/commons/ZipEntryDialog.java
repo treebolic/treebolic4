@@ -18,12 +18,11 @@ public class ZipEntryDialog extends ChoiceDialog
 	/**
 	 * Constructor
 	 *
-	 * @param archive
-	 *        zip archive
-	 * @throws IOException
+	 * @param archive zip archive
+	 * @throws IOException io exception
 	 */
 	public ZipEntryDialog(final File archive) throws IOException
 	{
-		super(null, Searcher.findZipEntries(archive, null, ".*\\.(png|jpg|gif|MF)|META-INF/"), Messages.getString("ZipEntryDialog.zip"), Messages.getString("ZipEntryDialog.entry"), false); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		super(null, Searcher.findZipEntries(archive, null, ".*\\.(png|jpg|gif|MF)|META-INF/"), Messages.getString("ZipEntryDialog.zip"), Messages.getString("ZipEntryDialog.entry"), false);   
 	}
 }

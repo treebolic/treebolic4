@@ -8,8 +8,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,17 +29,17 @@ public class AboutDialog extends JDialog
 	/**
 	 * Author
 	 */
-	static final String author = "Bernard Bou"; //$NON-NLS-1$
+	static final String author = "Bernard Bou"; 
 
 	/**
 	 * Email
 	 */
-	static final String email = "mailto:1313ou@gmail.com"; //$NON-NLS-1$
+	static final String email = "mailto:1313ou@gmail.com"; 
 
 	/**
 	 * Copyright notice
 	 */
-	static final String copyright = "Copyright © 2001-2017"; //$NON-NLS-1$
+	static final String copyright = "Copyright © 2001-2017"; 
 
 	/**
 	 * Constructor
@@ -84,7 +82,7 @@ public class AboutDialog extends JDialog
 	 */
 	protected JPanel initialize(final String product, final String version, final boolean sysInfo)
 	{
-		setTitle(Messages.getString("AboutDialog.title")); //$NON-NLS-1$
+		setTitle(Messages.getString("AboutDialog.title")); 
 
 		final JLabel titleLabel = new JLabel(product);
 		titleLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
@@ -95,17 +93,10 @@ public class AboutDialog extends JDialog
 		final JLabel versionLabel = new JLabel(version);
 
 		final JLabel image = new JLabel();
-		image.setIcon(new ImageIcon(AboutDialog.class.getResource("images/logo.png"))); //$NON-NLS-1$
+		image.setIcon(new ImageIcon(AboutDialog.class.getResource("images/logo.png"))); 
 
-		final JButton oKButton = new JButton(Messages.getString("AboutDialog.ok")); //$NON-NLS-1$
-		oKButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final ActionEvent e)
-			{
-				setVisible(false);
-			}
-		});
+		final JButton oKButton = new JButton(Messages.getString("AboutDialog.ok")); 
+		oKButton.addActionListener(e -> setVisible(false));
 
 		final JPanel commandPanel = new JPanel();
 		commandPanel.setLayout(new FlowLayout());

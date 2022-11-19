@@ -5,8 +5,6 @@
 package treebolic.commons;
 
 import java.awt.Desktop;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -55,45 +53,34 @@ public class HyperlinkButton extends JButton
 		this.setOpaque(false);
 
 		this.setToolTipText(this.uri.toString());
-		this.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(ActionEvent e)
+		this.addActionListener(e -> {
+			if (Desktop.isDesktopSupported())
 			{
-				if (Desktop.isDesktopSupported())
+				if (HyperlinkButton.this.uri != null)
 				{
-					if (HyperlinkButton.this.uri != null)
-					{
-						// we are likely to be on a handler
-						SwingUtilities.invokeLater(new Runnable()
+					// we are likely to be on a handler
+					SwingUtilities.invokeLater(() -> {
+						try
 						{
-							@Override
-							public void run()
-							{
-								try
-								{
-									System.out.println(HyperlinkButton.this.uri);
-									Desktop.getDesktop().browse(HyperlinkButton.this.uri);
-								}
-								catch (IOException e)
-								{
-									System.err.println(e.getMessage() + ':' + HyperlinkButton.this.uri);
-								}
-							}
-						});
-						return;
-					}
+							System.out.println(HyperlinkButton.this.uri);
+							Desktop.getDesktop().browse(HyperlinkButton.this.uri);
+						}
+						catch (IOException e1)
+						{
+							System.err.println(e1.getMessage() + ':' + HyperlinkButton.this.uri);
+						}
+					});
+					return;
 				}
-				System.err.println(HyperlinkButton.this.uri);
 			}
+			System.err.println(HyperlinkButton.this.uri);
 		});
 	}
 
 	static public String makeURILabel(final String text)
 	{
 		// final String format = "<HTML><FONT color=\"#000099\"><U>%s</U></FONT></HTML>";
-		final String format = "<HTML><U>%s</U></HTML>"; //$NON-NLS-1$
+		final String format = "<HTML><U>%s</U></HTML>"; 
 		return String.format(format, text);
 	}
 
@@ -105,10 +92,10 @@ public class HyperlinkButton extends JButton
 	// public static void main(String[] args)
 	// {
 	// Laf.lookAndFeel(args);
-	// final String uri = "https://play.google.com/store/apps/details?id=org.treebolic.wordnet.browser"; //$NON-NLS-1$
-	// final String label = makeURILabel("Treebolic WordNet"); //$NON-NLS-1$
-	// final Icon icon = new ImageIcon(HyperlinkButton.class.getResource("images/logo.png")); //$NON-NLS-1$
-	// JFrame frame = new JFrame("Links"); //$NON-NLS-1$
+	// final String uri = "https://play.google.com/store/apps/details?id=org.treebolic.wordnet.browser"; 
+	// final String label = makeURILabel("Treebolic WordNet"); 
+	// final Icon icon = new ImageIcon(HyperlinkButton.class.getResource("images/logo.png")); 
+	// JFrame frame = new JFrame("Links"); 
 	// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	// frame.setSize(400, 400);
 	// Container container = frame.getContentPane();

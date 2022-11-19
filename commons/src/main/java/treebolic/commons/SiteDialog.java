@@ -10,8 +10,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Properties;
 
 import javax.swing.Box;
@@ -29,8 +27,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 /**
  * Site dialog
@@ -44,7 +40,7 @@ public class SiteDialog extends JDialog
 	/**
 	 * Mode types
 	 */
-	static private enum Mode
+	private enum Mode
 	{
 		FILE, NET
 	}
@@ -109,20 +105,20 @@ public class SiteDialog extends JDialog
 	 */
 	private void initialize()
 	{
-		setTitle(Messages.getString("SiteDialog.title")); //$NON-NLS-1$
+		setTitle(Messages.getString("SiteDialog.title")); 
 		setResizable(true);
 
 		// images
-		final Icon icon = new ImageIcon(SiteDialog.class.getResource("images/sitemake.png")); //$NON-NLS-1$
+		final Icon icon = new ImageIcon(SiteDialog.class.getResource("images/sitemake.png")); 
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		headerLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-		headerLabel.setText(Messages.getString("SiteDialog.header")); //$NON-NLS-1$
+		headerLabel.setText(Messages.getString("SiteDialog.header")); 
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		final Icon fileIcon = new ImageIcon(SiteDialog.class.getResource("images/local.png")); //$NON-NLS-1$
-		final Icon httpIcon = new ImageIcon(SiteDialog.class.getResource("images/net.png")); //$NON-NLS-1$
+		final Icon fileIcon = new ImageIcon(SiteDialog.class.getResource("images/local.png")); 
+		final Icon httpIcon = new ImageIcon(SiteDialog.class.getResource("images/net.png")); 
 
 		// mode combo
 		final Object[] options = { Mode.FILE, Mode.NET };
@@ -132,7 +128,7 @@ public class SiteDialog extends JDialog
 			private final JLabel label = new JLabel();
 
 			@Override
-			public Component getListCellRendererComponent(final JList<? extends Object> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+			public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
 			{
 				this.label.setText(value.toString());
 				this.label.setIcon(value.equals(Mode.FILE) ? fileIcon : httpIcon);
@@ -148,19 +144,19 @@ public class SiteDialog extends JDialog
 		this.pathTextField = new JTextField(16);
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("SiteDialog.ok")); //$NON-NLS-1$
-		final JButton cancelButton = new JButton(Messages.getString("SiteDialog.cancel")); //$NON-NLS-1$
-		final JButton browsePathButton = new JButton(Messages.getString("SiteDialog.browse")); //$NON-NLS-1$
+		final JButton oKButton = new JButton(Messages.getString("SiteDialog.ok")); 
+		final JButton cancelButton = new JButton(Messages.getString("SiteDialog.cancel")); 
+		final JButton browsePathButton = new JButton(Messages.getString("SiteDialog.browse")); 
 
 		// panels
 		final JPanel selectionPanel = new JPanel();
-		selectionPanel.add(new JLabel(Messages.getString("SiteDialog.mode"))); //$NON-NLS-1$
+		selectionPanel.add(new JLabel(Messages.getString("SiteDialog.mode"))); 
 		selectionPanel.setLayout(new FlowLayout());
 		selectionPanel.add(this.comboBox);
 
 		final JPanel pathPanel = new JPanel();
 		pathPanel.setLayout(new FlowLayout());
-		pathPanel.add(new JLabel(Messages.getString("SiteDialog.localdir"))); //$NON-NLS-1$
+		pathPanel.add(new JLabel(Messages.getString("SiteDialog.localdir"))); 
 		pathPanel.add(this.pathTextField);
 
 		final JPanel filePanel = new JPanel();
@@ -170,10 +166,10 @@ public class SiteDialog extends JDialog
 
 		final JPanel fTPPanel = new JPanel();
 		fTPPanel.setLayout(new GridBagLayout());
-		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.server")), new GridBagConstraints(0, 0, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0)); //$NON-NLS-1$
-		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.serverdir")), new GridBagConstraints(0, 1, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0)); //$NON-NLS-1$
-		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.login")), new GridBagConstraints(0, 2, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0)); //$NON-NLS-1$
-		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.password")), new GridBagConstraints(0, 3, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0)); //$NON-NLS-1$
+		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.server")), new GridBagConstraints(0, 0, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0)); 
+		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.serverdir")), new GridBagConstraints(0, 1, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0)); 
+		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.login")), new GridBagConstraints(0, 2, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0)); 
+		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.password")), new GridBagConstraints(0, 3, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0)); 
 		fTPPanel.add(this.serverTextField, new GridBagConstraints(1, 0, 1, 1, 1., 0., GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 20), 0, 0));
 		fTPPanel.add(this.directoryTextField, new GridBagConstraints(1, 1, 1, 1, 1., 01., GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 20), 0, 0));
 		fTPPanel.add(this.loginTextField, new GridBagConstraints(1, 2, 1, 1, 1., 0., GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 20), 0, 0));
@@ -186,29 +182,17 @@ public class SiteDialog extends JDialog
 
 		// tab init
 		final JTabbedPane tabbedPanel = new JTabbedPane();
-		tabbedPanel.addTab(Mode.FILE.toString(), fileIcon, filePanel, Messages.getString("SiteDialog.local")); //$NON-NLS-1$
-		tabbedPanel.addTab(Mode.NET.toString(), httpIcon, fTPPanel, Messages.getString("SiteDialog.net")); //$NON-NLS-1$
+		tabbedPanel.addTab(Mode.FILE.toString(), fileIcon, filePanel, Messages.getString("SiteDialog.local")); 
+		tabbedPanel.addTab(Mode.NET.toString(), httpIcon, fTPPanel, Messages.getString("SiteDialog.net")); 
 
 		// connect selections
-		tabbedPanel.addChangeListener(new ChangeListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void stateChanged(final ChangeEvent e)
-			{
-				final int index = tabbedPanel.getSelectedIndex();
-				SiteDialog.this.comboBox.setSelectedIndex(index);
-			}
+		tabbedPanel.addChangeListener(e -> {
+			final int index = tabbedPanel.getSelectedIndex();
+			SiteDialog.this.comboBox.setSelectedIndex(index);
 		});
-		this.comboBox.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent e)
-			{
-				final int index = SiteDialog.this.comboBox.getSelectedIndex();
-				tabbedPanel.setSelectedIndex(index);
-			}
+		this.comboBox.addActionListener(e -> {
+			final int index = SiteDialog.this.comboBox.getSelectedIndex();
+			tabbedPanel.setSelectedIndex(index);
 		});
 
 		// assemble tabs
@@ -216,36 +200,18 @@ public class SiteDialog extends JDialog
 		settingsPanel.add(tabbedPanel);
 
 		// events
-		browsePathButton.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent e)
+		browsePathButton.addActionListener(e -> {
+			final String path = FileDialogs.getFolder(SiteDialog.this.properties.getProperty("base", "."));  
+			if (path != null)
 			{
-				final String path = FileDialogs.getFolder(SiteDialog.this.properties.getProperty("base", ".")); //$NON-NLS-1$ //$NON-NLS-2$
-				if (path != null)
-				{
-					SiteDialog.this.pathTextField.setText(path);
-				}
+				SiteDialog.this.pathTextField.setText(path);
 			}
 		});
-		oKButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final ActionEvent e)
-			{
-				SiteDialog.this.ok = true;
-				setVisible(false);
-			}
+		oKButton.addActionListener(e -> {
+			SiteDialog.this.ok = true;
+			setVisible(false);
 		});
-		cancelButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final ActionEvent e)
-			{
-				setVisible(false);
-			}
-		});
+		cancelButton.addActionListener(e -> setVisible(false));
 
 		// assemble
 		final JPanel panel = new JPanel();
@@ -272,13 +238,13 @@ public class SiteDialog extends JDialog
 			this.ok = false;
 
 			// read properties into components
-			this.serverTextField.setText(this.properties.getProperty("server")); //$NON-NLS-1$
-			this.directoryTextField.setText(this.properties.getProperty("directory")); //$NON-NLS-1$
-			this.loginTextField.setText(this.properties.getProperty("login")); //$NON-NLS-1$
-			this.passwordTextField.setText(this.properties.getProperty("password")); //$NON-NLS-1$
-			this.pathTextField.setText(this.properties.getProperty("path")); //$NON-NLS-1$
+			this.serverTextField.setText(this.properties.getProperty("server")); 
+			this.directoryTextField.setText(this.properties.getProperty("directory")); 
+			this.loginTextField.setText(this.properties.getProperty("login")); 
+			this.passwordTextField.setText(this.properties.getProperty("password")); 
+			this.pathTextField.setText(this.properties.getProperty("path")); 
 
-			final Mode mode = this.properties.getProperty("mode") != null ? Mode.valueOf(this.properties.getProperty("mode")) : Mode.FILE; //$NON-NLS-1$ //$NON-NLS-2$
+			final Mode mode = this.properties.getProperty("mode") != null ? Mode.valueOf(this.properties.getProperty("mode")) : Mode.FILE;  
 			this.comboBox.setSelectedItem(mode);
 
 			pack();
@@ -290,18 +256,19 @@ public class SiteDialog extends JDialog
 			{
 				// update properties from components
 				final Mode mode = (Mode) this.comboBox.getSelectedItem();
-				this.properties.setProperty("mode", mode.toString()); //$NON-NLS-1$
+				assert mode != null;
+				this.properties.setProperty("mode", mode.toString()); 
 				switch (mode)
 				{
 				case NET:
-					this.properties.setProperty("server", this.serverTextField.getText()); //$NON-NLS-1$
-					this.properties.setProperty("directory", this.directoryTextField.getText()); //$NON-NLS-1$
-					this.properties.setProperty("login", this.loginTextField.getText()); //$NON-NLS-1$
-					this.properties.setProperty("password", new String(this.passwordTextField.getPassword())); //$NON-NLS-1$
+					this.properties.setProperty("server", this.serverTextField.getText()); 
+					this.properties.setProperty("directory", this.directoryTextField.getText()); 
+					this.properties.setProperty("login", this.loginTextField.getText()); 
+					this.properties.setProperty("password", new String(this.passwordTextField.getPassword())); 
 					break;
 
 				case FILE:
-					this.properties.setProperty("path", this.pathTextField.getText()); //$NON-NLS-1$
+					this.properties.setProperty("path", this.pathTextField.getText()); 
 					break;
 				}
 			}

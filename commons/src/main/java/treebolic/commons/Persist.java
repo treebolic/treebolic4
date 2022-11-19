@@ -33,7 +33,7 @@ public class Persist
 			String location = CodeBase.getJarLocation();
 			if (location == null)
 			{
-				final File file = new File(System.getProperty("user.dir")); //$NON-NLS-1$
+				final File file = new File(System.getProperty("user.dir")); 
 				try
 				{
 					location = file.toURI().toURL().toString();
@@ -43,18 +43,18 @@ public class Persist
 					return settings;
 				}
 			}
-			if (!location.endsWith("/")) //$NON-NLS-1$
+			if (!location.endsWith("/")) 
 			{
 				location += '/';
 			}
-			if (location.endsWith("/lib/")) //$NON-NLS-1$
+			if (location.endsWith("/lib/")) 
 			{
 				location = location.substring(0, location.length() - 4);
 			}
-			settings.setProperty("base", location + "data/test/"); //$NON-NLS-1$ //$NON-NLS-2$
-			settings.setProperty("images", location + "data/test/images/"); //$NON-NLS-1$ //$NON-NLS-2$
-			settings.setProperty("help", location + "doc/"); //$NON-NLS-1$ //$NON-NLS-2$
-			settings.setProperty("browser", "firefox"); //$NON-NLS-1$ //$NON-NLS-2$
+			settings.setProperty("base", location + "data/test/");  
+			settings.setProperty("images", location + "data/test/images/");  
+			settings.setProperty("help", location + "doc/");  
+			settings.setProperty("browser", "firefox");  
 		}
 		return settings;
 	}
@@ -72,7 +72,7 @@ public class Persist
 
 		try
 		{
-			final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile; //$NON-NLS-1$ //$NON-NLS-2$
+			final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile;  
 			final InputStream propStream = new FileInputStream(filePath);
 			settings.load(propStream);
 			return settings;
@@ -83,7 +83,7 @@ public class Persist
 		}
 		try
 		{
-			final String filePath = System.getProperty("user.dir") + File.separator + "." + persistFile; //$NON-NLS-1$ //$NON-NLS-2$
+			final String filePath = System.getProperty("user.dir") + File.separator + "." + persistFile;  
 			final InputStream propStream = new FileInputStream(filePath);
 			settings.load(propStream);
 			return settings;
@@ -108,14 +108,14 @@ public class Persist
 	{
 		try
 		{
-			final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile; //$NON-NLS-1$ //$NON-NLS-2$
+			final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile;  
 			final OutputStream propStream = new FileOutputStream(filePath);
-			settings.store(propStream, "treebolic"); //$NON-NLS-1$
+			settings.store(propStream, "treebolic"); 
 			return true;
 		}
 		catch (final Exception e)
 		{
-			System.out.println("Cannot save persist file :" + e); //$NON-NLS-1$
+			System.out.println("Cannot save persist file :" + e); 
 		}
 		return false;
 	}

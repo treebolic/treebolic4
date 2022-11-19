@@ -40,11 +40,11 @@ public class Laf
 		boolean customTheme = false;
 		for (final String arg : args)
 		{
-			if (arg.startsWith("laf=")) //$NON-NLS-1$
+			if (arg.startsWith("laf=")) 
 			{
 				laf = arg.substring(4);
 			}
-			if (arg.startsWith("theme=")) //$NON-NLS-1$
+			if (arg.startsWith("theme=")) 
 			{
 				customTheme = Boolean.parseBoolean(arg.substring(6));
 			}
@@ -67,13 +67,13 @@ public class Laf
 			}
 			catch (final UnsupportedLookAndFeelException e)
 			{
-				System.err.println("Unsupported LookAndFeel " + e.getMessage()); //$NON-NLS-1$
+				System.err.println("Unsupported LookAndFeel " + e.getMessage()); 
 				Laf.setDefault();
 			}
 		}
 		else
 		{
-			if (System.getProperty("swing.defaultlaf") == null) //$NON-NLS-1$
+			if (System.getProperty("swing.defaultlaf") == null) 
 			{
 				Laf.setDefault();
 			}
@@ -86,14 +86,14 @@ public class Laf
 	private static void setDefault()
 	{
 		final boolean isJava7 = JavaVersion.getJavaVersion() >= 1.7F;
-		final String plafName = isJava7 ? "javax.swing.plaf.nimbus.NimbusLookAndFeel" : "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"; //"javax.swing.plaf.metal.MetalLookAndFeel"; //$NON-NLS-1$ //$NON-NLS-2$
+		final String plafName = isJava7 ? "javax.swing.plaf.nimbus.NimbusLookAndFeel" : "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"; //"javax.swing.plaf.metal.MetalLookAndFeel";  
 		try
 		{
 			UIManager.setLookAndFeel(plafName);
 		}
 		catch (final Exception e2)
 		{
-			System.err.println("Can't set LookAndFeel"); //$NON-NLS-1$
+			System.err.println("Can't set LookAndFeel"); 
 		}
 	}
 
@@ -105,7 +105,7 @@ public class Laf
 	 */
 	static public void setBold(final boolean haveBold)
 	{
-		UIManager.put("swing.boldMetal", haveBold); //$NON-NLS-1$
+		UIManager.put("swing.boldMetal", haveBold); 
 	}
 
 	/**
@@ -114,8 +114,9 @@ public class Laf
 	 * @param lafName
 	 *        laf name
 	 * @return true if successful
-	 * @throws UnsupportedLookAndFeelException
+	 * @throws UnsupportedLookAndFeelException unsupported LAF exception
 	 */
+	@SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
 	static public boolean setLookAndFeel(final String lafName) throws UnsupportedLookAndFeelException
 	{
 		final LookAndFeel laf = Laf.getLaf(lafName);
@@ -142,25 +143,9 @@ public class Laf
 			final Object instance = constructor.newInstance(args);
 			return (LookAndFeel) instance;
 		}
-		catch (final ClassNotFoundException nfe)
+		catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException nfe)
 		{
 			nfe.printStackTrace();
-		}
-		catch (final NoSuchMethodException nsme)
-		{
-			nsme.printStackTrace();
-		}
-		catch (final InvocationTargetException ite)
-		{
-			ite.printStackTrace();
-		}
-		catch (final IllegalAccessException iae)
-		{
-			iae.printStackTrace();
-		}
-		catch (final InstantiationException ie)
-		{
-			ie.printStackTrace();
 		}
 		return null;
 	}
@@ -171,15 +156,12 @@ public class Laf
 	 * @param lafName
 	 *        laf name
 	 * @return true if successful
-	 * @throws UnsupportedLookAndFeelException
 	 */
+	@SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
 	static public boolean setCustomTheme(final String lafName)
 	{
 		final MetalTheme theme = Laf.makeCustomTheme();
-		if (theme != null)
-		{
-			Laf.setCurrentTheme(lafName, theme);
-		}
+		Laf.setCurrentTheme(lafName, theme);
 		return true;
 	}
 
@@ -197,13 +179,12 @@ public class Laf
 		{
 			final Class<?> clazz = Class.forName(className);
 			final Class<?>[] argsClass = new Class[] { MetalTheme.class };
-			final Method method = clazz.getMethod("setCurrentTheme", argsClass); //$NON-NLS-1$
+			final Method method = clazz.getMethod("setCurrentTheme", argsClass); 
 			method.invoke(null, theme);
-			return;
 		}
 		catch (final Exception e)
 		{
-			System.err.println("Setting current theme: " + e.getMessage()); //$NON-NLS-1$
+			System.err.println("Setting current theme: " + e.getMessage()); 
 			MetalLookAndFeel.setCurrentTheme(theme);
 		}
 	}

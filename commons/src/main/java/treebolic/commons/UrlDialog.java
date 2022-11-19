@@ -8,7 +8,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -73,91 +72,67 @@ public class UrlDialog extends JDialog
 	 */
 	private void initialize()
 	{
-		setTitle(Messages.getString("UrlDialog.title")); //$NON-NLS-1$
+		setTitle(Messages.getString("UrlDialog.title")); 
 		setResizable(true);
 
 		// label
-		final JLabel urlLabel = new JLabel(Messages.getString("UrlDialog.url")); //$NON-NLS-1$
-		final JLabel queryLabel = new JLabel(Messages.getString("UrlDialog.query")); //$NON-NLS-1$
-		urlLabel.setToolTipText(Messages.getString("UrlDialog.tooltip_url")); //$NON-NLS-1$
-		queryLabel.setToolTipText(Messages.getString("UrlDialog.tooltip_query")); //$NON-NLS-1$
+		final JLabel urlLabel = new JLabel(Messages.getString("UrlDialog.url")); 
+		final JLabel queryLabel = new JLabel(Messages.getString("UrlDialog.query")); 
+		urlLabel.setToolTipText(Messages.getString("UrlDialog.tooltip_url")); 
+		queryLabel.setToolTipText(Messages.getString("UrlDialog.tooltip_query")); 
 
 		// url
 		this.urlTextField = new JTextField();
 		this.urlTextField.setFont(new Font(Font.DIALOG, Font.PLAIN, 12));
-		this.urlTextField.setToolTipText(Messages.getString("UrlDialog.tooltip_result")); //$NON-NLS-1$
+		this.urlTextField.setToolTipText(Messages.getString("UrlDialog.tooltip_result")); 
 
 		// parameter table
 		this.queryTable = new JTable();
 		this.queryTable.setModel(new ParameterModel(null));
 		this.queryTable.getColumnModel().getColumn(0).setMaxWidth(90);
-		this.queryTable.setToolTipText(Messages.getString("UrlDialog.tooltip_parameters")); //$NON-NLS-1$
+		this.queryTable.setToolTipText(Messages.getString("UrlDialog.tooltip_parameters")); 
 		final JScrollPane scrollPane = new JScrollPane(this.queryTable);
 		scrollPane.setPreferredSize(new Dimension(0, 60));
 
 		// buttons
-		final JButton okButton = new JButton(Messages.getString("UrlDialog.ok")); //$NON-NLS-1$
-		okButton.addActionListener(new java.awt.event.ActionListener()
-		{
-			/*
-			 * (non-Javadoc)
-			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-			 */
-			@Override
-			public void actionPerformed(final ActionEvent e)
+		final JButton okButton = new JButton(Messages.getString("UrlDialog.ok")); 
+		/*
+		 * (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
+		okButton.addActionListener(e -> {
+			UrlDialog.this.ok = true;
+			setVisible(false);
+		});
+		final JButton cancelButton = new JButton(Messages.getString("UrlDialog.cancel")); 
+		/*
+		 * (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
+		cancelButton.addActionListener(e -> setVisible(false));
+		final JButton addParameter = new JButton(Messages.getString("UrlDialog.add")); 
+		/*
+		 * (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
+		addParameter.addActionListener(e -> {
+			final ParameterModel model = (ParameterModel) UrlDialog.this.queryTable.getModel();
+			if (model != null)
 			{
-				UrlDialog.this.ok = true;
-				setVisible(false);
+				model.newRow(null);
 			}
 		});
-		final JButton cancelButton = new JButton(Messages.getString("UrlDialog.cancel")); //$NON-NLS-1$
-		cancelButton.addActionListener(new java.awt.event.ActionListener()
-		{
-			/*
-			 * (non-Javadoc)
-			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-			 */
-			@Override
-			public void actionPerformed(final ActionEvent e)
+		final JButton removeParameter = new JButton(Messages.getString("UrlDialog.remove")); 
+		/*
+		 * (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
+		removeParameter.addActionListener(e -> {
+			final int rowIdx = UrlDialog.this.queryTable.getSelectedRow();
+			final ParameterModel model = (ParameterModel) UrlDialog.this.queryTable.getModel();
+			if (rowIdx != -1 && model != null)
 			{
-				setVisible(false);
-			}
-		});
-		final JButton addParameter = new JButton(Messages.getString("UrlDialog.add")); //$NON-NLS-1$
-		addParameter.addActionListener(new java.awt.event.ActionListener()
-		{
-			/*
-			 * (non-Javadoc)
-			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-			 */
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent e)
-			{
-				final ParameterModel model = (ParameterModel) UrlDialog.this.queryTable.getModel();
-				if (model != null)
-				{
-					model.newRow(null);
-				}
-			}
-		});
-		final JButton removeParameter = new JButton(Messages.getString("UrlDialog.remove")); //$NON-NLS-1$
-		removeParameter.addActionListener(new java.awt.event.ActionListener()
-		{
-			/*
-			 * (non-Javadoc)
-			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-			 */
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent e)
-			{
-				final int rowIdx = UrlDialog.this.queryTable.getSelectedRow();
-				final ParameterModel model = (ParameterModel) UrlDialog.this.queryTable.getModel();
-				if (rowIdx != -1 && model != null)
-				{
-					model.deleteRow(rowIdx);
-				}
+				model.deleteRow(rowIdx);
 			}
 		});
 
@@ -192,7 +167,7 @@ public class UrlDialog extends JDialog
 		String result = url;
 		if (query != null)
 		{
-			result += "?"; //$NON-NLS-1$
+			result += "?"; 
 			result += query;
 		}
 		return result;
@@ -226,10 +201,10 @@ public class UrlDialog extends JDialog
 	static private Properties query2Properties(final String query)
 	{
 		final Properties properties = new Properties();
-		final StringTokenizer stringTokenizer = new StringTokenizer(query, "&"); //$NON-NLS-1$
+		final StringTokenizer stringTokenizer = new StringTokenizer(query, "&"); 
 		while (stringTokenizer.hasMoreTokens())
 		{
-			final StringTokenizer stringTokenizer2 = new StringTokenizer(stringTokenizer.nextToken(), "="); //$NON-NLS-1$
+			final StringTokenizer stringTokenizer2 = new StringTokenizer(stringTokenizer.nextToken(), "="); 
 			if (stringTokenizer2.countTokens() != 2)
 			{
 				continue;
@@ -254,18 +229,18 @@ public class UrlDialog extends JDialog
 		if (params == null)
 			return null;
 
-		String query = ""; //$NON-NLS-1$
+		StringBuilder query = new StringBuilder(); 
 		int i = 0;
 		for (final String key : params.stringPropertyNames())
 		{
 			final String value = params.getProperty(key);
 			if (i++ != 0)
 			{
-				query += "&"; //$NON-NLS-1$
+				query.append("&"); 
 			}
-			query += key + "=" + UrlDialog.encode(value); //$NON-NLS-1$
+			query.append(key).append("=").append(UrlDialog.encode(value)); 
 		}
-		return query;
+		return query.toString();
 	}
 
 	// D E C O D E / E N C O D E
@@ -281,11 +256,11 @@ public class UrlDialog extends JDialog
 	{
 		try
 		{
-			return URLDecoder.decode(string, "UTF8"); //$NON-NLS-1$
+			return URLDecoder.decode(string, "UTF8"); 
 		}
 		catch (final UnsupportedEncodingException e)
 		{
-			System.err.println(Messages.getString("UrlDialog.err_decode") + string + " - " + e); //$NON-NLS-1$ //$NON-NLS-2$
+			System.err.println(Messages.getString("UrlDialog.err_decode") + string + " - " + e);  
 		}
 		return string;
 	}
@@ -301,11 +276,11 @@ public class UrlDialog extends JDialog
 	{
 		try
 		{
-			return URLEncoder.encode(string, "UTF8"); //$NON-NLS-1$
+			return URLEncoder.encode(string, "UTF8"); 
 		}
 		catch (final UnsupportedEncodingException e)
 		{
-			System.err.println(Messages.getString("UrlDialog.err_decode") + string + " - " + e); //$NON-NLS-1$ //$NON-NLS-2$
+			System.err.println(Messages.getString("UrlDialog.err_decode") + string + " - " + e);  
 		}
 		return string;
 	}
@@ -317,7 +292,7 @@ public class UrlDialog extends JDialog
 	 *
 	 * @author Bernard Bou
 	 */
-	private class ParameterModel extends AbstractTableModel
+	private static class ParameterModel extends AbstractTableModel
 	{
 		/**
 		 * Serial version uid
@@ -327,9 +302,9 @@ public class UrlDialog extends JDialog
 		/**
 		 * Properties
 		 */
-		private final Vector<Entry> entries = new Vector<Entry>();
+		private final Vector<Entry> entries = new Vector<>();
 
-		private class Entry
+		private static class Entry
 		{
 			/**
 			 * Key
@@ -382,7 +357,7 @@ public class UrlDialog extends JDialog
 				for (final Object key : params.keySet())
 				{
 					final Object value = params.get(key);
-					newRow(new ParameterModel.Entry((String) key, (String) value));
+					newRow(new Entry((String) key, (String) value));
 				}
 			}
 		}
@@ -394,6 +369,7 @@ public class UrlDialog extends JDialog
 		 *        entry
 		 * @return row index
 		 */
+		@SuppressWarnings("UnusedReturnValue")
 		public int newRow(final Entry entry)
 		{
 			this.entries.add(entry != null ? entry : new Entry());
@@ -518,11 +494,11 @@ public class UrlDialog extends JDialog
 			switch (x)
 			{
 			case 0:
-				return Messages.getString("UrlDialog.name"); //$NON-NLS-1$
+				return Messages.getString("UrlDialog.name"); 
 			case 1:
-				return Messages.getString("UrlDialog.value"); //$NON-NLS-1$
+				return Messages.getString("UrlDialog.value"); 
 			default:
-				return ""; //$NON-NLS-1$
+				return ""; 
 			}
 		}
 	}
@@ -539,10 +515,10 @@ public class UrlDialog extends JDialog
 			this.ok = false;
 
 			// read properties into components
-			final String property = this.properties.getProperty("openurl"); //$NON-NLS-1$
+			final String property = this.properties.getProperty("openurl"); 
 			if (property != null)
 			{
-				final String[] fields = property.split("\\?"); //$NON-NLS-1$
+				final String[] fields = property.split("\\?"); 
 				final String url = fields.length > 0 ? fields[0] : null;
 				final String query = fields.length > 1 ? fields[1] : null;
 				if (url != null)
@@ -569,11 +545,11 @@ public class UrlDialog extends JDialog
 				// update properties from components
 				final String url = this.urlTextField.getText();
 				final String query = getQuery((ParameterModel) this.queryTable.getModel());
-				this.properties.setProperty("openurl", getURL(url, query)); //$NON-NLS-1$
+				this.properties.setProperty("openurl", getURL(url, query)); 
 			}
 			else
 			{
-				this.properties.remove("openurl"); //$NON-NLS-1$
+				this.properties.remove("openurl"); 
 			}
 		}
 		super.setVisible(flag);

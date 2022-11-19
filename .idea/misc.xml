@@ -430,6 +430,13 @@
     <pattern value="treebolic.Widget" method="link" />
     <pattern value="treebolic.Widget" method="match" />
     <pattern value="treebolic.Widget" method="search" />
+    <pattern value="treebolic.commons.SqlProperties" method="toString" />
+    <pattern value="treebolic.commons.FileDialogs" method="getAny" />
+    <pattern value="treebolic.commons.HyperlinkButton" method="HyperlinkButton" />
+    <pattern value="treebolic.commons.OpenDialog" method="inform" />
+    <pattern value="treebolic.commons.ProviderDialog" method="ProviderDialog" />
+    <pattern value="treebolic.commons.RadioChoiceDialog" method="RadioChoiceDialog" />
+    <pattern value="treebolic.commons.Interact" method="warn" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
