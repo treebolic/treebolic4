@@ -15,6 +15,9 @@ public class Arc2D extends java.awt.geom.Arc2D.Double implements treebolic.glue.
 
 	private boolean counterclockwise;
 
+	/**
+	 * Constructor
+	 */
 	public Arc2D()
 	{
 		super();

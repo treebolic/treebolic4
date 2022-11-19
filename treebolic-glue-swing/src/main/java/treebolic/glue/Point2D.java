@@ -13,6 +13,12 @@ public class Point2D extends java.awt.geom.Point2D.Double implements treebolic.g
 {
 	private static final long serialVersionUID = 2080063772680665125L;
 
+	/**
+	 * Constructor
+	 *
+	 * @param x x
+	 * @param y y
+	 */
 	public Point2D(final double x, final double y)
 	{
 		super(x, y);

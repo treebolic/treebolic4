@@ -13,11 +13,22 @@ public class Rectangle2D extends java.awt.geom.Rectangle2D.Double implements tre
 {
 	private static final long serialVersionUID = -138247987760984392L;
 
+	/**
+	 * Constructor
+	 *
+	 * @param x left corner
+	 * @param y top corner
+	 * @param w width
+	 * @param h height
+	 */
 	public Rectangle2D(final int x, final int y, final int w, final int h)
 	{
 		super(x, y, w, h);
 	}
 
+	/**
+	 * Default constructor
+	 */
 	public Rectangle2D()
 	{
 		super();

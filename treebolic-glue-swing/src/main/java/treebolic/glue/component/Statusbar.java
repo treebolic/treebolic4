@@ -42,13 +42,16 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Whether this component contains search component
+	 */
 	static public final boolean HAS_SEARCH = true;
 
 	/*
 	 * Icon array
 	 */
 	@SuppressWarnings("ConstantConditions")
-	static final ImageIcon[] icons = new ImageIcon[] { //
+	static final ImageIcon[] icons = new ImageIcon[]{ //
 			new ImageIcon(Statusbar.class.getResource("images/status_info.png")), //
 			new ImageIcon(Statusbar.class.getResource("images/status_linking.png")), //
 			new ImageIcon(Statusbar.class.getResource("images/status_mounting.png")), //
@@ -194,14 +197,14 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 		this.labelTextField.setEditable(false);
 		this.labelTextField.setBackground(Color.WHITE.color);
 		this.labelTextField.setBorder(BorderFactory.createLineBorder(Color.GRAY.color));
-		this.labelTextField.setToolTipText(Messages.getString("Statusbar.tooltip_label")); 
+		this.labelTextField.setToolTipText(Messages.getString("Statusbar.tooltip_label"));
 		this.labelTextField.setPreferredSize(Constants.DIM_STATUS_LABEL);
 
 		// content
 		this.contentTextPane = new JTextPane();
-		this.contentTextPane.setContentType("text/html; charset=UTF-8"); 
+		this.contentTextPane.setContentType("text/html; charset=UTF-8");
 		this.contentTextPane.setEditable(false);
-		this.contentTextPane.setToolTipText(Messages.getString("Statusbar.tooltip_content")); 
+		this.contentTextPane.setToolTipText(Messages.getString("Statusbar.tooltip_content"));
 		this.contentTextPane.setPreferredSize(Constants.DIM_STATUS_CONTENT);
 
 		// stylesheet
@@ -227,7 +230,9 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 		add(this.labelAndInputBox, new GridBagConstraints(1, 0, 1, 1, 1.0, 0.0, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, new Insets(5, 0, 5, 0), 0, 0));
 		add(this.contentPane, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
 		if (HAS_SEARCH)
+		{
 			add(this.searchToggleButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		}
 		add(buttonBox, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.SOUTH, GridBagConstraints.NONE, new Insets(0, 0, 5, 0), 0, 0));
 
 		validate();
@@ -262,7 +267,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	@Override
 	public void setStyle(final String style)
 	{
-		final String[] rules = style.split("\n"); 
+		final String[] rules = style.split("\n");
 		for (final String rule : rules)
 		{
 			this.styleSheet.addRule(rule);
@@ -294,10 +299,10 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	/**
 	 * Put status
 	 *
-	 * @param image image
+	 * @param image     image
 	 * @param converter converter
-	 * @param label label
-	 * @param contents contents
+	 * @param label     label
+	 * @param contents  contents
 	 */
 	@Override
 	public void put(final int image, final Converter converter, final String label, final String... contents)
@@ -311,11 +316,17 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 		// content
 		String content;
 		if (contents == null || contents.length == 0)
+		{
 			content = "";
+		}
 		else if (converter != null)
+		{
 			content = converter.convert(contents);
+		}
 		else
+		{
 			content = String.join("\n", contents);
+		}
 		this.contentTextPane.setText(content);
 		this.contentTextPane.setCaretPosition(0);
 

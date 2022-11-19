@@ -44,19 +44,26 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 
 	public static final Color DARK_GRAY = new Color(java.awt.Color.DARK_GRAY);
 
+	/**
+	 * AWT color
+	 */
 	transient public java.awt.Color color;
 
 	/**
 	 * Constructor from java.awt.color
 	 *
-	 * @param color
-	 *        java.awt.color
+	 * @param color java.awt.color
 	 */
 	public Color(final java.awt.Color color)
 	{
 		this.color = color;
 	}
 
+	/**
+	 * Constructor
+	 *
+	 * @param rgb rgb int value
+	 */
 	public Color(final int rgb)
 	{
 		this.color = new java.awt.Color(rgb);
@@ -70,12 +77,9 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 	/**
 	 * Constructor
 	 *
-	 * @param r
-	 *        red
-	 * @param g
-	 *        green
-	 * @param b
-	 *        blue
+	 * @param r red
+	 * @param g green
+	 * @param b blue
 	 */
 	@Override
 	public void set(final int r, final int g, final int b)
@@ -92,7 +96,7 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 	@Override
 	public void parse(final String string)
 	{
-		this.color = java.awt.Color.decode("0x" + string); 
+		this.color = java.awt.Color.decode("0x" + string);
 	}
 
 	private static final float DARKERFACTOR = 0.85F;
@@ -111,7 +115,9 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 
 		final int i = (int) (1.0 / (1.0 - Color.DARKERFACTOR));
 		if (r == 0 && g == 0 && b == 0)
+		{
 			return new Color(new java.awt.Color(i, i, i, alpha));
+		}
 		if (r > 0 && r < i)
 		{
 			r = i;
@@ -135,8 +141,7 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 	@Override
 	public Color makeDarker()
 	{
-		return new Color(new java.awt.Color(Math.max((int) (this.color.getRed() * Color.DARKERFACTOR), 0), Math.max((int) (this.color.getGreen() * Color.DARKERFACTOR), 0), Math.max((int) (this.color.getBlue() * Color.DARKERFACTOR), 0),
-				this.color.getAlpha()));
+		return new Color(new java.awt.Color(Math.max((int) (this.color.getRed() * Color.DARKERFACTOR), 0), Math.max((int) (this.color.getGreen() * Color.DARKERFACTOR), 0), Math.max((int) (this.color.getBlue() * Color.DARKERFACTOR), 0), this.color.getAlpha()));
 	}
 
 	@Override

@@ -22,8 +22,14 @@ import java.util.Stack;
  */
 public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 {
+	/**
+	 * Plain style
+	 */
 	static public final int PLAIN = 0;
 
+	/**
+	 * Bold style
+	 */
 	static public final int BOLD = 1;
 
 	static private final float SWING_FONT_FACTOR = 1.5F;

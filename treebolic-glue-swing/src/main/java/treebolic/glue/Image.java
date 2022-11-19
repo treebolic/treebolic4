@@ -24,6 +24,9 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 {
 	private static final long serialVersionUID = -6088374866767037559L;
 
+	/**
+	 * AWT image
+	 */
 	public java.awt.Image image;
 
 	/**
@@ -86,6 +89,11 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 		return this.image.getHeight(null);
 	}
 
+	/**
+	 * Get graphics context
+	 *
+	 * @return graphics context
+	 */
 	public Graphics getGraphics()
 	{
 		return new Graphics(this.image.getGraphics());
