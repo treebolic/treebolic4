@@ -348,13 +348,6 @@ public class OwlModelFactory
 	// M E M B E R S
 
 	/**
-	 * Entities are named using IRIs. These are usually too long for use in user interfaces. To solve this problem, and so a query can be written using short
-	 * class, property, individual names we use a short form provider. In this case, we'll just use a simple short form provider that generates short forms from
-	 * IRI fragments.
-	 */
-	final private ShortFormProvider shortFormProvider;
-
-	/**
 	 * Ontology
 	 */
 	private OWLOntology ontology;
@@ -404,7 +397,6 @@ public class OwlModelFactory
 	public OwlModelFactory(final Properties properties)
 	{
 		this.properties = properties;
-		this.shortFormProvider = new SimpleShortFormProvider();
 		this.manager = OWLManager.createOWLOntologyManager();
 		this.dataFactory = this.manager.getOWLDataFactory();
 
@@ -586,7 +578,7 @@ public class OwlModelFactory
 				// System.out.println("Loaded ontology: " + this.ontology.getOntologyID());
 
 				this.engine = new QueryEngine(this.ontology);
-				this.parser = new QueryParser(this.ontology, this.shortFormProvider);
+				this.parser = new QueryParser(this.ontology, new SimpleShortFormProvider());
 			}
 			catch (final Exception e)
 			{
@@ -617,7 +609,7 @@ public class OwlModelFactory
 				{
 					// root
 					final MutableNode owlClassNode = new MutableNode(null, "root");
-					owlClassNode.setLabel(OwlModelFactory.getName(classIri));
+					owlClassNode.setLabel(getName(classIri));
 					decorateClassWithInstances(owlClassNode);
 
 					// instances root
@@ -635,7 +627,7 @@ public class OwlModelFactory
 				{
 					// root
 					final MutableNode owlClassNode = new MutableNode(null, "root");
-					owlClassNode.setLabel(OwlModelFactory.getName(classIri));
+					owlClassNode.setLabel(getName(classIri));
 					decorateClassWithProperties(owlClassNode);
 
 					// properties root
@@ -643,7 +635,7 @@ public class OwlModelFactory
 					decorateProperties(propertiesNode);
 
 					// properties
-					final Stream<OWLObjectProperty> properties = this.engine.getProperties(owlClass);
+					final Stream<OWLObjectProperty> properties = this.engine.getRelationProperties(owlClass);
 					visitProperties(propertiesNode, properties);
 
 					return new Tree(owlClassNode, null);
@@ -653,7 +645,7 @@ public class OwlModelFactory
 				{
 					// root
 					final MutableNode owlClassNode = new MutableNode(null, "root");
-					owlClassNode.setLabel(OwlModelFactory.getName(classIri));
+					owlClassNode.setLabel(getName(classIri));
 					decorateClassWithInstancesAndProperties(owlClassNode);
 
 					// instances root
@@ -669,7 +661,7 @@ public class OwlModelFactory
 					visitInstances(instancesNode, instances.sorted());
 
 					// properties
-					final Stream<OWLObjectProperty> properties = this.engine.getProperties(owlClass);
+					final Stream<OWLObjectProperty> properties = this.engine.getRelationProperties(owlClass);
 					visitProperties(propertiesNode, properties);
 
 					return new Tree(owlClassNode, null);
@@ -771,8 +763,8 @@ public class OwlModelFactory
 	 */
 	public TreeMutableNode visitClass(final INode parentOwlClassNode, final OWLClass owlClass, final String ontologyUrlString)
 	{
-		final String ownClassShortForm = this.shortFormProvider.getShortForm(owlClass);
-		final String owlClassId = OwlModelFactory.getName(ownClassShortForm);
+		final String ownClassShortForm = owlClass.getIRI().getShortForm();
+		final String owlClassId = getName(ownClassShortForm);
 		final Stream<OWLAnnotation> annotations = this.engine.getAnnotations(owlClass);
 
 		// comment
@@ -798,14 +790,18 @@ public class OwlModelFactory
 		if (!owlClass.isOWLThing())
 		{
 			// get instances or properties
+			if("AsymmetricRelation".equals(owlClass.getIRI().getShortForm()))
+			{
+				System.out.println("TODO");
+			}
 			final Stream<OWLNamedIndividual> instances = this.engine.getInstances(owlClass);
 			final boolean hasInstances = instances.findAny().isPresent();
-			final Stream<OWLObjectProperty> properties = this.engine.getProperties(owlClass.asOWLClass());
-			final boolean hasProperties = properties.findAny().isPresent();
+			final boolean hasProperties = this.engine.isRelation(owlClass.asOWLClass());
 
 			// instances+properties mountpoint
 			if (hasInstances && hasProperties)
 			{
+				System.out.println("has instances and properties " + owlClass);
 				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
 				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=instances_properties";
 				owlClassNode.setMountPoint(mountingPoint);
@@ -862,7 +858,7 @@ public class OwlModelFactory
 		final List<INode> childNodes = owlIndividuals //
 				.map(owlNamedIndividual -> {
 
-					final String owlIndividualPropertyShortForm = this.shortFormProvider.getShortForm(owlNamedIndividual);
+					final String owlIndividualPropertyShortForm = owlNamedIndividual.getIRI().getShortForm();
 					final String owlIndividualId = getName(owlIndividualPropertyShortForm);
 					final Stream<OWLClassExpression> types = this.engine.getTypes(owlNamedIndividual);
 					final Stream<OWLAnnotation> annotations = this.engine.getAnnotations(owlNamedIndividual);
@@ -908,8 +904,8 @@ public class OwlModelFactory
 		final List<INode> childNodes = owlProperties //
 				.peek(System.out::println) //
 				.map(owlProperty -> {
-					final String owlPropertyShortForm = this.shortFormProvider.getShortForm(owlProperty);
-					final String owlPropertyId = OwlModelFactory.getName(owlPropertyShortForm);
+					final String owlPropertyShortForm = owlProperty.getIRI().getShortForm();
+					final String owlPropertyId = getName(owlPropertyShortForm);
 
 					final MutableNode propertyNode = new MutableNode(null, owlPropertyId);
 					propertyNode.setLabel(owlPropertyId);

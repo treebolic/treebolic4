@@ -5,15 +5,17 @@
 package treebolic.provider.owl.owlapi;
 
 import org.semanticweb.owlapi.model.*;
-import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 import org.semanticweb.owlapi.search.EntitySearcher;
 
 import java.util.Iterator;
-import java.util.Set;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toMap;
 
 /**
  * OWL query engine
@@ -24,10 +26,10 @@ public class QueryEngine
 
 	private final OWLReasoner reasoner;
 
-	private final Set<OWLObjectProperty> owlProperties;
+	private final Map<String, OWLObjectProperty> owlProperties;
 
 	/**
-	 * Constructs a DLQueryEngine. This will answer "DL queries" using the specified reasoner.
+	 * Constructs a QueryEngine. This will answer queries using the specified reasoner.
 	 *
 	 * @param ontology The ontology
 	 */
@@ -44,7 +46,8 @@ public class QueryEngine
 		this.reasoner = reasonerFactory.createReasoner(this.ontology);
 
 		// Object properties
-		this.owlProperties = this.ontology.getObjectPropertiesInSignature();
+		this.owlProperties = this.ontology.getObjectPropertiesInSignature().stream() //
+				.collect(toMap(p -> p.getIRI().getShortForm(), Function.identity()));
 	}
 
 	// C L A S S E S
@@ -85,6 +88,7 @@ public class QueryEngine
 	}
 
 	// instances
+	static boolean DIRECT_INSTANCES = false;
 
 	/**
 	 * Gets the instances of a class expression
@@ -94,26 +98,75 @@ public class QueryEngine
 	 */
 	public Stream<OWLNamedIndividual> getInstances(final OWLClass owlClass)
 	{
-		return this.reasoner.instances(owlClass, true);
+		return this.reasoner.instances(owlClass, DIRECT_INSTANCES);
 	}
 
 	// properties
 
+	static String getName(final String uriString)
+	{
+		if (uriString != null)
+		{
+			final int index = uriString.lastIndexOf('#');
+			if (index != -1)
+			{
+				return uriString.substring(index + 1);
+			}
+		}
+		return uriString;
+	}
+
+	// relations
+
 	/**
 	 * Gets the properties of a class expression
 	 *
-	 * @param owlClass The class
-	 * @return The instances of the specified class expression. Null if there was a problem parsing the class expression.
+	 * @param owlEntity OWL entity
+	 * @return The properties of the specified entity.
 	 */
-	public Stream<OWLObjectProperty> getProperties(final OWLClass owlClass)
+	public Stream<OWLObjectProperty> getRelationProperties(final OWLEntity owlEntity)
 	{
-		return this.owlProperties.stream().filter(p -> hasProperty(owlClass, p));
+		String key = owlEntity.getIRI().getShortForm();
+		OWLObjectProperty p = owlProperties.get(key);
+		if (p != null)
+		{
+			return Stream.of(p);
+		}
+		return Stream.empty();
 	}
 
-	private boolean hasProperty(final OWLClass owlClass, final OWLObjectPropertyExpression prop)
+	/**
+	 * Is a relation
+	 *
+	 * @param owlEntity OWL entity
+	 * @return true is this entity is a relation
+	 */
+	public boolean isRelation(final OWLEntity owlEntity)
 	{
-		final NodeSet<OWLClass> owlClasses = this.reasoner.getObjectPropertyDomains(prop, true);
-		return owlClasses.containsEntity(owlClass);
+		String key = owlEntity.getIRI().getShortForm();
+		return owlProperties.get(key) != null;
+	}
+
+
+	public Stream<OWLObjectProperty> getProperties(final OWLEntity owlEntity)
+	{
+		// final NodeSet<OWLClass> owlClasses = this.reasoner.getObjectPropertyDomains(prop, true);
+		return Stream.empty();
+
+		// return this.owlProperties.stream().filter(p -> hasProperty(owlClass, p));
+	}
+
+	/**
+	 * Gets the properties of a class expression
+	 *
+	 * @param owlClass OWL class
+	 * @return The instances of the specified class expression. Null if there was a problem parsing the class expression.
+	 */
+	private boolean hasProperty(final OWLEntity owlClass, final OWLObjectPropertyExpression prop)
+	{
+		return false;
+		//final NodeSet<OWLClass> owlClasses = this.reasoner.getObjectPropertyDomains(prop, true);
+		//return owlClasses.containsEntity(owlClass);
 	}
 
 	// top classes
