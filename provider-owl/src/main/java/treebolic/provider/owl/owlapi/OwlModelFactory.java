@@ -506,8 +506,6 @@ public class OwlModelFactory
 		final Settings settings = new Settings();
 		settings.hasToolbarFlag = true;
 		settings.hasStatusbarFlag = true;
-		settings.focus = "AsymmetricRelation"; //TODO remove focus
-		settings.focus = "FinancialInstrument"; //TODO remove focus
 		settings.orientation = OwlModelFactory.asTree ? "south" : "radial";
 		settings.hasToolbarFlag = true;
 		settings.backColor = new Color(0xffffe0);

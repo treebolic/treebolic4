@@ -83,14 +83,14 @@ public class Provider implements IProvider
 		String source = source0;
 		if (source == null)
 		{
-			source = parameters.getProperty("source"); 
+			source = parameters.getProperty("source");
 		}
 
 		// parse OWL file
 		if (source != null)
 		{
 			// settings properties
-			final Properties properties = getSettings(base, parameters);
+			Properties properties = getSettings(base, parameters);
 
 			// factory
 			if (this.factory == null)
@@ -102,14 +102,14 @@ public class Provider implements IProvider
 			final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 
 			// parse
-			this.context.progress("Loading ..." + (url != null ? url : source), false); 
+			this.context.progress("Loading ..." + (url != null ? url : source), false);
 			final Model model = this.factory.makeModel(url != null ? url.toString() : source);
 			if (model != null)
 			{
-				this.context.progress("Loaded " + (url != null ? url : source), false); 
+				this.context.progress("Loaded " + (url != null ? url : source), false);
 				return model;
 			}
-			this.context.message("Cannot load OWL file <" + (url != null ? url : source) + ">");  
+			this.context.message("Cannot load OWL file <" + (url != null ? url : source) + ">");
 		}
 		return null;
 	}
@@ -125,7 +125,7 @@ public class Provider implements IProvider
 		String source = source0;
 		if (source == null)
 		{
-			source = parameters.getProperty("source"); 
+			source = parameters.getProperty("source");
 		}
 
 		// parse owl file
@@ -144,45 +144,67 @@ public class Provider implements IProvider
 			}
 
 			// parse
-			this.context.progress("Loading ..." + (url != null ? url : source), false); 
+			this.context.progress("Loading ..." + (url != null ? url : source), false);
 			final Tree tree = this.factory.makeTree(url != null ? url.toString() : source);
 			if (tree != null)
 			{
-				this.context.progress("Loaded " + (url != null ? url : source), false); 
+				this.context.progress("Loaded " + (url != null ? url : source), false);
 				return tree;
 			}
-			this.context.message("Cannot load OWL file <" + (url != null ? url : source) + ">");  
+			this.context.message("Cannot load OWL file <" + (url != null ? url : source) + ">");
 		}
 		return null;
 	}
 
 	/**
-	 * Get properties in settings file
+	 * Get properties in settings file or command-line override
 	 *
-	 * @param base base
+	 * @param base       base
 	 * @param parameters parameters
 	 * @return properties
 	 */
 	private Properties getSettings(final URL base, final Properties parameters)
 	{
-		// settings properties
+		// settings properties from configuration file set by settings=file
 		Properties properties = null;
-		final String location = parameters == null ? null : parameters.getProperty("settings"); 
+		final String location = parameters == null ? null : parameters.getProperty("settings");
 		if (location != null && !location.isEmpty())
 		{
 			final URL url = ProviderUtils.makeURL(location, base, parameters, this.context);
 
-			this.context.progress("Loading ..." + (url != null ? url : location), false); 
+			this.context.progress("Loading ..." + (url != null ? url : location), false);
 			try
 			{
 				properties = url != null ? Utils.load(url) : Utils.load(location);
-				this.context.progress("Loaded " + (url != null ? url : location), false); 
+				this.context.progress("Loaded " + (url != null ? url : location), false);
 			}
 			catch (final IOException e)
 			{
-				this.context.message("Cannot load Settings file <" + (url != null ? url : location) + ">");  
+				this.context.message("Cannot load Settings file <" + (url != null ? url : location) + ">");
 			}
 		}
+
+		// settings properties from command-line override
+		assert parameters != null;
+		for (String parameter : parameters.stringPropertyNames())
+		{
+			switch(parameter)
+			{
+				case "source":
+				case "provider":
+				case "base":
+				case "imagebase":
+				case "settings":
+					continue;
+			}
+
+			if (properties == null)
+			{
+				properties = new Properties();
+			}
+			properties.setProperty(parameter, parameters.getProperty(parameter));
+		}
+
 		return properties;
 	}
 }
