@@ -5,6 +5,7 @@
 package treebolic.provider.owl.owlapi;
 
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
@@ -122,17 +123,12 @@ public class QueryEngine
 	 * Gets the properties of a class expression
 	 *
 	 * @param owlEntity OWL entity
-	 * @return The properties of the specified entity.
+	 * @return The objectproperty matching the specified entity (by name).
 	 */
-	public Stream<OWLObjectProperty> getRelationProperties(final OWLEntity owlEntity)
+	public OWLObjectProperty getRelation(final OWLEntity owlEntity)
 	{
 		String key = owlEntity.getIRI().getShortForm();
-		OWLObjectProperty p = owlProperties.get(key);
-		if (p != null)
-		{
-			return Stream.of(p);
-		}
-		return Stream.empty();
+		return owlProperties.get(key);
 	}
 
 	/**
@@ -143,30 +139,31 @@ public class QueryEngine
 	 */
 	public boolean isRelation(final OWLEntity owlEntity)
 	{
-		String key = owlEntity.getIRI().getShortForm();
-		return owlProperties.get(key) != null;
-	}
-
-
-	public Stream<OWLObjectProperty> getProperties(final OWLEntity owlEntity)
-	{
-		// final NodeSet<OWLClass> owlClasses = this.reasoner.getObjectPropertyDomains(prop, true);
-		return Stream.empty();
-
-		// return this.owlProperties.stream().filter(p -> hasProperty(owlClass, p));
+		return getRelation(owlEntity) != null;
 	}
 
 	/**
-	 * Gets the properties of a class expression
+	 * Get domains of object property
+	 *
+	 * @param owlObjectProperty property
+	 * @return stream of domain classes
+	 */
+	public Stream<OWLClass> getDomains(final OWLObjectProperty owlObjectProperty)
+	{
+		return this.reasoner.objectPropertyDomains(owlObjectProperty, true);
+	}
+
+	/**
+	 * Gets the properties of a class
 	 *
 	 * @param owlClass OWL class
-	 * @return The instances of the specified class expression. Null if there was a problem parsing the class expression.
+	 * @return stream of properties
 	 */
-	private boolean hasProperty(final OWLEntity owlClass, final OWLObjectPropertyExpression prop)
+	public Stream<OWLObjectProperty> getProperties(final OWLClass owlClass)
 	{
-		return false;
-		//final NodeSet<OWLClass> owlClasses = this.reasoner.getObjectPropertyDomains(prop, true);
-		//return owlClasses.containsEntity(owlClass);
+		return this.owlProperties.values().stream() //
+				.filter(p -> getDomains(p) //
+						.anyMatch(c -> c.equals(owlClass)));
 	}
 
 	// top classes

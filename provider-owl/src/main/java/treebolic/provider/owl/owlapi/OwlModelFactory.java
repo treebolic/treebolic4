@@ -6,7 +6,6 @@ package treebolic.provider.owl.owlapi;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.StreamDocumentSource;
 import org.semanticweb.owlapi.model.*;
-import org.semanticweb.owlapi.util.ShortFormProvider;
 import org.semanticweb.owlapi.util.SimpleShortFormProvider;
 
 import java.io.IOException;
@@ -508,6 +507,7 @@ public class OwlModelFactory
 		settings.hasToolbarFlag = true;
 		settings.hasStatusbarFlag = true;
 		settings.focus = "AsymmetricRelation"; //TODO remove focus
+		settings.focus = "FinancialInstrument"; //TODO remove focus
 		settings.orientation = OwlModelFactory.asTree ? "south" : "radial";
 		settings.hasToolbarFlag = true;
 		settings.backColor = new Color(0xffffe0);
@@ -604,69 +604,52 @@ public class OwlModelFactory
 			// class
 			if (owlClass != null)
 			{
-				// instances
-				if ("instances".equals(target))
+				if (target != null)
 				{
+					boolean hasInstances = target.contains("instances");
+					boolean hasProperties = target.contains("properties");
+					boolean isRelation = target.contains("relation");
+
 					// root
 					final MutableNode owlClassNode = new MutableNode(null, "root");
 					owlClassNode.setLabel(getName(classIri));
-					decorateClassWithInstances(owlClassNode);
-
-					// instances root
-					final TreeMutableNode instancesNode = new TreeMutableNode(owlClassNode, classIri + "-instances");
-					decorateInstances(instancesNode);
+					decorateClassWith(owlClassNode, hasInstances, hasProperties, isRelation);
 
 					// instances
-					final Stream<OWLNamedIndividual> instances = this.engine.getInstances(owlClass);
-					visitInstances(instancesNode, instances.sorted());
+					if (hasInstances)
+					{
+						// instances root
+						final TreeMutableNode instancesNode = new TreeMutableNode(owlClassNode, classIri + "-instances");
+						decorateInstances(instancesNode);
 
-					return new Tree(owlClassNode, null);
-				}
-				// properties
-				else if ("properties".equals(target))
-				{
-					// root
-					final MutableNode owlClassNode = new MutableNode(null, "root");
-					owlClassNode.setLabel(getName(classIri));
-					decorateClassWithProperties(owlClassNode);
+						// instances
+						final Stream<OWLNamedIndividual> instances = this.engine.getInstances(owlClass);
+						visitInstances(instancesNode, instances.sorted());
+					}
+					// relation
+					if (isRelation)
+					{
+						// relation root
+						final TreeMutableNode propertiesNode = new TreeMutableNode(owlClassNode, classIri + "-relation");
+						decorateProperties(propertiesNode);
 
-					// properties root
-					final TreeMutableNode propertiesNode = new TreeMutableNode(owlClassNode, classIri + "-properties");
-					decorateProperties(propertiesNode);
-
+						// relation
+						OWLObjectProperty relation = this.engine.getRelation(owlClass);
+						visitRelation(propertiesNode, relation);
+					}
 					// properties
-					final Stream<OWLObjectProperty> properties = this.engine.getRelationProperties(owlClass);
-					visitProperties(propertiesNode, properties);
+					if (hasProperties)
+					{
+						// properties root
+						final TreeMutableNode propertiesNode = new TreeMutableNode(owlClassNode, classIri + "-properties");
+						decorateProperties(propertiesNode);
 
+						// properties
+						final Stream<OWLObjectProperty> properties = this.engine.getProperties(owlClass);
+						visitProperties(propertiesNode, properties);
+					}
 					return new Tree(owlClassNode, null);
 				}
-				// instances + properties
-				else if ("instances_properties".equals(target))
-				{
-					// root
-					final MutableNode owlClassNode = new MutableNode(null, "root");
-					owlClassNode.setLabel(getName(classIri));
-					decorateClassWithInstancesAndProperties(owlClassNode);
-
-					// instances root
-					final TreeMutableNode instancesNode = new TreeMutableNode(owlClassNode, classIri + "-instances");
-					decorateInstances(instancesNode);
-
-					// properties root
-					final TreeMutableNode propertiesNode = new TreeMutableNode(owlClassNode, classIri + "-properties");
-					decorateProperties(propertiesNode);
-
-					// instances
-					final Stream<OWLNamedIndividual> instances = this.engine.getInstances(owlClass);
-					visitInstances(instancesNode, instances.sorted());
-
-					// properties
-					final Stream<OWLObjectProperty> properties = this.engine.getRelationProperties(owlClass);
-					visitProperties(propertiesNode, properties);
-
-					return new Tree(owlClassNode, null);
-				}
-
 				// class
 				final MutableNode owlClassNode = visitClassAndSubclasses(null, owlClass, ontologyUrlString);
 				return new Tree(decorateRoot(owlClassNode), null);
@@ -790,36 +773,31 @@ public class OwlModelFactory
 		if (!owlClass.isOWLThing())
 		{
 			// get instances or properties
-			if("AsymmetricRelation".equals(owlClass.getIRI().getShortForm()))
-			{
-				System.out.println("TODO");
-			}
 			final Stream<OWLNamedIndividual> instances = this.engine.getInstances(owlClass);
+			final Stream<OWLObjectProperty> properties = this.engine.getProperties(owlClass);
 			final boolean hasInstances = instances.findAny().isPresent();
-			final boolean hasProperties = this.engine.isRelation(owlClass.asOWLClass());
+			final boolean hasProperties = properties.findAny().isPresent();
+			final boolean isRelation = this.engine.isRelation(owlClass.asOWLClass());
 
-			// instances+properties mountpoint
-			if (hasInstances && hasProperties)
+			// mountpoint
+			if (hasInstances || hasProperties || isRelation)
 			{
-				System.out.println("has instances and properties " + owlClass);
-				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
-				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=instances_properties";
-				owlClassNode.setMountPoint(mountingPoint);
-			}
+				List<String> targets = new ArrayList<>();
+				if (hasInstances)
+				{
+					targets.add("instances");
+				}
+				if (isRelation)
+				{
+					targets.add("relation");
+				}
+				if (hasProperties)
+				{
+					targets.add("properties");
+				}
 
-			// instances mountpoint
-			else if (hasInstances)
-			{
 				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
-				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=instances";
-				owlClassNode.setMountPoint(mountingPoint);
-			}
-
-			// properties mountpoint
-			else if (hasProperties)
-			{
-				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
-				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=properties";
+				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=" + String.join("+", targets);
 				owlClassNode.setMountPoint(mountingPoint);
 			}
 		}
@@ -867,23 +845,7 @@ public class OwlModelFactory
 					instanceNode.setLabel(owlIndividualId);
 					instanceNode.setTarget(owlIndividualId);
 					instanceNode.setContent(typesToString(types) + "<br>" + annotationsToString(annotations) + "<br>");
-
-					instanceNode.setBackColor(this.instanceBackColor);
-					instanceNode.setForeColor(this.instanceForeColor);
-					instanceNode.setEdgeStyle(this.instanceEdgeStyle);
-					instanceNode.setEdgeColor(this.instanceEdgeColor);
-					if (this.instanceImageFile != null)
-					{
-						instanceNode.setImageFile(this.instanceImageFile);
-					}
-					else
-					{
-						instanceNode.setImageIndex(ImageIndices.INSTANCE.ordinal());
-					}
-					if (this.instanceEdgeImageFile != null)
-					{
-						instanceNode.setEdgeImageFile(this.instanceEdgeImageFile);
-					}
+					decorateInstance(instanceNode);
 					return instanceNode;
 				}) //
 				.collect(toList());
@@ -891,6 +853,35 @@ public class OwlModelFactory
 		// balance load
 		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
 		parentNode.addChildren(balancedNodes);
+	}
+
+	/**
+	 * Walk relation properties
+	 *
+	 * @param parentNode  treebolic parent node to attach to
+	 * @param owlProperty property
+	 */
+	public void visitRelation(final TreeMutableNode parentNode, final OWLObjectProperty owlProperty)
+	{
+		final String owlPropertyShortForm = owlProperty.getIRI().getShortForm();
+		if ("AsymmetricRelation".equals(owlPropertyShortForm))
+		{
+			System.out.println();
+		}
+
+		final Stream<OWLClass> domains = this.engine.getDomains(owlProperty);
+
+		final MutableNode domainsNode = new MutableNode(parentNode, owlPropertyShortForm + "-domains");
+		domainsNode.setLabel("domains");
+		decorateProperty(domainsNode);
+		domains.forEach(owlDomainClass -> {
+
+			String owlClassId = owlDomainClass.asOWLClass().getIRI().getShortForm();
+			final MutableNode relationNode = new MutableNode(domainsNode, owlClassId);
+			relationNode.setLabel(owlClassId);
+			relationNode.setTarget(owlClassId);
+			decorateProperty(relationNode);
+		});
 	}
 
 	/**
@@ -902,7 +893,7 @@ public class OwlModelFactory
 	public void visitProperties(final TreeMutableNode parentNode, final Stream<OWLObjectProperty> owlProperties)
 	{
 		final List<INode> childNodes = owlProperties //
-				.peek(System.out::println) //
+				.peek(System.out::println) // TODO
 				.map(owlProperty -> {
 					final String owlPropertyShortForm = owlProperty.getIRI().getShortForm();
 					final String owlPropertyId = getName(owlPropertyShortForm);
@@ -957,6 +948,23 @@ public class OwlModelFactory
 		return node;
 	}
 
+	private MutableNode decorateClassWith(final MutableNode node, boolean hasInstances, boolean hasProperties, boolean isRelation)
+	{
+		if (hasInstances)
+		{
+			return decorateClassWithInstances(node);
+		}
+		else if (hasProperties)
+		{
+			return decorateClassWithProperties(node);
+		}
+		else if (isRelation)
+		{
+			return node;
+		}
+		return node;
+	}
+
 	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateClassWithProperties(final MutableNode node)
 	{
@@ -975,22 +983,6 @@ public class OwlModelFactory
 
 	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateClassWithInstances(final MutableNode node)
-	{
-		node.setBackColor(this.classWithInstancesBackColor);
-		node.setForeColor(this.classWithInstancesForeColor);
-		if (this.classWithInstancesImageFile != null)
-		{
-			node.setImageFile(this.classWithInstancesImageFile);
-		}
-		else
-		{
-			node.setImageIndex(ImageIndices.CLASSWITHINSTANCES.ordinal());
-		}
-		return node;
-	}
-
-	@SuppressWarnings("UnusedReturnValue")
-	private MutableNode decorateClassWithInstancesAndProperties(final MutableNode node)
 	{
 		node.setBackColor(this.classWithInstancesBackColor);
 		node.setForeColor(this.classWithInstancesForeColor);
@@ -1035,6 +1027,50 @@ public class OwlModelFactory
 		else
 		{
 			node.setImageIndex(ImageIndices.INSTANCES.ordinal());
+		}
+		return node;
+	}
+
+	@SuppressWarnings("UnusedReturnValue")
+	private MutableNode decorateInstance(final MutableNode node)
+	{
+		node.setBackColor(this.instanceBackColor);
+		node.setForeColor(this.instanceForeColor);
+		node.setEdgeStyle(this.instanceEdgeStyle);
+		node.setEdgeColor(this.instanceEdgeColor);
+		if (this.instanceImageFile != null)
+		{
+			node.setImageFile(this.instanceImageFile);
+		}
+		else
+		{
+			node.setImageIndex(ImageIndices.INSTANCE.ordinal());
+		}
+		if (this.instanceEdgeImageFile != null)
+		{
+			node.setEdgeImageFile(this.instanceEdgeImageFile);
+		}
+		return node;
+	}
+
+	@SuppressWarnings("UnusedReturnValue")
+	private MutableNode decorateProperty(final MutableNode node)
+	{
+		node.setBackColor(this.propertyBackColor);
+		node.setForeColor(this.propertyForeColor);
+		node.setEdgeStyle(this.propertyEdgeStyle);
+		node.setEdgeColor(this.propertyEdgeColor);
+		if (this.propertyImageFile != null)
+		{
+			node.setImageFile(this.propertyImageFile);
+		}
+		else
+		{
+			node.setImageIndex(ImageIndices.PROPERTY.ordinal());
+		}
+		if (this.propertyEdgeImageFile != null)
+		{
+			node.setEdgeImageFile(this.propertyEdgeImageFile);
 		}
 		return node;
 	}
