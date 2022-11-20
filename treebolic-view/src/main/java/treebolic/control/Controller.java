@@ -603,7 +603,6 @@ public class Controller extends Commander
 	static private String[] getContent(@NonNull final INode node)
 	{
 		final String[] contents = new String[4];
-
 		contents[IDX_NODE_CONTENT] = node.getContent();
 
 		// link
