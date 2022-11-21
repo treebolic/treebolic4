@@ -88,7 +88,7 @@ public class QueryEngine
 	}
 
 	// instances
-	static boolean DIRECT_INSTANCES = false;
+	static final boolean DIRECT_INSTANCES = false;
 
 	/**
 	 * Gets the instances of a class expression

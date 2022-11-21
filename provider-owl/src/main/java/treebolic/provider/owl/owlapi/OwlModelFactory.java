@@ -95,7 +95,9 @@ public class OwlModelFactory
 		 * Load balancing properties branch
 		 */
 		BRANCH_PROPERTIES,
-
+		/**
+		 * Yields count of enumeration
+		 */
 		COUNT
 	}
 
@@ -1172,6 +1174,7 @@ public class OwlModelFactory
 		return node;
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateClassWith(final MutableNode node, boolean hasInstances, boolean hasProperties, boolean isRelation)
 	{
 		if (isRelation)
