@@ -153,6 +153,7 @@ public class LoadBalancer
 			root.setBackColor(this.backColor);
 			root.setForeColor(this.foreColor);
 			root.setLabel(this.label);
+			root.setEdgeColor(this.edgeColor);
 
 			// image
 			if (imageIndex >= 0)
