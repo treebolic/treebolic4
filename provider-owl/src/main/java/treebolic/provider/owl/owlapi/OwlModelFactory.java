@@ -904,6 +904,38 @@ public class OwlModelFactory
 			});
 		}
 
+		final List<OWLObjectProperty> subproperties = this.engine.getSubproperties(owlProperty).collect(toList());
+		if (!subproperties.isEmpty())
+		{
+			final MutableNode subPropertiesNode = new MutableNode(relationNode, owlPropertyShortForm + "-subproperties");
+			subPropertiesNode.setLabel("subproperties");
+			decorateProperty(subPropertiesNode);
+			subproperties.forEach(owlSubProperty -> {
+
+				String owlSubpropertyId = owlSubProperty.getIRI().getShortForm();
+				final MutableNode subPropertyNode = new MutableNode(subPropertiesNode, owlSubpropertyId);
+				subPropertyNode.setLabel(owlSubpropertyId);
+				subPropertyNode.setTarget(owlSubpropertyId);
+				decorateProperty(subPropertyNode);
+			});
+		}
+
+		final List<OWLObjectProperty> inverses = this.engine.getInverseProperties(owlProperty).collect(toList());
+		if (!inverses.isEmpty())
+		{
+			final MutableNode inversesNode = new MutableNode(relationNode, owlPropertyShortForm + "-inverses");
+			inversesNode.setLabel("inverses");
+			decorateProperty(inversesNode);
+			inverses.forEach(owlInverseProperty -> {
+
+				String owlInverseId = owlInverseProperty.getIRI().getShortForm();
+				final MutableNode inverseNode = new MutableNode(inversesNode, owlInverseId);
+				inverseNode.setLabel(owlInverseId);
+				inverseNode.setTarget(owlInverseId);
+				decorateProperty(inverseNode);
+			});
+		}
+
 		if (owlProperty.isOWLClass())
 		{
 			final List<OWLClass> subclasses = this.engine.getSubclasses(owlProperty).collect(toList());
@@ -914,7 +946,7 @@ public class OwlModelFactory
 				decorateProperty(subclassesNode);
 				subclasses.forEach(owlSubclass -> {
 
-					String owlSubclassId = owlSubclass.asOWLClass().getIRI().getShortForm();
+					String owlSubclassId = owlSubclass.getIRI().getShortForm();
 					final MutableNode subclassNode = new MutableNode(subclassesNode, owlSubclassId);
 					subclassNode.setLabel(owlSubclassId);
 					subclassNode.setTarget(owlSubclassId);
@@ -930,7 +962,7 @@ public class OwlModelFactory
 				decorateProperty(superclassesNode);
 				superclasses.forEach(owlSuperclass -> {
 
-					String owlSuperclassId = owlSuperclass.asOWLClass().getIRI().getShortForm();
+					String owlSuperclassId = owlSuperclass.getIRI().getShortForm();
 					final MutableNode superclassNode = new MutableNode(superclassesNode, owlSuperclassId);
 					superclassNode.setLabel(owlSuperclassId);
 					superclassNode.setTarget(owlSuperclassId);
@@ -938,24 +970,6 @@ public class OwlModelFactory
 				});
 			}
 		}
-
-		final List<OWLObjectProperty> inverses = this.engine.getInverseProperties(owlProperty).collect(toList());
-		if (!inverses.isEmpty())
-		{
-			final MutableNode inversesNode = new MutableNode(relationNode, owlPropertyShortForm + "-inverses");
-			inversesNode.setLabel("inverses");
-			decorateProperty(inversesNode);
-			inverses.stream() //
-					.forEach(owlInverseProperty -> {
-
-						String owlInverseId = owlInverseProperty.getIRI().getShortForm();
-						final MutableNode inverseNode = new MutableNode(inversesNode, owlInverseId);
-						inverseNode.setLabel(owlInverseId);
-						inverseNode.setTarget(owlInverseId);
-						decorateProperty(inverseNode);
-					});
-		}
-
 	}
 
 	/**

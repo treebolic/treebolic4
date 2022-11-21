@@ -5,7 +5,6 @@
 package treebolic.provider.owl.owlapi;
 
 import org.semanticweb.owlapi.model.*;
-import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
@@ -175,18 +174,20 @@ public class QueryEngine
 	 * Get sub properties of object property
 	 *
 	 * @param owlObjectProperty property
-	 * @return stream of sub property expressions
+	 * @return stream of sub properties
 	 */
-	public Stream<OWLObjectPropertyExpression> getSubProperties(final OWLObjectProperty owlObjectProperty)
+	public Stream<OWLObjectProperty> getSubproperties(final OWLObjectProperty owlObjectProperty)
 	{
-		return this.reasoner.subObjectProperties(owlObjectProperty, true);
+		return this.reasoner.subObjectProperties(owlObjectProperty, true) //
+				.filter(OWLObjectPropertyExpression::isNamed) //
+				.map(OWLObjectPropertyExpression::getNamedProperty);
 	}
 
 	/**
-	 * Get sub properties of object property
+	 * Get inverse properties of object property
 	 *
 	 * @param owlObjectProperty property
-	 * @return stream of sub property expressions
+	 * @return stream of inverse properties
 	 */
 	public Stream<OWLObjectProperty> getInverseProperties(final OWLObjectProperty owlObjectProperty)
 	{
