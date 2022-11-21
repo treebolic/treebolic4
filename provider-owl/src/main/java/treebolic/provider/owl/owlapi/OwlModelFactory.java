@@ -76,23 +76,74 @@ public class OwlModelFactory
 		 */
 		PROPERTY,
 		/**
+		 * Class with relation attached
+		 */
+		CLASSWITHRELATION,
+		/**
+		 * Relation
+		 */
+		RELATION,
+		/**
 		 * Load balancing branch
 		 */
 		BRANCH,
 		/**
-		 * Load balancing 2 branch
+		 * Load balancing instances branch
 		 */
-		BRANCH2
+		BRANCH_INSTANCES,
+		/**
+		 * Load balancing properties branch
+		 */
+		BRANCH_PROPERTIES,
+
+		COUNT
 	}
 
 	static Image[] images;
 
 	/**
-	 * Default class color
+	 * Default class background color
 	 */
 	static final Color defaultClassBackColor = new Color(0xffffC0);
 
+	/**
+	 * Default class background color
+	 */
+	static final Color defaultClassForeColor = Color.DARK_GRAY;
+
+	/**
+	 * Default instance background color
+	 */
+	static final Color defaultInstanceBackColor = Color.WHITE;
+
+	/**
+	 * Default instance foreground color
+	 */
+	static final Color defaultInstanceForeColor = Color.BLUE;
+
+	/**
+	 * Default relation background color
+	 */
+	static final Color defaultRelationBackColor = Color.WHITE;
+
+	/**
+	 * Default relation foreground color
+	 */
+	static final Color defaultRelationForeColor = Color.RED;
+
+	/**
+	 * Default property background color
+	 */
+	static final Color defaultPropertyBackColor = Color.WHITE;
+
+	/**
+	 * Default property foreground color
+	 */
+	static final Color defaultPropertyForeColor = Color.MAGENTA;
+
 	// L O A D B A L A N C I N G
+
+	// class nodes
 
 	/**
 	 * LoadBalancer : Max children nodes at level 0, 1 ... n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for level i to n.
@@ -122,7 +173,7 @@ public class OwlModelFactory
 	/**
 	 * LoadBalancer (classes) : image index
 	 */
-	static private final int LOADBALANCING_IMAGEINDEX = ImageIndices.BRANCH.ordinal(); // -1;
+	static private final int LOADBALANCING_IMAGEINDEX = ImageIndices.BRANCH.ordinal();
 
 	/**
 	 * LoadBalancer (classes) : image
@@ -134,35 +185,69 @@ public class OwlModelFactory
 	 */
 	static private final int LOADBALANCING_EDGE_STYLE = IEdge.SOLID | /* IEdge.FROMDEF | IEdge.FROMCIRCLE | */IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.STROKEDEF | IEdge.TODEF;
 
+	// instances
+
 	/**
 	 * LoadBalancer (instances and properties) : back color
 	 */
-	static private final Color LOADBALANCING2_BACKCOLOR = null;
+	static private final Color LOADBALANCING_INSTANCES_BACKCOLOR = defaultInstanceBackColor;
 
 	/**
 	 * LoadBalancer (instances and properties) : fore color
 	 */
-	static private final Color LOADBALANCING2_FORECOLOR = null;
+	static private final Color LOADBALANCING_INSTANCES_FORECOLOR = defaultInstanceForeColor;
 
 	/**
 	 * LoadBalancer (instances and properties) : edge color
 	 */
-	static private final Color LOADBALANCING2_EDGECOLOR = Color.GRAY; // Color.DARK_GRAY;
+	static private final Color LOADBALANCING_INSTANCES_EDGECOLOR = defaultInstanceForeColor;
 
 	/**
 	 * LoadBalancer (instances and properties) : image index
 	 */
-	static private final int LOADBALANCING2_IMAGEINDEX = ImageIndices.BRANCH2.ordinal(); // -1;
+	static private final int LOADBALANCING_INSTANCES_IMAGEINDEX = ImageIndices.BRANCH_INSTANCES.ordinal();
 
 	/**
 	 * LoadBalancer (instances and properties) : image
 	 */
-	static private final Image LOADBALANCING2_IMAGE = null;
+	static private final Image LOADBALANCING_INSTANCES_IMAGE = null;
 
 	/**
 	 * LoadBalancer (instances and properties) : Edge style
 	 */
-	static private final int LOADBALANCING2_EDGE_STYLE = IEdge.DASH | /* IEdge.FROMDEF | IEdge.FROMCIRCLE | */IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.STROKEDEF | IEdge.TODEF;
+	static private final int LOADBALANCING_INSTANCES_EDGE_STYLE = IEdge.DASH | /* IEdge.FROMDEF | IEdge.FROMCIRCLE | */IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.STROKEDEF | IEdge.TODEF;
+
+	// properties
+
+	/**
+	 * LoadBalancer (instances and properties) : back color
+	 */
+	static private final Color LOADBALANCING_PROPERTIES_BACKCOLOR = defaultPropertyBackColor;
+
+	/**
+	 * LoadBalancer (instances and properties) : fore color
+	 */
+	static private final Color LOADBALANCING_PROPERTIES_FORECOLOR = defaultPropertyForeColor;
+
+	/**
+	 * LoadBalancer (instances and properties) : edge color
+	 */
+	static private final Color LOADBALANCING_PROPERTIES_EDGECOLOR = defaultPropertyForeColor;
+
+	/**
+	 * LoadBalancer (instances and properties) : image index
+	 */
+	static private final int LOADBALANCING_PROPERTIES_IMAGEINDEX = ImageIndices.BRANCH_PROPERTIES.ordinal(); // -1;
+
+	/**
+	 * LoadBalancer (instances and properties) : image
+	 */
+	static private final Image LOADBALANCING_PROPERTIES_IMAGE = null;
+
+	/**
+	 * LoadBalancer (instances and properties) : Edge style
+	 */
+	static private final int LOADBALANCING_PROPERTIES_EDGE_STYLE = IEdge.DASH | /* IEdge.FROMDEF | IEdge.FROMCIRCLE | */IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.STROKEDEF | IEdge.TODEF;
 
 	// D E C O R A T I O N   M E M B E R S
 
@@ -189,6 +274,21 @@ public class OwlModelFactory
 	private String classImageFile;
 
 	/**
+	 * Class with relation fore color
+	 */
+	private Color classWithRelationBackColor;
+
+	/**
+	 * Class with relation fore color
+	 */
+	private Color classWithRelationForeColor;
+
+	/**
+	 * Class with relation image
+	 */
+	private String classWithRelationImageFile;
+
+	/**
 	 * Class with instances fore color
 	 */
 	private Color classWithInstancesBackColor;
@@ -199,7 +299,7 @@ public class OwlModelFactory
 	private Color classWithInstancesForeColor;
 
 	/**
-	 * Class with properties image
+	 * Class with instances image
 	 */
 	private String classWithInstancesImageFile;
 
@@ -292,6 +392,36 @@ public class OwlModelFactory
 	 */
 	private String instanceEdgeImageFile;
 
+	/**
+	 * Instance fore color
+	 */
+	private Color relationForeColor;
+
+	/**
+	 * Relation fore color
+	 */
+	private Color relationBackColor;
+
+	/**
+	 * Relation image
+	 */
+	private String relationImageFile;
+
+	/**
+	 * Relation edge color
+	 */
+	private Color relationEdgeColor;
+
+	/**
+	 * Relation edge style
+	 */
+	private Integer relationEdgeStyle;
+
+	/**
+	 * Relation edge image file
+	 */
+	private String relationEdgeImageFile;
+
 	// properties
 
 	/**
@@ -382,9 +512,14 @@ public class OwlModelFactory
 	protected final LoadBalancer loadBalancer;
 
 	/**
-	 * Load balancer (properties and instances)
+	 * Load balancer (instances)
 	 */
-	protected final LoadBalancer subLoadBalancer;
+	protected final LoadBalancer instancesLoadBalancer;
+
+	/**
+	 * Load balancer (properties)
+	 */
+	protected final LoadBalancer propertiesLoadBalancer;
 
 	// C O N S T R U C T O R
 
@@ -406,8 +541,10 @@ public class OwlModelFactory
 
 		this.loadBalancer = new LoadBalancer(MAX_AT_LEVEL, LABEL_TRUNCATE_AT);
 		this.loadBalancer.setGroupNode(null, LOADBALANCING_BACKCOLOR, LOADBALANCING_FORECOLOR, LOADBALANCING_EDGECOLOR, LOADBALANCING_EDGE_STYLE, LOADBALANCING_IMAGEINDEX, LOADBALANCING_IMAGE);
-		this.subLoadBalancer = new LoadBalancer(MAX_AT_LEVEL, LABEL_TRUNCATE_AT);
-		this.subLoadBalancer.setGroupNode(null, LOADBALANCING2_BACKCOLOR, LOADBALANCING2_FORECOLOR, LOADBALANCING2_EDGECOLOR, LOADBALANCING2_EDGE_STYLE, LOADBALANCING2_IMAGEINDEX, LOADBALANCING2_IMAGE);
+		this.instancesLoadBalancer = new LoadBalancer(MAX_AT_LEVEL, LABEL_TRUNCATE_AT);
+		this.instancesLoadBalancer.setGroupNode(null, LOADBALANCING_INSTANCES_BACKCOLOR, LOADBALANCING_INSTANCES_FORECOLOR, LOADBALANCING_INSTANCES_EDGECOLOR, LOADBALANCING_INSTANCES_EDGE_STYLE, LOADBALANCING_INSTANCES_IMAGEINDEX, LOADBALANCING_INSTANCES_IMAGE);
+		this.propertiesLoadBalancer = new LoadBalancer(MAX_AT_LEVEL, LABEL_TRUNCATE_AT);
+		this.propertiesLoadBalancer.setGroupNode(null, LOADBALANCING_PROPERTIES_BACKCOLOR, LOADBALANCING_PROPERTIES_FORECOLOR, LOADBALANCING_PROPERTIES_EDGECOLOR, LOADBALANCING_PROPERTIES_EDGE_STYLE, LOADBALANCING_PROPERTIES_IMAGEINDEX, LOADBALANCING_PROPERTIES_IMAGE);
 
 		initialize();
 	}
@@ -423,51 +560,63 @@ public class OwlModelFactory
 		this.rootLabel = getLabel("root.label", "Thing");
 
 		this.classBackColor = getColor("class.backcolor", OwlModelFactory.defaultClassBackColor);
-		this.classForeColor = getColor("class.forecolor", Color.BLACK);
+		this.classForeColor = getColor("class.forecolor", OwlModelFactory.defaultClassForeColor);
 		this.classImageFile = getImageFile("class.image");
 
-		this.classWithPropertiesBackColor = getColor("class.withprops.backcolor", OwlModelFactory.defaultClassBackColor);
-		this.classWithPropertiesForeColor = getColor("class.withprops.forecolor", Color.MAGENTA);
+		this.classWithPropertiesBackColor = getColor("class.withprops.backcolor", OwlModelFactory.defaultPropertyBackColor);
+		this.classWithPropertiesForeColor = getColor("class.withprops.forecolor", OwlModelFactory.defaultPropertyForeColor);
 		this.classWithPropertiesImageFile = getImageFile("class.withprops.image");
 
-		this.classWithInstancesBackColor = getColor("class.withinstances.backcolor", OwlModelFactory.defaultClassBackColor);
-		this.classWithInstancesForeColor = getColor("class.withinstances.forecolor", Color.BLUE);
+		this.classWithInstancesBackColor = getColor("class.withinstances.backcolor", OwlModelFactory.defaultInstanceBackColor);
+		this.classWithInstancesForeColor = getColor("class.withinstances.forecolor", OwlModelFactory.defaultInstanceForeColor);
 		this.classWithInstancesImageFile = getImageFile("class.withinstances.image");
 
+		this.classWithRelationBackColor = getColor("class.withrelation.backcolor", OwlModelFactory.defaultRelationBackColor);
+		this.classWithRelationForeColor = getColor("class.withrelation.forecolor", OwlModelFactory.defaultRelationForeColor);
+		this.classWithRelationImageFile = getImageFile("class.withrelation.image");
+
 		this.instancesLabel = getLabel("instances.label", "instances");
-		this.instancesBackColor = getColor("instances.backcolor", Color.WHITE);
-		this.instancesForeColor = getColor("instances.forecolor", Color.BLUE);
+		this.instancesBackColor = getColor("instances.backcolor", OwlModelFactory.defaultInstanceBackColor);
+		this.instancesForeColor = getColor("instances.forecolor", OwlModelFactory.defaultInstanceForeColor);
 		this.instancesImageFile = getImageFile("instances.image");
 
-		this.instanceBackColor = getColor("instance.backcolor", Color.WHITE);
-		this.instanceForeColor = getColor("instance.forecolor", Color.BLUE);
-		this.instanceEdgeColor = getColor("instance.edgecolor", Color.BLUE);
+		this.instanceBackColor = getColor("instance.backcolor", OwlModelFactory.defaultInstanceBackColor);
+		this.instanceForeColor = getColor("instance.forecolor", OwlModelFactory.defaultInstanceForeColor);
+		this.instanceEdgeColor = getColor("instance.edgecolor", OwlModelFactory.defaultInstanceForeColor);
 		this.instanceImageFile = getImageFile("instance.image");
 		this.instanceEdgeImageFile = getImageFile("instance.edge.image");
 
+		this.relationBackColor = getColor("relation.backcolor", OwlModelFactory.defaultRelationBackColor);
+		this.relationForeColor = getColor("relation.forecolor", OwlModelFactory.defaultRelationForeColor);
+		this.relationEdgeColor = getColor("relation.edgecolor", OwlModelFactory.defaultRelationForeColor);
+		this.relationImageFile = getImageFile("relation.image");
+		this.relationEdgeImageFile = getImageFile("relation.edge.image");
+
 		this.propertiesLabel = getLabel("properties.label", "properties");
-		this.propertiesBackColor = getColor("properties.backcolor", Color.WHITE);
-		this.propertiesForeColor = getColor("properties.forecolor", Color.MAGENTA);
+		this.propertiesBackColor = getColor("properties.backcolor", defaultPropertyBackColor);
+		this.propertiesForeColor = getColor("properties.forecolor", defaultPropertyForeColor);
 		this.propertiesImageFile = getImageFile("properties.image");
 
-		this.propertyBackColor = getColor("property.backcolor", Color.WHITE);
-		this.propertyForeColor = getColor("property.forecolor", Color.MAGENTA);
-		this.propertyEdgeColor = getColor("property.edge.color", Color.MAGENTA);
+		this.propertyBackColor = getColor("property.backcolor", defaultPropertyBackColor);
+		this.propertyForeColor = getColor("property.forecolor", defaultPropertyForeColor);
+		this.propertyEdgeColor = getColor("property.edge.color", defaultPropertyForeColor);
 		this.propertyImageFile = getImageFile("property.image");
 		this.propertyEdgeImageFile = getImageFile("property.edge.image");
 
-		OwlModelFactory.images = new Image[]{ //
-				Image.make(Provider.class.getResource("images/root.png")), // ROOT
-				Image.make(Provider.class.getResource("images/class.png")), // CLASS
-				Image.make(Provider.class.getResource("images/classwithinstances.png")), // CLASSWITHINSTANCES
-				Image.make(Provider.class.getResource("images/instances.png")), // INSTANCES
-				Image.make(Provider.class.getResource("images/instance.png")), // INSTANCE
-				Image.make(Provider.class.getResource("images/classwithproperties.png")), // CLASSWITHPROPERTIES
-				Image.make(Provider.class.getResource("images/properties.png")), // PROPERTIES
-				Image.make(Provider.class.getResource("images/property.png")), // PROPERTY
-				Image.make(Provider.class.getResource("images/branch.png")), // BRANCH
-				Image.make(Provider.class.getResource("images/branch2.png")), // BRANCH2
-		};
+		OwlModelFactory.images = new Image[ImageIndices.COUNT.ordinal()];
+		images[ImageIndices.ROOT.ordinal()] = Image.make(Provider.class.getResource("images/root.png"));
+		images[ImageIndices.CLASS.ordinal()] = Image.make(Provider.class.getResource("images/class.png"));
+		images[ImageIndices.CLASSWITHINSTANCES.ordinal()] = Image.make(Provider.class.getResource("images/classwithinstances.png"));
+		images[ImageIndices.INSTANCES.ordinal()] = Image.make(Provider.class.getResource("images/instances.png"));
+		images[ImageIndices.INSTANCE.ordinal()] = Image.make(Provider.class.getResource("images/instance.png"));
+		images[ImageIndices.CLASSWITHPROPERTIES.ordinal()] = Image.make(Provider.class.getResource("images/classwithproperties.png"));
+		images[ImageIndices.PROPERTIES.ordinal()] = Image.make(Provider.class.getResource("images/properties.png"));
+		images[ImageIndices.PROPERTY.ordinal()] = Image.make(Provider.class.getResource("images/property.png"));
+		images[ImageIndices.CLASSWITHRELATION.ordinal()] = Image.make(Provider.class.getResource("images/classwithrelation.png"));
+		images[ImageIndices.RELATION.ordinal()] = Image.make(Provider.class.getResource("images/relation.png"));
+		images[ImageIndices.BRANCH.ordinal()] = Image.make(Provider.class.getResource("images/branch.png"));
+		images[ImageIndices.BRANCH_INSTANCES.ordinal()] = Image.make(Provider.class.getResource("images/branch_instances.png"));
+		images[ImageIndices.BRANCH_PROPERTIES.ordinal()] = Image.make(Provider.class.getResource("images/branch_properties.png"));
 	}
 
 	/**
@@ -536,13 +685,17 @@ public class OwlModelFactory
 		}
 
 		// cache property features from settings
+		/*
 		this.instanceEdgeStyle = settings.edgeStyle;
 		this.instanceEdgeColor = settings.edgeColor;
 		this.instanceEdgeImageFile = settings.defaultEdgeImage;
 		this.propertyEdgeStyle = settings.edgeStyle;
 		this.propertyEdgeColor = settings.edgeColor;
 		this.propertyEdgeImageFile = settings.defaultEdgeImage;
-
+		this.relationEdgeStyle = settings.edgeStyle;
+		this.relationEdgeColor = settings.edgeColor;
+		this.relationEdgeImageFile = settings.defaultEdgeImage;
+		*/
 		return new Model(tree, settings, OwlModelFactory.images);
 	}
 
@@ -604,11 +757,6 @@ public class OwlModelFactory
 			{
 				if (target != null)
 				{
-					if ("AsymmetricRelation".equals(owlClass.getIRI().getShortForm()))
-					{
-						System.out.println();
-					}
-
 					boolean hasInstances = target.contains("instances");
 					boolean hasProperties = target.contains("properties");
 					boolean isRelation = target.contains("relation");
@@ -617,6 +765,7 @@ public class OwlModelFactory
 					final MutableNode owlClassNode = new MutableNode(null, "root");
 					owlClassNode.setLabel(owlClass.getIRI().getShortForm());
 					decorateClassWith(owlClassNode, hasInstances, hasProperties, isRelation);
+					owlClassNode.setEdgeColor(defaultClassForeColor);
 
 					// instances
 					if (hasInstances)
@@ -624,6 +773,7 @@ public class OwlModelFactory
 						// instances root
 						final TreeMutableNode instancesNode = new TreeMutableNode(owlClassNode, classIri + "-instances");
 						decorateInstances(instancesNode);
+						instancesNode.setEdgeColor(defaultInstanceForeColor);
 
 						// instances
 						final Stream<OWLNamedIndividual> instances = this.engine.getInstances(owlClass);
@@ -642,6 +792,7 @@ public class OwlModelFactory
 						// properties root
 						final TreeMutableNode propertiesNode = new TreeMutableNode(owlClassNode, classIri + "-properties");
 						decorateProperties(propertiesNode);
+						propertiesNode.setEdgeColor(defaultPropertyForeColor);
 
 						// properties
 						final Stream<OWLObjectProperty> properties = this.engine.getProperties(owlClass);
@@ -746,7 +897,7 @@ public class OwlModelFactory
 	public TreeMutableNode visitClass(final INode parentOwlClassNode, final OWLClass owlClass, final String ontologyUrlString)
 	{
 		final String ownClassShortForm = owlClass.getIRI().getShortForm();
-		final String owlClassId = getName(ownClassShortForm);
+		final String owlClassId = owlClass.getIRI().getShortForm();
 		final Stream<OWLAnnotation> annotations = this.engine.getAnnotations(owlClass);
 
 		// comment
@@ -754,19 +905,10 @@ public class OwlModelFactory
 
 		// node
 		final TreeMutableNode owlClassNode = new TreeMutableNode(parentOwlClassNode, owlClassId);
-		owlClassNode.setLabel(owlClassId);
+		owlClassNode.setLabel(ownClassShortForm);
 		owlClassNode.setTarget(owlClassId);
 		owlClassNode.setContent(comment);
-		owlClassNode.setBackColor(this.classBackColor);
-		owlClassNode.setForeColor(this.classForeColor);
-		if (this.classImageFile != null)
-		{
-			owlClassNode.setImageFile(this.classImageFile);
-		}
-		else
-		{
-			owlClassNode.setImageIndex(ImageIndices.CLASS.ordinal());
-		}
+		decorateClass(owlClassNode);
 
 		// mounts
 		if (!owlClass.isOWLThing())
@@ -780,10 +922,6 @@ public class OwlModelFactory
 
 			// mountpoint
 			final String owlClassShortForm = owlClass.getIRI().getShortForm();
-			if ("AsymmetricRelation".equals(owlClassShortForm))
-			{
-				System.out.println();
-			}
 			if (hasInstances || hasProperties || isRelation)
 			{
 				List<String> targets = new ArrayList<>();
@@ -805,8 +943,6 @@ public class OwlModelFactory
 				owlClassNode.setMountPoint(mountingPoint);
 			}
 		}
-
-		// if (owlClass.listDeclaredProperties(true).hasNext())
 		return owlClassNode;
 	}
 
@@ -840,13 +976,13 @@ public class OwlModelFactory
 		final List<INode> childNodes = owlIndividuals //
 				.map(owlNamedIndividual -> {
 
-					final String owlIndividualPropertyShortForm = owlNamedIndividual.getIRI().getShortForm();
-					final String owlIndividualId = getName(owlIndividualPropertyShortForm);
+					final String owlIndividualShortForm = owlNamedIndividual.getIRI().getShortForm();
+					final String owlIndividualId = owlNamedIndividual.getIRI().getShortForm();
 					final Stream<OWLClassExpression> types = this.engine.getTypes(owlNamedIndividual);
 					final Stream<OWLAnnotation> annotations = this.engine.getAnnotations(owlNamedIndividual);
 
 					final MutableNode instanceNode = new MutableNode(null, owlIndividualId);
-					instanceNode.setLabel(owlIndividualId);
+					instanceNode.setLabel(owlIndividualShortForm);
 					instanceNode.setTarget(owlIndividualId);
 					instanceNode.setContent(typesToString(types) + "<br>" + annotationsToString(annotations) + "<br>");
 					decorateInstance(instanceNode);
@@ -855,7 +991,7 @@ public class OwlModelFactory
 				.collect(toList());
 
 		// balance load
-		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
+		final List<INode> balancedNodes = this.propertiesLoadBalancer.buildHierarchy(childNodes, 0);
 		parentNode.addChildren(balancedNodes);
 	}
 
@@ -870,21 +1006,21 @@ public class OwlModelFactory
 		final String owlPropertyShortForm = owlProperty.getIRI().getShortForm();
 		final MutableNode relationNode = new MutableNode(parentNode, owlPropertyShortForm);
 		relationNode.setLabel(owlPropertyShortForm);
-		decorateProperty(relationNode);
+		decorateRelation(relationNode);
 
 		final List<OWLClass> domains = this.engine.getDomains(owlProperty).collect(toList());
 		if (!domains.isEmpty())
 		{
 			final MutableNode domainsNode = new MutableNode(relationNode, owlPropertyShortForm + "-domains");
 			domainsNode.setLabel("domains");
-			decorateProperty(domainsNode);
+			decorateRelation(domainsNode);
 			domains.forEach(owlDomainClass -> {
 
 				String owlClassId = owlDomainClass.asOWLClass().getIRI().getShortForm();
 				final MutableNode domainNode = new MutableNode(domainsNode, owlClassId);
 				domainNode.setLabel(owlClassId);
 				domainNode.setTarget(owlClassId);
-				decorateProperty(domainNode);
+				decorateRelation(domainNode);
 			});
 		}
 
@@ -893,14 +1029,14 @@ public class OwlModelFactory
 		{
 			final MutableNode rangesNode = new MutableNode(relationNode, owlPropertyShortForm + "-ranges");
 			rangesNode.setLabel("ranges");
-			decorateProperty(rangesNode);
+			decorateRelation(rangesNode);
 			ranges.forEach(owlRangeClass -> {
 
 				String owlClassId = owlRangeClass.asOWLClass().getIRI().getShortForm();
 				final MutableNode rangeNode = new MutableNode(rangesNode, owlClassId);
 				rangeNode.setLabel(owlClassId);
 				rangeNode.setTarget(owlClassId);
-				decorateProperty(rangeNode);
+				decorateRelation(rangeNode);
 			});
 		}
 
@@ -909,14 +1045,14 @@ public class OwlModelFactory
 		{
 			final MutableNode subPropertiesNode = new MutableNode(relationNode, owlPropertyShortForm + "-subproperties");
 			subPropertiesNode.setLabel("subproperties");
-			decorateProperty(subPropertiesNode);
+			decorateRelation(subPropertiesNode);
 			subproperties.forEach(owlSubProperty -> {
 
 				String owlSubpropertyId = owlSubProperty.getIRI().getShortForm();
 				final MutableNode subPropertyNode = new MutableNode(subPropertiesNode, owlSubpropertyId);
 				subPropertyNode.setLabel(owlSubpropertyId);
 				subPropertyNode.setTarget(owlSubpropertyId);
-				decorateProperty(subPropertyNode);
+				decorateRelation(subPropertyNode);
 			});
 		}
 
@@ -925,14 +1061,14 @@ public class OwlModelFactory
 		{
 			final MutableNode inversesNode = new MutableNode(relationNode, owlPropertyShortForm + "-inverses");
 			inversesNode.setLabel("inverses");
-			decorateProperty(inversesNode);
+			decorateRelation(inversesNode);
 			inverses.forEach(owlInverseProperty -> {
 
 				String owlInverseId = owlInverseProperty.getIRI().getShortForm();
 				final MutableNode inverseNode = new MutableNode(inversesNode, owlInverseId);
 				inverseNode.setLabel(owlInverseId);
 				inverseNode.setTarget(owlInverseId);
-				decorateProperty(inverseNode);
+				decorateRelation(inverseNode);
 			});
 		}
 
@@ -943,14 +1079,14 @@ public class OwlModelFactory
 			{
 				final MutableNode subclassesNode = new MutableNode(relationNode, owlPropertyShortForm + "-subclasses");
 				subclassesNode.setLabel("subclasses");
-				decorateProperty(subclassesNode);
+				decorateRelation(subclassesNode);
 				subclasses.forEach(owlSubclass -> {
 
 					String owlSubclassId = owlSubclass.getIRI().getShortForm();
 					final MutableNode subclassNode = new MutableNode(subclassesNode, owlSubclassId);
 					subclassNode.setLabel(owlSubclassId);
 					subclassNode.setTarget(owlSubclassId);
-					decorateProperty(subclassNode);
+					decorateRelation(subclassNode);
 				});
 			}
 
@@ -959,14 +1095,14 @@ public class OwlModelFactory
 			{
 				final MutableNode superclassesNode = new MutableNode(relationNode, owlPropertyShortForm + "-superclasses");
 				superclassesNode.setLabel("superclasses");
-				decorateProperty(superclassesNode);
+				decorateRelation(superclassesNode);
 				superclasses.forEach(owlSuperclass -> {
 
 					String owlSuperclassId = owlSuperclass.getIRI().getShortForm();
 					final MutableNode superclassNode = new MutableNode(superclassesNode, owlSuperclassId);
 					superclassNode.setLabel(owlSuperclassId);
 					superclassNode.setTarget(owlSuperclassId);
-					decorateProperty(superclassNode);
+					decorateRelation(superclassNode);
 				});
 			}
 		}
@@ -984,34 +1120,18 @@ public class OwlModelFactory
 
 				.map(owlProperty -> {
 					final String owlPropertyShortForm = owlProperty.getIRI().getShortForm();
-					final String owlPropertyId = getName(owlPropertyShortForm);
+					final String owlPropertyId = owlProperty.getIRI().getShortForm();
 
 					final MutableNode propertyNode = new MutableNode(null, owlPropertyId);
-					propertyNode.setLabel(owlPropertyId);
+					propertyNode.setLabel(owlPropertyShortForm);
 					propertyNode.setTarget(owlPropertyId);
-					propertyNode.setBackColor(this.propertyBackColor);
-					propertyNode.setForeColor(this.propertyForeColor);
-					propertyNode.setEdgeStyle(this.propertyEdgeStyle);
-					propertyNode.setEdgeColor(this.propertyEdgeColor);
-					if (this.propertyImageFile != null)
-					{
-						propertyNode.setImageFile(this.propertyImageFile);
-					}
-					else
-					{
-						propertyNode.setImageIndex(ImageIndices.PROPERTY.ordinal());
-					}
-					if (this.propertyEdgeImageFile != null)
-					{
-						propertyNode.setEdgeImageFile(this.propertyEdgeImageFile);
-					}
-
+					decorateProperty(propertyNode);
 					return propertyNode;
 				}) //
 				.collect(toList());
 
 		// balance load
-		final List<INode> balancedNodes = this.subLoadBalancer.buildHierarchy(childNodes, 0);
+		final List<INode> balancedNodes = this.propertiesLoadBalancer.buildHierarchy(childNodes, 0);
 		parentNode.addChildren(balancedNodes);
 	}
 
@@ -1036,9 +1156,28 @@ public class OwlModelFactory
 		return node;
 	}
 
+	private MutableNode decorateClass(final MutableNode node)
+	{
+		node.setBackColor(this.classBackColor);
+		node.setForeColor(this.classForeColor);
+		if (this.classImageFile != null)
+		{
+			node.setImageFile(this.classImageFile);
+		}
+		else
+		{
+			node.setImageIndex(ImageIndices.CLASS.ordinal());
+		}
+		return node;
+	}
+
 	private MutableNode decorateClassWith(final MutableNode node, boolean hasInstances, boolean hasProperties, boolean isRelation)
 	{
-		if (hasInstances)
+		if (isRelation)
+		{
+			return decorateClassWithRelation(node);
+		}
+		else if (hasInstances)
 		{
 			return decorateClassWithInstances(node);
 		}
@@ -1046,9 +1185,38 @@ public class OwlModelFactory
 		{
 			return decorateClassWithProperties(node);
 		}
-		else if (isRelation)
+		return decorateClass(node);
+	}
+
+	@SuppressWarnings("UnusedReturnValue")
+	private MutableNode decorateClassWithRelation(final MutableNode node)
+	{
+		node.setBackColor(this.classWithRelationBackColor);
+		node.setForeColor(this.classWithRelationForeColor);
+		if (this.classWithRelationImageFile != null)
 		{
-			return node;
+			node.setImageFile(this.classWithRelationImageFile);
+		}
+		else
+		{
+			node.setImageIndex(ImageIndices.CLASSWITHRELATION.ordinal());
+		}
+		return node;
+	}
+
+
+	@SuppressWarnings("UnusedReturnValue")
+	private MutableNode decorateClassWithInstances(final MutableNode node)
+	{
+		node.setBackColor(this.classWithInstancesBackColor);
+		node.setForeColor(this.classWithInstancesForeColor);
+		if (this.classWithInstancesImageFile != null)
+		{
+			node.setImageFile(this.classWithInstancesImageFile);
+		}
+		else
+		{
+			node.setImageIndex(ImageIndices.CLASSWITHINSTANCES.ordinal());
 		}
 		return node;
 	}
@@ -1070,27 +1238,12 @@ public class OwlModelFactory
 	}
 
 	@SuppressWarnings("UnusedReturnValue")
-	private MutableNode decorateClassWithInstances(final MutableNode node)
-	{
-		node.setBackColor(this.classWithInstancesBackColor);
-		node.setForeColor(this.classWithInstancesForeColor);
-		if (this.classWithInstancesImageFile != null)
-		{
-			node.setImageFile(this.classWithInstancesImageFile);
-		}
-		else
-		{
-			node.setImageIndex(ImageIndices.CLASSWITHINSTANCES.ordinal());
-		}
-		return node;
-	}
-
-	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateProperties(final MutableNode node)
 	{
 		node.setLabel(this.propertiesLabel);
 		node.setBackColor(this.propertiesBackColor);
 		node.setForeColor(this.propertiesForeColor);
+		node.setEdgeColor(this.propertyEdgeColor);
 		if (this.propertiesImageFile != null)
 		{
 			node.setImageFile(this.propertiesImageFile);
@@ -1108,6 +1261,7 @@ public class OwlModelFactory
 		node.setLabel(this.instancesLabel);
 		node.setBackColor(this.instancesBackColor);
 		node.setForeColor(this.instancesForeColor);
+		node.setEdgeColor(this.instanceEdgeColor);
 		if (this.instancesImageFile != null)
 		{
 			node.setImageFile(this.instancesImageFile);
@@ -1137,6 +1291,28 @@ public class OwlModelFactory
 		if (this.instanceEdgeImageFile != null)
 		{
 			node.setEdgeImageFile(this.instanceEdgeImageFile);
+		}
+		return node;
+	}
+
+	@SuppressWarnings("UnusedReturnValue")
+	private MutableNode decorateRelation(final MutableNode node)
+	{
+		node.setBackColor(this.relationBackColor);
+		node.setForeColor(this.relationForeColor);
+		node.setEdgeStyle(this.relationEdgeStyle);
+		node.setEdgeColor(this.relationEdgeColor);
+		if (this.relationImageFile != null)
+		{
+			node.setImageFile(this.relationImageFile);
+		}
+		else
+		{
+			node.setImageIndex(ImageIndices.RELATION.ordinal());
+		}
+		if (this.relationEdgeImageFile != null)
+		{
+			node.setEdgeImageFile(this.relationEdgeImageFile);
 		}
 		return node;
 	}
@@ -1198,25 +1374,6 @@ public class OwlModelFactory
 	private String getImageFile(final String imageKey)
 	{
 		return this.properties == null ? null : this.properties.getProperty(imageKey);
-	}
-
-	/**
-	 * Get name
-	 *
-	 * @param uriString uri string
-	 * @return name
-	 */
-	static String getName(final String uriString)
-	{
-		if (uriString != null)
-		{
-			final int index = uriString.lastIndexOf('#');
-			if (index != -1)
-			{
-				return uriString.substring(index + 1);
-			}
-		}
-		return uriString;
 	}
 
 	/**
