@@ -12,12 +12,14 @@
         <module name="treebolic-mutable" />
         <module name="provider-xml" />
         <module name="treebolic-model" />
+        <module name="browser2" />
         <module name="commons" />
         <module name="treebolic-glue-swing" />
         <module name="treebolic-iface" />
         <module name="application" />
         <module name="treebolic-graph" />
         <module name="treebolic-view" />
+        <module name="browser" />
         <module name="transformer-xml" />
         <module name="treebolic-annotations" />
         <module name="provider-owl" />

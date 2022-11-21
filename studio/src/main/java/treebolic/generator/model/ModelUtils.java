@@ -53,7 +53,7 @@ public class ModelUtils
 	 */
 	static public String makeNodeId()
 	{
-		return "X" + Long.toHexString(ModelUtils.RANDOMIZER.nextLong()); 
+		return "X" + Long.toHexString(ModelUtils.RANDOMIZER.nextLong());
 	}
 
 	// M A K E . D E F A U L T
@@ -66,13 +66,10 @@ public class ModelUtils
 	public static INode makeDefaultTree()
 	{
 		final String[][] data = { //
-				{ "id1", "one\n1", "id11", "eleven\n11", "id12", "twelve\n12", "id13", "thirteen\n13", "id14", "fourteen\n14" },          //$NON-NLS-10$
-				{ "id2", "two\n2", "id21", "twenty-one\n21", "id22", "twenty-two\n22", "id23", "twenty-three\n23" },        
-				{ "id3", "three\n3", "id31", "thirty-one\n31", "id32", "thirty-two\n32" },      
-				{ "id4", "four\n4", "id41", "forty-one\n41" },    
-				{ "id5", "five\n5" } };  
-		final TreeMutableNode root = new TreeMutableNode(null, "root"); 
-		root.setLabel("root"); 
+				{"id1", "one\n1", "id11", "eleven\n11", "id12", "twelve\n12", "id13", "thirteen\n13", "id14", "fourteen\n14"},          //$NON-NLS-10$
+				{"id2", "two\n2", "id21", "twenty-one\n21", "id22", "twenty-two\n22", "id23", "twenty-three\n23"}, {"id3", "three\n3", "id31", "thirty-one\n31", "id32", "thirty-two\n32"}, {"id4", "four\n4", "id41", "forty-one\n41"}, {"id5", "five\n5"}};
+		final TreeMutableNode root = new TreeMutableNode(null, "root");
+		root.setLabel("root");
 		root.setBackColor(Color.ORANGE);
 		root.setForeColor(Color.BLACK);
 		for (final String[] nodeData : data)
@@ -124,8 +121,8 @@ public class ModelUtils
 	/**
 	 * Make of copy of this model with mutable nodes
 	 *
-	 * @param node0 start node
-	 * @param idToNodeMap id to node map
+	 * @param node0           start node
+	 * @param idToNodeMap     id to node map
 	 * @param oldToNewNodeMap old node to new node map
 	 * @return equivalent model with mutable nodes
 	 */
@@ -173,7 +170,7 @@ public class ModelUtils
 	/**
 	 * Make id to node map for this model
 	 *
-	 * @param node start node
+	 * @param node        start node
 	 * @param idToNodeMap id to node result map
 	 */
 	static private void makeIdToNodeMap(final MutableNode node, final Map<String, MutableNode> idToNodeMap)
@@ -197,7 +194,7 @@ public class ModelUtils
 	/**
 	 * Normalize ids in this model
 	 *
-	 * @param model model
+	 * @param model  model
 	 * @param prefix id prefix
 	 * @return new id to node map
 	 */
@@ -214,16 +211,16 @@ public class ModelUtils
 	/**
 	 * Normalize ids in model
 	 *
-	 * @param node node
-	 * @param prefix id prefix
-	 * @param idToNodeMap id to node result map
+	 * @param node            node
+	 * @param prefix          id prefix
+	 * @param idToNodeMap     id to node result map
 	 * @param oldIdToNewIdMap old id to new id result map
 	 */
 	static private void normalizeId(final TreeMutableNode node, final String prefix, final Map<String, MutableNode> idToNodeMap, final Map<String, String> oldIdToNewIdMap)
 	{
 		// this node
 		final String oldId = node.getId();
-		final String id = node.getParent() == null ? "root" : prefix; 
+		final String id = node.getParent() == null ? "root" : prefix;
 		node.setId(id);
 
 		// record in maps
@@ -237,7 +234,7 @@ public class ModelUtils
 			int i = 0;
 			for (final INode childNode : children)
 			{
-				ModelUtils.normalizeId((TreeMutableNode) childNode, prefix + "-" + i++, idToNodeMap, oldIdToNewIdMap); 
+				ModelUtils.normalizeId((TreeMutableNode) childNode, prefix + "-" + i++, idToNodeMap, oldIdToNewIdMap);
 			}
 		}
 	}
@@ -245,7 +242,7 @@ public class ModelUtils
 	/**
 	 * Normalize node links
 	 *
-	 * @param node start node
+	 * @param node            start node
 	 * @param oldIdToNewIdMap old id to new id map
 	 */
 	static private void normalizeLinks(final TreeMutableNode node, final Map<String, String> oldIdToNewIdMap)
@@ -299,25 +296,25 @@ public class ModelUtils
 			imageFile = model.settings.backgroundImageFile;
 			if (imageFile != null && !imageFile.isEmpty())
 			{
-				ModelUtils.putReferenceMapKeyValue(map, imageFile, "background"); 
+				ModelUtils.putReferenceMapKeyValue(map, imageFile, "background");
 			}
 
 			imageFile = model.settings.defaultNodeImage;
 			if (imageFile != null && !imageFile.isEmpty())
 			{
-				ModelUtils.putReferenceMapKeyValue(map, imageFile, "default node"); 
+				ModelUtils.putReferenceMapKeyValue(map, imageFile, "default node");
 			}
 
 			imageFile = model.settings.defaultTreeEdgeImage;
 			if (imageFile != null && !imageFile.isEmpty())
 			{
-				ModelUtils.putReferenceMapKeyValue(map, imageFile, "default tree-edge"); 
+				ModelUtils.putReferenceMapKeyValue(map, imageFile, "default tree-edge");
 			}
 
 			imageFile = model.settings.defaultEdgeImage;
 			if (imageFile != null && !imageFile.isEmpty())
 			{
-				ModelUtils.putReferenceMapKeyValue(map, imageFile, "default edge"); 
+				ModelUtils.putReferenceMapKeyValue(map, imageFile, "default edge");
 			}
 		}
 
@@ -333,7 +330,7 @@ public class ModelUtils
 				imageFile = edge.getImageFile();
 				if (imageFile != null && !imageFile.isEmpty())
 				{
-					ModelUtils.putReferenceMapKeyValue(map, imageFile, "edge:" + edge.getFrom().getId() + "->" + edge.getTo().getId());  
+					ModelUtils.putReferenceMapKeyValue(map, imageFile, "edge:" + edge.getFrom().getId() + "->" + edge.getTo().getId());
 				}
 			}
 		}
@@ -344,7 +341,7 @@ public class ModelUtils
 	 * Recursive traversal of nodes for images
 	 *
 	 * @param node start node
-	 * @param map map to collect results
+	 * @param map  map to collect results
 	 */
 	static private void getImageMap(final INode node, final Map<String, SortedSet<String>> map)
 	{
@@ -352,12 +349,12 @@ public class ModelUtils
 		String imageFile = node.getImageFile();
 		if (imageFile != null && !imageFile.isEmpty())
 		{
-			ModelUtils.putReferenceMapKeyValue(map, imageFile, "node:" + node.getId()); 
+			ModelUtils.putReferenceMapKeyValue(map, imageFile, "node:" + node.getId());
 		}
 		imageFile = node.getEdgeImageFile();
 		if (imageFile != null && !imageFile.isEmpty())
 		{
-			ModelUtils.putReferenceMapKeyValue(map, imageFile, "treeedge:" + node.getId()); 
+			ModelUtils.putReferenceMapKeyValue(map, imageFile, "treeedge:" + node.getId());
 		}
 
 		// recurse
@@ -390,7 +387,7 @@ public class ModelUtils
 	 * Recursive traversal of nodes for mounts
 	 *
 	 * @param node start node
-	 * @param map map to collect results
+	 * @param map  map to collect results
 	 */
 	static private void getMountMap(final INode node, final Map<String, SortedSet<String>> map)
 	{
@@ -399,7 +396,7 @@ public class ModelUtils
 		if (mountPoint instanceof MountPoint.Mounting)
 		{
 			final MountPoint.Mounting mountingPoint = (MountPoint.Mounting) mountPoint;
-			ModelUtils.putReferenceMapKeyValue(map, mountingPoint.url, "node:" + node.getId()); 
+			ModelUtils.putReferenceMapKeyValue(map, mountingPoint.url, "node:" + node.getId());
 		}
 
 		// recurse
@@ -432,7 +429,7 @@ public class ModelUtils
 	 * Recursive traversal of nodes for mounts
 	 *
 	 * @param node start node
-	 * @param map map to collect results
+	 * @param map  map to collect results
 	 */
 	static private void getLinkMap(final INode node, final Map<String, SortedSet<String>> map)
 	{
@@ -440,7 +437,7 @@ public class ModelUtils
 		final String link = node.getLink();
 		if (link != null && !link.isEmpty())
 		{
-			ModelUtils.putReferenceMapKeyValue(map, link, "node:" + node.getId()); 
+			ModelUtils.putReferenceMapKeyValue(map, link, "node:" + node.getId());
 		}
 
 		// recurse
@@ -473,7 +470,7 @@ public class ModelUtils
 	 * Recursive traversal of nodes for ids
 	 *
 	 * @param node start node
-	 * @param map map to collect results
+	 * @param map  map to collect results
 	 */
 	static private void getIdMap(final INode node, final Map<String, SortedSet<String>> map)
 	{
@@ -481,10 +478,10 @@ public class ModelUtils
 		String id = node.getId();
 		if (id == null || id.isEmpty())
 		{
-			id = "null"; 
+			id = "null";
 		}
 		final INode parent = node.getParent();
-		ModelUtils.putReferenceMapKeyValue(map, id, "label:" + node.getLabel() + " parent:" + (parent == null ? "null" : parent.getId()));   
+		ModelUtils.putReferenceMapKeyValue(map, id, "label:" + node.getLabel() + " parent:" + (parent == null ? "null" : parent.getId()));
 
 		// recurse
 		final List<INode> children = node.getChildren();
@@ -502,8 +499,8 @@ public class ModelUtils
 	/**
 	 * Put value in multi-valued map
 	 *
-	 * @param map map
-	 * @param key key
+	 * @param map   map
+	 * @param key   key
 	 * @param value value
 	 */
 	static private void putReferenceMapKeyValue(final Map<String, SortedSet<String>> map, final String key, final String value)
@@ -524,11 +521,11 @@ public class ModelUtils
 	{
 		try
 		{
-			return URLDecoder.decode(string, "UTF8"); 
+			return URLDecoder.decode(string, "UTF8");
 		}
 		catch (final UnsupportedEncodingException e)
 		{
-			System.err.println("Can't decode " + string + " - " + e);  
+			System.err.println("Can't decode " + string + " - " + e);
 		}
 		return string;
 	}
@@ -543,11 +540,11 @@ public class ModelUtils
 	{
 		try
 		{
-			return URLEncoder.encode(string, "UTF8"); 
+			return URLEncoder.encode(string, "UTF8");
 		}
 		catch (final UnsupportedEncodingException e)
 		{
-			System.err.println("Can't decode " + string + " - " + e);  
+			System.err.println("Can't decode " + string + " - " + e);
 		}
 		return string;
 	}
@@ -555,6 +552,7 @@ public class ModelUtils
 	/**
 	 * Save settings to file
 	 *
+	 * @param settings     settings to save
 	 * @param propertyFile property file to save to
 	 */
 	static public void saveSettings(final Settings settings, final String propertyFile)
@@ -562,7 +560,7 @@ public class ModelUtils
 		final Properties properties = ModelUtils.settingsToProperty(settings);
 		try
 		{
-			properties.store(new FileOutputStream(propertyFile), "TREEBOLIC-SETTINGS"); 
+			properties.store(new FileOutputStream(propertyFile), "TREEBOLIC-SETTINGS");
 		}
 		catch (final IOException e)
 		{
@@ -571,9 +569,10 @@ public class ModelUtils
 	}
 
 	/**
-	 * Save settings
+	 * Convert settings to properties
 	 *
 	 * @param settings settings to convert to properties
+	 * @return properties
 	 */
 	static public Properties settingsToProperty(final Settings settings)
 	{

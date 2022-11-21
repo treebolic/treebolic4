@@ -19,6 +19,9 @@ public class SqlProperties
 {
 	/**
 	 * Load properties
+	 *
+	 * @param url properties url
+	 * @return properties
 	 */
 	static public Properties load(final URL url)
 	{
@@ -31,7 +34,7 @@ public class SqlProperties
 		}
 		catch (final IOException e)
 		{
-			System.err.println("Sql: Cannot load <" + url + ">");  
+			System.err.println("Sql: Cannot load <" + url + ">");
 			return null;
 		}
 	}
@@ -43,7 +46,7 @@ public class SqlProperties
 	{
 		try
 		{
-			properties.store(new FileOutputStream(propertyFile), "TREEBOLIC-SQL"); 
+			properties.store(new FileOutputStream(propertyFile), "TREEBOLIC-SQL");
 		}
 		catch (final IOException e)
 		{
@@ -53,18 +56,21 @@ public class SqlProperties
 
 	/**
 	 * Make default property
+	 *
+	 * @param properties properties
+	 * @return string for properties
 	 */
 	static public String toString(final Properties properties)
 	{
 		final StringBuilder buffer = new StringBuilder();
-		for (final Enumeration<?> it = properties.propertyNames(); it.hasMoreElements();)
+		for (final Enumeration<?> it = properties.propertyNames(); it.hasMoreElements(); )
 		{
 			final String name = (String) it.nextElement();
 			final String value = properties.getProperty(name);
 			buffer.append(name);
-			buffer.append("="); 
+			buffer.append("=");
 			buffer.append(value);
-			buffer.append("\n"); 
+			buffer.append("\n");
 		}
 		return buffer.toString();
 	}

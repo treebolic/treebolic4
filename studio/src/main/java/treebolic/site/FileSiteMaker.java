@@ -14,6 +14,9 @@ import java.net.URL;
 
 import org.w3c.dom.Document;
 
+/**
+ * File (local) site maker
+ */
 public class FileSiteMaker extends SiteMaker
 {
 	/**
@@ -24,7 +27,7 @@ public class FileSiteMaker extends SiteMaker
 	/**
 	 * Extra path
 	 */
-	private String xtraPath = ""; 
+	private String xtraPath = "";
 
 	/**
 	 * Constructor
@@ -36,7 +39,7 @@ public class FileSiteMaker extends SiteMaker
 	 * @param htmlFile         HTML file (target)
 	 * @param xmlFile          XML file (target)
 	 * @param title            HTML file title (target)
-	 * @throws IOException        io exception
+	 * @throws IOException io exception
 	 */
 	public FileSiteMaker(final Document document, final String repositoryFolder, final String imageFolder, final String path, final String htmlFile, final String xmlFile, final String title) throws IOException
 	{
@@ -45,7 +48,7 @@ public class FileSiteMaker extends SiteMaker
 		final File folder = new File(path);
 		if (!folder.exists() || !folder.isDirectory())
 		{
-			throw new FileNotFoundException(path + " not found"); 
+			throw new FileNotFoundException(path + " not found");
 		}
 
 		this.pathUrl = folder.toURI().toURL().toString();
@@ -107,9 +110,9 @@ public class FileSiteMaker extends SiteMaker
 		}
 		// update extra path
 		this.xtraPath = relativeFolder;
-		if (!"".equals(this.xtraPath) && !this.xtraPath.endsWith("/"))  
+		if (!"".equals(this.xtraPath) && !this.xtraPath.endsWith("/"))
 		{
-			this.xtraPath += "/"; 
+			this.xtraPath += "/";
 		}
 		return true;
 	}

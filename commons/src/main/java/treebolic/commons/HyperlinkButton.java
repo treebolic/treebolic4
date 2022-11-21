@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 /**
- * @author bbou
+ * Hyperlink button
  */
 public class HyperlinkButton extends JButton
 {
@@ -23,12 +23,24 @@ public class HyperlinkButton extends JButton
 
 	private URI uri;
 
+	/**
+	 * Constructor
+	 *
+	 * @param image image
+	 * @param uri   url
+	 */
 	public HyperlinkButton(final Icon image, final String uri)
 	{
 		super(image);
 		init(uri);
 	}
 
+	/**
+	 * Constructor
+	 *
+	 * @param label label
+	 * @param uri   url
+	 */
 	public HyperlinkButton(final String label, final String uri)
 	{
 		super(label);
@@ -77,10 +89,16 @@ public class HyperlinkButton extends JButton
 		});
 	}
 
+	/**
+	 * Make URI label
+	 *
+	 * @param text text
+	 * @return label
+	 */
 	static public String makeURILabel(final String text)
 	{
 		// final String format = "<HTML><FONT color=\"#000099\"><U>%s</U></FONT></HTML>";
-		final String format = "<HTML><U>%s</U></HTML>"; 
+		final String format = "<HTML><U>%s</U></HTML>";
 		return String.format(format, text);
 	}
 

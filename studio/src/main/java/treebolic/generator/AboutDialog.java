@@ -5,7 +5,7 @@ package treebolic.generator;
 
 import javax.swing.WindowConstants;
 
-import treebolic.Generator;
+import treebolic.Studio;
 
 /**
  * About dialog
@@ -21,7 +21,7 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 	 */
 	public AboutDialog()
 	{
-		super(Messages.getString("AboutDialog.title"), Generator.getVersion()); 
+		super(Messages.getString("AboutDialog.title"), Studio.getVersion());
 	}
 
 	/**

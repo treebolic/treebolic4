@@ -20,12 +20,14 @@ public class LinkListDialog extends ReferenceListDialog
 
 	/**
 	 * Constructor
+	 *
+	 * @param controller controller
 	 */
 	public LinkListDialog(final Controller controller)
 	{
 		super(controller);
-		setTitle(Messages.getString("LinkListDialog.title")); 
-		this.label.setText(Messages.getString("LinkListDialog.label")); 
+		setTitle(Messages.getString("LinkListDialog.title"));
+		this.label.setText(Messages.getString("LinkListDialog.label"));
 		this.scrollPane.setPreferredSize(new Dimension(300, 120));
 	}
 

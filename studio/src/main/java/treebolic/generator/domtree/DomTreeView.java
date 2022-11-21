@@ -26,6 +26,8 @@ public class DomTreeView extends JTree
 
 	/**
 	 * Constructor
+	 *
+	 * @param renderer renderer
 	 */
 	public DomTreeView(final TreeCellRenderer renderer)
 	{
@@ -35,10 +37,10 @@ public class DomTreeView extends JTree
 		setScrollsOnExpand(true);
 		setDragEnabled(false);
 		setEditable(false);
-		setToolTipText(Messages.getString("DomTreeView.tooltip")); 
+		setToolTipText(Messages.getString("DomTreeView.tooltip"));
 		setRowHeight(17);
 		setShowsRootHandles(true);
-		putClientProperty("JTree.lineStyle", "Horizontal");  
+		putClientProperty("JTree.lineStyle", "Horizontal");
 		getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
 		// renderer
@@ -50,8 +52,7 @@ public class DomTreeView extends JTree
 	/**
 	 * Set model from document
 	 *
-	 * @param document
-	 *        document
+	 * @param document document
 	 */
 	public void setDocument(final Document document)
 	{
@@ -79,7 +80,9 @@ public class DomTreeView extends JTree
 	{
 		final Object root = getModel().getRoot();
 		if (root == null)
+		{
 			return;
+		}
 		final TreePath path = new TreePath(root);
 		expandAll(path);
 	}
@@ -87,8 +90,7 @@ public class DomTreeView extends JTree
 	/**
 	 * Expand all subtree
 	 *
-	 * @param path
-	 *        tree path
+	 * @param path tree path
 	 */
 	public void expandAll(final TreePath path)
 	{

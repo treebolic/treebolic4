@@ -35,6 +35,8 @@ public class ImageListDialog extends ReferenceListDialog
 
 	/**
 	 * Constructor
+	 *
+	 * @param controller controller
 	 */
 	public ImageListDialog(final Controller controller)
 	{

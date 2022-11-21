@@ -151,11 +151,11 @@ public class TreeView extends JScrollPane
 			String label = parentNode.getLabel();
 			if (label == null)
 			{
-				label = ""; 
+				label = "";
 			}
 			else
 			{
-				label += "-"; 
+				label += "-";
 			}
 			label += pos;
 
@@ -319,6 +319,9 @@ public class TreeView extends JScrollPane
 
 	// L I S T E N E R
 
+	/**
+	 * On editing stopped callback
+	 */
 	public void onEditingStopped()
 	{
 		// System.err.println("TREEVIEW: editing stopped");

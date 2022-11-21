@@ -93,6 +93,8 @@ public class SiteDialog extends JDialog
 
 	/**
 	 * Constructor
+	 *
+	 * @param properties properties
 	 */
 	public SiteDialog(final Properties properties)
 	{
@@ -105,7 +107,7 @@ public class SiteDialog extends JDialog
 	 */
 	private void initialize()
 	{
-		setTitle(Messages.getString("SiteDialog.title")); 
+		setTitle(Messages.getString("SiteDialog.title"));
 		setResizable(true);
 
 		// images
@@ -115,13 +117,13 @@ public class SiteDialog extends JDialog
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		headerLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-		headerLabel.setText(Messages.getString("SiteDialog.header")); 
+		headerLabel.setText(Messages.getString("SiteDialog.header"));
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		@SuppressWarnings("ConstantConditions") final Icon fileIcon = new ImageIcon(SiteDialog.class.getResource("images/local.png"));
 		@SuppressWarnings("ConstantConditions") final Icon httpIcon = new ImageIcon(SiteDialog.class.getResource("images/net.png"));
 
 		// mode combo
-		final Object[] options = { Mode.FILE, Mode.NET };
+		final Object[] options = {Mode.FILE, Mode.NET};
 		this.comboBox = new JComboBox<>(options);
 		this.comboBox.setRenderer(new ListCellRenderer<Object>()
 		{
@@ -144,19 +146,19 @@ public class SiteDialog extends JDialog
 		this.pathTextField = new JTextField(16);
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("SiteDialog.ok")); 
-		final JButton cancelButton = new JButton(Messages.getString("SiteDialog.cancel")); 
-		final JButton browsePathButton = new JButton(Messages.getString("SiteDialog.browse")); 
+		final JButton oKButton = new JButton(Messages.getString("SiteDialog.ok"));
+		final JButton cancelButton = new JButton(Messages.getString("SiteDialog.cancel"));
+		final JButton browsePathButton = new JButton(Messages.getString("SiteDialog.browse"));
 
 		// panels
 		final JPanel selectionPanel = new JPanel();
-		selectionPanel.add(new JLabel(Messages.getString("SiteDialog.mode"))); 
+		selectionPanel.add(new JLabel(Messages.getString("SiteDialog.mode")));
 		selectionPanel.setLayout(new FlowLayout());
 		selectionPanel.add(this.comboBox);
 
 		final JPanel pathPanel = new JPanel();
 		pathPanel.setLayout(new FlowLayout());
-		pathPanel.add(new JLabel(Messages.getString("SiteDialog.localdir"))); 
+		pathPanel.add(new JLabel(Messages.getString("SiteDialog.localdir")));
 		pathPanel.add(this.pathTextField);
 
 		final JPanel filePanel = new JPanel();
@@ -166,10 +168,10 @@ public class SiteDialog extends JDialog
 
 		final JPanel fTPPanel = new JPanel();
 		fTPPanel.setLayout(new GridBagLayout());
-		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.server")), new GridBagConstraints(0, 0, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0)); 
-		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.serverdir")), new GridBagConstraints(0, 1, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0)); 
-		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.login")), new GridBagConstraints(0, 2, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0)); 
-		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.password")), new GridBagConstraints(0, 3, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0)); 
+		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.server")), new GridBagConstraints(0, 0, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0));
+		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.serverdir")), new GridBagConstraints(0, 1, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0));
+		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.login")), new GridBagConstraints(0, 2, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0));
+		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.password")), new GridBagConstraints(0, 3, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0));
 		fTPPanel.add(this.serverTextField, new GridBagConstraints(1, 0, 1, 1, 1., 0., GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 20), 0, 0));
 		fTPPanel.add(this.directoryTextField, new GridBagConstraints(1, 1, 1, 1, 1., 01., GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 20), 0, 0));
 		fTPPanel.add(this.loginTextField, new GridBagConstraints(1, 2, 1, 1, 1., 0., GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 20), 0, 0));
@@ -182,8 +184,8 @@ public class SiteDialog extends JDialog
 
 		// tab init
 		final JTabbedPane tabbedPanel = new JTabbedPane();
-		tabbedPanel.addTab(Mode.FILE.toString(), fileIcon, filePanel, Messages.getString("SiteDialog.local")); 
-		tabbedPanel.addTab(Mode.NET.toString(), httpIcon, fTPPanel, Messages.getString("SiteDialog.net")); 
+		tabbedPanel.addTab(Mode.FILE.toString(), fileIcon, filePanel, Messages.getString("SiteDialog.local"));
+		tabbedPanel.addTab(Mode.NET.toString(), httpIcon, fTPPanel, Messages.getString("SiteDialog.net"));
 
 		// connect selections
 		tabbedPanel.addChangeListener(e -> {
@@ -201,7 +203,7 @@ public class SiteDialog extends JDialog
 
 		// events
 		browsePathButton.addActionListener(e -> {
-			final String path = FileDialogs.getFolder(SiteDialog.this.properties.getProperty("base", "."));  
+			final String path = FileDialogs.getFolder(SiteDialog.this.properties.getProperty("base", "."));
 			if (path != null)
 			{
 				SiteDialog.this.pathTextField.setText(path);
@@ -238,13 +240,13 @@ public class SiteDialog extends JDialog
 			this.ok = false;
 
 			// read properties into components
-			this.serverTextField.setText(this.properties.getProperty("server")); 
-			this.directoryTextField.setText(this.properties.getProperty("directory")); 
-			this.loginTextField.setText(this.properties.getProperty("login")); 
-			this.passwordTextField.setText(this.properties.getProperty("password")); 
-			this.pathTextField.setText(this.properties.getProperty("path")); 
+			this.serverTextField.setText(this.properties.getProperty("server"));
+			this.directoryTextField.setText(this.properties.getProperty("directory"));
+			this.loginTextField.setText(this.properties.getProperty("login"));
+			this.passwordTextField.setText(this.properties.getProperty("password"));
+			this.pathTextField.setText(this.properties.getProperty("path"));
 
-			final Mode mode = this.properties.getProperty("mode") != null ? Mode.valueOf(this.properties.getProperty("mode")) : Mode.FILE;  
+			final Mode mode = this.properties.getProperty("mode") != null ? Mode.valueOf(this.properties.getProperty("mode")) : Mode.FILE;
 			this.comboBox.setSelectedItem(mode);
 
 			pack();
@@ -257,19 +259,19 @@ public class SiteDialog extends JDialog
 				// update properties from components
 				final Mode mode = (Mode) this.comboBox.getSelectedItem();
 				assert mode != null;
-				this.properties.setProperty("mode", mode.toString()); 
+				this.properties.setProperty("mode", mode.toString());
 				switch (mode)
 				{
-				case NET:
-					this.properties.setProperty("server", this.serverTextField.getText()); 
-					this.properties.setProperty("directory", this.directoryTextField.getText()); 
-					this.properties.setProperty("login", this.loginTextField.getText()); 
-					this.properties.setProperty("password", new String(this.passwordTextField.getPassword())); 
-					break;
+					case NET:
+						this.properties.setProperty("server", this.serverTextField.getText());
+						this.properties.setProperty("directory", this.directoryTextField.getText());
+						this.properties.setProperty("login", this.loginTextField.getText());
+						this.properties.setProperty("password", new String(this.passwordTextField.getPassword()));
+						break;
 
-				case FILE:
-					this.properties.setProperty("path", this.pathTextField.getText()); 
-					break;
+					case FILE:
+						this.properties.setProperty("path", this.pathTextField.getText());
+						break;
 				}
 			}
 		}

@@ -59,6 +59,8 @@ public class UrlDialog extends JDialog
 
 	/**
 	 * Constructor
+	 *
+	 * @param properties properties
 	 */
 	public UrlDialog(final Properties properties)
 	{
@@ -72,30 +74,30 @@ public class UrlDialog extends JDialog
 	 */
 	private void initialize()
 	{
-		setTitle(Messages.getString("UrlDialog.title")); 
+		setTitle(Messages.getString("UrlDialog.title"));
 		setResizable(true);
 
 		// label
-		final JLabel urlLabel = new JLabel(Messages.getString("UrlDialog.url")); 
-		final JLabel queryLabel = new JLabel(Messages.getString("UrlDialog.query")); 
-		urlLabel.setToolTipText(Messages.getString("UrlDialog.tooltip_url")); 
-		queryLabel.setToolTipText(Messages.getString("UrlDialog.tooltip_query")); 
+		final JLabel urlLabel = new JLabel(Messages.getString("UrlDialog.url"));
+		final JLabel queryLabel = new JLabel(Messages.getString("UrlDialog.query"));
+		urlLabel.setToolTipText(Messages.getString("UrlDialog.tooltip_url"));
+		queryLabel.setToolTipText(Messages.getString("UrlDialog.tooltip_query"));
 
 		// url
 		this.urlTextField = new JTextField();
 		this.urlTextField.setFont(new Font(Font.DIALOG, Font.PLAIN, 12));
-		this.urlTextField.setToolTipText(Messages.getString("UrlDialog.tooltip_result")); 
+		this.urlTextField.setToolTipText(Messages.getString("UrlDialog.tooltip_result"));
 
 		// parameter table
 		this.queryTable = new JTable();
 		this.queryTable.setModel(new ParameterModel(null));
 		this.queryTable.getColumnModel().getColumn(0).setMaxWidth(90);
-		this.queryTable.setToolTipText(Messages.getString("UrlDialog.tooltip_parameters")); 
+		this.queryTable.setToolTipText(Messages.getString("UrlDialog.tooltip_parameters"));
 		final JScrollPane scrollPane = new JScrollPane(this.queryTable);
 		scrollPane.setPreferredSize(new Dimension(0, 60));
 
 		// buttons
-		final JButton okButton = new JButton(Messages.getString("UrlDialog.ok")); 
+		final JButton okButton = new JButton(Messages.getString("UrlDialog.ok"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -104,13 +106,13 @@ public class UrlDialog extends JDialog
 			UrlDialog.this.ok = true;
 			setVisible(false);
 		});
-		final JButton cancelButton = new JButton(Messages.getString("UrlDialog.cancel")); 
+		final JButton cancelButton = new JButton(Messages.getString("UrlDialog.cancel"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
 		cancelButton.addActionListener(e -> setVisible(false));
-		final JButton addParameter = new JButton(Messages.getString("UrlDialog.add")); 
+		final JButton addParameter = new JButton(Messages.getString("UrlDialog.add"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -122,7 +124,7 @@ public class UrlDialog extends JDialog
 				model.newRow(null);
 			}
 		});
-		final JButton removeParameter = new JButton(Messages.getString("UrlDialog.remove")); 
+		final JButton removeParameter = new JButton(Messages.getString("UrlDialog.remove"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -167,7 +169,7 @@ public class UrlDialog extends JDialog
 		String result = url;
 		if (query != null)
 		{
-			result += "?"; 
+			result += "?";
 			result += query;
 		}
 		return result;
@@ -184,7 +186,9 @@ public class UrlDialog extends JDialog
 		{
 			final Properties parameters = model.getProperties();
 			if (parameters != null && parameters.size() != 0)
+			{
 				return UrlDialog.properties2Query(parameters);
+			}
 		}
 		return null;
 	}
@@ -194,17 +198,16 @@ public class UrlDialog extends JDialog
 	/**
 	 * Convert query to properties
 	 *
-	 * @param query
-	 *        queries
+	 * @param query queries
 	 * @return property set
 	 */
 	static private Properties query2Properties(final String query)
 	{
 		final Properties properties = new Properties();
-		final StringTokenizer stringTokenizer = new StringTokenizer(query, "&"); 
+		final StringTokenizer stringTokenizer = new StringTokenizer(query, "&");
 		while (stringTokenizer.hasMoreTokens())
 		{
-			final StringTokenizer stringTokenizer2 = new StringTokenizer(stringTokenizer.nextToken(), "="); 
+			final StringTokenizer stringTokenizer2 = new StringTokenizer(stringTokenizer.nextToken(), "=");
 			if (stringTokenizer2.countTokens() != 2)
 			{
 				continue;
@@ -220,25 +223,26 @@ public class UrlDialog extends JDialog
 	/**
 	 * Convert properties to query
 	 *
-	 * @param params
-	 *        properties
+	 * @param params properties
 	 * @return query string
 	 */
 	static private String properties2Query(final Properties params)
 	{
 		if (params == null)
+		{
 			return null;
+		}
 
-		StringBuilder query = new StringBuilder(); 
+		StringBuilder query = new StringBuilder();
 		int i = 0;
 		for (final String key : params.stringPropertyNames())
 		{
 			final String value = params.getProperty(key);
 			if (i++ != 0)
 			{
-				query.append("&"); 
+				query.append("&");
 			}
-			query.append(key).append("=").append(UrlDialog.encode(value)); 
+			query.append(key).append("=").append(UrlDialog.encode(value));
 		}
 		return query.toString();
 	}
@@ -248,19 +252,18 @@ public class UrlDialog extends JDialog
 	/**
 	 * Decode encoded URL (for display)
 	 *
-	 * @param string
-	 *        encode URL string
+	 * @param string encode URL string
 	 * @return decoded URL string
 	 */
 	static private String decode(final String string)
 	{
 		try
 		{
-			return URLDecoder.decode(string, "UTF8"); 
+			return URLDecoder.decode(string, "UTF8");
 		}
 		catch (final UnsupportedEncodingException e)
 		{
-			System.err.println(Messages.getString("UrlDialog.err_decode") + string + " - " + e);  
+			System.err.println(Messages.getString("UrlDialog.err_decode") + string + " - " + e);
 		}
 		return string;
 	}
@@ -268,19 +271,18 @@ public class UrlDialog extends JDialog
 	/**
 	 * Encode encoded URL
 	 *
-	 * @param string
-	 *        encode URL string
+	 * @param string encode URL string
 	 * @return decoded URL string
 	 */
 	static private String encode(final String string)
 	{
 		try
 		{
-			return URLEncoder.encode(string, "UTF8"); 
+			return URLEncoder.encode(string, "UTF8");
 		}
 		catch (final UnsupportedEncodingException e)
 		{
-			System.err.println(Messages.getString("UrlDialog.err_decode") + string + " - " + e);  
+			System.err.println(Messages.getString("UrlDialog.err_decode") + string + " - " + e);
 		}
 		return string;
 	}
@@ -328,10 +330,8 @@ public class UrlDialog extends JDialog
 			/**
 			 * Constructor
 			 *
-			 * @param key
-			 *        key
-			 * @param value
-			 *        value
+			 * @param key   key
+			 * @param value value
 			 */
 			public Entry(final String key, final String value)
 			{
@@ -343,8 +343,7 @@ public class UrlDialog extends JDialog
 		/**
 		 * Parameter model
 		 *
-		 * @param params
-		 *        parameters
+		 * @param params parameters
 		 */
 		public ParameterModel(final Properties params)
 		{
@@ -365,8 +364,7 @@ public class UrlDialog extends JDialog
 		/**
 		 * New row
 		 *
-		 * @param entry
-		 *        entry
+		 * @param entry entry
 		 * @return row index
 		 */
 		@SuppressWarnings("UnusedReturnValue")
@@ -381,13 +379,14 @@ public class UrlDialog extends JDialog
 		/**
 		 * Delete row
 		 *
-		 * @param rowIdx
-		 *        row index
+		 * @param rowIdx row index
 		 */
 		public void deleteRow(final int rowIdx)
 		{
 			if (rowIdx >= this.entries.size())
+			{
 				return;
+			}
 			this.entries.remove(rowIdx);
 			fireTableRowsDeleted(rowIdx, rowIdx);
 		}
@@ -454,14 +453,14 @@ public class UrlDialog extends JDialog
 			final Entry entry = this.entries.get(y);
 			switch (x)
 			{
-			case 0:
-				entry.key = (String) value;
-				break;
-			case 1:
-				entry.value = (String) value;
-				break;
-			default:
-				break;
+				case 0:
+					entry.key = (String) value;
+					break;
+				case 1:
+					entry.value = (String) value;
+					break;
+				default:
+					break;
 			}
 		}
 
@@ -475,12 +474,12 @@ public class UrlDialog extends JDialog
 			final Entry entry = this.entries.get(y);
 			switch (x)
 			{
-			case 0:
-				return entry.key;
-			case 1:
-				return entry.value;
-			default:
-				return null;
+				case 0:
+					return entry.key;
+				case 1:
+					return entry.value;
+				default:
+					return null;
 			}
 		}
 
@@ -493,12 +492,12 @@ public class UrlDialog extends JDialog
 		{
 			switch (x)
 			{
-			case 0:
-				return Messages.getString("UrlDialog.name"); 
-			case 1:
-				return Messages.getString("UrlDialog.value"); 
-			default:
-				return ""; 
+				case 0:
+					return Messages.getString("UrlDialog.name");
+				case 1:
+					return Messages.getString("UrlDialog.value");
+				default:
+					return "";
 			}
 		}
 	}
@@ -515,10 +514,10 @@ public class UrlDialog extends JDialog
 			this.ok = false;
 
 			// read properties into components
-			final String property = this.properties.getProperty("openurl"); 
+			final String property = this.properties.getProperty("openurl");
 			if (property != null)
 			{
-				final String[] fields = property.split("\\?"); 
+				final String[] fields = property.split("\\?");
 				final String url = fields.length > 0 ? fields[0] : null;
 				final String query = fields.length > 1 ? fields[1] : null;
 				if (url != null)
@@ -545,11 +544,11 @@ public class UrlDialog extends JDialog
 				// update properties from components
 				final String url = this.urlTextField.getText();
 				final String query = getQuery((ParameterModel) this.queryTable.getModel());
-				this.properties.setProperty("openurl", getURL(url, query)); 
+				this.properties.setProperty("openurl", getURL(url, query));
 			}
 			else
 			{
-				this.properties.remove("openurl"); 
+				this.properties.remove("openurl");
 			}
 		}
 		super.setVisible(flag);

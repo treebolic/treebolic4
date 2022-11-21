@@ -98,6 +98,8 @@ public class MainFrame extends JFrame
 
 	/**
 	 * Constructor
+	 *
+	 * @param args arguments
 	 */
 	public MainFrame(final String[] args)
 	{
@@ -114,7 +116,7 @@ public class MainFrame extends JFrame
 		setVisible(true);
 
 		// open
-		final String documentPath = this.controller.getParameters().getProperty("doc"); 
+		final String documentPath = this.controller.getParameters().getProperty("doc");
 		if (documentPath != null && !documentPath.isEmpty())
 		{
 			this.controller.open(documentPath);
@@ -142,7 +144,7 @@ public class MainFrame extends JFrame
 
 		setJMenuBar(makeMenubar(this.controller));
 		setContentPane(contentPane);
-		setTitle(Messages.getString("MainFrame.title")); 
+		setTitle(Messages.getString("MainFrame.title"));
 
 		// connect controller
 		this.controller.connect(this.widget);
@@ -228,13 +230,13 @@ public class MainFrame extends JFrame
 	private JTabbedPane makeTabbedPane(final Controller controller)
 	{
 		this.tabbedPane = new JTabbedPane();
-		
+
 		makeTab(this.tabbedPane, Messages.getString("MainFrame.tab_tree"), MainFrame.treeIcon, makeEditor(controller), MainFrame.this.controller::updateTree);
-		
+
 		makeTab(this.tabbedPane, Messages.getString("MainFrame.tab_view"), MainFrame.treebolicIcon, makeView(controller), MainFrame.this.controller::updateWidget);
-		
+
 		makeTab(this.tabbedPane, Messages.getString("MainFrame.tab_xmltree"), null, new JScrollPane(this.domTreeView), MainFrame.this.controller::updateDom);
-		
+
 		makeTab(this.tabbedPane, Messages.getString("MainFrame.tab_xml"), null, new JScrollPane(this.textView), MainFrame.this.controller::updateText);
 		this.tabbedPane.addChangeListener(controller);
 		this.tabbedPane.addChangeListener(event -> {
@@ -247,16 +249,11 @@ public class MainFrame extends JFrame
 	/**
 	 * Make tab
 	 *
-	 * @param tabbedPane
-	 *        tabbed pane
-	 * @param title
-	 *        title
-	 * @param icon
-	 *        tab icon
-	 * @param component
-	 *        component
-	 * @param action
-	 *        component update runnable
+	 * @param tabbedPane tabbed pane
+	 * @param title      title
+	 * @param icon       tab icon
+	 * @param component  component
+	 * @param action     component update runnable
 	 */
 	private void makeTab(final JTabbedPane tabbedPane, final String title, final Icon icon, final Component component, final Runnable action)
 	{
@@ -282,7 +279,7 @@ public class MainFrame extends JFrame
 	 *
 	 * @return treebolic view
 	 */
-	private JPanel makeView(final Controller controller)
+	private JPanel makeView(final Controller ignoredController)
 	{
 		final JPanel view = new JPanel();
 		view.setLayout(new BorderLayout());
@@ -372,10 +369,10 @@ public class MainFrame extends JFrame
 	{
 		final JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
-		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.globals"), "top.png", Controller.Code.SELECTTOP));  
-		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.tree"), "tree.png", Controller.Code.SELECTTREE));  
-		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.nodes"), "nodes.png", Controller.Code.SELECTNODES));  
-		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.edges"), "edges.png", Controller.Code.SELECTEDGES));  
+		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.globals"), "top.png", Controller.Code.SELECTTOP));
+		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.tree"), "tree.png", Controller.Code.SELECTTREE));
+		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.nodes"), "nodes.png", Controller.Code.SELECTNODES));
+		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.edges"), "edges.png", Controller.Code.SELECTEDGES));
 		return panel;
 	}
 

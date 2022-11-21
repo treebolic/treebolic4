@@ -10,27 +10,31 @@ import java.net.URL;
 import java.net.URLDecoder;
 
 /**
- * @author bbou
- *
+ * Where (base location)
  */
 public class Where
 {
+	/**
+	 * Make base location
+	 *
+	 * @return base location
+	 */
 	@SuppressWarnings("UnusedReturnValue")
 	static public String makeBaseLocation()
 	{
 		// base=parent(classes)/database
 		final URL uRL = Where.class.getProtectionDomain().getCodeSource().getLocation();
-		System.out.println("url " + uRL); 
+		System.out.println("url " + uRL);
 		final String location0 = Where.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-		System.out.println("path " + location0); 
+		System.out.println("path " + location0);
 		try
 		{
-			final String location = URLDecoder.decode(location0, "UTF-8"); 
-			System.out.println("decoded " + location); 
+			final String location = URLDecoder.decode(location0, "UTF-8");
+			System.out.println("decoded " + location);
 			final String parent = new File(location).getParent();
-			System.out.println("parent " + parent); 
-			final File dir = new File(parent, "database/"); 
-			System.out.println("database " + dir); 
+			System.out.println("parent " + parent);
+			final File dir = new File(parent, "database/");
+			System.out.println("database " + dir);
 			return dir.getAbsolutePath();
 		}
 		catch (UnsupportedEncodingException exception)
@@ -42,9 +46,8 @@ public class Where
 
 	/**
 	 * Main
-	 * 
-	 * @param args
-	 *        args
+	 *
+	 * @param args args
 	 */
 	public static void main(String[] args)
 	{

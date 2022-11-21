@@ -11,13 +11,15 @@ import treebolic.model.Utils;
  */
 public class Floats
 {
+	/**
+	 * Float array
+	 */
 	public final float[] floats;
 
 	/**
 	 * Constructor
 	 *
-	 * @param floats0
-	 *        array of floats
+	 * @param floats0 array of floats
 	 */
 	public Floats(final float[] floats0)
 	{

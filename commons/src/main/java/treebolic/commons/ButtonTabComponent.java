@@ -13,6 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+/**
+ * Button tab component
+ */
 public class ButtonTabComponent extends JPanel
 {
 	/**

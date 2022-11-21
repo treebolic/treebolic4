@@ -35,7 +35,7 @@ public class PropertyView extends JPanel implements SelectListener
 	/**
 	 * String for default value
 	 */
-	static final String defaultString = Messages.getString("PropertyView.default"); 
+	static final String defaultString = Messages.getString("PropertyView.default");
 
 	// I N T E R F A C E S
 
@@ -44,7 +44,15 @@ public class PropertyView extends JPanel implements SelectListener
 	 */
 	public enum AttributeType
 	{
-		NONE, BOOLEAN, INTEGER, FLOAT, FLOATS, LABEL, TEXT, LONGTEXT, COLOR, ID, REFID, IMAGE, LINK, FONTFACE, FONTSIZE, STROKE, TERMINATOR
+		// @formatter:off
+		/** Nonr */ NONE, /** Boolean */ BOOLEAN, /** Integer */ INTEGER, /** Float */ FLOAT, /** Floats */ FLOATS,
+		/** Label */ LABEL, /** Text */ TEXT, /** Long text */ LONGTEXT,
+		/** Color */ COLOR,
+		/** Id */ ID, /** Id reference */ REFID,
+		/** Image */ IMAGE, /** Link */ LINK,
+		/** Font face */ FONTFACE, /** Font size */ FONTSIZE,
+		/** Stroke */ STROKE, /** Terminator */ TERMINATOR
+		// @formatter:on
 	}
 
 	/**
@@ -52,6 +60,13 @@ public class PropertyView extends JPanel implements SelectListener
 	 */
 	public interface Setter
 	{
+		/**
+		 * Set object attribute
+		 *
+		 * @param object         object
+		 * @param attributeName  attribute name
+		 * @param attributeValue attribute value
+		 */
 		void set(Object object, String attributeName, Object attributeValue);
 	}
 
@@ -60,6 +75,13 @@ public class PropertyView extends JPanel implements SelectListener
 	 */
 	public interface Getter
 	{
+		/**
+		 * Get object attribute's value
+		 *
+		 * @param object        object
+		 * @param attributeName attribute name
+		 * @return attribute value
+		 */
 		Object get(Object object, String attributeName);
 	}
 
@@ -125,7 +147,7 @@ public class PropertyView extends JPanel implements SelectListener
 		@Override
 		public String toString()
 		{
-			return String.format("%s (%s)", this.name, this.type); 
+			return String.format("%s (%s)", this.name, this.type);
 		}
 	}
 
@@ -159,7 +181,7 @@ public class PropertyView extends JPanel implements SelectListener
 		@Override
 		public String toString()
 		{
-			return String.format("%s=%s", this.descriptor, this.value); 
+			return String.format("%s=%s", this.descriptor, this.value);
 		}
 	}
 
@@ -260,7 +282,7 @@ public class PropertyView extends JPanel implements SelectListener
 	/**
 	 * Stoke strings
 	 */
-	static public final String[] strokeStrings = {"solid", "dash", "dot"};   
+	static public final String[] strokeStrings = {"solid", "dash", "dot"};
 
 	/**
 	 * String to stroke icons
@@ -270,7 +292,7 @@ public class PropertyView extends JPanel implements SelectListener
 	/**
 	 * Terminator strings
 	 */
-	static public final String[] terminatorStrings = {"z", "a", "t", "h", "tf", "c", "cf", "d", "df"};         
+	static public final String[] terminatorStrings = {"z", "a", "t", "h", "tf", "c", "cf", "d", "df"};
 
 	/**
 	 * String to terminator icon map
@@ -282,19 +304,19 @@ public class PropertyView extends JPanel implements SelectListener
 	 */
 	static
 	{
-		PropertyView.terminatorIcons.put("z", new ImageIcon(PropertyView.class.getResource("images/terminatorz.png")));  
-		PropertyView.terminatorIcons.put("a", new ImageIcon(PropertyView.class.getResource("images/terminatora.png")));  
-		PropertyView.terminatorIcons.put("h", new ImageIcon(PropertyView.class.getResource("images/terminatorh.png")));  
-		PropertyView.terminatorIcons.put("t", new ImageIcon(PropertyView.class.getResource("images/terminatort.png")));  
-		PropertyView.terminatorIcons.put("tf", new ImageIcon(PropertyView.class.getResource("images/terminatortf.png")));  
-		PropertyView.terminatorIcons.put("c", new ImageIcon(PropertyView.class.getResource("images/terminatorc.png")));  
-		PropertyView.terminatorIcons.put("cf", new ImageIcon(PropertyView.class.getResource("images/terminatorcf.png")));  
-		PropertyView.terminatorIcons.put("d", new ImageIcon(PropertyView.class.getResource("images/terminatord.png")));  
-		PropertyView.terminatorIcons.put("df", new ImageIcon(PropertyView.class.getResource("images/terminatordf.png")));  
+		PropertyView.terminatorIcons.put("z", new ImageIcon(PropertyView.class.getResource("images/terminatorz.png")));
+		PropertyView.terminatorIcons.put("a", new ImageIcon(PropertyView.class.getResource("images/terminatora.png")));
+		PropertyView.terminatorIcons.put("h", new ImageIcon(PropertyView.class.getResource("images/terminatorh.png")));
+		PropertyView.terminatorIcons.put("t", new ImageIcon(PropertyView.class.getResource("images/terminatort.png")));
+		PropertyView.terminatorIcons.put("tf", new ImageIcon(PropertyView.class.getResource("images/terminatortf.png")));
+		PropertyView.terminatorIcons.put("c", new ImageIcon(PropertyView.class.getResource("images/terminatorc.png")));
+		PropertyView.terminatorIcons.put("cf", new ImageIcon(PropertyView.class.getResource("images/terminatorcf.png")));
+		PropertyView.terminatorIcons.put("d", new ImageIcon(PropertyView.class.getResource("images/terminatord.png")));
+		PropertyView.terminatorIcons.put("df", new ImageIcon(PropertyView.class.getResource("images/terminatordf.png")));
 
-		PropertyView.strokeIcons.put("solid", new ImageIcon(PropertyView.class.getResource("images/solid.png")));  
-		PropertyView.strokeIcons.put("dash", new ImageIcon(PropertyView.class.getResource("images/dash.png")));  
-		PropertyView.strokeIcons.put("dot", new ImageIcon(PropertyView.class.getResource("images/dot.png")));  
+		PropertyView.strokeIcons.put("solid", new ImageIcon(PropertyView.class.getResource("images/solid.png")));
+		PropertyView.strokeIcons.put("dash", new ImageIcon(PropertyView.class.getResource("images/dash.png")));
+		PropertyView.strokeIcons.put("dot", new ImageIcon(PropertyView.class.getResource("images/dot.png")));
 	}
 
 	// C O N S T R U C T
@@ -326,7 +348,7 @@ public class PropertyView extends JPanel implements SelectListener
 	private void initialize()
 	{
 		this.attributeTable.setToolTipText(null);
-		final JLabel attributesLabel = new JLabel(Messages.getString("PropertyView.attributes")); 
+		final JLabel attributesLabel = new JLabel(Messages.getString("PropertyView.attributes"));
 		setLayout(new BorderLayout());
 		this.add(attributesLabel, BorderLayout.NORTH);
 		this.add(new JScrollPane(this.attributeTable), BorderLayout.CENTER);
@@ -451,11 +473,11 @@ public class PropertyView extends JPanel implements SelectListener
 	{
 		try
 		{
-			return URLDecoder.decode(string, "UTF8"); 
+			return URLDecoder.decode(string, "UTF8");
 		}
 		catch (final UnsupportedEncodingException e)
 		{
-			System.err.println("Can't decode " + string + " - " + e);  
+			System.err.println("Can't decode " + string + " - " + e);
 		}
 		return string;
 	}
@@ -470,11 +492,11 @@ public class PropertyView extends JPanel implements SelectListener
 	{
 		try
 		{
-			return URLEncoder.encode(string, "UTF8"); 
+			return URLEncoder.encode(string, "UTF8");
 		}
 		catch (final UnsupportedEncodingException e)
 		{
-			System.err.println("Cant decode " + string + " - " + e);  
+			System.err.println("Cant decode " + string + " - " + e);
 		}
 		return string;
 	}
@@ -652,15 +674,15 @@ public class PropertyView extends JPanel implements SelectListener
 			switch (x)
 			{
 				case STATUS:
-					return "x"; 
+					return "x";
 				case TYPE:
-					return "t"; 
+					return "t";
 				case NAME:
-					return Messages.getString("PropertyView.name"); 
+					return Messages.getString("PropertyView.name");
 				case VALUE:
-					return Messages.getString("PropertyView.value"); 
+					return Messages.getString("PropertyView.value");
 				default:
-					return ""; 
+					return "";
 			}
 		}
 	}

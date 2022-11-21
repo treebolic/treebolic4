@@ -35,7 +35,12 @@ public class ZipMaker
 	private final String entry;
 
 	/**
+	 * Constructor
 	 *
+	 * @param document  document
+	 * @param imageBase image base
+	 * @param archive   archive
+	 * @param entry     entry
 	 */
 	public ZipMaker(final Document document, final URL imageBase, final File archive, final String entry)
 	{
@@ -45,16 +50,21 @@ public class ZipMaker
 		this.entry = entry;
 	}
 
+	/**
+	 * Make
+	 */
 	public void make()
 	{
 		if (this.document == null)
+		{
 			return;
+		}
 		try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(this.archive, true)))
 		{
 			// XML
 			final ZipEntry ze = new ZipEntry(this.entry);
 			zos.putNextEntry(ze);
-			new DomTransformer(false, "Treebolic.dtd").documentToStream(this.document, zos); 
+			new DomTransformer(false, "Treebolic.dtd").documentToStream(this.document, zos);
 			zos.closeEntry();
 
 			// images
@@ -80,7 +90,7 @@ public class ZipMaker
 				}
 				catch (Exception e)
 				{
-					System.err.println("Zip can't include " + imageFileName); 
+					System.err.println("Zip can't include " + imageFileName);
 				}
 			}
 		}

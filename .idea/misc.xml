@@ -88,6 +88,10 @@
       <entry_point TYPE="field" FQNAME="treebolic.core.math.ArcMath HALFPI" />
       <entry_point TYPE="field" FQNAME="treebolic.view.AbstractPainter fontStyle" />
       <entry_point TYPE="field" FQNAME="treebolic.view.AbstractPainter foreColor" />
+      <entry_point TYPE="field" FQNAME="treebolic.generator.tree.Renderer italicFont" />
+      <entry_point TYPE="field" FQNAME="treebolic.generator.tree.Tree isDirty" />
+      <entry_point TYPE="field" FQNAME="treebolic.propertyview.PropertyView.AttributeType NONE" />
+      <entry_point TYPE="field" FQNAME="treebolic.site.FtpClient welcomeMsg" />
     </entry_points>
     <pattern value="treebolic.glue.Worker" method="doInBackground" />
     <pattern value="treebolic.glue.Worker" method="job" />
@@ -437,6 +441,47 @@
     <pattern value="treebolic.commons.ProviderDialog" method="ProviderDialog" />
     <pattern value="treebolic.commons.RadioChoiceDialog" method="RadioChoiceDialog" />
     <pattern value="treebolic.commons.Interact" method="warn" />
+    <pattern value="treebolic.generator.TextView" method="update" />
+    <pattern value="treebolic.propertyview.ChangeNotifier" method="addChangeListener" />
+    <pattern value="treebolic.propertyview.ChangeNotifier" method="getChangeListeners" />
+    <pattern value="treebolic.propertyview.ChangeNotifier" method="removeChangeListener" />
+    <pattern value="treebolic.propertyview.PropertyView.AttributeType" />
+    <pattern value="treebolic.propertyview.PropertyView" method="encode" />
+    <pattern value="treebolic.propertyview.PropertyView.IdGetter" method="get" />
+    <pattern value="treebolic.propertyview.PropertyView.IdGetter" />
+    <pattern value="treebolic.propertyview.SelectListener" method="onSelected" />
+    <pattern value="treebolic.site.FtpClient" method="append" />
+    <pattern value="treebolic.site.FtpClient" method="ascii" />
+    <pattern value="treebolic.site.FtpClient" method="cdUp" />
+    <pattern value="treebolic.site.FtpClient.RegexpPool" method="delete" />
+    <pattern value="treebolic.site.FtpClient" method="get" />
+    <pattern value="treebolic.site.FtpClient" method="getFtpProxyPort" />
+    <pattern value="treebolic.site.FtpClient" method="getUseFtpProxy" />
+    <pattern value="treebolic.site.FtpClient" method="list" />
+    <pattern value="treebolic.site.FtpClient.RegexpPool" method="matchNext" />
+    <pattern value="treebolic.site.FtpClient" method="matchNonProxyHosts" />
+    <pattern value="treebolic.site.FtpClient" method="nameList" />
+    <pattern value="treebolic.site.FtpClient" method="noop" />
+    <pattern value="treebolic.site.FtpClient.RegexpPool" method="print" />
+    <pattern value="treebolic.site.FtpClient" method="pwd" />
+    <pattern value="treebolic.site.FtpClient.REException" />
+    <pattern value="treebolic.site.FtpClient.REException" method="REException" />
+    <pattern value="treebolic.site.FtpClient.RegexpNode" />
+    <pattern value="treebolic.site.FtpClient.RegexpNode" method="RegexpNode" />
+    <pattern value="treebolic.site.FtpClient.RegexpPool" />
+    <pattern value="treebolic.site.FtpClient.RegexpPool" method="RegexpPool" />
+    <pattern value="treebolic.site.FtpClient" method="reInit" />
+    <pattern value="treebolic.site.FtpClient" method="rename" />
+    <pattern value="treebolic.site.FtpClient.RegexpPool" method="replace" />
+    <pattern value="treebolic.site.FtpClient.RegexpPool" method="reset" />
+    <pattern value="treebolic.site.FtpClient" method="system" />
+    <pattern value="treebolic.generator.PropertyView.NodeIdGetter" method="get" />
+    <pattern value="treebolic.generator.domtree.ElementDecorator" method="getText" />
+    <pattern value="treebolic.site.FtpClient" method="FtpClient" />
+    <pattern value="treebolic.browser.Context" method="makeURLAlt" />
+    <pattern value="treebolic.browser.MainFrame" method="replaceTab" />
+    <pattern value="treebolic.browser2.Context" method="makeURLAlt" />
+    <pattern value="treebolic.browser2.MainFrame" method="getSelected" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">

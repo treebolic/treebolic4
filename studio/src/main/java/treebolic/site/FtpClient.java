@@ -65,6 +65,7 @@ public class FtpClient extends TransferProtocolClient
 		 * value from found() back to its caller.
 		 *
 		 * @param remainder the string that matched the * in the pattern.
+		 * @return found value
 		 */
 		Object found(String remainder);
 	}
@@ -84,6 +85,9 @@ public class FtpClient extends TransferProtocolClient
 		private static final int BIG = 0x7FFFFFFF;
 		private int lastDepth = BIG;
 
+		/**
+		 * Constructor
+		 */
 		public RegexpPool()
 		{
 		}
@@ -143,7 +147,7 @@ public class FtpClient extends TransferProtocolClient
 			RegexpNode best = p;
 			int len = re.length() - 1;
 			int i;
-			boolean prefix = true;
+			@SuppressWarnings("unused") boolean prefix = true;
 
 			if (!re.startsWith("*") || !re.endsWith("*"))
 			{
@@ -215,6 +219,9 @@ public class FtpClient extends TransferProtocolClient
 		 * regular expressions that were added to the pool <i>after</i>
 		 * the last regular expression that matched in the last call
 		 * to match() or matchNext()
+		 *
+		 * @param s string to match
+		 * @return match
 		 */
 		public Object matchNext(String s)
 		{
@@ -328,6 +335,8 @@ public class FtpClient extends TransferProtocolClient
 
 		/**
 		 * Print this pool to standard output
+		 *
+		 * @param out output
 		 */
 		public void print(PrintStream out)
 		{
@@ -438,6 +447,9 @@ public class FtpClient extends TransferProtocolClient
 		}
 	}
 
+	/**
+	 * FTP port
+	 */
 	public static final int FTP_PORT = 21;
 
 	static final int FTP_SUCCESS = 1;
@@ -505,18 +517,18 @@ public class FtpClient extends TransferProtocolClient
 	public static String getFtpProxyHost()
 	{
 		return (String) java.security.AccessController.doPrivileged((PrivilegedAction) () -> {
-			String result = System.getProperty("ftp.proxyHost"); 
+			String result = System.getProperty("ftp.proxyHost");
 			if (result == null)
 			{
-				result = System.getProperty("ftpProxyHost"); 
+				result = System.getProperty("ftpProxyHost");
 			}
 			if (result == null)
 			{
 				// as a last resort we use the general one if ftp.useProxy
 				// is true
-				if (Boolean.getBoolean("ftp.useProxy")) 
+				if (Boolean.getBoolean("ftp.useProxy"))
 				{
-					result = System.getProperty("proxyHost"); 
+					result = System.getProperty("proxyHost");
 				}
 			}
 			return result;
@@ -532,19 +544,19 @@ public class FtpClient extends TransferProtocolClient
 		final int[] result = {80};
 		java.security.AccessController.doPrivileged((PrivilegedAction) () -> {
 
-			String tmp = System.getProperty("ftp.proxyPort"); 
+			String tmp = System.getProperty("ftp.proxyPort");
 			if (tmp == null)
 			{
 				// for compatibility with 1.0.2
-				tmp = System.getProperty("ftpProxyPort"); 
+				tmp = System.getProperty("ftpProxyPort");
 			}
 			if (tmp == null)
 			{
 				// as a last resort we use the general one if ftp.useProxy
 				// is true
-				if (Boolean.getBoolean("ftp.useProxy")) 
+				if (Boolean.getBoolean("ftp.useProxy"))
 				{
-					tmp = System.getProperty("proxyPort"); 
+					tmp = System.getProperty("proxyPort");
 				}
 			}
 			if (tmp != null)
@@ -556,11 +568,17 @@ public class FtpClient extends TransferProtocolClient
 		return result[0];
 	}
 
+	/**
+	 * Matches non-proxy host
+	 *
+	 * @param host host
+	 * @return true if it matches o non-proxy host
+	 */
 	public static boolean matchNonProxyHosts(final String host)
 	{
 		synchronized (FtpClient.class)
 		{
-			final String rawList = java.security.AccessController.doPrivileged(new sun.security.action.GetPropertyAction("ftp.nonProxyHosts")); 
+			final String rawList = java.security.AccessController.doPrivileged(new sun.security.action.GetPropertyAction("ftp.nonProxyHosts"));
 			if (rawList == null)
 			{
 				FtpClient.nonProxyHostsPool = null;
@@ -570,7 +588,7 @@ public class FtpClient extends TransferProtocolClient
 				if (!rawList.equals(FtpClient.nonProxyHostsSource))
 				{
 					final RegexpPool pool = new RegexpPool();
-					final StringTokenizer st = new StringTokenizer(rawList, "|", false); 
+					final StringTokenizer st = new StringTokenizer(rawList, "|", false);
 					try
 					{
 						while (st.hasMoreTokens())
@@ -580,7 +598,7 @@ public class FtpClient extends TransferProtocolClient
 					}
 					catch (final REException ex)
 					{
-						System.err.println("Error in http.nonProxyHosts system property: " + ex); 
+						System.err.println("Error in http.nonProxyHosts system property: " + ex);
 					}
 					FtpClient.nonProxyHostsPool = pool;
 				}
@@ -606,7 +624,7 @@ public class FtpClient extends TransferProtocolClient
 	{
 		if (serverIsOpen())
 		{
-			issueCommand("QUIT"); 
+			issueCommand("QUIT");
 			super.closeServer();
 		}
 	}
@@ -629,12 +647,12 @@ public class FtpClient extends TransferProtocolClient
 			this.replyPending = false;
 			if (readReply() == FtpClient.FTP_ERROR)
 			{
-				throw new FtpProtocolException("Error reading FTP pending reply\n"); 
+				throw new FtpProtocolException("Error reading FTP pending reply\n");
 			}
 		}
 		do
 		{
-			sendServer(cmd + "\r\n"); 
+			sendServer(cmd + "\r\n");
 			reply = readReply();
 		}
 		while (reply == FtpClient.FTP_TRY_AGAIN);
@@ -651,7 +669,7 @@ public class FtpClient extends TransferProtocolClient
 	{
 		if (issueCommand(cmd) != FtpClient.FTP_SUCCESS)
 		{
-			throw new FtpProtocolException(cmd + ":" + getResponseString()); 
+			throw new FtpProtocolException(cmd + ":" + getResponseString());
 		}
 	}
 
@@ -680,13 +698,13 @@ public class FtpClient extends TransferProtocolClient
 				{
 					if (!this.loggedIn)
 					{
-						throw new FtpLoginException("Not logged in"); 
+						throw new FtpLoginException("Not logged in");
 					}
 					return FtpClient.FTP_ERROR;
 				}
 				if (this.lastReplyCode == 550)
 				{
-					throw new FileNotFoundException(this.command + ": " + getResponseString()); 
+					throw new FileNotFoundException(this.command + ": " + getResponseString());
 				}
 		}
 
@@ -712,12 +730,12 @@ public class FtpClient extends TransferProtocolClient
 		 * EPSV ALL cmd first. EPSV is documented in RFC2428 - If EPSV fails, then we fall back to the older, yet OK PASV command - If PASV fails as well, then
 		 * we throw an exception and the calling method will have to try the EPRT or PORT command
 		 */
-		if (issueCommand("EPSV ALL") == FtpClient.FTP_SUCCESS) 
+		if (issueCommand("EPSV ALL") == FtpClient.FTP_SUCCESS)
 		{
 			// We can safely use EPSV commands
-			if (issueCommand("EPSV") == FtpClient.FTP_ERROR) 
+			if (issueCommand("EPSV") == FtpClient.FTP_ERROR)
 			{
-				throw new FtpProtocolException("EPSV Failed: " + getResponseString()); 
+				throw new FtpProtocolException("EPSV Failed: " + getResponseString());
 			}
 			serverAnswer = getResponseString();
 
@@ -727,11 +745,11 @@ public class FtpClient extends TransferProtocolClient
 			//
 			// So we'll use the regular expresions package to parse the output.
 
-			final Pattern p = Pattern.compile("^229 .* \\(\\|\\|\\|(\\d+)\\|\\)"); 
+			final Pattern p = Pattern.compile("^229 .* \\(\\|\\|\\|(\\d+)\\|\\)");
 			final Matcher m = p.matcher(serverAnswer);
 			if (!m.find())
 			{
-				throw new FtpProtocolException("EPSV failed : " + serverAnswer); 
+				throw new FtpProtocolException("EPSV failed : " + serverAnswer);
 			}
 			// Yay! Let's extract the port number
 			final String s = m.group(1);
@@ -753,9 +771,9 @@ public class FtpClient extends TransferProtocolClient
 		else
 		{
 			// EPSV ALL failed, so Let's try the regular PASV cmd
-			if (issueCommand("PASV") == FtpClient.FTP_ERROR) 
+			if (issueCommand("PASV") == FtpClient.FTP_ERROR)
 			{
-				throw new FtpProtocolException("PASV failed: " + getResponseString()); 
+				throw new FtpProtocolException("PASV failed: " + getResponseString());
 			}
 			serverAnswer = getResponseString();
 
@@ -771,11 +789,11 @@ public class FtpClient extends TransferProtocolClient
 			// The regular expression is a bit more complex this time, because the
 			// parenthesis are optionals and we have to use 3 groups.
 
-			final Pattern p = Pattern.compile("227 .* \\(?(\\d{1,3},\\d{1,3},\\d{1,3},\\d{1,3}),(\\d{1,3}),(\\d{1,3})\\)?"); 
+			final Pattern p = Pattern.compile("227 .* \\(?(\\d{1,3},\\d{1,3},\\d{1,3},\\d{1,3}),(\\d{1,3}),(\\d{1,3})\\)?");
 			final Matcher m = p.matcher(serverAnswer);
 			if (!m.find())
 			{
-				throw new FtpProtocolException("PASV failed : " + serverAnswer); 
+				throw new FtpProtocolException("PASV failed : " + serverAnswer);
 			}
 			// Get port number out of group 2 & 3
 			port = Integer.parseInt(m.group(3)) + (Integer.parseInt(m.group(2)) << 8);
@@ -882,7 +900,7 @@ public class FtpClient extends TransferProtocolClient
 		// since we can't accept a connection through SOCKS (yet)
 		// throw an exception
 		{
-			throw new FtpProtocolException("Passive mode failed"); 
+			throw new FtpProtocolException("Passive mode failed");
 		}
 		else
 		{
@@ -902,29 +920,29 @@ public class FtpClient extends TransferProtocolClient
 			// (e.g. RETR) will fail, so we have to check BOTH results (the
 			// EPRT cmd then the actual command) to decide wether we should
 			// fall back on the older PORT command.
-			portCmd = new StringBuilder("EPRT |" + (myAddress instanceof Inet6Address ? "2" : "1") + "|" + myAddress.getHostAddress() + "|" + portSocket.getLocalPort() + "|");      
+			portCmd = new StringBuilder("EPRT |" + (myAddress instanceof Inet6Address ? "2" : "1") + "|" + myAddress.getHostAddress() + "|" + portSocket.getLocalPort() + "|");
 			if (issueCommand(portCmd.toString()) == FtpClient.FTP_ERROR || issueCommand(cmd) == FtpClient.FTP_ERROR)
 			{
 				// The EPRT command failed, let's fall back to good old PORT
-				portCmd = new StringBuilder("PORT "); 
+				portCmd = new StringBuilder("PORT ");
 				final byte[] addr = myAddress.getAddress();
 
 				/* append host addr */
 				for (final byte element : addr)
 				{
-					portCmd.append(element & 0xFF).append(","); 
+					portCmd.append(element & 0xFF).append(",");
 				}
 
 				/* append port number */
-				portCmd.append(portSocket.getLocalPort() >>> 8 & 0xff).append(",").append(portSocket.getLocalPort() & 0xff); 
+				portCmd.append(portSocket.getLocalPort() >>> 8 & 0xff).append(",").append(portSocket.getLocalPort() & 0xff);
 				if (issueCommand(portCmd.toString()) == FtpClient.FTP_ERROR)
 				{
-					e = new FtpProtocolException("PORT :" + getResponseString()); 
+					e = new FtpProtocolException("PORT :" + getResponseString());
 					throw e;
 				}
 				if (issueCommand(cmd) == FtpClient.FTP_ERROR)
 				{
-					e = new FtpProtocolException(cmd + ":" + getResponseString()); 
+					e = new FtpProtocolException(cmd + ":" + getResponseString());
 					throw e;
 				}
 			}
@@ -989,7 +1007,7 @@ public class FtpClient extends TransferProtocolClient
 		super.openServer(host, port);
 		if (readReply() == FtpClient.FTP_ERROR)
 		{
-			throw new FtpProtocolException("Welcome message: " + getResponseString()); 
+			throw new FtpProtocolException("Welcome message: " + getResponseString());
 		}
 	}
 
@@ -1004,15 +1022,15 @@ public class FtpClient extends TransferProtocolClient
 	{
 		if (!serverIsOpen())
 		{
-			throw new FtpLoginException("not connected to host"); 
+			throw new FtpLoginException("not connected to host");
 		}
 		if (user == null || user.length() == 0)
 		{
 			return;
 		}
-		if (issueCommand("USER " + user) == FtpClient.FTP_ERROR) 
+		if (issueCommand("USER " + user) == FtpClient.FTP_ERROR)
 		{
-			throw new FtpLoginException("user " + user + " : " + getResponseString());  
+			throw new FtpLoginException("user " + user + " : " + getResponseString());
 		}
 		/*
 		 * Checks for "331 User name okay, need password." answer
@@ -1020,9 +1038,9 @@ public class FtpClient extends TransferProtocolClient
 
 		if (this.lastReplyCode == 331)
 		{
-			if (password == null || password.length() == 0 || issueCommand("PASS " + password) == FtpClient.FTP_ERROR) 
+			if (password == null || password.length() == 0 || issueCommand("PASS " + password) == FtpClient.FTP_ERROR)
 			{
-				throw new FtpLoginException("password: " + getResponseString()); 
+				throw new FtpLoginException("password: " + getResponseString());
 			}
 		}
 
@@ -1035,7 +1053,7 @@ public class FtpClient extends TransferProtocolClient
 			l = this.serverResponse.elementAt(i);
 			if (l != null)
 			{
-				if (l.length() >= 4 && l.startsWith("230")) 
+				if (l.length() >= 4 && l.startsWith("230"))
 				{
 					// get rid of the "230-" prefix
 					l = l.substring(4);
@@ -1060,7 +1078,7 @@ public class FtpClient extends TransferProtocolClient
 
 		try
 		{
-			s = openDataConnection("RETR " + filename); 
+			s = openDataConnection("RETR " + filename);
 		}
 		catch (final FileNotFoundException fileException)
 		{
@@ -1073,7 +1091,7 @@ public class FtpClient extends TransferProtocolClient
 				throw fileException;
 			}
 
-			final StringTokenizer t = new StringTokenizer(filename, "/"); 
+			final StringTokenizer t = new StringTokenizer(filename, "/");
 			String pathElement = null;
 
 			while (t.hasMoreElements())
@@ -1097,7 +1115,7 @@ public class FtpClient extends TransferProtocolClient
 			}
 			if (pathElement != null)
 			{
-				s = openDataConnection("RETR " + pathElement); 
+				s = openDataConnection("RETR " + pathElement);
 			}
 			else
 			{
@@ -1120,10 +1138,11 @@ public class FtpClient extends TransferProtocolClient
 	 *
 	 * @param filename name of the file to store
 	 * @return the {@code OutputStream} to write the file to
+	 * @throws IOException io exception
 	 */
 	public TelnetOutputStream put(final String filename) throws IOException
 	{
-		final Socket s = openDataConnection("STOR " + filename); 
+		final Socket s = openDataConnection("STOR " + filename);
 		final TelnetOutputStream out = new TelnetOutputStream(s.getOutputStream(), this.binaryMode);
 		if (!this.binaryMode)
 		{
@@ -1137,10 +1156,11 @@ public class FtpClient extends TransferProtocolClient
 	 *
 	 * @param filename name of the file to append to
 	 * @return the {@code OutputStream} to write the file to
+	 * @throws IOException io exception
 	 */
 	public TelnetOutputStream append(final String filename) throws IOException
 	{
-		final Socket s = openDataConnection("APPE " + filename); 
+		final Socket s = openDataConnection("APPE " + filename);
 		final TelnetOutputStream out = new TelnetOutputStream(s.getOutputStream(), this.binaryMode);
 		if (!this.binaryMode)
 		{
@@ -1154,10 +1174,11 @@ public class FtpClient extends TransferProtocolClient
 	 * LIST files in the current directory on a remote FTP server
 	 *
 	 * @return the {@code InputStream} to read the list from
+	 * @throws IOException io exception
 	 */
 	public TelnetInputStream list() throws IOException
 	{
-		final Socket s = openDataConnection("LIST"); 
+		final Socket s = openDataConnection("LIST");
 
 		return new TelnetInputStream(s.getInputStream(), this.binaryMode);
 	}
@@ -1175,11 +1196,11 @@ public class FtpClient extends TransferProtocolClient
 
 		if (path != null)
 		{
-			s = openDataConnection("NLST " + path); 
+			s = openDataConnection("NLST " + path);
 		}
 		else
 		{
-			s = openDataConnection("NLST"); 
+			s = openDataConnection("NLST");
 		}
 		return new TelnetInputStream(s.getInputStream(), this.binaryMode);
 	}
@@ -1192,11 +1213,11 @@ public class FtpClient extends TransferProtocolClient
 	 */
 	public void cd(final String remoteDirectory) throws IOException
 	{
-		if (remoteDirectory == null || "".equals(remoteDirectory)) 
+		if (remoteDirectory == null || "".equals(remoteDirectory))
 		{
 			return;
 		}
-		issueCommandCheck("CWD " + remoteDirectory); 
+		issueCommandCheck("CWD " + remoteDirectory);
 	}
 
 	/**
@@ -1206,26 +1227,27 @@ public class FtpClient extends TransferProtocolClient
 	 */
 	public void cdUp() throws IOException
 	{
-		issueCommandCheck("CDUP"); 
+		issueCommandCheck("CDUP");
 	}
 
 	/**
 	 * Print working directory of remote FTP server
 	 *
+	 * @return pwd
 	 * @throws FtpProtocolException if the command fails
 	 */
 	public String pwd() throws IOException
 	{
 		String answ;
 
-		issueCommandCheck("PWD"); 
+		issueCommandCheck("PWD");
 		/*
 		 * answer will be of the following format : 257 "/" is current directory.
 		 */
 		answ = getResponseString();
-		if (!answ.startsWith("257")) 
+		if (!answ.startsWith("257"))
 		{
-			throw new FtpProtocolException("PWD failed. " + answ); 
+			throw new FtpProtocolException("PWD failed. " + answ);
 		}
 		return answ.substring(5, answ.lastIndexOf('"'));
 	}
@@ -1237,7 +1259,7 @@ public class FtpClient extends TransferProtocolClient
 	 */
 	public void binary() throws IOException
 	{
-		issueCommandCheck("TYPE I"); 
+		issueCommandCheck("TYPE I");
 		this.binaryMode = true;
 	}
 
@@ -1248,34 +1270,37 @@ public class FtpClient extends TransferProtocolClient
 	 */
 	public void ascii() throws IOException
 	{
-		issueCommandCheck("TYPE A"); 
+		issueCommandCheck("TYPE A");
 		this.binaryMode = false;
 	}
 
 	/**
 	 * Rename a file on the ftp server
 	 *
+	 * @param from rename from
+	 * @param to   rename to
 	 * @throws FtpProtocolException if the command fails
 	 */
 	public void rename(final String from, final String to) throws IOException
 	{
-		issueCommandCheck("RNFR " + from); 
-		issueCommandCheck("RNTO " + to); 
+		issueCommandCheck("RNFR " + from);
+		issueCommandCheck("RNTO " + to);
 	}
 
 	/**
 	 * Get the "System string" from the FTP server
 	 *
+	 * @return command's system out
 	 * @throws FtpProtocolException if it fails
 	 */
 	public String system() throws IOException
 	{
 		String answ;
-		issueCommandCheck("SYST"); 
+		issueCommandCheck("SYST");
 		answ = getResponseString();
-		if (!answ.startsWith("215")) 
+		if (!answ.startsWith("215"))
 		{
-			throw new FtpProtocolException("SYST failed." + answ); 
+			throw new FtpProtocolException("SYST failed." + answ);
 		}
 		return answ.substring(4); // Skip "215 "
 	}
@@ -1287,7 +1312,7 @@ public class FtpClient extends TransferProtocolClient
 	 */
 	public void noop() throws IOException
 	{
-		issueCommandCheck("NOOP"); 
+		issueCommandCheck("NOOP");
 	}
 
 	/**
@@ -1297,7 +1322,7 @@ public class FtpClient extends TransferProtocolClient
 	 */
 	public void reInit() throws IOException
 	{
-		issueCommandCheck("REIN"); 
+		issueCommandCheck("REIN");
 		this.loggedIn = false;
 	}
 
@@ -1333,9 +1358,14 @@ public class FtpClient extends TransferProtocolClient
 	{
 	}
 
-	public FtpClient(final Proxy p)
+	/**
+	 * Constructor
+	 *
+	 * @param proxy proxy
+	 */
+	public FtpClient(final Proxy proxy)
 	{
-		this.proxy = p;
+		this.proxy = proxy;
 	}
 
 	@Override

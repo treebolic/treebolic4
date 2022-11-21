@@ -34,10 +34,6 @@ public class DefaultDecorator
 
 	// S T R I N G S
 
-	// array of names for DOM node-types (indexes = nodeType() values)
-	// static private final String[] typeName =
-	// { "Element", "Attr", "Text", "CDATA", "EntityRef", "Entity", "ProcInstr", "Comment", "Document", "DocType", "DocFragment", "Notation", };
-
 	/**
 	 * Get node name
 	 *

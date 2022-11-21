@@ -18,6 +18,12 @@ public class Messages
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 
+	/**
+	 * Get localized message
+	 *
+	 * @param key message key
+	 * @return localized message
+	 */
 	public static String getString(final String key)
 	{
 		try

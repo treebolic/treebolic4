@@ -11,7 +11,7 @@ import treebolic.generator.MainFrame;
  *
  * @author Bernard Bou
  */
-public class Generator
+public class Studio
 {
 	/**
 	 * Version
@@ -24,7 +24,7 @@ public class Generator
 	 * @param args
 	 *        program arguments
 	 */
-	public Generator(final String[] args)
+	public Studio(final String[] args)
 	{
 		// System.out.println("CLASSPATH=<" + System.getProperty("java.class.path", ".") + ">");
 
@@ -41,7 +41,7 @@ public class Generator
 	 */
 	static public String getVersion()
 	{
-		return Generator.version;
+		return Studio.version;
 	}
 
 	/**
@@ -53,6 +53,6 @@ public class Generator
 	public static void main(final String[] args)
 	{
 		Laf.lookAndFeel(args);
-		new Generator(args);
+		new Studio(args);
 	}
 }

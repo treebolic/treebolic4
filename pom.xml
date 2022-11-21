@@ -36,6 +36,8 @@
 		<module>application-xml</module>
 		<module>commons</module>
 		<module>transformer-xml</module>
+		<module>browser</module>
+		<module>browser2</module>
 	</modules>
 
 	<properties>

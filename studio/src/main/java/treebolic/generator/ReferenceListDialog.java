@@ -68,6 +68,8 @@ public class ReferenceListDialog extends JDialog
 
 	/**
 	 * Constructor
+	 *
+	 * @param controller controller
 	 */
 	public ReferenceListDialog(final Controller controller)
 	{
@@ -88,7 +90,7 @@ public class ReferenceListDialog extends JDialog
 
 		// reference table
 		this.referenceTable = new JTable();
-		this.referenceTable.setToolTipText(Messages.getString("ReferenceListDialog.tooltip")); 
+		this.referenceTable.setToolTipText(Messages.getString("ReferenceListDialog.tooltip"));
 
 		// update
 		update();
@@ -97,13 +99,13 @@ public class ReferenceListDialog extends JDialog
 		this.scrollPane = new JScrollPane(this.referenceTable);
 
 		// buttons
-		final JButton updateButton = new JButton(Messages.getString("ReferenceListDialog.update")); 
+		final JButton updateButton = new JButton(Messages.getString("ReferenceListDialog.update"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
 		updateButton.addActionListener(e -> update());
-		final JButton cancelButton = new JButton(Messages.getString("ReferenceListDialog.cancel")); 
+		final JButton cancelButton = new JButton(Messages.getString("ReferenceListDialog.cancel"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -174,8 +176,7 @@ public class ReferenceListDialog extends JDialog
 	/**
 	 * Set model
 	 *
-	 * @param targetToLocationMap
-	 *        target to location map
+	 * @param targetToLocationMap target to location map
 	 */
 	protected void setModel(final Map<String, SortedSet<String>> targetToLocationMap)
 	{
@@ -250,10 +251,8 @@ public class ReferenceListDialog extends JDialog
 			/**
 			 * Constructor
 			 *
-			 * @param key
-			 *        key
-			 * @param value
-			 *        value
+			 * @param key   key
+			 * @param value value
 			 */
 			public Entry(final String key, final String value, final int valueCount)
 			{
@@ -266,13 +265,14 @@ public class ReferenceListDialog extends JDialog
 		/**
 		 * Parameter model
 		 *
-		 * @param targetToLocationMap
-		 *        target location map
+		 * @param targetToLocationMap target location map
 		 */
 		public ParameterModel(final Map<String, SortedSet<String>> targetToLocationMap)
 		{
 			if (targetToLocationMap == null)
+			{
 				return;
+			}
 
 			for (final String target : targetToLocationMap.keySet())
 			{
@@ -288,8 +288,7 @@ public class ReferenceListDialog extends JDialog
 		/**
 		 * New row
 		 *
-		 * @param entry
-		 *        entry
+		 * @param entry entry
 		 * @return row index
 		 */
 		@SuppressWarnings("UnusedReturnValue")
@@ -350,12 +349,12 @@ public class ReferenceListDialog extends JDialog
 		{
 			switch (x)
 			{
-			case 0:
-				return Messages.getString("ReferenceListDialog.name"); 
-			case 1:
-				return Messages.getString("ReferenceListDialog.value"); 
-			default:
-				return null;
+				case 0:
+					return Messages.getString("ReferenceListDialog.name");
+				case 1:
+					return Messages.getString("ReferenceListDialog.value");
+				default:
+					return null;
 			}
 		}
 	}

@@ -23,6 +23,12 @@ class Messages
 		// do nothing
 	}
 
+	/**
+	 * Get localized message
+	 *
+	 * @param key message key
+	 * @return localized message
+	 */
 	public static String getString(final String key)
 	{
 		try

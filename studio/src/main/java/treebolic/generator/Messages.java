@@ -8,15 +8,21 @@ import java.util.ResourceBundle;
 
 /**
  * Language dependency
- * 
+ *
  * @author Bernard Bou
  */
 public class Messages
 {
-	private static final String BUNDLE_NAME = "treebolic.generator.messages"; 
+	private static final String BUNDLE_NAME = "treebolic.generator.messages";
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 
+	/**
+	 * Get localized message
+	 *
+	 * @param key message key
+	 * @return localized message
+	 */
 	public static String getString(final String key)
 	{
 		try

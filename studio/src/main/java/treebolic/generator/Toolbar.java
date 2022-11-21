@@ -86,7 +86,7 @@ public class Toolbar extends JToolBar
 	/**
 	 * Make button
 	 *
-	 * @param text
+	 * @param ignoredText
 	 *        text
 	 * @param tooltip
 	 *        tooltip
@@ -94,7 +94,7 @@ public class Toolbar extends JToolBar
 	 *        image
 	 * @return button
 	 */
-	private JButton makeButton(final String text, final String tooltip, final String image)
+	private JButton makeButton(final String ignoredText, final String tooltip, final String image)
 	{
 		final JButton button = new JButton();
 		button.setToolTipText(tooltip);

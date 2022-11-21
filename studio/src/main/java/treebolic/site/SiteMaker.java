@@ -59,11 +59,6 @@ public abstract class SiteMaker extends Observable
 	// progress
 
 	/**
-	 * Start
-	 */
-	static final int PROGRESSZERO = 0;
-
-	/**
 	 * Connect start
 	 */
 	static final int PROGRESSCONNECT = 0;

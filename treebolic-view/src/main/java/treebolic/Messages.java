@@ -25,10 +25,10 @@ public class Messages
 	}
 
 	/**
-	 * Get string from key
+	 * Get localized message
 	 *
 	 * @param key message key
-	 * @return message value
+	 * @return localized message
 	 */
 	public static String getString(@NonNull String key)
 	{

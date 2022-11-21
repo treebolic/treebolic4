@@ -32,7 +32,12 @@ public class XSettingsDialog extends SettingsDialog
 	 */
 	static private final int REPOIDX = 4;
 
-	static public final int REPO = 1 << XSettingsDialog.REPOIDX;
+// --Commented out by Inspection START (11/21/22, 6:34 PM):
+//	/**
+//	 * Repository
+//	 */
+//	static public final int REPO = 1 << XSettingsDialog.REPOIDX;
+// --Commented out by Inspection STOP (11/21/22, 6:34 PM)
 
 	/**
 	 * Repository text
@@ -58,18 +63,18 @@ public class XSettingsDialog extends SettingsDialog
 	{
 		super.initialize();
 		this.repositoryTextField = new JTextField(32);
-		this.repositoryTextField.setToolTipText(Messages.getString("XSettingsDialog.tooltip_repo")); 
-		final JLabel repositoryFolderLabel = new JLabel(Messages.getString("XSettingsDialog.label_repo")); 
-		final JButton repositoryBrowseButton = new JButton(Messages.getString("XSettingsDialog.browse")); 
+		this.repositoryTextField.setToolTipText(Messages.getString("XSettingsDialog.tooltip_repo"));
+		final JLabel repositoryFolderLabel = new JLabel(Messages.getString("XSettingsDialog.label_repo"));
+		final JButton repositoryBrowseButton = new JButton(Messages.getString("XSettingsDialog.browse"));
 		repositoryBrowseButton.addActionListener(event -> {
-			final String folder = FileDialogs.getFolder(XSettingsDialog.this.settings.getProperty("base", "."));  
+			final String folder = FileDialogs.getFolder(XSettingsDialog.this.settings.getProperty("base", "."));
 			if (folder != null && !folder.isEmpty())
 			{
 				XSettingsDialog.this.repositoryTextField.setText(folder);
 			}
 			else
 			{
-				XSettingsDialog.this.repositoryTextField.setText(Messages.getString("XSettingsDialog.internal")); 
+				XSettingsDialog.this.repositoryTextField.setText(Messages.getString("XSettingsDialog.internal"));
 			}
 		});
 
@@ -88,7 +93,7 @@ public class XSettingsDialog extends SettingsDialog
 		if (flag)
 		{
 			// read properties into components
-			this.repositoryTextField.setText(this.settings.getProperty("repository", Messages.getString("XSettingsDialog.internal")));  
+			this.repositoryTextField.setText(this.settings.getProperty("repository", Messages.getString("XSettingsDialog.internal")));
 		}
 		else
 		{
@@ -96,30 +101,35 @@ public class XSettingsDialog extends SettingsDialog
 			{
 				// update properties from components
 				final String repository = this.repositoryTextField.getText();
-				if (repository == null || repository.isEmpty() || repository.equals(Messages.getString("XSettingsDialog.internal"))) 
+				if (repository == null || repository.isEmpty() || repository.equals(Messages.getString("XSettingsDialog.internal")))
 				{
-					this.settings.remove("repository"); 
+					this.settings.remove("repository");
 				}
 				else
 				{
-					this.settings.setProperty("repository", repository); 
+					this.settings.setProperty("repository", repository);
 				}
 			}
 		}
 		super.setVisible(flag);
 	}
 
+	/**
+	 * Main entry point
+	 *
+	 * @param args argmuments
+	 */
 	static public void main(final String[] args)
 	{
-		UIManager.put("swing.boldMetal", false); 
-		final Properties settings = Persist.getSettings("treebolic-generator"); 
+		UIManager.put("swing.boldMetal", false);
+		final Properties settings = Persist.getSettings("treebolic-generator");
 		final XSettingsDialog dialog = new XSettingsDialog(settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		if (dialog.ok)
 		{
-			Persist.saveSettings("treebolic-generator", settings); 
+			Persist.saveSettings("treebolic-generator", settings);
 		}
 		System.exit(0);
 	}

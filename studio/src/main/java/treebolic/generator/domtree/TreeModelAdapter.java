@@ -13,6 +13,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * Tree model adapter
+ */
 public class TreeModelAdapter implements TreeModel
 {
 	// D A T A
@@ -42,8 +45,8 @@ public class TreeModelAdapter implements TreeModel
 	/**
 	 * Constructor
 	 *
-	 * @param document document
-	 * @param fromNode from node
+	 * @param document         document
+	 * @param fromNode         from node
 	 * @param elementsOnlyFlag whether to consider elements only
 	 */
 	public TreeModelAdapter(final Document document, final String fromNode, final boolean elementsOnlyFlag)
@@ -63,7 +66,9 @@ public class TreeModelAdapter implements TreeModel
 	public Object getRoot()
 	{
 		if (this.fromNode == null)
+		{
 			return this.document.getDocumentElement();
+		}
 		else
 		{
 			final NodeList elements = this.document.getElementsByTagName(this.fromNode);
@@ -154,14 +159,16 @@ public class TreeModelAdapter implements TreeModel
 	/**
 	 * Get nth child node
 	 *
-	 * @param node node
+	 * @param node        node
 	 * @param targetIndex index
 	 * @return nth child
 	 */
 	private Node nthChildOf(final Node node, final int targetIndex)
 	{
 		if (!this.elementsOnly)
+		{
 			return node.getChildNodes().item(targetIndex);
+		}
 
 		// nth element node
 		int index = 0;
@@ -169,7 +176,9 @@ public class TreeModelAdapter implements TreeModel
 		{
 			final Node child = node.getChildNodes().item(i);
 			if (child.getNodeType() == Node.ELEMENT_NODE && index++ == targetIndex)
+			{
 				return child;
+			}
 		}
 		return null;
 	}
@@ -183,7 +192,9 @@ public class TreeModelAdapter implements TreeModel
 	private int childCountOf(final Node node)
 	{
 		if (!this.elementsOnly)
+		{
 			return node.getChildNodes().getLength();
+		}
 
 		// number of element nodes
 		int count = 0;
@@ -201,7 +212,7 @@ public class TreeModelAdapter implements TreeModel
 	/**
 	 * Get index of child node
 	 *
-	 * @param node node
+	 * @param node        node
 	 * @param targetChild child
 	 * @return index or -1 if not found
 	 */
@@ -212,7 +223,9 @@ public class TreeModelAdapter implements TreeModel
 		{
 			final Node child = nthChildOf(node, i);
 			if (child == targetChild)
+			{
 				return i;
+			}
 		}
 		return -1;
 	}

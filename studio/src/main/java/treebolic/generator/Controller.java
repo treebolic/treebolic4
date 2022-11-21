@@ -190,20 +190,22 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	public enum Code
 	{
-		NEW, OPEN, OPENURL, IMPORTXSL, IMPORTPROVIDER, //
-		EXPORT, SAVE, SAVEAS, //
-		ZIP, UNZIP, SERIALIZE, DESERIALIZE, //
-		NEWELEMENT, REMOVEELEMENT, //
-		EXPORTSETTINGS, //
-		NORMALIZEIDS, LISTIMAGES, LISTLINKS, LISTMOUNTS, LISTIDS, //
-		MAKESITE, RUNSITE, //
-		SETTINGS, SETTINGSBASE, SETTINGSURL, //
-		UPDATE, //
-		OPTIONTREEBOLICRENDERER, OPTIONVALIDATEXML, OPTIONFOCUSPARENT, //
-		EXPANDTREE, COLLAPSETREE, //
-		SELECTTOP, SELECTTREE, SELECTNODES, SELECTEDGES, //
-		DTD, //
-		ABOUT, HELP,
+		//@formatter:off
+		/** New */ NEW, /** Open */ OPEN, /** Open URL */ OPENURL, /** Import with XSL */ IMPORTXSL, /** Import from provider */ IMPORTPROVIDER, //
+		/** Export */ EXPORT, /** Save */ SAVE, /** Save as */ SAVEAS, //
+		/** Zip */ ZIP, /** Unzip */ UNZIP, /** Serialize */ SERIALIZE, /** Deserialize */ DESERIALIZE, //
+		/** New element */ NEWELEMENT, /** Remove element */ REMOVEELEMENT, //
+		/** Export settings */ EXPORTSETTINGS, //
+		/** Normalize IDs */ NORMALIZEIDS, /** List images */ LISTIMAGES, /** List links */ LISTLINKS, /** List mounts */ LISTMOUNTS, /** List IDs */ LISTIDS, //
+		/** Make */ MAKESITE, /** Run site */ RUNSITE, //
+		/** Settings */ SETTINGS, /** Settings base */ SETTINGSBASE, /** Settings URL */ SETTINGSURL, //
+		/** Update */ UPDATE, //
+		/** Treebolic renderer option */ OPTIONTREEBOLICRENDERER, /** Validate XML option */ OPTIONVALIDATEXML, /** Focus parent option */ OPTIONFOCUSPARENT, //
+		/** Expand tree */ EXPANDTREE, /** Collapse tree */ COLLAPSETREE, //
+		/** Select top */ SELECTTOP, /** Select tree */ SELECTTREE, /** Select nodes */ SELECTNODES, /** Select edges */ SELECTEDGES, //
+		/** DTD */ DTD, //
+		/** About */ ABOUT, /** Help */ HELP,
+		// @formatter:on
 	}
 
 	// O P E N . M O D E S
@@ -213,7 +215,9 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	public enum Mode
 	{
-		NEW, OPEN, IMPORT, DESERIALIZE, UNZIP
+		// formatter:off
+		/** New */ NEW, /** Open */ OPEN, /** Import */ IMPORT, /** Deserialize */ DESERIALIZE, /** Unzip */ UNZIP
+		// formatter:on
 	}
 
 	// U P D A T E . R O U T I N E S
@@ -479,11 +483,13 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 
 	// E X E C U T E
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.generator.IController#execute(int, int)
+	/**
+	 * Execute code
+	 *
+	 * @param code  code
+	 * @param value value parameter
 	 */
-	public void execute(final Code code, final int value)
+	public void execute(final Code code, @SuppressWarnings("unused") final int value)
 	{
 		switch (code)
 		{
@@ -1259,6 +1265,9 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 
 	/**
 	 * Transform to view
+	 *
+	 * @param exportUrl     export url
+	 * @param xsltUrlString xslt url
 	 */
 	public void transformToView(final String exportUrl, final String xsltUrlString)
 	{
@@ -1298,6 +1307,10 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 
 	/**
 	 * Transform to file
+	 *
+	 * @param exportUrl     export url
+	 * @param xsltUrlString xslt url
+	 * @param outputFileUrl output file url
 	 */
 	public void transformToFile(final String exportUrl, final String xsltUrlString, final String outputFileUrl)
 	{

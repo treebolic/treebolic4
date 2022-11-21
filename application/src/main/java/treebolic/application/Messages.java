@@ -24,10 +24,10 @@ public class Messages
 	}
 
 	/**
-	 * Get string
+	 * Get localized message
 	 *
-	 * @param key key
-	 * @return string value
+	 * @param key message key
+	 * @return localized message
 	 */
 	public static String getString(final String key)
 	{

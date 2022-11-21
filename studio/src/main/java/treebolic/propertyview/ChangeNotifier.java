@@ -30,8 +30,7 @@ public class ChangeNotifier
 	/**
 	 * Add a listener
 	 *
-	 * @param listener
-	 *        listener
+	 * @param listener listener
 	 */
 	public void addChangeListener(final ChangeListener listener)
 	{
@@ -41,8 +40,7 @@ public class ChangeNotifier
 	/**
 	 * Remove listener
 	 *
-	 * @param listener
-	 *        listener
+	 * @param listener listener
 	 */
 	public void removeChangeListener(final ChangeListener listener)
 	{
@@ -62,6 +60,7 @@ public class ChangeNotifier
 	/**
 	 * Notifies all listeners that have registered interest for notification on this event type.
 	 *
+	 * @param changeEvent change event
 	 * @see EventListenerList
 	 */
 	public void fireStateChanged(final ChangeEvent changeEvent)

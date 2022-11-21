@@ -66,22 +66,6 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		{
 			//
 		}
-
-		//		@Override
-		//		protected AbstractLayoutCache.NodeDimensions createNodeDimensions()
-		//		{
-		//			return new NodeDimensionsHandler()
-		//			{
-		//				@SuppressWarnings("synthetic-access")
-		//				@Override
-		//				public Rectangle getNodeDimensions(final Object value, final int row, final int depth, final boolean expanded, final Rectangle size)
-		//				{
-		//					final Rectangle dimensions = super.getNodeDimensions(value, row, depth, expanded, size);
-		//					dimensions.width = MyBasicTreeUI.this.tree.getWidth() - getRowX(row, depth);
-		//					return dimensions;
-		//				}
-		//			};
-		//		}
 	}
 
 	// C O N S T R U C T

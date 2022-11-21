@@ -85,11 +85,11 @@ public class TreeAdapter extends DefaultTreeModel
 	 *
 	 * @param node
 	 *        treebolic node
-	 * @param parentTreeNode
+	 * @param ignoredParentTreeNode
 	 *        parent tree node
 	 * @return tree node
 	 */
-	private static MutableTreeNode makeNode(final Node node, final MutableTreeNode parentTreeNode)
+	private static MutableTreeNode makeNode(final Node node, final MutableTreeNode ignoredParentTreeNode)
 	{
 		final DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode();
 		treeNode.setUserObject(node);
@@ -141,13 +141,13 @@ public class TreeAdapter extends DefaultTreeModel
 	/**
 	 * Make tree node for menu
 	 *
-	 * @param menu
+	 * @param ignoredMenu
 	 *        menu
 	 * @param settings
 	 *        settings
 	 * @return tree node
 	 */
-	private static MutableTreeNode makeTools(final List<MenuItem> menu, final Settings settings)
+	private static MutableTreeNode makeTools(final List<MenuItem> ignoredMenu, final Settings settings)
 	{
 		final DefaultMutableTreeNode toolsTreeNode = new DefaultMutableTreeNode();
 		toolsTreeNode.setUserObject(new ToolsWrapper(settings));
