@@ -604,13 +604,18 @@ public class OwlModelFactory
 			{
 				if (target != null)
 				{
+					if ("AsymmetricRelation".equals(owlClass.getIRI().getShortForm()))
+					{
+						System.out.println();
+					}
+
 					boolean hasInstances = target.contains("instances");
 					boolean hasProperties = target.contains("properties");
 					boolean isRelation = target.contains("relation");
 
 					// root
 					final MutableNode owlClassNode = new MutableNode(null, "root");
-					owlClassNode.setLabel(getName(classIri));
+					owlClassNode.setLabel(owlClass.getIRI().getShortForm());
 					decorateClassWith(owlClassNode, hasInstances, hasProperties, isRelation);
 
 					// instances
@@ -627,13 +632,9 @@ public class OwlModelFactory
 					// relation
 					if (isRelation)
 					{
-						// relation root
-						final TreeMutableNode propertiesNode = new TreeMutableNode(owlClassNode, classIri + "-relation");
-						decorateProperties(propertiesNode);
-
 						// relation
 						OWLObjectProperty relation = this.engine.getRelation(owlClass);
-						visitRelation(propertiesNode, relation);
+						visitRelation(owlClassNode, relation);
 					}
 					// properties
 					if (hasProperties)
@@ -778,6 +779,11 @@ public class OwlModelFactory
 			final boolean isRelation = this.engine.isRelation(owlClass.asOWLClass());
 
 			// mountpoint
+			final String owlClassShortForm = owlClass.getIRI().getShortForm();
+			if ("AsymmetricRelation".equals(owlClassShortForm))
+			{
+				System.out.println();
+			}
 			if (hasInstances || hasProperties || isRelation)
 			{
 				List<String> targets = new ArrayList<>();
@@ -859,27 +865,97 @@ public class OwlModelFactory
 	 * @param parentNode  treebolic parent node to attach to
 	 * @param owlProperty property
 	 */
-	public void visitRelation(final TreeMutableNode parentNode, final OWLObjectProperty owlProperty)
+	public void visitRelation(final MutableNode parentNode, final OWLObjectProperty owlProperty)
 	{
 		final String owlPropertyShortForm = owlProperty.getIRI().getShortForm();
-		if ("AsymmetricRelation".equals(owlPropertyShortForm))
+		final MutableNode relationNode = new MutableNode(parentNode, owlPropertyShortForm);
+		relationNode.setLabel(owlPropertyShortForm);
+		decorateProperty(relationNode);
+
+		final List<OWLClass> domains = this.engine.getDomains(owlProperty).collect(toList());
+		if (!domains.isEmpty())
 		{
-			System.out.println();
+			final MutableNode domainsNode = new MutableNode(relationNode, owlPropertyShortForm + "-domains");
+			domainsNode.setLabel("domains");
+			decorateProperty(domainsNode);
+			domains.forEach(owlDomainClass -> {
+
+				String owlClassId = owlDomainClass.asOWLClass().getIRI().getShortForm();
+				final MutableNode domainNode = new MutableNode(domainsNode, owlClassId);
+				domainNode.setLabel(owlClassId);
+				domainNode.setTarget(owlClassId);
+				decorateProperty(domainNode);
+			});
 		}
 
-		final Stream<OWLClass> domains = this.engine.getDomains(owlProperty);
+		final List<OWLClass> ranges = this.engine.getRanges(owlProperty).collect(toList());
+		if (!ranges.isEmpty())
+		{
+			final MutableNode rangesNode = new MutableNode(relationNode, owlPropertyShortForm + "-ranges");
+			rangesNode.setLabel("ranges");
+			decorateProperty(rangesNode);
+			ranges.forEach(owlRangeClass -> {
 
-		final MutableNode domainsNode = new MutableNode(parentNode, owlPropertyShortForm + "-domains");
-		domainsNode.setLabel("domains");
-		decorateProperty(domainsNode);
-		domains.forEach(owlDomainClass -> {
+				String owlClassId = owlRangeClass.asOWLClass().getIRI().getShortForm();
+				final MutableNode rangeNode = new MutableNode(rangesNode, owlClassId);
+				rangeNode.setLabel(owlClassId);
+				rangeNode.setTarget(owlClassId);
+				decorateProperty(rangeNode);
+			});
+		}
 
-			String owlClassId = owlDomainClass.asOWLClass().getIRI().getShortForm();
-			final MutableNode relationNode = new MutableNode(domainsNode, owlClassId);
-			relationNode.setLabel(owlClassId);
-			relationNode.setTarget(owlClassId);
-			decorateProperty(relationNode);
-		});
+		if (owlProperty.isOWLClass())
+		{
+			final List<OWLClass> subclasses = this.engine.getSubclasses(owlProperty).collect(toList());
+			if (!subclasses.isEmpty())
+			{
+				final MutableNode subclassesNode = new MutableNode(relationNode, owlPropertyShortForm + "-subclasses");
+				subclassesNode.setLabel("subclasses");
+				decorateProperty(subclassesNode);
+				subclasses.forEach(owlSubclass -> {
+
+					String owlSubclassId = owlSubclass.asOWLClass().getIRI().getShortForm();
+					final MutableNode subclassNode = new MutableNode(subclassesNode, owlSubclassId);
+					subclassNode.setLabel(owlSubclassId);
+					subclassNode.setTarget(owlSubclassId);
+					decorateProperty(subclassNode);
+				});
+			}
+
+			final List<OWLClass> superclasses = this.engine.getSuperclasses(owlProperty).collect(toList());
+			if (!superclasses.isEmpty())
+			{
+				final MutableNode superclassesNode = new MutableNode(relationNode, owlPropertyShortForm + "-superclasses");
+				superclassesNode.setLabel("superclasses");
+				decorateProperty(superclassesNode);
+				superclasses.forEach(owlSuperclass -> {
+
+					String owlSuperclassId = owlSuperclass.asOWLClass().getIRI().getShortForm();
+					final MutableNode superclassNode = new MutableNode(superclassesNode, owlSuperclassId);
+					superclassNode.setLabel(owlSuperclassId);
+					superclassNode.setTarget(owlSuperclassId);
+					decorateProperty(superclassNode);
+				});
+			}
+		}
+
+		final List<OWLObjectProperty> inverses = this.engine.getInverseProperties(owlProperty).collect(toList());
+		if (!inverses.isEmpty())
+		{
+			final MutableNode inversesNode = new MutableNode(relationNode, owlPropertyShortForm + "-inverses");
+			inversesNode.setLabel("inverses");
+			decorateProperty(inversesNode);
+			inverses.stream() //
+					.forEach(owlInverseProperty -> {
+
+						String owlInverseId = owlInverseProperty.getIRI().getShortForm();
+						final MutableNode inverseNode = new MutableNode(inversesNode, owlInverseId);
+						inverseNode.setLabel(owlInverseId);
+						inverseNode.setTarget(owlInverseId);
+						decorateProperty(inverseNode);
+					});
+		}
+
 	}
 
 	/**
@@ -891,7 +967,7 @@ public class OwlModelFactory
 	public void visitProperties(final TreeMutableNode parentNode, final Stream<OWLObjectProperty> owlProperties)
 	{
 		final List<INode> childNodes = owlProperties //
-				.peek(System.out::println) // TODO
+
 				.map(owlProperty -> {
 					final String owlPropertyShortForm = owlProperty.getIRI().getShortForm();
 					final String owlPropertyId = getName(owlPropertyShortForm);

@@ -102,21 +102,6 @@ public class QueryEngine
 		return this.reasoner.instances(owlClass, DIRECT_INSTANCES);
 	}
 
-	// properties
-
-	static String getName(final String uriString)
-	{
-		if (uriString != null)
-		{
-			final int index = uriString.lastIndexOf('#');
-			if (index != -1)
-			{
-				return uriString.substring(index + 1);
-			}
-		}
-		return uriString;
-	}
-
 	// relations
 
 	/**
@@ -151,6 +136,63 @@ public class QueryEngine
 	public Stream<OWLClass> getDomains(final OWLObjectProperty owlObjectProperty)
 	{
 		return this.reasoner.objectPropertyDomains(owlObjectProperty, true);
+	}
+
+	/**
+	 * Get ranges of object property
+	 *
+	 * @param owlObjectProperty property
+	 * @return stream of domain classes
+	 */
+	public Stream<OWLClass> getRanges(final OWLObjectProperty owlObjectProperty)
+	{
+		return this.reasoner.objectPropertyRanges(owlObjectProperty, true);
+	}
+
+	/**
+	 * Get subclasses of object property
+	 *
+	 * @param owlObjectProperty property
+	 * @return stream of sub classes
+	 */
+	public Stream<OWLClass> getSubclasses(final OWLObjectProperty owlObjectProperty)
+	{
+		return this.reasoner.subClasses(owlObjectProperty.asOWLClass(), true);
+	}
+
+	/**
+	 * Get superclasses of object property
+	 *
+	 * @param owlObjectProperty property
+	 * @return stream of super classes
+	 */
+	public Stream<OWLClass> getSuperclasses(final OWLObjectProperty owlObjectProperty)
+	{
+		return this.reasoner.superClasses(owlObjectProperty.asOWLClass(), true);
+	}
+
+	/**
+	 * Get sub properties of object property
+	 *
+	 * @param owlObjectProperty property
+	 * @return stream of sub property expressions
+	 */
+	public Stream<OWLObjectPropertyExpression> getSubProperties(final OWLObjectProperty owlObjectProperty)
+	{
+		return this.reasoner.subObjectProperties(owlObjectProperty, true);
+	}
+
+	/**
+	 * Get sub properties of object property
+	 *
+	 * @param owlObjectProperty property
+	 * @return stream of sub property expressions
+	 */
+	public Stream<OWLObjectProperty> getInverseProperties(final OWLObjectProperty owlObjectProperty)
+	{
+		return this.reasoner.inverseObjectProperties(owlObjectProperty) //
+				.filter(OWLObjectPropertyExpression::isNamed) //
+				.map(OWLObjectPropertyExpression::getNamedProperty);
 	}
 
 	/**
