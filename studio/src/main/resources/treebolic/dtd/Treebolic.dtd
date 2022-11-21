@@ -128,8 +128,8 @@
 
 <!ELEMENT menuitem (label, a?)>
 <!ATTLIST menuitem
-	action (goto|search|focus) #REQUIRED
+	action (goto|search|focus|GOTO|SEARCH|FOCUS) #REQUIRED
 	match-target CDATA #IMPLIED
-	match-scope (label|content|link|id) #IMPLIED
-	match-mode (equals|startswith|includes) #IMPLIED
+	match-scope (label|content|link|id|LABEL|CONTENT|LINK|ID) #IMPLIED
+	match-mode (equals|startswith|includes|EQUALS|STARTSWITH|INCLUDES) #IMPLIED
 >
