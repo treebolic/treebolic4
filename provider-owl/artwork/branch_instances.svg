@@ -2,15 +2,15 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   version="1.0"
-   width="128"
-   height="128"
-   id="svg2"
-   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
-   sodipodi:docname="branch_instances.svg"
-   inkscape:export-filename="/home/bbou/Desktop/stale.png"
-   inkscape:export-xdpi="11.25"
    inkscape:export-ydpi="11.25"
+   inkscape:export-xdpi="11.25"
+   inkscape:export-filename="/home/bbou/Desktop/stale.png"
+   sodipodi:docname="branch_instances.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   id="svg2"
+   height="128"
+   width="128"
+   version="1.0"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -39,16 +39,16 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1244"
-     inkscape:window-height="971"
+     inkscape:window-width="1920"
+     inkscape:window-height="1113"
      id="namedview21"
      showgrid="false"
      inkscape:zoom="2.1599903"
-     inkscape:cx="42.361301"
+     inkscape:cx="-87.731875"
      inkscape:cy="27.083455"
-     inkscape:window-x="609"
-     inkscape:window-y="125"
-     inkscape:window-maximized="0"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
      inkscape:current-layer="svg2"
      inkscape:pagecheckerboard="0" />
   <defs
@@ -56,26 +56,26 @@
     <linearGradient
        id="linearGradient2816">
       <stop
-         style="stop-color:#949494;stop-opacity:1"
+         style="stop-color:#000094;stop-opacity:1"
          offset="0"
          id="stop2818" />
       <stop
-         style="stop-color:#ffffff;stop-opacity:1"
+         style="stop-color:#0000ff;stop-opacity:1"
          offset="1"
          id="stop2820" />
     </linearGradient>
     <linearGradient
        id="linearGradient2794">
       <stop
-         style="stop-color:#545454;stop-opacity:1"
+         style="stop-color:#000054;stop-opacity:1"
          offset="0"
          id="stop2796" />
       <stop
-         style="stop-color:#545454;stop-opacity:1"
+         style="stop-color:#000054;stop-opacity:1"
          offset="0.9464286"
          id="stop2804" />
       <stop
-         style="stop-color:#c5c5c5;stop-opacity:0"
+         style="stop-color:#0000c5;stop-opacity:0"
          offset="1"
          id="stop2798" />
     </linearGradient>
@@ -112,7 +112,7 @@
        inkscape:connector-curvature="0" />
     <path
        id="path1873"
-       style="fill:#888888;fill-opacity:1;fill-rule:nonzero;stroke:#232323;stroke-width:5.01;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#000088;fill-opacity:1;fill-rule:nonzero;stroke:#000023;stroke-width:5.01;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        d="m 112.34681,67.694316 a 37.726397,39.899501 0 0 1 -75.452794,0 37.726397,39.899501 0 1 1 75.452794,0 z"
        inkscape:connector-curvature="0" />
     <path

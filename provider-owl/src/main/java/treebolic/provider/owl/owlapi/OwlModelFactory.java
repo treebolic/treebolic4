@@ -991,7 +991,7 @@ public class OwlModelFactory
 				.collect(toList());
 
 		// balance load
-		final List<INode> balancedNodes = this.propertiesLoadBalancer.buildHierarchy(childNodes, 0);
+		final List<INode> balancedNodes = this.instancesLoadBalancer.buildHierarchy(childNodes, 0);
 		parentNode.addChildren(balancedNodes);
 	}
 
@@ -1006,6 +1006,7 @@ public class OwlModelFactory
 		final String owlPropertyShortForm = owlProperty.getIRI().getShortForm();
 		final MutableNode relationNode = new MutableNode(parentNode, owlPropertyShortForm);
 		relationNode.setLabel(owlPropertyShortForm);
+		relationNode.setEdgeLabel("is relation");
 		decorateRelation(relationNode);
 
 		final List<OWLClass> domains = this.engine.getDomains(owlProperty).collect(toList());
