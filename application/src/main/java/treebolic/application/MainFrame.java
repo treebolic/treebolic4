@@ -124,6 +124,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return widget
 	 */
+	@NonNull
 	public Widget getWidget()
 	{
 		return this.widget;
@@ -210,6 +211,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return parameters
 	 */
+	@Nullable
 	public Properties getParameters()
 	{
 		return this.parameters;

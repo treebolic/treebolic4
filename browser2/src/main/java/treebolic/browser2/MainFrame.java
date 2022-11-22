@@ -67,6 +67,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Settings (merged settings and command-line overrides)
 	 */
+	@NonNull
 	protected final Properties settings;
 
 	// C O M P O N E N T S
@@ -106,7 +107,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		@NonNull JToolBar toolbar = makeToolbar();
 
 		// components: pane
-		final JComponent home = makeHome();
+		@NonNull final JComponent home = makeHome();
 		home.setPreferredSize(Constants.DIM_APP);
 
 		// assemble
@@ -146,6 +147,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * HTML home pane
 	 */
+	@NonNull
 	private JComponent makeHome()
 	{
 		return makeBrowserPane(this.getClass().getResource("splash/index.html"), false);
@@ -425,6 +427,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param args     command-line arguments
 	 * @return parameters
 	 */
+	@NonNull
 	static public Properties makeSettings(@NonNull final Properties settings, @Nullable final String[] args)
 	{
 		// param1=<val> param2=<"val with spaces"> ...
