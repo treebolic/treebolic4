@@ -4,9 +4,13 @@
 
 package treebolic.control;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import treebolic.IWidget;
 import treebolic.Messages;
@@ -89,7 +93,13 @@ public class Controller extends Commander
 	 * Verbose status flag (use for debug purposes)
 	 */
 	@SuppressWarnings("WeakerAccess")
-	static public final boolean CONTENT_VERBOSE = false; // weight...
+	static public final boolean CONTENT_VERBOSE = false;
+
+	/**
+	 * Tweak relative IMG urls to absolute
+	 */
+	@SuppressWarnings("WeakerAccess")
+	static public final boolean ABSOLUTE_IMG_URLS = true;
 
 	// action
 
@@ -98,54 +108,34 @@ public class Controller extends Commander
 	 */
 	public enum Event
 	{
-		/**
-		 * Select event
-		 */
+		// @formatter:off
+		/** Select event */
 		SELECT,
 		/**
 		 * Hover event
 		 */
 		HOVER,
-		/**
-		 * Drag event
-		 */
+		/** Drag event */
 		DRAG,
-		/**
-		 * Leave drag event
-		 */
+		/** Leave drag event */
 		LEAVEDRAG,
-		/**
-		 * Move event
-		 */
+		/** Move event */
 		MOVE,
-		/**
-		 * Rotate event
-		 */
+		/** Rotate event */
 		ROTATE,
-		/**
-		 * Focus event
-		 */
+		/** Focus event */
 		FOCUS,
-		/**
-		 * Mount event
-		 */
+		/** Mount event */
 		MOUNT,
-		/**
-		 * Link event
-		 */
+		/** Link event */
 		LINK,
-		/**
-		 * Popup event
-		 */
+		/** Popup event */
 		POPUP,
-		/**
-		 * Zoom event
-		 */
+		/** Zoom event */
 		ZOOM,
-		/**
-		 * Scale event
-		 */
+		/** Scale event */
 		SCALE
+		// @formatter:on
 	}
 
 	/**
@@ -436,7 +426,7 @@ public class Controller extends Commander
 								.append(String.format(Messages.getString("Controller.status_search_origin"), node.getLabel())); //
 					}
 					assert this.widget != null;
-					this.widget.putStatus(Statusbar.PutType.SEARCH, (s) -> Controller.makeHtml("searching", s), Messages.getString("Controller.status_searching"), message.toString());
+					this.widget.putStatus(Statusbar.PutType.SEARCH, (s) -> makeHtml("searching", s), Messages.getString("Controller.status_searching"), message.toString());
 
 					// search: scope, mode, target, [start]
 					final INode result = search(SearchCommand.SEARCH, matchScope, matchMode, searchTarget, node);
@@ -650,7 +640,7 @@ public class Controller extends Commander
 	 * @return html content string
 	 */
 	@NonNull
-	public static String makeHtmlContent(@NonNull final CharSequence[] contents, boolean div)
+	public String makeHtmlContent(@NonNull final CharSequence[] contents, boolean div)
 	{
 		final StringBuilder sb = new StringBuilder();
 		if (contents[IDX_NODE_CONTENT] != null)
@@ -686,13 +676,18 @@ public class Controller extends Commander
 	 * @return content as HTML
 	 */
 	@NonNull
-	public static String makeHtml(String divStyle, @NonNull final CharSequence... contents)
+	public String makeHtml(String divStyle, @NonNull final CharSequence... contents)
 	{
 		final StringBuilder sb = new StringBuilder();
 		for (CharSequence content : contents)
 		{
 			if (content != null && content.length() > 0)
 			{
+				if (ABSOLUTE_IMG_URLS)
+				{
+					content = absoluteImageSrc(content.toString());
+				}
+
 				sb.append("<div class='");
 				sb.append(divStyle);
 				sb.append("'>");
@@ -701,6 +696,78 @@ public class Controller extends Commander
 			}
 		}
 		return sb.toString();
+	}
+
+	private static final Pattern SCR_QUOTE1_PATTERN = Pattern.compile("(?<=<img[^>]{1,20})src='([^']+)'", Pattern.CASE_INSENSITIVE);
+
+	private static final Pattern SRC_QUOTE2_PATTERN = Pattern.compile("(?<=<img[^>]{1,20})src=\"([^\"]+)\"", Pattern.CASE_INSENSITIVE);
+
+	/**
+	 * Replace src='rel_url' or src="rel_url" with absolute URLs in IMG tags
+	 *
+	 * @param content content
+	 * @return changed content
+	 */
+	private String absoluteImageSrc(String content)
+	{
+		// "<IMG src='image'>"
+		// "<img src='http://somesite/path/image'>"
+		// "<img src='file:///path/image'>"
+		// "<img src='file://image'>"
+		// "<IMG src=\"jar:file:///proj/parser/jar/parser.jar!/test.xml\""
+		URL imageBase = widget.getIContext().getImagesBase();
+		if (imageBase != null)
+		{
+			Matcher m = SCR_QUOTE1_PATTERN.matcher(content);
+			while (m.find())
+			{
+				String f1 = m.group(1); // first group = src content
+				URL url2 = makeUrlAbsolute(imageBase, f1);
+				if (url2 != null)
+				{
+					content = m.replaceFirst("src='" + url2 + "'");
+				}
+			}
+
+			Matcher m2 = SRC_QUOTE2_PATTERN.matcher(content);
+			while (m2.find())
+			{
+				String f1 = m2.group(1); // first group = src content
+				URL url2 = makeUrlAbsolute(imageBase, f1);
+				if (url2 != null)
+				{
+					content = m2.replaceFirst("src='" + url2 + "'");
+				}
+			}
+		}
+		return content;
+	}
+
+	/**
+	 * Make url absolute
+	 *
+	 * @param base    base url
+	 * @param urlSpec url spec
+	 * @return new url with base, null if unchanged and already absolute
+	 */
+	private URL makeUrlAbsolute(URL base, String urlSpec)
+	{
+		try
+		{
+			new URL(urlSpec);
+			return null;
+		}
+		catch (MalformedURLException e)
+		{
+			try
+			{
+				return new URL(base, urlSpec);
+			}
+			catch (MalformedURLException ignored)
+			{
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -777,6 +844,10 @@ public class Controller extends Commander
 				else
 				{
 					content = content.replaceAll("\n", "<br>");
+					if (ABSOLUTE_IMG_URLS)
+					{
+						content = absoluteImageSrc(content);
+					}
 					sb.append(content.length() <= Commander.TOOLTIPLINESPAN ? "<div>" : "<div width='" + Commander.TOOLTIPLINESPAN * 7 + "'>");
 					sb.append(content);
 					sb.append("</div>");
@@ -787,8 +858,11 @@ public class Controller extends Commander
 		{
 			sb.append("</html>");
 		}
+
+		String tip = makeHtml(sb.toString());
+		tip = sb.toString();
 		assert this.view != null;
-		this.view.setToolTipText(sb.toString());
+		this.view.setToolTipText(tip);
 	}
 
 	// P O P U P

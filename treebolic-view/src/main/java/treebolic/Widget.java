@@ -630,7 +630,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 
 		if (this.provider == null)
 		{
-			final Converter toHtml = (s) -> Controller.makeHtml("mount", s);
+			final Converter toHtml = (s) -> this.controller.makeHtml("mount", s);
 
 			putStatus(Statusbar.PutType.MOUNT, toHtml, Messages.getString("Widget.status_mount"), Messages.getString("Widget.status_mount_err_provider_null"));
 
@@ -719,7 +719,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 		final INode mountingNode = Mounter.prune(mountedNode, this.model.tree.getEdges());
 		if (mountingNode == null)
 		{
-			putStatus(Statusbar.PutType.MOUNT, (s) -> Controller.makeHtml("mount", s), Messages.getString("Widget.status_unmount"), Messages.getString("Widget.status_unmount_err"));
+			putStatus(Statusbar.PutType.MOUNT, (s) -> this.controller.makeHtml("mount", s), Messages.getString("Widget.status_unmount"), Messages.getString("Widget.status_unmount_err"));
 			return;
 		}
 
@@ -1182,7 +1182,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 		dialog.setListener(this.linkActionListener);
 		final String style = this.context.getStyle();
 		dialog.setStyle(style);
-		dialog.setConverter((s) -> Controller.makeHtmlContent(s, Commander.TOOLTIPHTML));
+		dialog.setConverter((s) -> this.controller.makeHtmlContent(s, Commander.TOOLTIPHTML));
 		dialog.set(header, content);
 		dialog.display();
 	}
