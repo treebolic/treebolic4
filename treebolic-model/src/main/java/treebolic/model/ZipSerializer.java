@@ -29,12 +29,12 @@ public class ZipSerializer
 	 * @param object  object to serialize
 	 * @throws IOException io exception
 	 */
-	static public void serializeZip(@NonNull final String archive, @SuppressWarnings("SameParameterValue") final String entry, final Object object) throws IOException
+	static public void serializeZip(@NonNull final String archive, @NonNull @SuppressWarnings("SameParameterValue") final String entry, final Object object) throws IOException
 	{
-		final ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(archive, false));
-		final ZipEntry ze = new ZipEntry(entry);
+		@NonNull final ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(archive, false));
+		@NonNull final ZipEntry ze = new ZipEntry(entry);
 		zos.putNextEntry(ze);
-		final ObjectOutput oos = new ObjectOutputStream(zos);
+		@NonNull final ObjectOutput oos = new ObjectOutputStream(zos);
 		oos.writeObject(object);
 		zos.closeEntry();
 		zos.close();

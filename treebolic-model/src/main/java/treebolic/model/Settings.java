@@ -532,8 +532,8 @@ public class Settings implements Serializable
 	public void load(@NonNull final Properties properties)
 	{
 		String param;
-		Color color;
-		Integer style;
+		@Nullable Color color;
+		@Nullable Integer style;
 
 		// top
 		param = properties.getProperty(Settings.PROP_TOOLBAR);
@@ -742,14 +742,14 @@ public class Settings implements Serializable
 		for (int i = 0; (param = properties.getProperty(Settings.PROP_MENUITEM + i)) != null; i++)
 		{
 			// label;action;link;target;matchTarget;matchScope;matchMode
-			final String[] fields = param.split(";");
+			@NonNull final String[] fields = param.split(";");
 			if (fields.length != 7)
 			{
 				continue;
 			}
 
 			// menu item
-			final MenuItem menuItem = new MenuItem();
+			@NonNull final MenuItem menuItem = new MenuItem();
 			menuItem.label = fields[0];
 			menuItem.link = fields[2];
 			menuItem.target = fields[3];

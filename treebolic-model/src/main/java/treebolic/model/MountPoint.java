@@ -119,7 +119,7 @@ public class MountPoint implements Serializable
 	@NonNull
 	public static INode follow(@NonNull final INode node, @SuppressWarnings("SameParameterValue") boolean up, @SuppressWarnings("SameParameterValue") boolean down)
 	{
-		MountPoint mountPoint = node.getMountPoint();
+		@Nullable MountPoint mountPoint = node.getMountPoint();
 
 		// mounted mountpoint must be non-null
 		if (mountPoint != null)
@@ -128,10 +128,10 @@ public class MountPoint implements Serializable
 			//noinspection InstanceofConcreteClass
 			if (down && mountPoint instanceof Mounting)
 			{
-				final Mounting mountingMountPoint = (Mounting) mountPoint;
+				@NonNull final Mounting mountingMountPoint = (Mounting) mountPoint;
 
 				// mounting mountpoint must be reference a mounted node
-				final INode mountedNode = mountingMountPoint.mountedNode;
+				@Nullable final INode mountedNode = mountingMountPoint.mountedNode;
 				if (mountedNode != null)
 				{
 					// mounted mountpoint must be non-null
@@ -142,7 +142,7 @@ public class MountPoint implements Serializable
 						//noinspection InstanceofConcreteClass
 						if (mountPoint instanceof Mounted)
 						{
-							final Mounted mountedMountPoint = (Mounted) mountPoint;
+							@NonNull final Mounted mountedMountPoint = (Mounted) mountPoint;
 
 							// mounted mountpoint must reference mounting node
 							if (mountedMountPoint.mountingNode == node)
@@ -159,10 +159,10 @@ public class MountPoint implements Serializable
 				//noinspection InstanceofConcreteClass
 				if (up && mountPoint instanceof Mounted)
 				{
-					final Mounted mountedMountPoint = (Mounted) mountPoint;
+					@NonNull final Mounted mountedMountPoint = (Mounted) mountPoint;
 
 					// mounted mountpoint must be reference a mounting node
-					final INode mountingNode = mountedMountPoint.mountingNode;
+					@Nullable final INode mountingNode = mountedMountPoint.mountingNode;
 					if (mountingNode != null)
 					{
 						// mounting mountpoint must be non-null
@@ -173,7 +173,7 @@ public class MountPoint implements Serializable
 							//noinspection InstanceofConcreteClass
 							if (mountPoint instanceof Mounting)
 							{
-								final Mounting mountingMountPoint = (Mounting) mountPoint;
+								@NonNull final Mounting mountingMountPoint = (Mounting) mountPoint;
 
 								// mounting mountpoint must reference mounted node
 								if (mountingMountPoint.mountedNode == node)

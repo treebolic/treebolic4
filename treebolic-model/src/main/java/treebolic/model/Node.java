@@ -352,6 +352,7 @@ class XNodeData extends NodeData
 	// A C C E S S
 
 	// location
+	@NonNull
 	public Location getLocation()
 	{
 		if (this.location == null)
@@ -477,7 +478,7 @@ public class Node extends XNodeData implements INode
 		if (parent != null)
 		{
 			this.parent = parent;
-			final List<INode> children = parent.getChildren();
+			@Nullable final List<INode> children = parent.getChildren();
 			assert children != null;
 			children.add(this);
 		}

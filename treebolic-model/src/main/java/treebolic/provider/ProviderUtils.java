@@ -45,7 +45,7 @@ public class ProviderUtils
 		// try to consider it well-formed full-fledged url
 		try
 		{
-			final URL url = new URL(source);
+			@NonNull final URL url = new URL(source);
 			if (DEBUG)
 			{
 				context.message("URL=" + url);
@@ -60,7 +60,7 @@ public class ProviderUtils
 		// default to source relative to a base
 		try
 		{
-			final URL url = new URL(base, source);
+			@NonNull final URL url = new URL(base, source);
 			if (DEBUG)
 			{
 				context.message("URL=" + url); // + " from BASE URL=" + base.toString());
