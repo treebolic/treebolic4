@@ -14,7 +14,7 @@ import treebolic.glue.component.Component;
 public class GraphicsCache implements treebolic.glue.iface.GraphicsCache<Graphics>
 {
 	/**
-	 * Cosntructor
+	 * Constructor
 	 *
 	 * @param component component
 	 * @param graphics  graphics context

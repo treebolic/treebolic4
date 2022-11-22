@@ -501,6 +501,31 @@
       </set>
     </option>
   </component>
+  <component name="NullableNotNullManager">
+    <option name="myDefaultNullable" value="treebolic.annotations.Nullable" />
+    <option name="myDefaultNotNull" value="treebolic.annotations.NonNull" />
+    <option name="myNullables">
+      <value>
+        <list size="5">
+          <item index="1" class="java.lang.String" itemvalue="treebolic.annotations.Nullable" />
+          <item index="2" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
+          <item index="3" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
+          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.Nullable" />
+          <item index="5" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNullable" />
+        </list>
+      </value>
+    </option>
+    <option name="myNotNulls">
+      <value>
+        <list size="5">
+          <item index="1" class="java.lang.String" itemvalue="treebolic.annotations.NonNull" />
+          <item index="2" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
+          <item index="3" class="java.lang.String" itemvalue="androidx.annotation.NonNull" />
+          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
+         </list>
+      </value>
+    </option>
+  </component>
   <component name="ProjectResources">
     <resource url="http://www.w3.org/1999/XSL/Transform" location="" />
     <resource url="http://xml.apache.org/xslt" location="" />

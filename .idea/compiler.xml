@@ -26,8 +26,5 @@
         <module name="treebolic-glue" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="owl-application" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
