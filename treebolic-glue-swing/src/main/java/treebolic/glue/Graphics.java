@@ -182,12 +182,20 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 	@Override
 	public void drawImage(@NonNull final Image image, final int x, final int y)
 	{
+		if (image.image == null)
+		{
+			return;
+		}
 		this.g.drawImage(image.image, x, y, null);
 	}
 
 	@Override
 	public void drawImage(@NonNull final Image image, final int x, final int y, final int w, final int h)
 	{
+		if (image.image == null)
+		{
+			return;
+		}
 		final java.awt.Image awtImage = image.image.getScaledInstance(w, h, java.awt.Image.SCALE_FAST);
 		this.g.drawImage(awtImage, x, y, null);
 	}

@@ -14,13 +14,12 @@ import java.net.URL;
 public class Image implements treebolic.glue.iface.Image
 {
 	/**
-	 * Make image
+	 * Constructor
 	 *
 	 * @param resource
 	 *        resource url
-	 * @return Image
 	 */
-	static public Image make(final URL resource)
+	public Image(final URL resource)
 	{
 		throw new NotImplementedException();
 	}

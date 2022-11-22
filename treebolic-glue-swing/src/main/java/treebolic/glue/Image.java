@@ -5,12 +5,7 @@
 package treebolic.glue;
 
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -30,16 +25,28 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	/**
 	 * AWT image
 	 */
+	@Nullable
 	public java.awt.Image image;
 
 	/**
 	 * Constructor from AWT image
 	 *
-	 * @param image AWT image
+	 * @param image AWT image or null if it could not be loaded
 	 */
-	public Image(final java.awt.Image image)
+	public Image(@Nullable final java.awt.Image image)
 	{
 		this.image = image;
+	}
+
+	/**
+	 * Constructor from URL
+	 *
+	 * @param resource resource url
+	 * @throws IOException io exception
+	 */
+	public Image(@NonNull final URL resource)
+	{
+		this(make(resource));
 	}
 
 	/**
@@ -47,12 +54,18 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	 *
 	 * @param resource resource url
 	 * @return Image
-	 * @throws IOException io exception
 	 */
-	@NonNull
-	static public Image make(@NonNull final URL resource) throws IOException
+	@Nullable
+	static public java.awt.Image make(@NonNull final URL resource)
 	{
-		return new Image(ImageIO.read(resource));
+		try
+		{
+			return ImageIO.read(resource);
+		}
+		catch (IOException ignored)
+		{
+		}
+		return null;
 	}
 
 	/**
@@ -99,9 +112,13 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	 *
 	 * @return graphics context
 	 */
-	@NonNull
+	@Nullable
 	public Graphics getGraphics()
 	{
+		if (this.image == null)
+		{
+			return null;
+		}
 		return new Graphics(this.image.getGraphics());
 	}
 
@@ -109,15 +126,23 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 
 	private void writeObject(@NonNull final ObjectOutputStream out) throws IOException
 	{
-		@NonNull final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ImageIO.write((BufferedImage) this.image, "png", baos);
-		@NonNull final byte[] imageBytes = baos.toByteArray();
+		@Nullable byte[] imageBytes = null;
+		if (this.image != null)
+		{
+			@NonNull final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write((BufferedImage) this.image, "png", baos);
+			imageBytes = baos.toByteArray();
+		}
 		out.writeObject(imageBytes);
 	}
 
 	private void readObject(@NonNull final ObjectInputStream in) throws IOException, ClassNotFoundException
 	{
+		this.image = null;
 		final byte[] imageBytes = (byte[]) in.readObject();
-		this.image = ImageIO.read(new ByteArrayInputStream(imageBytes));
+		if (imageBytes != null)
+		{
+			this.image = ImageIO.read(new ByteArrayInputStream(imageBytes));
+		}
 	}
 }

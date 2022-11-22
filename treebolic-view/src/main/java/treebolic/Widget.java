@@ -1050,8 +1050,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 			}
 
 			// image loading
-			Image image;
-			image = Image.make(url);
+			Image image = new Image(url);
 
 			// cache image
 			this.images.put(source, image);
