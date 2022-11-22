@@ -180,12 +180,9 @@ public class ModelUtils
 
 		// recurse
 		final List<INode> children = node.getChildren();
-		if (children != null)
+		for (final INode childNode : children)
 		{
-			for (final INode childNode : children)
-			{
-				ModelUtils.makeIdToNodeMap((MutableNode) childNode, idToNodeMap);
-			}
+			ModelUtils.makeIdToNodeMap((MutableNode) childNode, idToNodeMap);
 		}
 	}
 
@@ -229,13 +226,10 @@ public class ModelUtils
 
 		// recurse
 		final List<INode> children = node.getChildren();
-		if (children != null)
+		int i = 0;
+		for (final INode childNode : children)
 		{
-			int i = 0;
-			for (final INode childNode : children)
-			{
-				ModelUtils.normalizeId((TreeMutableNode) childNode, prefix + "-" + i++, idToNodeMap, oldIdToNewIdMap);
-			}
+			ModelUtils.normalizeId((TreeMutableNode) childNode, prefix + "-" + i++, idToNodeMap, oldIdToNewIdMap);
 		}
 	}
 
@@ -267,12 +261,9 @@ public class ModelUtils
 
 		// recurse
 		final List<INode> children = node.getChildren();
-		if (children != null)
+		for (final INode childNode : children)
 		{
-			for (final INode childNode : children)
-			{
-				ModelUtils.normalizeLinks((TreeMutableNode) childNode, oldIdToNewIdMap);
-			}
+			ModelUtils.normalizeLinks((TreeMutableNode) childNode, oldIdToNewIdMap);
 		}
 	}
 
@@ -615,7 +606,7 @@ public class ModelUtils
 		{
 			properties.setProperty(Settings.PROP_YMOVETO, settings.yMoveTo.toString());
 		}
-		if (settings.yShift != null)
+		if (settings.xShift != null)
 		{
 			properties.setProperty(Settings.PROP_XSHIFT, settings.xShift.toString());
 		}

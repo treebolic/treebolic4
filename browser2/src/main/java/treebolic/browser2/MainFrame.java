@@ -497,6 +497,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 
 				// active component/widget
 				final Component component = this.tabbedPane.getSelectedComponent();
+				//noinspection ConstantConditions
 				if (component != null && component instanceof Widget)
 				{
 					final IWidget widget = (IWidget) component;
@@ -601,10 +602,8 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		final String base = this.settings.getProperty("base", null);
 		final String imageBase = this.settings.getProperty("images", null);
 		final String urlScheme = this.settings.getProperty("urlscheme", null);
-		final String userHomeStr = this.settings.getProperty("userhome", null);
-		final boolean userHome = userHomeStr == null || Boolean.parseBoolean(userHomeStr);
 
-		SwingUtilities.invokeLater(() -> lookup(source, provider, base, imageBase, urlScheme, userHome));
+		SwingUtilities.invokeLater(() -> lookup(source, provider, base, imageBase, urlScheme));
 	}
 
 	/**
@@ -616,7 +615,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param imageBase image base
 	 * @param urlScheme url scheme
 	 */
-	private void lookup(final String source, final String provider, final String base, final String imageBase, final String urlScheme, @SuppressWarnings("unused") final boolean userHome)
+	private void lookup(final String source, final String provider, final String base, final String imageBase, final String urlScheme)
 	{
 		System.out.println(Messages.getString("MainFrame.run") + " <" + source + ">");
 
@@ -631,6 +630,8 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		// tabbed pane
 		final String toolTip = "<html><body><strong>" + source + "</strong><br>" + provider + "</body></html>";
 		final String title = mangle(source);
+		//noinspection ConstantConditions
+		assert widget instanceof Component;
 		addTab((Component) widget, title, toolTip);
 
 		// history
@@ -773,7 +774,6 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			{
 				final JComponent component = makeBrowserPane(url, true);
 				addTab(component, mangle(linkUrl), linkUrl);
-				// replaceTab(component, (Component) widget, mangle(linkUrl), linkUrl);
 				return;
 			}
 

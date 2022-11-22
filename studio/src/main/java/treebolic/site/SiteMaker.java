@@ -39,17 +39,17 @@ public abstract class SiteMaker extends Observable
 	/**
 	 * Jar file to transfer
 	 */
-	static private final String jarFile = "treebolic-applet-dom.jar"; 
+	static private final String jarFile = "treebolic-applet-dom.jar";
 
 	/**
 	 * Dtd file to transfer
 	 */
-	static private final String dTDFile = "Treebolic.dtd"; 
+	static private final String dTDFile = "Treebolic.dtd";
 
 	/**
 	 * Applet class
 	 */
-	static private final String appclass = "treebolic.applet.Treebolic.class"; 
+	static private final String appclass = "treebolic.applet.Treebolic.class";
 
 	/**
 	 * HTML template file
@@ -225,10 +225,10 @@ public abstract class SiteMaker extends Observable
 	public boolean make()
 	{
 		// connect
-		notifyOperation(Messages.getString("SiteMaker.connecting"), SiteMaker.PROGRESSCONNECT); 
+		notifyOperation(Messages.getString("SiteMaker.connecting"), SiteMaker.PROGRESSCONNECT);
 		if (!connect())
 		{
-			notifyOperation(Messages.getString("SiteMaker.connect_fail"), SiteMaker.PROGRESSCOMPLETE); 
+			notifyOperation(Messages.getString("SiteMaker.connect_fail"), SiteMaker.PROGRESSCOMPLETE);
 			return false;
 		}
 
@@ -240,70 +240,75 @@ public abstract class SiteMaker extends Observable
 			final URL imageRepositoryUrl = new URL(this.imageRepository);
 
 			// xml file
-			notifyOperation("STOR " + this.xmlFile, SiteMaker.PROGRESSXFERXML); 
-			OutputStream outputStream = makeOutStream(this.xmlFile);
-			new DomTransformer().documentToStream(this.document, outputStream);
-			outputStream.close();
+			notifyOperation("STOR " + this.xmlFile, SiteMaker.PROGRESSXFERXML);
+			try (OutputStream outputStream = makeOutStream(this.xmlFile))
+			{
+				new DomTransformer().documentToStream(this.document, outputStream);
+			}
 
 			// html file
-			notifyOperation("STOR " + this.htmlFile, SiteMaker.PROGRESSXFERHTML); 
-			final String[] macros = {"%XMLFILE%", "%TITLE%", "%CLASS%", "%JAR%", "%WIDTH%", "%HEIGHT%", "%DATE%"};       
-			final String[] values = {this.xmlFile, this.title, SiteMaker.appclass, SiteMaker.jarFile, "100%", "100%", new Date().toString()};  
+			notifyOperation("STOR " + this.htmlFile, SiteMaker.PROGRESSXFERHTML);
+			final String[] macros = {"%XMLFILE%", "%TITLE%", "%CLASS%", "%JAR%", "%WIDTH%", "%HEIGHT%", "%DATE%"};
+			final String[] values = {this.xmlFile, this.title, SiteMaker.appclass, SiteMaker.jarFile, "100%", "100%", new Date().toString()};
 			URL url = new URL(repositoryUrl, SiteMaker.templateFile);
-			outputStream = makeOutStream(this.htmlFile);
-			copyStreamsReplace(url.openStream(), outputStream, macros, values);
-			outputStream.close();
+			try (OutputStream outputStream = makeOutStream(this.htmlFile))
+			{
+				copyStreamsReplace(url.openStream(), outputStream, macros, values);
+			}
 
 			// copy code jar
-			notifyOperation("STOR " + SiteMaker.jarFile, SiteMaker.PROGRESSXFERJAR); 
+			notifyOperation("STOR " + SiteMaker.jarFile, SiteMaker.PROGRESSXFERJAR);
 			url = new URL(repositoryUrl, SiteMaker.jarFile);
-			outputStream = makeOutStream(SiteMaker.jarFile);
-			SiteMaker.copyStreams(url.openStream(), outputStream);
-			outputStream.close();
+			try (OutputStream outputStream = makeOutStream(SiteMaker.jarFile))
+			{
+				SiteMaker.copyStreams(url.openStream(), outputStream);
+			}
 
 			// copy dtd
-			notifyOperation("STOR " + SiteMaker.dTDFile, SiteMaker.PROGRESSXFERDTD); 
-			outputStream = makeOutStream(SiteMaker.dTDFile);
-			Dtd.copyToUTF8Stream(outputStream);
-			outputStream.close();
+			notifyOperation("STOR " + SiteMaker.dTDFile, SiteMaker.PROGRESSXFERDTD);
+			try (OutputStream outputStream = makeOutStream(SiteMaker.dTDFile))
+			{
+				Dtd.copyToUTF8Stream(outputStream);
+			}
 
 			// copy images
-			notifyOperation("CD " + "images", SiteMaker.PROGRESSXFERIMAGES);  
-			if (changeFolder("images")) 
+			notifyOperation("CD " + "images", SiteMaker.PROGRESSXFERIMAGES);
+			if (changeFolder("images"))
 			{
 				for (final String imageFileName : DocumentSearch.makeImageList(this.document))
 				{
-					notifyOperation("STOR " + "images" + "/" + imageFileName, SiteMaker.PROGRESSXFERIMAGES);   
+					notifyOperation("STOR " + "images" + "/" + imageFileName, SiteMaker.PROGRESSXFERIMAGES);
 					url = new URL(imageRepositoryUrl, imageFileName);
-					outputStream = makeOutStream(imageFileName);
-					SiteMaker.copyStreams(url.openStream(), outputStream);
-					outputStream.close();
+					try (OutputStream outputStream = makeOutStream(imageFileName))
+					{
+						SiteMaker.copyStreams(url.openStream(), outputStream);
+					}
 				}
 			}
 
 			// end
-			notifyOperation(Messages.getString("SiteMaker.disconnecting"), SiteMaker.PROGRESSDISCONNECT); 
+			notifyOperation(Messages.getString("SiteMaker.disconnecting"), SiteMaker.PROGRESSDISCONNECT);
 			success = true;
 		}
 		catch (final MalformedURLException exception)
 		{
-			notifyOperation(Messages.getString("SiteMaker.except_malformed_url") + this.operation + " [" + exception + "]", SiteMaker.PROGRESSCOMPLETE);   
+			notifyOperation(Messages.getString("SiteMaker.except_malformed_url") + this.operation + " [" + exception + "]", SiteMaker.PROGRESSCOMPLETE);
 		}
 		catch (final IOException exception)
 		{
-			notifyOperation(Messages.getString("SiteMaker.except_io") + this.operation + " [" + exception + "]", SiteMaker.PROGRESSCOMPLETE);   
+			notifyOperation(Messages.getString("SiteMaker.except_io") + this.operation + " [" + exception + "]", SiteMaker.PROGRESSCOMPLETE);
 		}
 		catch (final TransformerConfigurationException exception)
 		{
-			notifyOperation(Messages.getString("SiteMaker.except_transf") + this.operation + " [" + exception + "]", SiteMaker.PROGRESSCOMPLETE);   
+			notifyOperation(Messages.getString("SiteMaker.except_transf") + this.operation + " [" + exception + "]", SiteMaker.PROGRESSCOMPLETE);
 		}
 		catch (final TransformerException exception)
 		{
-			notifyOperation(Messages.getString("SiteMaker.except_conf") + this.operation + " [" + exception + "]", SiteMaker.PROGRESSCOMPLETE);   
+			notifyOperation(Messages.getString("SiteMaker.except_conf") + this.operation + " [" + exception + "]", SiteMaker.PROGRESSCOMPLETE);
 		}
 		catch (final URISyntaxException exception)
 		{
-			notifyOperation(Messages.getString("SiteMaker.except_uri_syntax") + this.operation + " [" + exception + "]", SiteMaker.PROGRESSCOMPLETE);   
+			notifyOperation(Messages.getString("SiteMaker.except_uri_syntax") + this.operation + " [" + exception + "]", SiteMaker.PROGRESSCOMPLETE);
 		}
 		finally
 		{
@@ -311,7 +316,7 @@ public abstract class SiteMaker extends Observable
 		}
 		if (success)
 		{
-			notifyOperation(Messages.getString("SiteMaker.transfer_end"), SiteMaker.PROGRESSCOMPLETE); 
+			notifyOperation(Messages.getString("SiteMaker.transfer_end"), SiteMaker.PROGRESSCOMPLETE);
 		}
 		return success;
 	}

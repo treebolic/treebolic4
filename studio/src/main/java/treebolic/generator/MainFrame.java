@@ -8,6 +8,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.WindowEvent;
+import java.util.Properties;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -116,7 +117,8 @@ public class MainFrame extends JFrame
 		setVisible(true);
 
 		// open
-		final String documentPath = this.controller.getParameters().getProperty("doc");
+		Properties parameters = this.controller.getParameters();
+		final String documentPath = parameters == null ? null : parameters.getProperty("doc");
 		if (documentPath != null && !documentPath.isEmpty())
 		{
 			this.controller.open(documentPath);
@@ -279,10 +281,13 @@ public class MainFrame extends JFrame
 	 *
 	 * @return treebolic view
 	 */
+	@SuppressWarnings("RedundantSuppression")
 	private JPanel makeView(final Controller ignoredController)
 	{
 		final JPanel view = new JPanel();
 		view.setLayout(new BorderLayout());
+		//noinspection ConstantConditions
+		assert widget instanceof Component;
 		view.add((Component) this.widget, BorderLayout.CENTER);
 		return view;
 	}

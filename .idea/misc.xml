@@ -92,6 +92,7 @@
       <entry_point TYPE="field" FQNAME="treebolic.generator.tree.Tree isDirty" />
       <entry_point TYPE="field" FQNAME="treebolic.propertyview.PropertyView.AttributeType NONE" />
       <entry_point TYPE="field" FQNAME="treebolic.site.FtpClient welcomeMsg" />
+      <entry_point TYPE="field" FQNAME="treebolic.commons.RadioChoiceDialog value" />
     </entry_points>
     <pattern value="treebolic.glue.Worker" method="doInBackground" />
     <pattern value="treebolic.glue.Worker" method="job" />
@@ -488,6 +489,10 @@
     <pattern value="treebolic.glue.Point" method="x" />
     <pattern value="treebolic.glue.Point" method="y" />
     <pattern value="treebolic.glue.iface.component.Toolbar" method="getButtons" />
+    <pattern value="treebolic.glue.component.Toolbar" method="getButtons" />
+    <pattern value="treebolic.xml.transformer.DomTransformer" method="documentToDocument" />
+    <pattern value="treebolic.xml.transformer.DomTransformer" method="documentToString" />
+    <pattern value="treebolic.xml.transformer.DomTransformer" method="fileToDocument" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">

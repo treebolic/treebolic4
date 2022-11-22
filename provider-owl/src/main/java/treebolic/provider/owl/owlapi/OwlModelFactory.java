@@ -587,12 +587,14 @@ public class OwlModelFactory
 		this.instanceEdgeColor = getColor("instance.edgecolor", OwlModelFactory.defaultInstanceForeColor);
 		this.instanceImageFile = getImageFile("instance.image");
 		this.instanceEdgeImageFile = getImageFile("instance.edge.image");
+		this.instanceEdgeStyle = IEdge.DOT | IEdge.TOTRIANGLE | IEdge.TOFILL;
 
 		this.relationBackColor = getColor("relation.backcolor", OwlModelFactory.defaultRelationBackColor);
 		this.relationForeColor = getColor("relation.forecolor", OwlModelFactory.defaultRelationForeColor);
 		this.relationEdgeColor = getColor("relation.edgecolor", OwlModelFactory.defaultRelationForeColor);
 		this.relationImageFile = getImageFile("relation.image");
 		this.relationEdgeImageFile = getImageFile("relation.edge.image");
+		this.relationEdgeStyle = IEdge.SOLID | IEdge.TOTRIANGLE | IEdge.TOFILL;
 
 		this.propertiesLabel = getLabel("properties.label", "properties");
 		this.propertiesBackColor = getColor("properties.backcolor", defaultPropertyBackColor);
@@ -604,6 +606,7 @@ public class OwlModelFactory
 		this.propertyEdgeColor = getColor("property.edge.color", defaultPropertyForeColor);
 		this.propertyImageFile = getImageFile("property.image");
 		this.propertyEdgeImageFile = getImageFile("property.edge.image");
+		this.propertyEdgeStyle = IEdge.DOT | IEdge.TOTRIANGLE | IEdge.TOFILL;
 
 		OwlModelFactory.images = new Image[ImageIndices.COUNT.ordinal()];
 		images[ImageIndices.ROOT.ordinal()] = new Image(Provider.class.getResource("images/root.png"));
@@ -655,8 +658,6 @@ public class OwlModelFactory
 		}
 
 		final Settings settings = new Settings();
-		settings.hasToolbarFlag = true;
-		settings.hasStatusbarFlag = true;
 		settings.orientation = OwlModelFactory.asTree ? "south" : "radial";
 		settings.hasToolbarFlag = true;
 		settings.backColor = new Color(0xffffe0);
@@ -668,6 +669,7 @@ public class OwlModelFactory
 		settings.focusOnHoverFlag = false;
 		settings.treeEdgeColor = Color.BLACK;
 		settings.treeEdgeStyle = IEdge.SOLID | IEdge.TOTRIANGLE | IEdge.TOFILL;
+
 		if (OwlModelFactory.asTree)
 		{
 			settings.yMoveTo = -0.3F;
@@ -686,18 +688,6 @@ public class OwlModelFactory
 			}
 		}
 
-		// cache property features from settings
-		/*
-		this.instanceEdgeStyle = settings.edgeStyle;
-		this.instanceEdgeColor = settings.edgeColor;
-		this.instanceEdgeImageFile = settings.defaultEdgeImage;
-		this.propertyEdgeStyle = settings.edgeStyle;
-		this.propertyEdgeColor = settings.edgeColor;
-		this.propertyEdgeImageFile = settings.defaultEdgeImage;
-		this.relationEdgeStyle = settings.edgeStyle;
-		this.relationEdgeColor = settings.edgeColor;
-		this.relationEdgeImageFile = settings.defaultEdgeImage;
-		*/
 		return new Model(tree, settings, OwlModelFactory.images);
 	}
 
@@ -923,7 +913,6 @@ public class OwlModelFactory
 			final boolean isRelation = this.engine.isRelation(owlClass.asOWLClass());
 
 			// mountpoint
-			final String owlClassShortForm = owlClass.getIRI().getShortForm();
 			if (hasInstances || hasProperties || isRelation)
 			{
 				List<String> targets = new ArrayList<>();

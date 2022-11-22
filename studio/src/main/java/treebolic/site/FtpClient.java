@@ -891,10 +891,7 @@ public class FtpClient extends TransferProtocolClient
 			}
 		}
 
-		assert clientSocket == null;
-
 		// Passive mode failed, let's fall back to the good old "PORT"
-
 		if (this.proxy != null && this.proxy.type() == Proxy.Type.SOCKS)
 		// We're behind a firewall and the passive mode fail,
 		// since we can't accept a connection through SOCKS (yet)
@@ -1075,7 +1072,6 @@ public class FtpClient extends TransferProtocolClient
 	public TelnetInputStream get(final String filename) throws IOException
 	{
 		Socket s = null;
-
 		try
 		{
 			s = openDataConnection("RETR " + filename);

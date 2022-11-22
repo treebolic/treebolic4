@@ -133,8 +133,8 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * Add tab
 	 *
 	 * @param component component
-	 * @param title title
-	 * @param toolTip tooltip
+	 * @param title     title
+	 * @param toolTip   tooltip
 	 */
 	public void addTab(final Component component, final String title, final String toolTip)
 	{
@@ -156,10 +156,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Replace tab
 	 *
-	 * @param component component to add
+	 * @param component    component to add
 	 * @param oldComponent component to replace
-	 * @param title title
-	 * @param toolTip tooltip
+	 * @param title        title
+	 * @param toolTip      tooltip
 	 */
 	public void replaceTab(final Component component, final Component oldComponent, final String title, final String toolTip)
 	{
@@ -259,9 +259,9 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Make menu item
 	 *
-	 * @param text text
-	 * @param image image
-	 * @param command command code
+	 * @param text           text
+	 * @param image          image
+	 * @param command        command code
 	 * @param acceleratorKey accelerator key
 	 * @return menu item
 	 */
@@ -399,15 +399,6 @@ public class MainFrame extends JFrame implements HyperlinkListener
 				{
 					return;
 				}
-				if (entry == null || entry.isEmpty())
-				{
-					if (provider == null || provider.isEmpty())
-					{
-						final String[] lines = {Messages.getString("MainFrame.nullentry")};
-						JOptionPane.showMessageDialog(null, lines, Messages.getString("MainFrame.title"), JOptionPane.WARNING_MESSAGE);
-						return;
-					}
-				}
 
 				// open
 				try
@@ -451,6 +442,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 
 				// active component/widget
 				final Component component = this.tabbedPane.getSelectedComponent();
+				//noinspection ConstantConditions
 				if (component != null && component instanceof Widget)
 				{
 					final IWidget widget = (IWidget) component;
@@ -532,8 +524,8 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * Open source
 	 *
 	 * @param provider0 provider
-	 * @param source source
-	 * @param base base
+	 * @param source    source
+	 * @param base      base
 	 * @param imageBase image base
 	 */
 	private void open(final String provider0, final String source, final String base, final String imageBase)
@@ -570,6 +562,8 @@ public class MainFrame extends JFrame implements HyperlinkListener
 
 		// tab
 		final String toolTip = "<html><body><strong>" + source + "</strong><br>" + provider + "</body></html>";
+		//noinspection ConstantConditions
+		assert widget instanceof Component;
 		this.tabbedPane.addTab(mangle(source), null, (Component) widget, toolTip);
 		final int index = this.tabbedPane.indexOfComponent((Component) widget);
 		this.tabbedPane.setTabComponentAt(index, new ButtonTabComponent(this.tabbedPane));
@@ -580,8 +574,8 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * Open bundle
 	 *
 	 * @param source source
-	 * @param base base
-	 * @param entry entry
+	 * @param base   base
+	 * @param entry  entry
 	 * @throws MalformedURLException malformed URL exception
 	 */
 	private void openBundle(final String provider, final String source, final String base, final String entry) throws MalformedURLException
@@ -598,7 +592,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * Open bundle
 	 *
 	 * @param archive archive
-	 * @param entry entry
+	 * @param entry   entry
 	 * @throws MalformedURLException malformed URL exception
 	 */
 	private void openBundle(final String provider, final File archive, final String entry) throws MalformedURLException
@@ -613,8 +607,8 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Open deserialize
 	 *
-	 * @param source serialized file path
-	 * @param base base
+	 * @param source    serialized file path
+	 * @param base      base
 	 * @param imageBase image base
 	 * @throws IOException io exception
 	 */
@@ -648,6 +642,8 @@ public class MainFrame extends JFrame implements HyperlinkListener
 
 		// tab
 		final String toolTip = "<html><body><strong>" + source + "</strong></body></html>";
+		//noinspection ConstantConditions
+		assert widget instanceof Component;
 		this.tabbedPane.addTab(mangle(source), null, (Component) widget, toolTip);
 		final int index = this.tabbedPane.indexOfComponent((Component) widget);
 		this.tabbedPane.setTabComponentAt(index, new ButtonTabComponent(this.tabbedPane));
@@ -695,7 +691,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * Serialize
 	 *
 	 * @param destination destination file
-	 * @param widget widget
+	 * @param widget      widget
 	 * @throws IOException io exception
 	 */
 	private void serialize(final String destination, final IWidget widget) throws IOException
@@ -829,11 +825,11 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		/**
 		 * Constructor
 		 *
-		 * @param provider provider class
-		 * @param source document source
-		 * @param base document base
+		 * @param provider  provider class
+		 * @param source    document source
+		 * @param base      document base
 		 * @param imageBase image base
-		 * @param entry entry
+		 * @param entry     entry
 		 * @param isZipFlag is zip
 		 * @param isSerFlag is ser
 		 */
@@ -979,10 +975,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Link to
 	 *
-	 * @param linkUrl link url
+	 * @param linkUrl    link url
 	 * @param linkTarget linkTarget link target
-	 * @param widget widget
-	 * @param context widget's context
+	 * @param widget     widget
+	 * @param context    widget's context
 	 */
 	public void linkTo(final String linkUrl, @SuppressWarnings("unused") final String linkTarget, @SuppressWarnings("unused") final IWidget widget, final Context context)
 	{
@@ -999,7 +995,6 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			{
 				final JComponent component = makeBrowserPane(url);
 				addTab(component, mangle(linkUrl), linkUrl);
-				// replaceTab(component, (Component) widget, mangle(linkUrl), linkUrl);
 				return;
 			}
 

@@ -304,18 +304,30 @@ public class PropertyView extends JPanel implements SelectListener
 	 */
 	static
 	{
+		//noinspection ConstantConditions
 		PropertyView.terminatorIcons.put("z", new ImageIcon(PropertyView.class.getResource("images/terminatorz.png")));
+		//noinspection ConstantConditions
 		PropertyView.terminatorIcons.put("a", new ImageIcon(PropertyView.class.getResource("images/terminatora.png")));
+		//noinspection ConstantConditions
 		PropertyView.terminatorIcons.put("h", new ImageIcon(PropertyView.class.getResource("images/terminatorh.png")));
+		//noinspection ConstantConditions
 		PropertyView.terminatorIcons.put("t", new ImageIcon(PropertyView.class.getResource("images/terminatort.png")));
+		//noinspection ConstantConditions
 		PropertyView.terminatorIcons.put("tf", new ImageIcon(PropertyView.class.getResource("images/terminatortf.png")));
+		//noinspection ConstantConditions
 		PropertyView.terminatorIcons.put("c", new ImageIcon(PropertyView.class.getResource("images/terminatorc.png")));
+		//noinspection ConstantConditions
 		PropertyView.terminatorIcons.put("cf", new ImageIcon(PropertyView.class.getResource("images/terminatorcf.png")));
+		//noinspection ConstantConditions
 		PropertyView.terminatorIcons.put("d", new ImageIcon(PropertyView.class.getResource("images/terminatord.png")));
+		//noinspection ConstantConditions
 		PropertyView.terminatorIcons.put("df", new ImageIcon(PropertyView.class.getResource("images/terminatordf.png")));
 
+		//noinspection ConstantConditions
 		PropertyView.strokeIcons.put("solid", new ImageIcon(PropertyView.class.getResource("images/solid.png")));
+		//noinspection ConstantConditions
 		PropertyView.strokeIcons.put("dash", new ImageIcon(PropertyView.class.getResource("images/dash.png")));
+		//noinspection ConstantConditions
 		PropertyView.strokeIcons.put("dot", new ImageIcon(PropertyView.class.getResource("images/dot.png")));
 	}
 

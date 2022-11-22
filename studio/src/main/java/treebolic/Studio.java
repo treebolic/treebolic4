@@ -53,6 +53,7 @@ public class Studio
 	public static void main(final String[] args)
 	{
 		Laf.lookAndFeel(args);
+		//noinspection InstantiationOfUtilityClass
 		new Studio(args);
 	}
 }

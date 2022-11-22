@@ -43,9 +43,9 @@ public class NodeDecorator extends ElementDecorator
 	 * (non-Javadoc)
 	 * @see treebolic.generator.domtree.ElementDecorator#getValue()
 	 */
-	@Override
-	public String getValue()
-	{
-		return super.getValue();
-	}
+	// @Override
+	// public String getValue()
+	// {
+	// 	return super.getValue();
+	// }
 }

@@ -37,21 +37,22 @@ public class ModelToDocumentTransformer
 	/**
 	 * Transform model to document
 	 *
-	 * @param model
-	 *        model
+	 * @param model model
 	 * @return DOM document
 	 */
 	public static Document transform(final Model model)
 	{
 		if (model == null)
+		{
 			return null;
+		}
 
 		DocumentBuilder builder;
 		try
 		{
 			builder = ModelToDocumentTransformer.makeDocumentBuilder();
 			final Document document = builder.newDocument();
-			document.appendChild(document.createComment("created " + new Date())); 
+			document.appendChild(document.createComment("created " + new Date()));
 			final Map<String, Object> attributes = new HashMap<String, Object>()
 			{
 				/**
@@ -67,41 +68,43 @@ public class ModelToDocumentTransformer
 				public Object put(final String key, final Object value)
 				{
 					if (value == null)
+					{
 						return null;
+					}
 					return super.put(key, value);
 				}
 			};
 
 			// top
-			final Element topElement = document.createElement("treebolic"); 
-			attributes.put("toolbar", model.settings.hasToolbarFlag); 
-			attributes.put("statusbar", model.settings.hasStatusbarFlag); 
-			attributes.put("popupmenu", model.settings.hasPopUpMenuFlag); 
-			attributes.put("tooltip", model.settings.hasToolTipFlag); 
-			attributes.put("tooltip-displays-content", model.settings.toolTipDisplaysContentFlag); 
-			attributes.put("focus-on-hover", model.settings.focusOnHoverFlag); 
-			attributes.put("focus", model.settings.focus); 
-			attributes.put("xmoveto", model.settings.xMoveTo); 
-			attributes.put("ymoveto", model.settings.yMoveTo); 
-			attributes.put("xshift", model.settings.xShift); 
-			attributes.put("yshift", model.settings.yShift); 
+			final Element topElement = document.createElement("treebolic");
+			attributes.put("toolbar", model.settings.hasToolbarFlag);
+			attributes.put("statusbar", model.settings.hasStatusbarFlag);
+			attributes.put("popupmenu", model.settings.hasPopUpMenuFlag);
+			attributes.put("tooltip", model.settings.hasToolTipFlag);
+			attributes.put("tooltip-displays-content", model.settings.toolTipDisplaysContentFlag);
+			attributes.put("focus-on-hover", model.settings.focusOnHoverFlag);
+			attributes.put("focus", model.settings.focus);
+			attributes.put("xmoveto", model.settings.xMoveTo);
+			attributes.put("ymoveto", model.settings.yMoveTo);
+			attributes.put("xshift", model.settings.xShift);
+			attributes.put("yshift", model.settings.yShift);
 			ModelToDocumentTransformer.setAttributes(topElement, attributes);
 			document.appendChild(topElement);
 
 			// tree
-			final Element treeElement = document.createElement("tree"); 
-			attributes.put("backcolor", model.settings.backColor); 
-			attributes.put("forecolor", model.settings.foreColor); 
-			attributes.put("orientation", model.settings.orientation); 
-			attributes.put("expansion", model.settings.expansion); 
-			attributes.put("sweep", model.settings.sweep); 
-			attributes.put("preserve-orientation", model.settings.preserveOrientationFlag); 
-			attributes.put("fontface", model.settings.fontFace); 
-			attributes.put("fontsize", model.settings.fontSize); 
-			attributes.put("scalefonts", model.settings.downscaleFontsFlag); 
-			attributes.put("fontscaler", model.settings.fontDownscaler); 
-			attributes.put("scaleimages", model.settings.downscaleImagesFlag); 
-			attributes.put("imagescaler", model.settings.imageDownscaler); 
+			final Element treeElement = document.createElement("tree");
+			attributes.put("backcolor", model.settings.backColor);
+			attributes.put("forecolor", model.settings.foreColor);
+			attributes.put("orientation", model.settings.orientation);
+			attributes.put("expansion", model.settings.expansion);
+			attributes.put("sweep", model.settings.sweep);
+			attributes.put("preserve-orientation", model.settings.preserveOrientationFlag);
+			attributes.put("fontface", model.settings.fontFace);
+			attributes.put("fontsize", model.settings.fontSize);
+			attributes.put("scalefonts", model.settings.downscaleFontsFlag);
+			attributes.put("fontscaler", model.settings.fontDownscaler);
+			attributes.put("scaleimages", model.settings.downscaleImagesFlag);
+			attributes.put("imagescaler", model.settings.imageDownscaler);
 			ModelToDocumentTransformer.setAttributes(treeElement, attributes);
 			topElement.appendChild(treeElement);
 			// image
@@ -111,13 +114,13 @@ public class ModelToDocumentTransformer
 			}
 
 			// nodes
-			final Element nodesElement = document.createElement("nodes"); 
-			attributes.put("backcolor", model.settings.nodeBackColor); 
-			attributes.put("forecolor", model.settings.nodeForeColor); 
-			attributes.put("border", model.settings.borderFlag); 
-			attributes.put("ellipsize", model.settings.ellipsizeFlag); 
-			attributes.put("max-lines", model.settings.labelMaxLines); 
-			attributes.put("extra-line-factor", model.settings.labelExtraLineFactor); 
+			final Element nodesElement = document.createElement("nodes");
+			attributes.put("backcolor", model.settings.nodeBackColor);
+			attributes.put("forecolor", model.settings.nodeForeColor);
+			attributes.put("border", model.settings.borderFlag);
+			attributes.put("ellipsize", model.settings.ellipsizeFlag);
+			attributes.put("max-lines", model.settings.labelMaxLines);
+			attributes.put("extra-line-factor", model.settings.labelExtraLineFactor);
 			ModelToDocumentTransformer.setAttributes(nodesElement, attributes);
 			treeElement.appendChild(nodesElement);
 
@@ -129,11 +132,11 @@ public class ModelToDocumentTransformer
 			// default.treeedge
 			if (model.settings.defaultTreeEdgeImage != null || model.settings.treeEdgeColor != null || model.settings.treeEdgeStyle != null)
 			{
-				final Element defaultTreeEdgeElement = document.createElement("default.treeedge"); 
+				final Element defaultTreeEdgeElement = document.createElement("default.treeedge");
 				// color, stroke,toterminator,fromterminator,hidden
 				if (model.settings.treeEdgeColor != null)
 				{
-					defaultTreeEdgeElement.setAttribute("color", Utils.colorToString(model.settings.treeEdgeColor)); 
+					defaultTreeEdgeElement.setAttribute("color", Utils.colorToString(model.settings.treeEdgeColor));
 				}
 				if (model.settings.treeEdgeStyle != null)
 				{
@@ -154,22 +157,22 @@ public class ModelToDocumentTransformer
 			final List<IEdge> edges = model.tree.getEdges();
 			if (edges != null && !edges.isEmpty() || model.settings.edgesAsArcsFlag != null)
 			{
-				final Element edgesElement = document.createElement("edges"); 
+				final Element edgesElement = document.createElement("edges");
 				treeElement.appendChild(edgesElement);
 
 				// as arcs
-				attributes.put("arcs", model.settings.edgesAsArcsFlag); 
+				attributes.put("arcs", model.settings.edgesAsArcsFlag);
 				ModelToDocumentTransformer.setAttributes(edgesElement, attributes);
 
 				// default edge
 				if (model.settings.defaultEdgeImage != null || model.settings.edgeColor != null || model.settings.edgeStyle != null)
 				{
-					final Element defaultEdgeElement = document.createElement("default.edge"); 
+					final Element defaultEdgeElement = document.createElement("default.edge");
 					// attributes
 					// color, stroke,toterminator,fromterminator,hidden
 					if (model.settings.edgeColor != null)
 					{
-						defaultEdgeElement.setAttribute("color", Utils.colorToString(model.settings.edgeColor)); 
+						defaultEdgeElement.setAttribute("color", Utils.colorToString(model.settings.edgeColor));
 					}
 					if (model.settings.edgeStyle != null)
 					{
@@ -187,10 +190,12 @@ public class ModelToDocumentTransformer
 				if (edges != null)
 				{
 					for (final IEdge edge : edges)
+					{
 						if (edge.getFrom() != null && edge.getTo() != null)
 						{
 							edgesElement.appendChild(ModelToDocumentTransformer.makeEdge(document, edge));
 						}
+					}
 				}
 			}
 
@@ -198,9 +203,9 @@ public class ModelToDocumentTransformer
 			if (model.settings.menu != null && !model.settings.menu.isEmpty())
 			{
 				// menu
-				final Element toolsElement = document.createElement("tools"); 
+				final Element toolsElement = document.createElement("tools");
 				topElement.appendChild(toolsElement);
-				final Element menuElement = document.createElement("menu"); 
+				final Element menuElement = document.createElement("menu");
 				toolsElement.appendChild(menuElement);
 
 				for (final MenuItem menuItem : model.settings.menu)
@@ -238,10 +243,8 @@ public class ModelToDocumentTransformer
 	/**
 	 * Make node element
 	 *
-	 * @param document
-	 *        document
-	 * @param node0
-	 *        node
+	 * @param document document
+	 * @param node0    node
 	 * @return node element
 	 */
 	static private Element makeNode(final Document document, final INode node0)
@@ -254,28 +257,29 @@ public class ModelToDocumentTransformer
 		{
 			final MountPoint.Mounted mountedPoint = (MountPoint.Mounted) mountPoint;
 			node = mountedPoint.mountingNode;
+			assert node != null;
 			mountPoint = node.getMountPoint();
 		}
 
-		final Element nodeElement = document.createElement("node"); 
+		final Element nodeElement = document.createElement("node");
 
 		// attributes
 		// id, backcolor, forecolor
-		nodeElement.setAttribute("id", node.getId()); 
+		nodeElement.setAttribute("id", node.getId());
 		Color color = node.getBackColor();
 		if (color != null)
 		{
-			nodeElement.setAttribute("backcolor", Utils.colorToString(color)); 
+			nodeElement.setAttribute("backcolor", Utils.colorToString(color));
 		}
 		color = node.getForeColor();
 		if (color != null)
 		{
-			nodeElement.setAttribute("forecolor", Utils.colorToString(color)); 
+			nodeElement.setAttribute("forecolor", Utils.colorToString(color));
 		}
 		final double weight = node.getWeight();
 		if (weight < 0.)
 		{
-			nodeElement.setAttribute("weight", Double.toString(-weight)); 
+			nodeElement.setAttribute("weight", Double.toString(-weight));
 		}
 
 		// label
@@ -300,12 +304,12 @@ public class ModelToDocumentTransformer
 		final Integer edgeStyle = node.getEdgeStyle();
 		if (edgeLabel != null || edgeImage != null || edgeColor != null || edgeStyle != null)
 		{
-			final Element treeEdgeElement = document.createElement("treeedge"); 
+			final Element treeEdgeElement = document.createElement("treeedge");
 			// attributes
 			// color, stroke,toterminator,fromterminator,hidden
 			if (edgeColor != null)
 			{
-				treeEdgeElement.setAttribute("color", Utils.colorToString(edgeColor)); 
+				treeEdgeElement.setAttribute("color", Utils.colorToString(edgeColor));
 			}
 			if (edgeStyle != null)
 			{
@@ -346,9 +350,13 @@ public class ModelToDocumentTransformer
 		}
 
 		// recurse
-		for (final INode child : node.getChildren())
+		List<INode> children = node.getChildren();
+		if (children != null)
 		{
-			nodeElement.appendChild(ModelToDocumentTransformer.makeNode(document, child));
+			for (final INode child : children)
+			{
+				nodeElement.appendChild(ModelToDocumentTransformer.makeNode(document, child));
+			}
 		}
 
 		return nodeElement;
@@ -361,12 +369,12 @@ public class ModelToDocumentTransformer
 	 */
 	static private Element makeEdge(final Document document, final IEdge edge)
 	{
-		final Element edgeElement = document.createElement("edge"); 
+		final Element edgeElement = document.createElement("edge");
 
 		// attributes
 		// from,to,color,stroke,toterminator,fromterminator,hidden
-		edgeElement.setAttribute("from", edge.getFrom().getId()); 
-		edgeElement.setAttribute("to", edge.getTo().getId()); 
+		edgeElement.setAttribute("from", edge.getFrom().getId());
+		edgeElement.setAttribute("to", edge.getTo().getId());
 		final Integer style = edge.getStyle();
 		if (style != null)
 		{
@@ -375,7 +383,7 @@ public class ModelToDocumentTransformer
 		final Color color = edge.getColor();
 		if (color != null)
 		{
-			edgeElement.setAttribute("color", Utils.colorToString(color)); 
+			edgeElement.setAttribute("color", Utils.colorToString(color));
 		}
 
 		// label
@@ -398,15 +406,13 @@ public class ModelToDocumentTransformer
 	/**
 	 * Make label element
 	 *
-	 * @param document
-	 *        document
-	 * @param string
-	 *        label
+	 * @param document document
+	 * @param string   label
 	 * @return label element
 	 */
 	static private Element makeLabel(final Document document, final String string)
 	{
-		final Element element = document.createElement("label"); 
+		final Element element = document.createElement("label");
 		final Text text = document.createTextNode(string);
 		element.appendChild(text);
 		return element;
@@ -415,15 +421,13 @@ public class ModelToDocumentTransformer
 	/**
 	 * Make content element
 	 *
-	 * @param document
-	 *        document
-	 * @param string
-	 *        content
+	 * @param document document
+	 * @param string   content
 	 * @return content element
 	 */
 	static private Element makeContent(final Document document, final String string)
 	{
-		final Element contentElement = document.createElement("content"); 
+		final Element contentElement = document.createElement("content");
 		final CDATASection contentCData = document.createCDATASection(string);
 		contentElement.appendChild(contentCData);
 		return contentElement;
@@ -432,35 +436,31 @@ public class ModelToDocumentTransformer
 	/**
 	 * Make image element
 	 *
-	 * @param document
-	 *        document
-	 * @param imageSrc
-	 *        image source
+	 * @param document document
+	 * @param imageSrc image source
 	 * @return image element
 	 */
 	static public Element makeImage(final Document document, final String imageSrc)
 	{
-		final Element element = document.createElement("img"); 
-		element.setAttribute("src", imageSrc); 
+		final Element element = document.createElement("img");
+		element.setAttribute("src", imageSrc);
 		return element;
 	}
 
 	/**
 	 * Make link element
 	 *
-	 * @param document
-	 *        document
-	 * @param href
-	 *        link href
+	 * @param document document
+	 * @param href     link href
 	 * @return link element
 	 */
 	static private Element makeLink(final Document document, final String href, final String target)
 	{
-		final Element element = document.createElement("a"); 
-		element.setAttribute("href", href); 
+		final Element element = document.createElement("a");
+		element.setAttribute("href", href);
 		if (target != null && !target.isEmpty())
 		{
-			element.setAttribute("target", target); 
+			element.setAttribute("target", target);
 		}
 		return element;
 	}
@@ -468,25 +468,23 @@ public class ModelToDocumentTransformer
 	/**
 	 * Make mountpoint element
 	 *
-	 * @param document
-	 *        document
-	 * @param mountPoint
-	 *        mountpoint
+	 * @param document   document
+	 * @param mountPoint mountpoint
 	 * @return mountpoint element
 	 */
 	static private Element makeMountPoint(final Document document, final MountPoint.Mounting mountPoint)
 	{
-		final Element mountPointElement = document.createElement("mountpoint"); 
+		final Element mountPointElement = document.createElement("mountpoint");
 
 		// attributes
 		if (mountPoint.now != null)
 		{
-			mountPointElement.setAttribute("now", mountPoint.now.toString()); 
+			mountPointElement.setAttribute("now", mountPoint.now.toString());
 		}
 
 		// a
-		final Element aElement = document.createElement("a"); 
-		aElement.setAttribute("href", mountPoint.url); 
+		final Element aElement = document.createElement("a");
+		aElement.setAttribute("href", mountPoint.url);
 		mountPointElement.appendChild(aElement);
 		return mountPointElement;
 	}
@@ -494,46 +492,44 @@ public class ModelToDocumentTransformer
 	/**
 	 * Make menuitem element
 	 *
-	 * @param document
-	 *        document
-	 * @param menuItem
-	 *        menuitem
+	 * @param document document
+	 * @param menuItem menuitem
 	 * @return menuitem
 	 */
 	static private Element makeMenuItem(final Document document, final MenuItem menuItem)
 	{
-		final Element menuItemElement = document.createElement("menuitem"); 
+		final Element menuItemElement = document.createElement("menuitem");
 
 		// attributes
 		// action (goto|search|focus), match-target, match-scope, match-mode (equals|startswith|includes)
 		final String[] strings = Utils.toStrings(menuItem);
 		if (strings[0] != null)
 		{
-			menuItemElement.setAttribute("action", strings[0]); 
+			menuItemElement.setAttribute("action", strings[0]);
 		}
 		if (strings[1] != null)
 		{
-			menuItemElement.setAttribute("match-scope", strings[1]); 
+			menuItemElement.setAttribute("match-scope", strings[1]);
 		}
 		if (strings[2] != null)
 		{
-			menuItemElement.setAttribute("match-mode", strings[2]); 
+			menuItemElement.setAttribute("match-mode", strings[2]);
 		}
 		if (menuItem.matchTarget != null && !menuItem.matchTarget.isEmpty())
 		{
-			menuItemElement.setAttribute("match-target", menuItem.matchTarget); 
+			menuItemElement.setAttribute("match-target", menuItem.matchTarget);
 		}
 
 		// label
-		final Element menuItemLabelElement = document.createElement("label"); 
+		final Element menuItemLabelElement = document.createElement("label");
 		menuItemLabelElement.appendChild(document.createTextNode(menuItem.label));
 		menuItemElement.appendChild(menuItemLabelElement);
 
 		// a
 		if (menuItem.link != null && !menuItem.link.isEmpty())
 		{
-			final Element aElement = document.createElement("a"); 
-			aElement.setAttribute("href", menuItem.link); 
+			final Element aElement = document.createElement("a");
+			aElement.setAttribute("href", menuItem.link);
 			menuItemElement.appendChild(aElement);
 		}
 
@@ -543,10 +539,8 @@ public class ModelToDocumentTransformer
 	/**
 	 * Set style attributes
 	 *
-	 * @param element
-	 *        element
-	 * @param style
-	 *        style
+	 * @param element element
+	 * @param style   style
 	 */
 	static private void setStyleAttributes(final Element element, final Integer style)
 	{
@@ -555,7 +549,7 @@ public class ModelToDocumentTransformer
 			String string = Utils.toString(style, Utils.StyleComponent.STROKE);
 			if (string != null && !string.isEmpty())
 			{
-				element.setAttribute("stroke", string); 
+				element.setAttribute("stroke", string);
 			}
 			String string2 = Utils.toString(style, Utils.StyleComponent.STROKEWIDTH);
 			if (string2 != null && !string2.isEmpty())
@@ -567,25 +561,25 @@ public class ModelToDocumentTransformer
 					builder.append(' ');
 				}
 				builder.append(string2);
-				element.setAttribute("stroke", builder.toString()); 
+				element.setAttribute("stroke", builder.toString());
 			}
 			string = Utils.toString(style, Utils.StyleComponent.FROMTERMINATOR);
 			if (string != null && !string.isEmpty())
 			{
-				element.setAttribute("fromterminator", string); 
+				element.setAttribute("fromterminator", string);
 			}
 			string = Utils.toString(style, Utils.StyleComponent.TOTERMINATOR);
 			if (string != null && !string.isEmpty())
 			{
-				element.setAttribute("toterminator", string); 
+				element.setAttribute("toterminator", string);
 			}
 			if ((style & IEdge.LINE) != 0)
 			{
-				element.setAttribute("line", "true");  
+				element.setAttribute("line", "true");
 			}
 			if ((style & IEdge.HIDDEN) != 0)
 			{
-				element.setAttribute("hidden", "true");  
+				element.setAttribute("hidden", "true");
 			}
 		}
 	}
@@ -593,10 +587,8 @@ public class ModelToDocumentTransformer
 	/**
 	 * Set attributes
 	 *
-	 * @param element
-	 *        element
-	 * @param attributes
-	 *        attributes
+	 * @param element    element
+	 * @param attributes attributes
 	 */
 	static private void setAttributes(final Element element, final Map<String, Object> attributes)
 	{

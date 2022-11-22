@@ -159,8 +159,16 @@ public class Renderer extends DefaultTreeCellRenderer
 		if (object instanceof MutableNode)
 		{
 			final Node node = (Node) treeNode.getUserObject();
-			final String label = node.getLabel().replaceAll("\n", "\\\\n");
-			final String tooltip = node.getLabel().replaceAll("\n", "<br>");
+			String label = node.getLabel();
+			if (label != null)
+			{
+				label = label.replaceAll("\n", "\\\\n");
+			}
+			String tooltip = node.getLabel();
+			if (tooltip != null)
+			{
+				tooltip = tooltip.replaceAll("\n", "<br>");
+			}
 			final String content = node.getContent();
 			final boolean isSpecial = node.getLink() != null || node.getMountPoint() != null;
 			final boolean isRoot = node.getParent() == null;
@@ -177,55 +185,55 @@ public class Renderer extends DefaultTreeCellRenderer
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.edgeIcon);
 			setForeground(Color.BLACK);
-			setToolTipText(Messages.getString("Renderer.tooltip_edge")); 
+			setToolTipText(Messages.getString("Renderer.tooltip_edge"));
 		}
 		else if (object instanceof TopWrapper)
 		{
-			setText(Messages.getString("Renderer.top")); 
+			setText(Messages.getString("Renderer.top"));
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.treebolicIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(Messages.getString("Renderer.tooltip_top")); 
+			setToolTipText(Messages.getString("Renderer.tooltip_top"));
 		}
 		else if (object instanceof TreeWrapper)
 		{
-			setText(Messages.getString("Renderer.tree")); 
+			setText(Messages.getString("Renderer.tree"));
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.treeIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(Messages.getString("Renderer.tooltip_tree")); 
+			setToolTipText(Messages.getString("Renderer.tooltip_tree"));
 		}
 		else if (object instanceof NodesWrapper)
 		{
-			setText(Messages.getString("Renderer.nodes")); 
+			setText(Messages.getString("Renderer.nodes"));
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.nodesIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(Messages.getString("Renderer.tooltip_nodes")); 
+			setToolTipText(Messages.getString("Renderer.tooltip_nodes"));
 		}
 		else if (object instanceof EdgesWrapper)
 		{
-			setText(Messages.getString("Renderer.edges")); 
+			setText(Messages.getString("Renderer.edges"));
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.edgesIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(Messages.getString("Renderer.tooltip_edges")); 
+			setToolTipText(Messages.getString("Renderer.tooltip_edges"));
 		}
 		else if (object instanceof ToolsWrapper)
 		{
-			setText(Messages.getString("Renderer.tools")); 
+			setText(Messages.getString("Renderer.tools"));
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.toolsIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(Messages.getString("Renderer.tooltip_tools")); 
+			setToolTipText(Messages.getString("Renderer.tooltip_tools"));
 		}
 		else if (object instanceof MenuWrapper)
 		{
-			setText(Messages.getString("Renderer.menu")); 
+			setText(Messages.getString("Renderer.menu"));
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.menuIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(Messages.getString("Renderer.tooltip_menu")); 
+			setToolTipText(Messages.getString("Renderer.tooltip_menu"));
 		}
 		else if (object instanceof MenuItemWrapper)
 		{
@@ -235,15 +243,15 @@ public class Renderer extends DefaultTreeCellRenderer
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.menuIcon);
 			setForeground(Color.BLACK);
-			setToolTipText(Messages.getString("Renderer.tooltip_menuitem")); 
+			setToolTipText(Messages.getString("Renderer.tooltip_menuitem"));
 		}
 		else
 		{
-			setText("?"); 
+			setText("?");
 			setFont(Renderer.defaultFont);
 			setIcon(Renderer.defaultIcon);
 			setForeground(Color.GRAY);
-			setToolTipText(""); 
+			setToolTipText("");
 		}
 
 		// selection
@@ -259,21 +267,19 @@ public class Renderer extends DefaultTreeCellRenderer
 	/**
 	 * Get node tooltip string
 	 *
-	 * @param label
-	 *        node label
-	 * @param content
-	 *        node content
+	 * @param label   node label
+	 * @param content node content
 	 * @return tooltip string
 	 */
 	private String getNodeTooltip(final String label, final String content)
 	{
 		final StringBuilder buffer = new StringBuilder();
-		buffer.append("<html><strong>Node</strong><br>"); 
+		buffer.append("<html><strong>Node</strong><br>");
 		buffer.append(label);
-		buffer.append("<br>"); 
+		buffer.append("<br>");
 		if (content != null)
 		{
-			buffer.append("<i>"); 
+			buffer.append("<i>");
 			if (content.length() < 16)
 			{
 				buffer.append(content);
@@ -281,11 +287,11 @@ public class Renderer extends DefaultTreeCellRenderer
 			else
 			{
 				buffer.append(content, 0, 16);
-				buffer.append(" ..."); 
+				buffer.append(" ...");
 			}
-			buffer.append("</i>"); 
+			buffer.append("</i>");
 		}
-		buffer.append("</html>"); 
+		buffer.append("</html>");
 		return buffer.toString();
 	}
 }

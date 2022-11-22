@@ -380,8 +380,10 @@ public class Context implements IContext
 	 */
 	protected URL getDefaultBase()
 	{
+		Properties parameters = getParameters();
+
 		// base parameter
-		final String base = getParameters().getProperty("base");
+		final String base = parameters == null ? null : parameters.getProperty("base");
 		String uRLString = base != null ? base : System.getProperty("user.dir");
 
 		// tail

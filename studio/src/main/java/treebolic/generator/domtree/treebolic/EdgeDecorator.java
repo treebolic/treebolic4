@@ -36,16 +36,16 @@ public class EdgeDecorator extends ElementDecorator
 	@Override
 	public String getName()
 	{
-		return " " + super.getName() + " ";  
+		return " " + super.getName() + " ";
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see treebolic.generator.domtree.ElementDecorator#getValue()
 	 */
-	@Override
-	public String getValue()
-	{
-		return super.getValue();
-	}
+	// @Override
+	// public String getValue()
+	// {
+	// 	return super.getValue();
+	// }
 }

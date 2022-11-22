@@ -217,7 +217,26 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	public enum Mode
 	{
 		// formatter:off
-		/** New */ NEW, /** Open */ OPEN, /** Import */ IMPORT, /** Deserialize */ DESERIALIZE, /** Unzip */ UNZIP
+		/**
+		 * New
+		 */
+		NEW,
+		/**
+		 * Open
+		 */
+		OPEN,
+		/**
+		 * Import
+		 */
+		IMPORT,
+		/**
+		 * Deserialize
+		 */
+		DESERIALIZE,
+		/**
+		 * Unzip
+		 */
+		UNZIP
 		// formatter:on
 	}
 
@@ -1324,7 +1343,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			try
 			{
 				final File outputFile = Controller.getFile(outputFileUrl);
-				if (outputFile.exists() && !Interact.confirm(new String[]{outputFileUrl, Messages.getString("Controller.file"), Messages.getString("Controller.prompt_overwrite")}))
+				if (outputFile != null && outputFile.exists() && !Interact.confirm(new String[]{outputFileUrl, Messages.getString("Controller.file"), Messages.getString("Controller.prompt_overwrite")}))
 				{
 					return;
 				}
@@ -1629,7 +1648,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			{
 				folder = new File(imageRepositoryPath);
 			}
-			if (folder.exists() && folder.isDirectory())
+			if (folder != null && folder.exists() && folder.isDirectory())
 			{
 				try
 				{
@@ -1763,9 +1782,11 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	@Override
 	public URL getBase()
 	{
+		Properties parameters = getParameters();
+
 		// base parameter
 		final String baseSetting = this.settings.getProperty("base");
-		final String baseParameter = getParameters().getProperty("base");
+		final String baseParameter = parameters == null ? null : parameters.getProperty("base");
 		String uRLString = baseSetting != null ? baseSetting : baseParameter != null ? baseParameter : System.getProperty("user.dir");
 
 		// tail

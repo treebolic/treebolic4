@@ -5,7 +5,7 @@
   -->
 
 <!-- This code released under the GPL. (http://www.gnu.org/copyleft/gpl.html) Document : freemind2treebolic.xsl Created on : 01 May 2008, 17:17 Author : Bernard
-	Bou bbou@ac-toulouse.fr Description: transforms freemind mm format to treebolic ChangeLog: -->
+	Bou 1313ou@gmail.com Description: transforms freemind mm format to treebolic ChangeLog: -->
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xlink="http://www.w3.org/1999/xlink"
 	exclude-result-prefixes="xlink">

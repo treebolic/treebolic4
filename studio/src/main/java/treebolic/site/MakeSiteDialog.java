@@ -153,7 +153,7 @@ public class MakeSiteDialog extends JDialog
 		modeButton.setText(Messages.getString("MakeSiteDialog.browse"));
 
 		// images
-		final Icon icon = new ImageIcon(MakeSiteDialog.class.getResource("images/sitemake.png"));
+		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(MakeSiteDialog.class.getResource("images/sitemake.png"));
 		final JLabel imageLabel = new JLabel();
 		imageLabel.setBackground(Color.RED);
 		imageLabel.setIcon(icon);
@@ -388,7 +388,9 @@ public class MakeSiteDialog extends JDialog
 			}
 			if (repository == null || repository.isEmpty())
 			{
-				repository = SiteMaker.class.getResource("repository/").toURI().toURL().toString();
+				URL url = SiteMaker.class.getResource("repository/");
+				assert url != null;
+				repository = url.toURI().toURL().toString();
 			}
 
 			// image repository check

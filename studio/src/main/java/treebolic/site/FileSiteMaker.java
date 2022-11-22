@@ -5,12 +5,12 @@ package treebolic.site;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
 
 import org.w3c.dom.Document;
 
@@ -84,7 +84,7 @@ public class FileSiteMaker extends SiteMaker
 		final URL pathUrl = new URL(this.pathUrl);
 		final URL url = new URL(pathUrl, this.xtraPath + filename);
 		final File file = new File(url.toURI());
-		return new FileOutputStream(file);
+		return Files.newOutputStream(file.toPath());
 	}
 
 	/*

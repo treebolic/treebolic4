@@ -37,8 +37,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Constructor
 	 *
-	 * @param args
-	 *        arguments
+	 * @param args arguments
 	 */
 	public MainFrame(final String[] args)
 	{
@@ -49,7 +48,9 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		// menu
 		final JMenuBar menu = makeMenuBar();
 		if (menu != null)
+		{
 			setJMenuBar(menu);
+		}
 
 		// container
 		Container container = getContentPane();
@@ -58,7 +59,9 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		// toolbar
 		final JToolBar toolbar = makeToolBar();
 		if (toolbar != null)
+		{
 			container.add(toolbar, BorderLayout.NORTH);
+		}
 
 		// widget
 		this.widget = makeWidget();
@@ -70,7 +73,8 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		// which extends JComponent
 		// which extends Component
 		//noinspection ConstantConditions
-		container.add((Component)this.widget, BorderLayout.CENTER);
+		assert this.widget instanceof Component;
+		container.add((Component) this.widget, BorderLayout.CENTER);
 
 		// show
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -80,7 +84,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 
 	/**
 	 * Make widget
-	 * 
+	 *
 	 * @return widget
 	 */
 	protected Widget makeWidget()
@@ -112,7 +116,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 
 	/**
 	 * Get widget
-	 * 
+	 *
 	 * @return widget
 	 */
 	public Widget getWidget()
@@ -122,7 +126,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 
 	/**
 	 * Get provider
-	 * 
+	 *
 	 * @return default provider
 	 */
 	@SuppressWarnings("SameReturnValue")
@@ -133,7 +137,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 
 	/**
 	 * Get source
-	 * 
+	 *
 	 * @return default source
 	 */
 	@SuppressWarnings("SameReturnValue")
@@ -144,13 +148,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
 
 	/**
 	 * Make context
-	 * 
-	 * @param source
-	 *        source
-	 * @param base
-	 *        base
-	 * @param imageBase
-	 *        image base
+	 *
+	 * @param source    source
+	 * @param base      base
+	 * @param imageBase image base
 	 * @return application context
 	 */
 	protected Context makeContext(final String source, final String base, final String imageBase)
@@ -161,15 +162,16 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Make parameters
 	 *
-	 * @param args
-	 *        command-line arguments
+	 * @param args command-line arguments
 	 * @return parameters
 	 */
 	protected Properties makeParameters(final String[] args)
 	{
 		// param1=<val> param2=<"val with spaces"> ...
 		if (args == null)
+		{
 			return null;
+		}
 
 		final Properties parameters = new Properties();
 		for (final String arg : args)
@@ -196,7 +198,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 
 	/**
 	 * Get parameters
-	 * 
+	 *
 	 * @return parameters
 	 */
 	public Properties getParameters()
@@ -273,8 +275,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Main
 	 *
-	 * @param args
-	 *        arguments
+	 * @param args arguments
 	 */
 	public static void main(final String[] args)
 	{

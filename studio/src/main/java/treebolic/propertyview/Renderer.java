@@ -41,100 +41,115 @@ class Renderer extends DefaultTableCellRenderer
 	/**
 	 * The bold font
 	 */
-	private final Font boldFont = new Font(Font.DIALOG, Font.BOLD, 12); 
+	private final Font boldFont = new Font(Font.DIALOG, Font.BOLD, 12);
 
 	/**
 	 * The italic font
 	 */
-	private final Font italicFont = new Font(Font.DIALOG, Font.ITALIC, 12); 
+	private final Font italicFont = new Font(Font.DIALOG, Font.ITALIC, 12);
 
 	// icons
 
 	/**
 	 * Mandatory attribute icon
 	 */
-	private final ImageIcon mandatoryIcon = new ImageIcon(Renderer.class.getResource("images/mandatory.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon mandatoryIcon = new ImageIcon(Renderer.class.getResource("images/mandatory.png"));
 
 	/**
 	 * Optional attribute icon
 	 */
-	private final ImageIcon optionalIcon = new ImageIcon(Renderer.class.getResource("images/optional.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon optionalIcon = new ImageIcon(Renderer.class.getResource("images/optional.png"));
 
 	/**
 	 * Attribute icon
 	 */
-	private final ImageIcon attributeIcon = new ImageIcon(Renderer.class.getResource("images/attribute.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon attributeIcon = new ImageIcon(Renderer.class.getResource("images/attribute.png"));
 
 	/**
 	 * Id icon
 	 */
-	private final ImageIcon idIcon = new ImageIcon(Renderer.class.getResource("images/id.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon idIcon = new ImageIcon(Renderer.class.getResource("images/id.png"));
 
 	/**
 	 * Id reference icon
 	 */
-	private final ImageIcon refIdcon = new ImageIcon(Renderer.class.getResource("images/node.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon refIdcon = new ImageIcon(Renderer.class.getResource("images/node.png"));
 
 	/**
 	 * Text icon
 	 */
-	private final ImageIcon textIcon = new ImageIcon(Renderer.class.getResource("images/text.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon textIcon = new ImageIcon(Renderer.class.getResource("images/text.png"));
 
 	/**
 	 * Long text icon
 	 */
-	private final ImageIcon longTextIcon = new ImageIcon(Renderer.class.getResource("images/longtext.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon longTextIcon = new ImageIcon(Renderer.class.getResource("images/longtext.png"));
 
 	/**
 	 * Image icon
 	 */
-	private final ImageIcon imageIcon = new ImageIcon(Renderer.class.getResource("images/image.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon imageIcon = new ImageIcon(Renderer.class.getResource("images/image.png"));
 
 	/**
 	 * Link icon
 	 */
-	private final ImageIcon linkIcon = new ImageIcon(Renderer.class.getResource("images/link.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon linkIcon = new ImageIcon(Renderer.class.getResource("images/link.png"));
 
 	/**
 	 * Color icon
 	 */
-	private final ImageIcon colorIcon = new ImageIcon(Renderer.class.getResource("images/color.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon colorIcon = new ImageIcon(Renderer.class.getResource("images/color.png"));
 
 	/**
 	 * Stroke icon
 	 */
-	private final ImageIcon strokeIcon = new ImageIcon(Renderer.class.getResource("images/stroke.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon strokeIcon = new ImageIcon(Renderer.class.getResource("images/stroke.png"));
 
 	/**
 	 * Terminator icon
 	 */
-	private final ImageIcon terminatorIcon = new ImageIcon(Renderer.class.getResource("images/terminator.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon terminatorIcon = new ImageIcon(Renderer.class.getResource("images/terminator.png"));
 
 	/**
 	 * Font icon
 	 */
-	private final ImageIcon fontIcon = new ImageIcon(Renderer.class.getResource("images/font.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon fontIcon = new ImageIcon(Renderer.class.getResource("images/font.png"));
 
 	/**
 	 * Font size icon
 	 */
-	private final ImageIcon fontSizeIcon = new ImageIcon(Renderer.class.getResource("images/fontsize.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon fontSizeIcon = new ImageIcon(Renderer.class.getResource("images/fontsize.png"));
 
 	/**
 	 * Boolean icon
 	 */
-	private final ImageIcon booleanIcon = new ImageIcon(Renderer.class.getResource("images/boolean.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon booleanIcon = new ImageIcon(Renderer.class.getResource("images/boolean.png"));
 
 	/**
 	 * Floats icon
 	 */
-	private final ImageIcon floatsIcon = new ImageIcon(Renderer.class.getResource("images/floats.png")); 
+	@SuppressWarnings("ConstantConditions")
+	private final ImageIcon floatsIcon = new ImageIcon(Renderer.class.getResource("images/floats.png"));
 
 	/**
 	 * Constructor
 	 *
-	 * @param propertyView
-	 *        property view
+	 * @param propertyView property view
 	 */
 	public Renderer(final PropertyView propertyView)
 	{
@@ -156,177 +171,177 @@ class Renderer extends DefaultTableCellRenderer
 
 		switch (column)
 		{
-		case PropertyView.VALUE:
-		{
-			final Attribute attribute = (Attribute) value;
-			final Object attributeValue = attribute == null ? null : attribute.value;
-			if (attributeValue == null)
+			case PropertyView.VALUE:
 			{
-				setText(PropertyView.defaultString);
+				final Attribute attribute = (Attribute) value;
+				final Object attributeValue = attribute == null ? null : attribute.value;
+				if (attributeValue == null)
+				{
+					setText(PropertyView.defaultString);
+					return this;
+				}
+
+				final AttributeType type = attribute.descriptor.type;
+				switch (type)
+				{
+					case COLOR:
+						this.colorPanel.setBackground(((Color) attributeValue).color);
+						return this.colorPanel;
+
+					case LABEL:
+						setText(attributeValue.toString().replaceAll("\n", "\\\\n"));
+						setFont(this.boldFont);
+						assert Color.RED.color != null;
+						setForeground(Color.RED.color.darker());
+						return this;
+
+					case TEXT:
+					case LONGTEXT:
+						setText(attributeValue.toString().replaceAll("\n", "\\\\n"));
+						return this;
+
+					case BOOLEAN:
+					case FLOAT:
+					case INTEGER:
+						setText(attributeValue.toString());
+						return this;
+
+					case FLOATS:
+						setIcon(this.floatsIcon);
+						setText(attributeValue.toString());
+						return this;
+
+					case ID:
+						setText((String) attributeValue);
+						return this;
+
+					case REFID:
+						setText((String) attributeValue);
+						setIcon(this.refIdcon);
+						return this;
+
+					case LINK:
+						setText(PropertyView.decode((String) attributeValue));
+						setForeground(Color.BLUE.color);
+						setFont(this.italicFont);
+						setIcon(this.linkIcon);
+						return this;
+
+					case FONTFACE:
+						setText((String) attributeValue);
+						setFont(new Font((String) attributeValue, Font.PLAIN, 18));
+						return this;
+
+					case IMAGE:
+						final String imageFile = (String) attributeValue;
+						setIcon(makeIcon(imageFile));
+						setText(imageFile);
+						return this;
+
+					case FONTSIZE:
+						setIcon(this.fontSizeIcon);
+						setText((String) attributeValue);
+						return this;
+
+					case STROKE:
+						setIcon(PropertyView.strokeIcons.get((String) attributeValue));
+						setText((String) attributeValue);
+						setForeground(Color.BLUE.color);
+						return this;
+
+					case TERMINATOR:
+						setIcon(PropertyView.terminatorIcons.get((String) attributeValue));
+						setText((String) attributeValue);
+						setForeground(Color.BLUE.color);
+						return this;
+
+					default:
+						System.err.println("Renderer doesn't handle this class: " + attribute.descriptor.name + " type:" + attribute.descriptor.type);
+						return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+				}
+			}
+
+			case PropertyView.STATUS:
+			{
+				final Boolean booleanValue = (Boolean) value;
+				setIcon(booleanValue ? this.mandatoryIcon : this.optionalIcon);
+				setText(null);
+				setHorizontalAlignment(SwingConstants.CENTER);
 				return this;
 			}
 
-			final AttributeType type = attribute.descriptor.type;
-			switch (type)
+			case PropertyView.TYPE:
 			{
-			case COLOR:
-				this.colorPanel.setBackground(((Color) attributeValue).color);
-				return this.colorPanel;
+				final AttributeType propertyTypeValue = (AttributeType) value;
+				switch (propertyTypeValue)
+				{
+					case TEXT:
+						setIcon(this.textIcon);
+						break;
 
-			case LABEL:
-				setText(attributeValue.toString().replaceAll("\n", "\\\\n"));
-				setFont(this.boldFont);
-				// setBackground(Color.LIGHT_GRAY.color);
-				setForeground(Color.RED.color.darker());
-				return this;
+					case LONGTEXT:
+						setIcon(this.longTextIcon);
+						break;
 
-			case TEXT:
-			case LONGTEXT:
-				setText(attributeValue.toString().replaceAll("\n", "\\\\n"));
-				return this;
-				
-			case BOOLEAN:
-			case FLOAT:
-			case INTEGER:
-				setText(attributeValue.toString());
-				return this;
+					case IMAGE:
+						setIcon(this.imageIcon);
+						break;
 
-			case FLOATS:
-				setIcon(this.floatsIcon);
-				setText(attributeValue.toString());
-				return this;
+					case LINK:
+						setIcon(this.linkIcon);
+						break;
 
-			case ID:
-				setText((String) attributeValue);
-				return this;
+					case COLOR:
+						setIcon(this.colorIcon);
+						break;
 
-			case REFID:
-				setText((String) attributeValue);
-				setIcon(this.refIdcon);
-				return this;
+					case BOOLEAN:
+						setIcon(this.booleanIcon);
+						break;
 
-			case LINK:
-				setText(PropertyView.decode((String) attributeValue));
-				setForeground(Color.BLUE.color);
-				setFont(this.italicFont);
-				setIcon(this.linkIcon);
-				return this;
+					case FLOATS:
+						setIcon(this.floatsIcon);
+						break;
 
-			case FONTFACE:
-				setText((String) attributeValue);
-				setFont(new Font((String) attributeValue, Font.PLAIN, 18));
-				return this;
+					case ID:
+						setIcon(this.idIcon);
+						break;
 
-			case IMAGE:
-				final String imageFile = (String) attributeValue;
-				setIcon(makeIcon(imageFile));
-				setText(imageFile);
-				return this;
+					case REFID:
+						setIcon(this.refIdcon);
+						break;
 
-			case FONTSIZE:
-				setIcon(this.fontSizeIcon);
-				setText((String) attributeValue);
-				return this;
+					case STROKE:
+						setIcon(this.strokeIcon);
+						break;
 
-			case STROKE:
-				setIcon(PropertyView.strokeIcons.get((String) attributeValue));
-				setText((String) attributeValue);
-				setForeground(Color.BLUE.color);
-				return this;
+					case TERMINATOR:
+						setIcon(this.terminatorIcon);
+						break;
 
-			case TERMINATOR:
-				setIcon(PropertyView.terminatorIcons.get((String) attributeValue));
-				setText((String) attributeValue);
-				setForeground(Color.BLUE.color);
-				return this;
+					case FONTFACE:
+						setIcon(this.fontIcon);
+						break;
 
-			default:
-				System.err.println("Renderer doesn't handle this class: " + attribute.descriptor.name + " type:" + attribute.descriptor.type);  
-				return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+					case FONTSIZE:
+						setIcon(this.fontSizeIcon);
+						break;
+
+					default:
+						setIcon(this.attributeIcon);
+						break;
+				}
+				setText(null);
+				setHorizontalAlignment(SwingConstants.CENTER);
+				return this;
 			}
-		}
 
-		case PropertyView.STATUS:
-		{
-			final Boolean booleanValue = (Boolean) value;
-			setIcon(booleanValue ? this.mandatoryIcon : this.optionalIcon);
-			setText(null);
-			setHorizontalAlignment(SwingConstants.CENTER);
-			return this;
-		}
-
-		case PropertyView.TYPE:
-		{
-			final AttributeType propertyTypeValue = (AttributeType) value;
-			switch (propertyTypeValue)
+			case PropertyView.NAME:
 			{
-			case TEXT:
-				setIcon(this.textIcon);
-				break;
-
-			case LONGTEXT:
-				setIcon(this.longTextIcon);
-				break;
-
-			case IMAGE:
-				setIcon(this.imageIcon);
-				break;
-
-			case LINK:
-				setIcon(this.linkIcon);
-				break;
-
-			case COLOR:
-				setIcon(this.colorIcon);
-				break;
-
-			case BOOLEAN:
-				setIcon(this.booleanIcon);
-				break;
-
-			case FLOATS:
-				setIcon(this.floatsIcon);
-				break;
-
-			case ID:
-				setIcon(this.idIcon);
-				break;
-
-			case REFID:
-				setIcon(this.refIdcon);
-				break;
-
-			case STROKE:
-				setIcon(this.strokeIcon);
-				break;
-
-			case TERMINATOR:
-				setIcon(this.terminatorIcon);
-				break;
-
-			case FONTFACE:
-				setIcon(this.fontIcon);
-				break;
-
-			case FONTSIZE:
-				setIcon(this.fontSizeIcon);
-				break;
-
-			default:
-				setIcon(this.attributeIcon);
-				break;
+				final String name = (String) value;
+				setText(name);
+				return this;
 			}
-			setText(null);
-			setHorizontalAlignment(SwingConstants.CENTER);
-			return this;
-		}
-
-		case PropertyView.NAME:
-		{
-			final String name = (String) value;
-			setText(name);
-			return this;
-		}
 		}
 		return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 	}
@@ -334,8 +349,7 @@ class Renderer extends DefaultTableCellRenderer
 	/**
 	 * Make icon
 	 *
-	 * @param imageFile
-	 *        image file
+	 * @param imageFile image file
 	 * @return icon
 	 */
 	private Icon makeIcon(final String imageFile)
