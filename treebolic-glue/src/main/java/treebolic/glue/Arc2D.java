@@ -4,6 +4,8 @@
 
 package treebolic.glue;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Arc 2D
  *
@@ -79,12 +81,14 @@ public class Arc2D implements treebolic.glue.iface.Arc2D<Point2D>
 		throw new NotImplementedException();
 	}
 
+	@NonNull
 	@Override
 	public Point2D getStartPoint()
 	{
 		throw new NotImplementedException();
 	}
 
+	@NonNull
 	@Override
 	public Point2D getEndPoint()
 	{

@@ -4,6 +4,8 @@
 
 package treebolic.glue;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Graphics context
  *
@@ -105,6 +107,7 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 		throw new NotImplementedException();
 	}
 
+	@NonNull
 	@Override
 	public Color getColor()
 	{

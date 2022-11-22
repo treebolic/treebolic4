@@ -4,6 +4,8 @@
 
 package treebolic.glue;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Color
  *
@@ -112,12 +114,14 @@ public class Color implements treebolic.glue.iface.Color<Color>
 		throw new NotImplementedException();
 	}
 
+	@NonNull
 	@Override
 	public Color makeBrighter()
 	{
 		throw new NotImplementedException();
 	}
 
+	@NonNull
 	@Override
 	public Color makeDarker()
 	{

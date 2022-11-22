@@ -4,6 +4,7 @@
 
 package treebolic.glue;
 
+import treebolic.annotations.NonNull;
 import treebolic.glue.component.Component;
 
 /**
@@ -26,6 +27,7 @@ public class GraphicsCache implements treebolic.glue.iface.GraphicsCache<Graphic
 		throw new NotImplementedException();
 	}
 
+	@NonNull
 	@Override
 	public Graphics getGraphics()
 	{
