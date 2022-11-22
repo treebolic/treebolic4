@@ -493,6 +493,8 @@
     <pattern value="treebolic.xml.transformer.DomTransformer" method="documentToDocument" />
     <pattern value="treebolic.xml.transformer.DomTransformer" method="documentToString" />
     <pattern value="treebolic.xml.transformer.DomTransformer" method="fileToDocument" />
+    <pattern value="treebolic.dtd.Dtd" method="copyToUTF8Stream" />
+    <pattern value="treebolic.xml.transformer.DomTransformer" method="DomTransformer" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
