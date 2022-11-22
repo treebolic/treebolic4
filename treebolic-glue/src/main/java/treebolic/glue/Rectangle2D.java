@@ -92,26 +92,6 @@ public class Rectangle2D implements treebolic.glue.iface.Rectangle2D<Point2D, Re
 		throw new NotImplementedException();
 	}
 
-	/**
-	 * Parameter for outcode (): bottom
-	 */
-	public static final int OUT_BOTTOM = 1;
-
-	/**
-	 * Parameter for outcode (): left
-	 */
-	public static final int OUT_LEFT = 2;
-
-	/**
-	 * Parameter for outcode (): right
-	 */
-	public static final int OUT_RIGHT = 4;
-
-	/**
-	 * Parameter for outcode (): top
-	 */
-	public static final int OUT_TOP = 8;
-
 	@Override
 	public int outcode(final Point2D point)
 	{

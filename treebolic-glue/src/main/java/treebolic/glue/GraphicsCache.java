@@ -22,7 +22,7 @@ public class GraphicsCache implements treebolic.glue.iface.GraphicsCache<Graphic
 	 * @param width     width
 	 * @param height    height
 	 */
-	public GraphicsCache(final Component component, final Graphics graphics, final int width, final int height)
+	public GraphicsCache(@NonNull final Component component, @NonNull final Graphics graphics, final int width, final int height)
 	{
 		throw new NotImplementedException();
 	}
@@ -35,7 +35,7 @@ public class GraphicsCache implements treebolic.glue.iface.GraphicsCache<Graphic
 	}
 
 	@Override
-	public void put(final Graphics graphics)
+	public void put(@NonNull final Graphics graphics)
 	{
 		throw new NotImplementedException();
 	}
