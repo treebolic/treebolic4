@@ -79,8 +79,6 @@ import treebolic.provider.IProvider;
 import treebolic.provider.IProviderContext;
 import treebolic.provider.xml.DocumentAdapter;
 import treebolic.provider.xml.Parser;
-import treebolic.site.MakeSiteDialog;
-import treebolic.site.RunSiteDialog;
 import treebolic.xml.transformer.DomTransformer;
 import treebolic.zip.ZipMaker;
 
@@ -198,7 +196,6 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		/** New element */ NEWELEMENT, /** Remove element */ REMOVEELEMENT, //
 		/** Export settings */ EXPORTSETTINGS, //
 		/** Normalize IDs */ NORMALIZEIDS, /** List images */ LISTIMAGES, /** List links */ LISTLINKS, /** List mounts */ LISTMOUNTS, /** List IDs */ LISTIDS, //
-		/** Make */ MAKESITE, /** Run site */ RUNSITE, //
 		/** Settings */ SETTINGS, /** Settings base */ SETTINGSBASE, /** Settings URL */ SETTINGSURL, //
 		/** Update */ UPDATE, //
 		/** Treebolic renderer option */ OPTIONTREEBOLICRENDERER, /** Validate XML option */ OPTIONVALIDATEXML, /** Focus parent option */ OPTIONFOCUSPARENT, //
@@ -597,14 +594,6 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 
 			case UPDATE:
 				updateWidget();
-				break;
-
-			case MAKESITE:
-				makeSite();
-				break;
-
-			case RUNSITE:
-				runSite();
 				break;
 
 			case SETTINGS:
@@ -1343,7 +1332,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			try
 			{
 				final File outputFile = Controller.getFile(outputFileUrl);
-				if (outputFile != null && outputFile.exists() && !Interact.confirm(new String[]{outputFileUrl, Messages.getString("Controller.file"), Messages.getString("Controller.prompt_overwrite")}))
+				if (outputFile.exists() && !Interact.confirm(new String[]{outputFileUrl, Messages.getString("Controller.file"), Messages.getString("Controller.prompt_overwrite")}))
 				{
 					return;
 				}
@@ -1363,31 +1352,6 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	}
 
 	// D I A L O G S
-
-	/**
-	 * Make site
-	 */
-	private void makeSite()
-	{
-		this.document = makeDocument(this.model);
-		if (this.document != null)
-		{
-			final MakeSiteDialog dialog = new MakeSiteDialog(this.settings);
-			dialog.setDocument(this.document);
-			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		}
-	}
-
-	/**
-	 * Run site
-	 */
-	private void runSite()
-	{
-		final RunSiteDialog dialog = new RunSiteDialog(this.settings);
-		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		dialog.setVisible(true);
-	}
 
 	/**
 	 * Persist

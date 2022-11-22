@@ -53,9 +53,7 @@ public class Menubar extends JMenuBar
 		final JMenuItem saveAsMenuItem = makeItem(Messages.getString("Menubar.saveas"), "saveas.png", Controller.Code.SAVEAS, null);  
 		final JMenuItem exportMenuItem = makeItem(Messages.getString("Menubar.export"), "export.png", Controller.Code.EXPORT, null);  
 		final JMenuItem exportSettingsMenuItem = makeItem(Messages.getString("Menubar.export_rendering"), null, Controller.Code.EXPORTSETTINGS, null); 
-		final JMenuItem makeSiteMenuItem = makeItem(Messages.getString("Menubar.make_site"), "sitemake.png", Controller.Code.MAKESITE, null);  
-		final JMenuItem runSiteMenuItem = makeItem(Messages.getString("Menubar.run_site"), "siterun.png", Controller.Code.RUNSITE, null);  
-		final JMenuItem zipMenuItem = makeItem(Messages.getString("Menubar.zip"), "zip.png", Controller.Code.ZIP, null);  
+		final JMenuItem zipMenuItem = makeItem(Messages.getString("Menubar.zip"), "zip.png", Controller.Code.ZIP, null);
 		final JMenuItem unZipMenuItem = makeItem(Messages.getString("Menubar.unzip"), "unzip.png", Controller.Code.UNZIP, null);  
 		final JMenuItem serializeMenuItem = makeItem(Messages.getString("Menubar.serialize"), "serialize.png", Controller.Code.SERIALIZE, null);  
 		final JMenuItem deserializeMenuItem = makeItem(Messages.getString("Menubar.deserialize"), "deserialize.png", Controller.Code.DESERIALIZE, null);  
@@ -130,8 +128,6 @@ public class Menubar extends JMenuBar
 		toolsMenu.setText(Messages.getString("Menubar.menu_tools")); 
 		toolsMenu.add(dtdMenuItem);
 		toolsMenu.addSeparator();
-		toolsMenu.add(makeSiteMenuItem);
-		toolsMenu.add(runSiteMenuItem);
 
 		this.add(filesMenu);
 		this.add(elementsMenu);

@@ -61,12 +61,6 @@ public class Toolbar extends JToolBar
 		final JButton saveButton = makeButton(Messages.getString("Toolbar.save"), Messages.getString("Toolbar.tooltip_save"), "save.png");   
 		saveButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.SAVE, 0));
 
-		final JButton makeSiteButton = makeButton(Messages.getString("Toolbar.make"), Messages.getString("Toolbar.tooltip_make"), "sitemake.png");   
-		makeSiteButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.MAKESITE, 0));
-
-		final JButton runSiteButton = makeButton(Messages.getString("Toolbar.run"), Messages.getString("Toolbar.tooltip_run"), "siterun.png");   
-		runSiteButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.RUNSITE, 0));
-
 		final JButton helpButton = makeButton(Messages.getString("Toolbar.help"), Messages.getString("Toolbar.tooltip_help"), "help.png");   
 		helpButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.HELP, 0));
 
@@ -78,8 +72,6 @@ public class Toolbar extends JToolBar
 		this.add(newButton);
 		this.add(saveButton);
 		this.add(updateNodeButton);
-		this.add(makeSiteButton);
-		this.add(runSiteButton);
 		this.add(helpButton);
 	}
 
