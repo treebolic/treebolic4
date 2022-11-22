@@ -15,6 +15,9 @@ import javax.swing.plaf.metal.DefaultMetalTheme;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Look and feel
  *
@@ -27,7 +30,7 @@ public class Laf
 	 *
 	 * @param args command line arguments
 	 */
-	static public void lookAndFeel(final String[] args)
+	static public void lookAndFeel(@NonNull final String[] args)
 	{
 		// "com.incors.plaf.kunststoff.KunststoffLookAndFeel"
 		// "com.jgoodies.looks.plastic.PlasticLookAndFeel"
@@ -35,9 +38,9 @@ public class Laf
 		// "com.sun.java.swing.plaf.windows.WindowsLookAndFeel"
 
 		// look and feel
-		String laf = null;
+		@Nullable String laf = null;
 		boolean customTheme = false;
-		for (final String arg : args)
+		for (@NonNull final String arg : args)
 		{
 			if (arg.startsWith("laf="))
 			{
@@ -114,7 +117,7 @@ public class Laf
 	private static void setDefault()
 	{
 		final boolean isJava7 = getJavaVersion() >= 1.7F;
-		final String plafName = isJava7 ? "javax.swing.plaf.nimbus.NimbusLookAndFeel" : "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"; // "javax.swing.plaf.metal.MetalLookAndFeel";
+		@NonNull final String plafName = isJava7 ? "javax.swing.plaf.nimbus.NimbusLookAndFeel" : "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"; // "javax.swing.plaf.metal.MetalLookAndFeel";
 		try
 		{
 			UIManager.setLookAndFeel(plafName);
@@ -145,7 +148,7 @@ public class Laf
 	@SuppressWarnings({"SameReturnValue", "UnusedReturnValue"})
 	static public boolean setLookAndFeel(final String lafName) throws UnsupportedLookAndFeelException
 	{
-		final LookAndFeel laf = Laf.getLaf(lafName);
+		@Nullable final LookAndFeel laf = Laf.getLaf(lafName);
 		UIManager.setLookAndFeel(laf);
 		return true;
 	}
@@ -156,16 +159,17 @@ public class Laf
 	 * @param className LAF class name
 	 * @return instance of this class
 	 */
+	@Nullable
 	static LookAndFeel getLaf(final String className)
 	{
 		try
 		{
-			final Class<?> clazz = Class.forName(className);
-			final Class<?>[] argsClass = new Class[] {};
-			final Object[] args = new Object[] {};
+			@NonNull final Class<?> clazz = Class.forName(className);
+			@NonNull final Class<?>[] argsClass = new Class[] {};
+			@NonNull final Object[] args = new Object[] {};
 
-			final Constructor<?> constructor = clazz.getConstructor(argsClass);
-			final Object instance = constructor.newInstance(args);
+			@NonNull final Constructor<?> constructor = clazz.getConstructor(argsClass);
+			@NonNull final Object instance = constructor.newInstance(args);
 			return (LookAndFeel) instance;
 		}
 		catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException nfe)
@@ -184,7 +188,7 @@ public class Laf
 	@SuppressWarnings({"SameReturnValue", "UnusedReturnValue"})
 	static public boolean setCustomTheme(final String lafName)
 	{
-		final MetalTheme theme = Laf.makeCustomTheme();
+		@NonNull final MetalTheme theme = Laf.makeCustomTheme();
 		Laf.setCurrentTheme(lafName, theme);
 		return true;
 	}
@@ -195,13 +199,13 @@ public class Laf
 	 * @param className LAF class name (may have overridden 'setCurrentTheme()')
 	 * @param theme theme
 	 */
-	static void setCurrentTheme(final String className, final MetalTheme theme)
+	static void setCurrentTheme(final String className, @NonNull final MetalTheme theme)
 	{
 		try
 		{
-			final Class<?> clazz = Class.forName(className);
-			final Class<?>[] argsClass = new Class[] { MetalTheme.class };
-			final Method method = clazz.getMethod("setCurrentTheme", argsClass);
+			@NonNull final Class<?> clazz = Class.forName(className);
+			@NonNull final Class<?>[] argsClass = new Class[] { MetalTheme.class };
+			@NonNull final Method method = clazz.getMethod("setCurrentTheme", argsClass);
 			method.invoke(null, theme);
 		}
 		catch (final Exception e)
@@ -216,6 +220,7 @@ public class Laf
 	 *
 	 * @return metal theme
 	 */
+	@NonNull
 	static private MetalTheme makeCustomTheme()
 	{
 		return new DefaultMetalTheme()

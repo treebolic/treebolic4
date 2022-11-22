@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
+import treebolic.annotations.NonNull;
+
 /**
  * About dialog
  *
@@ -40,7 +42,7 @@ public class AboutDialog extends JDialog
 	 */
 	private void initialize()
 	{
-		final JLabel title = new JLabel();
+		@NonNull final JLabel title = new JLabel();
 		title.setText(Messages.getString("AboutDialog.title"));
 		title.setFont(new Font(Font.DIALOG, Font.BOLD, 18));
 		title.setOpaque(true);
@@ -49,27 +51,27 @@ public class AboutDialog extends JDialog
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		final JLabel description = new JLabel();
+		@NonNull final JLabel description = new JLabel();
 		description.setText(Messages.getString("AboutDialog.app"));
 		description.setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
 		description.setHorizontalAlignment(SwingConstants.CENTER);
 		description.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		final JLabel version = new JLabel();
+		@NonNull final JLabel version = new JLabel();
 		version.setText("version 4.0.0");
 		version.setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
 		version.setHorizontalAlignment(SwingConstants.CENTER);
 		version.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		final JLabel author = new JLabel();
+		@NonNull final JLabel author = new JLabel();
 		author.setText("Bernard Bou <1313ou@gmail.com>");
 		author.setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
 		author.setHorizontalAlignment(SwingConstants.CENTER);
 		author.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		final BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+		@NonNull final BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 		panel.setLayout(layout);
 		panel.add(Box.createVerticalGlue());
 		panel.add(title);
@@ -89,7 +91,7 @@ public class AboutDialog extends JDialog
 	 * @param component
 	 *        component to center
 	 */
-	static public void center(final Component component)
+	static public void center(@NonNull final Component component)
 	{
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		final Dimension componentSize = component.getSize();
@@ -112,7 +114,7 @@ public class AboutDialog extends JDialog
 	 */
 	static public void main(final String[] args)
 	{
-		final AboutDialog dialog = new AboutDialog();
+		@NonNull final AboutDialog dialog = new AboutDialog();
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

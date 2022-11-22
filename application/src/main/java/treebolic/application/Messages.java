@@ -7,6 +7,8 @@ package treebolic.application;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Language dependency, bundle reader
  *
@@ -29,7 +31,8 @@ public class Messages
 	 * @param key message key
 	 * @return localized message
 	 */
-	public static String getString(final String key)
+	@NonNull
+	public static String getString(@NonNull final String key)
 	{
 		try
 		{

@@ -3,6 +3,7 @@
  */
 package treebolic;
 
+import treebolic.annotations.NonNull;
 import treebolic.application.Laf;
 import treebolic.application.MainFrame;
 
@@ -25,6 +26,7 @@ public class Application
 	 *
 	 * @return version
 	 */
+	@NonNull
 	static public String getVersion()
 	{
 		return Application.VERSION;
@@ -38,7 +40,7 @@ public class Application
 	 * @param args
 	 *        arguments
 	 */
-	public static void main(final String[] args)
+	public static void main(@NonNull final String[] args)
 	{
 		Laf.lookAndFeel(args);
 		new MainFrame(args);

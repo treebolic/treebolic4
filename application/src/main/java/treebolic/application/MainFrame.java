@@ -17,6 +17,8 @@ import javax.swing.event.HyperlinkEvent.EventType;
 import javax.swing.event.HyperlinkListener;
 
 import treebolic.Widget;
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * Application
@@ -27,11 +29,13 @@ public class MainFrame extends JFrame implements HyperlinkListener
 {
 	private static final long serialVersionUID = 1L;
 
+	@NonNull
 	protected final Widget widget;
 
 	/**
 	 * Parameters
 	 */
+	@Nullable
 	protected final Properties parameters;
 
 	/**
@@ -46,7 +50,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		setTitle("Treebolic");
 
 		// menu
-		final JMenuBar menu = makeMenuBar();
+		@Nullable final JMenuBar menu = makeMenuBar();
 		if (menu != null)
 		{
 			setJMenuBar(menu);
@@ -57,7 +61,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		container.setLayout(new BorderLayout());
 
 		// toolbar
-		final JToolBar toolbar = makeToolBar();
+		@Nullable final JToolBar toolbar = makeToolBar();
 		if (toolbar != null)
 		{
 			container.add(toolbar, BorderLayout.NORTH);
@@ -87,6 +91,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return widget
 	 */
+	@NonNull
 	protected Widget makeWidget()
 	{
 		// context parameters
@@ -96,10 +101,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		final String provider = this.parameters.getProperty("provider", getProvider());
 
 		// context parameters
-		final Context context = makeContext(source, base, imageBase);
+		@NonNull final Context context = makeContext(source, base, imageBase);
 
 		// widget
-		final Widget widget = new Widget(context, null);
+		@NonNull final Widget widget = new Widget(context, null);
 
 		// init
 		final String serFile = getParameters().getProperty("ser");
@@ -129,6 +134,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return default provider
 	 */
+	@Nullable
 	@SuppressWarnings("SameReturnValue")
 	protected String getProvider()
 	{
@@ -140,6 +146,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return default source
 	 */
+	@Nullable
 	@SuppressWarnings("SameReturnValue")
 	protected String getSource()
 	{
@@ -154,6 +161,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param imageBase image base
 	 * @return application context
 	 */
+	@NonNull
 	protected Context makeContext(final String source, final String base, final String imageBase)
 	{
 		return new Context(this, source, base, imageBase);
@@ -165,7 +173,8 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param args command-line arguments
 	 * @return parameters
 	 */
-	protected Properties makeParameters(final String[] args)
+	@Nullable
+	protected Properties makeParameters(@Nullable final String[] args)
 	{
 		// param1=<val> param2=<"val with spaces"> ...
 		if (args == null)
@@ -173,10 +182,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			return null;
 		}
 
-		final Properties parameters = new Properties();
-		for (final String arg : args)
+		@NonNull final Properties parameters = new Properties();
+		for (@NonNull final String arg : args)
 		{
-			final String[] pair = arg.split("=");
+			@NonNull final String[] pair = arg.split("=");
 			if (pair.length != 2)
 			{
 				continue;
@@ -211,7 +220,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @see javax.swing.event.HyperlinkListener#hyperlinkUpdate(javax.swing.event.HyperlinkEvent)
 	 */
 	@Override
-	public void hyperlinkUpdate(HyperlinkEvent event)
+	public void hyperlinkUpdate(@NonNull HyperlinkEvent event)
 	{
 		if (event.getEventType() == EventType.ACTIVATED)
 		{
@@ -233,6 +242,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return toolbar
 	 */
+	@Nullable
 	@SuppressWarnings("SameReturnValue")
 	protected JToolBar makeToolBar()
 	{
@@ -244,6 +254,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return menu bar
 	 */
+	@Nullable
 	@SuppressWarnings("SameReturnValue")
 	protected JMenuBar makeMenuBar()
 	{

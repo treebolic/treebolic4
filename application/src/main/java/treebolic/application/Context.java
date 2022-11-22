@@ -17,6 +17,8 @@ import javax.swing.SwingUtilities;
 
 import treebolic.IContext;
 import treebolic.Widget;
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.glue.component.Statusbar;
 
 /**
@@ -70,6 +72,7 @@ public class Context implements IContext
 	 *
 	 * @return widget
 	 */
+	@Nullable
 	public Widget getWidget()
 	{
 		return this.application == null ? null : this.application.getWidget();
@@ -82,7 +85,7 @@ public class Context implements IContext
 	@Override
 	public URL getBase()
 	{
-		URL defaultBase = null;
+		@Nullable URL defaultBase = null;
 		if (this.base != null && !this.base.isEmpty())
 		{
 			// 1-use 'base' parameter as full-fledged
@@ -98,7 +101,7 @@ public class Context implements IContext
 			// 1b-use 'base' parameter as full-fledged directory
 			try
 			{
-				final File file = new File(this.base);
+				@NonNull final File file = new File(this.base);
 				if (file.exists() && file.isDirectory())
 				{
 					return file.toURI().toURL();
@@ -110,7 +113,7 @@ public class Context implements IContext
 			}
 
 			// 2-use 'base' parameter as path relative to default
-			String base = this.base;
+			@NonNull String base = this.base;
 			if (!base.endsWith("/"))
 			{
 				base += "/";
@@ -141,8 +144,8 @@ public class Context implements IContext
 	@Override
 	public URL getImagesBase()
 	{
-		URL documentUrl = null;
-		URL defaultUrl = null;
+		@Nullable URL documentUrl = null;
+		@Nullable URL defaultUrl = null;
 		if (this.imageBase != null && !this.imageBase.isEmpty())
 		{
 			// 1-use 'images' parameter as full-fledged url
@@ -158,7 +161,7 @@ public class Context implements IContext
 			// 2-use 'images' parameter as full-fledged directory
 			try
 			{
-				final File file = new File(this.imageBase);
+				@NonNull final File file = new File(this.imageBase);
 				if (file.exists() && file.isDirectory())
 				{
 					return file.toURI().toURL();
@@ -169,7 +172,7 @@ public class Context implements IContext
 				// do nothing
 			}
 
-			String imageBase = this.imageBase;
+			@NonNull String imageBase = this.imageBase;
 			if (!imageBase.endsWith("/"))
 			{
 				imageBase += "/";
@@ -260,15 +263,15 @@ public class Context implements IContext
 	 * @see treebolic.component.Context#linkTo(java.lang.String)
 	 */
 	@Override
-	public boolean linkTo(final String linkUrl, final String linkTarget)
+	public boolean linkTo(@NonNull final String linkUrl, final String linkTarget)
 	{
 		if (Desktop.isDesktopSupported())
 		{
 			try
 			{
-				final File file = new File(linkUrl);
+				@NonNull final File file = new File(linkUrl);
 				boolean exists = file.exists();
-				final URI uri = exists ? file.toURI() : new URI(linkUrl);
+				@NonNull final URI uri = exists ? file.toURI() : new URI(linkUrl);
 				System.out.println(Messages.getString("Context.linkto") + uri);
 
 				// we are likely to be on the popup handler
@@ -307,9 +310,9 @@ public class Context implements IContext
 	 * @see treebolic.IContext#warn(java.lang.String)
 	 */
 	@Override
-	public void warn(final String message)
+	public void warn(@NonNull final String message)
 	{
-		final String[] lines = message.split("\n");
+		@NonNull final String[] lines = message.split("\n");
 		JOptionPane.showMessageDialog(null, lines, Messages.getString("Context.title"), JOptionPane.WARNING_MESSAGE);
 	}
 
@@ -320,7 +323,7 @@ public class Context implements IContext
 	@Override
 	public String getInput()
 	{
-		final Widget widget = getWidget();
+		@Nullable final Widget widget = getWidget();
 		if (widget != null)
 		{
 			final Statusbar statusbar = widget.getStatusbar();
@@ -341,7 +344,8 @@ public class Context implements IContext
 	 * @return url
 	 * @throws MalformedURLException malformed URL exception
 	 */
-	protected URL makeURLAlt(final String source) throws MalformedURLException
+	@NonNull
+	protected URL makeURLAlt(@NonNull final String source) throws MalformedURLException
 	{
 		// try to consider it well-formed full-fledged url
 		try
@@ -354,7 +358,7 @@ public class Context implements IContext
 		}
 
 		// try to consider it file
-		final File file = new File(source);
+		@NonNull final File file = new File(source);
 		if (file.exists() && file.canRead())
 		{
 			try
@@ -377,7 +381,8 @@ public class Context implements IContext
 	 * @param source source
 	 * @return url
 	 */
-	protected URL makeURL(final String source)
+	@Nullable
+	protected URL makeURL(@Nullable final String source)
 	{
 		if (source == null)
 		{
@@ -411,6 +416,7 @@ public class Context implements IContext
 	 *
 	 * @return base default;
 	 */
+	@Nullable
 	protected URL getDefaultBase()
 	{
 		// base parameter
@@ -434,7 +440,7 @@ public class Context implements IContext
 			// make from folder
 			try
 			{
-				final File folder = new File(uRLString);
+				@NonNull final File folder = new File(uRLString);
 				return folder.toURI().toURL();
 			}
 			catch (final MalformedURLException exception)
@@ -450,9 +456,10 @@ public class Context implements IContext
 	 *
 	 * @return image base default;
 	 */
+	@Nullable
 	protected URL getDefaultImagesBase()
 	{
-		final URL base = getDefaultBase();
+		@Nullable final URL base = getDefaultBase();
 		try
 		{
 			return new URL(base, "images/");
