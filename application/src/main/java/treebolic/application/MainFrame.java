@@ -95,10 +95,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	protected Widget makeWidget()
 	{
 		// context parameters
-		final String source = this.parameters.getProperty("source", getSource());
-		final String base = this.parameters.getProperty("base", null);
-		final String imageBase = this.parameters.getProperty("images", null);
-		final String provider = this.parameters.getProperty("provider", getProvider());
+		final String source = this.parameters == null ? null : this.parameters.getProperty("source", getSource());
+		final String base = this.parameters == null ? null : this.parameters.getProperty("base", null);
+		final String imageBase = this.parameters == null ? null : this.parameters.getProperty("images", null);
+		final String provider = this.parameters == null ? null : this.parameters.getProperty("provider", getProvider());
 
 		// context parameters
 		@NonNull final Context context = makeContext(source, base, imageBase);
@@ -107,7 +107,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		@NonNull final Widget widget = new Widget(context, null);
 
 		// init
-		final String serFile = getParameters().getProperty("ser");
+		final String serFile = this.parameters == null ? null : this.parameters.getProperty("ser");
 		if (serFile == null)
 		{
 			widget.init(provider, source);
