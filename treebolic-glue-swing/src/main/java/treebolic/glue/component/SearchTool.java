@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import treebolic.annotations.NonNull;
 import treebolic.glue.ActionListener;
 import treebolic.glue.Color;
 
@@ -99,7 +100,7 @@ class SearchTool extends Box
 	void init()
 	{
 		// input button
-		final JButton inputButton = new JButton();
+		@NonNull final JButton inputButton = new JButton();
 		//noinspection ConstantConditions
 		inputButton.setIcon(new ImageIcon(SearchTool.class.getResource("images/search_run.png")));
 		inputButton.setToolTipText(Messages.getString("SearchTool.tooltip_run"));
@@ -108,7 +109,7 @@ class SearchTool extends Box
 		inputButton.addActionListener(e -> search());
 
 		// input clear
-		final JButton inputClearButton = new JButton();
+		@NonNull final JButton inputClearButton = new JButton();
 		//noinspection ConstantConditions
 		inputClearButton.setIcon(new ImageIcon(SearchTool.class.getResource("images/search_reset.png")));
 		inputClearButton.setToolTipText(Messages.getString("SearchTool.tooltip_reset"));
@@ -172,7 +173,7 @@ class SearchTool extends Box
 		inputClearButton.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
 		add(inputClearButton);
 
-		JButton settingButton = makeSettingsButton();
+		@NonNull JButton settingButton = makeSettingsButton();
 		settingButton.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 		add(settingButton);
 	}
@@ -193,14 +194,15 @@ class SearchTool extends Box
 	 * @param container container
 	 * @return button
 	 */
-	public JToggleButton makeControlToggle(final java.awt.Container container)
+	@NonNull
+	public JToggleButton makeControlToggle(@NonNull final java.awt.Container container)
 	{
 		// toggle icons
-		@SuppressWarnings("ConstantConditions") final Icon openIcon = new ImageIcon(SearchTool.class.getResource("images/search_open.png"));
-		@SuppressWarnings("ConstantConditions") final Icon closeIcon = new ImageIcon(SearchTool.class.getResource("images/search_close.png"));
+		@NonNull @SuppressWarnings("ConstantConditions") final Icon openIcon = new ImageIcon(SearchTool.class.getResource("images/search_open.png"));
+		@NonNull @SuppressWarnings("ConstantConditions") final Icon closeIcon = new ImageIcon(SearchTool.class.getResource("images/search_close.png"));
 
 		// toggle button
-		final JToggleButton toggleButton = new JToggleButton();
+		@NonNull final JToggleButton toggleButton = new JToggleButton();
 		toggleButton.setIcon(openIcon);
 		toggleButton.setToolTipText(Messages.getString("SearchTool.tooltip_toggle"));
 		toggleButton.setRolloverIcon(openIcon);
@@ -227,19 +229,20 @@ class SearchTool extends Box
 	 *
 	 * @return button
 	 */
+	@NonNull
 	public JButton makeSettingsButton()
 	{
 		// toggle icons
-		@SuppressWarnings("ConstantConditions") final Icon settingsIcon = new ImageIcon(SearchDialog.class.getResource("images/search_settings.png"));
+		@NonNull @SuppressWarnings("ConstantConditions") final Icon settingsIcon = new ImageIcon(SearchDialog.class.getResource("images/search_settings.png"));
 
 		// toggle button
-		final JButton settingsButton = new JButton();
+		@NonNull final JButton settingsButton = new JButton();
 		settingsButton.setIcon(settingsIcon);
 		settingsButton.setContentAreaFilled(false);
 		settingsButton.setOpaque(true);
 		settingsButton.setToolTipText(Messages.getString("SearchTool.tooltip_scope_mode"));
 		settingsButton.addActionListener(e -> {
-			final SearchDialog dialog = new SearchDialog(SearchTool.this.scope, SearchTool.this.mode, Messages.getString("SearchDialog.title"), Messages.getString("SearchDialog.prompt"));
+			@NonNull final SearchDialog dialog = new SearchDialog(SearchTool.this.scope, SearchTool.this.mode, Messages.getString("SearchDialog.title"), Messages.getString("SearchDialog.prompt"));
 			dialog.setModal(true);
 			dialog.setVisible(true);
 			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

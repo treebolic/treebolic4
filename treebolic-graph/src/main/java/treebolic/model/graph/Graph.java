@@ -49,6 +49,7 @@ public class Graph
 	 *
 	 * @return the nodes of the graph.
 	 */
+	@NonNull
 	@SuppressWarnings("WeakerAccess")
 	public Collection<GraphNode> getNodes()
 	{
@@ -61,6 +62,7 @@ public class Graph
 	 *
 	 * @return the edges of the graph.
 	 */
+	@NonNull
 	public Collection<GraphEdge> getEdges()
 	{
 		return Collections.unmodifiableCollection(this.edges);
@@ -73,11 +75,12 @@ public class Graph
 	 * @param node node.
 	 * @return set of adjacent tree edges.
 	 */
+	@NonNull
 	@SuppressWarnings("WeakerAccess")
 	public Collection<GraphEdge> getTreeEdges(final GraphNode node)
 	{
-		final Collection<GraphEdge> edgeSet = new HashSet<>();
-		for (final GraphEdge edge : this.edges)
+		@NonNull final Collection<GraphEdge> edgeSet = new HashSet<>();
+		for (@NonNull final GraphEdge edge : this.edges)
 		{
 			final Boolean isTreeEdge = edge.getIsTreeEdge();
 			if (isTreeEdge == null || !isTreeEdge)
@@ -99,11 +102,12 @@ public class Graph
 	 * @param node node.
 	 * @return set of adjacent tree edges.
 	 */
+	@NonNull
 	@SuppressWarnings("WeakerAccess")
 	public Collection<GraphEdge> getNonTreeEdges(final GraphNode node)
 	{
-		final Collection<GraphEdge> edgeSet = new HashSet<>();
-		for (final GraphEdge edge : this.edges)
+		@NonNull final Collection<GraphEdge> edgeSet = new HashSet<>();
+		for (@NonNull final GraphEdge edge : this.edges)
 		{
 			final Boolean isTreeEdge = edge.getIsTreeEdge();
 			if (isTreeEdge != null && isTreeEdge)
@@ -124,11 +128,12 @@ public class Graph
 	 * @param node node.
 	 * @return set of adjacent edges.
 	 */
+	@NonNull
 	@SuppressWarnings("WeakerAccess")
 	public Collection<GraphEdge> getEdges(final GraphNode node)
 	{
-		final Collection<GraphEdge> edgeSet = new HashSet<>();
-		for (final GraphEdge edge : this.edges)
+		@NonNull final Collection<GraphEdge> edgeSet = new HashSet<>();
+		for (@NonNull final GraphEdge edge : this.edges)
 		{
 			if (edge.getFrom().equals(node) || edge.getTo().equals(node))
 			{
@@ -144,9 +149,10 @@ public class Graph
 	 *
 	 * @return the edges of the graph.
 	 */
+	@NonNull
 	public Map<GraphNode, Collection<GraphEdge>> getNodeToEdgesMap()
 	{
-		final Map<GraphNode, Collection<GraphEdge>> map = new HashMap<>();
+		@NonNull final Map<GraphNode, Collection<GraphEdge>> map = new HashMap<>();
 		for (final GraphNode node : this.nodes)
 		{
 			map.put(node, getEdges(node));
@@ -166,7 +172,7 @@ public class Graph
 	public Tree makeSpanningTree()
 	{
 		// root
-		final GraphNode root = getNodeWithMinimumIncomingDegree();
+		@Nullable final GraphNode root = getNodeWithMinimumIncomingDegree();
 		assert root != null;
 		return makeSpanningTree(root);
 	}
@@ -183,7 +189,7 @@ public class Graph
 		// System.err.println("root " + root);
 
 		// result graph
-		final Graph spanningTree = new Graph();
+		@NonNull final Graph spanningTree = new Graph();
 		spanningTree.nodes.add(root);
 
 		// populate
@@ -208,10 +214,10 @@ public class Graph
 	private void processSpanningTreeDFS(@NonNull final Graph spanningTree, @NonNull final GraphNode root)
 	{
 		// check all outgoing nodes, whether they are already in the spanning tree or not. If not, add them.
-		for (GraphEdge edge : getTreeEdges(root))
+		for (@NonNull GraphEdge edge : getTreeEdges(root))
 		{
 			// get node at other end of the edge
-			final GraphNode connectedNode = edge.getOtherNode(root);
+			@Nullable final GraphNode connectedNode = edge.getOtherNode(root);
 
 			// if the spanning tree does not have this node
 			if (!spanningTree.nodes.contains(connectedNode))
@@ -232,10 +238,10 @@ public class Graph
 		}
 
 		// check all outgoing nodes, whether they are already in the spanning tree or not. If not, add them.
-		for (GraphEdge edge : getNonTreeEdges(root))
+		for (@NonNull GraphEdge edge : getNonTreeEdges(root))
 		{
 			// get node at other end of the edge
-			final GraphNode connectedNode = edge.getOtherNode(root);
+			@Nullable final GraphNode connectedNode = edge.getOtherNode(root);
 
 			// if the spanning tree does not have this node
 			if (!spanningTree.nodes.contains(connectedNode))
@@ -265,7 +271,7 @@ public class Graph
 	private void processSpanningTreeBFS(@NonNull final Graph spanningTree, final GraphNode root)
 	{
 		// bag
-		final Collection<GraphNode> bag = new HashSet<>();
+		@NonNull final Collection<GraphNode> bag = new HashSet<>();
 		bag.add(root);
 
 		while (!bag.isEmpty())
@@ -275,10 +281,10 @@ public class Graph
 			bag.remove(node);
 
 			// follow each edge starting from this node
-			for (GraphEdge edge : getTreeEdges(node))
+			for (@NonNull GraphEdge edge : getTreeEdges(node))
 			{
 				// get node at other end of the edge
-				final GraphNode connectedNode = edge.getOtherNode(node);
+				@Nullable final GraphNode connectedNode = edge.getOtherNode(node);
 
 				// if the spanning tree does not have this node
 				if (!spanningTree.nodes.contains(connectedNode))
@@ -299,10 +305,10 @@ public class Graph
 			}
 
 			// follow each non-edge starting from this node
-			for (GraphEdge edge : getNonTreeEdges(node))
+			for (@NonNull GraphEdge edge : getNonTreeEdges(node))
 			{
 				// get node at other end of the edge
-				final GraphNode connectedNode = edge.getOtherNode(node);
+				@Nullable final GraphNode connectedNode = edge.getOtherNode(node);
 
 				// if the spanning tree does not have this node
 				if (!spanningTree.nodes.contains(connectedNode))
@@ -336,7 +342,7 @@ public class Graph
 	public GraphNode getNodeWithMinimumIncomingDegree()
 	{
 		// the node with the smallest incoming degree so far
-		GraphNode result = null;
+		@Nullable GraphNode result = null;
 
 		// the current incoming degree
 		int minimumDegree = -1;
@@ -346,7 +352,7 @@ public class Graph
 		{
 			// compute incoming degree for this node
 			int degree = 0;
-			for (final GraphEdge edge : getEdges(node))
+			for (@NonNull final GraphEdge edge : getEdges(node))
 			{
 				if (edge.getTo().equals(node))
 				{
@@ -380,14 +386,14 @@ public class Graph
 	public List<GraphNode> getNodesWithZeroDegree()
 	{
 		// the nodes with zero incoming degree
-		List<GraphNode> result = null;
+		@Nullable List<GraphNode> result = null;
 
 		// for each node
 		for (final GraphNode node : getNodes())
 		{
 			// compute incoming degree for this node
 			boolean zeroDegree = true;
-			for (final GraphEdge edge : getEdges(node))
+			for (@NonNull final GraphEdge edge : getEdges(node))
 			{
 				if (edge.getTo().equals(node))
 				{
@@ -415,15 +421,15 @@ public class Graph
 	@Override
 	public String toString()
 	{
-		final StringBuilder sb = new StringBuilder();
+		@NonNull final StringBuilder sb = new StringBuilder();
 		sb.append("Nodes :\n");
-		for (final GraphNode node : getNodes())
+		for (@NonNull final GraphNode node : getNodes())
 		{
 			sb.append(node.toString());
 			sb.append("\n");
 		}
 		sb.append("Edges :\n");
-		for (final GraphEdge edge : getEdges())
+		for (@NonNull final GraphEdge edge : getEdges())
 		{
 			sb.append(edge.toString());
 			sb.append("\n");

@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import treebolic.annotations.NonNull;
 import treebolic.glue.ActionListener;
 
 /**
@@ -60,9 +61,9 @@ public class PopupMenu extends JPopupMenu implements treebolic.glue.iface.compon
 	}
 
 	@Override
-	public void addItem(final String label, final int imageIndex, final ActionListener listener)
+	public void addItem(final String label, final int imageIndex, @NonNull final ActionListener listener)
 	{
-		final JMenuItem menuItem = new JMenuItem(label);
+		@NonNull final JMenuItem menuItem = new JMenuItem(label);
 		if (imageIndex != -1)
 		{
 			menuItem.setIcon(PopupMenu.icons[imageIndex]);
@@ -72,7 +73,7 @@ public class PopupMenu extends JPopupMenu implements treebolic.glue.iface.compon
 	}
 
 	@Override
-	public void addItem(final int labelIndex, final int imageIndex, final ActionListener listener)
+	public void addItem(final int labelIndex, final int imageIndex, @NonNull final ActionListener listener)
 	{
 		addItem(labels[labelIndex], imageIndex, listener);
 	}

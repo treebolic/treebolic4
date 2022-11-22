@@ -15,6 +15,9 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Image, embeds awt's Image
  *
@@ -46,7 +49,8 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	 * @return Image
 	 * @throws IOException io exception
 	 */
-	static public Image make(final URL resource) throws IOException
+	@NonNull
+	static public Image make(@NonNull final URL resource) throws IOException
 	{
 		return new Image(ImageIO.read(resource));
 	}
@@ -57,7 +61,8 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	 * @param resource resource url
 	 * @return Image or null if it fails
 	 */
-	static public Image makeOptional(final URL resource)
+	@Nullable
+	static public Image makeOptional(@NonNull final URL resource)
 	{
 		try
 		{
@@ -94,6 +99,7 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	 *
 	 * @return graphics context
 	 */
+	@NonNull
 	public Graphics getGraphics()
 	{
 		return new Graphics(this.image.getGraphics());
@@ -101,15 +107,15 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 
 	// O V E R R I D E S E R I A L I Z A T I O N
 
-	private void writeObject(final ObjectOutputStream out) throws IOException
+	private void writeObject(@NonNull final ObjectOutputStream out) throws IOException
 	{
-		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		@NonNull final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write((BufferedImage) this.image, "png", baos);
-		final byte[] imageBytes = baos.toByteArray();
+		@NonNull final byte[] imageBytes = baos.toByteArray();
 		out.writeObject(imageBytes);
 	}
 
-	private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException
+	private void readObject(@NonNull final ObjectInputStream in) throws IOException, ClassNotFoundException
 	{
 		final byte[] imageBytes = (byte[]) in.readObject();
 		this.image = ImageIO.read(new ByteArrayInputStream(imageBytes));

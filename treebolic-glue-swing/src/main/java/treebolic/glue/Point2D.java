@@ -4,6 +4,8 @@
 
 package treebolic.glue;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Point2D, derived from awt's Point2D
  *
@@ -29,7 +31,7 @@ public class Point2D extends java.awt.geom.Point2D.Double implements treebolic.g
 	 *
 	 * @param p awt.geom.Point2D
 	 */
-	public Point2D(final java.awt.geom.Point2D p)
+	public Point2D(@NonNull final java.awt.geom.Point2D p)
 	{
 		super(p.getX(), p.getY());
 	}

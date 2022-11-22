@@ -4,6 +4,8 @@
 
 package treebolic.glue;
 
+import treebolic.annotations.Nullable;
+
 /**
  * Worker, embeds swing's SwingWorker
  *
@@ -36,6 +38,7 @@ public abstract class Worker extends javax.swing.SwingWorker<Void, Void> impleme
 	 * (non-Javadoc)
 	 * @see javax.swing.SwingWorker#doInBackground()
 	 */
+	@Nullable
 	@Override
 	public Void doInBackground()
 	{

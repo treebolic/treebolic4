@@ -5,6 +5,7 @@
 package treebolic.model.graph;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * Graph edge
@@ -63,7 +64,7 @@ public class GraphEdge
 	@NonNull
 	static GraphEdge makeReverseOf(@NonNull final GraphEdge edge0)
 	{
-		final GraphEdge edge = new GraphEdge(edge0.getTo(), edge0.getFrom(), edge0.getIsTreeEdge());
+		@NonNull final GraphEdge edge = new GraphEdge(edge0.getTo(), edge0.getFrom(), edge0.getIsTreeEdge());
 		edge.setUserData(edge0.getUserData());
 		return edge;
 	}
@@ -135,6 +136,7 @@ public class GraphEdge
 	 * @param node reference node
 	 * @return node
 	 */
+	@Nullable
 	public GraphNode getOtherNode(@NonNull final GraphNode node)
 	{
 		return node.equals(this.fromNode) ? this.toNode : this.fromNode;

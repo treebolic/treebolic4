@@ -4,6 +4,8 @@
 
 package treebolic.glue;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Arc2D, derived from awt's Arc2D
  *
@@ -58,12 +60,14 @@ public class Arc2D extends java.awt.geom.Arc2D.Double implements treebolic.glue.
 
 	// public double getCenterY();
 
+	@NonNull
 	@Override
 	public Point2D getStartPoint()
 	{
 		return new Point2D(super.getStartPoint());
 	}
 
+	@NonNull
 	@Override
 	public Point2D getEndPoint()
 	{

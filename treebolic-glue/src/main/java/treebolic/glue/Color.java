@@ -16,67 +16,67 @@ public class Color implements treebolic.glue.iface.Color<Color>
 	/**
 	 * White color
 	 */
-	public static final Color WHITE = null;
+	public static final Color WHITE = new Color();
 
 	/**
 	 * Black color
 	 */
-	public static final Color BLACK = null;
+	public static final Color BLACK = new Color();
 
 	/**
 	 * Red color
 	 */
-	public static final Color RED = null;
+	public static final Color RED = new Color();
 
 	/**
 	 * Green color
 	 */
-	public static final Color GREEN = null;
+	public static final Color GREEN = new Color();
 
 	/**
 	 * Blue color
 	 */
-	public static final Color BLUE = null;
+	public static final Color BLUE = new Color();
 
 	/**
 	 * Orange color
 	 */
-	public static final Color ORANGE = null;
+	public static final Color ORANGE = new Color();
 
 	/**
 	 * Yellow color
 	 */
-	public static final Color YELLOW = null;
+	public static final Color YELLOW = new Color();
 
 	/**
 	 * Pink color
 	 */
-	public static final Color PINK = null;
+	public static final Color PINK = new Color();
 
 	/**
 	 * Cyan color
 	 */
-	public static final Color CYAN = null;
+	public static final Color CYAN = new Color();
 
 	/**
 	 * Magenta color
 	 */
-	public static final Color MAGENTA = null;
+	public static final Color MAGENTA = new Color();
 
 	/**
 	 * Gray color
 	 */
-	public static final Color GRAY = null;
+	public static final Color GRAY = new Color();
 
 	/**
 	 * Light gray color
 	 */
-	public static final Color LIGHT_GRAY = null;
+	public static final Color LIGHT_GRAY = new Color();
 
 	/**
 	 * Dark gray color
 	 */
-	public static final Color DARK_GRAY = null;
+	public static final Color DARK_GRAY = new Color();
 
 	/**
 	 * Constructor

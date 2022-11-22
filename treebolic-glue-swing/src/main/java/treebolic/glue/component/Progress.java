@@ -16,6 +16,8 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Progress panel, derived from JPanel
  *
@@ -40,16 +42,19 @@ public class Progress extends JPanel implements Component, treebolic.glue.iface.
 	/**
 	 * Progress bar
 	 */
+	@NonNull
 	private final JProgressBar progress;
 
 	/**
 	 * Label
 	 */
+	@NonNull
 	private final JLabel label;
 
 	/**
 	 * Label
 	 */
+	@NonNull
 	private final JLabel text;
 
 	/**
@@ -101,7 +106,7 @@ public class Progress extends JPanel implements Component, treebolic.glue.iface.
 	@Override
 	public void put(final String message, final boolean fail)
 	{
-		final Runnable routine = () -> {
+		@NonNull final Runnable routine = () -> {
 			Progress.this.text.setText(message);
 			Progress.this.label.setIcon(fail ? Progress.stopIcon : Progress.workingIcon);
 			Progress.this.progress.setValue(fail ? 0 : Progress.this.progress.getValue() + 10);

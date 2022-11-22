@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Search dialog, derived from JDialog
  *
@@ -73,16 +75,19 @@ class SearchDialog extends JDialog
 	/**
 	 * Buttons
 	 */
+	@NonNull
 	protected final JRadioButton[] scopeButtons;
 
 	/**
 	 * Buttons
 	 */
+	@NonNull
 	protected final JRadioButton[] modeButtons;
 
 	/**
 	 * Data panel
 	 */
+	@NonNull
 	protected final JPanel dataPanel;
 
 	/**
@@ -117,11 +122,11 @@ class SearchDialog extends JDialog
 		setResizable(true);
 
 		// label
-		final JLabel headerLabel = new JLabel();
+		@NonNull final JLabel headerLabel = new JLabel();
 		headerLabel.setText(label);
 
 		// scope buttons
-		final ButtonGroup scopeGroup = new ButtonGroup();
+		@NonNull final ButtonGroup scopeGroup = new ButtonGroup();
 		this.scopeButtons = new JRadioButton[scopeValues.length];
 		for (int i = 0; i < scopeValues.length; i++)
 		{
@@ -134,7 +139,7 @@ class SearchDialog extends JDialog
 		}
 
 		// mode buttons
-		final ButtonGroup modeGroup = new ButtonGroup();
+		@NonNull final ButtonGroup modeGroup = new ButtonGroup();
 		this.modeButtons = new JRadioButton[modeValues.length];
 		for (int j = 0; j < modeValues.length; j++)
 		{
@@ -147,8 +152,8 @@ class SearchDialog extends JDialog
 		}
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("SearchDialog.ok")); 
-		final JButton cancelButton = new JButton(Messages.getString("SearchDialog.cancel")); 
+		@NonNull final JButton oKButton = new JButton(Messages.getString("SearchDialog.ok"));
+		@NonNull final JButton cancelButton = new JButton(Messages.getString("SearchDialog.cancel"));
 
 		// buttons panel
 		this.dataPanel = new JPanel();
@@ -166,7 +171,7 @@ class SearchDialog extends JDialog
 		}
 
 		// command panel
-		final JPanel commandPanel = new JPanel();
+		@NonNull final JPanel commandPanel = new JPanel();
 		commandPanel.setLayout(new FlowLayout());
 		commandPanel.add(cancelButton);
 		commandPanel.add(oKButton);
@@ -178,7 +183,7 @@ class SearchDialog extends JDialog
 		cancelButton.addActionListener(event -> setVisible(false));
 
 		// assemble
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(Box.createRigidArea(new Dimension(0, 20)));
 		panel.add(this.dataPanel);

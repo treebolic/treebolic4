@@ -9,6 +9,8 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
+import treebolic.annotations.Nullable;
+
 /**
  * Container, derived from JPanel
  *
@@ -33,7 +35,7 @@ public class Container extends JPanel implements Component, treebolic.glue.iface
 	@Override
 	public void addComponent(final Component component, final int position)
 	{
-		Object constraints = null;
+		@Nullable Object constraints = null;
 		switch (position)
 		{
 			case PANE:

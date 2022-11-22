@@ -9,6 +9,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Color, embeds awt's Color
  *
@@ -47,6 +50,7 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 	/**
 	 * AWT color
 	 */
+	@Nullable
 	transient public java.awt.Color color;
 
 	/**
@@ -108,6 +112,7 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 	 * (non-Javadoc)
 	 * @see treebolic.glue.iface.Color#makeBrighter()
 	 */
+	@NonNull
 	@Override
 	public Color makeBrighter()
 	{
@@ -141,6 +146,7 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 	 * (non-Javadoc)
 	 * @see treebolic.glue.iface.Color#makeDarker()
 	 */
+	@NonNull
 	@Override
 	public Color makeDarker()
 	{
@@ -161,12 +167,12 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 
 	// O V E R R I D E S E R I A L I Z A T I O N
 
-	private void writeObject(final ObjectOutputStream out) throws IOException
+	private void writeObject(@NonNull final ObjectOutputStream out) throws IOException
 	{
 		out.writeObject(this.color.getRGB());
 	}
 
-	private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException
+	private void readObject(@NonNull final ObjectInputStream in) throws IOException, ClassNotFoundException
 	{
 		this.color = new java.awt.Color((Integer) in.readObject());
 	}

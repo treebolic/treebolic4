@@ -3,6 +3,8 @@
  */
 package treebolic.glue.component;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.glue.ActionListener;
 import treebolic.glue.NotImplementedException;
 
@@ -18,7 +20,7 @@ public class PopupMenu implements treebolic.glue.iface.component.PopupMenu<Compo
 	 *
 	 * @param ignoredHandle Opaque handle required for component creation
 	 */
-	protected PopupMenu(final Object ignoredHandle)
+	protected PopupMenu(@Nullable final Object ignoredHandle)
 	{
 		throw new NotImplementedException();
 	}
@@ -36,7 +38,7 @@ public class PopupMenu implements treebolic.glue.iface.component.PopupMenu<Compo
 	}
 
 	@Override
-	public void popup(final Component component, final int x, final int y)
+	public void popup(@NonNull final Component component, final int x, final int y)
 	{
 		throw new NotImplementedException();
 	}

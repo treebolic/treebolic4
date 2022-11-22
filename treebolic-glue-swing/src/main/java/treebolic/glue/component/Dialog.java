@@ -12,6 +12,8 @@ import javax.swing.event.HyperlinkEvent.EventType;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.glue.iface.ActionListener;
 import treebolic.glue.iface.component.Converter;
 
@@ -24,10 +26,13 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 {
 	private static final long serialVersionUID = 3504737418377115665L;
 
+	@NonNull
 	final private JLabel headerLabel;
 
+	@NonNull
 	final private JEditorPane contentPane;
 
+	@NonNull
 	final private JComponent contentComponent;
 
 	final private StyleSheet styleSheet;
@@ -55,7 +60,7 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 		this.contentPane.setContentType("text/html");
 
 		// stylesheet
-		final HTMLEditorKit kit = new HTMLEditorKit();
+		@NonNull final HTMLEditorKit kit = new HTMLEditorKit();
 		this.contentPane.setEditorKit(kit);
 		this.styleSheet = kit.getStyleSheet();
 
@@ -69,15 +74,15 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 		this.contentComponent = new JScrollPane(this.contentPane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		this.contentComponent.setPreferredSize(null);
 
-		final JButton oKButton = new JButton(Messages.getString("WebDialog.ok")); 
+		@NonNull final JButton oKButton = new JButton(Messages.getString("WebDialog.ok"));
 		oKButton.addActionListener(e -> setVisible(false));
 
-		final JPanel commandPanel = new JPanel();
+		@NonNull final JPanel commandPanel = new JPanel();
 		commandPanel.setLayout(new FlowLayout());
 		commandPanel.add(oKButton);
 
 		// assemble
-		final GroupLayout layout = new GroupLayout(getContentPane());
+		@NonNull final GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setAutoCreateGaps(true);
 		layout.setAutoCreateContainerGaps(true);
@@ -117,7 +122,7 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 	 * @see treebolic.glue.iface.component.Dialog#setListener(treebolic.glue.iface.ActionListener)
 	 */
 	@Override
-	public void setListener(final ActionListener actionListener)
+	public void setListener(@NonNull final ActionListener actionListener)
 	{
 		this.contentPane.addHyperlinkListener(event -> {
 			if (event.getEventType() == EventType.ACTIVATED)
@@ -164,7 +169,7 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 	 * @see treebolic.glue.iface.component.Dialog#set(java.lang.CharSequence, java.lang.CharSequence[])
 	 */
 	@Override
-	public void set(final CharSequence header, final CharSequence... contents)
+	public void set(@NonNull final CharSequence header, @Nullable final CharSequence... contents)
 	{
 		this.headerLabel.setText(header.toString());
 		if (contents == null || contents.length == 0)
@@ -196,9 +201,9 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 	 * @see treebolic.glue.iface.component.Dialog#setStyle(java.lang.String)
 	 */
 	@Override
-	public void setStyle(final String style)
+	public void setStyle(@NonNull final String style)
 	{
-		final String[] rules = style.split("\n"); 
+		@NonNull final String[] rules = style.split("\n");
 		for (final String rule : rules)
 		{
 			this.styleSheet.addRule(rule);

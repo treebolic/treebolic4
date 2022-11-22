@@ -4,6 +4,7 @@
 
 package treebolic.glue.component;
 
+import treebolic.annotations.Nullable;
 import treebolic.glue.NotImplementedException;
 import treebolic.glue.iface.ActionListener;
 import treebolic.glue.iface.component.Converter;
@@ -24,7 +25,7 @@ public class Dialog implements treebolic.glue.iface.component.Dialog
 	}
 
 	@Override
-	public void setHandle(final Object handle)
+	public void setHandle(@Nullable final Object handle)
 	{
 		throw new NotImplementedException();
 	}

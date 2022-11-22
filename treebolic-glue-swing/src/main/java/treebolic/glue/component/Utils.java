@@ -8,6 +8,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Common Utilities
  */
@@ -18,7 +20,7 @@ public class Utils
 	 *
 	 * @param component component
 	 */
-	public static void center(final JDialog component)
+	public static void center(@NonNull final JDialog component)
 	{
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		final Dimension componentSize = component.getSize();

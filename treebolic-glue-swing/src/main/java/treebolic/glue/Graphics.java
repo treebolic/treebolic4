@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Graphics, embeds awt's Graphics
  *
@@ -54,6 +57,7 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 	/**
 	 * Baseline font
 	 */
+	@Nullable
 	public Font font;
 
 	/**
@@ -64,6 +68,7 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 	/**
 	 * Transform stack
 	 */
+	@NonNull
 	private final Stack<AffineTransform> transformStack;
 
 	// C O N S T R U C T
@@ -99,7 +104,7 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 	 * @see treebolic.glue.iface.Graphics#drawBackgroundColor(java.lang.Object, int, int, int, int)
 	 */
 	@Override
-	public void drawBackgroundColor(final Color color, final int left, final int top, final int width, final int height)
+	public void drawBackgroundColor(@NonNull final Color color, final int left, final int top, final int width, final int height)
 	{
 		setColor(color);
 		fillRectangle(left, top, width, height);
@@ -114,7 +119,7 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 	@Override
 	public void drawArc(final float x, final float y, final float w, final float h, final float startAngle, final float extentAngle)
 	{
-		final java.awt.geom.Arc2D a = new java.awt.geom.Arc2D.Float(x, y, w, h, startAngle, extentAngle, java.awt.geom.Arc2D.OPEN);
+		@NonNull final java.awt.geom.Arc2D a = new java.awt.geom.Arc2D.Float(x, y, w, h, startAngle, extentAngle, java.awt.geom.Arc2D.OPEN);
 		this.g.draw(a);
 		// DO NOT USE: rounding error on angles (a fraction of a degree may matter)
 		// this.g.drawArc(x, y, w, h, (int) startAngle, (int) extentAngle);
@@ -175,13 +180,13 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 	}
 
 	@Override
-	public void drawImage(final Image image, final int x, final int y)
+	public void drawImage(@NonNull final Image image, final int x, final int y)
 	{
 		this.g.drawImage(image.image, x, y, null);
 	}
 
 	@Override
-	public void drawImage(final Image image, final int x, final int y, final int w, final int h)
+	public void drawImage(@NonNull final Image image, final int x, final int y, final int w, final int h)
 	{
 		final java.awt.Image awtImage = image.image.getScaledInstance(w, h, java.awt.Image.SCALE_FAST);
 		this.g.drawImage(awtImage, x, y, null);
@@ -190,11 +195,12 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 	// S E T T I N G S
 
 	@Override
-	public void setColor(final Color color)
+	public void setColor(@NonNull final Color color)
 	{
 		this.g.setColor(color.color);
 	}
 
+	@NonNull
 	@Override
 	public Color getColor()
 	{
@@ -262,7 +268,7 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 	// @formatter:on
 
 	@Override
-	public int stringWidth(final String string)
+	public int stringWidth(@NonNull final String string)
 	{
 		final FontMetrics metrics = this.g.getFontMetrics();
 		return metrics.stringWidth(string);
@@ -271,7 +277,7 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 	@Override
 	public void setStroke(final int stroke0, final int width)
 	{
-		Stroke stroke = null;
+		@Nullable Stroke stroke = null;
 		switch (stroke0)
 		{
 			case treebolic.glue.iface.Graphics.SOLID:

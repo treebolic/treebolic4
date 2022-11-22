@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import treebolic.annotations.NonNull;
+
 /**
  * EventListener
  *
@@ -40,7 +42,7 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 	 * @see java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseDragged(final MouseEvent e)
+	public void mouseDragged(@NonNull final MouseEvent e)
 	{
 		if (onDragged(e.getX(), e.getY()))
 		{
@@ -53,7 +55,7 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 	 * @see java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseMoved(final MouseEvent e)
+	public void mouseMoved(@NonNull final MouseEvent e)
 	{
 		// check if we are hovering
 		if (onHover(e.getX(), e.getY()))
@@ -67,7 +69,7 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseClicked(final MouseEvent e)
+	public void mouseClicked(@NonNull final MouseEvent e)
 	{
 		boolean consume = false;
 		if ((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK)
@@ -97,7 +99,7 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mousePressed(final MouseEvent e)
+	public void mousePressed(@NonNull final MouseEvent e)
 	{
 		if (onDown(e.getX(), e.getY(), e.isShiftDown()))
 		{
@@ -110,7 +112,7 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
 	 */
 	@Override
-	public void mouseReleased(final MouseEvent e)
+	public void mouseReleased(@NonNull final MouseEvent e)
 	{
 		if (onUp(e.getX(), e.getY()))
 		{

@@ -8,6 +8,7 @@ import java.awt.Cursor;
 
 import javax.swing.Timer;
 
+import treebolic.annotations.Nullable;
 import treebolic.glue.EventListener;
 import treebolic.glue.Graphics;
 
@@ -155,7 +156,7 @@ public abstract class Surface extends javax.swing.JPanel implements Component, t
 	@Override
 	public void setCursor(final int cursor)
 	{
-		Cursor awtCursor = null;
+		@Nullable Cursor awtCursor = null;
 		switch (cursor)
 		{
 			case DEFAULTCURSOR:

@@ -29,6 +29,8 @@ import javax.swing.text.StyledDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.glue.ActionListener;
 import treebolic.glue.Color;
 import treebolic.glue.iface.component.Converter;
@@ -148,7 +150,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	public void init(final int operationImage)
 	{
 		// enlarge/shrink buttons
-		final JButton moreButton = new JButton();
+		@NonNull final JButton moreButton = new JButton();
 		//noinspection ConstantConditions
 		moreButton.setIcon(new ImageIcon(Statusbar.class.getResource("images/status_plus.png")));
 		moreButton.setContentAreaFilled(false);
@@ -165,7 +167,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 				container.validate();
 			}
 		});
-		final JButton lessButton = new JButton();
+		@NonNull final JButton lessButton = new JButton();
 		//noinspection ConstantConditions
 		lessButton.setIcon(new ImageIcon(Statusbar.class.getResource("images/status_minus.png")));
 		lessButton.setContentAreaFilled(false);
@@ -184,7 +186,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 		});
 
 		// button box
-		final Box buttonBox = new Box(BoxLayout.Y_AXIS);
+		@NonNull final Box buttonBox = new Box(BoxLayout.Y_AXIS);
 		buttonBox.add(moreButton);
 		buttonBox.add(lessButton);
 
@@ -208,7 +210,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 		this.contentTextPane.setPreferredSize(Constants.DIM_STATUS_CONTENT);
 
 		// stylesheet
-		final HTMLEditorKit kit = new HTMLEditorKit();
+		@NonNull final HTMLEditorKit kit = new HTMLEditorKit();
 		this.contentTextPane.setEditorKit(kit);
 		this.styleSheet = kit.getStyleSheet();
 
@@ -245,7 +247,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	 * @param foreColor forecolor
 	 */
 	@Override
-	public void setColors(final Color backColor, final Color foreColor)
+	public void setColors(@NonNull final Color backColor, @NonNull final Color foreColor)
 	{
 		setBackground(backColor.color);
 
@@ -265,9 +267,9 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	}
 
 	@Override
-	public void setStyle(final String style)
+	public void setStyle(@NonNull final String style)
 	{
-		final String[] rules = style.split("\n");
+		@NonNull final String[] rules = style.split("\n");
 		for (final String rule : rules)
 		{
 			this.styleSheet.addRule(rule);
@@ -305,7 +307,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	 * @param contents  contents
 	 */
 	@Override
-	public void put(final int image, final Converter converter, final String label, final String... contents)
+	public void put(final int image, @Nullable final Converter converter, final String label, @Nullable final String... contents)
 	{
 		// icon and colors
 		this.operationIconLabel.setIcon(Statusbar.icons[image]);

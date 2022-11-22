@@ -10,6 +10,7 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import treebolic.annotations.NonNull;
 import treebolic.glue.ActionListener;
 
 /**
@@ -28,6 +29,7 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 	 *
 	 * @return list of buttons
 	 */
+	@NonNull
 	static public Button[] toolbar()
 	{
 		return new Button[]{Button.HOME, //
@@ -178,9 +180,9 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 	 * @param toolTip tooltip
 	 * @param listener action listener
 	 */
-	public void addButton(final int iconIndex, final String toolTip, final ActionListener listener)
+	public void addButton(final int iconIndex, final String toolTip, @NonNull final ActionListener listener)
 	{
-		final JButton button = new JButton();
+		@NonNull final JButton button = new JButton();
 		button.setBorder(null);
 		button.setToolTipText(toolTip);
 		button.addActionListener(e -> listener.actionPerformed(null));
@@ -197,9 +199,9 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 	 * @param state tooltip
 	 * @param listener action listener
 	 */
-	public void addToggle(final int iconIndex, final int selectedIconIndex, final String toolTip, final boolean state, final ActionListener listener)
+	public void addToggle(final int iconIndex, final int selectedIconIndex, final String toolTip, final boolean state, @NonNull final ActionListener listener)
 	{
-		final JToggleButton button = new JToggleButton();
+		@NonNull final JToggleButton button = new JToggleButton();
 		button.setBorder(null);
 		button.setToolTipText(toolTip);
 		button.addActionListener(e -> listener.actionPerformed(null));
@@ -214,7 +216,7 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 	 * @see treebolic.glue.iface.component.Toolbar#addButton(treebolic.glue.iface.component.Toolbar.Button, java.lang.Object)
 	 */
 	@Override
-	public void addButton(treebolic.glue.iface.component.Toolbar.Button button, ActionListener listener)
+	public void addButton(@NonNull treebolic.glue.iface.component.Toolbar.Button button, @NonNull ActionListener listener)
 	{
 		if (button.equals(Button.SEPARATOR))
 		{
@@ -223,8 +225,8 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 		}
 
 		// interface button to implementation
-		final String name = button.name();
-		final ButtonImplementation impl = ButtonImplementation.valueOf(name);
+		@NonNull final String name = button.name();
+		@NonNull final ButtonImplementation impl = ButtonImplementation.valueOf(name);
 
 		final int iconIndex = impl.getIconIndex();
 		final String tooltip = impl.getTooltip();

@@ -7,6 +7,8 @@ package treebolic.glue.component;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Language dependency, bundle reader
  *
@@ -29,7 +31,8 @@ class Messages
 	 * @param key message key
 	 * @return localized message
 	 */
-	public static String getString(final String key)
+	@NonNull
+	public static String getString(@NonNull final String key)
 	{
 		try
 		{
@@ -41,11 +44,12 @@ class Messages
 		}
 	}
 
-	public static String[] getStrings(final String... keys)
+	@NonNull
+	public static String[] getStrings(@NonNull final String... keys)
 	{
-		String[] strings = new String[keys.length];
+		@NonNull String[] strings = new String[keys.length];
 		int i = 0;
-		for (String key : keys)
+		for (@NonNull String key : keys)
 		{
 			try
 			{

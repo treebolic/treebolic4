@@ -4,6 +4,7 @@
 
 package treebolic.glue;
 
+import treebolic.annotations.NonNull;
 import treebolic.glue.component.Component;
 
 /**
@@ -29,6 +30,7 @@ public class GraphicsCache implements treebolic.glue.iface.GraphicsCache<Graphic
 		this.image = awtComponent.createImage(width, height);
 	}
 
+	@NonNull
 	@Override
 	public Graphics getGraphics()
 	{
@@ -36,7 +38,7 @@ public class GraphicsCache implements treebolic.glue.iface.GraphicsCache<Graphic
 	}
 
 	@Override
-	public void put(final Graphics graphics)
+	public void put(@NonNull final Graphics graphics)
 	{
 		graphics.g.drawImage(this.image, 0, 0, null);
 	}

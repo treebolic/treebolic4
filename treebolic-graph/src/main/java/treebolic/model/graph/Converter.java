@@ -32,8 +32,8 @@ public class Converter<T extends TreeMutableNode>
 	public Tree graphToTree(@NonNull final Graph graph)
 	{
 		// determine root node
-		GraphNode rootNode;
-		final List<GraphNode> rootNodes = graph.getNodesWithZeroDegree();
+		@Nullable GraphNode rootNode;
+		@Nullable final List<GraphNode> rootNodes = graph.getNodesWithZeroDegree();
 		if (rootNodes != null)
 		{
 			if (rootNodes.size() == 1)
@@ -70,11 +70,11 @@ public class Converter<T extends TreeMutableNode>
 		}
 
 		// spanning tree
-		final treebolic.model.graph.Tree spanningTree = graph.makeSpanningTree(rootNode);
+		@NonNull final treebolic.model.graph.Tree spanningTree = graph.makeSpanningTree(rootNode);
 
 		// tree edges
 		final Collection<GraphEdge> graphEdges = spanningTree.graph.getEdges();
-		for (final GraphEdge graphEdge : graphEdges)
+		for (@NonNull final GraphEdge graphEdge : graphEdges)
 		{
 			// tree edge nodes
 			final T fromNode = (T) graphEdge.getFrom();
@@ -92,8 +92,8 @@ public class Converter<T extends TreeMutableNode>
 		}
 
 		// non-tree edges
-		List<IEdge> edges = null;
-		for (final GraphEdge graphEdge : graph.getEdges())
+		@Nullable List<IEdge> edges = null;
+		for (@NonNull final GraphEdge graphEdge : graph.getEdges())
 		{
 			if (graphEdges.contains(graphEdge))
 			{
