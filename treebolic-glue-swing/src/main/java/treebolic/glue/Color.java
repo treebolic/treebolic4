@@ -21,31 +21,70 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 {
 	private static final long serialVersionUID = 5704334480899935769L;
 
-	/** White */ public static final Color WHITE = new Color(java.awt.Color.WHITE);
+	/**
+	 * White
+	 */
+	public static final Color WHITE = new Color(java.awt.Color.WHITE);
 
-	/** Black */ public static final Color BLACK = new Color(java.awt.Color.BLACK);
+	/**
+	 * Black
+	 */
+	public static final Color BLACK = new Color(java.awt.Color.BLACK);
 
-	/** Red */ public static final Color RED = new Color(java.awt.Color.RED);
+	/**
+	 * Red
+	 */
+	public static final Color RED = new Color(java.awt.Color.RED);
 
-	/** Green */ public static final Color GREEN = new Color(java.awt.Color.GREEN);
+	/**
+	 * Green
+	 */
+	public static final Color GREEN = new Color(java.awt.Color.GREEN);
 
-	/** Blue */ public static final Color BLUE = new Color(java.awt.Color.BLUE);
+	/**
+	 * Blue
+	 */
+	public static final Color BLUE = new Color(java.awt.Color.BLUE);
 
-	/** Orange */ public static final Color ORANGE = new Color(java.awt.Color.ORANGE);
+	/**
+	 * Orange
+	 */
+	public static final Color ORANGE = new Color(java.awt.Color.ORANGE);
 
-	/** Yellow */ public static final Color YELLOW = new Color(java.awt.Color.YELLOW);
+	/**
+	 * Yellow
+	 */
+	public static final Color YELLOW = new Color(java.awt.Color.YELLOW);
 
-	/** Pink */ public static final Color PINK = new Color(java.awt.Color.PINK);
+	/**
+	 * Pink
+	 */
+	public static final Color PINK = new Color(java.awt.Color.PINK);
 
-	/** Cyan */ public static final Color CYAN = new Color(java.awt.Color.CYAN);
+	/**
+	 * Cyan
+	 */
+	public static final Color CYAN = new Color(java.awt.Color.CYAN);
 
-	/** Magenta */ public static final Color MAGENTA = new Color(java.awt.Color.MAGENTA);
+	/**
+	 * Magenta
+	 */
+	public static final Color MAGENTA = new Color(java.awt.Color.MAGENTA);
 
-	/** Grey */ public static final Color GRAY = new Color(java.awt.Color.GRAY);
+	/**
+	 * Grey
+	 */
+	public static final Color GRAY = new Color(java.awt.Color.GRAY);
 
-	/** Light Grey */ public static final Color LIGHT_GRAY = new Color(java.awt.Color.LIGHT_GRAY);
+	/**
+	 * Light Grey
+	 */
+	public static final Color LIGHT_GRAY = new Color(java.awt.Color.LIGHT_GRAY);
 
-	/** Dark grey */ public static final Color DARK_GRAY = new Color(java.awt.Color.DARK_GRAY);
+	/**
+	 * Dark grey
+	 */
+	public static final Color DARK_GRAY = new Color(java.awt.Color.DARK_GRAY);
 
 	/**
 	 * AWT color
@@ -58,7 +97,7 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 	 *
 	 * @param color java.awt.color
 	 */
-	public Color(final java.awt.Color color)
+	public Color(@Nullable final java.awt.Color color)
 	{
 		this.color = color;
 	}
@@ -116,6 +155,11 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 	@Override
 	public Color makeBrighter()
 	{
+		if (this.color == null)
+		{
+			return new Color();
+		}
+
 		int r = this.color.getRed();
 		int g = this.color.getGreen();
 		int b = this.color.getBlue();
@@ -150,13 +194,17 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 	@Override
 	public Color makeDarker()
 	{
+		if (this.color == null)
+		{
+			return new Color();
+		}
 		return new Color(new java.awt.Color(Math.max((int) (this.color.getRed() * Color.DARKERFACTOR), 0), Math.max((int) (this.color.getGreen() * Color.DARKERFACTOR), 0), Math.max((int) (this.color.getBlue() * Color.DARKERFACTOR), 0), this.color.getAlpha()));
 	}
 
 	@Override
 	public int getRGB()
 	{
-		return this.color.getRGB();
+		return this.color == null ? 0 : this.color.getRGB();
 	}
 
 	@Override
@@ -169,7 +217,7 @@ public class Color implements treebolic.glue.iface.Color<Color>, Serializable
 
 	private void writeObject(@NonNull final ObjectOutputStream out) throws IOException
 	{
-		out.writeObject(this.color.getRGB());
+		out.writeObject(this.color == null ? null : this.color.getRGB());
 	}
 
 	private void readObject(@NonNull final ObjectInputStream in) throws IOException, ClassNotFoundException

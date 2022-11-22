@@ -42,21 +42,20 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	 * Constructor from URL
 	 *
 	 * @param resource resource url
-	 * @throws IOException io exception
 	 */
 	public Image(@NonNull final URL resource)
 	{
-		this(make(resource));
+		this(makeOptional(resource));
 	}
 
 	/**
 	 * Make image
 	 *
 	 * @param resource resource url
-	 * @return Image
+	 * @return awt Image or null if it fails
 	 */
 	@Nullable
-	static public java.awt.Image make(@NonNull final URL resource)
+	static public java.awt.Image makeOptional(@NonNull final URL resource)
 	{
 		try
 		{
@@ -66,25 +65,6 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 		{
 		}
 		return null;
-	}
-
-	/**
-	 * Make image (caught exception returns null)
-	 *
-	 * @param resource resource url
-	 * @return Image or null if it fails
-	 */
-	@Nullable
-	static public Image makeOptional(@NonNull final URL resource)
-	{
-		try
-		{
-			return new Image(ImageIO.read(resource));
-		}
-		catch (final IOException exception)
-		{
-			return null;
-		}
 	}
 
 	@Override

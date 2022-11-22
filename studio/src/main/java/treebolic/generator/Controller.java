@@ -45,6 +45,7 @@ import org.xml.sax.SAXException;
 import treebolic.IContext;
 import treebolic.IWidget;
 import treebolic.Widget;
+import treebolic.annotations.NonNull;
 import treebolic.commons.ButtonTabComponent;
 import treebolic.commons.ExternalBrowser;
 import treebolic.commons.FileDialogs;
@@ -350,12 +351,14 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		// document -> model
 		final DocumentAdapter adapter = new DocumentAdapter()
 		{
+			@NonNull
 			@Override
 			protected MutableNode makeNode(final MutableNode parent, final String id)
 			{
 				return new TreeMutableNode(parent, id);
 			}
 
+			@NonNull
 			@Override
 			protected MutableEdge makeEdge(final MutableNode fromNode, final MutableNode toNode)
 			{

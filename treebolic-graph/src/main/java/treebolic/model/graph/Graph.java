@@ -218,22 +218,24 @@ public class Graph
 		{
 			// get node at other end of the edge
 			@Nullable final GraphNode connectedNode = edge.getOtherNode(root);
-
-			// if the spanning tree does not have this node
-			if (!spanningTree.nodes.contains(connectedNode))
+			if (connectedNode != null)
 			{
-				// if the edge is backwards, reverse it
-				if (connectedNode == edge.getFrom())
+				// if the spanning tree does not have this node
+				if (!spanningTree.nodes.contains(connectedNode))
 				{
-					edge = GraphEdge.makeReverseOf(edge);
+					// if the edge is backwards, reverse it
+					if (connectedNode == edge.getFrom())
+					{
+						edge = GraphEdge.makeReverseOf(edge);
+					}
+
+					// add node and edge to the spanning tree
+					spanningTree.nodes.add(connectedNode);
+					spanningTree.edges.add(edge);
+
+					// move down
+					processSpanningTreeDFS(spanningTree, connectedNode);
 				}
-
-				// add node and edge to the spanning tree
-				spanningTree.nodes.add(connectedNode);
-				spanningTree.edges.add(edge);
-
-				// move down
-				processSpanningTreeDFS(spanningTree, connectedNode);
 			}
 		}
 
@@ -242,22 +244,24 @@ public class Graph
 		{
 			// get node at other end of the edge
 			@Nullable final GraphNode connectedNode = edge.getOtherNode(root);
-
-			// if the spanning tree does not have this node
-			if (!spanningTree.nodes.contains(connectedNode))
+			if (connectedNode != null)
 			{
-				// if the edge is backwards, reverse it
-				if (connectedNode == edge.getFrom())
+				// if the spanning tree does not have this node
+				if (!spanningTree.nodes.contains(connectedNode))
 				{
-					edge = GraphEdge.makeReverseOf(edge);
+					// if the edge is backwards, reverse it
+					if (connectedNode == edge.getFrom())
+					{
+						edge = GraphEdge.makeReverseOf(edge);
+					}
+
+					// add node and edge to the spanning tree
+					spanningTree.nodes.add(connectedNode);
+					spanningTree.edges.add(edge);
+
+					// move down
+					processSpanningTreeDFS(spanningTree, connectedNode);
 				}
-
-				// add node and edge to the spanning tree
-				spanningTree.nodes.add(connectedNode);
-				spanningTree.edges.add(edge);
-
-				// move down
-				processSpanningTreeDFS(spanningTree, connectedNode);
 			}
 		}
 	}
@@ -425,13 +429,13 @@ public class Graph
 		sb.append("Nodes :\n");
 		for (@NonNull final GraphNode node : getNodes())
 		{
-			sb.append(node.toString());
+			sb.append(node);
 			sb.append("\n");
 		}
 		sb.append("Edges :\n");
 		for (@NonNull final GraphEdge edge : getEdges())
 		{
-			sb.append(edge.toString());
+			sb.append(edge);
 			sb.append("\n");
 		}
 		return sb.toString();

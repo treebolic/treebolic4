@@ -2,6 +2,17 @@
 <project version="4">
   <component name="EntryPointsManager">
     <entry_points version="2.0">
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color BLACK" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color BLUE" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color CYAN" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color DARK_GRAY" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color GREEN" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color LIGHT_GRAY" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color MAGENTA" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color ORANGE" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color PINK" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color RED" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Color YELLOW" />
       <entry_point TYPE="field" FQNAME="treebolic.glue.iface.Rectangle2D OUT_BOTTOM" />
       <entry_point TYPE="field" FQNAME="treebolic.glue.iface.Rectangle2D OUT_LEFT" />
       <entry_point TYPE="field" FQNAME="treebolic.glue.iface.Rectangle2D OUT_RIGHT" />
@@ -9,6 +20,27 @@
       <entry_point TYPE="field" FQNAME="treebolic.glue.iface.component.PopupMenu.ImageIndices IMAGE_GOTO" />
       <entry_point TYPE="field" FQNAME="treebolic.glue.iface.component.PopupMenu.ImageIndices IMAGE_SEARCH" />
       <entry_point TYPE="field" FQNAME="treebolic.glue.iface.component.Toolbar.Button REFRESH" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Graphics BOLD" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.Graphics PLAIN" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation EAST" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation EXPAND" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation EXPANSIONRESET" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation EXPANSIONSWEEPRESET" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation HOME" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation NARROW" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation NORTH" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation RADIAL" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation SCALEDOWN" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation SCALEONE" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation SCALEUP" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation SHRINK" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation SOUTH" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation SWEEPRESET" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation WEST" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation WIDEN" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation ZOOMIN" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation ZOOMONE" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.component.Toolbar.ButtonImplementation ZOOMOUT" />
       <entry_point TYPE="field" FQNAME="org.treebolic.TreebolicIface ACTION_MAKEMODEL" />
       <entry_point TYPE="field" FQNAME="org.treebolic.TreebolicIface ACTIVITY_CLIENT" />
       <entry_point TYPE="field" FQNAME="org.treebolic.TreebolicIface ACTIVITY_MODEL" />
@@ -450,6 +482,12 @@
     <pattern value="treebolic.browser.MainFrame" method="replaceTab" />
     <pattern value="treebolic.browser2.Context" method="makeURLAlt" />
     <pattern value="treebolic.browser2.MainFrame" method="getSelected" />
+    <pattern value="treebolic.glue.Image" method="Image" />
+    <pattern value="treebolic.glue.iface.Point" method="x" />
+    <pattern value="treebolic.glue.iface.Point" method="y" />
+    <pattern value="treebolic.glue.Point" method="x" />
+    <pattern value="treebolic.glue.Point" method="y" />
+    <pattern value="treebolic.glue.iface.component.Toolbar" method="getButtons" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
@@ -490,7 +528,7 @@
           <item index="2" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
           <item index="3" class="java.lang.String" itemvalue="androidx.annotation.NonNull" />
           <item index="4" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
-         </list>
+        </list>
       </value>
     </option>
   </component>

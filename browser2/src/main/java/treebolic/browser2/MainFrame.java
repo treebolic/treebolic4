@@ -602,7 +602,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		final String imageBase = this.settings.getProperty("images", null);
 		final String urlScheme = this.settings.getProperty("urlscheme", null);
 		final String userHomeStr = this.settings.getProperty("userhome", null);
-		final boolean userHome = userHomeStr == null ? true : Boolean.parseBoolean(userHomeStr);
+		final boolean userHome = userHomeStr == null || Boolean.parseBoolean(userHomeStr);
 
 		SwingUtilities.invokeLater(() -> lookup(source, provider, base, imageBase, urlScheme, userHome));
 	}

@@ -25,11 +25,13 @@ public class Point extends java.awt.Point implements treebolic.glue.iface.Point
 		this.y = y;
 	}
 
+	@Override
 	public int x()
 	{
 		return x;
 	}
 
+	@Override
 	public int y()
 	{
 		return y;

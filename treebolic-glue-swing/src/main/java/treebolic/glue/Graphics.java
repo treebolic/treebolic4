@@ -228,6 +228,11 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 		Font font = Graphics.fontCache.get(size);
 		if (font == null)
 		{
+			// cache miss
+			if (this.font == null)
+			{
+				return;
+			}
 			font = this.font.deriveFont(size * SWING_FONT_FACTOR);
 			Graphics.fontCache.put(size, font);
 		}

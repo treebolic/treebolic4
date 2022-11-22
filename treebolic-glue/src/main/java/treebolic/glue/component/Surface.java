@@ -35,7 +35,7 @@ public abstract class Surface implements Component, treebolic.glue.iface.compone
 	}
 
 	@Override
-	abstract public void paint(@Nullable final Graphics g);
+	abstract public void paint(@NotNull final Graphics g);
 
 	@Override
 	public int getWidth()

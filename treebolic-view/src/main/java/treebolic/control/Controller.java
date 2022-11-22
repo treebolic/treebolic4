@@ -4,6 +4,7 @@
 
 package treebolic.control;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -715,6 +716,7 @@ public class Controller extends Commander
 		// "<img src='file:///path/image'>"
 		// "<img src='file://image'>"
 		// "<IMG src=\"jar:file:///proj/parser/jar/parser.jar!/test.xml\""
+		assert widget != null;
 		@Nullable URL imageBase = widget.getIContext().getImagesBase();
 		if (imageBase != null)
 		{
@@ -860,8 +862,7 @@ public class Controller extends Commander
 			sb.append("</html>");
 		}
 
-		@NonNull String tip = makeHtml(sb.toString());
-		tip = sb.toString();
+		@NonNull String tip = sb.toString();
 		assert this.view != null;
 		this.view.setToolTipText(tip);
 	}
@@ -878,8 +879,7 @@ public class Controller extends Commander
 	@SuppressWarnings("WeakerAccess")
 	public void popup(final int x, final int y, @NonNull final INode node)
 	{
-		@Nullable final View view = getView();
-		assert view != null;
+		assert this.view != null;
 		assert this.widget != null;
 		assert this.model != null;
 		@NonNull final PopupMenu menu = PopupMenu.makePopup(view, this, this.widget.getTarget(), node, this.model.settings);
@@ -1106,13 +1106,17 @@ public class Controller extends Commander
 	 * @return decoded URL string
 	 */
 	@Nullable
-	private static String decode(@NonNull final String str)
+	private static String decode(@Nullable final String str)
 	{
+		if (str == null)
+		{
+			return null;
+		}
 		try
 		{
 			return URLDecoder.decode(str, "UTF8");
 		}
-		catch (@NonNull final Exception ignored)
+		catch (@NonNull final UnsupportedEncodingException ignored)
 		{
 			// System.err.println("Can't decode " + str + " - " + e);
 		}

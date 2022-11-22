@@ -61,22 +61,37 @@ public class SettingsDialog extends JDialog
 	 */
 	static private final int PROVIDERIDX = 0;
 
+	/**
+	 * Provider bit
+	 */
 	static public final int PROVIDER = 1 << SettingsDialog.PROVIDERIDX;
 
 	static private final int BASEIDX = 1;
 
+	/**
+	 * Document base
+	 */
 	static public final int BASE = 1 << SettingsDialog.BASEIDX;
 
 	static private final int IMAGEBASEIDX = 2;
 
+	/**
+	 * Image base bit
+	 */
 	static public final int IMAGEBASE = 1 << SettingsDialog.IMAGEBASEIDX;
 
 	static private final int HELPIDX = 8;
 
+	/**
+	 * Help bit
+	 */
 	static public final int HELP = 1 << SettingsDialog.HELPIDX;
 
 	static private final int BROWSERIDX = 9;
 
+	/**
+	 * Browser bit
+	 */
 	static public final int BROWSER = 1 << SettingsDialog.BROWSERIDX;
 
 	// C O M P O N E N T S

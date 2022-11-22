@@ -136,7 +136,7 @@ public class ModelDump
 		{
 			for (@NonNull final IEdge edge : edgeList)
 			{
-				sb.append(edge.toString());
+				sb.append(edge);
 				sb.append('\n');
 			}
 		}
