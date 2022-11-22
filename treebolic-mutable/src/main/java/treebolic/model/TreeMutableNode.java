@@ -106,7 +106,7 @@ public class TreeMutableNode extends MutableNode
 	 */
 	static public void assertNoLink(@NonNull final INode parent, @NonNull final INode child)
 	{
-		List<INode> children = parent.getChildren();
+		@Nullable List<INode> children = parent.getChildren();
 		if (children != null)
 		{
 			// assert !children.contains(child);
@@ -131,7 +131,7 @@ public class TreeMutableNode extends MutableNode
 	public void addChild(@NonNull final INode child)
 	{
 		// assertNoLink(this, child);
-		final List<INode> children = this.getChildren();
+		@NonNull final List<INode> children = this.getChildren();
 		children.add(child);
 		child.setParent(this);
 	}
@@ -145,7 +145,7 @@ public class TreeMutableNode extends MutableNode
 	{
 		if (children != null)
 		{
-			for (INode child : children)
+			for (@NonNull INode child : children)
 			{
 				addChild(child);
 			}
@@ -161,7 +161,7 @@ public class TreeMutableNode extends MutableNode
 	{
 		if (children != null)
 		{
-			for (INode child : children)
+			for (@NonNull INode child : children)
 			{
 				addChild(child);
 			}
@@ -177,7 +177,7 @@ public class TreeMutableNode extends MutableNode
 	@SuppressWarnings("WeakerAccess")
 	public void insertChild(@NonNull final INode child, @SuppressWarnings("SameParameterValue") final int i)
 	{
-		final List<INode> children = this.getChildren();
+		@NonNull final List<INode> children = this.getChildren();
 		children.add(i, child);
 		child.setParent(this);
 	}
@@ -213,7 +213,7 @@ public class TreeMutableNode extends MutableNode
 	{
 		if (parent != null)
 		{
-			final List<INode> children = parent.getChildren();
+			@Nullable final List<INode> children = parent.getChildren();
 			if (children != null)
 			{
 				children.remove(child);
