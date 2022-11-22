@@ -13,8 +13,6 @@ import treebolic.glue.component.Component;
  */
 public class Progress extends treebolic.glue.component.Progress implements Component
 {
-	// private static final long serialVersionUID = 4362329721644133327L;
-
 	/**
 	 * Constructor
 	 *

@@ -18,8 +18,6 @@ import treebolic.annotations.Nullable;
  */
 public class Container extends JPanel implements Component, treebolic.glue.iface.component.Container<Component>
 {
-	private static final long serialVersionUID = 5343097039212596542L;
-
 	/**
 	 * Constructor
 	 *

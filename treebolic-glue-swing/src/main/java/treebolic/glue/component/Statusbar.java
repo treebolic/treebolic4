@@ -42,8 +42,6 @@ import treebolic.glue.iface.component.Converter;
  */
 public class Statusbar extends JToolBar implements Component, treebolic.glue.iface.component.Statusbar<Color, ActionListener>
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Whether this component contains search component
 	 */

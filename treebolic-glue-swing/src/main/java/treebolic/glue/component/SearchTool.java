@@ -31,8 +31,6 @@ import treebolic.glue.Color;
  */
 class SearchTool extends Box
 {
-	private static final long serialVersionUID = -6354719663163733300L;
-
 	static private final String CMD_SEARCH = "SEARCH";
 
 	static private final String CMD_RESET = "RESET";

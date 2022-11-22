@@ -18,8 +18,6 @@ import treebolic.annotations.NonNull;
  */
 class SearchDialog extends JDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	// SCOPE
 
 	static private final String[] scopeLabels = new String[] { Messages.getString("SearchDialog.label"), Messages.getString("SearchDialog.content"), Messages.getString("SearchDialog.link"), Messages.getString("SearchDialog.id"), };

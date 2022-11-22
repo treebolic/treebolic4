@@ -25,8 +25,6 @@ import treebolic.annotations.NonNull;
  */
 public class Progress extends JPanel implements Component, treebolic.glue.iface.component.Progress
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Stop icon
 	 */

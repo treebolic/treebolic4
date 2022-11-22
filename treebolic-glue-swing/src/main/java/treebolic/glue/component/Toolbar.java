@@ -22,15 +22,14 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 {
 	// D A T A
 
-	private static final long serialVersionUID = -4830414811106373265L;
-
 	/**
 	 * (Ordered) toolbar
 	 *
 	 * @return list of buttons
 	 */
+	@Override
 	@NonNull
-	static public Button[] toolbar()
+	public Button[] getButtons()
 	{
 		return new Button[]{Button.HOME, //
 				Button.ZOOMIN, Button.ZOOMOUT, Button.ZOOMONE, Button.SEPARATOR, //
@@ -177,8 +176,8 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 	 * Make button
 	 *
 	 * @param iconIndex icon
-	 * @param toolTip tooltip
-	 * @param listener action listener
+	 * @param toolTip   tooltip
+	 * @param listener  action listener
 	 */
 	public void addButton(final int iconIndex, final String toolTip, @NonNull final ActionListener listener)
 	{
@@ -193,11 +192,11 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 	/**
 	 * Make toggle button
 	 *
-	 * @param iconIndex icon
+	 * @param iconIndex         icon
 	 * @param selectedIconIndex pressed icon
-	 * @param toolTip tooltip
-	 * @param state tooltip
-	 * @param listener action listener
+	 * @param toolTip           tooltip
+	 * @param state             tooltip
+	 * @param listener          action listener
 	 */
 	public void addToggle(final int iconIndex, final int selectedIconIndex, final String toolTip, final boolean state, @NonNull final ActionListener listener)
 	{

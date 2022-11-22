@@ -20,8 +20,6 @@ import treebolic.glue.Graphics;
  */
 public abstract class Surface extends javax.swing.JPanel implements Component, treebolic.glue.iface.component.Surface<Graphics, EventListener>
 {
-	private static final long serialVersionUID = 7546424810791062316L;
-
 	/**
 	 * Error margin when finding node
 	 */

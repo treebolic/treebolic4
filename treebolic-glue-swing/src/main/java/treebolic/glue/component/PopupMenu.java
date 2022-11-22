@@ -18,8 +18,6 @@ import treebolic.glue.ActionListener;
  */
 public class PopupMenu extends JPopupMenu implements treebolic.glue.iface.component.PopupMenu<Component, ActionListener>
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Icon array as per ImageIndices ordinals:
 	 * IMAGE_CANCEL, IMAGE_INFO, IMAGE_FOCUS, IMAGE_LINK, IMAGE_MOUNT, IMAGE_GOTO, IMAGE_SEARCH

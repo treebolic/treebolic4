@@ -24,8 +24,6 @@ import treebolic.glue.iface.component.Converter;
  */
 public class Dialog extends JDialog implements treebolic.glue.iface.component.Dialog
 {
-	private static final long serialVersionUID = 3504737418377115665L;
-
 	@NonNull
 	final private JLabel headerLabel;
 
