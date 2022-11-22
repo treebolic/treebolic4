@@ -630,7 +630,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 
 		if (this.provider == null)
 		{
-			final Converter toHtml = (CharSequence[] s) -> Controller.makeHtml("mount", s);
+			final Converter toHtml = (s) -> Controller.makeHtml("mount", s);
 
 			putStatus(Statusbar.PutType.MOUNT, toHtml, Messages.getString("Widget.status_mount"), Messages.getString("Widget.status_mount_err_provider_null"));
 
