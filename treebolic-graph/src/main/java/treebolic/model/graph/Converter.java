@@ -73,7 +73,7 @@ public class Converter<T extends TreeMutableNode>
 		@NonNull final treebolic.model.graph.Tree spanningTree = graph.makeSpanningTree(rootNode);
 
 		// tree edges
-		final Collection<GraphEdge> graphEdges = spanningTree.graph.getEdges();
+		@NonNull final Collection<GraphEdge> graphEdges = spanningTree.graph.getEdges();
 		for (@NonNull final GraphEdge graphEdge : graphEdges)
 		{
 			// tree edge nodes
