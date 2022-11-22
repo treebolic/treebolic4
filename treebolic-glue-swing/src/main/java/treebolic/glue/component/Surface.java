@@ -94,8 +94,7 @@ public abstract class Surface extends javax.swing.JPanel implements Component, t
 	/**
 	 * Constructor
 	 *
-	 * @param ignoredHandle
-	 *        Handle required for component creation (unused)
+	 * @param ignoredHandle Handle required for component creation (unused)
 	 */
 	public Surface(final Object ignoredHandle)
 	{
@@ -130,7 +129,9 @@ public abstract class Surface extends javax.swing.JPanel implements Component, t
 	public void setFireHover(final boolean flag)
 	{
 		if (this.eventListener == null)
+		{
 			return;
+		}
 		if (flag)
 		{
 			// timer creation
@@ -157,12 +158,12 @@ public abstract class Surface extends javax.swing.JPanel implements Component, t
 		Cursor awtCursor = null;
 		switch (cursor)
 		{
-		case DEFAULTCURSOR:
-			awtCursor = Cursor.getDefaultCursor();
-			break;
-		case HOTCURSOR:
-			awtCursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-			break;
+			case DEFAULTCURSOR:
+				awtCursor = Cursor.getDefaultCursor();
+				break;
+			case HOTCURSOR:
+				awtCursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+				break;
 		}
 		super.setCursor(awtCursor);
 	}
