@@ -17,106 +17,20 @@ public interface Toolbar<L>
 	 */
 	enum Button
 	{
-		/**
-		 * Home
-		 */
-		HOME, //
-		/**
-		 * North
-		 */
-		NORTH,
-		/**
-		 * South
-		 */
-		SOUTH,
-		/**
-		 * East
-		 */
-		EAST,
-		/**
-		 * West
-		 */
-		WEST,
-		/**
-		 * Radial
-		 */
-		RADIAL, //
-		/**
-		 * Expand
-		 */
-		EXPAND,
-		/**
-		 * Shrink
-		 */
-		SHRINK,
-		/**
-		 * Reset expansion
-		 */
-		EXPANSIONRESET, //
-		/**
-		 * Widen
-		 */
-		WIDEN,
-		/**
-		 * Narrow
-		 */
-		NARROW,
-		/**
-		 * Reset sweep
-		 */
-		SWEEPRESET, //
-		/**
-		 * Reset expansion and sweep
-		 */
-		EXPANSIONSWEEPRESET, //
-		/**
-		 * Zoom in
-		 */
-		ZOOMIN,
-		/**
-		 * Zoom out
-		 */
-		ZOOMOUT,
-		/**
-		 * Reset zooming
-		 */
-		ZOOMONE, //
-		/**
-		 * Scale up
-		 */
-		SCALEUP,
-		/**
-		 * Scale down
-		 */
-		SCALEDOWN,
-		/**
-		 * Reset scaling
-		 */
-		SCALEONE, //
-		/**
-		 * Refresh
-		 */
-		REFRESH, //
-		/**
-		 * Render edges as arcs
-		 */
-		ARCEDGE, //
-		/**
-		 * Use tooltips
-		 */
-		TOOLTIP,
-		/**
-		 * Content in tooltips
-		 */
-		TOOLTIPCONTENT, //
-		/**
-		 * Focus on hover
-		 */
-		FOCUSHOVER, //
-		/**
-		 * Separator
-		 */
-		SEPARATOR
+		// @formatter:off
+		/** Home */	HOME, //
+		/** North */ NORTH, /** South */ SOUTH, /** East */ EAST, /** West */ WEST, /** Radial */ RADIAL, //
+		/** Expand */ EXPAND, /** Shrink */ SHRINK, /** Reset expansion */ EXPANSIONRESET, //
+		/** Widen */ WIDEN, /** Narrow */ NARROW, /** Reset sweep */ SWEEPRESET, //
+		/** Reset expansion and sweep */ EXPANSIONSWEEPRESET, //
+		/** Zoom in */ ZOOMIN, /** Zoom out */ ZOOMOUT, /** Reset zooming */ ZOOMONE, //
+		/** Scale up */ SCALEUP, /** Scale down */ SCALEDOWN, /** Reset scaling */ SCALEONE, //
+		/** Refresh */ REFRESH, //
+		/** Render edges as arcs */ ARCEDGE, //
+		/** Use tooltips */ TOOLTIP, /** Content in tooltips */ TOOLTIPCONTENT, //
+		/** Focus on hover */ FOCUSHOVER, //
+		/** Separator */ SEPARATOR
+		// @formatter:on
 	}
 
 	/**
@@ -126,4 +40,11 @@ public interface Toolbar<L>
 	 * @param listener listener
 	 */
 	void addButton(final Button button, final L listener);
+
+	/**
+	 * Get buttons
+	 *
+	 * @return buttons
+	 */
+	Button[] getButtons();
 }

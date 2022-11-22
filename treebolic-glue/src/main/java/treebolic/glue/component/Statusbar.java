@@ -3,6 +3,9 @@
  */
 package treebolic.glue.component;
 
+import com.sun.istack.internal.NotNull;
+
+import treebolic.annotations.Nullable;
 import treebolic.glue.ActionListener;
 import treebolic.glue.Color;
 import treebolic.glue.NotImplementedException;
@@ -20,7 +23,7 @@ public class Statusbar implements Component, treebolic.glue.iface.component.Stat
 	 *
 	 * @param ignoredHandle Opaque handle required for component creation
 	 */
-	public Statusbar(final Object ignoredHandle)
+	public Statusbar(@Nullable final Object ignoredHandle)
 	{
 		throw new NotImplementedException();
 	}
@@ -32,37 +35,37 @@ public class Statusbar implements Component, treebolic.glue.iface.component.Stat
 	}
 
 	@Override
-	public void setColors(final Color backColor, final Color foreColor)
+	public void setColors(@Nullable final Color backColor, @Nullable final Color foreColor)
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public void setStyle(final String style)
+	public void setStyle(@Nullable final String style)
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public void addListener(final ActionListener listener)
+	public void addListener(@NotNull final ActionListener listener)
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public void setListener(final treebolic.glue.iface.ActionListener actionListener)
+	public void setListener(@Nullable final treebolic.glue.iface.ActionListener actionListener)
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public void put(final int image, final Converter converter, final String label, final String... contents)
+	public void put(final int image, @Nullable final Converter converter, @Nullable final String label, final String... contents)
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public void put(final String message)
+	public void put(@Nullable final String message)
 	{
 		throw new NotImplementedException();
 	}

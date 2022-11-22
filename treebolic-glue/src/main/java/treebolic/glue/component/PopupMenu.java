@@ -26,13 +26,13 @@ public class PopupMenu implements treebolic.glue.iface.component.PopupMenu<Compo
 	}
 
 	@Override
-	public void addItem(final String label, final int imageIndex, final ActionListener listener)
+	public void addItem(@NonNull final String label, final int imageIndex, @NonNull final ActionListener listener)
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public void addItem(final int labelIndex, final int imageIndex, final ActionListener listener)
+	public void addItem(final int labelIndex, final int imageIndex, @NonNull final ActionListener listener)
 	{
 		throw new NotImplementedException();
 	}

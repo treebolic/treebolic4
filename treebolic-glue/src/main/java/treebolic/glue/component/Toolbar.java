@@ -3,6 +3,9 @@
  */
 package treebolic.glue.component;
 
+import com.sun.istack.internal.NotNull;
+
+import treebolic.annotations.Nullable;
 import treebolic.glue.ActionListener;
 import treebolic.glue.NotImplementedException;
 
@@ -13,16 +16,6 @@ import treebolic.glue.NotImplementedException;
  */
 public class Toolbar implements Component, treebolic.glue.iface.component.Toolbar<ActionListener>
 {
-	/**
-	 * (Ordered) toolbar
-	 *
-	 * @return list of buttons
-	 */
-	static public Button[] toolbar()
-	{
-		throw new NotImplementedException();
-	}
-
 	// C O N S T R U C T O R
 
 	/**
@@ -30,13 +23,23 @@ public class Toolbar implements Component, treebolic.glue.iface.component.Toolba
 	 *
 	 * @param ignoredHandle Handle required for component creation (unused)
 	 */
-	public Toolbar(final Object ignoredHandle)
+	public Toolbar(@Nullable final Object ignoredHandle)
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public void addButton(treebolic.glue.iface.component.Toolbar.Button button, ActionListener listener)
+	public void addButton(@NotNull Button button, ActionListener listener)
+	{
+		throw new NotImplementedException();
+	}
+
+	/**
+	 * (Ordered) List of toolbar buttons
+	 *
+	 * @return list of buttons
+	 */
+	public Button[] getButtons()
 	{
 		throw new NotImplementedException();
 	}

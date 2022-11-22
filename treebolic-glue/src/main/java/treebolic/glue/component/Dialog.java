@@ -4,6 +4,8 @@
 
 package treebolic.glue.component;
 
+import com.sun.istack.internal.NotNull;
+
 import treebolic.annotations.Nullable;
 import treebolic.glue.NotImplementedException;
 import treebolic.glue.iface.ActionListener;
@@ -31,7 +33,7 @@ public class Dialog implements treebolic.glue.iface.component.Dialog
 	}
 
 	@Override
-	public void setListener(final ActionListener actionListener)
+	public void setListener(@Nullable final ActionListener actionListener)
 	{
 		throw new NotImplementedException();
 	}
@@ -43,19 +45,19 @@ public class Dialog implements treebolic.glue.iface.component.Dialog
 	}
 
 	@Override
-	public void set(final CharSequence header, final CharSequence... contents)
+	public void set(@Nullable final CharSequence header, final CharSequence... contents)
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public void setConverter(final Converter converter)
+	public void setConverter(@NotNull final Converter converter)
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public void setStyle(final String style)
+	public void setStyle(@Nullable final String style)
 	{
 		throw new NotImplementedException();
 	}
