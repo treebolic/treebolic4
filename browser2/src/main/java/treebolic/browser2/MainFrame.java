@@ -42,6 +42,8 @@ import javax.swing.event.HyperlinkListener;
 
 import treebolic.IWidget;
 import treebolic.Widget;
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.commons.ButtonTabComponent;
 import treebolic.commons.ExternalBrowser;
 import treebolic.commons.FileDialogs;
@@ -72,6 +74,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Main pane
 	 */
+	@NonNull
 	private final JComponent mainPane;
 
 	/**
@@ -91,7 +94,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @param args command line arguments
 	 */
-	public MainFrame(final String[] args)
+	public MainFrame(@NonNull final String[] args)
 	{
 		// settings
 		this.settings = makeSettings(Persist.loadSettings(getPersistName()), args);
@@ -100,7 +103,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		setTitle(Messages.getString("MainFrame.title"));
 
 		// components: toolbar
-		JToolBar toolbar = makeToolbar();
+		@NonNull JToolBar toolbar = makeToolbar();
 
 		// components: pane
 		final JComponent home = makeHome();
@@ -129,7 +132,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @see java.awt.Window#processWindowEvent(java.awt.event.WindowEvent)
 	 */
 	@Override
-	protected void processWindowEvent(final WindowEvent event)
+	protected void processWindowEvent(@NonNull final WindowEvent event)
 	{
 		if (event.getID() == WindowEvent.WINDOW_CLOSING)
 		{
@@ -155,9 +158,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param scroll scroll flag
 	 * @return component
 	 */
+	@NonNull
 	public JComponent makeBrowserPane(final URL url, final boolean scroll)
 	{
-		final JEditorPane panel = new JEditorPane();
+		@NonNull final JEditorPane panel = new JEditorPane();
 		panel.setEditable(false);
 		try
 		{
@@ -178,28 +182,29 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return menu
 	 */
+	@NonNull
 	protected JPopupMenu makeMenu()
 	{
-		final JMenuItem closeAllMenuItem = makeItem(Messages.getString("MainFrame.close"), "close.png", Code.CLOSEALL, 0);
-		final JMenuItem serializeMenuItem = makeItem(Messages.getString("MainFrame.serialize"), "serialize.png", Code.SERIALIZE, 0);
-		final JMenuItem settingsMenuItem = makeItem(Messages.getString("MainFrame.settings"), "settings.png", Code.SETTINGS, 0);
-		final JMenuItem aboutMenuItem = makeItem(Messages.getString("MainFrame.about"), "about.png", Code.ABOUT, 0);
-		final JMenuItem helpMenuItem = makeItem(Messages.getString("MainFrame.help"), "help.png", Code.HELP, 0);
+		@NonNull final JMenuItem closeAllMenuItem = makeItem(Messages.getString("MainFrame.close"), "close.png", Code.CLOSEALL, 0);
+		@NonNull final JMenuItem serializeMenuItem = makeItem(Messages.getString("MainFrame.serialize"), "serialize.png", Code.SERIALIZE, 0);
+		@NonNull final JMenuItem settingsMenuItem = makeItem(Messages.getString("MainFrame.settings"), "settings.png", Code.SETTINGS, 0);
+		@NonNull final JMenuItem aboutMenuItem = makeItem(Messages.getString("MainFrame.about"), "about.png", Code.ABOUT, 0);
+		@NonNull final JMenuItem helpMenuItem = makeItem(Messages.getString("MainFrame.help"), "help.png", Code.HELP, 0);
 
-		final JPopupMenu menu = new JPopupMenu();
+		@NonNull final JPopupMenu menu = new JPopupMenu();
 		if (MainFrame.HIERARCHIZEMENU)
 		{
-			final JMenu filesMenu = new JMenu();
+			@NonNull final JMenu filesMenu = new JMenu();
 			filesMenu.setText(Messages.getString("MainFrame.menu_files"));
 			filesMenu.add(serializeMenuItem);
 			filesMenu.add(closeAllMenuItem);
 
-			final JMenu helpMenu = new JMenu();
+			@NonNull final JMenu helpMenu = new JMenu();
 			helpMenu.setText(Messages.getString("MainFrame.menu_help"));
 			helpMenu.add(aboutMenuItem);
 			helpMenu.add(helpMenuItem);
 
-			final JMenu optionsMenu = new JMenu();
+			@NonNull final JMenu optionsMenu = new JMenu();
 			optionsMenu.setText(Messages.getString("MainFrame.menu_options"));
 			optionsMenu.add(settingsMenuItem);
 
@@ -227,13 +232,14 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param acceleratorKey accelerator key
 	 * @return menu item
 	 */
-	private JMenuItem makeItem(final String text, final String image, final Code command, @SuppressWarnings("SameParameterValue") final int acceleratorKey)
+	@NonNull
+	private JMenuItem makeItem(final String text, @Nullable final String image, @NonNull final Code command, @SuppressWarnings("SameParameterValue") final int acceleratorKey)
 	{
-		final JMenuItem item = new JMenuItem();
+		@NonNull final JMenuItem item = new JMenuItem();
 		item.setText(text);
 		if (image != null)
 		{
-			final URL url = MainFrame.class.getResource("images/" + image);
+			@Nullable final URL url = MainFrame.class.getResource("images/" + image);
 			assert url != null;
 			item.setIcon(new ImageIcon(url));
 		}
@@ -248,21 +254,22 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Make toolbar
 	 */
+	@NonNull
 	private JToolBar makeToolbar()
 	{
-		final JToolBar toolbar = new JToolBar();
+		@NonNull final JToolBar toolbar = new JToolBar();
 		toolbar.setFloatable(true);
 		toolbar.setPreferredSize(Constants.DIM_TOOLBAR);
 		toolbar.setLayout(new BoxLayout(toolbar, BoxLayout.X_AXIS));
 		toolbar.add(Box.createHorizontalStrut(16));
 
 		// search icon
-		final URL url = MainFrame.class.getResource("images/search.png");
+		@Nullable final URL url = MainFrame.class.getResource("images/search.png");
 		assert url != null;
-		final JLabel label = new JLabel(new ImageIcon(url));
+		@NonNull final JLabel label = new JLabel(new ImageIcon(url));
 
 		// listener
-		final ActionListener lookupActionListener = e -> MainFrame.this.lookup();
+		@NonNull final ActionListener lookupActionListener = e -> MainFrame.this.lookup();
 
 		// edit combo
 		this.editor = new JComboBox<>();
@@ -273,23 +280,23 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		this.editor.getEditor().addActionListener(lookupActionListener);
 
 		// buttons
-		final JButton lookupButton = makeButton(Messages.getString("MainFrame.run"), Messages.getString("MainFrame.run"), "images/run.png", lookupActionListener);
+		@NonNull final JButton lookupButton = makeButton(Messages.getString("MainFrame.run"), Messages.getString("MainFrame.run"), "images/run.png", lookupActionListener);
 
 		// menu
-		final JButton menuButton = makeButton(null, Messages.getString("MainFrame.menu"), "images/menu.png", null);
+		@NonNull final JButton menuButton = makeButton(null, Messages.getString("MainFrame.menu"), "images/menu.png", null);
 		menuButton.setComponentPopupMenu(makeMenu());
 		menuButton.addMouseListener(new MouseAdapter()
 		{
 			@Override
-			public void mousePressed(final MouseEvent e)
+			public void mousePressed(@NonNull final MouseEvent e)
 			{
-				final JPopupMenu popup = makeMenu();
+				@NonNull final JPopupMenu popup = makeMenu();
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
 
 		// extras
-		final Component[] extras = makeExtras();
+		@Nullable final Component[] extras = makeExtras();
 
 		// assemble
 		toolbar.add(label);
@@ -317,6 +324,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return list of components
 	 */
+	@Nullable
 	@SuppressWarnings("SameReturnValue")
 	protected Component[] makeExtras()
 	{
@@ -332,11 +340,12 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param listener action listener
 	 * @return button
 	 */
-	private JButton makeButton(final String text, final String tooltip, final String image, final ActionListener listener)
+	@NonNull
+	private JButton makeButton(final String text, final String tooltip, @NonNull final String image, final ActionListener listener)
 	{
-		final URL url = MainFrame.class.getResource(image);
+		@Nullable final URL url = MainFrame.class.getResource(image);
 		assert url != null;
-		final JButton button = new JButton(text);
+		@NonNull final JButton button = new JButton(text);
 		button.setToolTipText(tooltip);
 		button.setIcon(new ImageIcon(url));
 		button.addActionListener(listener);
@@ -377,6 +386,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return selected component
 	 */
+	@Nullable
 	protected Component getSelected()
 	{
 		if (this.tabbedPane != null)
@@ -400,6 +410,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param imageBase image base
 	 * @param urlScheme url scheme
 	 */
+	@NonNull
 	protected Context makeContext(final String source, final String base, final String imageBase, final String urlScheme)
 	{
 		return new Context(this, source, base, imageBase, urlScheme);
@@ -414,15 +425,15 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param args     command-line arguments
 	 * @return parameters
 	 */
-	static public Properties makeSettings(final Properties settings, final String[] args)
+	static public Properties makeSettings(@NonNull final Properties settings, @Nullable final String[] args)
 	{
 		// param1=<val> param2=<"val with spaces"> ...
 		if (args != null && args.length >= 1)
 		{
-			final Properties parameters = new Properties();
-			for (final String arg : args)
+			@NonNull final Properties parameters = new Properties();
+			for (@NonNull final String arg : args)
 			{
-				final String[] pair = arg.split("=");
+				@NonNull final String[] pair = arg.split("=");
 				if (pair.length != 2)
 				{
 					continue;
@@ -459,9 +470,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return provider class name
 	 */
+	@Nullable
 	protected String getProvider()
 	{
-		String provider = this.settings.getProperty("provider", null);
+		@Nullable String provider = this.settings.getProperty("provider", null);
 		if (provider != null && provider.isEmpty())
 		{
 			provider = null;
@@ -484,7 +496,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @param code command code
 	 */
-	private void execute(final Code code)
+	private void execute(@NonNull final Code code)
 	{
 		switch (code)
 		{
@@ -508,7 +520,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 					{
 						return;
 					}
-					final File file = new File(filePath);
+					@NonNull final File file = new File(filePath);
 					if (file.exists() && !Interact.confirm(new String[]{filePath, Messages.getString("MainFrame.exists"), Messages.getString("MainFrame.overwrite")}))
 					{
 						return;
@@ -558,7 +570,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 */
 	private void lookup()
 	{
-		final String lookup = getLookup();
+		@NonNull final String lookup = getLookup();
 		lookup(lookup);
 	}
 
@@ -567,12 +579,12 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @param args command line arguments
 	 */
-	private void lookup0(final String[] args)
+	private void lookup0(@NonNull final String[] args)
 	{
 		final String source = this.settings.getProperty("source");
 		lookup(source);
 
-		for (final String arg : args)
+		for (@NonNull final String arg : args)
 		{
 			if (arg.contains("="))
 			{
@@ -587,13 +599,13 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @param source source
 	 */
-	public void lookup(final String source)
+	public void lookup(@Nullable final String source)
 	{
 		if (source == null || source.isEmpty())
 		{
 			return;
 		}
-		final String provider = getProvider();
+		@Nullable final String provider = getProvider();
 		if (provider == null || provider.isEmpty())
 		{
 			Interact.warn(Messages.getString("MainFrame.providernull"));
@@ -620,15 +632,15 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		System.out.println(Messages.getString("MainFrame.run") + " <" + source + ">");
 
 		// widget
-		final Context context = makeContext(source, base, imageBase, urlScheme);
-		final IWidget widget = new Widget(context, null);
+		@NonNull final Context context = makeContext(source, base, imageBase, urlScheme);
+		@NonNull final IWidget widget = new Widget(context, null);
 		context.connect(widget);
 
 		// widget init
 		widget.init(provider, source);
 
 		// tabbed pane
-		final String toolTip = "<html><body><strong>" + source + "</strong><br>" + provider + "</body></html>";
+		@NonNull final String toolTip = "<html><body><strong>" + source + "</strong><br>" + provider + "</body></html>";
 		final String title = mangle(source);
 		//noinspection ConstantConditions
 		assert widget instanceof Component;
@@ -654,7 +666,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 */
 	protected void about()
 	{
-		final JDialog dialog = new AboutDialog();
+		@NonNull final JDialog dialog = new AboutDialog();
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
@@ -665,7 +677,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 */
 	protected void settings()
 	{
-		final SettingsDialog dialog = new SettingsDialog(this.settings, SettingsDialog.PROVIDER | SettingsDialog.BASE | SettingsDialog.IMAGEBASE | SettingsDialog.HELP | SettingsDialog.BROWSER);
+		@NonNull final SettingsDialog dialog = new SettingsDialog(this.settings, SettingsDialog.PROVIDER | SettingsDialog.BASE | SettingsDialog.IMAGEBASE | SettingsDialog.HELP | SettingsDialog.BROWSER);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -682,6 +694,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return lookup
 	 */
+	@NonNull
 	protected String getLookup()
 	{
 		String lookup = (String) this.editor.getEditor().getItem();
@@ -694,6 +707,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return persist name
 	 */
+	@NonNull
 	@SuppressWarnings("SameReturnValue")
 	protected String getPersistName()
 	{
@@ -716,14 +730,14 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param str0 string to mangle
 	 * @return mangled string
 	 */
-	private String mangle(final String str0)
+	private String mangle(@Nullable final String str0)
 	{
 		if (str0 == null)
 		{
 			return null;
 		}
 
-		String str = str0;
+		@NonNull String str = str0;
 		final int index = Math.max(str.lastIndexOf('/'), str.lastIndexOf('\\'));
 		if (index != -1)
 		{
@@ -741,9 +755,9 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param widget      widget
 	 * @throws IOException io exception
 	 */
-	private void serialize(final String destination, final IWidget widget) throws IOException
+	private void serialize(final String destination, @NonNull final IWidget widget) throws IOException
 	{
-		final Model model = ((Widget) widget).getModel();
+		@Nullable final Model model = ((Widget) widget).getModel();
 		if (model != null)
 		{
 			new ModelWriter(destination).serialize(model);
@@ -760,9 +774,9 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param widget     widget
 	 * @param context    widget's context
 	 */
-	public void linkTo(final String linkUrl, @SuppressWarnings("unused") final String linkTarget, @SuppressWarnings("unused") final IWidget widget, final Context context)
+	public void linkTo(final String linkUrl, @SuppressWarnings("unused") final String linkTarget, @SuppressWarnings("unused") final IWidget widget, @NonNull final Context context)
 	{
-		final URL url = context.makeURL(linkUrl);
+		@Nullable final URL url = context.makeURL(linkUrl);
 		if (url == null)
 		{
 			return;
@@ -772,7 +786,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			// try internal browser
 			if ("true".equals(this.settings.getProperty("internal.browser")))
 			{
-				final JComponent component = makeBrowserPane(url, true);
+				@NonNull final JComponent component = makeBrowserPane(url, true);
 				addTab(component, mangle(linkUrl), linkUrl);
 				return;
 			}
@@ -795,7 +809,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @see javax.swing.event.HyperlinkListener#hyperlinkUpdate(javax.swing.event.HyperlinkEvent)
 	 */
 	@Override
-	public void hyperlinkUpdate(final HyperlinkEvent event)
+	public void hyperlinkUpdate(@NonNull final HyperlinkEvent event)
 	{
 		if (event.getEventType() == EventType.ACTIVATED)
 		{
