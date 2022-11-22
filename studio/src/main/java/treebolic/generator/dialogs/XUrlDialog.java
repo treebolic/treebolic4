@@ -40,7 +40,7 @@ public class XUrlDialog extends UrlDialog
 	static public void main(final String[] args)
 	{
 		UIManager.put("swing.boldMetal", false); 
-		final Properties settings = Persist.getSettings("treebolic-generator"); 
+		final Properties settings = Persist.getSettings("treebolic-studio");
 		final XUrlDialog dialog = new XUrlDialog(settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
@@ -48,7 +48,7 @@ public class XUrlDialog extends UrlDialog
 		if (dialog.ok)
 		{
 			System.out.println(settings.getProperty("openurl")); 
-			Persist.saveSettings("treebolic-generator", settings); 
+			Persist.saveSettings("treebolic-studio", settings);
 		}
 		System.exit(0);
 	}

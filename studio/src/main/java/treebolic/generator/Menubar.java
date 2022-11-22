@@ -67,8 +67,8 @@ public class Menubar extends JMenuBar
 		final JMenuItem listIdsMenuItem = makeItem(Messages.getString("Menubar.list_ids"), null, Controller.Code.LISTIDS, null); 
 
 		final JMenuItem settingsMenuItem = makeItem(Messages.getString("Menubar.settings"), "settings.png", Controller.Code.SETTINGS, null);  
-		final JMenuItem baseMenuItem = makeItem(Messages.getString("Menubar.site"), "site.png", Controller.Code.SETTINGSBASE, null);  
-		final JMenuItem urlMenuItem = makeItem(Messages.getString("Menubar.url"), "url.png", Controller.Code.SETTINGSURL, null);  
+		// final JMenuItem baseMenuItem = makeItem(Messages.getString("Menubar.site"), "site.png", Controller.Code.SETTINGSBASE, null);
+		// final JMenuItem urlMenuItem = makeItem(Messages.getString("Menubar.url"), "url.png", Controller.Code.SETTINGSURL, null);
 		final JCheckBoxMenuItem treebolicRendererMenuItem = makeCheckboxItem(Messages.getString("Menubar.renderer"), null, Controller.Code.OPTIONTREEBOLICRENDERER, null, MainFrame.hasTreebolicRendering); 
 		final JCheckBoxMenuItem validateMenuItem = makeCheckboxItem(Messages.getString("Menubar.validate"), null, Controller.Code.OPTIONVALIDATEXML, null, Controller.validate); 
 		final JCheckBoxMenuItem focusParentMenuItem = makeCheckboxItem(Messages.getString("Menubar.focus"), null, Controller.Code.OPTIONFOCUSPARENT, null, treebolic.generator.tree.Tree.focusParent); 
@@ -112,8 +112,8 @@ public class Menubar extends JMenuBar
 		final JMenu optionsMenu = new JMenu();
 		optionsMenu.setText(Messages.getString("Menubar.menu_options")); 
 		optionsMenu.add(settingsMenuItem);
-		optionsMenu.add(baseMenuItem);
-		optionsMenu.add(urlMenuItem);
+		// optionsMenu.add(baseMenuItem);
+		// optionsMenu.add(urlMenuItem);
 		optionsMenu.addSeparator();
 		optionsMenu.add(treebolicRendererMenuItem);
 		optionsMenu.add(validateMenuItem);
@@ -127,7 +127,6 @@ public class Menubar extends JMenuBar
 		final JMenu toolsMenu = new JMenu();
 		toolsMenu.setText(Messages.getString("Menubar.menu_tools")); 
 		toolsMenu.add(dtdMenuItem);
-		toolsMenu.addSeparator();
 
 		this.add(filesMenu);
 		this.add(elementsMenu);

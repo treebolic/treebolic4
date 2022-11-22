@@ -3,10 +3,11 @@
  */
 package treebolic.commons;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Enumeration;
 import java.util.Properties;
 
@@ -46,7 +47,7 @@ public class SqlProperties
 	{
 		try
 		{
-			properties.store(new FileOutputStream(propertyFile), "TREEBOLIC-SQL");
+			properties.store(Files.newOutputStream(Paths.get(propertyFile)), "TREEBOLIC-SQL");
 		}
 		catch (final IOException e)
 		{

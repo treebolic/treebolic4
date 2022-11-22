@@ -4,11 +4,11 @@
 package treebolic.commons;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
@@ -73,7 +73,7 @@ public class Persist
 		try
 		{
 			final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile;  
-			final InputStream propStream = new FileInputStream(filePath);
+			final InputStream propStream = Files.newInputStream(Paths.get(filePath));
 			settings.load(propStream);
 			return settings;
 		}
@@ -84,7 +84,7 @@ public class Persist
 		try
 		{
 			final String filePath = System.getProperty("user.dir") + File.separator + "." + persistFile;  
-			final InputStream propStream = new FileInputStream(filePath);
+			final InputStream propStream = Files.newInputStream(Paths.get(filePath));
 			settings.load(propStream);
 			return settings;
 		}
@@ -110,7 +110,7 @@ public class Persist
 		try
 		{
 			final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile;  
-			final OutputStream propStream = new FileOutputStream(filePath);
+			final OutputStream propStream = Files.newOutputStream(Paths.get(filePath));
 			settings.store(propStream, "treebolic"); 
 			return true;
 		}

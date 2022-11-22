@@ -122,14 +122,14 @@ public class XSettingsDialog extends SettingsDialog
 	static public void main(final String[] args)
 	{
 		UIManager.put("swing.boldMetal", false);
-		final Properties settings = Persist.getSettings("treebolic-generator");
+		final Properties settings = Persist.getSettings("treebolic-studio");
 		final XSettingsDialog dialog = new XSettingsDialog(settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		if (dialog.ok)
 		{
-			Persist.saveSettings("treebolic-generator", settings);
+			Persist.saveSettings("treebolic-studio", settings);
 		}
 		System.exit(0);
 	}

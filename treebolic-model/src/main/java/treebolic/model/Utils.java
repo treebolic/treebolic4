@@ -4,10 +4,11 @@
 
 package treebolic.model;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -872,7 +873,7 @@ public class Utils
 	static public Properties load(@NonNull final String location) throws IOException
 	{
 		@NonNull final Properties properties = new Properties();
-		try (@NonNull InputStream is = new FileInputStream(location))
+		try (@NonNull InputStream is = Files.newInputStream(Paths.get(location)))
 		{
 			properties.load(is);
 			return properties;

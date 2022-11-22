@@ -257,7 +257,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		this.document = null;
 		this.url = null;
 		this.mode = null;
-		this.settings = Persist.getSettings("treebolic-generator");
+		this.settings = Persist.getSettings("treebolic-studio");
 		this.updateMap = new HashMap<>();
 	}
 
@@ -670,7 +670,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	public void exit()
 	{
 		checkSave();
-		Persist.saveSettings("treebolic-generator", this.settings);
+		Persist.saveSettings("treebolic-studio", this.settings);
 	}
 
 	/**
@@ -1332,7 +1332,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			try
 			{
 				final File outputFile = Controller.getFile(outputFileUrl);
-				if (outputFile.exists() && !Interact.confirm(new String[]{outputFileUrl, Messages.getString("Controller.file"), Messages.getString("Controller.prompt_overwrite")}))
+				if (outputFile == null || (outputFile.exists() && !Interact.confirm(new String[]{outputFileUrl, Messages.getString("Controller.file"), Messages.getString("Controller.prompt_overwrite")})))
 				{
 					return;
 				}
@@ -1364,7 +1364,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		if (dialog.ok)
 		{
-			treebolic.commons.Persist.saveSettings("treebolic-generator", this.settings);
+			treebolic.commons.Persist.saveSettings("treebolic-studio", this.settings);
 			this.propertyView.setImageRepository(makeImageRepositoryURL());
 			updateView();
 		}

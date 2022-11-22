@@ -3,11 +3,12 @@
  */
 package treebolic.generator.model;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -551,7 +552,7 @@ public class ModelUtils
 		final Properties properties = ModelUtils.settingsToProperty(settings);
 		try
 		{
-			properties.store(new FileOutputStream(propertyFile), "TREEBOLIC-SETTINGS");
+			properties.store(Files.newOutputStream(Paths.get(propertyFile)), "TREEBOLIC-SETTINGS");
 		}
 		catch (final IOException e)
 		{
