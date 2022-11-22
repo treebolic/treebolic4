@@ -55,9 +55,9 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	 * Make image (caught exception returns null)
 	 *
 	 * @param resource resource url
-	 * @return Image
+	 * @return Image or null if it fails
 	 */
-	static public Image try_make(final URL resource)
+	static public Image makeOptional(final URL resource)
 	{
 		try
 		{
