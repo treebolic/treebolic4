@@ -173,8 +173,8 @@ public class HyperTransform implements IHyperTransform
 		// z = (z*theta+p)/(1+(~p)*z*theta)
 		// </BOUTHIER>
 
-		final Complex num = new Complex(z).mul(this.rot).add(this.xlat);
-		final Complex denom = new Complex(this.xlat).conj().mul(z).mul(this.rot).add(Complex.ONE);
+		@NonNull final Complex num = new Complex(z).mul(this.rot).add(this.xlat);
+		@NonNull final Complex denom = new Complex(this.xlat).conj().mul(z).mul(this.rot).add(Complex.ONE);
 		return z.div(num, denom);
 
 		// OPTIMIZED
@@ -214,15 +214,15 @@ public class HyperTransform implements IHyperTransform
 
 		// denominator : theta2*p1*~p2+1
 		// ~p2 * p1 * theta2 + 1
-		final Complex denom = new Complex(t2.xlat).conj().mul(this.xlat).mul(t2.rot).add(Complex.ONE);
+		@NonNull final Complex denom = new Complex(t2.xlat).conj().mul(this.xlat).mul(t2.rot).add(Complex.ONE);
 
 		// translation
 		// p1 * theta2 + p2
-		final Complex nom1 = new Complex(this.xlat).mul(t2.rot).add(t2.xlat); // (theta2*p1)+p2
+		@NonNull final Complex nom1 = new Complex(this.xlat).mul(t2.rot).add(t2.xlat); // (theta2*p1)+p2
 
 		// rotation
 		// ~p1 * p2 + theta2 * theta1
-		final Complex nom2 = new Complex(this.xlat).conj().mul(t2.xlat).add(t2.rot).mul(this.rot); // theta1*(theta2+~p1*p2)
+		@NonNull final Complex nom2 = new Complex(this.xlat).conj().mul(t2.xlat).add(t2.rot).mul(this.rot); // theta1*(theta2+~p1*p2)
 
 		// make
 		this.xlat.div(nom1, denom);

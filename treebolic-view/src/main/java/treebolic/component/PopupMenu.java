@@ -51,7 +51,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 	@NonNull
 	static public PopupMenu makePopup(@NonNull final View view, @NonNull final Controller controller, final String value, @NonNull final INode node, @NonNull final Settings settings)
 	{
-		final PopupMenu popupMenu = new PopupMenu(view);
+		@NonNull final PopupMenu popupMenu = new PopupMenu(view);
 
 		// info
 		popupMenu.addItem(LabelIndices.LABEL_INFO.ordinal(), ImageIndices.IMAGE_INFO.ordinal(), new ActionListener()
@@ -78,7 +78,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 		});
 
 		// mount
-		final MountPoint mountPoint = node.getMountPoint();
+		@Nullable final MountPoint mountPoint = node.getMountPoint();
 		if (mountPoint != null)
 		{
 			@SuppressWarnings("InstanceofConcreteClass") final boolean isMounted = mountPoint instanceof MountPoint.Mounted;
@@ -112,9 +112,9 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 		// custom
 		if (settings.menu != null)
 		{
-			for (final MenuItem menuItem : settings.menu)
+			for (@NonNull final MenuItem menuItem : settings.menu)
 			{
-				String menuLabel = null;
+				@Nullable String menuLabel = null;
 				boolean prepend = menuItem.label != null && (menuItem.label.length() == 0 || Character.isLowerCase(menuItem.label.charAt(0)));
 				assert menuItem.action != null;
 				switch (menuItem.action)
@@ -203,7 +203,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 				// well-formed URI
 				try
 				{
-					final URI uri = new URI(link);
+					@NonNull final URI uri = new URI(link);
 
 					// relative form not including scheme
 					if (link.equals(uri.getPath()))
@@ -212,7 +212,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 					}
 
 					// fragment
-					final String fragment = '#' + uri.getFragment();
+					@NonNull final String fragment = '#' + uri.getFragment();
 					//noinspection SimplifiableIfStatement
 					if (link.equals(fragment))
 					{
@@ -249,7 +249,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 			return null;
 		}
 
-		final StringBuilder sb = new StringBuilder();
+		@NonNull final StringBuilder sb = new StringBuilder();
 		final int n = str.length();
 		for (int i = 0; i < n; i++)
 		{
@@ -269,7 +269,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 
 						// label
 						case 'l':
-							final String label = node.getLabel();
+							@Nullable final String label = node.getLabel();
 							if (label != null)
 							{
 								sb.append(label.toCharArray());
@@ -278,7 +278,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 
 						// content
 						case 'c':
-							final String content = node.getContent();
+							@Nullable final String content = node.getContent();
 							if (content != null)
 							{
 								sb.append(content.toCharArray());
@@ -287,7 +287,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 
 						// link url
 						case 'u':
-							final String link = node.getLink();
+							@Nullable final String link = node.getLink();
 							if (link != null)
 							{
 								sb.append(link.toCharArray());
@@ -296,7 +296,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 
 						// id
 						case 'i':
-							final String id = node.getId();
+							@Nullable final String id = node.getId();
 							if (id != null)
 							{
 								sb.append(id.toCharArray());
@@ -305,10 +305,10 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 
 						// parent
 						case 'p':
-							final INode parent = node.getParent();
+							@Nullable final INode parent = node.getParent();
 							if (parent != null)
 							{
-								final String parentId = parent.getId();
+								@Nullable final String parentId = parent.getId();
 								if (parentId != null)
 								{
 									sb.append(parentId.toCharArray());
@@ -342,7 +342,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 				}
 			}
 		}
-		final String result = sb.toString();
+		@NonNull final String result = sb.toString();
 		if (result.isEmpty())
 		{
 			return null;

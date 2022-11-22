@@ -25,7 +25,7 @@ public class HyperRadialOrientationPreservingTransform extends HyperTransform
 		this.xlat = new HyperTranslation(root).inverse();
 
 		// from -> from1 -> to
-		final Complex from1 = this.xlat.map(new Complex(from));
+		@NonNull final Complex from1 = this.xlat.map(new Complex(from));
 		composeXlats(this.xlat, new HyperTranslation(from1, to));
 	}
 }

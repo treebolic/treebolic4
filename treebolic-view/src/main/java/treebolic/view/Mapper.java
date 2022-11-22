@@ -255,7 +255,7 @@ public class Mapper
 	@NonNull
 	public Complex viewToUnitCircle(final int vx, final int vy, final int width, final int height)
 	{
-		final Complex p = new Complex(vx, vy);
+		@NonNull final Complex p = new Complex(vx, vy);
 
 		// this offsets for translation on cache graphics
 		p.set(p.re - width / 2f, p.im - height / 2f);

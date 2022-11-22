@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.model.INode;
 import treebolic.model.Types.MatchMode;
 import treebolic.model.Types.MatchScope;
@@ -99,7 +100,7 @@ public class Traverser extends Generator<INode>
 				return false;
 			}
 
-			String nodeScope;
+			@Nullable String nodeScope;
 			switch (this.scope)
 			{
 				case CONTENT:
@@ -177,7 +178,7 @@ public class Traverser extends Generator<INode>
 				return false;
 			}
 
-			String nodeScope;
+			@Nullable String nodeScope;
 			switch (this.scope)
 			{
 				case CONTENT:
@@ -271,10 +272,10 @@ public class Traverser extends Generator<INode>
 		}
 
 		// try to match match this node's children
-		final List<INode> children = node.getChildren();
+		@Nullable final List<INode> children = node.getChildren();
 		if (children != null)
 		{
-			for (final INode child : node.getChildren())
+			for (@NonNull final INode child : node.getChildren())
 			{
 				traverse(child);
 			}

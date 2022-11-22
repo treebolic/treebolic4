@@ -172,7 +172,7 @@ public class Transformer
 		Transformer.transform(transform, node.getLocation().hyper);
 
 		// recurse on children
-		final List<INode> children = node.getChildren();
+		@Nullable final List<INode> children = node.getChildren();
 		if (children != null)
 		{
 			for (final INode child : children)
@@ -196,7 +196,7 @@ public class Transformer
 
 		node.getLocation().hyper.reset();
 
-		final List<INode> children = node.getChildren();
+		@Nullable final List<INode> children = node.getChildren();
 		if (children != null)
 		{
 			for (final INode child : children)

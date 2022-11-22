@@ -55,8 +55,8 @@ public class MapperToEuclidean
 				// map this hypercircle circle HC (center, radius) to euclidean
 				// circle EC (origin, eradius)
 				// z1 and z2 are the ends of diameter on (0,C) direction
-				final Complex z1 = new Complex(hyperCircle.center).multiply(euclideanCircle.radius / hyperCircle.dist);
-				final Complex z2 = new Complex(z1).neg();
+				@NonNull final Complex z1 = new Complex(hyperCircle.center).multiply(euclideanCircle.radius / hyperCircle.dist);
+				@NonNull final Complex z2 = new Complex(z1).neg();
 
 				// hyperbolic translation of this diameter
 				HyperTranslation.map(z1, hyperCircle.center);

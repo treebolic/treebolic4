@@ -36,17 +36,17 @@ public class Finder
 			return null;
 		}
 
-		INode result = start;
+		@NonNull INode result = start;
 		Location resultLocation = start.getLocation();
 
 		// find nearest (using squares as a measure)
 		double distance = Distance.getEuclideanDistanceSquared(resultLocation.hyper.center, point);
-		final List<INode> children = start.getChildren();
+		@Nullable final List<INode> children = start.getChildren();
 		if (children != null)
 		{
 			for (final INode child : children)
 			{
-				final INode targetNode = Finder.findNodeAt(child, point, 1.F);
+				@Nullable final INode targetNode = Finder.findNodeAt(child, point, 1.F);
 				if (targetNode != null)
 				{
 					final Location targetLocation = targetNode.getLocation();
@@ -93,12 +93,12 @@ public class Finder
 		}
 
 		// children
-		final List<INode> childNodes = start.getChildren();
+		@Nullable final List<INode> childNodes = start.getChildren();
 		if (childNodes != null)
 		{
 			for (final INode childNode : childNodes)
 			{
-				final INode node = Finder.findNodeById(childNode, id);
+				@Nullable final INode node = Finder.findNodeById(childNode, id);
 				if (node != null)
 				{
 					return node;

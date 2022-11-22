@@ -221,7 +221,7 @@ public abstract class Commander
 	{
 		if (!changeOrientation(Complex.SOUTH))
 		{
-			final View view = getView();
+			@Nullable final View view = getView();
 			assert view != null;
 			view.setYShift(Commander.YSSHIFTSTEP, true);
 		}
@@ -234,7 +234,7 @@ public abstract class Commander
 	{
 		if (!changeOrientation(Complex.NORTH))
 		{
-			final View view = getView();
+			@Nullable final View view = getView();
 			assert view != null;
 			view.setYShift(-Commander.YSSHIFTSTEP, true);
 		}
@@ -247,7 +247,7 @@ public abstract class Commander
 	{
 		if (!changeOrientation(Complex.EAST))
 		{
-			final View view = getView();
+			@Nullable final View view = getView();
 			assert view != null;
 			view.setXShift(-Commander.XSHIFTSTEP, true);
 		}
@@ -260,7 +260,7 @@ public abstract class Commander
 	{
 		if (!changeOrientation(Complex.WEST))
 		{
-			final View view = getView();
+			@Nullable final View view = getView();
 			assert view != null;
 			view.setXShift(+Commander.XSHIFTSTEP, true);
 		}
@@ -272,7 +272,7 @@ public abstract class Commander
 	private void setRadial()
 	{
 		changeOrientation(Complex.ZERO);
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.setXShift(0F, false);
 		view.setYShift(0F, false);
@@ -286,16 +286,16 @@ public abstract class Commander
 	 */
 	synchronized private boolean changeOrientation(@NonNull final Complex orientation)
 	{
-		final AbstractLayerOut layerOut = getLayerOut();
+		@Nullable final AbstractLayerOut layerOut = getLayerOut();
 		assert layerOut != null;
 		if (orientation.equals(layerOut.getOrientation()))
 		{
 			return false;
 		}
 
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
-		final Model model = getModel();
+		@Nullable final Model model = getModel();
 		assert model != null;
 		view.resetTransform();
 		view.setXShift(0, false);
@@ -316,7 +316,7 @@ public abstract class Commander
 	 */
 	private void changeExpansion(final float factor)
 	{
-		final AbstractLayerOut layerOut = getLayerOut();
+		@Nullable final AbstractLayerOut layerOut = getLayerOut();
 		assert layerOut != null;
 		if (factor == .0)
 		{
@@ -332,9 +332,9 @@ public abstract class Commander
 			}
 			layerOut.setExpansion(expansion);
 		}
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
-		final Model model = getModel();
+		@Nullable final Model model = getModel();
 		assert model != null;
 		view.resetTransform();
 		layerOut.layout(model.tree.getRoot());
@@ -359,7 +359,7 @@ public abstract class Commander
 	 */
 	private void changeSweep(final float factor)
 	{
-		final AbstractLayerOut layerOut = getLayerOut();
+		@Nullable final AbstractLayerOut layerOut = getLayerOut();
 		assert layerOut != null;
 		if (factor == .0)
 		{
@@ -375,9 +375,9 @@ public abstract class Commander
 			}
 			layerOut.setChildSweep(sweep);
 		}
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
-		final Model model = getModel();
+		@Nullable final Model model = getModel();
 		assert model != null;
 		view.resetTransform();
 		layerOut.layout(model.tree.getRoot());
@@ -400,11 +400,11 @@ public abstract class Commander
 	 */
 	private void resetExpansionSweep()
 	{
-		final AbstractLayerOut layerOut = getLayerOut();
+		@Nullable final AbstractLayerOut layerOut = getLayerOut();
 		assert layerOut != null;
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
-		final Model model = getModel();
+		@Nullable final Model model = getModel();
 		assert model != null;
 		layerOut.setDefaultExpansion();
 		layerOut.setDefaultChildSweep();
@@ -441,7 +441,7 @@ public abstract class Commander
 	 */
 	private void doRefresh()
 	{
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.repaint();
 	}
@@ -452,7 +452,7 @@ public abstract class Commander
 	private void doNorth()
 	{
 		setNorth();
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.repaint();
 	}
@@ -463,7 +463,7 @@ public abstract class Commander
 	private void doSouth()
 	{
 		setSouth();
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.repaint();
 	}
@@ -474,7 +474,7 @@ public abstract class Commander
 	private void doEast()
 	{
 		setEast();
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.repaint();
 	}
@@ -485,7 +485,7 @@ public abstract class Commander
 	private void doWest()
 	{
 		setWest();
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.repaint();
 	}
@@ -496,7 +496,7 @@ public abstract class Commander
 	private void doRadial()
 	{
 		setRadial();
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.repaint();
 	}
@@ -506,7 +506,7 @@ public abstract class Commander
 	 */
 	private void doZoomIn()
 	{
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.setZoomFactor(Commander.SCALEUPFACTOR, Float.MAX_VALUE, Float.MAX_VALUE);
 		view.repaint();
@@ -517,7 +517,7 @@ public abstract class Commander
 	 */
 	private void doZoomOut()
 	{
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.setZoomFactor(Commander.SCALEDOWNFACTOR, Float.MAX_VALUE, Float.MAX_VALUE);
 		view.repaint();
@@ -528,7 +528,7 @@ public abstract class Commander
 	 */
 	private void doZoomOne()
 	{
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.setZoomFactor(1F, 0, 0);
 		view.repaint();
@@ -539,7 +539,7 @@ public abstract class Commander
 	 */
 	private void doScaleUp()
 	{
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.setScaleFactors(0, Commander.SCALEUPFACTOR, Commander.SCALEUPFACTOR);
 		view.repaint();
@@ -550,7 +550,7 @@ public abstract class Commander
 	 */
 	private void doScaleDown()
 	{
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.setScaleFactors(0, Commander.SCALEDOWNFACTOR, Commander.SCALEDOWNFACTOR);
 		view.repaint();
@@ -561,7 +561,7 @@ public abstract class Commander
 	 */
 	private void doScaleOne()
 	{
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.setScaleFactors(1F, 1F, 1F);
 		view.repaint();
@@ -572,7 +572,7 @@ public abstract class Commander
 	 */
 	private void doHome()
 	{
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.reset();
 	}
@@ -585,7 +585,7 @@ public abstract class Commander
 	private void doChangeExpansion(final float factor)
 	{
 		changeExpansion(factor);
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.repaint();
 	}
@@ -609,7 +609,7 @@ public abstract class Commander
 	private void doChangeSweep(final float factor)
 	{
 		changeSweep(factor);
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.repaint();
 	}
@@ -631,7 +631,7 @@ public abstract class Commander
 	private void doResetExpansionSweep()
 	{
 		resetExpansionSweep();
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.repaint();
 	}
@@ -641,7 +641,7 @@ public abstract class Commander
 	 */
 	private void doArcEdges()
 	{
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.setArcEdges(null);
 		view.repaint();
@@ -668,7 +668,7 @@ public abstract class Commander
 	 */
 	private void doFocusHover()
 	{
-		final View view = getView();
+		@Nullable final View view = getView();
 		assert view != null;
 		view.setFocusOnHover(null);
 	}

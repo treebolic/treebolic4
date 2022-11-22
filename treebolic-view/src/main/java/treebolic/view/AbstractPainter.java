@@ -57,31 +57,37 @@ public abstract class AbstractPainter extends Mapper
 	/**
 	 * Initial default background color
 	 */
+	@Nullable
 	static private final Color backColor0 = Color.WHITE;
 
 	/**
 	 * Initial default foreground color
 	 */
+	@Nullable
 	static private final Color foreColor0 = Color.BLACK;
 
 	/**
 	 * Initial default node background color
 	 */
+	@Nullable
 	static private final Color nodeBackColor0 = Color.WHITE;
 
 	/**
 	 * Initial default node foreground color
 	 */
+	@Nullable
 	static private final Color nodeForeColor0 = Color.BLACK;
 
 	/**
 	 * Initial default tree edge color
 	 */
+	@Nullable
 	static private final Color treeEdgeColor0 = Color.GRAY;
 
 	/**
 	 * Initial default tree edge color
 	 */
+	@Nullable
 	static private final Color edgeColor0 = Color.DARK_GRAY;
 
 	// D A T A

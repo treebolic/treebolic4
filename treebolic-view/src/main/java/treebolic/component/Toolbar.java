@@ -43,10 +43,10 @@ public class Toolbar extends treebolic.glue.component.Toolbar implements Compone
 		super(handle);
 		this.controller = controller;
 
-		for (final Button button : toolbar())
+		for (@NonNull final Button button : toolbar())
 		{
 			ActionListener listener;
-			final String action = button.name();
+			@NonNull final String action = button.name();
 			try
 			{
 				final Controller.Command command = Controller.Command.valueOf(action);

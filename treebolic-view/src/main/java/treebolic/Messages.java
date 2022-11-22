@@ -30,6 +30,7 @@ public class Messages
 	 * @param key message key
 	 * @return localized message
 	 */
+	@NonNull
 	public static String getString(@NonNull String key)
 	{
 		try

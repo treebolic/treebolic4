@@ -92,14 +92,14 @@ public class HyperTranslation extends Complex
 		// ~n = |n| / n
 
 		// w1 = to.from
-		final Complex w1 = new Complex(new Complex(to)).mul(from);
+		@NonNull final Complex w1 = new Complex(new Complex(to)).mul(from);
 		final double d = 1.0 - w1.abs2();
 
 		// w1= ~(to.from)
 		w1.conj();
 
 		// w2 = (to-from)
-		final Complex w2 = new Complex(to).sub(from);
+		@NonNull final Complex w2 = new Complex(to).sub(from);
 
 		// w1 = (to-from).~(to.from)
 		w1.mul(w2);
@@ -138,9 +138,9 @@ public class HyperTranslation extends Complex
 		// z = (z*theta+p)/(1+(~p)*z)
 		// = (z*1+p)/(1+(~p)*z)
 		// = (z+p)/(1+(~p)*z)
-		final Complex nom = new Complex().add(z, p);
-		final Complex conjp = new Complex().conj(p);
-		final Complex denom = new Complex().mul(conjp, z).add(Complex.ONE);
+		@NonNull final Complex nom = new Complex().add(z, p);
+		@NonNull final Complex conjp = new Complex().conj(p);
+		@NonNull final Complex denom = new Complex().mul(conjp, z).add(Complex.ONE);
 		return z.div(nom, denom);
 	}
 
@@ -170,10 +170,10 @@ public class HyperTranslation extends Complex
 	@SuppressWarnings("WeakerAccess")
 	static public Complex mapinv(@NonNull final Complex z, @NonNull final Complex p)
 	{
-		final Complex pinv = new Complex(p).neg();
-		final Complex nom = new Complex().add(z, pinv);
-		final Complex conjpinv = new Complex().conj(pinv);
-		final Complex denom = new Complex().mul(conjpinv, z).add(Complex.ONE);
+		@NonNull final Complex pinv = new Complex(p).neg();
+		@NonNull final Complex nom = new Complex().add(z, pinv);
+		@NonNull final Complex conjpinv = new Complex().conj(pinv);
+		@NonNull final Complex denom = new Complex().mul(conjpinv, z).add(Complex.ONE);
 		return z.div(nom, denom);
 	}
 
@@ -239,10 +239,10 @@ public class HyperTranslation extends Complex
 		// = 1*(1+~p1*p2) /(1+1*p1*~p2); (factored)
 		// = (1+~p1*p2) /(1+p1*~p2); (factored)
 
-		final HyperTransform t = new HyperTransform(t1);
+		@NonNull final HyperTransform t = new HyperTransform(t1);
 
 		// denominator : ~p2*p1+1
-		final Complex denom = new Complex(t2).conj().mul(t1).add(Complex.ONE);
+		@NonNull final Complex denom = new Complex(t2).conj().mul(t1).add(Complex.ONE);
 
 		// translation
 		t.xlat.add(t2); // p1+p2

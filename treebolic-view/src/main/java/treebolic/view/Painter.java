@@ -181,7 +181,7 @@ public class Painter extends AbstractPainter
 		// edges
 		if (edgeList != null)
 		{
-			for (final IEdge edge : edgeList)
+			for (@NonNull final IEdge edge : edgeList)
 			{
 				drawNonTreeEdge(edge);
 			}
@@ -214,7 +214,7 @@ public class Painter extends AbstractPainter
 		node.getLocation().viewData = computeNodeData(node);
 
 		// recurse to compute the children
-		final List<INode> children = node.getChildren();
+		@Nullable final List<INode> children = node.getChildren();
 		if (children != null)
 		{
 			for (final INode child : children)
@@ -237,11 +237,11 @@ public class Painter extends AbstractPainter
 		}
 
 		// edge to parent
-		final INode parent = node.getParent();
+		@Nullable final INode parent = node.getParent();
 		if (parent != null)
 		{
 			// color
-			Color color = node.getEdgeColor();
+			@Nullable Color color = node.getEdgeColor();
 			if (color == null)
 			{
 				color = this.treeEdgeColor;
@@ -253,7 +253,7 @@ public class Painter extends AbstractPainter
 		}
 
 		// recurse to draw the children
-		final List<INode> children = node.getChildren();
+		@Nullable final List<INode> children = node.getChildren();
 		if (children != null)
 		{
 			for (final INode child : children)
@@ -441,19 +441,19 @@ public class Painter extends AbstractPainter
 				final int x1 = x0 - w0;
 				final int x2 = x0 + w0;
 				final int y0 = y + hm;
-				final int[] xs = {x1, x0, x2};
+				@NonNull final int[] xs = {x1, x0, x2};
 				if (nodeData.isMountable)
 				{
 					final int hr = h - 2 * hm;
 					final int y2 = y0 + hr;
 					final int y1 = y2 - h0;
-					final int[] ys = {y1, y2, y1};
+					@NonNull final int[] ys = {y1, y2, y1};
 					this.graphics.fillPolygon(xs, ys, 3);
 				}
 				else
 				{
 					final int y1 = y0 + h0;
-					final int[] ys = {y1, y0, y1};
+					@NonNull final int[] ys = {y1, y0, y1};
 					this.graphics.fillPolygon(xs, ys, 3);
 				}
 			}
@@ -496,7 +496,7 @@ public class Painter extends AbstractPainter
 	@SuppressWarnings({"boxing"})
 	private NodeData computeNodeData(@NonNull final INode node)
 	{
-		final NodeData nodeData = new NodeData();
+		@NonNull final NodeData nodeData = new NodeData();
 
 		// hyper circle
 		final Location location = node.getLocation();
@@ -628,7 +628,7 @@ public class Painter extends AbstractPainter
 		nodeData.labelY = ybox + Painter.NODE_TOP_PADDING + this.graphics.getAscent();
 
 		// is mountable
-		final MountPoint mountPoint = node.getMountPoint();
+		@Nullable final MountPoint mountPoint = node.getMountPoint();
 		nodeData.isMountable = mountPoint == null ? null : mountPoint instanceof MountPoint.Mounting;
 
 		return nodeData;
@@ -645,7 +645,7 @@ public class Painter extends AbstractPainter
 	private void drawTreeEdge(@NonNull final INode parent, @NonNull final INode node)
 	{
 		// style
-		final Integer style0 = node.getEdgeStyle();
+		@Nullable final Integer style0 = node.getEdgeStyle();
 		final int style = mergeStyles(this.treeEdgeStyle, style0);
 		if ((style & IEdge.HIDDEN) != 0) // defined and hidden
 		{
@@ -657,14 +657,14 @@ public class Painter extends AbstractPainter
 		final Location to = node.getLocation();
 
 		// space
-		final NodeData fromData = (NodeData) parent.getLocation().viewData;
-		final NodeData toData = (NodeData) node.getLocation().viewData;
-		Rectangle2D fromSpace = null;
+		@Nullable final NodeData fromData = (NodeData) parent.getLocation().viewData;
+		@Nullable final NodeData toData = (NodeData) node.getLocation().viewData;
+		@Nullable Rectangle2D fromSpace = null;
 		if (fromData != null)
 		{
 			fromSpace = fromData.space != null ? fromData.space : fromData.box;
 		}
-		Rectangle2D toSpace = null;
+		@Nullable Rectangle2D toSpace = null;
 		if (toData != null)
 		{
 			toSpace = toData.space != null ? toData.space : toData.box;
@@ -677,7 +677,7 @@ public class Painter extends AbstractPainter
 		}
 
 		// image
-		Image image = node.getEdgeImage();
+		@Nullable Image image = node.getEdgeImage();
 		float imageScale = 1.F;
 		if (image == null)
 		{
@@ -697,7 +697,7 @@ public class Painter extends AbstractPainter
 		}
 
 		// draw
-		final String label = node.getEdgeLabel();
+		@Nullable final String label = node.getEdgeLabel();
 		final boolean isBorder = from.hyper.isBorder;
 		drawEdge(from.euclidean.center, to.euclidean.center, label, image, imageScale, style, fromSpace, toSpace, isBorder);
 	}
@@ -710,7 +710,7 @@ public class Painter extends AbstractPainter
 	private void drawNonTreeEdge(@NonNull final IEdge edge)
 	{
 		// style
-		final Integer style0 = edge.getStyle();
+		@Nullable final Integer style0 = edge.getStyle();
 		final int style = mergeStyles(this.edgeStyle, style0);
 		if ((style & IEdge.HIDDEN) != 0) // defined and hidden
 		{
@@ -743,14 +743,14 @@ public class Painter extends AbstractPainter
 		}
 
 		// space
-		final NodeData fromData = (NodeData) fromNode.getLocation().viewData;
-		final NodeData toData = (NodeData) toNode.getLocation().viewData;
-		Rectangle2D fromSpace = null;
+		@Nullable final NodeData fromData = (NodeData) fromNode.getLocation().viewData;
+		@Nullable final NodeData toData = (NodeData) toNode.getLocation().viewData;
+		@Nullable Rectangle2D fromSpace = null;
 		if (fromData != null)
 		{
 			fromSpace = fromData.space != null ? fromData.space : fromData.box;
 		}
-		Rectangle2D toSpace = null;
+		@Nullable Rectangle2D toSpace = null;
 		if (toData != null)
 		{
 			toSpace = toData.space != null ? toData.space : toData.box;
@@ -763,7 +763,7 @@ public class Painter extends AbstractPainter
 		}
 
 		// label
-		final String label = edge.getLabel();
+		@Nullable final String label = edge.getLabel();
 		if (label != null)
 		{
 			// text size
@@ -772,7 +772,7 @@ public class Painter extends AbstractPainter
 		}
 
 		// draw
-		Color color = edge.getColor();
+		@Nullable Color color = edge.getColor();
 		if (color == null)
 		{
 			color = this.edgeColor;
@@ -780,7 +780,7 @@ public class Painter extends AbstractPainter
 		this.graphics.setColor(color);
 
 		// image
-		Image image = edge.getImage();
+		@Nullable Image image = edge.getImage();
 		if (image == null)
 		{
 			image = this.defaultEdgeImage;
@@ -860,7 +860,7 @@ public class Painter extends AbstractPainter
 	 */
 	private void drawArc(@NonNull final Complex z1, @NonNull final Complex z2, final String label0, @Nullable final Image image, final float imageScale, final int style, final Rectangle2D fromSpace, final Rectangle2D toSpace, final boolean isBorder)
 	{
-		final Arc arc = new Arc(z1, z2);
+		@NonNull final Arc arc = new Arc(z1, z2);
 
 		String label = label0;
 
@@ -871,13 +871,13 @@ public class Painter extends AbstractPainter
 			Point2D to = new Point2D(xUnitCircleToView(arc.to.re), yUnitCircleToView(arc.to.im));
 
 			// adjust to anchors
-			Point2D fromAnchor = null;
+			@Nullable Point2D fromAnchor = null;
 			if (!isBorder)
 			{
 				fromAnchor = getIntersection(fromSpace, to, from);
 			}
 			//noinspection UnusedAssignment
-			Point2D toAnchor = null;
+			@Nullable Point2D toAnchor = null;
 			toAnchor = getIntersection(toSpace, from, to);
 
 			// adjust line ends
@@ -896,7 +896,7 @@ public class Painter extends AbstractPainter
 			// image
 			if (image != null && !isBorder)
 			{
-				final Point2D midPoint = Painter.getMidPoint(from, to);
+				@NonNull final Point2D midPoint = Painter.getMidPoint(from, to);
 				drawImage(image, midPoint, imageScale);
 			}
 
@@ -918,10 +918,10 @@ public class Painter extends AbstractPainter
 		}
 		else
 		{
-			final Arc2D arc2D = toArc2D(arc);
+			@NonNull final Arc2D arc2D = toArc2D(arc);
 
 			// adjust to anchors
-			Point2D fromAnchor = null;
+			@Nullable Point2D fromAnchor = null;
 			if (!isBorder)
 			{
 				fromAnchor = getIntersection(fromSpace, arc2D);
@@ -932,7 +932,7 @@ public class Painter extends AbstractPainter
 			}
 
 			//noinspection UnusedAssignment
-			Point2D toAnchor = null;
+			@Nullable Point2D toAnchor = null;
 			toAnchor = getIntersection(toSpace, arc2D);
 			if (toAnchor == null)
 			{
@@ -979,7 +979,7 @@ public class Painter extends AbstractPainter
 				}
 
 				// mid arc
-				final Point2D midArc = ArcMath.getMidArc(arc2D);
+				@NonNull final Point2D midArc = ArcMath.getMidArc(arc2D);
 
 				// tangent
 				final double tangent = ArcMath.getTextTangent(arc2D, midArc);
@@ -1046,7 +1046,7 @@ public class Painter extends AbstractPainter
 	@NonNull
 	private Arc2D toArc2D(@NonNull final Arc arc)
 	{
-		final Arc2D arc2D = new Arc2D();
+		@NonNull final Arc2D arc2D = new Arc2D();
 
 		// frame
 		final double x0 = xUnitCircleToView(arc.x);
@@ -1094,13 +1094,13 @@ public class Painter extends AbstractPainter
 		Point2D to = new Point2D(xUnitCircleToView(z2.re), yUnitCircleToView(z2.im));
 
 		// adjust to anchors
-		Point2D fromAnchor = null;
+		@Nullable Point2D fromAnchor = null;
 		if (!isBorder)
 		{
 			fromAnchor = getIntersection(fromSpace, to, from);
 		}
 		//noinspection UnusedAssignment
-		Point2D toAnchor = null;
+		@Nullable Point2D toAnchor = null;
 		toAnchor = getIntersection(toSpace, from, to);
 
 		// adjust line ends
@@ -1119,7 +1119,7 @@ public class Painter extends AbstractPainter
 		// image
 		if (image != null && !isBorder)
 		{
-			final Point2D midPoint = Painter.getMidPoint(from, to);
+			@NonNull final Point2D midPoint = Painter.getMidPoint(from, to);
 			drawImage(image, midPoint, imageScale);
 		}
 
@@ -1270,7 +1270,7 @@ public class Painter extends AbstractPainter
 		}
 
 		// where
-		final Point2D where = new Point2D((x2 + x1) / 2., (y2 + y1) / 2.);
+		@NonNull final Point2D where = new Point2D((x2 + x1) / 2., (y2 + y1) / 2.);
 
 		// draw
 		drawText(str, where, orientation);
@@ -1450,15 +1450,15 @@ public class Painter extends AbstractPainter
 			case IEdge.TRIANGLE:
 			{
 				// t
-				final int[] x = {(int) x1, (int) (x1 + sx1 + dx1), (int) (x1 + sx1 - dx1)};
-				final int[] y = {(int) y1, (int) (y1 + sy1 + dy1), (int) (y1 + sy1 - dy1)};
+				@NonNull final int[] x = {(int) x1, (int) (x1 + sx1 + dx1), (int) (x1 + sx1 - dx1)};
+				@NonNull final int[] y = {(int) y1, (int) (y1 + sy1 + dy1), (int) (y1 + sy1 - dy1)};
 				if ((style & IEdge.FROMFILL) != 0)
 				{
 					this.graphics.fillPolygon(x, y, x.length);
 				}
 				else
 				{
-					final Color color = this.graphics.getColor();
+					@NonNull final Color color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillPolygon(x, y, x.length);
 					this.graphics.setColor(color);
@@ -1478,7 +1478,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					final Color color = this.graphics.getColor();
+					@NonNull final Color color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillOval((int) x, (int) y, (int) terminatorHeight, (int) terminatorHeight);
 					this.graphics.setColor(color);
@@ -1490,15 +1490,15 @@ public class Painter extends AbstractPainter
 			case IEdge.DIAMOND:
 			{
 				// d
-				final int[] x = {(int) x1, (int) (x1 + sx1 + dx1), (int) (x1 + sx1 + sx1), (int) (x1 + sx1 - dx1)};
-				final int[] y = {(int) y1, (int) (y1 + sy1 + dy1), (int) (y1 + sy1 + sy1), (int) (y1 + sy1 - dy1)};
+				@NonNull final int[] x = {(int) x1, (int) (x1 + sx1 + dx1), (int) (x1 + sx1 + sx1), (int) (x1 + sx1 - dx1)};
+				@NonNull final int[] y = {(int) y1, (int) (y1 + sy1 + dy1), (int) (y1 + sy1 + sy1), (int) (y1 + sy1 - dy1)};
 				if ((style & IEdge.FROMFILL) != 0)
 				{
 					this.graphics.fillPolygon(x, y, x.length);
 				}
 				else
 				{
-					final Color color = this.graphics.getColor();
+					@NonNull final Color color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillPolygon(x, y, x.length);
 					this.graphics.setColor(color);
@@ -1510,8 +1510,8 @@ public class Painter extends AbstractPainter
 			case IEdge.ARROW:
 			{
 				// a
-				final int[] x = {(int) (x1 + sx1 + dx1), (int) x1, (int) (x1 + sx1 - dx1)};
-				final int[] y = {(int) (y1 + sy1 + dy1), (int) y1, (int) (y1 + sy1 - dy1)};
+				@NonNull final int[] x = {(int) (x1 + sx1 + dx1), (int) x1, (int) (x1 + sx1 - dx1)};
+				@NonNull final int[] y = {(int) (y1 + sy1 + dy1), (int) y1, (int) (y1 + sy1 - dy1)};
 				this.graphics.drawPolyline(x, y, x.length);
 				break;
 			}
@@ -1519,8 +1519,8 @@ public class Painter extends AbstractPainter
 			case IEdge.HOOK:
 			{
 				// h
-				final int[] x = {(int) (x1 + sx1 + dx1), (int) x1};
-				final int[] y = {(int) (y1 + sy1 + dy1), (int) y1};
+				@NonNull final int[] x = {(int) (x1 + sx1 + dx1), (int) x1};
+				@NonNull final int[] y = {(int) (y1 + sy1 + dy1), (int) y1};
 				this.graphics.drawPolyline(x, y, x.length);
 				break;
 			}
@@ -1536,15 +1536,15 @@ public class Painter extends AbstractPainter
 			case IEdge.TRIANGLE:
 			{
 				// t
-				final int[] x = {(int) x2, (int) (x2 + sx2 + dx2), (int) (x2 + sx2 - dx2)};
-				final int[] y = {(int) y2, (int) (y2 + sy2 + dy2), (int) (y2 + sy2 - dy2)};
+				@NonNull final int[] x = {(int) x2, (int) (x2 + sx2 + dx2), (int) (x2 + sx2 - dx2)};
+				@NonNull final int[] y = {(int) y2, (int) (y2 + sy2 + dy2), (int) (y2 + sy2 - dy2)};
 				if ((style & IEdge.TOFILL) != 0)
 				{
 					this.graphics.fillPolygon(x, y, x.length);
 				}
 				else
 				{
-					final Color color = this.graphics.getColor();
+					@NonNull final Color color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillPolygon(x, y, x.length);
 					this.graphics.setColor(color);
@@ -1564,7 +1564,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					final Color color = this.graphics.getColor();
+					@NonNull final Color color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillOval((int) x, (int) y, (int) terminatorHeight, (int) terminatorHeight);
 					this.graphics.setColor(color);
@@ -1576,15 +1576,15 @@ public class Painter extends AbstractPainter
 			case IEdge.DIAMOND:
 			{
 				// d
-				final int[] x = {(int) x2, (int) (x2 + sx2 + dx2), (int) (x2 + sx2 + sx2), (int) (x2 + sx2 - dx2)};
-				final int[] y = {(int) y2, (int) (y2 + sy2 + dy2), (int) (y2 + sy2 + sy2), (int) (y2 + sy2 - dy2)};
+				@NonNull final int[] x = {(int) x2, (int) (x2 + sx2 + dx2), (int) (x2 + sx2 + sx2), (int) (x2 + sx2 - dx2)};
+				@NonNull final int[] y = {(int) y2, (int) (y2 + sy2 + dy2), (int) (y2 + sy2 + sy2), (int) (y2 + sy2 - dy2)};
 				if ((style & IEdge.TOFILL) != 0)
 				{
 					this.graphics.fillPolygon(x, y, x.length);
 				}
 				else
 				{
-					final Color color = this.graphics.getColor();
+					@NonNull final Color color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillPolygon(x, y, x.length);
 					this.graphics.setColor(color);
@@ -1596,8 +1596,8 @@ public class Painter extends AbstractPainter
 			case IEdge.ARROW:
 			{
 				// a
-				final int[] x = {(int) (x2 + sx2 + dx2), (int) x2, (int) (x2 + sx2 - dx2)};
-				final int[] y = {(int) (y2 + sy2 + dy2), (int) y2, (int) (y2 + sy2 - dy2)};
+				@NonNull final int[] x = {(int) (x2 + sx2 + dx2), (int) x2, (int) (x2 + sx2 - dx2)};
+				@NonNull final int[] y = {(int) (y2 + sy2 + dy2), (int) y2, (int) (y2 + sy2 - dy2)};
 				this.graphics.drawPolyline(x, y, x.length);
 				break;
 			}
@@ -1605,8 +1605,8 @@ public class Painter extends AbstractPainter
 			case IEdge.HOOK:
 			{
 				// h
-				final int[] x = {(int) (x2 + sx2 + dx2), (int) x2};
-				final int[] y = {(int) (y2 + sy2 + dy2), (int) y2};
+				@NonNull final int[] x = {(int) (x2 + sx2 + dx2), (int) x2};
+				@NonNull final int[] y = {(int) (y2 + sy2 + dy2), (int) y2};
 				this.graphics.drawPolyline(x, y, x.length);
 				break;
 			}
@@ -1626,7 +1626,7 @@ public class Painter extends AbstractPainter
 	private void drawSpace(@NonNull final INode node)
 	{
 		// color
-		Color backColor = node.getBackColor();
+		@Nullable Color backColor = node.getBackColor();
 		if (backColor == null)
 		{
 			backColor = this.nodeBackColor;
@@ -1974,9 +1974,9 @@ public class Painter extends AbstractPainter
 		if (rect1 != null && rect2 != null)
 		{
 			// inflate
-			@SuppressWarnings("TypeMayBeWeakened") final Rectangle2D fromRect2 = new Rectangle2D();
+			@NonNull @SuppressWarnings("TypeMayBeWeakened") final Rectangle2D fromRect2 = new Rectangle2D();
 			fromRect2.setFrame(rect1.getMinX() - 1, rect1.getMinY() - 1, (int) rect1.getWidth() + 2, (int) rect1.getHeight() + 2);
-			final Rectangle2D toRect2 = new Rectangle2D();
+			@NonNull final Rectangle2D toRect2 = new Rectangle2D();
 			toRect2.setFrame(rect2.getMinX() - 1, rect2.getMinY() - 1, (int) rect2.getWidth() + 2, (int) rect2.getHeight() + 2);
 
 			// intersection test
@@ -2037,7 +2037,7 @@ public class Painter extends AbstractPainter
 			return new String[]{label.replaceAll("\\n", " ")};
 		}
 		// multiline
-		final String[] result = label.split("\\n", this.labelMaxLines);
+		@NonNull final String[] result = label.split("\\n", this.labelMaxLines);
 		if (this.labelMaxLines > 1 && result.length == this.labelMaxLines)
 		{
 			result[result.length - 1] = ELLIPSIS;
