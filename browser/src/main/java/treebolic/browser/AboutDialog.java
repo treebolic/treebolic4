@@ -6,6 +6,7 @@ package treebolic.browser;
 import javax.swing.WindowConstants;
 
 import treebolic.Browser;
+import treebolic.annotations.NonNull;
 
 /**
  * About dialog
@@ -32,7 +33,7 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 	 */
 	static public void main(final String[] args)
 	{
-		final AboutDialog dialog = new AboutDialog();
+		@NonNull final AboutDialog dialog = new AboutDialog();
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

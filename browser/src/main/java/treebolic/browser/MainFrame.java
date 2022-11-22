@@ -34,6 +34,8 @@ import javax.swing.event.HyperlinkListener;
 
 import treebolic.IWidget;
 import treebolic.Widget;
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.commons.ButtonTabComponent;
 import treebolic.commons.ExternalBrowser;
 import treebolic.commons.FileDialogs;
@@ -102,7 +104,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		// components
 		final Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
-		final JEditorPane home = makeHome();
+		@NonNull final JEditorPane home = makeHome();
 		home.setPreferredSize(Constants.DIM_APP);
 		contentPane.add(home);
 
@@ -120,7 +122,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @see java.awt.Window#processWindowEvent(java.awt.event.WindowEvent)
 	 */
 	@Override
-	protected void processWindowEvent(final WindowEvent event)
+	protected void processWindowEvent(@NonNull final WindowEvent event)
 	{
 		if (event.getID() == WindowEvent.WINDOW_CLOSING)
 		{
@@ -187,6 +189,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * HTML home pane
 	 */
+	@NonNull
 	private JEditorPane makeHome()
 	{
 		return makeBrowserPane(MainFrame.class.getResource("splash/home.html"));
@@ -195,9 +198,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * HTML pane
 	 */
+	@NonNull
 	private JEditorPane makeBrowserPane(final URL url)
 	{
-		final JEditorPane panel = new JEditorPane();
+		@NonNull final JEditorPane panel = new JEditorPane();
 		panel.setEditable(false);
 		try
 		{
@@ -216,21 +220,22 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return menu bar
 	 */
+	@NonNull
 	protected JMenuBar makeMenuBar()
 	{
-		final JMenuItem openMenuItem = makeItem(Messages.getString("MainFrame.open"), "open.png", Code.OPEN, 79);
-		final JMenuItem openUrlMenuItem = makeItem(Messages.getString("MainFrame.openurl"), "openurl.png", Code.OPENURL, 0);
-		final JMenuItem openProviderMenuItem = makeItem(Messages.getString("MainFrame.openprovider"), "openprovider.png", Code.OPENPROVIDER, 0);
-		final JMenuItem openBundleMenuItem = makeItem(Messages.getString("MainFrame.openzip"), "unzip.png", Code.OPENBUNDLE, 0);
-		final JMenuItem openDeSerializeMenuItem = makeItem(Messages.getString("MainFrame.openser"), "deserialize.png", Code.OPENDESERIALIZE, 0);
-		final JMenuItem serializeMenuItem = makeItem(Messages.getString("MainFrame.serialize"), "serialize.png", Code.SERIALIZE, 0);
+		@NonNull final JMenuItem openMenuItem = makeItem(Messages.getString("MainFrame.open"), "open.png", Code.OPEN, 79);
+		@NonNull final JMenuItem openUrlMenuItem = makeItem(Messages.getString("MainFrame.openurl"), "openurl.png", Code.OPENURL, 0);
+		@NonNull final JMenuItem openProviderMenuItem = makeItem(Messages.getString("MainFrame.openprovider"), "openprovider.png", Code.OPENPROVIDER, 0);
+		@NonNull final JMenuItem openBundleMenuItem = makeItem(Messages.getString("MainFrame.openzip"), "unzip.png", Code.OPENBUNDLE, 0);
+		@NonNull final JMenuItem openDeSerializeMenuItem = makeItem(Messages.getString("MainFrame.openser"), "deserialize.png", Code.OPENDESERIALIZE, 0);
+		@NonNull final JMenuItem serializeMenuItem = makeItem(Messages.getString("MainFrame.serialize"), "serialize.png", Code.SERIALIZE, 0);
 
-		final JMenuItem settingsMenuItem = makeItem(Messages.getString("MainFrame.settings"), "settings.png", Code.SETTINGS, 0);
+		@NonNull final JMenuItem settingsMenuItem = makeItem(Messages.getString("MainFrame.settings"), "settings.png", Code.SETTINGS, 0);
 
-		final JMenuItem aboutMenuItem = makeItem(Messages.getString("MainFrame.about"), "about.png", Code.ABOUT, 0);
-		final JMenuItem helpMenuItem = makeItem(Messages.getString("MainFrame.help"), "help.png", Code.HELP, 0);
+		@NonNull final JMenuItem aboutMenuItem = makeItem(Messages.getString("MainFrame.about"), "about.png", Code.ABOUT, 0);
+		@NonNull final JMenuItem helpMenuItem = makeItem(Messages.getString("MainFrame.help"), "help.png", Code.HELP, 0);
 
-		final JMenu filesMenu = new JMenu();
+		@NonNull final JMenu filesMenu = new JMenu();
 		filesMenu.setText(Messages.getString("MainFrame.menu_files"));
 		filesMenu.add(openMenuItem);
 		filesMenu.add(openUrlMenuItem);
@@ -240,16 +245,16 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		filesMenu.addSeparator();
 		filesMenu.add(serializeMenuItem);
 
-		final JMenu helpMenu = new JMenu();
+		@NonNull final JMenu helpMenu = new JMenu();
 		helpMenu.setText(Messages.getString("MainFrame.menu_help"));
 		helpMenu.add(aboutMenuItem);
 		helpMenu.add(helpMenuItem);
 
-		final JMenu optionsMenu = new JMenu();
+		@NonNull final JMenu optionsMenu = new JMenu();
 		optionsMenu.setText(Messages.getString("MainFrame.menu_options"));
 		optionsMenu.add(settingsMenuItem);
 
-		final JMenuBar menuBar = new JMenuBar();
+		@NonNull final JMenuBar menuBar = new JMenuBar();
 		menuBar.add(filesMenu);
 		menuBar.add(optionsMenu);
 		menuBar.add(helpMenu);
@@ -265,13 +270,14 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param acceleratorKey accelerator key
 	 * @return menu item
 	 */
-	private JMenuItem makeItem(final String text, final String image, final Code command, final int acceleratorKey)
+	@NonNull
+	private JMenuItem makeItem(final String text, @Nullable final String image, @NonNull final Code command, final int acceleratorKey)
 	{
-		final JMenuItem item = new JMenuItem();
+		@NonNull final JMenuItem item = new JMenuItem();
 		item.setText(text);
 		if (image != null)
 		{
-			URL url = MainFrame.class.getResource("images/" + image);
+			@Nullable URL url = MainFrame.class.getResource("images/" + image);
 			assert url != null;
 			item.setIcon(new ImageIcon(url));
 		}
@@ -298,7 +304,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @param code command code
 	 */
-	private void execute(final Code code)
+	private void execute(@NonNull final Code code)
 	{
 		switch (code)
 		{
@@ -314,7 +320,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			}
 			case OPENURL:
 			{
-				final UrlDialog dialog = new UrlDialog(this.settings);
+				@NonNull final UrlDialog dialog = new UrlDialog(this.settings);
 				dialog.setModal(true);
 				dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
@@ -323,7 +329,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 					final String source = this.settings.getProperty("openurl");
 					if (source == null || source.isEmpty())
 					{
-						final String[] lines = {Messages.getString("MainFrame.nullsource")};
+						@NonNull final String[] lines = {Messages.getString("MainFrame.nullsource")};
 						JOptionPane.showMessageDialog(null, lines, Messages.getString("MainFrame.title"), JOptionPane.WARNING_MESSAGE);
 						return;
 					}
@@ -333,7 +339,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			}
 			case OPENPROVIDER:
 			{
-				final OpenDialog dialog = new OpenDialog(this.settings.getProperty("provider"), this.settings.getProperty("source"), this.settings.getProperty("base", "."));
+				@NonNull final OpenDialog dialog = new OpenDialog(this.settings.getProperty("provider"), this.settings.getProperty("source"), this.settings.getProperty("base", "."));
 				dialog.setModal(true);
 				dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
@@ -343,7 +349,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 					final String provider = dialog.provider;
 					if (provider == null || provider.isEmpty())
 					{
-						final String[] lines = {Messages.getString("MainFrame.nullprovider")};
+						@NonNull final String[] lines = {Messages.getString("MainFrame.nullprovider")};
 						JOptionPane.showMessageDialog(null, lines, Messages.getString("MainFrame.title"), JOptionPane.WARNING_MESSAGE);
 						return;
 					}
@@ -352,7 +358,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 					final String source = dialog.source;
 					if (source == null || source.isEmpty())
 					{
-						final String[] lines = {Messages.getString("MainFrame.nullsource")};
+						@NonNull final String[] lines = {Messages.getString("MainFrame.nullsource")};
 						JOptionPane.showMessageDialog(null, lines, Messages.getString("MainFrame.title"), JOptionPane.WARNING_MESSAGE);
 						return;
 					}
@@ -366,7 +372,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 				final String provider = this.settings.getProperty("provider");
 				if (provider == null || provider.isEmpty())
 				{
-					final String[] lines = {Messages.getString("MainFrame.nullprovider")};
+					@NonNull final String[] lines = {Messages.getString("MainFrame.nullprovider")};
 					JOptionPane.showMessageDialog(null, lines, Messages.getString("MainFrame.title"), JOptionPane.WARNING_MESSAGE);
 					return;
 				}
@@ -377,10 +383,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
 				{
 					return;
 				}
-				final File archive = new File(source);
+				@NonNull final File archive = new File(source);
 				if (!archive.exists())
 				{
-					final String[] lines = {Messages.getString("MainFrame.nullsource")};
+					@NonNull final String[] lines = {Messages.getString("MainFrame.nullsource")};
 					JOptionPane.showMessageDialog(null, lines, Messages.getString("MainFrame.title"), JOptionPane.WARNING_MESSAGE);
 					return;
 				}
@@ -389,7 +395,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 				String entry;
 				try
 				{
-					final ZipEntryDialog dialog = new ZipEntryDialog(archive);
+					@NonNull final ZipEntryDialog dialog = new ZipEntryDialog(archive);
 					dialog.setModal(true);
 					dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
@@ -407,7 +413,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 				}
 				catch (final Exception exception)
 				{
-					final String[] lines = {exception.toString(), exception.getMessage()};
+					@NonNull final String[] lines = {exception.toString(), exception.getMessage()};
 					JOptionPane.showMessageDialog(null, lines, Messages.getString("MainFrame.title"), JOptionPane.WARNING_MESSAGE);
 				}
 				break;
@@ -428,7 +434,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 				}
 				catch (final Exception exception)
 				{
-					final String[] lines = {exception.toString(), exception.getMessage()};
+					@NonNull final String[] lines = {exception.toString(), exception.getMessage()};
 					JOptionPane.showMessageDialog(null, lines, Messages.getString("MainFrame.title"), JOptionPane.WARNING_MESSAGE);
 				}
 				break;
@@ -453,7 +459,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 					{
 						return;
 					}
-					final File file = new File(filePath);
+					@NonNull final File file = new File(filePath);
 					if (file.exists() && !Interact.confirm(new String[]{filePath, Messages.getString("MainFrame.exists"), Messages.getString("MainFrame.overwrite")}))
 					{
 						return;
@@ -474,7 +480,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			}
 			case ABOUT:
 			{
-				final JDialog dialog = new AboutDialog();
+				@NonNull final JDialog dialog = new AboutDialog();
 				dialog.setModal(true);
 				dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
@@ -482,7 +488,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			}
 			case SETTINGS:
 			{
-				final SettingsDialog dialog = new SettingsDialog(this.settings, SettingsDialog.PROVIDER | SettingsDialog.BASE | SettingsDialog.IMAGEBASE | SettingsDialog.HELP | SettingsDialog.BROWSER);
+				@NonNull final SettingsDialog dialog = new SettingsDialog(this.settings, SettingsDialog.PROVIDER | SettingsDialog.BASE | SettingsDialog.IMAGEBASE | SettingsDialog.HELP | SettingsDialog.BROWSER);
 				dialog.setModal(true);
 				dialog.setVisible(true);
 				dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -508,14 +514,14 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		final List<ContextData> contextDataList = ContextData.getContextData(this.args);
 		if (contextDataList != null && !contextDataList.isEmpty())
 		{
-			for (final ContextData contextData : contextDataList)
+			for (@NonNull final ContextData contextData : contextDataList)
 			{
 				runContextData(contextData);
 			}
 		}
 		else
 		{
-			final ContextData contextData = ContextData.getDefaultContextData(this.settings);
+			@NonNull final ContextData contextData = ContextData.getDefaultContextData(this.settings);
 			runContextData(contextData);
 		}
 	}
@@ -530,11 +536,11 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 */
 	private void open(final String provider0, final String source, final String base, final String imageBase)
 	{
-		String provider = provider0;
+		@Nullable String provider = provider0;
 
 		// widget
-		final Context context = new Context(this, source, base, imageBase);
-		final IWidget widget = new Widget(context, null);
+		@NonNull final Context context = new Context(this, source, base, imageBase);
+		@NonNull final IWidget widget = new Widget(context, null);
 		context.connect(widget);
 
 		// provider
@@ -561,7 +567,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		}
 
 		// tab
-		final String toolTip = "<html><body><strong>" + source + "</strong><br>" + provider + "</body></html>";
+		@NonNull final String toolTip = "<html><body><strong>" + source + "</strong><br>" + provider + "</body></html>";
 		//noinspection ConstantConditions
 		assert widget instanceof Component;
 		this.tabbedPane.addTab(mangle(source), null, (Component) widget, toolTip);
@@ -578,9 +584,9 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param entry  entry
 	 * @throws MalformedURLException malformed URL exception
 	 */
-	private void openBundle(final String provider, final String source, final String base, final String entry) throws MalformedURLException
+	private void openBundle(final String provider, @NonNull final String source, @Nullable final String base, final String entry) throws MalformedURLException
 	{
-		File file = new File(source);
+		@NonNull File file = new File(source);
 		if (!file.exists() && base != null)
 		{
 			file = new File(new File(base), source);
@@ -595,7 +601,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param entry   entry
 	 * @throws MalformedURLException malformed URL exception
 	 */
-	private void openBundle(final String provider, final File archive, final String entry) throws MalformedURLException
+	private void openBundle(final String provider, @NonNull final File archive, final String entry) throws MalformedURLException
 	{
 		final String archiveUrl = archive.toURI().toURL().toString();
 		// final String urlString = String.format("jar:%s!/%s", archiveUrl, entry);
@@ -612,17 +618,17 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param imageBase image base
 	 * @throws IOException io exception
 	 */
-	private void openDeserialize(final String source, final String base, final String imageBase) throws IOException
+	private void openDeserialize(@NonNull final String source, @Nullable final String base, final String imageBase) throws IOException
 	{
-		File file = new File(source);
+		@NonNull File file = new File(source);
 		if (!file.exists() && base != null)
 		{
 			file = new File(new File(base), source);
 		}
 
 		// widget
-		final Context context = new Context(this, source, base, imageBase);
-		final IWidget widget = new Widget(context, null);
+		@NonNull final Context context = new Context(this, source, base, imageBase);
+		@NonNull final IWidget widget = new Widget(context, null);
 		context.connect(widget);
 
 		// model
@@ -641,7 +647,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		}
 
 		// tab
-		final String toolTip = "<html><body><strong>" + source + "</strong></body></html>";
+		@NonNull final String toolTip = "<html><body><strong>" + source + "</strong></body></html>";
 		//noinspection ConstantConditions
 		assert widget instanceof Component;
 		this.tabbedPane.addTab(mangle(source), null, (Component) widget, toolTip);
@@ -655,7 +661,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @param contextData context data
 	 */
-	private void runContextData(final ContextData contextData)
+	private void runContextData(@NonNull final ContextData contextData)
 	{
 		if (contextData.source != null)
 		{
@@ -694,9 +700,9 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param widget      widget
 	 * @throws IOException io exception
 	 */
-	private void serialize(final String destination, final IWidget widget) throws IOException
+	private void serialize(final String destination, @NonNull final IWidget widget) throws IOException
 	{
-		final Model model = ((Widget) widget).getModel();
+		@Nullable final Model model = ((Widget) widget).getModel();
 		if (model != null)
 		{
 			new ModelWriter(destination).serialize(model);
@@ -709,13 +715,13 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param str0 string to mangle
 	 * @return mangled string
 	 */
-	private String mangle(final String str0)
+	private String mangle(@Nullable final String str0)
 	{
 		if (str0 == null)
 		{
 			return null;
 		}
-		String str = str0;
+		@NonNull String str = str0;
 
 		final int index = Math.max(str.lastIndexOf('/'), str.lastIndexOf('\\'));
 		if (index != -1)
@@ -741,7 +747,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param args command-line arguments
 	 * @return parameters
 	 */
-	private Properties makeParameters(final String[] args)
+	private Properties makeParameters(@Nullable final String[] args)
 	{
 		// param1=<val> param2=<"val with spaces"> ...
 		if (args == null)
@@ -749,10 +755,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			return null;
 		}
 
-		final Properties parameters = new Properties();
-		for (final String arg : args)
+		@NonNull final Properties parameters = new Properties();
+		for (@NonNull final String arg : args)
 		{
-			final String[] pair = arg.split("=");
+			@NonNull final String[] pair = arg.split("=");
 			if (pair.length != 2)
 			{
 				continue;
@@ -849,22 +855,22 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		 *
 		 * @return context data from command line
 		 */
-		static List<ContextData> getContextData(final String[] args)
+		static List<ContextData> getContextData(@Nullable final String[] args)
 		{
 			if (args == null)
 			{
 				return null;
 			}
 			boolean debug = false;
-			String defaultProvider = null;
-			String defaultBase = null;
-			String defaultImageBase = null;
-			String provider = null;
-			String base = null;
-			String imageBase = null;
-			String entry = null;
-			List<ContextData> sources = null;
-			for (final String arg : args)
+			@Nullable String defaultProvider = null;
+			@Nullable String defaultBase = null;
+			@Nullable String defaultImageBase = null;
+			@Nullable String provider = null;
+			@Nullable String base = null;
+			@Nullable String imageBase = null;
+			@Nullable String entry = null;
+			@Nullable List<ContextData> sources = null;
+			for (@NonNull final String arg : args)
 			{
 				if (arg.startsWith("base="))
 				{
@@ -908,7 +914,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 				}
 
 				// source
-				final String[] fields = arg.split("=");
+				@NonNull final String[] fields = arg.split("=");
 				String source = fields[0];
 				boolean isZip = false;
 				boolean isSer = false;
@@ -924,7 +930,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 				{
 					sources = new ArrayList<>();
 				}
-				final ContextData context = new ContextData(provider != null ? provider : defaultProvider, source, base != null ? base : defaultBase, imageBase != null ? imageBase : defaultImageBase, entry, isZip, isSer);
+				@NonNull final ContextData context = new ContextData(provider != null ? provider : defaultProvider, source, base != null ? base : defaultBase, imageBase != null ? imageBase : defaultImageBase, entry, isZip, isSer);
 				sources.add(context);
 				if (debug)
 				{
@@ -946,13 +952,14 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		 * @param settings settings
 		 * @return context data from settings
 		 */
-		static ContextData getDefaultContextData(final Properties settings)
+		@NonNull
+		static ContextData getDefaultContextData(@NonNull final Properties settings)
 		{
 			final String provider = settings.getProperty("provider", null);
 			final String source = settings.getProperty("source", null);
 			final String base = settings.getProperty("base", ".");
 			final String imageBase = settings.getProperty("images", ".");
-			final String entry = null;
+			@Nullable final String entry = null;
 			final boolean isZip = false;
 			final boolean isSer = false;
 			//noinspection ConstantConditions
@@ -963,6 +970,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		 * (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
+		@NonNull
 		@Override
 		public String toString()
 		{
@@ -980,9 +988,9 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param widget     widget
 	 * @param context    widget's context
 	 */
-	public void linkTo(final String linkUrl, @SuppressWarnings("unused") final String linkTarget, @SuppressWarnings("unused") final IWidget widget, final Context context)
+	public void linkTo(final String linkUrl, @SuppressWarnings("unused") final String linkTarget, @SuppressWarnings("unused") final IWidget widget, @NonNull final Context context)
 	{
-		final URL url = context.makeURL(linkUrl);
+		@Nullable final URL url = context.makeURL(linkUrl);
 		if (url == null)
 		{
 			return;
@@ -993,7 +1001,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			// try internal browser
 			if ("true".equals(this.settings.getProperty("internal.browser")))
 			{
-				final JComponent component = makeBrowserPane(url);
+				@NonNull final JComponent component = makeBrowserPane(url);
 				addTab(component, mangle(linkUrl), linkUrl);
 				return;
 			}
@@ -1016,7 +1024,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @see javax.swing.event.HyperlinkListener#hyperlinkUpdate(javax.swing.event.HyperlinkEvent)
 	 */
 	@Override
-	public void hyperlinkUpdate(final HyperlinkEvent event)
+	public void hyperlinkUpdate(@NonNull final HyperlinkEvent event)
 	{
 		if (event.getEventType() == EventType.ACTIVATED)
 		{
