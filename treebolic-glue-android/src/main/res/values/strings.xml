@@ -1,0 +1,52 @@
+<!--
+  ~ Copyright (c) 2019. Bernard Bou <1313ou@gmail.com>
+  -->
+
+<resources>
+
+	<!-- status -->
+	<string name="progress_text">Treebolic</string> <!-- progress text -->
+
+	<!-- content descriptions -->
+	<string name="progress_logo">logo</string> <!-- content description for progress pix -->
+	<string name="popup_arrow">arrow</string> <!-- content description for popup arrow pix -->
+	<string name="popup_item">item</string> <!-- content description for popup bullet pix -->
+	<string name="tip_info">info</string> <!-- content description for tip info pix -->
+
+	<!-- popup labels -->
+	<string-array name="popup_labels">
+		<item name="cancel">Cancel</item>
+		<item name="info">Info</item>
+		<item name="focus">Focus</item>
+		<item name="linkto">Link</item>
+		<item name="mount">Mount</item>
+		<item name="unmount">UnMount</item>
+		<item name="goto">Go to</item>
+		<item name="search">Search</item>
+	</string-array>
+
+	<!-- content description -->
+	<string name="desc_surface">Treebolic surface</string>
+	<string name="desc_content_header">Type of content</string>
+	<string name="desc_content">Node content</string>
+	<string name="desc_toolbar_home">Home</string>
+	<string name="desc_toolbar_radial">Radial</string>
+	<string name="desc_toolbar_north">North</string>
+	<string name="desc_toolbar_south">South</string>
+	<string name="desc_toolbar_east">East</string>
+	<string name="desc_toolbar_west">West</string>
+	<string name="desc_toolbar_expand">Expand</string>
+	<string name="desc_toolbar_shrink">Shrink</string>
+	<string name="desc_toolbar_expand_reset">Reset expansion</string>
+	<string name="desc_toolbar_expand_widen_reset">Reset expansion and widening</string>
+	<string name="desc_toolbar_widen">Widen</string>
+	<string name="desc_toolbar_narrow">Narrow</string>
+	<string name="desc_toolbar_widen_reset">Reset widening</string>
+	<string name="desc_toolbar_zoomin">Zoom in</string>
+	<string name="desc_toolbar_zoomout">Zoom out</string>
+	<string name="desc_toolbar_zoomone">Zoom 1:1</string>
+	<string name="desc_toolbar_scaleup">Scale up</string>
+	<string name="desc_toolbar_scaledown">Scale down</string>
+	<string name="desc_toolbar_scaleone">Scale 1:1</string>
+
+</resources>

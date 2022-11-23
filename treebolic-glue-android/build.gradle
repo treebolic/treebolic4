@@ -1,0 +1,70 @@
+/*
+ * Copyright (c) 2019. Bernard Bou <1313ou@gmail.com>
+ */
+
+apply plugin: 'com.android.library'
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+    maven { url System.getenv('HOME') + "/.m2/repository/" }
+}
+
+buildscript {
+
+    repositories {
+        google()
+        mavenCentral() // or jcenter()
+    }
+
+    ext {
+        versionCode = 1
+        versionName = '4.1'
+        minSdkVersion = 14
+        targetSdkVersion = 32
+        compileSdkVersion = 32
+        multiDexEnabled = true
+    }
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:deprecation"
+            options.compilerArgs << "-Xlint:unchecked"
+        }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.2'
+    }
+}
+
+
+dependencies {
+    implementation 'io.github.treebolic:treebolic-glue-iface:4.0-SNAPSHOT'
+
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.preference:preference:1.2.0'
+}
