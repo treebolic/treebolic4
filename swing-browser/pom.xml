@@ -49,6 +49,31 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>with-xml</id>
+			<dependencies>
+				<dependency>
+					<groupId>io.github.treebolic</groupId>
+					<artifactId>provider-xml</artifactId>
+					<version>${revision}</version>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>with-owl</id>
+			<dependencies>
+				<dependency>
+					<groupId>io.github.treebolic</groupId>
+					<artifactId>provider-owl</artifactId>
+					<version>${revision}</version>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
 	<build>
 		<plugins>
 
