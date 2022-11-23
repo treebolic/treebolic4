@@ -497,6 +497,9 @@
     <pattern value="treebolic.xml.transformer.DomTransformer" method="DomTransformer" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file:///mnt/data2/devel/treebolic4/treebolic-glue-android" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
