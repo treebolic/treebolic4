@@ -49,7 +49,11 @@ public interface PopupMenu<C, L>
 		/**
 		 * Search label
 		 */
-		LABEL_SEARCH
+		LABEL_SEARCH,
+		/**
+		 * Label count
+		 */
+		LABEL_COUNT
 	}
 
 	/**
@@ -84,7 +88,11 @@ public interface PopupMenu<C, L>
 		/**
 		 * Search image
 		 */
-		IMAGE_SEARCH
+		IMAGE_SEARCH,
+		/**
+		 * Image count
+		 */
+		IMAGE_COUNT
 	}
 
 	/**

@@ -11,8 +11,6 @@ package treebolic.glue.iface.component;
  */
 public interface Progress
 {
-	// public Progress();
-
 	/**
 	 * Put progress
 	 *

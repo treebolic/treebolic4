@@ -15,6 +15,12 @@ import treebolic.glue.iface.ActionListener;
  */
 public interface Statusbar<C, L>
 {
+	/**
+	 * Image indices
+	 */
+	enum ImageIndices
+	{ /** Info */ INFO, /** Link */  LINK,  /** Mount */ MOUNT,  /** Search */ SEARCH, /** Count */ COUNT}
+
 	// public Statusbar();
 
 	/**

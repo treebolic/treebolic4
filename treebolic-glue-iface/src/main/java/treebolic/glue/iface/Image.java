@@ -11,9 +11,7 @@ package treebolic.glue.iface;
  */
 public interface Image
 {
-	// static public Image make(URL resource) throws IOException;
-
-	// static public Image makeOptional(URL resource);
+	// public Image(URL resource);
 
 	/**
 	 * Image width
