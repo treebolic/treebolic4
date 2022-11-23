@@ -20,7 +20,7 @@ public class PopupMenu implements treebolic.glue.iface.component.PopupMenu<Compo
 	 *
 	 * @param ignoredHandle Opaque handle required for component creation
 	 */
-	protected PopupMenu(@Nullable final Object ignoredHandle)
+	public PopupMenu(@Nullable final Object ignoredHandle)
 	{
 		throw new NotImplementedException();
 	}
