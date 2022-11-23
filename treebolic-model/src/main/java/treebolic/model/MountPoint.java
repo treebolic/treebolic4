@@ -109,11 +109,11 @@ public class MountPoint implements Serializable
 	}
 
 	/**
-	 * Follow mounted->mounting or mounting->mounted
+	 * Follow mounted-&gt;mounting or mounting-&gt;mounted
 	 *
 	 * @param node source node
-	 * @param up   allow mounted -> mounting
-	 * @param down allow mounting -> mounted
+	 * @param up   allow mounted -&gt; mounting
+	 * @param down allow mounting -&gt; mounted
 	 * @return target node (or source if no mounting)
 	 */
 	@NonNull

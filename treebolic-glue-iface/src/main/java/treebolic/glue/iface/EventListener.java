@@ -108,7 +108,7 @@ public interface EventListener
 	/**
 	 * Zoom event callback
 	 *
-	 * @param zf zoom factor (>=0 absolute, <0 relative)
+	 * @param zf zoom factor (&gt;=0 absolute, &lt;0 relative)
 	 * @param zx zoom pivot x
 	 * @param zy zoom pivot y
 	 */
@@ -117,9 +117,9 @@ public interface EventListener
 	/**
 	 * Scale event callback
 	 *
-	 * @param msf map scale factor (>=0 absolute, <0 relative)
-	 * @param fsf font scale factor (>=0 absolute, <0 relative)
-	 * @param isf image scale factor (>=0 absolute, <0 relative)
+	 * @param msf map scale factor (&gt;=0 absolute, &lt;0 relative)
+	 * @param fsf font scale factor (&gt;=0 absolute, &lt;0 relative)
+	 * @param isf image scale factor (&gt;=0 absolute, &lt;0 relative)
 	 */
 	void onScale(@SuppressWarnings("SameParameterValue") float msf, float fsf, float isf);
 }

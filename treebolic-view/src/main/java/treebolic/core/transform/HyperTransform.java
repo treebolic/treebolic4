@@ -24,7 +24,7 @@ public class HyperTransform implements IHyperTransform
 	// D A T A
 
 	/**
-	 * Translation component, with abs(xlat) < 1
+	 * Translation component, with abs(xlat) &lt; 1
 	 */
 	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	public HyperTranslation xlat;
