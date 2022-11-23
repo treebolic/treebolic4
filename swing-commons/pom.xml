@@ -6,54 +6,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>treebolic</artifactId>
 		<groupId>io.github.treebolic</groupId>
 		<version>4.0-SNAPSHOT</version>
 	</parent>
+	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>provider-owl</artifactId>
+	<artifactId>swing-commons</artifactId>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>
 		<maven.compiler.target>8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-model</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-mutable</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-glue</artifactId>
-			<version>${revision}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-loadbalancer</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-annotations</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.owlapi</groupId>
-			<artifactId>owlapi-distribution</artifactId>
-			<version>5.1.20</version>
-		</dependency>
-	</dependencies>
 
 	<build>
 		<plugins>

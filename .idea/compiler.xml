@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/android-constants/src/main/resources/archetype-resources" includeSubdirectories="true" />
+    </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="studio" />
         <module name="treebolic-glue-iface" />
         <module name="treebolic-loadbalancer" />
         <module name="treebolic-mutable" />
         <module name="provider-xml" />
         <module name="treebolic-model" />
-        <module name="browser2" />
-        <module name="commons" />
+        <module name="swing-studio" />
         <module name="treebolic-glue-swing" />
-        <module name="treebolic-iface" />
-        <module name="application" />
+        <module name="swing-browser" />
+        <module name="android-constants" />
+        <module name="swing-browser-search" />
         <module name="treebolic-graph" />
+        <module name="swing-commons" />
         <module name="treebolic-view" />
-        <module name="browser" />
         <module name="transformer-xml" />
         <module name="treebolic-annotations" />
         <module name="provider-owl" />
+        <module name="swing-application" />
         <module name="treebolic-glue" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="application" target="1.8" />
+      <module name="application-owl" target="1.8" />
+      <module name="application-xml" target="1.8" />
+      <module name="browser" target="1.8" />
+      <module name="browser2" target="1.8" />
+      <module name="commons" target="1.8" />
+      <module name="studio" target="1.8" />
+      <module name="swing.application" target="1.8" />
+      <module name="treebolic-iface" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

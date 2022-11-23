@@ -13,7 +13,8 @@
 		<version>4.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>provider-owl</artifactId>
+	<artifactId>swing-application-owl</artifactId>
+	<packaging>pom</packaging>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>
@@ -24,34 +25,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-model</artifactId>
+			<artifactId>swing-application</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-mutable</artifactId>
+			<artifactId>provider-owl</artifactId>
 			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-glue</artifactId>
-			<version>${revision}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-loadbalancer</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-annotations</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.owlapi</groupId>
-			<artifactId>owlapi-distribution</artifactId>
-			<version>5.1.20</version>
 		</dependency>
 	</dependencies>
 
