@@ -24,6 +24,7 @@ import treebolic.glue.ActionListener;
 
 /**
  * Tool bar
+ * API class
  *
  * @author Bernard Bou
  */
@@ -75,12 +76,12 @@ public class Toolbar extends FrameLayout implements treebolic.glue.iface.compone
 	 */
 	static private Button[] buttons = new Button[]{ //
 			Button.HOME, //
-				Button.ZOOMIN, Button.ZOOMOUT, Button.ZOOMONE, //
-				Button.SCALEUP, Button.SCALEDOWN, Button.SCALEONE, //
-				Button.RADIAL, Button.SOUTH, Button.NORTH, Button.EAST, Button.WEST, //
-				Button.EXPAND, Button.SHRINK, Button.EXPANSIONRESET, //
-				Button.WIDEN, Button.NARROW, Button.SWEEPRESET, //
-				Button.EXPANSIONSWEEPRESET, //
+			Button.ZOOMIN, Button.ZOOMOUT, Button.ZOOMONE, //
+			Button.SCALEUP, Button.SCALEDOWN, Button.SCALEONE, //
+			Button.RADIAL, Button.SOUTH, Button.NORTH, Button.EAST, Button.WEST, //
+			Button.EXPAND, Button.SHRINK, Button.EXPANSIONRESET, //
+			Button.WIDEN, Button.NARROW, Button.SWEEPRESET, //
+			Button.EXPANSIONSWEEPRESET, //
 	};
 
 	@NonNull
@@ -157,10 +158,11 @@ public class Toolbar extends FrameLayout implements treebolic.glue.iface.compone
 
 	/**
 	 * Constructor from handle
+	 * API
 	 *
 	 * @param handle activity
 	 */
-	protected Toolbar(final Object handle)
+	public Toolbar(final Object handle)
 	{
 		this((AppCompatActivity) handle);
 	}

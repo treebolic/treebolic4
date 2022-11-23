@@ -12,7 +12,6 @@ import android.view.View;
 
 import org.treebolic.glue.R;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -21,29 +20,24 @@ import treebolic.glue.component.QuickAction.ActionItem;
 
 /**
  * Popup context menu
+ * API class
  *
  * @author Bernard Bou
  */
 public class PopupMenu implements treebolic.glue.iface.component.PopupMenu<Component, ActionListener>
 {
 	/**
-	 * Image index enum
-	 */
-	public enum ImageIndices
-	{IMAGE_CANCEL, IMAGE_INFO, IMAGE_FOCUS, IMAGE_LINK, IMAGE_MOUNT, IMAGE_GOTO, IMAGE_SEARCH, COUNT}
-
-	/**
 	 * Drawables
 	 */
 	@SuppressWarnings("WeakerAccess")
-	static final Drawable[] drawables = new Drawable[ImageIndices.COUNT.ordinal()];
+	static final Drawable[] drawables = new Drawable[ImageIndices.IMAGE_COUNT.ordinal()];
 
 	/**
 	 * Labels
 	 */
 	@Nullable
 	@SuppressWarnings("WeakerAccess")
-	static public String[] labels = null; //{  "Cancel", "Info", "Focus", "Link", "Mount", "UnMount", "Goto", "Search" };
+	static String[] labels = null; //{  "Cancel", "Info", "Focus", "Link", "Mount", "UnMount", "Goto", "Search" };
 
 	/**
 	 * Context
@@ -89,10 +83,11 @@ public class PopupMenu implements treebolic.glue.iface.component.PopupMenu<Compo
 
 	/**
 	 * Constructor
+	 * API
 	 *
 	 * @param handle anchor view
 	 */
-	protected PopupMenu(@NonNull final Object handle)
+	public PopupMenu(@NonNull final Object handle)
 	{
 		this(((View) handle).getContext(), (View) handle);
 	}
