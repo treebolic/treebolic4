@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>io.github.treebolic</groupId>
 		<artifactId>treebolic</artifactId>
-		<version>${revision}</version>
+		<version>4.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>treebolic-iface</artifactId>

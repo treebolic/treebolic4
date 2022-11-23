@@ -11,7 +11,7 @@
 	<groupId>io.github.treebolic</groupId>
 	<artifactId>treebolic</artifactId>
 	<packaging>pom</packaging>
-	<version>${revision}</version>
+	<version>4.0-SNAPSHOT</version>
 
 	<name>treebolic</name>
 	<description>Treebolic top project</description>
