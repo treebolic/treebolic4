@@ -3,7 +3,7 @@
  */
 package treebolic.application;
 
-import java.awt.Desktop;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -12,8 +12,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Properties;
 
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import treebolic.IContext;
 import treebolic.Widget;

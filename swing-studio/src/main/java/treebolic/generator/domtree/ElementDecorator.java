@@ -19,8 +19,7 @@ public class ElementDecorator extends DefaultDecorator
 	/**
 	 * Constructor
 	 *
-	 * @param node
-	 *        DOM node
+	 * @param node DOM node
 	 */
 	public ElementDecorator(final Node node)
 	{
@@ -72,7 +71,9 @@ public class ElementDecorator extends DefaultDecorator
 	{
 		final Node child = this.node.getFirstChild();
 		if (child != null)
+		{
 			return child.getNodeValue();
+		}
 		return null;
 	}
 
@@ -83,7 +84,7 @@ public class ElementDecorator extends DefaultDecorator
 	 */
 	protected String getAttributes()
 	{
-		StringBuilder result = new StringBuilder(); 
+		StringBuilder result = new StringBuilder();
 		final NamedNodeMap map = getElement().getAttributes();
 		if (map != null)
 		{
@@ -91,10 +92,10 @@ public class ElementDecorator extends DefaultDecorator
 			{
 				if (i != 0)
 				{
-					result.append(" "); 
+					result.append(" ");
 				}
 				final Node attribute = map.item(i);
-				result.append(attribute.getNodeName()).append("=\"").append(attribute.getNodeValue()).append("\"");  
+				result.append(attribute.getNodeName()).append("=\"").append(attribute.getNodeValue()).append("\"");
 			}
 		}
 		return result.toString();

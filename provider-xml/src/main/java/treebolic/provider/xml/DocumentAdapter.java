@@ -454,8 +454,7 @@ public class DocumentAdapter
 		}
 
 		// style
-		final Integer style = Utils.parseStyle(edgeElement.getAttribute("stroke"), edgeElement.getAttribute("fromterminator"), edgeElement.getAttribute("toterminator"), edgeElement.getAttribute("line"),
-				edgeElement.getAttribute("hidden"));
+		final Integer style = Utils.parseStyle(edgeElement.getAttribute("stroke"), edgeElement.getAttribute("fromterminator"), edgeElement.getAttribute("toterminator"), edgeElement.getAttribute("line"), edgeElement.getAttribute("hidden"));
 		if (style != null)
 		{
 			edge.setStyle(style);

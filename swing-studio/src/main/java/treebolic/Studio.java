@@ -21,8 +21,7 @@ public class Studio
 	/**
 	 * Constructor
 	 *
-	 * @param args
-	 *        program arguments
+	 * @param args program arguments
 	 */
 	public Studio(final String[] args)
 	{
@@ -47,8 +46,7 @@ public class Studio
 	/**
 	 * Main
 	 *
-	 * @param args
-	 *        aruments
+	 * @param args aruments
 	 */
 	public static void main(final String[] args)
 	{

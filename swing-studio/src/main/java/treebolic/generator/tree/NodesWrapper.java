@@ -16,17 +16,16 @@ public class NodesWrapper extends SettingsWrapper
 	/**
 	 * Constructor
 	 *
-	 * @param settings
-	 *        settings
+	 * @param settings settings
 	 */
 	public NodesWrapper(final Settings settings)
 	{
 		super(settings);
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		return Messages.getString("NodesWrapper.label"); 
+		return Messages.getString("NodesWrapper.label");
 	}
 }

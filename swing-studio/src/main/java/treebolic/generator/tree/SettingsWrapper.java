@@ -21,8 +21,7 @@ public class SettingsWrapper
 	/**
 	 * Constructor
 	 *
-	 * @param settings
-	 *        settings
+	 * @param settings settings
 	 */
 	protected SettingsWrapper(final Settings settings)
 	{
@@ -32,6 +31,6 @@ public class SettingsWrapper
 	@Override
 	public String toString()
 	{
-		return Messages.getString("SettingsWrapper.label"); 
+		return Messages.getString("SettingsWrapper.label");
 	}
 }

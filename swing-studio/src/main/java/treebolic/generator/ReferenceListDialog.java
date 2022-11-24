@@ -3,27 +3,14 @@
  */
 package treebolic.generator;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.Vector;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
+import javax.swing.*;
+import javax.swing.table.*;
 
 import treebolic.commons.Utils;
 import treebolic.generator.ReferenceListDialog.ParameterModel.Entry;

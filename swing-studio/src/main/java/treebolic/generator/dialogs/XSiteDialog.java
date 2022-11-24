@@ -5,8 +5,7 @@ package treebolic.generator.dialogs;
 
 import java.util.Properties;
 
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import treebolic.commons.Persist;
 import treebolic.commons.SiteDialog;
@@ -23,8 +22,7 @@ public class XSiteDialog extends SiteDialog
 	/**
 	 * Constructor
 	 *
-	 * @param properties
-	 *        properties
+	 * @param properties properties
 	 */
 	public XSiteDialog(final Properties properties)
 	{
@@ -34,12 +32,11 @@ public class XSiteDialog extends SiteDialog
 	/**
 	 * Main
 	 *
-	 * @param args
-	 *        arguments
+	 * @param args arguments
 	 */
 	static public void main(final String[] args)
 	{
-		UIManager.put("swing.boldMetal", false); 
+		UIManager.put("swing.boldMetal", false);
 		final Properties settings = Persist.getSettings("treebolic-studio");
 		final XSiteDialog dialog = new XSiteDialog(settings);
 		dialog.setModal(true);

@@ -11,12 +11,12 @@ import treebolic.annotations.NonNull;
 
 /**
  * Language dependency
- * 
+ *
  * @author Bernard Bou
  */
 public class Messages
 {
-	private static final String BUNDLE_NAME = "treebolic.browser2.messages"; 
+	private static final String BUNDLE_NAME = "treebolic.browser2.messages";
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 

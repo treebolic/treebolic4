@@ -3,31 +3,11 @@
  */
 package treebolic.commons;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.util.Collection;
 import java.util.Set;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.ListCellRenderer;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 /**
  * Import dialog
@@ -80,12 +60,9 @@ public class OpenDialog extends JDialog
 	/**
 	 * Constructor
 	 *
-	 * @param provider
-	 *        provider
-	 * @param source
-	 *        source
-	 * @param base
-	 *        base
+	 * @param provider provider
+	 * @param source   source
+	 * @param base     base
 	 */
 	public OpenDialog(final String provider, final String source, final String base)
 	{
@@ -94,7 +71,7 @@ public class OpenDialog extends JDialog
 		this.source = source;
 		this.base = base;
 
-		final Set<String> presetProviders = Searcher.findClasses(".*\\.Provider"); 
+		final Set<String> presetProviders = Searcher.findClasses(".*\\.Provider");
 		initialize(presetProviders);
 	}
 
@@ -103,7 +80,7 @@ public class OpenDialog extends JDialog
 	 */
 	protected void initialize(final Collection<String> providers)
 	{
-		setTitle(Messages.getString("OpenDialog.title")); 
+		setTitle(Messages.getString("OpenDialog.title"));
 		setResizable(true);
 
 		// images
@@ -113,12 +90,12 @@ public class OpenDialog extends JDialog
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		headerLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-		headerLabel.setText(Messages.getString("OpenDialog.header")); 
+		headerLabel.setText(Messages.getString("OpenDialog.header"));
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// labels
-		final JLabel sourceLabel = new JLabel(Messages.getString("OpenDialog.source")); 
-		final JLabel providerLabel = new JLabel(Messages.getString("OpenDialog.provider")); 
+		final JLabel sourceLabel = new JLabel(Messages.getString("OpenDialog.source"));
+		final JLabel providerLabel = new JLabel(Messages.getString("OpenDialog.provider"));
 
 		// text
 		final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
@@ -161,14 +138,14 @@ public class OpenDialog extends JDialog
 		}
 
 		// tooltips
-		this.sourceTextField.setToolTipText(Messages.getString("OpenDialog.tooltip_source")); 
-		this.providerComboBox.setToolTipText(Messages.getString("OpenDialog.tooltip_provider")); 
+		this.sourceTextField.setToolTipText(Messages.getString("OpenDialog.tooltip_source"));
+		this.providerComboBox.setToolTipText(Messages.getString("OpenDialog.tooltip_provider"));
 
 		// buttons
-		final JButton sourceBrowseButton = new JButton(Messages.getString("OpenDialog.browse")); 
-		final JButton providerAddButton = new JButton(Messages.getString("OpenDialog.add")); 
-		final JButton oKButton = new JButton(Messages.getString("OpenDialog.ok")); 
-		final JButton cancelButton = new JButton(Messages.getString("OpenDialog.cancel")); 
+		final JButton sourceBrowseButton = new JButton(Messages.getString("OpenDialog.browse"));
+		final JButton providerAddButton = new JButton(Messages.getString("OpenDialog.add"));
+		final JButton oKButton = new JButton(Messages.getString("OpenDialog.ok"));
+		final JButton cancelButton = new JButton(Messages.getString("OpenDialog.cancel"));
 
 		// panels
 		this.dataPanel = new JPanel();
@@ -187,14 +164,14 @@ public class OpenDialog extends JDialog
 
 		// action
 		sourceBrowseButton.addActionListener(event -> {
-			final String url = FileDialogs.getAnyUrl(OpenDialog.this.base != null ? OpenDialog.this.base : "."); 
+			final String url = FileDialogs.getAnyUrl(OpenDialog.this.base != null ? OpenDialog.this.base : ".");
 			if (url != null && !url.isEmpty())
 			{
 				OpenDialog.this.sourceTextField.setText(url);
 			}
 		});
 		providerAddButton.addActionListener(event -> {
-			final String provider = ask(Messages.getString("OpenDialog.prompt_provider")); 
+			final String provider = ask(Messages.getString("OpenDialog.prompt_provider"));
 			if (provider != null && !provider.isEmpty())
 			{
 				OpenDialog.this.providerComboBox.addItem(provider);
@@ -253,25 +230,23 @@ public class OpenDialog extends JDialog
 	/**
 	 * Ask
 	 *
-	 * @param message
-	 *        message
+	 * @param message message
 	 * @return input
 	 */
 	protected String ask(final String message)
 	{
-		final String[] lines = message.split("\n"); 
+		final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines);
 	}
 
 	/**
 	 * Inform dialog
 	 *
-	 * @param message
-	 *        message
+	 * @param message message
 	 */
 	protected void inform(final String message)
 	{
-		final String[] lines = message.split("\n"); 
-		JOptionPane.showMessageDialog(null, lines, Messages.getString("OpenDialog.app"), JOptionPane.WARNING_MESSAGE); 
+		final String[] lines = message.split("\n");
+		JOptionPane.showMessageDialog(null, lines, Messages.getString("OpenDialog.app"), JOptionPane.WARNING_MESSAGE);
 	}
 }

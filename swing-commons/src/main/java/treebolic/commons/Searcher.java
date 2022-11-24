@@ -5,14 +5,7 @@ package treebolic.commons;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
@@ -36,8 +29,8 @@ public class Searcher
 	{
 		String pattern = pattern0;
 		final Set<String> list = new TreeSet<>();
-		pattern = pattern.replaceAll("\\\\.", "/");  
-		for (final String fileName : Searcher.findFiles(pattern + "\\.class$").keySet()) 
+		pattern = pattern.replaceAll("\\\\.", "/");
+		for (final String fileName : Searcher.findFiles(pattern + "\\.class$").keySet())
 		{
 			String className = fileName.replace('/', '.');
 			if (File.separatorChar == '\\')
@@ -57,9 +50,9 @@ public class Searcher
 	 */
 	static public Map<String, String> findFiles(final String pattern)
 	{
-		final String pattern2 = File.separatorChar == '/' ? pattern : pattern.replaceAll("/", "\\\\\\\\");  
+		final String pattern2 = File.separatorChar == '/' ? pattern : pattern.replaceAll("/", "\\\\\\\\");
 		final Map<String, String> list = new TreeMap<>();
-		final String classPath = System.getProperty("java.class.path"); 
+		final String classPath = System.getProperty("java.class.path");
 		final String[] pathElements = classPath.split(File.pathSeparator);
 		for (final String pathElement : pathElements)
 		{
@@ -77,7 +70,7 @@ public class Searcher
 			}
 			catch (final IOException e)
 			{
-				System.err.println("Find files: " + e); 
+				System.err.println("Find files: " + e);
 			}
 		}
 		return list;
@@ -94,7 +87,7 @@ public class Searcher
 	static private Map<String, String> findInFile(final File file, final String pattern) throws IOException
 	{
 		final Map<String, String> map = new TreeMap<>();
-		if (file.canRead() && file.getAbsolutePath().endsWith(".jar")) 
+		if (file.canRead() && file.getAbsolutePath().endsWith(".jar"))
 		{
 			@SuppressWarnings("resource") final JarFile jar = new JarFile(file);
 			for (final Enumeration<JarEntry> entries = jar.entries(); entries.hasMoreElements(); )
@@ -201,13 +194,13 @@ public class Searcher
 			final String container = entry.getValue();
 			final String path = entry.getKey();
 			String urlString;
-			if (container.endsWith(".jar")) 
+			if (container.endsWith(".jar"))
 			{
-				urlString = "jar:file:" + container + "!/" + path;  
+				urlString = "jar:file:" + container + "!/" + path;
 			}
 			else
 			{
-				urlString = "file:" + container + '/' + path; 
+				urlString = "file:" + container + '/' + path;
 			}
 			urls.add(urlString);
 		}
@@ -221,14 +214,14 @@ public class Searcher
 	 */
 	public static void main(final String[] args)
 	{
-		for (final String className : Searcher.findClasses(".*\\.Provider")) 
+		for (final String className : Searcher.findClasses(".*\\.Provider"))
 		{
-			System.out.println("PROVIDER CLASS: " + className); 
+			System.out.println("PROVIDER CLASS: " + className);
 		}
 
-		for (final Map.Entry<String, String> entry : Searcher.findFiles(".*xsl$").entrySet()) 
+		for (final Map.Entry<String, String> entry : Searcher.findFiles(".*xsl$").entrySet())
 		{
-			System.out.println("XSL FILE: " + entry.getKey() + " @ " + entry.getValue());  
+			System.out.println("XSL FILE: " + entry.getKey() + " @ " + entry.getValue());
 		}
 	}
 }

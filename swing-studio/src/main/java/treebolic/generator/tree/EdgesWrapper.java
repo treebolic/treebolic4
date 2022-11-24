@@ -30,12 +30,9 @@ public class EdgesWrapper extends SettingsWrapper
 	/**
 	 * Constructor
 	 *
-	 * @param edgeList
-	 *        edge list
-	 * @param model
-	 *        model
-	 * @param settings
-	 *        settings
+	 * @param edgeList edge list
+	 * @param model    model
+	 * @param settings settings
 	 */
 	public EdgesWrapper(final List<IEdge> edgeList, final Model model, final Settings settings)
 	{
@@ -43,10 +40,10 @@ public class EdgesWrapper extends SettingsWrapper
 		this.edgeList = edgeList;
 		this.model = model;
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		return Messages.getString("EdgesWrapper.label"); 
+		return Messages.getString("EdgesWrapper.label");
 	}
 }

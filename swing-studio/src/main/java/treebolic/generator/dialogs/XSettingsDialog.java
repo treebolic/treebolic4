@@ -3,15 +3,10 @@
  */
 package treebolic.generator.dialogs;
 
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.awt.*;
 import java.util.Properties;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import treebolic.commons.FileDialogs;
 import treebolic.commons.Persist;
@@ -32,12 +27,12 @@ public class XSettingsDialog extends SettingsDialog
 	 */
 	static private final int REPOIDX = 4;
 
-// --Commented out by Inspection START (11/21/22, 6:34 PM):
-//	/**
-//	 * Repository
-//	 */
-//	static public final int REPO = 1 << XSettingsDialog.REPOIDX;
-// --Commented out by Inspection STOP (11/21/22, 6:34 PM)
+	// --Commented out by Inspection START (11/21/22, 6:34 PM):
+	//	/**
+	//	 * Repository
+	//	 */
+	//	static public final int REPO = 1 << XSettingsDialog.REPOIDX;
+	// --Commented out by Inspection STOP (11/21/22, 6:34 PM)
 
 	/**
 	 * Repository text

@@ -15,11 +15,10 @@ public class ProviderDialog extends ChoiceDialog
 	/**
 	 * Constructor
 	 *
-	 * @param provider
-	 *        provider
+	 * @param provider provider
 	 */
 	public ProviderDialog(final String provider)
 	{
-		super(provider, Searcher.findClasses(".*\\.Provider"), Messages.getString("ProviderDialog.provider"), Messages.getString("ProviderDialog.class"), true);   
+		super(provider, Searcher.findClasses(".*\\.Provider"), Messages.getString("ProviderDialog.provider"), Messages.getString("ProviderDialog.class"), true);
 	}
 }

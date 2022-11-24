@@ -3,9 +3,7 @@
  */
 package treebolic.browser;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
+import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -16,18 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkEvent.EventType;
 import javax.swing.event.HyperlinkListener;
@@ -36,15 +23,7 @@ import treebolic.IWidget;
 import treebolic.Widget;
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.commons.ButtonTabComponent;
-import treebolic.commons.ExternalBrowser;
-import treebolic.commons.FileDialogs;
-import treebolic.commons.Interact;
-import treebolic.commons.OpenDialog;
-import treebolic.commons.Persist;
-import treebolic.commons.SettingsDialog;
-import treebolic.commons.UrlDialog;
-import treebolic.commons.ZipEntryDialog;
+import treebolic.commons.*;
 import treebolic.model.Model;
 import treebolic.model.ModelWriter;
 

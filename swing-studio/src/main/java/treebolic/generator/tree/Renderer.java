@@ -3,21 +3,15 @@
  */
 package treebolic.generator.tree;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
+import java.awt.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JTree;
+import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
 import treebolic.generator.Messages;
-import treebolic.model.Edge;
 import treebolic.model.MenuItem;
-import treebolic.model.MutableEdge;
-import treebolic.model.MutableNode;
-import treebolic.model.Node;
+import treebolic.model.*;
 
 /**
  * XML tree renderer

@@ -3,7 +3,7 @@
  */
 package treebolic.generator;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.Map;
 import java.util.SortedSet;
 

@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 
 /**
@@ -126,37 +126,37 @@ public class FileDialogs
 	/**
 	 * Executable file filter
 	 */
-	static private final FileFilter executableFileFilter = new RegExprFileFilter(new String[]{".*\\.exe", ".*\\.sh"}, Messages.getString("FileDialogs.exe"));   
+	static private final FileFilter executableFileFilter = new RegExprFileFilter(new String[]{".*\\.exe", ".*\\.sh"}, Messages.getString("FileDialogs.exe"));
 
 	/**
 	 * XML file filter
 	 */
-	static private final FileFilter xmlFileFilter = new RegExprFileFilter(new String[]{".*\\.xml"}, Messages.getString("FileDialogs.xml"));  
+	static private final FileFilter xmlFileFilter = new RegExprFileFilter(new String[]{".*\\.xml"}, Messages.getString("FileDialogs.xml"));
 
 	/**
 	 * XSL file filter
 	 */
-	static private final FileFilter xslFileFilter = new RegExprFileFilter(new String[]{".*\\.xsl", ".*\\.xslt"}, Messages.getString("FileDialogs.xslt"));   
+	static private final FileFilter xslFileFilter = new RegExprFileFilter(new String[]{".*\\.xsl", ".*\\.xslt"}, Messages.getString("FileDialogs.xslt"));
 
 	/**
 	 * Zip file filter
 	 */
-	static private final FileFilter zipFileFilter = new RegExprFileFilter(new String[]{".*\\.zip", ".*\\.jar"}, Messages.getString("FileDialogs.zip"));   
+	static private final FileFilter zipFileFilter = new RegExprFileFilter(new String[]{".*\\.zip", ".*\\.jar"}, Messages.getString("FileDialogs.zip"));
 
 	/**
 	 * Ser file filter
 	 */
-	static private final FileFilter serFileFilter = new RegExprFileFilter(new String[]{".*\\.ser", ".*\\.ser\\.zip"}, Messages.getString("FileDialogs.ser"));   
+	static private final FileFilter serFileFilter = new RegExprFileFilter(new String[]{".*\\.ser", ".*\\.ser\\.zip"}, Messages.getString("FileDialogs.ser"));
 
 	/**
 	 * XSL file filter
 	 */
-	static private final FileFilter propertyFileFilter = new RegExprFileFilter(new String[]{".*\\.properties"}, Messages.getString("FileDialogs.properties"));  
+	static private final FileFilter propertyFileFilter = new RegExprFileFilter(new String[]{".*\\.properties"}, Messages.getString("FileDialogs.properties"));
 
 	/**
 	 * Document file filter
 	 */
-	static private final FileFilter docFileFilter = new NegRegExprFileFilter(new String[]{".*\\.png", ".*\\.jpg", ".*\\.gif", ".*\\.html", ".*\\.properties", ".*\\.applet"}, Messages.getString("FileDialogs.doc"));       
+	static private final FileFilter docFileFilter = new NegRegExprFileFilter(new String[]{".*\\.png", ".*\\.jpg", ".*\\.gif", ".*\\.html", ".*\\.properties", ".*\\.applet"}, Messages.getString("FileDialogs.doc"));
 
 	/**
 	 * Get executable
@@ -349,7 +349,7 @@ public class FileDialogs
 	static private JFileChooser makeFileChooser()
 	{
 		final JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle(Messages.getString("FileDialogs.title")); 
+		chooser.setDialogTitle(Messages.getString("FileDialogs.title"));
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		return chooser;
 	}
@@ -362,7 +362,7 @@ public class FileDialogs
 	static private JFileChooser makeFolderChooser()
 	{
 		final JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle(Messages.getString("FileDialogs.title")); 
+		chooser.setDialogTitle(Messages.getString("FileDialogs.title"));
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setFileFilter(new javax.swing.filechooser.FileFilter()
 		{
@@ -375,7 +375,7 @@ public class FileDialogs
 			@Override
 			public String getDescription()
 			{
-				return Messages.getString("FileDialogs.folder"); 
+				return Messages.getString("FileDialogs.folder");
 			}
 		});
 		return chooser;
@@ -394,7 +394,7 @@ public class FileDialogs
 			return;
 		}
 		File directory = null;
-		if (currentDirectory.startsWith("file:")) 
+		if (currentDirectory.startsWith("file:"))
 		{
 			try
 			{

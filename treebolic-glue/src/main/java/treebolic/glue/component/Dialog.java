@@ -4,12 +4,12 @@
 
 package treebolic.glue.component;
 
-import com.sun.istack.internal.NotNull;
+import java.util.function.Function;
 
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.NotImplementedException;
 import treebolic.glue.iface.ActionListener;
-import treebolic.glue.iface.component.Converter;
 
 /**
  * Dialog
@@ -51,7 +51,7 @@ public class Dialog implements treebolic.glue.iface.component.Dialog
 	}
 
 	@Override
-	public void setConverter(@NotNull final Converter converter)
+	public void setConverter(@NonNull final Function<CharSequence[], String> converter)
 	{
 		throw new NotImplementedException();
 	}

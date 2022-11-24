@@ -3,15 +3,11 @@
  */
 package treebolic.propertyview;
 
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.AbstractCellEditor;
-import javax.swing.JButton;
-import javax.swing.JColorChooser;
-import javax.swing.JDialog;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 
 import treebolic.glue.Color;
@@ -72,7 +68,7 @@ class ColorEditor extends AbstractCellEditor implements TableCellEditor
 				this.colorChooser,
 				// ok button handler
 				e -> ColorEditor.this.currentColor = new Color(ColorEditor.this.colorChooser.getColor()),
-		// cancel button handler
+				// cancel button handler
 				e -> ColorEditor.this.currentColor = null);
 	}
 

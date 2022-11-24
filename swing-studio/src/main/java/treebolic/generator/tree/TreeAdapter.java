@@ -10,12 +10,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 
-import treebolic.model.IEdge;
-import treebolic.model.INode;
-import treebolic.model.MenuItem;
-import treebolic.model.Model;
-import treebolic.model.Node;
-import treebolic.model.Settings;
+import treebolic.model.*;
 
 /**
  * Tree adapter (converts treebolic model to DefaultTreeModel)
@@ -29,8 +24,7 @@ public class TreeAdapter extends DefaultTreeModel
 	/**
 	 * Constructor
 	 *
-	 * @param model
-	 *        treebolic model
+	 * @param model treebolic model
 	 */
 	public TreeAdapter(final Model model)
 	{
@@ -40,14 +34,15 @@ public class TreeAdapter extends DefaultTreeModel
 	/**
 	 * Make tree model out of treebolic model
 	 *
-	 * @param model
-	 *        treebolic model
+	 * @param model treebolic model
 	 * @return tree model
 	 */
 	public static TreeNode makeTreeModel(final Model model)
 	{
 		if (model == null)
+		{
 			return null;
+		}
 
 		// root
 		final Node node = (Node) model.tree.getRoot();
@@ -83,10 +78,8 @@ public class TreeAdapter extends DefaultTreeModel
 	/**
 	 * Make tree node for treebolic node
 	 *
-	 * @param node
-	 *        treebolic node
-	 * @param ignoredParentTreeNode
-	 *        parent tree node
+	 * @param node                  treebolic node
+	 * @param ignoredParentTreeNode parent tree node
 	 * @return tree node
 	 */
 	private static MutableTreeNode makeNode(final Node node, final MutableTreeNode ignoredParentTreeNode)
@@ -109,12 +102,9 @@ public class TreeAdapter extends DefaultTreeModel
 	/**
 	 * Make tree node for edges
 	 *
-	 * @param edgeList
-	 *        edge list
-	 * @param model
-	 *        model
-	 * @param settings
-	 *        settings
+	 * @param edgeList edge list
+	 * @param model    model
+	 * @param settings settings
 	 * @return tree node
 	 */
 	private static MutableTreeNode makeEdges(final List<IEdge> edgeList, final Model model, final Settings settings)
@@ -141,10 +131,8 @@ public class TreeAdapter extends DefaultTreeModel
 	/**
 	 * Make tree node for menu
 	 *
-	 * @param ignoredMenu
-	 *        menu
-	 * @param settings
-	 *        settings
+	 * @param ignoredMenu menu
+	 * @param settings    settings
 	 * @return tree node
 	 */
 	private static MutableTreeNode makeTools(final List<MenuItem> ignoredMenu, final Settings settings)

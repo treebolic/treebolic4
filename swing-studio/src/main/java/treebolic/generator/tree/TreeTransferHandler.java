@@ -3,16 +3,14 @@
  */
 package treebolic.generator.tree;
 
-import java.awt.Component;
+import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.List;
 
-import javax.swing.JComponent;
-import javax.swing.JTree;
-import javax.swing.TransferHandler;
+import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
@@ -41,7 +39,7 @@ public class TreeTransferHandler extends TransferHandler
 	{
 		try
 		{
-			TreeTransferHandler.flavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + DefaultMutableTreeNode.class.getName() + "\"");  
+			TreeTransferHandler.flavor = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType + ";class=\"" + DefaultMutableTreeNode.class.getName() + "\"");
 		}
 		catch (final ClassNotFoundException e)
 		{
@@ -64,8 +62,7 @@ public class TreeTransferHandler extends TransferHandler
 		/**
 		 * Constructor
 		 *
-		 * @param node
-		 *        node object to transfer
+		 * @param node node object to transfer
 		 */
 		public TransferableNode(final Object node)
 		{
@@ -137,7 +134,9 @@ public class TreeTransferHandler extends TransferHandler
 	{
 		final Pair<TreePath, TreePath> nodes = getNodes(support);
 		if (nodes != null)
+		{
 			return testMove(nodes.first, nodes.second);
+		}
 		return false;
 	}
 
@@ -152,7 +151,9 @@ public class TreeTransferHandler extends TransferHandler
 		if (nodes != null)
 		{
 			if (support.isDrop())
+			{
 				return move((Tree) support.getComponent(), nodes.first, nodes.second, true);
+			}
 		}
 		return false;
 	}
@@ -172,15 +173,16 @@ public class TreeTransferHandler extends TransferHandler
 	/**
 	 * Get pair of source tree and destination treepaths
 	 *
-	 * @param support
-	 *        transfer support
+	 * @param support transfer support
 	 * @return source tree and destination treepaths
 	 */
 	private Pair<TreePath, TreePath> getNodes(final TransferSupport support)
 	{
 		// source flavour
 		if (!support.isDataFlavorSupported(TreeTransferHandler.flavor))
+		{
 			return null;
+		}
 
 		// destination tree
 		final Component component = support.getComponent();
@@ -210,9 +212,13 @@ public class TreeTransferHandler extends TransferHandler
 
 		// type check
 		if (sourceObject instanceof TreeMutableNode && destinationObject instanceof TreeMutableNode)
+		{
 			return new Pair<>(sourcePath, destinationPath);
+		}
 		if (sourceObject instanceof MenuItemWrapper && destinationObject instanceof MenuWrapper)
+		{
 			return new Pair<>(sourcePath, destinationPath);
+		}
 
 		return null;
 	}
@@ -220,10 +226,8 @@ public class TreeTransferHandler extends TransferHandler
 	/**
 	 * Whether source node can drag and drop to destination node
 	 *
-	 * @param source
-	 *        source node
-	 * @param destination
-	 *        destination node
+	 * @param source      source node
+	 * @param destination destination node
 	 * @return true if source node can drag and drop to destination node
 	 */
 	private boolean testMove(final TreePath source, final TreePath destination)
@@ -235,9 +239,13 @@ public class TreeTransferHandler extends TransferHandler
 			final Object destinationObject = destinationNode.getUserObject();
 			final Object sourceObject = sourceNode.getUserObject();
 			if (destinationObject instanceof TreeMutableNode && sourceObject instanceof TreeMutableNode)
+			{
 				return !source.isDescendant(destination);
+			}
 			else if (destinationObject instanceof MenuWrapper && sourceObject instanceof MenuItemWrapper)
+			{
 				return !source.isDescendant(destination);
+			}
 		}
 		return false;
 	}
@@ -245,10 +253,8 @@ public class TreeTransferHandler extends TransferHandler
 	/**
 	 * Move source node as child of destination node
 	 *
-	 * @param source
-	 *        source node
-	 * @param destination
-	 *        destination node
+	 * @param source      source node
+	 * @param destination destination node
 	 * @return true if successful
 	 */
 	@SuppressWarnings("SameReturnValue")
@@ -263,9 +269,13 @@ public class TreeTransferHandler extends TransferHandler
 
 		// tree add
 		if (prepend)
+		{
 			tree.prependToParent(parentTreeNode, treeNode);
+		}
 		else
+		{
 			tree.addToParent(parentTreeNode, treeNode);
+		}
 
 		// objects
 		final Object parentObject = parentTreeNode.getUserObject();
@@ -281,9 +291,13 @@ public class TreeTransferHandler extends TransferHandler
 
 			// object add
 			if (prepend)
+			{
 				parentNode.prependChild(node);
+			}
 			else
+			{
 				parentNode.addChild(node);
+			}
 		}
 		else
 		{
@@ -294,9 +308,13 @@ public class TreeTransferHandler extends TransferHandler
 			final MenuItem menuItem = node.menuItem;
 			menu.remove(menuItem);
 			if (prepend)
+			{
 				menu.add(0, menuItem);
+			}
 			else
+			{
 				menu.add(menu.size(), menuItem);
+			}
 		}
 		return true;
 	}

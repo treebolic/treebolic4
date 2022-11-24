@@ -4,11 +4,7 @@
 
 package treebolic.glue.component;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JToggleButton;
-import javax.swing.JToolBar;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 import treebolic.annotations.NonNull;
 import treebolic.glue.ActionListener;

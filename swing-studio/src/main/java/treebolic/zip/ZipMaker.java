@@ -4,17 +4,12 @@
 
 package treebolic.zip;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import org.w3c.dom.Document;
+
+import java.io.*;
 import java.net.URL;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
-import org.w3c.dom.Document;
 
 import treebolic.generator.DocumentSearch;
 import treebolic.xml.transformer.DomTransformer;

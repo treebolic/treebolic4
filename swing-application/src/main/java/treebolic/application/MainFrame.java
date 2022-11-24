@@ -7,11 +7,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.Properties;
 
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JToolBar;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkEvent.EventType;
 import javax.swing.event.HyperlinkListener;

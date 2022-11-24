@@ -3,19 +3,9 @@
  */
 package treebolic.commons;
 
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 /**
  * About dialog
@@ -29,25 +19,23 @@ public class AboutDialog extends JDialog
 	/**
 	 * Author
 	 */
-	static final String author = "Bernard Bou"; 
+	static final String author = "Bernard Bou";
 
 	/**
 	 * Email
 	 */
-	static final String email = "mailto:1313ou@gmail.com"; 
+	static final String email = "mailto:1313ou@gmail.com";
 
 	/**
 	 * Copyright notice
 	 */
-	static final String copyright = "Copyright © 2001-2017"; 
+	static final String copyright = "Copyright © 2001-2017";
 
 	/**
 	 * Constructor
 	 *
-	 * @param product
-	 *        product
-	 * @param version
-	 *        string
+	 * @param product product
+	 * @param version string
 	 */
 	public AboutDialog(final String product, final String version)
 	{
@@ -57,12 +45,9 @@ public class AboutDialog extends JDialog
 	/**
 	 * Constructor
 	 *
-	 * @param product
-	 *        product
-	 * @param version
-	 *        string
-	 * @param sysInfo
-	 *        whether to add sysinfo
+	 * @param product product
+	 * @param version string
+	 * @param sysInfo whether to add sysinfo
 	 */
 	public AboutDialog(final String product, final String version, final boolean sysInfo)
 	{
@@ -73,16 +58,13 @@ public class AboutDialog extends JDialog
 	/**
 	 * Initialize component
 	 *
-	 * @param product
-	 *        product
-	 * @param version
-	 *        string
-	 * @param sysInfo
-	 *        whether to add sysinfo
+	 * @param product product
+	 * @param version string
+	 * @param sysInfo whether to add sysinfo
 	 */
 	protected JPanel initialize(final String product, final String version, final boolean sysInfo)
 	{
-		setTitle(Messages.getString("AboutDialog.title")); 
+		setTitle(Messages.getString("AboutDialog.title"));
 
 		final JLabel titleLabel = new JLabel(product);
 		titleLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
@@ -96,7 +78,7 @@ public class AboutDialog extends JDialog
 		//noinspection ConstantConditions
 		image.setIcon(new ImageIcon(AboutDialog.class.getResource("images/logo.png")));
 
-		final JButton oKButton = new JButton(Messages.getString("AboutDialog.ok")); 
+		final JButton oKButton = new JButton(Messages.getString("AboutDialog.ok"));
 		oKButton.addActionListener(e -> setVisible(false));
 
 		final JPanel commandPanel = new JPanel();

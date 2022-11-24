@@ -15,8 +15,7 @@ public interface SelectListener extends EventListener
 	/**
 	 * Select event listener
 	 *
-	 * @param object
-	 *        parameter
+	 * @param object parameter
 	 */
 	void onSelected(Object object);
 }

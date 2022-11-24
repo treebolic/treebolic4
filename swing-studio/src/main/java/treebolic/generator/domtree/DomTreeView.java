@@ -3,13 +3,13 @@
  */
 package treebolic.generator.domtree;
 
-import javax.swing.JTree;
+import org.w3c.dom.Document;
+
+import javax.swing.*;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
-
-import org.w3c.dom.Document;
 
 import treebolic.generator.Messages;
 

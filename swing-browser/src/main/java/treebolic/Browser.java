@@ -37,8 +37,7 @@ public class Browser
 	/**
 	 * Main
 	 *
-	 * @param args
-	 *        arguments
+	 * @param args arguments
 	 */
 	public static void main(@NonNull final String[] args)
 	{

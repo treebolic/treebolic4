@@ -4,17 +4,9 @@
 
 package treebolic.glue.component;
 
-import java.awt.Color;
+import java.awt.*;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import treebolic.annotations.NonNull;
 

@@ -21,10 +21,8 @@ public class MenuItemWrapper extends SettingsWrapper
 	/**
 	 * Constructor
 	 *
-	 * @param menuItem
-	 *        menu item
-	 * @param settings
-	 *        settings
+	 * @param menuItem menu item
+	 * @param settings settings
 	 */
 	public MenuItemWrapper(final MenuItem menuItem, final Settings settings)
 	{

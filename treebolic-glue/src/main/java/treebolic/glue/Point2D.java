@@ -13,6 +13,7 @@ public class Point2D implements treebolic.glue.iface.Point2D
 {
 	/**
 	 * Constructor
+	 *
 	 * @param x x
 	 * @param y y
 	 */

@@ -3,38 +3,14 @@
  */
 package treebolic.browser2;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JToolBar;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkEvent.EventType;
@@ -44,12 +20,7 @@ import treebolic.IWidget;
 import treebolic.Widget;
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.commons.ButtonTabComponent;
-import treebolic.commons.ExternalBrowser;
-import treebolic.commons.FileDialogs;
-import treebolic.commons.Interact;
-import treebolic.commons.Persist;
-import treebolic.commons.SettingsDialog;
+import treebolic.commons.*;
 import treebolic.model.Model;
 import treebolic.model.ModelWriter;
 

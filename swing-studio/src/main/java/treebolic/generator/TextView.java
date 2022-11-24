@@ -3,10 +3,9 @@
  */
 package treebolic.generator;
 
-import java.awt.Font;
-import java.awt.Insets;
+import java.awt.*;
 
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 /**
  * Text view
@@ -22,7 +21,7 @@ public class TextView extends JTextArea
 	 */
 	public TextView()
 	{
-		setText(Messages.getString("TextView.init")); 
+		setText(Messages.getString("TextView.init"));
 		setEditable(false);
 		setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
 		setLineWrap(false);
@@ -32,8 +31,7 @@ public class TextView extends JTextArea
 	/**
 	 * Update text view with text
 	 *
-	 * @param text
-	 *        text
+	 * @param text text
 	 */
 	public void update(final String text)
 	{

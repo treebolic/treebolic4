@@ -3,7 +3,7 @@
  */
 package treebolic.propertyview;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -13,11 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.AbstractTableModel;

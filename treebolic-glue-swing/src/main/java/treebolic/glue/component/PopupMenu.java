@@ -4,9 +4,7 @@
 
 package treebolic.glue.component;
 
-import javax.swing.ImageIcon;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 
 import treebolic.annotations.NonNull;
 import treebolic.glue.ActionListener;

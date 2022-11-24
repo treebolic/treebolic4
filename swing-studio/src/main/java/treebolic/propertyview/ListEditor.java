@@ -3,16 +3,10 @@
  */
 package treebolic.propertyview;
 
-import java.awt.Component;
+import java.awt.*;
 import java.util.Map;
 
-import javax.swing.DefaultCellEditor;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.JList;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
@@ -47,7 +41,9 @@ class ListEditor extends DefaultCellEditor
 			public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
 			{
 				if (ListEditor.this.imageMap == null)
+				{
 					return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+				}
 
 				final ImageIcon icon = ListEditor.this.imageMap.get((String) value);
 				setText(value == null ? PropertyView.defaultString : (String) value);
@@ -101,8 +97,7 @@ class ListEditor extends DefaultCellEditor
 	/**
 	 * Allow for edit line
 	 *
-	 * @param flag
-	 *        true/false
+	 * @param flag true/false
 	 */
 	public void setEditable(final boolean flag)
 	{
@@ -112,8 +107,7 @@ class ListEditor extends DefaultCellEditor
 	/**
 	 * Render strings as images (as per map)
 	 *
-	 * @param imageMap
-	 *        string to image map
+	 * @param imageMap string to image map
 	 */
 	public void setImageMap(final Map<String, ImageIcon> imageMap)
 	{
@@ -131,7 +125,9 @@ class ListEditor extends DefaultCellEditor
 	{
 		String value = (String) super.getCellEditorValue();
 		if (PropertyView.defaultString.equals(value))
+		{
 			value = null;
+		}
 		// System.out.println("List getCellEditorValue " + value);
 		return value;
 	}
@@ -145,7 +141,9 @@ class ListEditor extends DefaultCellEditor
 	{
 		Object value = value0;
 		if (value == null)
+		{
 			value = PropertyView.defaultString;
+		}
 		// System.out.println("List getTableCellEditorComponent " + value);
 		return super.getTableCellEditorComponent(table, value.toString(), isSelected, row, column);
 	}

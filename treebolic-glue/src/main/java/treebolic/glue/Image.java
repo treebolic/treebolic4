@@ -16,8 +16,7 @@ public class Image implements treebolic.glue.iface.Image
 	/**
 	 * Constructor
 	 *
-	 * @param resource
-	 *        resource url
+	 * @param resource resource url
 	 */
 	public Image(final URL resource)
 	{

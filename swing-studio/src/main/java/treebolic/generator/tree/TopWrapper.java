@@ -16,17 +16,16 @@ public class TopWrapper extends SettingsWrapper
 	/**
 	 * Constructor
 	 *
-	 * @param settings
-	 *        settings
+	 * @param settings settings
 	 */
 	public TopWrapper(final Settings settings)
 	{
 		super(settings);
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		return Messages.getString("TopWrapper.label"); 
+		return Messages.getString("TopWrapper.label");
 	}
 }

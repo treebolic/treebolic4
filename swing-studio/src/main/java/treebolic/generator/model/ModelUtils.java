@@ -9,29 +9,11 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Random;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 import treebolic.generator.Pair;
 import treebolic.glue.Color;
-import treebolic.model.IEdge;
-import treebolic.model.INode;
-import treebolic.model.MenuItem;
-import treebolic.model.Model;
-import treebolic.model.MountPoint;
-import treebolic.model.MutableNode;
-import treebolic.model.Settings;
-import treebolic.model.Tree;
-import treebolic.model.TreeMutableEdge;
-import treebolic.model.TreeMutableNode;
-import treebolic.model.Utils;
+import treebolic.model.*;
 
 /**
  * Model utilities

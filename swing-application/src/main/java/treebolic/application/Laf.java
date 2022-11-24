@@ -7,9 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import javax.swing.LookAndFeel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.metal.DefaultMetalTheme;
 import javax.swing.plaf.metal.MetalLookAndFeel;
@@ -165,8 +163,8 @@ public class Laf
 		try
 		{
 			@NonNull final Class<?> clazz = Class.forName(className);
-			@NonNull final Class<?>[] argsClass = new Class[] {};
-			@NonNull final Object[] args = new Object[] {};
+			@NonNull final Class<?>[] argsClass = new Class[]{};
+			@NonNull final Object[] args = new Object[]{};
 
 			@NonNull final Constructor<?> constructor = clazz.getConstructor(argsClass);
 			@NonNull final Object instance = constructor.newInstance(args);
@@ -197,14 +195,14 @@ public class Laf
 	 * Set current theme
 	 *
 	 * @param className LAF class name (may have overridden 'setCurrentTheme()')
-	 * @param theme theme
+	 * @param theme     theme
 	 */
 	static void setCurrentTheme(final String className, @NonNull final MetalTheme theme)
 	{
 		try
 		{
 			@NonNull final Class<?> clazz = Class.forName(className);
-			@NonNull final Class<?>[] argsClass = new Class[] { MetalTheme.class };
+			@NonNull final Class<?>[] argsClass = new Class[]{MetalTheme.class};
 			@NonNull final Method method = clazz.getMethod("setCurrentTheme", argsClass);
 			method.invoke(null, theme);
 		}

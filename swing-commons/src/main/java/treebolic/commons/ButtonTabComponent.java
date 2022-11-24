@@ -3,15 +3,9 @@
  */
 package treebolic.commons;
 
-import java.awt.FlowLayout;
+import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 
 /**
  * Button tab component
@@ -49,8 +43,7 @@ public class ButtonTabComponent extends JPanel
 	/**
 	 * Constructor
 	 *
-	 * @param pane
-	 *        tabbed pane
+	 * @param pane tabbed pane
 	 */
 	public ButtonTabComponent(final JTabbedPane pane)
 	{
@@ -58,7 +51,9 @@ public class ButtonTabComponent extends JPanel
 		super(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
 		if (pane == null)
-			throw new NullPointerException("TabbedPane is null"); 
+		{
+			throw new NullPointerException("TabbedPane is null");
+		}
 		this.tabbedPane = pane;
 
 		// L A B E L
@@ -76,7 +71,9 @@ public class ButtonTabComponent extends JPanel
 			{
 				final int index = pane.indexOfTabComponent(ButtonTabComponent.this);
 				if (index != -1)
+				{
 					return pane.getTitleAt(index);
+				}
 				return null;
 			}
 		};
@@ -89,7 +86,7 @@ public class ButtonTabComponent extends JPanel
 		final JButton button = new JButton();
 
 		// tooltip
-		button.setToolTipText(Messages.getString("ButtonTabComponent.close")); 
+		button.setToolTipText(Messages.getString("ButtonTabComponent.close"));
 
 		// transparent
 		button.setContentAreaFilled(false);

@@ -15,8 +15,7 @@ public class TreeWrapper extends SettingsWrapper
 	/**
 	 * Constructor
 	 *
-	 * @param settings
-	 *        settings
+	 * @param settings settings
 	 */
 	public TreeWrapper(final Settings settings)
 	{

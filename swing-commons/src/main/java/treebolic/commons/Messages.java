@@ -9,12 +9,12 @@ import java.util.ResourceBundle;
 
 /**
  * Language dependency
- * 
+ *
  * @author Bernard Bou
  */
 public class Messages
 {
-	private static final String BUNDLE_NAME = "treebolic.commons.messages"; 
+	private static final String BUNDLE_NAME = "treebolic.commons.messages";
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 

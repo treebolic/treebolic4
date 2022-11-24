@@ -16,17 +16,16 @@ public class ToolsWrapper extends SettingsWrapper
 	/**
 	 * Constructor
 	 *
-	 * @param settings
-	 *        settings
+	 * @param settings settings
 	 */
 	public ToolsWrapper(final Settings settings)
 	{
 		super(settings);
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		return Messages.getString("ToolsWrapper.label"); 
+		return Messages.getString("ToolsWrapper.label");
 	}
 }

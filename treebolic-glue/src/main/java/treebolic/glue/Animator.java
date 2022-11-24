@@ -3,7 +3,7 @@
  */
 package treebolic.glue;
 
-import com.sun.istack.internal.NotNull;
+import treebolic.annotations.NonNull;
 
 /**
  * Animator implements animation
@@ -21,7 +21,7 @@ public class Animator implements treebolic.glue.iface.Animator<ActionListener>
 	}
 
 	@Override
-	public boolean run(@NotNull final ActionListener animation, final int steps, final int startDelay)
+	public boolean run(@NonNull final ActionListener animation, final int steps, final int startDelay)
 	{
 		throw new NotImplementedException();
 	}

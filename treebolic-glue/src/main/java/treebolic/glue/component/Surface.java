@@ -4,8 +4,7 @@
 
 package treebolic.glue.component;
 
-import com.sun.istack.internal.NotNull;
-
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.EventListener;
 import treebolic.glue.Graphics;
@@ -35,7 +34,7 @@ public abstract class Surface implements Component, treebolic.glue.iface.compone
 	}
 
 	@Override
-	abstract public void paint(@NotNull final Graphics g);
+	abstract public void paint(@NonNull final Graphics g);
 
 	@Override
 	public int getWidth()
@@ -62,7 +61,7 @@ public abstract class Surface implements Component, treebolic.glue.iface.compone
 	}
 
 	@Override
-	public void addEventListener(@NotNull final EventListener listener)
+	public void addEventListener(@NonNull final EventListener listener)
 	{
 		throw new NotImplementedException();
 	}

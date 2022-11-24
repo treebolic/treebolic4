@@ -4,8 +4,7 @@
 
 package treebolic.glue.component;
 
-import com.sun.istack.internal.NotNull;
-
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.NotImplementedException;
 
@@ -17,7 +16,7 @@ public class Container implements Component, treebolic.glue.iface.component.Cont
 	/**
 	 * Constructor
 	 *
-	 * @param handle  Opaque handle required for component creation
+	 * @param handle Opaque handle required for component creation
 	 */
 	public Container(@Nullable final Object handle)
 	{
@@ -25,7 +24,7 @@ public class Container implements Component, treebolic.glue.iface.component.Cont
 	}
 
 	@Override
-	public void addComponent(@NotNull final Component component, final int position)
+	public void addComponent(@NonNull final Component component, final int position)
 	{
 		throw new NotImplementedException();
 	}

@@ -3,15 +3,10 @@
  */
 package treebolic.propertyview;
 
-import java.awt.Component;
-import java.awt.Container;
+import java.awt.*;
 import java.io.File;
 
-import javax.swing.AbstractCellEditor;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.TableCellEditor;
 
@@ -56,7 +51,7 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor
 		});
 
 		// file chooser
-		final JButton defaultFileButton = new JButton(Messages.getString("FileEditor.default")); 
+		final JButton defaultFileButton = new JButton(Messages.getString("FileEditor.default"));
 		defaultFileButton.addActionListener(e -> {
 			FileEditor.this.fileChooser.setSelectedFile(null);
 			Container container = FileEditor.this.fileChooser.getParent();
@@ -73,13 +68,13 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor
 			@Override
 			public boolean accept(final File file)
 			{
-				return file.getName().toLowerCase().endsWith(".gif") || file.getName().toLowerCase().endsWith(".jpg") || file.getName().toLowerCase().endsWith(".png") || file.isDirectory();   
+				return file.getName().toLowerCase().endsWith(".gif") || file.getName().toLowerCase().endsWith(".jpg") || file.getName().toLowerCase().endsWith(".png") || file.isDirectory();
 			}
 
 			@Override
 			public String getDescription()
 			{
-				return Messages.getString("FileEditor.image"); 
+				return Messages.getString("FileEditor.image");
 			}
 		});
 		this.fileChooser.addActionListener(e -> {
@@ -98,8 +93,7 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor
 	/**
 	 * Set current directory
 	 *
-	 * @param currentDirectory
-	 *        current directory
+	 * @param currentDirectory current directory
 	 */
 	public void setDirectory(final File currentDirectory)
 	{

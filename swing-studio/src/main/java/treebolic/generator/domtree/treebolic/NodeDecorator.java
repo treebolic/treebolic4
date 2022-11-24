@@ -19,8 +19,7 @@ public class NodeDecorator extends ElementDecorator
 	/**
 	 * Constructor
 	 *
-	 * @param node
-	 *        DOM node
+	 * @param node DOM node
 	 */
 	public NodeDecorator(final Node node)
 	{
@@ -36,7 +35,7 @@ public class NodeDecorator extends ElementDecorator
 	@Override
 	public String getName()
 	{
-		return " " + super.getName() + " ";  
+		return " " + super.getName() + " ";
 	}
 
 	/*

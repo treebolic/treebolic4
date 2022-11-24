@@ -57,17 +57,17 @@ public class DefaultDecorator
 		String value = this.node.getNodeValue();
 		if (value != null)
 		{
-			buffer.append(": "); 
+			buffer.append(": ");
 
 			// trim the value to get rid of newlines at the front
 			value = value.trim();
-			if ("\n".compareTo(value) == 0) 
+			if ("\n".compareTo(value) == 0)
 			{
 				buffer.append('\u00B6');
 			}
 			else
 			{
-				final int breakPos = value.indexOf("\n"); 
+				final int breakPos = value.indexOf("\n");
 				if (breakPos >= 0)
 				{
 					value = value.substring(0, breakPos);

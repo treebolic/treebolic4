@@ -4,15 +4,12 @@
 
 package treebolic.commons;
 
-import java.awt.Desktop;
+import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 /**
  * Hyperlink button

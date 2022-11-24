@@ -3,11 +3,11 @@
  */
 package treebolic.generator;
 
-import java.awt.Color;
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.swing.JEditorPane;
+import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
@@ -25,8 +25,8 @@ public class HtmlView extends JEditorPane implements HyperlinkListener
 	 */
 	public HtmlView()
 	{
-		setText(Messages.getString("HtmlView.init")); 
-		setContentType("text/html; charset=UTF-8"); 
+		setText(Messages.getString("HtmlView.init"));
+		setContentType("text/html; charset=UTF-8");
 		setForeground(Color.blue);
 		setEditable(false);
 		addHyperlinkListener(this);
@@ -48,7 +48,7 @@ public class HtmlView extends JEditorPane implements HyperlinkListener
 			}
 			catch (final IOException e)
 			{
-				setText(Messages.getString("HtmlView.err_url") + event.getURL()); 
+				setText(Messages.getString("HtmlView.err_url") + event.getURL());
 			}
 		}
 	}

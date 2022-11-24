@@ -3,14 +3,14 @@
  */
 package treebolic.commons;
 
-import java.awt.Desktop;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 /**
  * External browse
@@ -22,15 +22,15 @@ public class ExternalBrowser
 	/**
 	 * Browse
 	 *
-	 * @param browser
-	 *        browser
-	 * @param url
-	 *        url string
+	 * @param browser browser
+	 * @param url     url string
 	 */
 	static public void browse(final String browser, final String url)
 	{
 		if (url == null || url.isEmpty())
+		{
 			return;
+		}
 		if (browser != null && !browser.isEmpty())
 		{
 			ExternalBrowser.run(browser + ' ' + url);
@@ -42,19 +42,19 @@ public class ExternalBrowser
 	/**
 	 * Help
 	 *
-	 * @param browser
-	 *        browser
-	 * @param helpUrl0
-	 *        help url string
+	 * @param browser  browser
+	 * @param helpUrl0 help url string
 	 */
 	static public void help(final String browser, final String helpUrl0)
 	{
 		if (helpUrl0 == null || helpUrl0.isEmpty())
+		{
 			return;
+		}
 
 		// help url
 		String helpUrl = helpUrl0;
-		if (!helpUrl.startsWith("file:")) 
+		if (!helpUrl.startsWith("file:"))
 		{
 			final File folder = new File(helpUrl);
 			try
@@ -66,11 +66,11 @@ public class ExternalBrowser
 				return;
 			}
 		}
-		if (!helpUrl.endsWith("/")) 
+		if (!helpUrl.endsWith("/"))
 		{
-			helpUrl += "/"; 
+			helpUrl += "/";
 		}
-		helpUrl += "index.html"; 
+		helpUrl += "index.html";
 
 		// browse
 		ExternalBrowser.browse(browser, helpUrl);
@@ -79,8 +79,7 @@ public class ExternalBrowser
 	/**
 	 * Browse through desktop facility
 	 *
-	 * @param url
-	 *        link url
+	 * @param url link url
 	 */
 	static public void browse(final String url)
 	{
@@ -91,7 +90,7 @@ public class ExternalBrowser
 				final File file = new File(url);
 				boolean exists = file.exists();
 				final URI uri = exists ? file.toURI() : new URI(url);
-				System.out.println(Messages.getString("Context.linkto") + uri); 
+				System.out.println(Messages.getString("Context.linkto") + uri);
 
 				// we are likely to be on the popup handler
 				SwingUtilities.invokeLater(() -> {
@@ -115,8 +114,7 @@ public class ExternalBrowser
 	/**
 	 * Run command as separate process
 	 *
-	 * @param command
-	 *        command line
+	 * @param command command line
 	 */
 	static private void run(final String command)
 	{
@@ -128,7 +126,7 @@ public class ExternalBrowser
 			}
 			catch (final Exception e)
 			{
-				System.err.println("Cannot run " + command + " " + e);  
+				System.err.println("Cannot run " + command + " " + e);
 			}
 		}
 	}

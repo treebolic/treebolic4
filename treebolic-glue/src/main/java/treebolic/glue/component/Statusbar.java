@@ -3,13 +3,13 @@
  */
 package treebolic.glue.component;
 
-import com.sun.istack.internal.NotNull;
+import java.util.function.Function;
 
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.ActionListener;
 import treebolic.glue.Color;
 import treebolic.glue.NotImplementedException;
-import treebolic.glue.iface.component.Converter;
 
 /**
  * Status bar
@@ -47,7 +47,7 @@ public class Statusbar implements Component, treebolic.glue.iface.component.Stat
 	}
 
 	@Override
-	public void addListener(@NotNull final ActionListener listener)
+	public void addListener(@NonNull final ActionListener listener)
 	{
 		throw new NotImplementedException();
 	}
@@ -59,7 +59,7 @@ public class Statusbar implements Component, treebolic.glue.iface.component.Stat
 	}
 
 	@Override
-	public void put(final int image, @Nullable final Converter converter, @Nullable final String label, final String... contents)
+	public void put(final int image, @Nullable final Function<CharSequence[], String> converter, @Nullable final String label, final String... contents)
 	{
 		throw new NotImplementedException();
 	}

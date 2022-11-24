@@ -24,20 +24,18 @@ public class MenuWrapper extends SettingsWrapper
 	/**
 	 * Constructor
 	 *
-	 * @param menu
-	 *        menu
-	 * @param settings
-	 *        settings
+	 * @param menu     menu
+	 * @param settings settings
 	 */
 	public MenuWrapper(final List<MenuItem> menu, final Settings settings)
 	{
 		super(settings);
 		this.menu = menu;
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		return Messages.getString("MenuWrapper.label"); 
+		return Messages.getString("MenuWrapper.label");
 	}
 }

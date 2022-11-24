@@ -3,14 +3,7 @@
  */
 package treebolic.dtd;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -24,7 +17,7 @@ public class Dtd
 	/**
 	 * DTD file name
 	 */
-	static final String DTD_FILE = "Treebolic.dtd"; 
+	static final String DTD_FILE = "Treebolic.dtd";
 
 	/**
 	 * Get DTD as string
@@ -67,7 +60,7 @@ public class Dtd
 		}
 		catch (final IOException ioe)
 		{
-			System.err.println("Can't find " + uRL + " " + ioe);  
+			System.err.println("Can't find " + uRL + " " + ioe);
 			return false;
 		}
 	}
@@ -86,7 +79,7 @@ public class Dtd
 		{
 			return false;
 		}
-		try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(outstream, StandardCharsets.UTF_8), false)) 
+		try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(outstream, StandardCharsets.UTF_8), false))
 		{
 			writer.print(str);
 			return true;

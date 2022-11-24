@@ -3,19 +3,17 @@
  */
 package treebolic.generator.domtree.treebolic;
 
-import java.awt.Color;
-import java.awt.Font;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
 import treebolic.generator.domtree.DefaultDecorator;
 
@@ -90,17 +88,17 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 	/**
 	 * Src pattern
 	 */
-	private static final Pattern srcPattern = Pattern.compile("src=\"([^\"]*)\""); 
+	private static final Pattern srcPattern = Pattern.compile("src=\"([^\"]*)\"");
 
 	/**
 	 * From pattern
 	 */
-	private static final Pattern fromPattern = Pattern.compile("from=\"([^\"]*)\""); 
+	private static final Pattern fromPattern = Pattern.compile("from=\"([^\"]*)\"");
 
 	/**
 	 * To pattern
 	 */
-	private static final Pattern toPattern = Pattern.compile("to=\"([^\"]*)\""); 
+	private static final Pattern toPattern = Pattern.compile("to=\"([^\"]*)\"");
 
 	// maps
 
@@ -172,13 +170,13 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 	{
 		// styles for class
 		this.typeToNameStyleMap = new HashMap<>();
-		this.typeToNameStyleMap.put("node", Renderer.nodeNameStyle); 
-		this.typeToNameStyleMap.put("edge", Renderer.nodeNameStyle); 
-		this.typeToNameStyleMap.put("a", Renderer.linkNameStyle); 
+		this.typeToNameStyleMap.put("node", Renderer.nodeNameStyle);
+		this.typeToNameStyleMap.put("edge", Renderer.nodeNameStyle);
+		this.typeToNameStyleMap.put("a", Renderer.linkNameStyle);
 		this.typeToValueStyleMap = new HashMap<>();
-		this.typeToValueStyleMap.put("node", Renderer.edgeValueStyle); 
-		this.typeToValueStyleMap.put("edge", Renderer.edgeValueStyle); 
-		this.typeToValueStyleMap.put("a", Renderer.linkValueStyle); 
+		this.typeToValueStyleMap.put("node", Renderer.edgeValueStyle);
+		this.typeToValueStyleMap.put("edge", Renderer.edgeValueStyle);
+		this.typeToValueStyleMap.put("a", Renderer.linkValueStyle);
 
 		// styles for patterns
 		this.patterns.add(srcPattern);
@@ -190,9 +188,9 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 
 		// icons for class
 		this.typeToIconMap = new HashMap<>();
-		this.typeToIconMap.put("node", Renderer.nodeIcon); 
-		this.typeToIconMap.put("edge", Renderer.edgeIcon); 
-		this.typeToIconMap.put("a", Renderer.linkIcon); 
+		this.typeToIconMap.put("node", Renderer.nodeIcon);
+		this.typeToIconMap.put("edge", Renderer.edgeIcon);
+		this.typeToIconMap.put("a", Renderer.linkIcon);
 	}
 
 	/*
@@ -207,7 +205,9 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 			final Element element = (Element) node;
 			final Icon icon = this.typeToIconMap.get(element.getNodeName());
 			if (icon != null)
+			{
 				return icon;
+			}
 		}
 		return super.getIconStyle(node);
 	}
@@ -224,7 +224,9 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 			final Element element = (Element) node;
 			final SimpleAttributeSet style = this.typeToNameStyleMap.get(element.getNodeName());
 			if (style != null)
+			{
 				return style;
+			}
 		}
 		return super.getNameStyle(node);
 	}
@@ -241,7 +243,9 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 			final Element element = (Element) node;
 			final SimpleAttributeSet style = this.typeToValueStyleMap.get(element.getNodeName());
 			if (style != null)
+			{
 				return style;
+			}
 		}
 		return super.getValueStyle(node);
 	}
@@ -254,7 +258,9 @@ public class Renderer extends treebolic.generator.domtree.Renderer
 	protected DefaultDecorator makeDecorator(final Node node)
 	{
 		if (node.getNodeType() != Node.ELEMENT_NODE)
+		{
 			return super.makeDecorator(node);
+		}
 
 		final Element element = (Element) node;
 		final String tag = element.getTagName();

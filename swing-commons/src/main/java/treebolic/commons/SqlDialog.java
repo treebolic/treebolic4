@@ -3,36 +3,14 @@
  */
 package treebolic.commons;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Properties;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.table.TableModel;
 
 /**
@@ -47,82 +25,14 @@ public class SqlDialog extends JDialog
 	/**
 	 * Attributes
 	 */
-	private final String[][] nameValues = new String[][] { //
-			{ "nodes.id", null }, 
-			{ "nodes.label", null }, 
-			{ "nodes.content", null }, 
-			{ "nodes.backcolor", null }, 
-			{ "nodes.forecolor", null }, 
-			{ "nodes.image", null }, 
-			{ "nodes.link", null }, 
-			{ "nodes.target", null }, 
-			{ "nodes.weight", null }, 
-			{ "nodes.mountpoint", null }, 
-			{ "nodes.mountnow", null }, 
+	private final String[][] nameValues = new String[][]{ //
+			{"nodes.id", null}, {"nodes.label", null}, {"nodes.content", null}, {"nodes.backcolor", null}, {"nodes.forecolor", null}, {"nodes.image", null}, {"nodes.link", null}, {"nodes.target", null}, {"nodes.weight", null}, {"nodes.mountpoint", null}, {"nodes.mountnow", null},
 
-			{ "edges.istree", null }, 
-			{ "edges.from", null }, 
-			{ "edges.to", null }, 
-			{ "edges.label", null }, 
-			{ "edges.image", null }, 
-			{ "edges.color", null }, 
-			{ "edges.hidden", null }, 
-			{ "edges.stroke", null }, 
-			{ "edges.fromterminator", null }, 
-			{ "edges.toterminator", null }, 
+			{"edges.istree", null}, {"edges.from", null}, {"edges.to", null}, {"edges.label", null}, {"edges.image", null}, {"edges.color", null}, {"edges.hidden", null}, {"edges.stroke", null}, {"edges.fromterminator", null}, {"edges.toterminator", null},
 
-			{ "settings.backimage", null }, 
-			{ "settings.backcolor", null }, 
-			{ "settings.forecolor", null }, 
-			{ "settings.fontface", null }, 
-			{ "settings.fontsize", null }, 
-			{ "settings.scalefonts", null }, 
-			{ "settings.fontscaler", null }, 
-			{ "settings.scaleimages", null }, 
-			{ "settings.imagescaler", null }, 
-			{ "settings.orientation", null }, 
-			{ "settings.expansion", null }, 
-			{ "settings.sweep", null }, 
-			{ "settings.preserveorientation", null }, 
-			{ "settings.hastoolbar", null }, 
-			{ "settings.hasstatusbar", null }, 
-			{ "settings.haspopupmenu", null }, 
-			{ "settings.hastooltip", null }, 
-			{ "settings.tooltipdisplayscontent", null }, 
-			{ "settings.focusonhover", null }, 
-			{ "settings.focus", null }, 
-			{ "settings.xmoveto", null }, 
-			{ "settings.ymoveto", null }, 
-			{ "settings.xshift", null }, 
-			{ "settings.yshift", null }, 
-			{ "settings.nodebackcolor", null }, 
-			{ "settings.nodeforecolor", null }, 
-			{ "settings.nodeborder", null }, 
-			{ "settings.nodeellipsize", null }, 
-			{ "settings.nodelabelmaxlines", null }, 
-			{ "settings.nodelabelextralinefactor", null }, 
-			{ "settings.nodeimage", null }, 
-			{ "settings.treeedgecolor", null }, 
-			{ "settings.treeedgehidden", null }, 
-			{ "settings.treeedgestroke", null }, 
-			{ "settings.treeedgefromterminator", null }, 
-			{ "settings.treeedgetoterminator", null }, 
-			{ "settings.treeedgeimage", null }, 
-			{ "settings.edgecolor", null }, 
-			{ "settings.edgearc", null }, 
-			{ "settings.edgehidden", null }, 
-			{ "settings.edgestroke", null }, 
-			{ "settings.edgefromterminator", null }, 
-			{ "settings.edgetoterminator", null }, 
-			{ "settings.edgeimage", null }, 
+			{"settings.backimage", null}, {"settings.backcolor", null}, {"settings.forecolor", null}, {"settings.fontface", null}, {"settings.fontsize", null}, {"settings.scalefonts", null}, {"settings.fontscaler", null}, {"settings.scaleimages", null}, {"settings.imagescaler", null}, {"settings.orientation", null}, {"settings.expansion", null}, {"settings.sweep", null}, {"settings.preserveorientation", null}, {"settings.hastoolbar", null}, {"settings.hasstatusbar", null}, {"settings.haspopupmenu", null}, {"settings.hastooltip", null}, {"settings.tooltipdisplayscontent", null}, {"settings.focusonhover", null}, {"settings.focus", null}, {"settings.xmoveto", null}, {"settings.ymoveto", null}, {"settings.xshift", null}, {"settings.yshift", null}, {"settings.nodebackcolor", null}, {"settings.nodeforecolor", null}, {"settings.nodeborder", null}, {"settings.nodeellipsize", null}, {"settings.nodelabelmaxlines", null}, {"settings.nodelabelextralinefactor", null}, {"settings.nodeimage", null}, {"settings.treeedgecolor", null}, {"settings.treeedgehidden", null}, {"settings.treeedgestroke", null}, {"settings.treeedgefromterminator", null}, {"settings.treeedgetoterminator", null}, {"settings.treeedgeimage", null}, {"settings.edgecolor", null}, {"settings.edgearc", null}, {"settings.edgehidden", null}, {"settings.edgestroke", null}, {"settings.edgefromterminator", null}, {"settings.edgetoterminator", null}, {"settings.edgeimage", null},
 
-			{ "menu.action", null }, 
-			{ "menu.label", null }, 
-			{ "menu.target", null }, 
-			{ "menu.scope", null }, 
-			{ "menu.mode", null }, 
-			{ "menu.link", null }, 
-	};
+			{"menu.action", null}, {"menu.label", null}, {"menu.target", null}, {"menu.scope", null}, {"menu.mode", null}, {"menu.link", null},};
 
 	/**
 	 * Ok button pressed
@@ -177,8 +87,7 @@ public class SqlDialog extends JDialog
 	/**
 	 * Constructor
 	 *
-	 * @param propertyUrlString
-	 *        property file string
+	 * @param propertyUrlString property file string
 	 */
 	public SqlDialog(final String propertyUrlString)
 	{
@@ -192,7 +101,7 @@ public class SqlDialog extends JDialog
 		this.treeEdgesSqlTextArea = new JTextArea();
 		this.edgesSqlTextArea = new JTextArea();
 		this.settingsSqlTextArea = new JTextArea();
-		this.nameTable = new JTable(this.nameValues, new String[] { Messages.getString("SqlDialog.name"), Messages.getString("SqlDialog.value") });  
+		this.nameTable = new JTable(this.nameValues, new String[]{Messages.getString("SqlDialog.name"), Messages.getString("SqlDialog.value")});
 
 		initialize();
 		load();
@@ -203,31 +112,31 @@ public class SqlDialog extends JDialog
 	 */
 	private void initialize()
 	{
-		final JLabel titleLabel = new JLabel(Messages.getString("SqlDialog.title")); 
+		final JLabel titleLabel = new JLabel(Messages.getString("SqlDialog.title"));
 		titleLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 
-		final JLabel uRLLabel = new JLabel(Messages.getString("SqlDialog.url")); 
-		final JLabel userLabel = new JLabel(Messages.getString("SqlDialog.user")); 
-		final JLabel passwdLabel = new JLabel(Messages.getString("SqlDialog.password")); 
-		final JLabel sqlLabel = new JLabel(Messages.getString("SqlDialog.sql")); 
-		final JLabel mapLabel = new JLabel(Messages.getString("SqlDialog.map")); 
+		final JLabel uRLLabel = new JLabel(Messages.getString("SqlDialog.url"));
+		final JLabel userLabel = new JLabel(Messages.getString("SqlDialog.user"));
+		final JLabel passwdLabel = new JLabel(Messages.getString("SqlDialog.password"));
+		final JLabel sqlLabel = new JLabel(Messages.getString("SqlDialog.sql"));
+		final JLabel mapLabel = new JLabel(Messages.getString("SqlDialog.map"));
 
 		this.uRLField.setEditable(true);
-		this.uRLField.setToolTipText(Messages.getString("SqlDialog.tooltip_url")); 
+		this.uRLField.setToolTipText(Messages.getString("SqlDialog.tooltip_url"));
 
-		this.userTextField.setToolTipText(Messages.getString("SqlDialog.tooltip_user")); 
-		this.userTextField.setText(Messages.getString("SqlDialog.prompt_user")); 
+		this.userTextField.setToolTipText(Messages.getString("SqlDialog.tooltip_user"));
+		this.userTextField.setText(Messages.getString("SqlDialog.prompt_user"));
 
 		this.passwdField.setToolTipText(null);
-		this.passwdField.setText(Messages.getString("SqlDialog.prompt_password")); 
+		this.passwdField.setText(Messages.getString("SqlDialog.prompt_password"));
 
 		this.nodesSqlTextArea.setEditable(true);
 		this.nodesSqlTextArea.setLineWrap(true);
 		this.nodesSqlTextArea.setWrapStyleWord(true);
 		this.nodesSqlTextArea.setRequestFocusEnabled(true);
-		this.nodesSqlTextArea.setToolTipText(Messages.getString("SqlDialog.tooltip_sqlnodes")); 
+		this.nodesSqlTextArea.setToolTipText(Messages.getString("SqlDialog.tooltip_sqlnodes"));
 		this.nodesSqlTextArea.setText(null);
 		this.nodesSqlTextArea.setRows(4);
 
@@ -235,7 +144,7 @@ public class SqlDialog extends JDialog
 		this.treeEdgesSqlTextArea.setLineWrap(true);
 		this.treeEdgesSqlTextArea.setWrapStyleWord(true);
 		this.treeEdgesSqlTextArea.setRequestFocusEnabled(true);
-		this.treeEdgesSqlTextArea.setToolTipText(Messages.getString("SqlDialog.tooltip_sqltreeedges")); 
+		this.treeEdgesSqlTextArea.setToolTipText(Messages.getString("SqlDialog.tooltip_sqltreeedges"));
 		this.treeEdgesSqlTextArea.setText(null);
 		this.treeEdgesSqlTextArea.setRows(4);
 
@@ -243,7 +152,7 @@ public class SqlDialog extends JDialog
 		this.edgesSqlTextArea.setLineWrap(true);
 		this.edgesSqlTextArea.setWrapStyleWord(true);
 		this.edgesSqlTextArea.setRequestFocusEnabled(true);
-		this.edgesSqlTextArea.setToolTipText(Messages.getString("SqlDialog.tooltip_sqledges")); 
+		this.edgesSqlTextArea.setToolTipText(Messages.getString("SqlDialog.tooltip_sqledges"));
 		this.edgesSqlTextArea.setText(null);
 		this.edgesSqlTextArea.setRows(4);
 
@@ -251,7 +160,7 @@ public class SqlDialog extends JDialog
 		this.settingsSqlTextArea.setLineWrap(true);
 		this.settingsSqlTextArea.setWrapStyleWord(true);
 		this.settingsSqlTextArea.setRequestFocusEnabled(true);
-		this.settingsSqlTextArea.setToolTipText(Messages.getString("SqlDialog.tooltip_sqlsettings")); 
+		this.settingsSqlTextArea.setToolTipText(Messages.getString("SqlDialog.tooltip_sqlsettings"));
 		this.settingsSqlTextArea.setText(null);
 		this.settingsSqlTextArea.setRows(4);
 
@@ -265,17 +174,17 @@ public class SqlDialog extends JDialog
 		settingsSqlScrollPane.setBorder(null);
 
 		final JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.add(Messages.getString("SqlDialog.tab_nodes"), nodesSqlScrollPane); 
-		tabbedPane.add(Messages.getString("SqlDialog.tab_treeedges"), treeEdgesSqlScrollPane); 
-		tabbedPane.add(Messages.getString("SqlDialog.tab_edges"), edgesSqlScrollPane); 
-		tabbedPane.add(Messages.getString("SqlDialog.tab_settings"), settingsSqlScrollPane); 
+		tabbedPane.add(Messages.getString("SqlDialog.tab_nodes"), nodesSqlScrollPane);
+		tabbedPane.add(Messages.getString("SqlDialog.tab_treeedges"), treeEdgesSqlScrollPane);
+		tabbedPane.add(Messages.getString("SqlDialog.tab_edges"), edgesSqlScrollPane);
+		tabbedPane.add(Messages.getString("SqlDialog.tab_settings"), settingsSqlScrollPane);
 
-		this.nameTable.setToolTipText(Messages.getString("SqlDialog.tooltip_value")); 
+		this.nameTable.setToolTipText(Messages.getString("SqlDialog.tooltip_value"));
 		final JScrollPane mapsSqlScrollPane = new JScrollPane(this.nameTable, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		mapsSqlScrollPane.setPreferredSize(new Dimension(500, 100));
 
 		final JButton okButton = new JButton();
-		okButton.setText(Messages.getString("SqlDialog.ok")); 
+		okButton.setText(Messages.getString("SqlDialog.ok"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -286,7 +195,7 @@ public class SqlDialog extends JDialog
 		});
 
 		final JButton cancelButton = new JButton();
-		cancelButton.setText(Messages.getString("SqlDialog.cancel")); 
+		cancelButton.setText(Messages.getString("SqlDialog.cancel"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -294,7 +203,7 @@ public class SqlDialog extends JDialog
 		cancelButton.addActionListener(e -> setVisible(false));
 
 		final JButton loadButton = new JButton();
-		loadButton.setText(Messages.getString("SqlDialog.load")); 
+		loadButton.setText(Messages.getString("SqlDialog.load"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -310,7 +219,7 @@ public class SqlDialog extends JDialog
 				@Override
 				public boolean accept(final File file)
 				{
-					return file.getName().toLowerCase().endsWith(".properties") || file.isDirectory(); 
+					return file.getName().toLowerCase().endsWith(".properties") || file.isDirectory();
 				}
 
 				/*
@@ -320,12 +229,12 @@ public class SqlDialog extends JDialog
 				@Override
 				public String getDescription()
 				{
-					return Messages.getString("SqlDialog.propertyfiles"); 
+					return Messages.getString("SqlDialog.propertyfiles");
 				}
 			});
-			fileChooser.setDialogTitle(Messages.getString("SqlDialog.title_choose")); 
+			fileChooser.setDialogTitle(Messages.getString("SqlDialog.title_choose"));
 			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fileChooser.setCurrentDirectory(new File(".")); 
+			fileChooser.setCurrentDirectory(new File("."));
 			if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
 			{
 				try
@@ -374,13 +283,13 @@ public class SqlDialog extends JDialog
 	public Properties getProperties()
 	{
 		final Properties properties = new Properties();
-		properties.put("url", this.uRLField.getText() == null ? "" : this.uRLField.getText());  
-		properties.put("user", this.userTextField.getText()); 
-		properties.put("passwd", new String(this.passwdField.getPassword())); 
-		properties.put("nodesSql", this.nodesSqlTextArea.getText()); 
-		properties.put("treeedgesSql", this.treeEdgesSqlTextArea.getText()); 
-		properties.put("edgesSql", this.edgesSqlTextArea.getText()); 
-		properties.put("settingsSql", this.settingsSqlTextArea.getText()); 
+		properties.put("url", this.uRLField.getText() == null ? "" : this.uRLField.getText());
+		properties.put("user", this.userTextField.getText());
+		properties.put("passwd", new String(this.passwdField.getPassword()));
+		properties.put("nodesSql", this.nodesSqlTextArea.getText());
+		properties.put("treeedgesSql", this.treeEdgesSqlTextArea.getText());
+		properties.put("edgesSql", this.edgesSqlTextArea.getText());
+		properties.put("settingsSql", this.settingsSqlTextArea.getText());
 		final TableModel model = this.nameTable.getModel();
 		int rowIndex = 0;
 		for (final String[] row : this.nameValues)
@@ -399,18 +308,17 @@ public class SqlDialog extends JDialog
 	/**
 	 * Set properties
 	 *
-	 * @param properties
-	 *        properties
+	 * @param properties properties
 	 */
 	public void setProperties(final Properties properties)
 	{
-		this.uRLField.setText((String) properties.get("url")); 
-		this.userTextField.setText((String) properties.get("user")); 
-		this.passwdField.setText((String) properties.get("passwd")); 
-		this.nodesSqlTextArea.setText((String) properties.get("nodesSql")); 
-		this.treeEdgesSqlTextArea.setText((String) properties.get("treeEdgesSql")); 
-		this.edgesSqlTextArea.setText((String) properties.get("edgesSql")); 
-		this.settingsSqlTextArea.setText((String) properties.get("settingsSql")); 
+		this.uRLField.setText((String) properties.get("url"));
+		this.userTextField.setText((String) properties.get("user"));
+		this.passwdField.setText((String) properties.get("passwd"));
+		this.nodesSqlTextArea.setText((String) properties.get("nodesSql"));
+		this.treeEdgesSqlTextArea.setText((String) properties.get("treeEdgesSql"));
+		this.edgesSqlTextArea.setText((String) properties.get("edgesSql"));
+		this.settingsSqlTextArea.setText((String) properties.get("settingsSql"));
 		final TableModel model = this.nameTable.getModel();
 		int rowIndex = 0;
 		for (final String[] row : this.nameValues)
@@ -428,7 +336,9 @@ public class SqlDialog extends JDialog
 	public void load()
 	{
 		if (this.propertyUrlString == null)
+		{
 			return;
+		}
 
 		try
 		{
@@ -451,7 +361,9 @@ public class SqlDialog extends JDialog
 	public void save()
 	{
 		if (this.propertyUrlString == null)
+		{
 			return;
+		}
 		try
 		{
 			final File file = new File(new URL(this.propertyUrlString).toURI());
@@ -482,8 +394,7 @@ public class SqlDialog extends JDialog
 	/**
 	 * Center on screen
 	 *
-	 * @param component
-	 *        component to center
+	 * @param component component to center
 	 */
 	static public void center(final Component component)
 	{
@@ -503,12 +414,11 @@ public class SqlDialog extends JDialog
 	/**
 	 * Main
 	 *
-	 * @param args
-	 *        arguments
+	 * @param args arguments
 	 */
 	static public void main(final String[] args)
 	{
-		UIManager.put("swing.boldMetal", false); 
+		UIManager.put("swing.boldMetal", false);
 		final SqlDialog dialog = new SqlDialog(args.length > 0 ? args[0] : null);
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

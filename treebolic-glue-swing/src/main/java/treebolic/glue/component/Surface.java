@@ -4,9 +4,9 @@
 
 package treebolic.glue.component;
 
-import java.awt.Cursor;
+import java.awt.*;
 
-import javax.swing.Timer;
+import javax.swing.*;
 
 import treebolic.annotations.Nullable;
 import treebolic.glue.EventListener;

@@ -38,12 +38,9 @@ public class Animator extends javax.swing.Timer implements java.awt.event.Action
 	/**
 	 * Run animation
 	 *
-	 * @param animation
-	 *        animation callback
-	 * @param steps
-	 *        number of steps
-	 * @param startDelay
-	 *        start delay
+	 * @param animation  animation callback
+	 * @param steps      number of steps
+	 * @param startDelay start delay
 	 * @return true if successful
 	 */
 	@Override

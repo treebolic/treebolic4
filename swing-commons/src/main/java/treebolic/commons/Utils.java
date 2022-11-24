@@ -3,9 +3,7 @@
  */
 package treebolic.commons;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
 
 /**
  * Utilities
@@ -19,8 +17,7 @@ public class Utils
 	/**
 	 * Center on screen
 	 *
-	 * @param component
-	 *        component to center
+	 * @param component component to center
 	 */
 	static public void center(final Component component)
 	{

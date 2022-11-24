@@ -3,7 +3,7 @@
  */
 package treebolic.generator;
 
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import treebolic.Studio;
 
@@ -27,8 +27,7 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 	/**
 	 * Standalone entry point
 	 *
-	 * @param args
-	 *        program arguments
+	 * @param args program arguments
 	 */
 	static public void main(final String[] args)
 	{

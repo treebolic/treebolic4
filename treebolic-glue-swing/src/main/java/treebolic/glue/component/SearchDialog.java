@@ -20,36 +20,29 @@ class SearchDialog extends JDialog
 {
 	// SCOPE
 
-	static private final String[] scopeLabels = new String[] { Messages.getString("SearchDialog.label"), Messages.getString("SearchDialog.content"), Messages.getString("SearchDialog.link"), Messages.getString("SearchDialog.id"), };
+	static private final String[] scopeLabels = new String[]{Messages.getString("SearchDialog.label"), Messages.getString("SearchDialog.content"), Messages.getString("SearchDialog.link"), Messages.getString("SearchDialog.id"),};
 
 	// to avoid dependency on SearchScope
-	static private final Object[] scopeValues = new String[] { "LABEL", "CONTENT", "LINK", "ID" };
+	static private final Object[] scopeValues = new String[]{"LABEL", "CONTENT", "LINK", "ID"};
 
 	/**
 	 * Icon array
 	 */
 	@SuppressWarnings("ConstantConditions")
-	static final ImageIcon[] scopeIcons = new ImageIcon[] { new ImageIcon(SearchDialog.class.getResource("images/search_label.png")),
-			new ImageIcon(SearchDialog.class.getResource("images/search_content.png")), 
-			new ImageIcon(SearchDialog.class.getResource("images/search_link.png")), 
-			new ImageIcon(SearchDialog.class.getResource("images/search_id.png")), 
-	};
+	static final ImageIcon[] scopeIcons = new ImageIcon[]{new ImageIcon(SearchDialog.class.getResource("images/search_label.png")), new ImageIcon(SearchDialog.class.getResource("images/search_content.png")), new ImageIcon(SearchDialog.class.getResource("images/search_link.png")), new ImageIcon(SearchDialog.class.getResource("images/search_id.png")),};
 
 	// MODE
 
-	static private final String[] modeLabels = new String[] { Messages.getString("SearchDialog.startswith"), Messages.getString("SearchDialog.equals"), Messages.getString("SearchDialog.includes") };
+	static private final String[] modeLabels = new String[]{Messages.getString("SearchDialog.startswith"), Messages.getString("SearchDialog.equals"), Messages.getString("SearchDialog.includes")};
 
 	// to avoid dependency on SearchMode
-	static private final Object[] modeValues = new String[] { "STARTSWITH", "EQUALS", "INCLUDES" };
+	static private final Object[] modeValues = new String[]{"STARTSWITH", "EQUALS", "INCLUDES"};
 
 	/**
 	 * Icon array
 	 */
 	@SuppressWarnings("ConstantConditions")
-	static final ImageIcon[] modeIcons = new ImageIcon[] { new ImageIcon(SearchDialog.class.getResource("images/search_startswith.png")),
-			new ImageIcon(SearchDialog.class.getResource("images/search_equals.png")), 
-			new ImageIcon(SearchDialog.class.getResource("images/search_includes.png")), 
-	};
+	static final ImageIcon[] modeIcons = new ImageIcon[]{new ImageIcon(SearchDialog.class.getResource("images/search_startswith.png")), new ImageIcon(SearchDialog.class.getResource("images/search_equals.png")), new ImageIcon(SearchDialog.class.getResource("images/search_includes.png")),};
 
 	// V A L U E S
 
@@ -101,14 +94,10 @@ class SearchDialog extends JDialog
 	/**
 	 * Constructor
 	 *
-	 * @param scopeValue0
-	 *        initial scope value
-	 * @param modeValue0
-	 *        initial mode value
-	 * @param title
-	 *        title
-	 * @param label
-	 *        label
+	 * @param scopeValue0 initial scope value
+	 * @param modeValue0  initial mode value
+	 * @param title       title
+	 * @param label       label
 	 */
 	public SearchDialog(final String scopeValue0, final String modeValue0, final String title, final String label)
 	{

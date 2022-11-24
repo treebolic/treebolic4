@@ -3,24 +3,11 @@
  */
 package treebolic.generator;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.util.Properties;
 
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.tree.TreeCellRenderer;
 
 import treebolic.IContext;

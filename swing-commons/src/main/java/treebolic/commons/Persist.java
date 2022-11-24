@@ -21,8 +21,7 @@ public class Persist
 	/**
 	 * Obtain settings (handles initial state)
 	 *
-	 * @param persistFile
-	 *        persist file
+	 * @param persistFile persist file
 	 * @return properties
 	 */
 	static public Properties getSettings(final String persistFile)
@@ -33,7 +32,7 @@ public class Persist
 			String location = CodeBase.getJarLocation();
 			if (location == null)
 			{
-				final File file = new File(System.getProperty("user.dir")); 
+				final File file = new File(System.getProperty("user.dir"));
 				try
 				{
 					location = file.toURI().toURL().toString();
@@ -43,18 +42,18 @@ public class Persist
 					return settings;
 				}
 			}
-			if (!location.endsWith("/")) 
+			if (!location.endsWith("/"))
 			{
 				location += '/';
 			}
-			if (location.endsWith("/lib/")) 
+			if (location.endsWith("/lib/"))
 			{
 				location = location.substring(0, location.length() - 4);
 			}
-			settings.setProperty("base", location + "data/test/");  
-			settings.setProperty("images", location + "data/test/images/");  
-			settings.setProperty("help", location + "doc/");  
-			settings.setProperty("browser", "firefox");  
+			settings.setProperty("base", location + "data/test/");
+			settings.setProperty("images", location + "data/test/images/");
+			settings.setProperty("help", location + "doc/");
+			settings.setProperty("browser", "firefox");
 		}
 		return settings;
 	}
@@ -62,8 +61,7 @@ public class Persist
 	/**
 	 * Load properties from file
 	 *
-	 * @param persistFile
-	 *        persist file
+	 * @param persistFile persist file
 	 * @return properties
 	 */
 	static public Properties loadSettings(final String persistFile)
@@ -72,7 +70,7 @@ public class Persist
 
 		try
 		{
-			final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile;  
+			final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile;
 			final InputStream propStream = Files.newInputStream(Paths.get(filePath));
 			settings.load(propStream);
 			return settings;
@@ -83,7 +81,7 @@ public class Persist
 		}
 		try
 		{
-			final String filePath = System.getProperty("user.dir") + File.separator + "." + persistFile;  
+			final String filePath = System.getProperty("user.dir") + File.separator + "." + persistFile;
 			final InputStream propStream = Files.newInputStream(Paths.get(filePath));
 			settings.load(propStream);
 			return settings;
@@ -98,10 +96,8 @@ public class Persist
 	/**
 	 * Save persist data
 	 *
-	 * @param persistFile
-	 *        persist file
-	 * @param settings
-	 *        settings to persist
+	 * @param persistFile persist file
+	 * @param settings    settings to persist
 	 * @return true if successful
 	 */
 	@SuppressWarnings("UnusedReturnValue")
@@ -109,14 +105,14 @@ public class Persist
 	{
 		try
 		{
-			final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile;  
+			final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile;
 			final OutputStream propStream = Files.newOutputStream(Paths.get(filePath));
-			settings.store(propStream, "treebolic"); 
+			settings.store(propStream, "treebolic");
 			return true;
 		}
 		catch (final Exception e)
 		{
-			System.out.println("Cannot save persist file :" + e); 
+			System.out.println("Cannot save persist file :" + e);
 		}
 		return false;
 	}

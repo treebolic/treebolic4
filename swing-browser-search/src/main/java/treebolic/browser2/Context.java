@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import treebolic.IContext;
 import treebolic.IWidget;

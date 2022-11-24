@@ -4,7 +4,7 @@
 
 package treebolic.commons;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  * Interact with user

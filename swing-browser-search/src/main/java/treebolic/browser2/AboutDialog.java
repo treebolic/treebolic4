@@ -3,7 +3,7 @@
  */
 package treebolic.browser2;
 
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import treebolic.Browser2;
 import treebolic.annotations.NonNull;
@@ -22,7 +22,7 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 	 */
 	public AboutDialog()
 	{
-		super(Messages.getString("AboutDialog.app"), Browser2.getVersion()); 
+		super(Messages.getString("AboutDialog.app"), Browser2.getVersion());
 	}
 
 	/**

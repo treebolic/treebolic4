@@ -3,10 +3,10 @@
  */
 package treebolic.generator.domtree.treebolic;
 
+import org.w3c.dom.Node;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-
-import org.w3c.dom.Node;
 
 import treebolic.generator.domtree.ElementDecorator;
 
@@ -22,8 +22,7 @@ public class LinkDecorator extends ElementDecorator
 	/**
 	 * Constructor
 	 *
-	 * @param node
-	 *        DOM node
+	 * @param node DOM node
 	 */
 	public LinkDecorator(final Node node)
 	{
@@ -39,7 +38,7 @@ public class LinkDecorator extends ElementDecorator
 	@Override
 	public String getName()
 	{
-		return " " + super.getName() + " ";  
+		return " " + super.getName() + " ";
 	}
 
 	/*
@@ -52,7 +51,7 @@ public class LinkDecorator extends ElementDecorator
 		final String string = super.getValue();
 		try
 		{
-			return URLDecoder.decode(string, "UTF8"); 
+			return URLDecoder.decode(string, "UTF8");
 		}
 		catch (final UnsupportedEncodingException exception)
 		{

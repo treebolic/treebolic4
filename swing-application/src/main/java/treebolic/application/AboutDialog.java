@@ -3,19 +3,9 @@
  */
 package treebolic.application;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
+import java.awt.*;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import treebolic.annotations.NonNull;
 
@@ -84,12 +74,11 @@ public class AboutDialog extends JDialog
 		center(this);
 		pack();
 	}
-	
+
 	/**
 	 * Center on screen
 	 *
-	 * @param component
-	 *        component to center
+	 * @param component component to center
 	 */
 	static public void center(@NonNull final Component component)
 	{
@@ -109,8 +98,7 @@ public class AboutDialog extends JDialog
 	/**
 	 * Main
 	 *
-	 * @param args
-	 *        arguments
+	 * @param args arguments
 	 */
 	static public void main(final String[] args)
 	{

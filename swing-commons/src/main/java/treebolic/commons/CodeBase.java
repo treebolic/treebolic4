@@ -20,7 +20,7 @@ public class CodeBase
 	 */
 	static public String getJarLocation()
 	{
-		URL url = Persist.class.getResource("CodeBase.class"); 
+		URL url = Persist.class.getResource("CodeBase.class");
 		if (url != null)
 		{
 			String urlString = url.toString();
@@ -28,7 +28,7 @@ public class CodeBase
 			if (index != -1)
 			{
 				urlString = urlString.substring(0, index);
-				if (urlString.startsWith("jar:")) 
+				if (urlString.startsWith("jar:"))
 				{
 					final int index2 = urlString.lastIndexOf('/');
 					urlString = urlString.substring(4, index2);

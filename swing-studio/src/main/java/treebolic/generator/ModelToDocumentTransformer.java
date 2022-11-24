@@ -3,6 +3,11 @@
  */
 package treebolic.generator;
 
+import org.w3c.dom.CDATASection;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Text;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,18 +17,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.CDATASection;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Text;
-
 import treebolic.glue.Color;
-import treebolic.model.IEdge;
-import treebolic.model.INode;
-import treebolic.model.MenuItem;
-import treebolic.model.Model;
-import treebolic.model.MountPoint;
-import treebolic.model.Utils;
+import treebolic.model.*;
 
 /**
  * Model to document transformer

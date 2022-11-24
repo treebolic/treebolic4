@@ -188,7 +188,7 @@ public class Provider implements IProvider
 		assert parameters != null;
 		for (String parameter : parameters.stringPropertyNames())
 		{
-			switch(parameter)
+			switch (parameter)
 			{
 				case "source":
 				case "provider":

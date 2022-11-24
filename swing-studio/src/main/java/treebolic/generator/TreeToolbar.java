@@ -3,12 +3,9 @@
  */
 package treebolic.generator;
 
-import java.awt.Dimension;
+import java.awt.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JToolBar;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 /**
  * Tool bar for tree view
@@ -49,17 +46,17 @@ public class TreeToolbar extends JToolBar
 	 */
 	private void initialize()
 	{
-		final JButton newElementButton = makeButton(Messages.getString("TreeToolbar.new"), Messages.getString("TreeToolbar.tooltip_new"), "new.png");   
+		final JButton newElementButton = makeButton(Messages.getString("TreeToolbar.new"), Messages.getString("TreeToolbar.tooltip_new"), "new.png");
 		newElementButton.addActionListener(e -> TreeToolbar.this.controller.execute(Controller.Code.NEWELEMENT, 0));
 
-		final JButton deleteElementButton = makeButton(Messages.getString("TreeToolbar.remove"), Messages.getString("TreeToolbar.tooltip_remove"), "delete.png");   
+		final JButton deleteElementButton = makeButton(Messages.getString("TreeToolbar.remove"), Messages.getString("TreeToolbar.tooltip_remove"), "delete.png");
 		deleteElementButton.addActionListener(e -> TreeToolbar.this.controller.execute(Controller.Code.REMOVEELEMENT, 0));
 		this.add(newElementButton);
 		this.add(deleteElementButton);
 
-		final JButton expandButton = makeButton(Messages.getString("TreeToolbar.expand"), Messages.getString("TreeToolbar.tooltip_expand"), "expand.png");   
+		final JButton expandButton = makeButton(Messages.getString("TreeToolbar.expand"), Messages.getString("TreeToolbar.tooltip_expand"), "expand.png");
 		expandButton.addActionListener(e -> TreeToolbar.this.controller.execute(Controller.Code.EXPANDTREE, 0));
-		final JButton collapseButton = makeButton(Messages.getString("TreeToolbar.collapse"), Messages.getString("TreeToolbar.tooltip_collapse"), "collapse.png");   
+		final JButton collapseButton = makeButton(Messages.getString("TreeToolbar.collapse"), Messages.getString("TreeToolbar.tooltip_collapse"), "collapse.png");
 		collapseButton.addActionListener(e -> TreeToolbar.this.controller.execute(Controller.Code.COLLAPSETREE, 0));
 		this.add(newElementButton);
 		this.add(deleteElementButton);
@@ -71,12 +68,9 @@ public class TreeToolbar extends JToolBar
 	/**
 	 * Make button
 	 *
-	 * @param ignoredText
-	 *        text
-	 * @param tooltip
-	 *        tooltip
-	 * @param image
-	 *        image
+	 * @param ignoredText text
+	 * @param tooltip     tooltip
+	 * @param image       image
 	 * @return button
 	 */
 	private JButton makeButton(final String ignoredText, final String tooltip, final String image)
@@ -91,8 +85,7 @@ public class TreeToolbar extends JToolBar
 	/**
 	 * Set controller
 	 *
-	 * @param controller
-	 *        controller
+	 * @param controller controller
 	 */
 	public void setController(final Controller controller)
 	{

@@ -3,12 +3,12 @@
  */
 package treebolic.generator;
 
-import java.util.Set;
-import java.util.TreeSet;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Document search
@@ -20,8 +20,7 @@ public class DocumentSearch
 	/**
 	 * Make image list
 	 *
-	 * @param document
-	 *        document
+	 * @param document document
 	 * @return image list
 	 */
 	static public Set<String> makeImageList(final Document document)
@@ -29,11 +28,11 @@ public class DocumentSearch
 		final Set<String> set = new TreeSet<>();
 
 		// <img>
-		final NodeList nodes = document.getElementsByTagName("img"); 
+		final NodeList nodes = document.getElementsByTagName("img");
 		for (int i = 0; i < nodes.getLength(); i++)
 		{
 			final Element imageElement = (Element) nodes.item(i);
-			final String imageFile = imageElement.getAttribute("src"); 
+			final String imageFile = imageElement.getAttribute("src");
 			if (!imageFile.isEmpty())
 			{
 				set.add(imageFile);

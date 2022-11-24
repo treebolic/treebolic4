@@ -3,16 +3,11 @@
  */
 package treebolic.propertyview;
 
-import java.awt.Component;
-import java.awt.Font;
+import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import treebolic.glue.Color;

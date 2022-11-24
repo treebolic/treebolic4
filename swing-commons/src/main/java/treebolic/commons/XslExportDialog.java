@@ -3,31 +3,13 @@
  */
 package treebolic.commons;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.ListCellRenderer;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 /**
  * Export dialog
@@ -38,7 +20,7 @@ public class XslExportDialog extends JDialog
 {
 	static private final long serialVersionUID = 1L;
 
-	static private final String[] viewOutputs = { "view:xml", "view:html", "view:text" };   
+	static private final String[] viewOutputs = {"view:xml", "view:html", "view:text"};
 
 	// V A L U E S
 
@@ -74,21 +56,20 @@ public class XslExportDialog extends JDialog
 	/**
 	 * Constructor
 	 *
-	 * @param properties
-	 *        settings
+	 * @param properties settings
 	 */
 	public XslExportDialog(final Properties properties)
 	{
 		super();
 		this.properties = properties;
 
-		
+
 		final List<String> presetXsls = new ArrayList<>(Searcher.findFileUrls(".*treebolic2.*\\.xsl$"));
 
-		final String xSLsProperty = this.properties.getProperty("exportxsls"); 
+		final String xSLsProperty = this.properties.getProperty("exportxsls");
 		if (xSLsProperty != null)
 		{
-			final String[] providers = xSLsProperty.split(":"); 
+			final String[] providers = xSLsProperty.split(":");
 			Collections.addAll(presetXsls, providers);
 		}
 
@@ -100,7 +81,7 @@ public class XslExportDialog extends JDialog
 	 */
 	protected void initialize(final List<String> presetXsls, @SuppressWarnings("SameParameterValue") final String[] viewOutputs)
 	{
-		setTitle(Messages.getString("XslExportDialog.title")); 
+		setTitle(Messages.getString("XslExportDialog.title"));
 		setResizable(true);
 
 		// images
@@ -110,12 +91,12 @@ public class XslExportDialog extends JDialog
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		headerLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-		headerLabel.setText(Messages.getString("XslExportDialog.header")); 
+		headerLabel.setText(Messages.getString("XslExportDialog.header"));
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// labels
-		final JLabel exportLabel = new JLabel(Messages.getString("XslExportDialog.output")); 
-		final JLabel xslLabel = new JLabel(Messages.getString("XslExportDialog.xsl")); 
+		final JLabel exportLabel = new JLabel(Messages.getString("XslExportDialog.output"));
+		final JLabel xslLabel = new JLabel(Messages.getString("XslExportDialog.xsl"));
 
 		// text
 		final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
@@ -158,14 +139,14 @@ public class XslExportDialog extends JDialog
 		}
 
 		// tooltips
-		this.exportComboBox.setToolTipText(Messages.getString("XslExportDialog.tooltip_xml")); 
-		this.xslComboBox.setToolTipText(Messages.getString("XslExportDialog.tooltip_xsl")); 
+		this.exportComboBox.setToolTipText(Messages.getString("XslExportDialog.tooltip_xml"));
+		this.xslComboBox.setToolTipText(Messages.getString("XslExportDialog.tooltip_xsl"));
 
 		// buttons
-		final JButton xmlBrowseButton = new JButton(Messages.getString("XslExportDialog.browse")); 
-		final JButton xslBrowseButton = new JButton(Messages.getString("XslExportDialog.browse")); 
-		final JButton oKButton = new JButton(Messages.getString("XslExportDialog.ok")); 
-		final JButton cancelButton = new JButton(Messages.getString("XslExportDialog.cancel")); 
+		final JButton xmlBrowseButton = new JButton(Messages.getString("XslExportDialog.browse"));
+		final JButton xslBrowseButton = new JButton(Messages.getString("XslExportDialog.browse"));
+		final JButton oKButton = new JButton(Messages.getString("XslExportDialog.ok"));
+		final JButton cancelButton = new JButton(Messages.getString("XslExportDialog.cancel"));
 
 		// panels
 		this.dataPanel = new JPanel();
@@ -184,14 +165,14 @@ public class XslExportDialog extends JDialog
 
 		// action
 		xmlBrowseButton.addActionListener(event -> {
-			final String url = FileDialogs.getXmlUrl(XslExportDialog.this.properties.getProperty("base", "."));  
+			final String url = FileDialogs.getXmlUrl(XslExportDialog.this.properties.getProperty("base", "."));
 			if (url != null && !url.isEmpty())
 			{
 				XslExportDialog.this.exportComboBox.getEditor().setItem(url);
 			}
 		});
 		xslBrowseButton.addActionListener(event -> {
-			final String url = FileDialogs.getXslUrl(XslExportDialog.this.properties.getProperty("base", "."));  
+			final String url = FileDialogs.getXslUrl(XslExportDialog.this.properties.getProperty("base", "."));
 			if (url != null && !url.isEmpty())
 			{
 				XslExportDialog.this.xslComboBox.getEditor().setItem(url);
@@ -227,11 +208,11 @@ public class XslExportDialog extends JDialog
 			this.ok = false;
 
 			// read properties into components
-			final String exportValue = this.properties.getProperty("exporturl"); 
+			final String exportValue = this.properties.getProperty("exporturl");
 			this.exportComboBox.addItem(exportValue);
 			this.exportComboBox.getEditor().setItem(exportValue);
 
-			final String xslValue = this.properties.getProperty("exportxsl"); 
+			final String xslValue = this.properties.getProperty("exportxsl");
 			this.xslComboBox.addItem(xslValue);
 			this.xslComboBox.getEditor().setItem(xslValue);
 
@@ -243,8 +224,8 @@ public class XslExportDialog extends JDialog
 			if (this.ok)
 			{
 				// update properties from components
-				this.properties.setProperty("exporturl", (String) this.exportComboBox.getEditor().getItem()); 
-				this.properties.setProperty("exportxsl", (String) this.xslComboBox.getEditor().getItem()); 
+				this.properties.setProperty("exporturl", (String) this.exportComboBox.getEditor().getItem());
+				this.properties.setProperty("exportxsl", (String) this.xslComboBox.getEditor().getItem());
 			}
 		}
 		super.setVisible(flag);

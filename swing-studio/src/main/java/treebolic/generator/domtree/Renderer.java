@@ -3,9 +3,10 @@
  */
 package treebolic.generator.domtree;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,21 +14,12 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.JTree;
+import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import javax.swing.tree.TreeCellRenderer;
-
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
 /**
  * Renderer
@@ -83,7 +75,7 @@ public class Renderer implements TreeCellRenderer
 	/**
 	 * Patterns
 	 */
-	private static final Pattern idPattern = Pattern.compile("id=\"([^\"]*)\""); 
+	private static final Pattern idPattern = Pattern.compile("id=\"([^\"]*)\"");
 
 	/**
 	 * Pattern list
@@ -195,7 +187,7 @@ public class Renderer implements TreeCellRenderer
 			styledDocument.insertString(0, name, getNameStyle(node));
 			if (value != null)
 			{
-				styledDocument.insertString(nameLength, " ", null); 
+				styledDocument.insertString(nameLength, " ", null);
 				styledDocument.insertString(nameLength + 1, value, getValueStyle(node));
 			}
 		}
@@ -217,10 +209,8 @@ public class Renderer implements TreeCellRenderer
 	/**
 	 * Apply styles to patterns
 	 *
-	 * @param string
-	 *        value string
-	 * @param offset
-	 *        offset of value in text
+	 * @param string value string
+	 * @param offset offset of value in text
 	 */
 	protected void applyStyleToPatterns(final String string, final int offset)
 	{
@@ -246,8 +236,7 @@ public class Renderer implements TreeCellRenderer
 	/**
 	 * Make node decorator
 	 *
-	 * @param node
-	 *        node
+	 * @param node node
 	 * @return node decorator
 	 */
 	protected DefaultDecorator makeDecorator(final Node node)
@@ -258,8 +247,7 @@ public class Renderer implements TreeCellRenderer
 	/**
 	 * Get name style for node
 	 *
-	 * @param node
-	 *        node
+	 * @param node node
 	 * @return style
 	 */
 	protected SimpleAttributeSet getNameStyle(final Node node)
@@ -270,8 +258,7 @@ public class Renderer implements TreeCellRenderer
 	/**
 	 * Get value style for node
 	 *
-	 * @param node
-	 *        node
+	 * @param node node
 	 * @return style
 	 */
 	protected SimpleAttributeSet getValueStyle(final Node node)
@@ -282,20 +269,19 @@ public class Renderer implements TreeCellRenderer
 	/**
 	 * Get icon for node
 	 *
-	 * @param node
-	 *        node
+	 * @param node node
 	 * @return style
 	 */
 	protected Icon getIconStyle(final Node node)
 	{
 		switch (node.getNodeType())
 		{
-		case Node.ELEMENT_NODE:
-			return Renderer.elementIcon;
-		case Node.TEXT_NODE:
-			return Renderer.textIcon;
-		default:
-			return Renderer.defaultIcon;
+			case Node.ELEMENT_NODE:
+				return Renderer.elementIcon;
+			case Node.TEXT_NODE:
+				return Renderer.textIcon;
+			default:
+				return Renderer.defaultIcon;
 		}
 	}
 }

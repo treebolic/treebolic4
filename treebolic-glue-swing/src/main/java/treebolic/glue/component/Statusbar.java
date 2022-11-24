@@ -5,24 +5,10 @@
 package treebolic.glue.component;
 
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
+import java.util.function.Function;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.JToggleButton;
-import javax.swing.JToolBar;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -33,7 +19,6 @@ import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.ActionListener;
 import treebolic.glue.Color;
-import treebolic.glue.iface.component.Converter;
 
 /**
  * Status bar, derived from JToolbar
@@ -305,7 +290,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	 * @param contents  contents
 	 */
 	@Override
-	public void put(final int image, @Nullable final Converter converter, final String label, @Nullable final String... contents)
+	public void put(final int image, @Nullable final Function<CharSequence[], String> converter, final String label, @Nullable final String... contents)
 	{
 		// icon and colors
 		this.operationIconLabel.setIcon(Statusbar.icons[image]);
@@ -321,7 +306,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 		}
 		else if (converter != null)
 		{
-			content = converter.convert(contents);
+			content = converter.apply(contents);
 		}
 		else
 		{

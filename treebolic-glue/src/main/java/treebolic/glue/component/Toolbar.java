@@ -3,8 +3,7 @@
  */
 package treebolic.glue.component;
 
-import com.sun.istack.internal.NotNull;
-
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.ActionListener;
 import treebolic.glue.NotImplementedException;
@@ -29,7 +28,7 @@ public class Toolbar implements Component, treebolic.glue.iface.component.Toolba
 	}
 
 	@Override
-	public void addButton(@NotNull Button button, ActionListener listener)
+	public void addButton(@NonNull Button button, ActionListener listener)
 	{
 		throw new NotImplementedException();
 	}

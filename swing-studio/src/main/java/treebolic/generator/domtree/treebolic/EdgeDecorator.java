@@ -19,8 +19,7 @@ public class EdgeDecorator extends ElementDecorator
 	/**
 	 * Constructor
 	 *
-	 * @param node
-	 *        DOM node
+	 * @param node DOM node
 	 */
 	public EdgeDecorator(final Node node)
 	{

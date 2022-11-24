@@ -7,9 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import javax.swing.LookAndFeel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.metal.DefaultMetalTheme;
 import javax.swing.plaf.metal.MetalLookAndFeel;
@@ -25,8 +23,7 @@ public class Laf
 	/**
 	 * Initialize look and feel
 	 *
-	 * @param args
-	 *        command line arguments
+	 * @param args command line arguments
 	 */
 	static public void lookAndFeel(final String[] args)
 	{
@@ -40,11 +37,11 @@ public class Laf
 		boolean customTheme = false;
 		for (final String arg : args)
 		{
-			if (arg.startsWith("laf=")) 
+			if (arg.startsWith("laf="))
 			{
 				laf = arg.substring(4);
 			}
-			if (arg.startsWith("theme=")) 
+			if (arg.startsWith("theme="))
 			{
 				customTheme = Boolean.parseBoolean(arg.substring(6));
 			}
@@ -67,13 +64,13 @@ public class Laf
 			}
 			catch (final UnsupportedLookAndFeelException e)
 			{
-				System.err.println("Unsupported LookAndFeel " + e.getMessage()); 
+				System.err.println("Unsupported LookAndFeel " + e.getMessage());
 				Laf.setDefault();
 			}
 		}
 		else
 		{
-			if (System.getProperty("swing.defaultlaf") == null) 
+			if (System.getProperty("swing.defaultlaf") == null)
 			{
 				Laf.setDefault();
 			}
@@ -93,26 +90,24 @@ public class Laf
 		}
 		catch (final Exception e2)
 		{
-			System.err.println("Can't set LookAndFeel"); 
+			System.err.println("Can't set LookAndFeel");
 		}
 	}
 
 	/**
 	 * Set bold font
 	 *
-	 * @param haveBold
-	 *        true/false
+	 * @param haveBold true/false
 	 */
 	static public void setBold(final boolean haveBold)
 	{
-		UIManager.put("swing.boldMetal", haveBold); 
+		UIManager.put("swing.boldMetal", haveBold);
 	}
 
 	/**
 	 * Set look and feel
 	 *
-	 * @param lafName
-	 *        laf name
+	 * @param lafName laf name
 	 * @return true if successful
 	 * @throws UnsupportedLookAndFeelException unsupported LAF exception
 	 */
@@ -127,8 +122,7 @@ public class Laf
 	/**
 	 * Get LAF instance
 	 *
-	 * @param className
-	 *        LAF class name
+	 * @param className LAF class name
 	 * @return instance of this class
 	 */
 	static LookAndFeel getLaf(final String className)
@@ -136,8 +130,8 @@ public class Laf
 		try
 		{
 			final Class<?> clazz = Class.forName(className);
-			final Class<?>[] argsClass = new Class[] {};
-			final Object[] args = new Object[] {};
+			final Class<?>[] argsClass = new Class[]{};
+			final Object[] args = new Object[]{};
 
 			final Constructor<?> constructor = clazz.getConstructor(argsClass);
 			final Object instance = constructor.newInstance(args);
@@ -153,8 +147,7 @@ public class Laf
 	/**
 	 * Set custom theme
 	 *
-	 * @param lafName
-	 *        laf name
+	 * @param lafName laf name
 	 * @return true if successful
 	 */
 	@SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
@@ -168,23 +161,21 @@ public class Laf
 	/**
 	 * Set current theme
 	 *
-	 * @param className
-	 *        LAF class name (may have overridden 'setCurrentTheme()')
-	 * @param theme
-	 *        theme
+	 * @param className LAF class name (may have overridden 'setCurrentTheme()')
+	 * @param theme     theme
 	 */
 	static void setCurrentTheme(final String className, final MetalTheme theme)
 	{
 		try
 		{
 			final Class<?> clazz = Class.forName(className);
-			final Class<?>[] argsClass = new Class[] { MetalTheme.class };
-			final Method method = clazz.getMethod("setCurrentTheme", argsClass); 
+			final Class<?>[] argsClass = new Class[]{MetalTheme.class};
+			final Method method = clazz.getMethod("setCurrentTheme", argsClass);
 			method.invoke(null, theme);
 		}
 		catch (final Exception e)
 		{
-			System.err.println("Setting current theme: " + e.getMessage()); 
+			System.err.println("Setting current theme: " + e.getMessage());
 			MetalLookAndFeel.setCurrentTheme(theme);
 		}
 	}

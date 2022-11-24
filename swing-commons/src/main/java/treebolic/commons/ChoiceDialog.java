@@ -3,29 +3,10 @@
  */
 package treebolic.commons;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.util.Collection;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.ListCellRenderer;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 /**
  * Import dialog
@@ -63,16 +44,11 @@ public class ChoiceDialog extends JDialog
 	/**
 	 * Constructor
 	 *
-	 * @param value
-	 *        initial value
-	 * @param values
-	 *        range of values
-	 * @param title
-	 *        title
-	 * @param headerLabelText
-	 *        label
-	 * @param canAdd
-	 *        if value can be added
+	 * @param value           initial value
+	 * @param values          range of values
+	 * @param title           title
+	 * @param headerLabelText label
+	 * @param canAdd          if value can be added
 	 */
 	public ChoiceDialog(final String value, final Collection<String> values, final String title, final String headerLabelText, final boolean canAdd)
 	{
@@ -129,8 +105,8 @@ public class ChoiceDialog extends JDialog
 		}
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("ChoiceDialog.ok")); 
-		final JButton cancelButton = new JButton(Messages.getString("ChoiceDialog.cancel")); 
+		final JButton oKButton = new JButton(Messages.getString("ChoiceDialog.ok"));
+		final JButton cancelButton = new JButton(Messages.getString("ChoiceDialog.cancel"));
 
 		// panels
 		this.dataPanel = new JPanel();
@@ -150,11 +126,11 @@ public class ChoiceDialog extends JDialog
 
 		if (canAdd)
 		{
-			final JButton addButton = new JButton(Messages.getString("ChoiceDialog.add")); 
+			final JButton addButton = new JButton(Messages.getString("ChoiceDialog.add"));
 
 			// action
 			addButton.addActionListener(event -> {
-				final String value1 = ask(Messages.getString("ChoiceDialog.addprompt")); 
+				final String value1 = ask(Messages.getString("ChoiceDialog.addprompt"));
 				if (value1 != null && !value1.isEmpty())
 				{
 					ChoiceDialog.this.comboBox.addItem(value1);
@@ -211,13 +187,12 @@ public class ChoiceDialog extends JDialog
 	/**
 	 * Ask
 	 *
-	 * @param message
-	 *        message
+	 * @param message message
 	 * @return input
 	 */
 	protected String ask(final String message)
 	{
-		final String[] lines = message.split("\n"); 
+		final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines);
 	}
 }

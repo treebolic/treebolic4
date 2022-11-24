@@ -4,7 +4,7 @@
 
 package treebolic.browser2;
 
-import java.awt.Dimension;
+import java.awt.*;
 
 /**
  * @author Bernard Bou

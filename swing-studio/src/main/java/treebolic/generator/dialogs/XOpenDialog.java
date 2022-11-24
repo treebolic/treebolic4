@@ -3,8 +3,7 @@
  */
 package treebolic.generator.dialogs;
 
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import treebolic.commons.OpenDialog;
 
@@ -20,12 +19,9 @@ public class XOpenDialog extends OpenDialog
 	/**
 	 * Constructor
 	 *
-	 * @param provider
-	 *        provider
-	 * @param source
-	 *        source
-	 * @param base
-	 *        base
+	 * @param provider provider
+	 * @param source   source
+	 * @param base     base
 	 */
 	public XOpenDialog(final String provider, final String source, final String base)
 	{
@@ -35,20 +31,19 @@ public class XOpenDialog extends OpenDialog
 	/**
 	 * Main
 	 *
-	 * @param args
-	 *        argumes
+	 * @param args argumes
 	 */
 	static public void main(final String[] args)
 	{
-		UIManager.put("swing.boldMetal", false); 
+		UIManager.put("swing.boldMetal", false);
 		final XOpenDialog dialog = new XOpenDialog(null, null, null);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		if (dialog.ok)
 		{
-			System.out.println("provider=" + dialog.provider); 
-			System.out.println("source=" + dialog.source); 
+			System.out.println("provider=" + dialog.provider);
+			System.out.println("source=" + dialog.source);
 		}
 		System.exit(0);
 	}

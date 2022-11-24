@@ -3,22 +3,11 @@
  */
 package treebolic.commons;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.*;
 
 /**
  * Import dialog
@@ -51,16 +40,11 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 	/**
 	 * Constructor
 	 *
-	 * @param value0
-	 *        initial value
-	 * @param values
-	 *        range of values
-	 * @param labels
-	 *        labels
-	 * @param title
-	 *        title
-	 * @param label
-	 *        label
+	 * @param value0 initial value
+	 * @param values range of values
+	 * @param labels labels
+	 * @param title  title
+	 * @param label  label
 	 */
 	public RadioChoiceDialog(final String value0, final String[] values, final String[] labels, final String title, final String label)
 	{
@@ -87,8 +71,8 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 		}
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("RadioChoiceDialog.ok")); 
-		final JButton cancelButton = new JButton(Messages.getString("RadioChoiceDialog.cancel")); 
+		final JButton oKButton = new JButton(Messages.getString("RadioChoiceDialog.ok"));
+		final JButton cancelButton = new JButton(Messages.getString("RadioChoiceDialog.cancel"));
 
 		// buttons panel
 		this.dataPanel = new JPanel();

@@ -6,6 +6,7 @@ package treebolic.glue.component;
 
 import java.awt.*;
 import java.net.URL;
+import java.util.function.Function;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent.EventType;
@@ -15,7 +16,6 @@ import javax.swing.text.html.StyleSheet;
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.iface.ActionListener;
-import treebolic.glue.iface.component.Converter;
 
 /**
  * Dialog, derived from JDialog
@@ -35,7 +35,7 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 
 	final private StyleSheet styleSheet;
 
-	private Converter converter;
+	private Function<CharSequence[], String> converter;
 
 	static private final int MAXWIDTH = 300;
 
@@ -48,7 +48,7 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 	{
 		super();
 
-		setTitle("Treebolic"); 
+		setTitle("Treebolic");
 
 		this.headerLabel = new JLabel();
 		this.headerLabel.setFont(Constants.FONT_WEB_HEADER);
@@ -177,9 +177,13 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 		}
 		String content;
 		if (this.converter != null)
-			content = this.converter.convert(contents);
+		{
+			content = this.converter.apply(contents);
+		}
 		else
+		{
 			content = String.join("\n", contents);
+		}
 		this.contentPane.setText(content);
 		this.contentPane.setCaretPosition(0);
 	}
@@ -189,7 +193,7 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 	 * @see treebolic.glue.iface.component.Dialog#setConverter(treebolic.glue.iface.component.Converter)
 	 */
 	@Override
-	public void setConverter(final Converter converter0)
+	public void setConverter(final Function<CharSequence[], String> converter0)
 	{
 		this.converter = converter0;
 	}
