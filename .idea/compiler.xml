@@ -14,6 +14,7 @@
         <module name="treebolic-mutable" />
         <module name="provider-xml" />
         <module name="treebolic-model" />
+        <module name="swing-application-owl" />
         <module name="swing-studio" />
         <module name="treebolic-glue-swing" />
         <module name="swing-browser" />
@@ -27,6 +28,7 @@
         <module name="provider-owl" />
         <module name="swing-application" />
         <module name="treebolic-glue" />
+        <module name="swing-application-xml" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
