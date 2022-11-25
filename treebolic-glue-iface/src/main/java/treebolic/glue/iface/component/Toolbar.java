@@ -4,13 +4,14 @@
 
 package treebolic.glue.iface.component;
 
+import treebolic.glue.iface.ActionListener;
+
 /**
  * Glue interface for Toolbar
  *
- * @param <L> platform action listener type
  * @author Bernard Bou
  */
-public interface Toolbar<L>
+public interface Toolbar
 {
 	/**
 	 * Toolbar button index
@@ -39,7 +40,7 @@ public interface Toolbar<L>
 	 * @param button   button
 	 * @param listener listener
 	 */
-	void addButton(final Button button, final L listener);
+	void addButton(final Button button, final ActionListener listener);
 
 	/**
 	 * Get buttons

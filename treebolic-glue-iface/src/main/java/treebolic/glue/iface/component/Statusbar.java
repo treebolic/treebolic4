@@ -12,10 +12,9 @@ import treebolic.glue.iface.ActionListener;
  * Glue interface for Statusbar
  *
  * @param <C> component type
- * @param <L> platform action listener type
  * @author Bernard Bou
  */
-public interface Statusbar<C, L>
+public interface Statusbar<C>
 {
 	/**
 	 * Image indices
@@ -99,5 +98,5 @@ public interface Statusbar<C, L>
 	 * @param listener listener
 	 */
 	@SuppressWarnings("EmptyMethod")
-	void addListener(final L listener);
+	void addListener(final ActionListener listener);
 }
