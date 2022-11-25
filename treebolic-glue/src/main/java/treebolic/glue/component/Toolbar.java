@@ -5,7 +5,7 @@ package treebolic.glue.component;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.ActionListener;
+import treebolic.glue.iface.ActionListener;
 import treebolic.glue.NotImplementedException;
 
 /**
@@ -13,7 +13,7 @@ import treebolic.glue.NotImplementedException;
  *
  * @author Bernard Bou
  */
-public class Toolbar implements Component, treebolic.glue.iface.component.Toolbar<ActionListener>
+public class Toolbar implements Component, treebolic.glue.iface.component.Toolbar
 {
 	// C O N S T R U C T O R
 

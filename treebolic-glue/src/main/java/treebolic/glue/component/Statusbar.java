@@ -7,7 +7,7 @@ import java.util.function.Function;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.ActionListener;
+import treebolic.glue.iface.ActionListener;
 import treebolic.glue.Color;
 import treebolic.glue.NotImplementedException;
 
@@ -16,7 +16,7 @@ import treebolic.glue.NotImplementedException;
  *
  * @author Bernard Bou
  */
-public class Statusbar implements Component, treebolic.glue.iface.component.Statusbar<Color, ActionListener>
+public class Statusbar implements Component, treebolic.glue.iface.component.Statusbar<Color>
 {
 	/**
 	 * Constructor
@@ -53,7 +53,7 @@ public class Statusbar implements Component, treebolic.glue.iface.component.Stat
 	}
 
 	@Override
-	public void setListener(@Nullable final treebolic.glue.iface.ActionListener actionListener)
+	public void setListener(@Nullable final ActionListener actionListener)
 	{
 		throw new NotImplementedException();
 	}
