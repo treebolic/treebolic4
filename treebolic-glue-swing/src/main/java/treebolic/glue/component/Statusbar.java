@@ -17,15 +17,15 @@ import javax.swing.text.html.StyleSheet;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.ActionListener;
 import treebolic.glue.Color;
+import treebolic.glue.iface.ActionListener;
 
 /**
  * Status bar, derived from JToolbar
  *
  * @author Bernard Bou
  */
-public class Statusbar extends JToolBar implements Component, treebolic.glue.iface.component.Statusbar<Color, ActionListener>
+public class Statusbar extends JToolBar implements Component, treebolic.glue.iface.component.Statusbar<Color>
 {
 	/**
 	 * Whether this component contains search component
@@ -267,7 +267,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	@Override
 	public void addListener(final ActionListener listener)
 	{
-		this.searchTool.addListener(listener);
+		this.searchTool.addListener((treebolic.glue.ActionListener) listener);
 	}
 
 	/**
@@ -276,7 +276,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	 * @param actionListener listener
 	 */
 	@Override
-	public void setListener(final treebolic.glue.iface.ActionListener actionListener)
+	public void setListener(final ActionListener actionListener)
 	{
 		//
 	}

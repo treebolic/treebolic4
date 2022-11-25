@@ -14,7 +14,7 @@ import treebolic.glue.ActionListener;
  *
  * @author Bernard Bou
  */
-public class Toolbar extends JToolBar implements Component, treebolic.glue.iface.component.Toolbar<ActionListener>
+public class Toolbar extends JToolBar implements Component, treebolic.glue.iface.component.Toolbar
 {
 	// D A T A
 
@@ -211,7 +211,7 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 	 * @see treebolic.glue.iface.component.Toolbar#addButton(treebolic.glue.iface.component.Toolbar.Button, java.lang.Object)
 	 */
 	@Override
-	public void addButton(@NonNull treebolic.glue.iface.component.Toolbar.Button button, @NonNull ActionListener listener)
+	public void addButton(@NonNull treebolic.glue.iface.component.Toolbar.Button button, @NonNull treebolic.glue.iface.ActionListener listener)
 	{
 		if (button.equals(Button.SEPARATOR))
 		{
@@ -229,9 +229,9 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 		{
 			final int selectedIconIndex = impl.getSelectedIconIndex();
 			final boolean state = impl.getState();
-			addToggle(iconIndex, selectedIconIndex, tooltip, state, listener);
+			addToggle(iconIndex, selectedIconIndex, tooltip, state, (ActionListener) listener);
 			return;
 		}
-		addButton(iconIndex, tooltip, listener);
+		addButton(iconIndex, tooltip, (ActionListener) listener);
 	}
 }
