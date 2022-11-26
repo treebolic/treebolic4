@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--created Wed Aug 28 17:42:46 CEST 2019--><!DOCTYPE treebolic SYSTEM "Treebolic.dtd">
+<!--created Sat Nov 26 10:33:35 CET 2022--><!DOCTYPE treebolic SYSTEM "Treebolic.dtd">
 <treebolic focus-on-hover="false" popupmenu="true" statusbar="true" toolbar="true" tooltip="true">
   <tree backcolor="19193b" expansion="0.9" fontface="SansSerif" forecolor="000000" orientation="radial" preserve-orientation="true" sweep="1.2">
     <img src="background.png"/>
@@ -9,12 +9,12 @@
         <img src="treeedge.png"/>
       </default.treeedge>
       <node id="root">
-        <label>0</label>
+        <label>root</label>
         <img src="focus.png"/>
-        <a href="home.html"/>
+        <a href="https://github.com/treebolic"/>
         <node backcolor="ffcc33" forecolor="000000" id="Id-0">
-          <label>1</label>
-          <content><![CDATA[<i>one</i><br>Lorem ipsum dolor sit amet, consectetuer adipisci elit. Etiam sequimur nostrum et imperitorum, cohaerescent eorum nominata diligant, verissimum non depravata principio inquam quod quasi doloribus dolemus quod industriae dolorem, aegritudine.. Adamare omnium, et is quantum ab faciunt hoc, parte natus expressas priventur hoc summum expetendam rem, sed atque praeterita prosperum ipsarum si quod iis, dixi inquam eriguntur posuit conversam idem, contra ipse possimus et me est disciplinam, si ad unum, peccant uberius concedo ante neque primo, ad emolumenti id, vivendum isdem dissensio indignae extremum.. Malorum qui aptius scribimus nec necessariae se, atque se cum, fastidii arbitror quae persecuti, dissentiunt meminerimus.]]></content>
+          <label>0</label>
+          <content><![CDATA[<p><img src='node1.png' style='float:left;margin-right:10px;'/><p><img src='node1.png' style='float:left;margin-right:10px;'/><i>one</i><br>Lorem ipsum dolor sit amet, consectetuer adipisci elit. Etiam sequimur nostrum et imperitorum, cohaerescent eorum nominata diligant, verissimum non depravata principio inquam quod quasi doloribus dolemus quod industriae dolorem, aegritudine.. Adamare omnium, et is quantum ab faciunt hoc, parte natus expressas priventur hoc summum expetendam rem, sed atque praeterita prosperum ipsarum si quod iis, dixi inquam eriguntur posuit conversam idem, contra ipse possimus et me est disciplinam, si ad unum, peccant uberius concedo ante neque primo, ad emolumenti id, vivendum isdem dissensio indignae extremum.. Malorum qui aptius scribimus nec necessariae se, atque se cum, fastidii arbitror quae persecuti, dissentiunt meminerimus.</p></p>]]></content>
           <treeedge color="ff0000" fromterminator="cf" stroke="solid 2" toterminator="tf">
             <label>first</label>
             <img src="treeedge2.png"/>
@@ -197,8 +197,8 @@
           </node>
         </node>
         <node backcolor="ffcc33" forecolor="000000" id="Id-1">
-          <label>2</label>
-          <content><![CDATA[<i>two</i><br>Lorem ipsum dolor sit amet, consectetuer adipisci elit. Etiam sequimur nostrum et imperitorum, cohaerescent eorum nominata diligant, verissimum non depravata principio inquam quod quasi doloribus dolemus quod industriae dolorem, aegritudine.. Adamare omnium, et is quantum ab faciunt hoc, parte natus expressas priventur hoc summum expetendam rem, sed atque praeterita prosperum ipsarum si quod iis, dixi inquam eriguntur posuit conversam idem, contra ipse possimus et me est disciplinam, si ad unum, peccant uberius concedo ante neque primo, ad emolumenti id, vivendum isdem dissensio indignae extremum.. Malorum qui aptius scribimus nec necessariae se, atque se cum, fastidii arbitror quae persecuti, dissentiunt meminerimus.]]></content>
+          <label>1</label>
+          <content><![CDATA[<p><img src='node1.png' style='float:left;margin-right:10px;'/><p><img src='node1.png' style='float:left;margin-right:10px;'/><i>two</i><br>Lorem ipsum dolor sit amet, consectetuer adipisci elit. Etiam sequimur nostrum et imperitorum, cohaerescent eorum nominata diligant, verissimum non depravata principio inquam quod quasi doloribus dolemus quod industriae dolorem, aegritudine.. Adamare omnium, et is quantum ab faciunt hoc, parte natus expressas priventur hoc summum expetendam rem, sed atque praeterita prosperum ipsarum si quod iis, dixi inquam eriguntur posuit conversam idem, contra ipse possimus et me est disciplinam, si ad unum, peccant uberius concedo ante neque primo, ad emolumenti id, vivendum isdem dissensio indignae extremum.. Malorum qui aptius scribimus nec necessariae se, atque se cum, fastidii arbitror quae persecuti, dissentiunt meminerimus.</p></p>]]></content>
           <treeedge color="ff0000" fromterminator="cf" stroke="solid 2" toterminator="tf">
             <label>second</label>
             <img src="treeedge2.png"/>
@@ -243,8 +243,8 @@
           </node>
         </node>
         <node backcolor="ffcc33" forecolor="000000" id="Id-2">
-          <label>3</label>
-          <content><![CDATA[three]]></content>
+          <label>2</label>
+          <content><![CDATA[<p><img src='node1.png' style='float:left;margin-right:10px;'/><p><img src='node1.png' style='float:left;margin-right:10px;'/>three</p></p>]]></content>
           <treeedge color="ff0000" fromterminator="cf" stroke="solid 2" toterminator="tf">
             <label>third</label>
             <img src="treeedge2.png"/>
@@ -301,7 +301,7 @@ List:
         </node>
         <node backcolor="ff6600" forecolor="ffffff" id="Id-3" weight="1.5">
           <label>more</label>
-          <content><![CDATA[Recursive mount this tree on this branch through context menu]]></content>
+          <content><![CDATA[<p><img src='mount.png' style='float:left;margin-right:10px;'/><p><img src='mount.png' style='float:left;margin-right:10px;'/>Recursive mount this tree on this branch through context menu</p></p>]]></content>
           <treeedge color="ffcc33" fromterminator="df" stroke="solid 2" toterminator="a">
             <label>more ...</label>
             <img src="treeedge1.png"/>
@@ -342,7 +342,7 @@ List:
       </menuitem>
       <menuitem action="GOTO" match-mode="INCLUDES" match-scope="ID">
         <label>Go to "one"</label>
-        <a href="%23Id-0"/>
+        <a href="%23Id-1"/>
       </menuitem>
       <menuitem action="SEARCH" match-mode="STARTSWITH" match-scope="LABEL" match-target="$e">
         <label>Search (label starts with "$e")</label>
