@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import treebolic.generator.DocumentSearch;
+import treebolic.studio.DocumentSearch;
 import treebolic.xml.transformer.DomTransformer;
 
 /**

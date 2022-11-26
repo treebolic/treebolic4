@@ -4,10 +4,10 @@
 package treebolic;
 
 import treebolic.commons.Laf;
-import treebolic.generator.MainFrame;
+import treebolic.studio.MainFrame;
 
 /**
- * Generator
+ * Studio
  *
  * @author Bernard Bou
  */
