@@ -3,15 +3,12 @@
  */
 package treebolic.studio.dialogs;
 
-import java.awt.*;
 import java.util.Properties;
 
 import javax.swing.*;
 
-import treebolic.commons.FileDialogs;
 import treebolic.commons.Persist;
 import treebolic.commons.SettingsDialog;
-import treebolic.studio.Messages;
 
 /**
  * Settings dialog
@@ -22,22 +19,10 @@ public class XSettingsDialog extends SettingsDialog
 {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Index and mask
+	/*
+	 * Index and mask to insert in Settings dialog
 	 */
-	static private final int REPOIDX = 4;
-
-	// --Commented out by Inspection START (11/21/22, 6:34 PM):
-	//	/**
-	//	 * Repository
-	//	 */
-	//	static public final int REPO = 1 << XSettingsDialog.REPOIDX;
-	// --Commented out by Inspection STOP (11/21/22, 6:34 PM)
-
-	/**
-	 * Repository text
-	 */
-	private JTextField repositoryTextField;
+	// static private final int SLOTIDX = 4;
 
 	/**
 	 * Constructor
@@ -57,25 +42,6 @@ public class XSettingsDialog extends SettingsDialog
 	protected void initialize()
 	{
 		super.initialize();
-		this.repositoryTextField = new JTextField(32);
-		this.repositoryTextField.setToolTipText(Messages.getString("XSettingsDialog.tooltip_repo"));
-		final JLabel repositoryFolderLabel = new JLabel(Messages.getString("XSettingsDialog.label_repo"));
-		final JButton repositoryBrowseButton = new JButton(Messages.getString("XSettingsDialog.browse"));
-		repositoryBrowseButton.addActionListener(event -> {
-			final String folder = FileDialogs.getFolder(XSettingsDialog.this.settings.getProperty("base", "."));
-			if (folder != null && !folder.isEmpty())
-			{
-				XSettingsDialog.this.repositoryTextField.setText(folder);
-			}
-			else
-			{
-				XSettingsDialog.this.repositoryTextField.setText(Messages.getString("XSettingsDialog.internal"));
-			}
-		});
-
-		this.dataPanel.add(repositoryFolderLabel, new GridBagConstraints(0, XSettingsDialog.REPOIDX, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0));
-		this.dataPanel.add(this.repositoryTextField, new GridBagConstraints(1, XSettingsDialog.REPOIDX, 1, 1, 1., 0., GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 10), 0, 0));
-		this.dataPanel.add(repositoryBrowseButton, new GridBagConstraints(2, XSettingsDialog.REPOIDX, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 20), 0, 0));
 	}
 
 	/*
@@ -85,27 +51,6 @@ public class XSettingsDialog extends SettingsDialog
 	@Override
 	public void setVisible(final boolean flag)
 	{
-		if (flag)
-		{
-			// read properties into components
-			this.repositoryTextField.setText(this.settings.getProperty("repository", Messages.getString("XSettingsDialog.internal")));
-		}
-		else
-		{
-			if (this.ok)
-			{
-				// update properties from components
-				final String repository = this.repositoryTextField.getText();
-				if (repository == null || repository.isEmpty() || repository.equals(Messages.getString("XSettingsDialog.internal")))
-				{
-					this.settings.remove("repository");
-				}
-				else
-				{
-					this.settings.setProperty("repository", repository);
-				}
-			}
-		}
 		super.setVisible(flag);
 	}
 
