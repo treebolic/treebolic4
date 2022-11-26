@@ -10,7 +10,6 @@ import java.net.URL;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import treebolic.glue.Color;
 import treebolic.propertyview.PropertyView.Attribute;
 import treebolic.propertyview.PropertyView.AttributeType;
 
@@ -161,8 +160,8 @@ class Renderer extends DefaultTableCellRenderer
 	{
 		setIcon(null);
 		setFont(null);
-		setForeground(Color.BLACK.color);
-		setBackground(row % 2 == 0 ? Color.WHITE.color : this.altRowColor.color);
+		setForeground(Color.BLACK);
+		setBackground(row % 2 == 0 ? Color.WHITE : this.altRowColor);
 
 		switch (column)
 		{
@@ -180,14 +179,14 @@ class Renderer extends DefaultTableCellRenderer
 				switch (type)
 				{
 					case COLOR:
-						this.colorPanel.setBackground(((Color) attributeValue).color);
+						this.colorPanel.setBackground(((Color) attributeValue));
 						return this.colorPanel;
 
 					case LABEL:
 						setText(attributeValue.toString().replaceAll("\n", "\\\\n"));
 						setFont(this.boldFont);
-						assert Color.RED.color != null;
-						setForeground(Color.RED.color.darker());
+						assert Color.RED != null;
+						setForeground(Color.RED.darker());
 						return this;
 
 					case TEXT:
@@ -217,7 +216,7 @@ class Renderer extends DefaultTableCellRenderer
 
 					case LINK:
 						setText(PropertyView.decode((String) attributeValue));
-						setForeground(Color.BLUE.color);
+						setForeground(Color.BLUE);
 						setFont(this.italicFont);
 						setIcon(this.linkIcon);
 						return this;
@@ -241,13 +240,13 @@ class Renderer extends DefaultTableCellRenderer
 					case STROKE:
 						setIcon(PropertyView.strokeIcons.get((String) attributeValue));
 						setText((String) attributeValue);
-						setForeground(Color.BLUE.color);
+						setForeground(Color.BLUE);
 						return this;
 
 					case TERMINATOR:
 						setIcon(PropertyView.terminatorIcons.get((String) attributeValue));
 						setText((String) attributeValue);
-						setForeground(Color.BLUE.color);
+						setForeground(Color.BLUE);
 						return this;
 
 					default:

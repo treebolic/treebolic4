@@ -7,7 +7,6 @@ package treebolic.model;
 import java.io.Serializable;
 
 import treebolic.annotations.Nullable;
-import treebolic.glue.Color;
 import treebolic.glue.Image;
 
 // @formatter:off
@@ -268,7 +267,7 @@ public interface IEdge extends Serializable
 	 * @return edge color
 	 */
 	@Nullable
-	Color getColor();
+	Integer getColor();
 
 	/**
 	 * Set edge style

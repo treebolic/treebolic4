@@ -5,15 +5,15 @@
 package treebolic.glue.iface;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * Glue interface for Graphics context
  *
- * @param <C> color
  * @param <I> image
  * @author Bernard Bou
  */
-public interface Graphics<C, I>
+public interface Graphics<I>
 {
 	// P O L Y G O N
 
@@ -26,7 +26,7 @@ public interface Graphics<C, I>
 	 * @param width  width
 	 * @param height height
 	 */
-	void drawBackgroundColor(final C color, final int left, final int top, final int width, final int height);
+	void drawBackgroundColor(@Nullable final Integer color, final int left, final int top, final int width, final int height);
 
 	// L I N E
 
@@ -177,15 +177,15 @@ public interface Graphics<C, I>
 	 *
 	 * @param color color
 	 */
-	void setColor(final C color);
+	void setColor(@Nullable final Integer color);
 
 	/**
 	 * Get color
 	 *
 	 * @return color
 	 */
-	@NonNull
-	C getColor();
+	@Nullable
+	Integer getColor();
 
 	// F O N T
 
@@ -195,7 +195,7 @@ public interface Graphics<C, I>
 	 * @param fontface font face
 	 * @param style    style
 	 */
-	void setFont(final String fontface, int style);
+	void setFont(@Nullable final String fontface, int style);
 
 	/**
 	 * Set text

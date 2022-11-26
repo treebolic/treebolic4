@@ -7,9 +7,9 @@ package treebolic.view;
 import java.util.List;
 
 import treebolic.annotations.Nullable;
-import treebolic.glue.Color;
 import treebolic.glue.Graphics;
 import treebolic.glue.Image;
+import treebolic.glue.iface.Color;
 import treebolic.model.IEdge;
 import treebolic.model.INode;
 
@@ -58,37 +58,37 @@ public abstract class AbstractPainter extends Mapper
 	 * Initial default background color
 	 */
 	@Nullable
-	static private final Color backColor0 = Color.WHITE;
+	static private final Integer backColor0 = Color.WHITE;
 
 	/**
 	 * Initial default foreground color
 	 */
 	@Nullable
-	static private final Color foreColor0 = Color.BLACK;
+	static private final Integer foreColor0 = Color.BLACK;
 
 	/**
 	 * Initial default node background color
 	 */
 	@Nullable
-	static private final Color nodeBackColor0 = Color.WHITE;
+	static private final Integer nodeBackColor0 = Color.WHITE;
 
 	/**
 	 * Initial default node foreground color
 	 */
 	@Nullable
-	static private final Color nodeForeColor0 = Color.BLACK;
+	static private final Integer nodeForeColor0 = Color.BLACK;
 
 	/**
 	 * Initial default tree edge color
 	 */
 	@Nullable
-	static private final Color treeEdgeColor0 = Color.GRAY;
+	static private final Integer treeEdgeColor0 = Color.GRAY;
 
 	/**
 	 * Initial default tree edge color
 	 */
 	@Nullable
-	static private final Color edgeColor0 = Color.DARK_GRAY;
+	static private final Integer edgeColor0 = Color.DARK_GRAY;
 
 	// D A T A
 
@@ -232,42 +232,42 @@ public abstract class AbstractPainter extends Mapper
 	 */
 	@Nullable
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	protected Color backColor;
+	protected Integer backColor;
 
 	/**
 	 * Default foreground color
 	 */
 	@Nullable
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	protected Color foreColor;
+	protected Integer foreColor;
 
 	/**
 	 * Default node background color
 	 */
 	@Nullable
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	protected Color nodeBackColor;
+	protected Integer nodeBackColor;
 
 	/**
 	 * Default node foreground color
 	 */
 	@Nullable
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	protected Color nodeForeColor;
+	protected Integer nodeForeColor;
 
 	/**
 	 * Default tree edge color
 	 */
 	@Nullable
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	protected Color treeEdgeColor;
+	protected Integer treeEdgeColor;
 
 	/**
 	 * Default edge color
 	 */
 	@Nullable
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	protected Color edgeColor;
+	protected Integer edgeColor;
 
 	// styles
 	/**
@@ -435,7 +435,7 @@ public abstract class AbstractPainter extends Mapper
 	 * @param treeEdgeColor tree edge default color
 	 * @param edgeColor     edge default color
 	 */
-	public void setColors(@Nullable final Color backColor, @Nullable final Color foreColor, @Nullable final Color nodeBackColor, @Nullable final Color nodeForeColor, @Nullable final Color treeEdgeColor, @Nullable final Color edgeColor)
+	public void setColors(@Nullable final Integer backColor, @Nullable final Integer foreColor, @Nullable final Integer nodeBackColor, @Nullable final Integer nodeForeColor, @Nullable final Integer treeEdgeColor, @Nullable final Integer edgeColor)
 	{
 		if (backColor != null)
 		{

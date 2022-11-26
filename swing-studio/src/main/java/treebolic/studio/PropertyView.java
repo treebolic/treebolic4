@@ -218,15 +218,15 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODE_BACKCOLOR))
 			{
-				node.setBackColor((Color) propertyValue);
+				node.setBackColor((Integer) propertyValue);
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODE_FORECOLOR))
 			{
-				node.setForeColor((Color) propertyValue);
+				node.setForeColor((Integer) propertyValue);
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODE_EDGE_COLOR))
 			{
-				node.setEdgeColor((Color) propertyValue);
+				node.setEdgeColor((Integer) propertyValue);
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODE_EDGE_STROKE))
 			{
@@ -435,7 +435,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else if (propertyName.equals(PropertyView.LABEL_EDGE_COLOR))
 			{
-				edge.setColor((Color) propertyValue);
+				edge.setColor((Integer) propertyValue);
 			}
 			else if (propertyName.equals(PropertyView.LABEL_EDGE_IMAGE))
 			{
@@ -762,11 +762,11 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else if (propertyName.equals(PropertyView.LABEL_TREE_FORECOLOR))
 			{
-				settings.foreColor = (Color) propertyValue;
+				settings.foreColor = (Integer) propertyValue;
 			}
 			else if (propertyName.equals(PropertyView.LABEL_TREE_BACKCOLOR))
 			{
-				settings.backColor = (Color) propertyValue;
+				settings.backColor = (Integer) propertyValue;
 			}
 			else if (propertyName.equals(PropertyView.LABEL_TREE_FONT_FACE))
 			{
@@ -935,11 +935,11 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			final Settings settings = nodesSettings.settings;
 			if (propertyName.equals(PropertyView.LABEL_NODES_BACKCOLOR))
 			{
-				settings.nodeBackColor = (Color) propertyValue;
+				settings.nodeBackColor = (Integer) propertyValue;
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODES_FORECOLOR))
 			{
-				settings.nodeForeColor = (Color) propertyValue;
+				settings.nodeForeColor = (Integer) propertyValue;
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODES_IMAGE))
 			{
@@ -947,7 +947,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODES_EDGE_COLOR))
 			{
-				settings.treeEdgeColor = (Color) propertyValue;
+				settings.treeEdgeColor = (Integer) propertyValue;
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODES_EDGE_FROMTERMINATOR))
 			{
@@ -1099,7 +1099,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else if (propertyName.equals(PropertyView.LABEL_EDGES_COLOR))
 			{
-				settings.edgeColor = (Color) propertyValue;
+				settings.edgeColor = (Integer) propertyValue;
 			}
 			else if (propertyName.equals(PropertyView.LABEL_EDGES_STROKE))
 			{

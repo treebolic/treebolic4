@@ -18,7 +18,7 @@ import treebolic.annotations.Nullable;
  *
  * @author Bernard Bou
  */
-public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
+public class Graphics implements treebolic.glue.iface.Graphics<Image>
 {
 	/**
 	 * Plain style
@@ -99,7 +99,7 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 	 * @see treebolic.glue.iface.Graphics#drawBackgroundColor(java.lang.Object, int, int, int, int)
 	 */
 	@Override
-	public void drawBackgroundColor(@NonNull final Color color, final int left, final int top, final int width, final int height)
+	public void drawBackgroundColor(@NonNull final Integer color, final int left, final int top, final int width, final int height)
 	{
 		setColor(color);
 		fillRectangle(left, top, width, height);
@@ -198,16 +198,17 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 	// S E T T I N G S
 
 	@Override
-	public void setColor(@NonNull final Color color)
+	public void setColor(@Nullable final Integer color)
 	{
-		this.g.setColor(color.color);
+		this.g.setColor(Color.toAWT(color));
 	}
 
-	@NonNull
+	@Nullable
 	@Override
-	public Color getColor()
+	public Integer getColor()
 	{
-		return new Color(this.g.getColor());
+		java.awt.Color color = this.g.getColor();
+		return Color.fromAWT(color);
 	}
 
 	@Override

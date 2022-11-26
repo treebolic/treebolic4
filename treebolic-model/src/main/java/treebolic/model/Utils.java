@@ -14,7 +14,6 @@ import java.util.Properties;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.Color;
 import treebolic.model.MenuItem.Action;
 import treebolic.model.Types.MatchMode;
 import treebolic.model.Types.MatchScope;
@@ -756,9 +755,9 @@ public class Utils
 	 * @return prefixless hexadecimal representation of color
 	 */
 	@NonNull
-	static public String colorToString(@SuppressWarnings("TypeMayBeWeakened") @Nullable final Color color)
+	static public String colorToString(@SuppressWarnings("TypeMayBeWeakened") @Nullable final Integer color)
 	{
-		return color == null ? NONE : Integer.toHexString(color.getRGB()).substring(2);
+		return color == null ? NONE : Integer.toHexString(color).substring(2);
 	}
 
 	/**
@@ -768,7 +767,7 @@ public class Utils
 	 * @return color
 	 */
 	@Nullable
-	static public Color stringToColor(final String str0)
+	static public Integer stringToColor(final String str0)
 	{
 		String str = str0;
 		if (str == null || str.isEmpty())
@@ -781,8 +780,7 @@ public class Utils
 		}
 		try
 		{
-			@NonNull final Color color = new Color();
-			color.parse(str);
+			@NonNull final Integer color = Integer.parseInt(str, 16);
 			return color;
 		}
 		catch (@NonNull final Exception ignored)

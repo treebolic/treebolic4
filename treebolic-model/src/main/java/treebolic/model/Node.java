@@ -10,7 +10,6 @@ import java.util.List;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.Color;
 import treebolic.glue.Image;
 
 /**
@@ -68,14 +67,14 @@ class NodeData implements Serializable
 	 */
 	@Nullable
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	protected Color backColor;
+	protected Integer backColor;
 
 	/**
 	 * Foreground color
 	 */
 	@Nullable
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	protected Color foreColor;
+	protected Integer foreColor;
 
 	/**
 	 * Node image filename
@@ -104,7 +103,7 @@ class NodeData implements Serializable
 	 */
 	@Nullable
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	protected Color edgeColor;
+	protected Integer edgeColor;
 
 	/**
 	 * Tree edge style
@@ -199,24 +198,24 @@ class NodeData implements Serializable
 	}
 
 	@Nullable
-	public Color getBackColor()
+	public Integer getBackColor()
 	{
 		return this.backColor;
 	}
 
 	@Nullable
-	public Color getForeColor()
+	public Integer getForeColor()
 	{
 		return this.foreColor;
 	}
 
 	@Nullable
-	public Color getEdgeColor()
+	public Integer getEdgeColor()
 	{
 		return this.edgeColor;
 	}
 
-	public void setEdgeColor(@Nullable final Color color)
+	public void setEdgeColor(@Nullable final Integer color)
 	{
 		this.edgeColor = color;
 	}

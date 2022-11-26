@@ -8,7 +8,6 @@ import java.util.function.Function;
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.iface.ActionListener;
-import treebolic.glue.Color;
 import treebolic.glue.NotImplementedException;
 
 /**
@@ -16,7 +15,7 @@ import treebolic.glue.NotImplementedException;
  *
  * @author Bernard Bou
  */
-public class Statusbar implements Component, treebolic.glue.iface.component.Statusbar<Color>
+public class Statusbar implements Component, treebolic.glue.iface.component.Statusbar
 {
 	/**
 	 * Constructor
@@ -35,7 +34,7 @@ public class Statusbar implements Component, treebolic.glue.iface.component.Stat
 	}
 
 	@Override
-	public void setColors(@Nullable final Color backColor, @Nullable final Color foreColor)
+	public void setColors(@Nullable final Integer backColor, @Nullable final Integer foreColor)
 	{
 		throw new NotImplementedException();
 	}

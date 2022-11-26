@@ -11,7 +11,6 @@ import java.util.Properties;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.Color;
 
 /**
  * Settings
@@ -327,14 +326,14 @@ public class Settings implements Serializable
 	 */
 	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	@Nullable
-	public Color backColor;
+	public Integer backColor;
 
 	/**
 	 * Foreground color
 	 */
 	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	@Nullable
-	public Color foreColor;
+	public Integer foreColor;
 
 	/**
 	 * Background image file
@@ -497,14 +496,14 @@ public class Settings implements Serializable
 	 */
 	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	@Nullable
-	public Color nodeBackColor;
+	public Integer nodeBackColor;
 
 	/**
 	 * Node default foreground color
 	 */
 	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	@Nullable
-	public Color nodeForeColor;
+	public Integer nodeForeColor;
 
 	// images
 	/**
@@ -552,7 +551,7 @@ public class Settings implements Serializable
 	 */
 	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	@Nullable
-	public Color treeEdgeColor;
+	public Integer treeEdgeColor;
 
 	/**
 	 * Tree edge default style
@@ -578,7 +577,7 @@ public class Settings implements Serializable
 	 */
 	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	@Nullable
-	public Color edgeColor;
+	public Integer edgeColor;
 
 	/**
 	 * Edge default style
@@ -632,7 +631,7 @@ public class Settings implements Serializable
 	public void load(@NonNull final Properties properties)
 	{
 		String param;
-		@Nullable Color color;
+		@Nullable Integer color;
 		@Nullable Integer style;
 
 		// top

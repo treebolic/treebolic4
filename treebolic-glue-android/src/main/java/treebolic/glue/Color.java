@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
  *
  * @author Bernard Bou
  */
-public class Color implements treebolic.glue.iface.Color<Color>, Serializable
+public class Color implements treebolic.glue.iface.Color, Serializable
 {
 	private static final long serialVersionUID = 5704334480899935769L;
 

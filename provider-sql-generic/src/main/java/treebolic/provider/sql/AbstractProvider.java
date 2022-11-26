@@ -18,7 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import treebolic.ILocator;
-import treebolic.glue.Color;
+import treebolic.glue.iface.Color;
 import treebolic.model.*;
 import treebolic.provider.IProvider;
 import treebolic.provider.IProviderContext;
@@ -722,9 +722,9 @@ public abstract class AbstractProvider< //
 		final List<INode> children = node.getChildren();
 		if (children.size() > 10)
 		{
-			final Color backColor = node.getBackColor();
-			final Color foreColor = node.getForeColor();
-			final Color edgeColor = node.getEdgeColor();
+			final Integer backColor = node.getBackColor();
+			final Integer foreColor = node.getForeColor();
+			final Integer edgeColor = node.getEdgeColor();
 			final LoadBalancer balancer = new LoadBalancer(new int[]{10, 3}, 3);
 			balancer.setGroupNode(null, backColor, foreColor, edgeColor, LOADBALANCING_EDGE_STYLE, -1, null);
 			final List<INode> newChildren = balancer.buildHierarchy(children, 0);
@@ -1167,7 +1167,7 @@ public abstract class AbstractProvider< //
 	 * @param came   field name
 	 * @return Color value
 	 */
-	private Color readColor(final C cursor, final String came)
+	private Integer readColor(final C cursor, final String came)
 	{
 		try
 		{

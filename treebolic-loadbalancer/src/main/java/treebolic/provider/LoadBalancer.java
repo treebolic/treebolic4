@@ -10,7 +10,6 @@ import java.util.Locale;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.Color;
 import treebolic.glue.Image;
 import treebolic.model.INode;
 import treebolic.model.TreeMutableNode;
@@ -47,14 +46,14 @@ public class LoadBalancer
 	/**
 	 * Back color of intermediate node
 	 */
-	@SuppressWarnings("InstanceVariableOfConcreteClass")
-	private Color backColor;
+	@Nullable
+	private Integer backColor;
 
 	/**
 	 * Fore color of intermediate node
 	 */
-	@SuppressWarnings("InstanceVariableOfConcreteClass")
-	private Color foreColor;
+	@Nullable
+	private Integer foreColor;
 
 	/**
 	 * Label of intermediate node
@@ -64,8 +63,8 @@ public class LoadBalancer
 	/**
 	 * Edge color of intermediate node
 	 */
-	@SuppressWarnings("InstanceVariableOfConcreteClass")
-	private Color edgeColor;
+	@Nullable
+	private Integer edgeColor;
 
 	/**
 	 * Edge style of intermediate node
@@ -106,7 +105,7 @@ public class LoadBalancer
 	 * @param imageIndex0 group node image index
 	 * @param image0      group node image
 	 */
-	public void setGroupNode(final String label0, final Color backColor0, final Color foreColor0, final Color edgeColor0, final int edgeStyle0, final int imageIndex0, @SuppressWarnings("SameParameterValue") final Image image0)
+	public void setGroupNode(final String label0, @Nullable final Integer backColor0, @Nullable final Integer foreColor0, @Nullable final Integer edgeColor0, final int edgeStyle0, final int imageIndex0, @SuppressWarnings("SameParameterValue") final Image image0)
 	{
 		this.label = label0;
 		this.backColor = backColor0;

@@ -4,7 +4,6 @@
 
 package treebolic.model;
 
-import treebolic.glue.Color;
 import treebolic.glue.Image;
 
 /**
@@ -38,7 +37,7 @@ public class MutableNode extends Node
 	 * @param backColor backcolor
 	 * @param foreColor forecolor
 	 */
-	public MutableNode(final INode parent, final String id, final String label, final Image image, final Color backColor, final Color foreColor)
+	public MutableNode(final INode parent, final String id, final String label, final Image image, final Integer backColor, final Integer foreColor)
 	{
 		super(parent, id);
 		setLabel(label);
@@ -58,7 +57,7 @@ public class MutableNode extends Node
 	 * @param foreColor  forecolor
 	 */
 	@SuppressWarnings("WeakerAccess")
-	public MutableNode(final INode parent, final String id, final String label, final int imageIndex, final Color backColor, final Color foreColor)
+	public MutableNode(final INode parent, final String id, final String label, final int imageIndex, final Integer backColor, final Integer foreColor)
 	{
 		super(parent, id);
 		setLabel(label);
@@ -94,7 +93,7 @@ public class MutableNode extends Node
 	 * @param color backcolor
 	 */
 	@SuppressWarnings("WeakerAccess")
-	public void setBackColor(final Color color)
+	public void setBackColor(final Integer color)
 	{
 		this.backColor = color;
 	}
@@ -105,7 +104,7 @@ public class MutableNode extends Node
 	 * @param color forecolor
 	 */
 	@SuppressWarnings("WeakerAccess")
-	public void setForeColor(final Color color)
+	public void setForeColor(final Integer color)
 	{
 		this.foreColor = color;
 	}

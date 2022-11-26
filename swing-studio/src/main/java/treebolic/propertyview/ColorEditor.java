@@ -10,8 +10,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 
-import treebolic.glue.Color;
-
 /**
  * Color editor
  *
@@ -24,7 +22,7 @@ class ColorEditor extends AbstractCellEditor implements TableCellEditor
 	/**
 	 * Color being edited
 	 */
-	private Color currentColor;
+	private Integer currentColor;
 
 	/**
 	 * Button (editor component)
@@ -54,7 +52,7 @@ class ColorEditor extends AbstractCellEditor implements TableCellEditor
 			@Override
 			public void actionPerformed(final ActionEvent e)
 			{
-				ColorEditor.this.colorChooser.setColor(ColorEditor.this.currentColor == null || ColorEditor.this.currentColor.isNull() ? null : ColorEditor.this.currentColor.color);
+				ColorEditor.this.colorChooser.setColor(treebolic.glue.Color.toAWT(ColorEditor.this.currentColor));
 				ColorEditor.this.colorDialog.setVisible(true);
 
 				// dialog returns control
@@ -67,7 +65,7 @@ class ColorEditor extends AbstractCellEditor implements TableCellEditor
 		this.colorDialog = JColorChooser.createDialog(this.button, Messages.getString("ColorEditor.prompt_color"), true, // modal 
 				this.colorChooser,
 				// ok button handler
-				e -> ColorEditor.this.currentColor = new Color(ColorEditor.this.colorChooser.getColor()),
+				e -> ColorEditor.this.currentColor = ColorEditor.this.colorChooser.getColor().getRGB(),
 				// cancel button handler
 				e -> ColorEditor.this.currentColor = null);
 	}
@@ -80,8 +78,8 @@ class ColorEditor extends AbstractCellEditor implements TableCellEditor
 	@Override
 	public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected, final int row, final int column)
 	{
-		this.currentColor = (Color) value;
-		this.button.setBackground(this.currentColor == null || this.currentColor.isNull() ? null : this.currentColor.color);
+		this.currentColor = (Integer) value;
+		this.button.setBackground(treebolic.glue.Color.toAWT(this.currentColor));
 		return this.button;
 	}
 

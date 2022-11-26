@@ -10,7 +10,6 @@ import java.util.*;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.Color;
 import treebolic.model.*;
 import treebolic.provider.IProvider;
 
@@ -251,9 +250,9 @@ public class DocumentAdapter
 		this.idToNodeMap.put(id, node);
 
 		// colors
-		final Color backColor = Utils.stringToColor(nodeElement.getAttribute("backcolor"));
+		@Nullable final Integer backColor = Utils.stringToColor(nodeElement.getAttribute("backcolor"));
 		node.setBackColor(backColor);
-		final Color foreColor = Utils.stringToColor(nodeElement.getAttribute("forecolor"));
+		@Nullable final Integer foreColor = Utils.stringToColor(nodeElement.getAttribute("forecolor"));
 		node.setForeColor(foreColor);
 
 		// weight
@@ -343,7 +342,7 @@ public class DocumentAdapter
 			}
 
 			// color
-			final Color color = Utils.stringToColor(element.getAttribute("color"));
+			@Nullable final Integer color = Utils.stringToColor(element.getAttribute("color"));
 			if (color != null)
 			{
 				node.setEdgeColor(color);
@@ -447,7 +446,7 @@ public class DocumentAdapter
 		}
 
 		// color
-		final Color color = Utils.stringToColor(edgeElement.getAttribute("color"));
+		final Integer color = Utils.stringToColor(edgeElement.getAttribute("color"));
 		if (color != null)
 		{
 			edge.setColor(color);
@@ -575,7 +574,7 @@ public class DocumentAdapter
 			}
 
 			// colors
-			Color color = Utils.stringToColor(element.getAttribute("backcolor"));
+			@Nullable Integer color = Utils.stringToColor(element.getAttribute("backcolor"));
 			if (color != null)
 			{
 				settings.backColor = color;
@@ -656,7 +655,7 @@ public class DocumentAdapter
 			}
 
 			// colors
-			Color color = Utils.stringToColor(element.getAttribute("backcolor"));
+			@Nullable Integer color = Utils.stringToColor(element.getAttribute("backcolor"));
 			if (color != null)
 			{
 				settings.nodeBackColor = color;
@@ -720,7 +719,7 @@ public class DocumentAdapter
 			}
 
 			// color
-			final Color color = Utils.stringToColor(element.getAttribute("color"));
+			final Integer color = Utils.stringToColor(element.getAttribute("color"));
 			if (color != null)
 			{
 				settings.treeEdgeColor = color;
@@ -750,7 +749,7 @@ public class DocumentAdapter
 			}
 
 			// color
-			final Color color = Utils.stringToColor(element.getAttribute("color"));
+			@Nullable final Integer color = Utils.stringToColor(element.getAttribute("color"));
 			if (color != null)
 			{
 				settings.edgeColor = color;

@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import treebolic.annotations.NonNull;
-import treebolic.glue.Color;
 import treebolic.glue.Image;
+import treebolic.glue.iface.Color;
 import treebolic.model.*;
 import treebolic.provider.LoadBalancer;
 
@@ -106,42 +106,42 @@ public class OwlModelFactory
 	/**
 	 * Default class background color
 	 */
-	static final Color defaultClassBackColor = new Color(0xffffC0);
+	static final Integer defaultClassBackColor = 0xffffC0;
 
 	/**
 	 * Default class background color
 	 */
-	static final Color defaultClassForeColor = Color.DARK_GRAY;
+	static final Integer defaultClassForeColor = Color.DARK_GRAY;
 
 	/**
 	 * Default instance background color
 	 */
-	static final Color defaultInstanceBackColor = Color.WHITE;
+	static final Integer defaultInstanceBackColor = Color.WHITE;
 
 	/**
 	 * Default instance foreground color
 	 */
-	static final Color defaultInstanceForeColor = Color.BLUE;
+	static final Integer defaultInstanceForeColor = Color.BLUE;
 
 	/**
 	 * Default relation background color
 	 */
-	static final Color defaultRelationBackColor = Color.WHITE;
+	static final Integer defaultRelationBackColor = Color.WHITE;
 
 	/**
 	 * Default relation foreground color
 	 */
-	static final Color defaultRelationForeColor = Color.RED;
+	static final Integer defaultRelationForeColor = Color.RED;
 
 	/**
 	 * Default property background color
 	 */
-	static final Color defaultPropertyBackColor = Color.WHITE;
+	static final Integer defaultPropertyBackColor = Color.WHITE;
 
 	/**
 	 * Default property foreground color
 	 */
-	static final Color defaultPropertyForeColor = Color.MAGENTA;
+	static final Integer defaultPropertyForeColor = Color.MAGENTA;
 
 	// L O A D B A L A N C I N G
 
@@ -160,17 +160,17 @@ public class OwlModelFactory
 	/**
 	 * LoadBalancer (classes) : back color
 	 */
-	static private final Color LOADBALANCING_BACKCOLOR = null;
+	static private final Integer LOADBALANCING_BACKCOLOR = null;
 
 	/**
 	 * LoadBalancer (classes) : fore color
 	 */
-	static private final Color LOADBALANCING_FORECOLOR = null;
+	static private final Integer LOADBALANCING_FORECOLOR = null;
 
 	/**
 	 * LoadBalancer (classes) : edge color
 	 */
-	static private final Color LOADBALANCING_EDGECOLOR = Color.DARK_GRAY;
+	static private final Integer LOADBALANCING_EDGECOLOR = Color.DARK_GRAY;
 
 	/**
 	 * LoadBalancer (classes) : image index
@@ -192,17 +192,17 @@ public class OwlModelFactory
 	/**
 	 * LoadBalancer (instances and properties) : back color
 	 */
-	static private final Color LOADBALANCING_INSTANCES_BACKCOLOR = defaultInstanceBackColor;
+	static private final Integer LOADBALANCING_INSTANCES_BACKCOLOR = defaultInstanceBackColor;
 
 	/**
 	 * LoadBalancer (instances and properties) : fore color
 	 */
-	static private final Color LOADBALANCING_INSTANCES_FORECOLOR = defaultInstanceForeColor;
+	static private final Integer LOADBALANCING_INSTANCES_FORECOLOR = defaultInstanceForeColor;
 
 	/**
 	 * LoadBalancer (instances and properties) : edge color
 	 */
-	static private final Color LOADBALANCING_INSTANCES_EDGECOLOR = defaultInstanceForeColor;
+	static private final Integer LOADBALANCING_INSTANCES_EDGECOLOR = defaultInstanceForeColor;
 
 	/**
 	 * LoadBalancer (instances and properties) : image index
@@ -224,17 +224,17 @@ public class OwlModelFactory
 	/**
 	 * LoadBalancer (instances and properties) : back color
 	 */
-	static private final Color LOADBALANCING_PROPERTIES_BACKCOLOR = defaultPropertyBackColor;
+	static private final Integer LOADBALANCING_PROPERTIES_BACKCOLOR = defaultPropertyBackColor;
 
 	/**
 	 * LoadBalancer (instances and properties) : fore color
 	 */
-	static private final Color LOADBALANCING_PROPERTIES_FORECOLOR = defaultPropertyForeColor;
+	static private final Integer LOADBALANCING_PROPERTIES_FORECOLOR = defaultPropertyForeColor;
 
 	/**
 	 * LoadBalancer (instances and properties) : edge color
 	 */
-	static private final Color LOADBALANCING_PROPERTIES_EDGECOLOR = defaultPropertyForeColor;
+	static private final Integer LOADBALANCING_PROPERTIES_EDGECOLOR = defaultPropertyForeColor;
 
 	/**
 	 * LoadBalancer (instances and properties) : image index
@@ -263,12 +263,12 @@ public class OwlModelFactory
 	/**
 	 * Class back color
 	 */
-	private Color classBackColor;
+	private Integer classBackColor;
 
 	/**
 	 * Class fore color
 	 */
-	private Color classForeColor;
+	private Integer classForeColor;
 
 	/**
 	 * Class image
@@ -278,12 +278,12 @@ public class OwlModelFactory
 	/**
 	 * Class with relation fore color
 	 */
-	private Color classWithRelationBackColor;
+	private Integer classWithRelationBackColor;
 
 	/**
 	 * Class with relation fore color
 	 */
-	private Color classWithRelationForeColor;
+	private Integer classWithRelationForeColor;
 
 	/**
 	 * Class with relation image
@@ -293,12 +293,12 @@ public class OwlModelFactory
 	/**
 	 * Class with instances fore color
 	 */
-	private Color classWithInstancesBackColor;
+	private Integer classWithInstancesBackColor;
 
 	/**
 	 * Class with instances fore color
 	 */
-	private Color classWithInstancesForeColor;
+	private Integer classWithInstancesForeColor;
 
 	/**
 	 * Class with instances image
@@ -308,12 +308,12 @@ public class OwlModelFactory
 	/**
 	 * Class with properties fore color
 	 */
-	private Color classWithPropertiesBackColor;
+	private Integer classWithPropertiesBackColor;
 
 	/**
 	 * Class with properties fore color
 	 */
-	private Color classWithPropertiesForeColor;
+	private Integer classWithPropertiesForeColor;
 
 	/**
 	 * Class with properties image
@@ -330,12 +330,12 @@ public class OwlModelFactory
 	/**
 	 * Root fore color
 	 */
-	private Color rootForeColor;
+	private Integer rootForeColor;
 
 	/**
 	 * Root fore color
 	 */
-	private Color rootBackColor;
+	private Integer rootBackColor;
 
 	/**
 	 * Root image
@@ -352,12 +352,12 @@ public class OwlModelFactory
 	/**
 	 * Instances fore color
 	 */
-	private Color instancesForeColor;
+	private Integer instancesForeColor;
 
 	/**
 	 * Instances fore color
 	 */
-	private Color instancesBackColor;
+	private Integer instancesBackColor;
 
 	/**
 	 * 6 Instances image
@@ -367,12 +367,12 @@ public class OwlModelFactory
 	/**
 	 * Instance fore color
 	 */
-	private Color instanceForeColor;
+	private Integer instanceForeColor;
 
 	/**
 	 * Instance fore color
 	 */
-	private Color instanceBackColor;
+	private Integer instanceBackColor;
 
 	/**
 	 * Instance image
@@ -382,7 +382,7 @@ public class OwlModelFactory
 	/**
 	 * Instance edge color
 	 */
-	private Color instanceEdgeColor;
+	private Integer instanceEdgeColor;
 
 	/**
 	 * Instance edge style
@@ -397,12 +397,12 @@ public class OwlModelFactory
 	/**
 	 * Instance fore color
 	 */
-	private Color relationForeColor;
+	private Integer relationForeColor;
 
 	/**
 	 * Relation fore color
 	 */
-	private Color relationBackColor;
+	private Integer relationBackColor;
 
 	/**
 	 * Relation image
@@ -412,7 +412,7 @@ public class OwlModelFactory
 	/**
 	 * Relation edge color
 	 */
-	private Color relationEdgeColor;
+	private Integer relationEdgeColor;
 
 	/**
 	 * Relation edge style
@@ -434,12 +434,12 @@ public class OwlModelFactory
 	/**
 	 * Properties fore color
 	 */
-	private Color propertiesForeColor;
+	private Integer propertiesForeColor;
 
 	/**
 	 * Properties fore color
 	 */
-	private Color propertiesBackColor;
+	private Integer propertiesBackColor;
 
 	/**
 	 * Properties image
@@ -449,12 +449,12 @@ public class OwlModelFactory
 	/**
 	 * Property fore color
 	 */
-	private Color propertyForeColor;
+	private Integer propertyForeColor;
 
 	/**
 	 * Property fore color
 	 */
-	private Color propertyBackColor;
+	private Integer propertyBackColor;
 
 	/**
 	 * Property image
@@ -464,7 +464,7 @@ public class OwlModelFactory
 	/**
 	 * Property edge color
 	 */
-	private Color propertyEdgeColor;
+	private Integer propertyEdgeColor;
 
 	/**
 	 * Property edge style
@@ -660,7 +660,7 @@ public class OwlModelFactory
 		final Settings settings = new Settings();
 		settings.orientation = OwlModelFactory.asTree ? "south" : "radial";
 		settings.hasToolbarFlag = true;
-		settings.backColor = new Color(0xffffe0);
+		settings.backColor = 0xffffe0;
 		settings.fontFace = "SansSerif";
 		settings.fontSize = 15;
 		settings.expansion = .9F;
@@ -1352,7 +1352,7 @@ public class OwlModelFactory
 	 * @param colorValue forecolor value
 	 * @return color
 	 */
-	private Color getColor(final String colorKey, final Color colorValue)
+	private Integer getColor(final String colorKey, final Integer colorValue)
 	{
 		final String colorString = this.properties == null ? null : this.properties.getProperty(colorKey);
 		return colorString == null ? colorValue : Utils.stringToColor(colorString);

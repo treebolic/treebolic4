@@ -8,7 +8,6 @@ import java.util.List;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.Color;
 
 /**
  * Extended Mutable node (mutable tree links, copy constructor)
@@ -43,7 +42,7 @@ public class TreeMutableNode extends MutableNode
 	 * @param backColor  backcolor
 	 * @param foreColor  forecolor
 	 */
-	public TreeMutableNode(final INode parent, final String id, final String label, final int imageIndex, final Color backColor, final Color foreColor)
+	public TreeMutableNode(final INode parent, final String id, final String label, final int imageIndex, final Integer backColor, final Integer foreColor)
 	{
 		super(parent, id, label, imageIndex, backColor, foreColor);
 	}

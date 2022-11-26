@@ -17,7 +17,7 @@ import javax.swing.text.html.StyleSheet;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.Color;
+import treebolic.glue.iface.Color;
 import treebolic.glue.iface.ActionListener;
 
 /**
@@ -25,7 +25,7 @@ import treebolic.glue.iface.ActionListener;
  *
  * @author Bernard Bou
  */
-public class Statusbar extends JToolBar implements Component, treebolic.glue.iface.component.Statusbar<Color>
+public class Statusbar extends JToolBar implements Component, treebolic.glue.iface.component.Statusbar
 {
 	/**
 	 * Whether this component contains search component
@@ -180,8 +180,8 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 		// operation
 		this.labelTextField = new JTextField();
 		this.labelTextField.setEditable(false);
-		this.labelTextField.setBackground(Color.WHITE.color);
-		this.labelTextField.setBorder(BorderFactory.createLineBorder(Color.GRAY.color));
+		this.labelTextField.setBackground(treebolic.glue.Color.toAWT(Color.WHITE));
+		this.labelTextField.setBorder(BorderFactory.createLineBorder(treebolic.glue.Color.toAWT(Color.GRAY)));
 		this.labelTextField.setToolTipText(Messages.getString("Statusbar.tooltip_label"));
 		this.labelTextField.setPreferredSize(Constants.DIM_STATUS_LABEL);
 
@@ -198,7 +198,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 		this.styleSheet = kit.getStyleSheet();
 
 		this.contentPane = new JScrollPane(this.contentTextPane);
-		this.contentPane.setBorder(BorderFactory.createLineBorder(Color.GRAY.color));
+		this.contentPane.setBorder(BorderFactory.createLineBorder(treebolic.glue.Color.toAWT(Color.GRAY)));
 
 		// label + input box
 		this.labelAndInputBox = new Box(BoxLayout.X_AXIS);
@@ -230,23 +230,23 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	 * @param foreColor forecolor
 	 */
 	@Override
-	public void setColors(@NonNull final Color backColor, @NonNull final Color foreColor)
+	public void setColors(@NonNull final Integer backColor, @NonNull final Integer foreColor)
 	{
-		setBackground(backColor.color);
+		setBackground(treebolic.glue.Color.toAWT(backColor));
 
-		this.labelAndInputBox.setBackground(backColor.color);
-		this.labelTextField.setBackground(backColor.color);
-		this.searchTool.setBackground(backColor.color);
-		this.contentTextPane.setBackground(backColor.color);
+		this.labelAndInputBox.setBackground(treebolic.glue.Color.toAWT(backColor));
+		this.labelTextField.setBackground(treebolic.glue.Color.toAWT(backColor));
+		this.searchTool.setBackground(treebolic.glue.Color.toAWT(backColor));
+		this.contentTextPane.setBackground(treebolic.glue.Color.toAWT(backColor));
 
-		setForeground(foreColor.color);
+		setForeground(treebolic.glue.Color.toAWT(foreColor));
 
-		this.labelAndInputBox.setForeground(foreColor.color);
-		this.labelTextField.setForeground(foreColor.color);
-		this.searchTool.setForeground(foreColor.color);
-		this.contentTextPane.setForeground(foreColor.color);
+		this.labelAndInputBox.setForeground(treebolic.glue.Color.toAWT(foreColor));
+		this.labelTextField.setForeground(treebolic.glue.Color.toAWT(foreColor));
+		this.searchTool.setForeground(treebolic.glue.Color.toAWT(foreColor));
+		this.contentTextPane.setForeground(treebolic.glue.Color.toAWT(foreColor));
 
-		StyleConstants.setForeground(Statusbar.contentStyle, foreColor.color);
+		StyleConstants.setForeground(Statusbar.contentStyle, treebolic.glue.Color.toAWT(foreColor));
 	}
 
 	@Override

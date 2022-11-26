@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 import treebolic.studio.Pair;
-import treebolic.glue.Color;
+import treebolic.glue.iface.Color;
 import treebolic.model.*;
 
 /**

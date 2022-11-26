@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import treebolic.annotations.Nullable;
-import treebolic.glue.Color;
 import treebolic.glue.Image;
 
 /**
@@ -164,7 +163,7 @@ public interface INode extends Serializable
 	 * @return background color
 	 */
 	@Nullable
-	Color getBackColor();
+	Integer getBackColor();
 
 	/**
 	 * Get foreground color
@@ -172,7 +171,7 @@ public interface INode extends Serializable
 	 * @return foreground color
 	 */
 	@Nullable
-	Color getForeColor();
+	Integer getForeColor();
 
 	/**
 	 * Get tree edge color
@@ -180,14 +179,14 @@ public interface INode extends Serializable
 	 * @return tree edge color
 	 */
 	@Nullable
-	Color getEdgeColor();
+	Integer getEdgeColor();
 
 	/**
 	 * Set edge color
 	 *
 	 * @param color edge color
 	 */
-	void setEdgeColor(final Color color);
+	void setEdgeColor(final Integer color);
 
 	// edge
 

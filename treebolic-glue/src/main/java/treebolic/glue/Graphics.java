@@ -5,18 +5,19 @@
 package treebolic.glue;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * Graphics context
  *
  * @author Bernard Bou
  */
-public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
+public class Graphics implements treebolic.glue.iface.Graphics<Image>
 {
 	// D R A W
 
 	@Override
-	public void drawBackgroundColor(final Color color, final int left, final int top, final int width, final int height)
+	public void drawBackgroundColor(@Nullable final Integer color, final int left, final int top, final int width, final int height)
 	{
 		throw new NotImplementedException();
 	}
@@ -102,14 +103,14 @@ public class Graphics implements treebolic.glue.iface.Graphics<Color, Image>
 	// S E T T I N G S
 
 	@Override
-	public void setColor(final Color color)
+	public void setColor(@Nullable final Integer color)
 	{
 		throw new NotImplementedException();
 	}
 
-	@NonNull
+	@Nullable
 	@Override
-	public Color getColor()
+	public Integer getColor()
 	{
 		throw new NotImplementedException();
 	}

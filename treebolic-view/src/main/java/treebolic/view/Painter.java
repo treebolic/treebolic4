@@ -12,7 +12,11 @@ import treebolic.core.location.Complex;
 import treebolic.core.math.Arc;
 import treebolic.core.math.ArcMath;
 import treebolic.core.math.MapperToEuclidean;
-import treebolic.glue.*;
+import treebolic.glue.Arc2D;
+import treebolic.glue.Image;
+import treebolic.glue.Point2D;
+import treebolic.glue.Rectangle2D;
+import treebolic.glue.iface.Color;
 import treebolic.model.IEdge;
 import treebolic.model.INode;
 import treebolic.model.Location;
@@ -237,7 +241,7 @@ public class Painter extends AbstractPainter
 		if (parent != null)
 		{
 			// color
-			@Nullable Color color = node.getEdgeColor();
+			@Nullable Integer color = node.getEdgeColor();
 			if (color == null)
 			{
 				color = this.treeEdgeColor;
@@ -365,14 +369,14 @@ public class Painter extends AbstractPainter
 		 */
 		@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
 		@Nullable
-		public Color backColor;
+		public Integer backColor;
 
 		/**
 		 * Node forecolor
 		 */
 		@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
 		@Nullable
-		public Color foreColor;
+		public Integer foreColor;
 
 		/**
 		 * Node text size
@@ -768,7 +772,7 @@ public class Painter extends AbstractPainter
 		}
 
 		// draw
-		@Nullable Color color = edge.getColor();
+		@Nullable Integer color = edge.getColor();
 		if (color == null)
 		{
 			color = this.edgeColor;
@@ -1454,7 +1458,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					@NonNull final Color color = this.graphics.getColor();
+					@NonNull final Integer color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillPolygon(x, y, x.length);
 					this.graphics.setColor(color);
@@ -1474,7 +1478,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					@NonNull final Color color = this.graphics.getColor();
+					@NonNull final Integer color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillOval((int) x, (int) y, (int) terminatorHeight, (int) terminatorHeight);
 					this.graphics.setColor(color);
@@ -1494,7 +1498,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					@NonNull final Color color = this.graphics.getColor();
+					@NonNull final Integer color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillPolygon(x, y, x.length);
 					this.graphics.setColor(color);
@@ -1540,7 +1544,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					@NonNull final Color color = this.graphics.getColor();
+					@NonNull final Integer color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillPolygon(x, y, x.length);
 					this.graphics.setColor(color);
@@ -1560,7 +1564,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					@NonNull final Color color = this.graphics.getColor();
+					@NonNull final Integer color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillOval((int) x, (int) y, (int) terminatorHeight, (int) terminatorHeight);
 					this.graphics.setColor(color);
@@ -1580,7 +1584,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					@NonNull final Color color = this.graphics.getColor();
+					@NonNull final Integer color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillPolygon(x, y, x.length);
 					this.graphics.setColor(color);
@@ -1622,7 +1626,7 @@ public class Painter extends AbstractPainter
 	private void drawSpace(@NonNull final INode node)
 	{
 		// color
-		@Nullable Color backColor = node.getBackColor();
+		@Nullable Integer backColor = node.getBackColor();
 		if (backColor == null)
 		{
 			backColor = this.nodeBackColor;
@@ -1650,7 +1654,7 @@ public class Painter extends AbstractPainter
 	 * @param r     radius
 	 * @param color color
 	 */
-	private void drawCircle(final double x, final double y, final double r, @Nullable final Color color)
+	private void drawCircle(final double x, final double y, final double r, @Nullable final Integer color)
 	{
 		this.graphics.setColor(color);
 		this.graphics.drawOval(xUnitCircleToView(x - r), yUnitCircleToView(y - r), wUnitCircleToView(2 * r), hUnitCircleToView(2 * r));

@@ -17,7 +17,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import treebolic.glue.Color;
+import treebolic.annotations.Nullable;
 import treebolic.model.*;
 
 /**
@@ -261,7 +261,7 @@ public class ModelToDocumentTransformer
 		// attributes
 		// id, backcolor, forecolor
 		nodeElement.setAttribute("id", node.getId());
-		Color color = node.getBackColor();
+		@Nullable Integer color = node.getBackColor();
 		if (color != null)
 		{
 			nodeElement.setAttribute("backcolor", Utils.colorToString(color));
@@ -295,7 +295,7 @@ public class ModelToDocumentTransformer
 		// treeedge
 		final String edgeLabel = node.getEdgeLabel();
 		final String edgeImage = node.getEdgeImageFile();
-		final Color edgeColor = node.getEdgeColor();
+		final Integer edgeColor = node.getEdgeColor();
 		final Integer edgeStyle = node.getEdgeStyle();
 		if (edgeLabel != null || edgeImage != null || edgeColor != null || edgeStyle != null)
 		{
@@ -375,7 +375,7 @@ public class ModelToDocumentTransformer
 		{
 			ModelToDocumentTransformer.setStyleAttributes(edgeElement, style);
 		}
-		final Color color = edge.getColor();
+		@Nullable final Integer color = edge.getColor();
 		if (color != null)
 		{
 			edgeElement.setAttribute("color", Utils.colorToString(color));
@@ -593,9 +593,10 @@ public class ModelToDocumentTransformer
 			if (value != null)
 			{
 				String string;
-				if (value instanceof Color)
+				//TODO color
+				if (value instanceof Integer)
 				{
-					string = Utils.colorToString((Color) value);
+					string = Utils.colorToString((Integer) value);
 				}
 				else if (value instanceof float[])
 				{

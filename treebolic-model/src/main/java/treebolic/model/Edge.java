@@ -8,7 +8,6 @@ import java.io.Serializable;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.Color;
 import treebolic.glue.Image;
 
 /**
@@ -32,7 +31,7 @@ class EdgeData implements Serializable
 	 */
 	@Nullable
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	protected Color color;
+	protected Integer color;
 
 	/**
 	 * Edge style
@@ -74,7 +73,7 @@ class EdgeData implements Serializable
 	}
 
 	@Nullable
-	public Color getColor()
+	public Integer getColor()
 	{
 		return this.color;
 	}

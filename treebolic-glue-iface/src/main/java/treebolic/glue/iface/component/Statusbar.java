@@ -11,10 +11,9 @@ import treebolic.glue.iface.ActionListener;
 /**
  * Glue interface for Statusbar
  *
- * @param <C> component type
  * @author Bernard Bou
  */
-public interface Statusbar<C>
+public interface Statusbar
 {
 	/**
 	 * Image indices
@@ -66,7 +65,7 @@ public interface Statusbar<C>
 	 * @param foreColor fore color
 	 */
 	@SuppressWarnings("EmptyMethod")
-	void setColors(C backColor, C foreColor);
+	void setColors(Integer backColor, Integer foreColor);
 
 	/**
 	 * Set style

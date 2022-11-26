@@ -4,8 +4,6 @@
 
 package treebolic.model;
 
-import treebolic.glue.Color;
-
 /**
  * Mutable edge
  *
@@ -42,7 +40,7 @@ public class MutableEdge extends Edge
 	 *
 	 * @param color color
 	 */
-	public void setColor(final Color color)
+	public void setColor(final Integer color)
 	{
 		this.color = color;
 	}
