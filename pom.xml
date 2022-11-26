@@ -29,6 +29,8 @@
 		<module>treebolic-glue-swing</module>
 		<module>provider-xml</module>
 		<module>provider-owl</module>
+		<module>provider-sql-generic</module>
+		<module>provider-sql-jdbc</module>
 		<module>transformer-xml</module>
 		<module>swing-studio</module>
 		<module>swing-application</module>
