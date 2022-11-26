@@ -181,46 +181,46 @@ public class ModelDump
 	static public String toString(@NonNull final Settings settings)
 	{
 		@NonNull final StringBuilder sb = new StringBuilder();
-		sb.append("SETTINGS\n");
-		sb.append("BackColor=").append(Utils.colorToString(settings.backColor)).append('\n');
-		sb.append("ForeColor=").append(Utils.colorToString(settings.foreColor)).append('\n');
-		sb.append("BackgroundImage=").append(settings.backgroundImageFile).append('\n');
-		sb.append("FontFace=").append(settings.fontFace).append('\n');
-		sb.append("FontSize=").append(settings.fontSize).append('\n');
-		sb.append("FontSizeFactor=").append(settings.fontSizeFactor).append('\n');
-		sb.append("DownScaleFonts=").append(settings.downscaleFontsFlag).append('\n');
-		sb.append("FontScaler=").append(toString(settings.fontDownscaler)).append('\n');
-		sb.append("DownScaleImages=").append(settings.downscaleImagesFlag).append('\n');
-		sb.append("ImageScaler=").append(toString(settings.imageDownscaler)).append('\n');
-		sb.append("Orientation=").append(settings.orientation).append('\n');
-		sb.append("Expansion=").append(settings.expansion).append('\n');
-		sb.append("Sweep=").append(settings.sweep).append('\n');
-		sb.append("PreserveOrientationFlag=").append(settings.preserveOrientationFlag).append('\n');
-		sb.append("HasToolbarFlag=").append(settings.hasToolbarFlag).append('\n');
-		sb.append("HasStatusbarFlag=").append(settings.hasStatusbarFlag).append('\n');
-		sb.append("HasPopUpMenuFlag=").append(settings.hasPopUpMenuFlag).append('\n');
-		sb.append("HasToolTipFlag=").append(settings.hasToolTipFlag).append('\n');
-		sb.append("ToolTipDisplaysContentFlag=").append(settings.toolTipDisplaysContentFlag).append('\n');
-		sb.append("FocusOnHoverFlag=").append(settings.focusOnHoverFlag).append('\n');
-		sb.append("Focus=").append(settings.focus).append('\n');
-		sb.append("XMoveTo=").append(settings.xMoveTo).append('\n');
-		sb.append("YMoveTo=").append(settings.yMoveTo).append('\n');
-		sb.append("XShift=").append(settings.xMoveTo).append('\n');
-		sb.append("YShift=").append(settings.yMoveTo).append('\n');
-		sb.append("NodeBackColor=").append(Utils.colorToString(settings.nodeBackColor)).append('\n');
-		sb.append("NodeForeColor=").append(Utils.colorToString(settings.nodeForeColor)).append('\n');
-		sb.append("DefaultNodeImage=").append(settings.defaultNodeImage).append('\n');
-		sb.append("BorderFlag=").append(settings.borderFlag).append('\n');
-		sb.append("EllipsizeFlag=").append(settings.ellipsizeFlag).append('\n');
-		sb.append("LabelMaxLines=").append(settings.labelMaxLines).append('\n');
-		sb.append("LabelExtraLineFactor=").append(settings.labelExtraLineFactor).append('\n');
-		sb.append("TreeEdgeColor=").append(Utils.colorToString(settings.treeEdgeColor)).append('\n');
-		sb.append("TreeEdgeStyle=").append(ModelDump.toString(settings.treeEdgeStyle)).append('\n');
-		sb.append("DefaultTreeEdgeImage=").append(settings.defaultTreeEdgeImage).append('\n');
-		sb.append("EdgesAsArcsFlag=").append(settings.edgesAsArcsFlag).append('\n');
-		sb.append("EdgeColor=").append(Utils.colorToString(settings.edgeColor)).append('\n');
-		sb.append("EdgeStyle=").append(ModelDump.toString(settings.edgeStyle)).append('\n');
-		sb.append("DefaultEdgeImage=").append(settings.defaultEdgeImage).append('\n');
+		sb.append("SETTINGS\n") //
+				.append("BackColor=").append(Utils.colorToString(settings.backColor)).append('\n') //
+				.append("ForeColor=").append(Utils.colorToString(settings.foreColor)).append('\n') //
+				.append("BackgroundImage=").append(settings.backgroundImageFile).append('\n') //
+				.append("FontFace=").append(settings.fontFace).append('\n') //
+				.append("FontSize=").append(settings.fontSize).append('\n') //
+				.append("FontSizeFactor=").append(settings.fontSizeFactor).append('\n') //
+				.append("DownScaleFonts=").append(settings.downscaleFontsFlag).append('\n') //
+				.append("FontScaler=").append(toString(settings.fontDownscaler)).append('\n') //
+				.append("DownScaleImages=").append(settings.downscaleImagesFlag).append('\n') //
+				.append("ImageScaler=").append(toString(settings.imageDownscaler)).append('\n') //
+				.append("Orientation=").append(settings.orientation).append('\n') //
+				.append("Expansion=").append(settings.expansion).append('\n') //
+				.append("Sweep=").append(settings.sweep).append('\n') //
+				.append("PreserveOrientationFlag=").append(settings.preserveOrientationFlag).append('\n') //
+				.append("HasToolbarFlag=").append(settings.hasToolbarFlag).append('\n') //
+				.append("HasStatusbarFlag=").append(settings.hasStatusbarFlag).append('\n') //
+				.append("HasPopUpMenuFlag=").append(settings.hasPopUpMenuFlag).append('\n') //
+				.append("HasToolTipFlag=").append(settings.hasToolTipFlag).append('\n') //
+				.append("ToolTipDisplaysContentFlag=").append(settings.toolTipDisplaysContentFlag).append('\n') //
+				.append("FocusOnHoverFlag=").append(settings.focusOnHoverFlag).append('\n') //
+				.append("Focus=").append(settings.focus).append('\n') //
+				.append("XMoveTo=").append(settings.xMoveTo).append('\n') //
+				.append("YMoveTo=").append(settings.yMoveTo).append('\n') //
+				.append("XShift=").append(settings.xMoveTo).append('\n') //
+				.append("YShift=").append(settings.yMoveTo).append('\n') //
+				.append("NodeBackColor=").append(Utils.colorToString(settings.nodeBackColor)).append('\n') //
+				.append("NodeForeColor=").append(Utils.colorToString(settings.nodeForeColor)).append('\n') //
+				.append("DefaultNodeImage=").append(settings.defaultNodeImage).append('\n') //
+				.append("BorderFlag=").append(settings.borderFlag).append('\n') //
+				.append("EllipsizeFlag=").append(settings.ellipsizeFlag).append('\n') //
+				.append("LabelMaxLines=").append(settings.labelMaxLines).append('\n') //
+				.append("LabelExtraLineFactor=").append(settings.labelExtraLineFactor).append('\n') //
+				.append("TreeEdgeColor=").append(Utils.colorToString(settings.treeEdgeColor)).append('\n') //
+				.append("TreeEdgeStyle=").append(ModelDump.toString(settings.treeEdgeStyle)).append('\n') //
+				.append("DefaultTreeEdgeImage=").append(settings.defaultTreeEdgeImage).append('\n') //
+				.append("EdgesAsArcsFlag=").append(settings.edgesAsArcsFlag).append('\n') //
+				.append("EdgeColor=").append(Utils.colorToString(settings.edgeColor)).append('\n') //
+				.append("EdgeStyle=").append(ModelDump.toString(settings.edgeStyle)).append('\n') //
+				.append("DefaultEdgeImage=").append(settings.defaultEdgeImage).append('\n');
 		if (settings.menu == null)
 		{
 			sb.append("Menu=null");
@@ -229,17 +229,16 @@ public class ModelDump
 		{
 			for (@NonNull final MenuItem menuItem : settings.menu)
 			{
-				sb.append("MenuItem");
-				sb.append(" action=").append(menuItem.action == null ? "" : menuItem.action);
-				sb.append(" link=").append(menuItem.link == null ? "" : menuItem.link);
-				sb.append(" target=").append(menuItem.matchTarget == null ? "" : menuItem.matchTarget);
-				sb.append(" scope=").append(menuItem.matchScope == null ? "" : menuItem.matchScope);
-				sb.append(" mode=").append(menuItem.matchMode == null ? "" : menuItem.matchMode);
-				sb.append(" label=").append(menuItem.label == null ? "" : menuItem.label).append('\n');
-				sb.append('\n');
+				sb.append("MenuItem") //
+						.append(" action=").append(menuItem.action == null ? "" : menuItem.action) //
+						.append(" link=").append(menuItem.link == null ? "" : menuItem.link) //
+						.append(" target=").append(menuItem.matchTarget == null ? "" : menuItem.matchTarget) //
+						.append(" scope=").append(menuItem.matchScope == null ? "" : menuItem.matchScope) //
+						.append(" mode=").append(menuItem.matchMode == null ? "" : menuItem.matchMode) //
+						.append(" label=").append(menuItem.label == null ? "" : menuItem.label) //
+						.append('\n');
 			}
 		}
-		sb.append('\n');
 		return sb.toString();
 	}
 
