@@ -126,6 +126,53 @@
 			</plugin>
 
 			<plugin>
+				<groupId>com.github.wvengen</groupId>
+				<artifactId>proguard-maven-plugin</artifactId>
+				<version>2.6.0</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>proguard</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<skip>false</skip>
+					<injar>${project.build.finalName}-uber.jar</injar>
+                    <outjar>${project.build.finalName}-uber-small.jar</outjar>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+					<obfuscate>false</obfuscate>
+					<options>
+						<option>-allowaccessmodification</option>
+
+						<option>-keep class treebolic.** { *; }</option>
+						<option>-keep class org.semanticweb.** { *; }</option>
+						<option>-keep class uk.ac.manchester.cs.** { *; }</option>
+						<option>-keep class com.github.benmanes.caffeine.** { *; }</option>
+
+						<option>-keepclassmembers class ** { *; }</option>
+						<!-- <option>-keepclassmembers class ** {&lt;init&gt;(***);}</option> -->
+
+						<option>-dontwarn com.github.jsonldjava.shaded.**</option>
+						<option>-dontwarn org.apache.http.osgi.impl.**</option>
+						<option>-dontwarn org.apache.http.impl.auth.**</option>
+						<option>-dontwarn org.apache.commons.codec.digest.**</option>
+						<option>-dontwarn org.apache.http.impl.client.cache.ehcache.**</option>
+						<option>-dontwarn org.apache.http.impl.client.cache.memcached.**</option>
+						<option>-dontwarn com.google.common.hash.**</option>-->
+						<option>-dontwarn org.slf4j.**</option>
+
+						<option>-dontnote **</option>
+					</options>
+					<libs>
+						<lib>${java.home}/lib/rt.jar</lib>
+						<lib>${java.home}/lib/jsse.jar</lib>
+					</libs>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
 				<version>1.6</version>
