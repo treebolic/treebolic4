@@ -40,6 +40,10 @@
 		<module>swing-browser</module>
 		<module>swing-browser-search</module>
 		<module>android-constants</module>
+		<module>provider-text-pair</module>
+		<module>provider-text-indent</module>
+		<module>provider-text-indent-tree</module>
+		<module>provider-gxl</module>
 	</modules>
 
 	<properties>

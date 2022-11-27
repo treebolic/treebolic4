@@ -11,30 +11,8 @@ package treebolic.glue;
  */
 public class Color
 {
-	/*
-	public static android.graphics.Color toAndroid(Integer color)
+	public static int makeOpaque(int color)
 	{
-		if (color == null)
-		{
-			return null;
-		}
-		return android.graphics.Color.valueOf(color);
+		return 0xFF000000 | color;
 	}
-
-	public static Integer fromAndroid(android.graphics.Color color)
-	{
-		if (color == null)
-		{
-			return null;
-		}
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-		{
-			return color.toArgb();
-		}
-		else
-		{
-			return android.graphics.Color.argb(color.alpha(), color.red(), color.green(), color.blue());
-		}
-	}
-	 */
 }
