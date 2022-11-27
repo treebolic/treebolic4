@@ -6,7 +6,6 @@ package treebolic.studio;
 import java.util.*;
 
 import treebolic.studio.tree.*;
-import treebolic.glue.Color;
 import treebolic.model.*;
 import treebolic.model.Types.MatchMode;
 import treebolic.model.Types.MatchScope;

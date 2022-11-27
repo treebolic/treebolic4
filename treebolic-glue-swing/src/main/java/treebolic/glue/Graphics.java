@@ -200,7 +200,7 @@ public class Graphics implements treebolic.glue.iface.Graphics<Image>
 	@Override
 	public void setColor(@Nullable final Integer color)
 	{
-		this.g.setColor(Color.toAWT(color));
+		this.g.setColor(ColorKit.toAWT(color));
 	}
 
 	@Nullable
@@ -208,7 +208,7 @@ public class Graphics implements treebolic.glue.iface.Graphics<Image>
 	public Integer getColor()
 	{
 		java.awt.Color color = this.g.getColor();
-		return Color.fromAWT(color);
+		return ColorKit.fromAWT(color);
 	}
 
 	@Override

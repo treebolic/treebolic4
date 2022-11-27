@@ -44,6 +44,9 @@ public class SqlProperties
 
 	/**
 	 * Load properties
+	 *
+	 * @param file property files
+	 * @return properties
 	 */
 	static public Properties load(final File file)
 	{

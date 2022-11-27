@@ -11,7 +11,7 @@ import treebolic.annotations.Nullable;
  *
  * @author Bernard Bou
  */
-public class Color
+public class ColorKit
 {
 	/**
 	 * Color from java.awt.color

@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 import treebolic.studio.Pair;
-import treebolic.glue.iface.Color;
+import treebolic.glue.iface.Colors;
 import treebolic.model.*;
 
 /**
@@ -53,8 +53,8 @@ public class ModelUtils
 				{"id2", "two\n2", "id21", "twenty-one\n21", "id22", "twenty-two\n22", "id23", "twenty-three\n23"}, {"id3", "three\n3", "id31", "thirty-one\n31", "id32", "thirty-two\n32"}, {"id4", "four\n4", "id41", "forty-one\n41"}, {"id5", "five\n5"}};
 		final TreeMutableNode root = new TreeMutableNode(null, "root");
 		root.setLabel("root");
-		root.setBackColor(Color.ORANGE);
-		root.setForeColor(Color.BLACK);
+		root.setBackColor(Colors.ORANGE);
+		root.setForeColor(Colors.BLACK);
 		for (final String[] nodeData : data)
 		{
 			final TreeMutableNode node = new TreeMutableNode(root, nodeData[0]);

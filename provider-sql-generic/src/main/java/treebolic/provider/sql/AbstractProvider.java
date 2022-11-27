@@ -18,7 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import treebolic.ILocator;
-import treebolic.glue.iface.Color;
+import treebolic.glue.iface.Colors;
 import treebolic.model.*;
 import treebolic.provider.IProvider;
 import treebolic.provider.IProviderContext;
@@ -124,6 +124,7 @@ public abstract class AbstractProvider< //
 		 *
 		 * @param sql sql statement
 		 * @return cursor
+		 * @throws E exception
 		 */
 		public C query(String sql) throws E;
 
@@ -690,7 +691,7 @@ public abstract class AbstractProvider< //
 				parentLessNode.setParent(rootNode);
 
 				// edge
-				parentLessNode.setEdgeColor(Color.RED);
+				parentLessNode.setEdgeColor(Colors.RED);
 			}
 		}
 

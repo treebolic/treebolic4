@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.iface.Color;
+import treebolic.glue.iface.Colors;
 import treebolic.glue.component.Component;
 import treebolic.model.Settings;
 
@@ -61,8 +61,8 @@ public class Statusbar extends treebolic.glue.component.Statusbar implements Com
 	{
 		for (int i = 0; i < PutType.values().length; i++)
 		{
-			Statusbar.backColor[i] = Color.WHITE;
-			Statusbar.foreColor[i] = Color.BLACK;
+			Statusbar.backColor[i] = Colors.WHITE;
+			Statusbar.foreColor[i] = Colors.BLACK;
 		}
 	}
 

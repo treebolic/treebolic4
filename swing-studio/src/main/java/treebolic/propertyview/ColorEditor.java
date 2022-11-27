@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 
+import treebolic.glue.ColorKit;
+
 /**
  * Color editor
  *
@@ -52,7 +54,7 @@ class ColorEditor extends AbstractCellEditor implements TableCellEditor
 			@Override
 			public void actionPerformed(final ActionEvent e)
 			{
-				ColorEditor.this.colorChooser.setColor(treebolic.glue.Color.toAWT(ColorEditor.this.currentColor));
+				ColorEditor.this.colorChooser.setColor(ColorKit.toAWT(ColorEditor.this.currentColor));
 				ColorEditor.this.colorDialog.setVisible(true);
 
 				// dialog returns control
@@ -79,7 +81,7 @@ class ColorEditor extends AbstractCellEditor implements TableCellEditor
 	public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected, final int row, final int column)
 	{
 		this.currentColor = (Integer) value;
-		this.button.setBackground(treebolic.glue.Color.toAWT(this.currentColor));
+		this.button.setBackground(ColorKit.toAWT(this.currentColor));
 		return this.button;
 	}
 

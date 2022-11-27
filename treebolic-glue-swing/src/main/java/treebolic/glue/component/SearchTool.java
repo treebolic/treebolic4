@@ -14,7 +14,8 @@ import javax.swing.event.DocumentListener;
 
 import treebolic.annotations.NonNull;
 import treebolic.glue.ActionListener;
-import treebolic.glue.iface.Color;
+import treebolic.glue.ColorKit;
+import treebolic.glue.iface.Colors;
 
 /**
  * Search tool, derived from BOX
@@ -123,7 +124,7 @@ class SearchTool extends Box
 		// input
 		this.inputTextField = new JTextField();
 		this.inputTextField.setEditable(true);
-		this.inputTextField.setBorder(new CompoundBorder(BorderFactory.createLineBorder(treebolic.glue.Color.toAWT(Color.GRAY)), new EmptyBorder(0, 5, 0, 5)));
+		this.inputTextField.setBorder(new CompoundBorder(BorderFactory.createLineBorder(ColorKit.toAWT(Colors.GRAY)), new EmptyBorder(0, 5, 0, 5)));
 		this.inputTextField.setToolTipText(Messages.getString("SearchTool.tooltip_target"));
 		this.inputTextField.setPreferredSize(Constants.DIM_SEARCH_LABEL);
 		this.inputTextField.setMaximumSize(Constants.DIM_SEARCH_LABEL);

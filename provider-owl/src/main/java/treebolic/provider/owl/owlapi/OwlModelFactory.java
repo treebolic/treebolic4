@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 
 import treebolic.annotations.NonNull;
 import treebolic.glue.Image;
-import treebolic.glue.iface.Color;
+import treebolic.glue.iface.Colors;
 import treebolic.model.*;
 import treebolic.provider.LoadBalancer;
 
@@ -111,37 +111,37 @@ public class OwlModelFactory
 	/**
 	 * Default class background color
 	 */
-	static final Integer defaultClassForeColor = Color.DARK_GRAY;
+	static final Integer defaultClassForeColor = Colors.DARK_GRAY;
 
 	/**
 	 * Default instance background color
 	 */
-	static final Integer defaultInstanceBackColor = Color.WHITE;
+	static final Integer defaultInstanceBackColor = Colors.WHITE;
 
 	/**
 	 * Default instance foreground color
 	 */
-	static final Integer defaultInstanceForeColor = Color.BLUE;
+	static final Integer defaultInstanceForeColor = Colors.BLUE;
 
 	/**
 	 * Default relation background color
 	 */
-	static final Integer defaultRelationBackColor = Color.WHITE;
+	static final Integer defaultRelationBackColor = Colors.WHITE;
 
 	/**
 	 * Default relation foreground color
 	 */
-	static final Integer defaultRelationForeColor = Color.RED;
+	static final Integer defaultRelationForeColor = Colors.RED;
 
 	/**
 	 * Default property background color
 	 */
-	static final Integer defaultPropertyBackColor = Color.WHITE;
+	static final Integer defaultPropertyBackColor = Colors.WHITE;
 
 	/**
 	 * Default property foreground color
 	 */
-	static final Integer defaultPropertyForeColor = Color.MAGENTA;
+	static final Integer defaultPropertyForeColor = Colors.MAGENTA;
 
 	// L O A D B A L A N C I N G
 
@@ -170,7 +170,7 @@ public class OwlModelFactory
 	/**
 	 * LoadBalancer (classes) : edge color
 	 */
-	static private final Integer LOADBALANCING_EDGECOLOR = Color.DARK_GRAY;
+	static private final Integer LOADBALANCING_EDGECOLOR = Colors.DARK_GRAY;
 
 	/**
 	 * LoadBalancer (classes) : image index
@@ -556,8 +556,8 @@ public class OwlModelFactory
 	 */
 	void initialize()
 	{
-		this.rootBackColor = getColor("root.backcolor", Color.ORANGE);
-		this.rootForeColor = getColor("root.forecolor", Color.BLACK);
+		this.rootBackColor = getColor("root.backcolor", Colors.ORANGE);
+		this.rootForeColor = getColor("root.forecolor", Colors.BLACK);
 		this.rootImageFile = getImageFile("root.image");
 		this.rootLabel = getLabel("root.label", "Thing");
 
@@ -667,7 +667,7 @@ public class OwlModelFactory
 		settings.sweep = 1.2F;
 		settings.hasStatusbarFlag = true;
 		settings.focusOnHoverFlag = false;
-		settings.treeEdgeColor = Color.BLACK;
+		settings.treeEdgeColor = Colors.BLACK;
 		settings.treeEdgeStyle = IEdge.SOLID | IEdge.TOTRIANGLE | IEdge.TOFILL;
 
 		if (OwlModelFactory.asTree)

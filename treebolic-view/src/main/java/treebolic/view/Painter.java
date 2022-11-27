@@ -16,7 +16,7 @@ import treebolic.glue.Arc2D;
 import treebolic.glue.Image;
 import treebolic.glue.Point2D;
 import treebolic.glue.Rectangle2D;
-import treebolic.glue.iface.Color;
+import treebolic.glue.iface.Colors;
 import treebolic.model.IEdge;
 import treebolic.model.INode;
 import treebolic.model.Location;
@@ -172,7 +172,7 @@ public class Painter extends AbstractPainter
 		// boundary circle
 		if ((Painter.DEBUG & Painter.DEBUG_OUTERCIRCLE) != 0)
 		{
-			drawCircle(0., 0., 1., Color.LIGHT_GRAY);
+			drawCircle(0., 0., 1., Colors.LIGHT_GRAY);
 		}
 
 		// compute node data

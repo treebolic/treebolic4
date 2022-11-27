@@ -9,7 +9,7 @@ import java.util.List;
 import treebolic.annotations.Nullable;
 import treebolic.glue.Graphics;
 import treebolic.glue.Image;
-import treebolic.glue.iface.Color;
+import treebolic.glue.iface.Colors;
 import treebolic.model.IEdge;
 import treebolic.model.INode;
 
@@ -58,37 +58,37 @@ public abstract class AbstractPainter extends Mapper
 	 * Initial default background color
 	 */
 	@Nullable
-	static private final Integer backColor0 = Color.WHITE;
+	static private final Integer backColor0 = Colors.WHITE;
 
 	/**
 	 * Initial default foreground color
 	 */
 	@Nullable
-	static private final Integer foreColor0 = Color.BLACK;
+	static private final Integer foreColor0 = Colors.BLACK;
 
 	/**
 	 * Initial default node background color
 	 */
 	@Nullable
-	static private final Integer nodeBackColor0 = Color.WHITE;
+	static private final Integer nodeBackColor0 = Colors.WHITE;
 
 	/**
 	 * Initial default node foreground color
 	 */
 	@Nullable
-	static private final Integer nodeForeColor0 = Color.BLACK;
+	static private final Integer nodeForeColor0 = Colors.BLACK;
 
 	/**
 	 * Initial default tree edge color
 	 */
 	@Nullable
-	static private final Integer treeEdgeColor0 = Color.GRAY;
+	static private final Integer treeEdgeColor0 = Colors.GRAY;
 
 	/**
 	 * Initial default tree edge color
 	 */
 	@Nullable
-	static private final Integer edgeColor0 = Color.DARK_GRAY;
+	static private final Integer edgeColor0 = Colors.DARK_GRAY;
 
 	// D A T A
 

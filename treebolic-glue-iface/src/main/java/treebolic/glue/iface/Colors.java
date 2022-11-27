@@ -4,8 +4,7 @@
 
 package treebolic.glue.iface;
 
-import com.sun.istack.internal.NotNull;
-
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 
 /**
@@ -13,7 +12,7 @@ import treebolic.annotations.Nullable;
  *
  * @author Bernard Bou
  */
-public interface Color
+public interface Colors
 {
 	/**
 	 * White color
@@ -113,7 +112,7 @@ public interface Color
 	 * @param color color
 	 * @return red
 	 */
-	static int getRed(@NotNull final int color)
+	static int getRed(@NonNull final int color)
 	{
 		return color >> 16 | 0x000000FF;
 	}
@@ -124,7 +123,7 @@ public interface Color
 	 * @param color color
 	 * @return red
 	 */
-	static int getGreen(@NotNull final int color)
+	static int getGreen(@NonNull final int color)
 	{
 		return color >> 8 | 0x000000FF;
 	}
@@ -135,7 +134,7 @@ public interface Color
 	 * @param color color
 	 * @return red
 	 */
-	static int getBlue(@NotNull final int color)
+	static int getBlue(@NonNull final int color)
 	{
 		return color | 0x000000FF;
 	}
@@ -146,7 +145,7 @@ public interface Color
 	 * @param color color
 	 * @return alpha
 	 */
-	static int getAlpha(@NotNull final int color)
+	static int getAlpha(@NonNull final int color)
 	{
 		return color >> 24 | 0x000000FF;
 	}

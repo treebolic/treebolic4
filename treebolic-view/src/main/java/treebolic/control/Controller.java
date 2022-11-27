@@ -5,9 +5,7 @@
 package treebolic.control;
 
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLDecoder;
+import java.net.*;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
@@ -727,7 +725,7 @@ public class Controller extends Commander
 				@Nullable URL url2 = makeUrlAbsolute(imageBase, f1);
 				if (url2 != null)
 				{
-					content = m.replaceFirst("src='" + url2 + "'");
+					content = m.replaceAll("src='" + url2 + "'");
 				}
 			}
 
@@ -738,7 +736,7 @@ public class Controller extends Commander
 				@Nullable URL url2 = makeUrlAbsolute(imageBase, f1);
 				if (url2 != null)
 				{
-					content = m2.replaceFirst("src='" + url2 + "'");
+					content = m2.replaceAll("src='" + url2 + "'");
 				}
 			}
 		}
@@ -757,11 +755,11 @@ public class Controller extends Commander
 	{
 		try
 		{
-			new URL(urlSpec);
-			return null;
-		}
-		catch (MalformedURLException e)
-		{
+			URI uri = new URI(urlSpec);
+			if (uri.isAbsolute())
+			{
+				return null;
+			}
 			try
 			{
 				return new URL(base, urlSpec);
@@ -769,6 +767,10 @@ public class Controller extends Commander
 			catch (MalformedURLException ignored)
 			{
 			}
+		}
+		catch (URISyntaxException e)
+		{
+			//
 		}
 		return null;
 	}
