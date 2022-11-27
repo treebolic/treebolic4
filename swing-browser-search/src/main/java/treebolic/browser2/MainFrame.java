@@ -382,6 +382,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param base      base
 	 * @param imageBase image base
 	 * @param urlScheme url scheme
+	 * @return context
 	 */
 	@NonNull
 	protected Context makeContext(final String source, final String base, final String imageBase, final String urlScheme)
