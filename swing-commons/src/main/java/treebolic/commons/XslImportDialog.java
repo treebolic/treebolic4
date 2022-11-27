@@ -66,8 +66,10 @@ public class XslImportDialog extends JDialog
 
 	/**
 	 * Initialize
+	 *
+	 * @param presetXslts preset xslt
 	 */
-	protected void initialize(final List<String> presetXsls)
+	protected void initialize(final List<String> presetXslts)
 	{
 		setTitle(Messages.getString("XslImportDialog.title"));
 		setResizable(true);
@@ -119,7 +121,7 @@ public class XslImportDialog extends JDialog
 		this.xslComboBox.setEditable(true);
 		this.xslComboBox.setRenderer(renderer);
 		this.xslComboBox.setPreferredSize(new Dimension(300, 24));
-		for (final String item : presetXsls)
+		for (final String item : presetXslts)
 		{
 			this.xslComboBox.addItem(item);
 		}

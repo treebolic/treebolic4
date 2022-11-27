@@ -78,6 +78,9 @@ public class XslExportDialog extends JDialog
 
 	/**
 	 * Initialize
+	 *
+	 * @param presetXsls  preset xslt
+	 * @param viewOutputs view outputs
 	 */
 	protected void initialize(final List<String> presetXsls, @SuppressWarnings("SameParameterValue") final String[] viewOutputs)
 	{

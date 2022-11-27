@@ -77,6 +77,8 @@ public class OpenDialog extends JDialog
 
 	/**
 	 * Initialize
+	 *
+	 * @param providers providers
 	 */
 	protected void initialize(final Collection<String> providers)
 	{

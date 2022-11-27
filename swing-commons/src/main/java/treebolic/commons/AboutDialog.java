@@ -61,6 +61,7 @@ public class AboutDialog extends JDialog
 	 * @param product product
 	 * @param version string
 	 * @param sysInfo whether to add sysinfo
+	 * @return panel
 	 */
 	protected JPanel initialize(final String product, final String version, final boolean sysInfo)
 	{
