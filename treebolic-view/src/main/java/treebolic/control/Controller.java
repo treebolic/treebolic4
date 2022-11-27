@@ -684,7 +684,7 @@ public class Controller extends Commander
 			{
 				if (ABSOLUTE_IMG_URLS)
 				{
-					content = absoluteImageSrc(content.toString());
+					content = absoluteImageSrcs(content.toString());
 				}
 
 				sb.append("<div class='");
@@ -707,7 +707,7 @@ public class Controller extends Commander
 	 * @param content content
 	 * @return changed content
 	 */
-	private String absoluteImageSrc(@NonNull String content)
+	private String absoluteImageSrcs(@NonNull String content)
 	{
 		// "<IMG src='image'>"
 		// "<img src='http://somesite/path/image'>"
@@ -718,29 +718,45 @@ public class Controller extends Commander
 		@Nullable URL imageBase = widget.getIContext().getImagesBase();
 		if (imageBase != null)
 		{
-			@NonNull Matcher m = SCR_QUOTE1_PATTERN.matcher(content);
-			while (m.find())
-			{
-				String f1 = m.group(1); // first group = src content
-				@Nullable URL url2 = makeUrlAbsolute(imageBase, f1);
-				if (url2 != null)
-				{
-					content = m.replaceAll("src='" + url2 + "'");
-				}
-			}
-
-			@NonNull Matcher m2 = SRC_QUOTE2_PATTERN.matcher(content);
-			while (m2.find())
-			{
-				String f1 = m2.group(1); // first group = src content
-				@Nullable URL url2 = makeUrlAbsolute(imageBase, f1);
-				if (url2 != null)
-				{
-					content = m2.replaceAll("src='" + url2 + "'");
-				}
-			}
+			return tweakImageSrcs(content, imageBase);
 		}
 		return content;
+	}
+
+	static String tweakImageSrcs(String content, URL imageBase)
+	{
+		StringBuffer sb = new StringBuffer();
+		@NonNull Matcher m1 = SCR_QUOTE1_PATTERN.matcher(content);
+		while (m1.find())
+		{
+			String group = m1.group(1);
+			String replacement = m1.group();
+			@Nullable URL url2 = makeUrlAbsolute(imageBase, group);
+			if (url2 != null)
+			{
+				replacement = "src='" + url2 + "'";
+			}
+			m1.appendReplacement(sb,replacement);
+		}
+		m1.appendTail(sb);
+		content = sb.toString();
+
+		sb.setLength(0);
+		@NonNull Matcher m2 = SRC_QUOTE2_PATTERN.matcher(content);
+		while (m2.find())
+		{
+			String group = m2.group(1);
+			String replacement = m2.group();
+			@Nullable URL url2 = makeUrlAbsolute(imageBase, group);
+			if (url2 != null)
+			{
+				replacement = "src=\"" + url2 + "\"";
+			}
+			m2.appendReplacement(sb,replacement);
+		}
+		m2.appendTail(sb);
+
+		return sb.toString();
 	}
 
 	/**
@@ -751,7 +767,7 @@ public class Controller extends Commander
 	 * @return new url with base, null if unchanged and already absolute
 	 */
 	@Nullable
-	private URL makeUrlAbsolute(URL base, @NonNull String urlSpec)
+	private static URL makeUrlAbsolute(URL base, @NonNull String urlSpec)
 	{
 		try
 		{
@@ -851,7 +867,7 @@ public class Controller extends Commander
 					content = content.replaceAll("\n", "<br>");
 					if (ABSOLUTE_IMG_URLS)
 					{
-						content = absoluteImageSrc(content);
+						content = absoluteImageSrcs(content);
 					}
 					sb.append(content.length() <= Commander.TOOLTIPLINESPAN ? "<div>" : "<div width='" + Commander.TOOLTIPLINESPAN * 7 + "'>");
 					sb.append(content);
