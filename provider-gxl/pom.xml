@@ -13,7 +13,7 @@
 		<version>4.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>provider-sql-generic</artifactId>
+	<artifactId>provider-gxl</artifactId>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>
@@ -24,30 +24,30 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
+			<artifactId>provider-xml</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-model</artifactId>
 			<version>${revision}</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-mutable</artifactId>
 			<version>${revision}</version>
-			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-loadbalancer</artifactId>
-			<version>4.0-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
-		<!--
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-glue</artifactId>
 			<version>${revision}</version>
 			<scope>provided</scope>
 		</dependency>
-		-->
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
+			<artifactId>treebolic-annotations</artifactId>
+			<version>${revision}</version>
+		</dependency>
 	</dependencies>
 
 </project>

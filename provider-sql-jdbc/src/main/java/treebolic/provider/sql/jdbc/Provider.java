@@ -12,6 +12,7 @@ import java.sql.*;
 import java.util.Properties;
 import java.util.regex.Matcher;
 
+import treebolic.annotations.NonNull;
 import treebolic.provider.sql.AbstractProvider;
 
 /**
@@ -23,16 +24,16 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 {
 	static class JdbcCursor implements AbstractProvider.Cursor<SQLException>
 	{
-		private final Statement statement;
+		@NonNull private final Statement statement;
 
-		private final ResultSet resultSet;
+		@NonNull private final ResultSet resultSet;
 
 		/**
 		 * Constructor
 		 * @param statement statement
 		 * @param resultSet resultset
 		 */
-		public JdbcCursor(Statement statement, ResultSet resultSet)
+		public JdbcCursor(@NonNull final Statement statement, @NonNull final ResultSet resultSet)
 		{
 			this.statement = statement;
 			this.resultSet = resultSet;
@@ -97,7 +98,7 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#getColumnIndex(java.lang.String)
 		 */
 		@Override
-		public int getColumnIndex(String columnName) throws SQLException
+		public int getColumnIndex(@NonNull final String columnName) throws SQLException
 		{
 			if (this.resultSet.isAfterLast())
 			{
@@ -208,7 +209,7 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		 * @see treebolic.provider.sqlx.AbstractProvider.Database#query(java.lang.String)
 		 */
 		@Override
-		public JdbcCursor query(String nodesSql) throws SQLException
+		public JdbcCursor query(@NonNull final String nodesSql) throws SQLException
 		{
 			final Statement statement = this.connection.createStatement();
 			final ResultSet resultSet = statement.executeQuery(nodesSql);

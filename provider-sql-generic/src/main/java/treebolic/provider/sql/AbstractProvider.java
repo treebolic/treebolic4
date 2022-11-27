@@ -18,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import treebolic.ILocator;
+import treebolic.annotations.Nullable;
 import treebolic.glue.iface.Colors;
 import treebolic.model.*;
 import treebolic.provider.IProvider;
@@ -348,6 +349,7 @@ public abstract class AbstractProvider< //
 	 * (non-Javadoc)
 	 * @see treebolic.provider.IProvider#makeModel(java.lang.String, java.net.URL, java.util.Properties)
 	 */
+	@Nullable
 	@Override
 	public Model makeModel(final String source, final URL base, final Properties parameters)
 	{
@@ -362,6 +364,7 @@ public abstract class AbstractProvider< //
 	 * (non-Javadoc)
 	 * @see treebolic.provider.IProvider#makeTree(java.lang.String, java.net.URL, java.util.Properties, boolean)
 	 */
+	@Nullable
 	@Override
 	public Tree makeTree(final String source, final URL base, final Properties parameters, final boolean checkRecursion)
 	{
@@ -425,6 +428,7 @@ public abstract class AbstractProvider< //
 	 * @return model
 	 */
 	@SuppressWarnings("boxing")
+	@Nullable
 	private Model queryModel()
 	{
 		this.properties.put("database", makeDatabasePath(this.properties)); //$NON-NLS-1$
@@ -475,6 +479,7 @@ public abstract class AbstractProvider< //
 	 *
 	 * @return tree
 	 */
+	@Nullable
 	private Tree queryTree()
 	{
 		try
@@ -506,6 +511,7 @@ public abstract class AbstractProvider< //
 	 * @return tree
 	 * @throws SQLException
 	 */
+	@Nullable
 	private Tree queryTree(final B db) throws E
 	{
 		final INode root = queryNodesAndEdges(db);

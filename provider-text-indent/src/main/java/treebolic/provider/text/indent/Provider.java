@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Properties;
 
 import treebolic.ILocator;
+import treebolic.annotations.Nullable;
 import treebolic.glue.iface.Colors;
 import treebolic.model.*;
 import treebolic.provider.IProvider;
@@ -112,6 +113,7 @@ public class Provider implements IProvider
 	 * (non-Javadoc)
 	 * @see treebolic.provider.IProvider#makeModel(java.lang.String, java.net.URL, java.util.Properties)
 	 */
+	@Nullable
 	@Override
 	public Model makeModel(final String source, final URL base, final Properties parameters)
 	{
@@ -172,6 +174,7 @@ public class Provider implements IProvider
 	 * (non-Javadoc)
 	 * @see treebolic.provider.IProvider#makeTree(java.lang.String, java.net.URL, java.util.Properties, boolean)
 	 */
+	@Nullable
 	@Override
 	public Tree makeTree(final String source0, final URL base, final Properties parameters, final boolean checkRecursion)
 	{
@@ -209,6 +212,7 @@ public class Provider implements IProvider
 	 * @param url text file URL
 	 * @return tree
 	 */
+	@Nullable
 	private Tree parseTree(final URL url)
 	{
 		// root
@@ -255,6 +259,7 @@ public class Provider implements IProvider
 	 * @param location text file location
 	 * @return tree
 	 */
+	@Nullable
 	private Tree parseTree(final String location)
 	{
 		// root

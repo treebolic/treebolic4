@@ -9,7 +9,10 @@
  */
 package treebolic.provider.text.pair;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,6 +21,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import treebolic.ILocator;
+import treebolic.annotations.Nullable;
 import treebolic.glue.iface.Colors;
 import treebolic.model.*;
 import treebolic.model.graph.Converter;
@@ -84,6 +88,7 @@ public class Provider implements IProvider
 	 * (non-Javadoc)
 	 * @see treebolic.provider.IProvider#makeModel(java.lang.String, java.net.URL, java.util.Properties)
 	 */
+	@Nullable
 	@Override
 	public Model makeModel(final String source, final URL base, final Properties parameters)
 	{
@@ -145,6 +150,7 @@ public class Provider implements IProvider
 	 * @see treebolic.provider.IProvider#makeTree(java.lang.String, java.net.URL, java.util.Properties, boolean)
 	 */
 	@Override
+	@Nullable
 	public Tree makeTree(final String source0, final URL base, final Properties parameters, final boolean checkRecursion)
 	{
 		// get text file
@@ -181,6 +187,7 @@ public class Provider implements IProvider
 	 * @param url text file URL
 	 * @return tree
 	 */
+	@Nullable
 	private Tree parseTree(final URL url)
 	{
 		final MutableGraph graph = new MutableGraph();
@@ -212,6 +219,7 @@ public class Provider implements IProvider
 	 * @param location text file location
 	 * @return tree
 	 */
+	@Nullable
 	private Tree parseTree(final String location)
 	{
 		final MutableGraph graph = new MutableGraph();
