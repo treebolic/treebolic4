@@ -9,28 +9,32 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="treebolic-glue-iface" />
+        <module name="provider-text-indent" />
         <module name="treebolic-loadbalancer" />
         <module name="treebolic-mutable" />
         <module name="provider-xml" />
         <module name="treebolic-model" />
-        <module name="swing-application-owl" />
+        <module name="provider-gxl" />
         <module name="provider-sql-jdbc" />
         <module name="swing-studio" />
         <module name="treebolic-glue-swing" />
-        <module name="swing-browser" />
-        <module name="android-constants" />
         <module name="swing-browser-search" />
-        <module name="treebolic-graph" />
         <module name="swing-commons" />
-        <module name="treebolic-view" />
         <module name="provider-sql-generic" />
-        <module name="transformer-xml" />
         <module name="treebolic-annotations" />
         <module name="provider-owl" />
+        <module name="swing-application-xml" />
+        <module name="treebolic-glue-iface" />
+        <module name="provider-text-pair" />
+        <module name="swing-application-owl" />
+        <module name="swing-browser" />
+        <module name="android-constants" />
+        <module name="provider-text-indent-tree" />
+        <module name="treebolic-graph" />
+        <module name="treebolic-view" />
+        <module name="transformer-xml" />
         <module name="swing-application" />
         <module name="treebolic-glue" />
-        <module name="swing-application-xml" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
