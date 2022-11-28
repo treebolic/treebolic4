@@ -5,7 +5,6 @@
  * Copyright : (c) 2001-2014
  * Terms of use : see license agreement at http://treebolic.sourceforge.net/en/license.htm
  * Author : Bernard Bou
- *
  */
 package treebolic.provider.text.indent;
 
@@ -57,7 +56,7 @@ public class Provider implements IProvider
 		/**
 		 * Constructor
 		 *
-		 * @param node node
+		 * @param node  node
 		 * @param level itslevel
 		 */
 		public StackEntry(final MutableNode node, final int level)
@@ -120,7 +119,9 @@ public class Provider implements IProvider
 	{
 		final Tree tree = makeTree(source, base, parameters, false);
 		if (tree == null)
+		{
 			return null;
+		}
 		final List<INode> nonRootTree = tree.getRoot().getChildren();
 		if (nonRootTree == null)
 		{
@@ -130,30 +131,30 @@ public class Provider implements IProvider
 		// settings
 		final boolean asTree = nonRootTree.size() < 3;
 		final Settings settings = new Settings();
+
 		settings.backColor = Provider.backgroundColor;
 		settings.nodeBackColor = Colors.WHITE;
 		settings.nodeForeColor = Colors.BLACK;
-
-		settings.orientation = asTree ? "south" : "radial";  
-		settings.hasToolbarFlag = true;
-		settings.backColor = 0xf5f5f0;
-		settings.fontFace = "SansSerif"; 
-		settings.fontSize = 20;
-		settings.expansion = .9F;
-		settings.sweep = 1.2F;
-		settings.hasToolbarFlag = true;
-		settings.hasStatusbarFlag = true;
-		settings.focusOnHoverFlag = true;
 		settings.treeEdgeColor = Colors.GRAY;
 		settings.treeEdgeStyle = IEdge.SOLID | IEdge.TOTRIANGLE | IEdge.TOFILL;
 
+		settings.orientation = asTree ? "south" : "radial";
+		settings.fontFace = "SansSerif";
+		settings.fontSize = 20;
+		settings.expansion = .9F;
+		settings.sweep = 1.2F;
+
+		settings.hasToolbarFlag = true;
+		settings.hasStatusbarFlag = true;
+		settings.focusOnHoverFlag = true;
+
 		// override settings properties
-		Properties properties = null;
-		final String location = parameters == null ? null : parameters.getProperty("settings"); 
+		Properties properties;
+		final String location = parameters == null ? null : parameters.getProperty("settings");
 		if (location != null && !location.isEmpty())
 		{
 			final URL url = ProviderUtils.makeURL(location, base, parameters, this.context);
-			this.context.progress("Loading ..." + (url != null ? url : location), false); 
+			this.context.progress("Loading ..." + (url != null ? url : location), false);
 
 			try
 			{
@@ -163,7 +164,7 @@ public class Provider implements IProvider
 			}
 			catch (final IOException e)
 			{
-				this.context.message("Cannot load Settings file <" + (url != null ? url : location) + ">");  
+				this.context.message("Cannot load Settings file <" + (url != null ? url : location) + ">");
 			}
 			catch (final Exception e)
 			{
@@ -185,25 +186,25 @@ public class Provider implements IProvider
 		String source = source0;
 		if (source == null)
 		{
-			source = parameters.getProperty("source"); 
+			source = parameters.getProperty("source");
 		}
 
 		if (source != null)
 		{
 			// URL
 			final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
-			this.context.progress("Loading ..." + (url != null ? url : source), false); 
+			this.context.progress("Loading ..." + (url != null ? url : source), false);
 
 			// parse
 			final Tree tree = url != null ? parseTree(url) : parseTree(source);
 			if (tree != null)
 			{
-				this.context.progress("Loaded " + (url != null ? url : source), false); 
+				this.context.progress("Loaded " + (url != null ? url : source), false);
 				return tree;
 			}
 			else
 			{
-				this.context.message("Cannot load text file <" + (url != null ? url : source) + ">");  
+				this.context.message("Cannot load text file <" + (url != null ? url : source) + ">");
 			}
 		}
 		return null;
@@ -219,8 +220,8 @@ public class Provider implements IProvider
 	private Tree parseTree(final URL url)
 	{
 		// root
-		MutableNode rootNode = new MutableNode(null, "root"); 
-		rootNode.setLabel("root"); 
+		MutableNode rootNode = new MutableNode(null, "root");
+		rootNode.setLabel("root");
 		rootNode.setBackColor(Colors.RED);
 		rootNode.setForeColor(Colors.WHITE);
 
@@ -233,7 +234,7 @@ public class Provider implements IProvider
 			String line;
 			for (int l = 1; (line = reader.readLine()) != null; l++)
 			{
-				if (line.matches("^\\s*$") || line.startsWith("#"))  
+				if (line.matches("^\\s*$") || line.startsWith("#"))
 				{
 					continue;
 				}
@@ -266,8 +267,8 @@ public class Provider implements IProvider
 	private Tree parseTree(final String location)
 	{
 		// root
-		MutableNode rootNode = new MutableNode(null, "root"); 
-		rootNode.setLabel("root"); 
+		MutableNode rootNode = new MutableNode(null, "root");
+		rootNode.setLabel("root");
 		rootNode.setBackColor(Colors.RED);
 		rootNode.setForeColor(Colors.WHITE);
 
@@ -280,7 +281,7 @@ public class Provider implements IProvider
 			String line;
 			for (int l = 1; (line = reader.readLine()) != null; l++)
 			{
-				if (line.matches("^\\s*$") || line.startsWith("#"))  
+				if (line.matches("^\\s*$") || line.startsWith("#"))
 				{
 					continue;
 				}
@@ -306,18 +307,25 @@ public class Provider implements IProvider
 	/**
 	 * Process line
 	 *
-	 * @param line line
+	 * @param line       line
 	 * @param lineNumber line number
-	 * @param stack node stack
+	 * @param stack      node stack
 	 */
 	private void processLine(@NonNull final String line, final int lineNumber, @NonNull final Deque<StackEntry> stack)
 	{
 		final int level = getLevel(line);
 		if (level == -1)
+		{
 			return;
+		}
 
 		// stack
-		final StackEntry entry = stack.peek();
+		StackEntry entry = stack.peek();
+		if (entry == null)
+		{
+			return;
+		}
+
 		int entryLevel = entry.level;
 
 		// parent
@@ -325,7 +333,12 @@ public class Provider implements IProvider
 		if (level == entryLevel)
 		{
 			stack.pop();
-			parent = stack.peek().node;
+			entry = stack.peek();
+			if (entry == null)
+			{
+				return;
+			}
+			parent = entry.node;
 		}
 		else if (level > entryLevel)
 		{
@@ -336,15 +349,20 @@ public class Provider implements IProvider
 			while (level <= entryLevel)
 			{
 				stack.pop();
-				entryLevel = stack.peek().level;
+				entry = stack.peek();
+				if (entry == null)
+				{
+					return;
+				}
+				entryLevel = entry.level;
 			}
 			parent = stack.peek().node;
 		}
 
 		// parse
 		// label:id:backcolor:forecolor:img:link:content
-		final String[] fields = line.substring(level).split(":", 7); 
-		final String id = fields.length > 1 ? fields[1] : "N" + lineNumber; 
+		final String[] fields = line.substring(level).split(":", 7);
+		final String id = fields.length > 1 ? fields[1] : "N" + lineNumber;
 
 		// new node
 		final MutableNode node = new MutableNode(parent, id);
@@ -386,7 +404,9 @@ public class Provider implements IProvider
 		{
 			final char c = line.charAt(i);
 			if (c != ' ' && c != '\t')
+			{
 				return i;
+			}
 		}
 		return -1;
 	}

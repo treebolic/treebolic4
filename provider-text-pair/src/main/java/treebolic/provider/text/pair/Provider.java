@@ -109,22 +109,22 @@ public class Provider implements IProvider
 		settings.backColor = Provider.backgroundColor;
 		settings.nodeBackColor = Colors.WHITE;
 		settings.nodeForeColor = Colors.BLACK;
+		settings.treeEdgeColor = Colors.GRAY;
+
+		settings.treeEdgeStyle = IEdge.SOLID | IEdge.TOTRIANGLE | IEdge.TOFILL;
 
 		settings.orientation = asTree ? "south" : "radial";
-		settings.hasToolbarFlag = true;
-		settings.backColor = 0xf5f5f0;
 		settings.fontFace = "SansSerif";
 		settings.fontSize = 20;
 		settings.expansion = .9F;
 		settings.sweep = 1.2F;
+
 		settings.hasToolbarFlag = true;
 		settings.hasStatusbarFlag = true;
 		settings.focusOnHoverFlag = true;
-		settings.treeEdgeColor = Colors.GRAY;
-		settings.treeEdgeStyle = IEdge.SOLID | IEdge.TOTRIANGLE | IEdge.TOFILL;
 
 		// override settings properties
-		Properties properties = null;
+		Properties properties;
 		final String location = parameters == null ? null : parameters.getProperty("settings");
 		if (location != null && !location.isEmpty())
 		{

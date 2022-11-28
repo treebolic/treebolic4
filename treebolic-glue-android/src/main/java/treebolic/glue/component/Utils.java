@@ -196,8 +196,9 @@ public class Utils
 		}
 		else
 		{
-			final Display display = wm.getDefaultDisplay();
+			@SuppressWarnings("deprecation") final Display display = wm.getDefaultDisplay();
 			final Point size = new Point();
+			//noinspection deprecation
 			display.getSize(size);
 			// int height = size.y;
 			return size.x;
@@ -221,8 +222,9 @@ public class Utils
 		}
 		else
 		{
-			final Display display = wm.getDefaultDisplay();
+			@SuppressWarnings("deprecation") final Display display = wm.getDefaultDisplay();
 			final Point size = new Point();
+			//noinspection deprecation
 			display.getSize(size);
 			return size;
 		}

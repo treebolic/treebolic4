@@ -667,7 +667,7 @@ public abstract class AbstractProvider< //
 		treeEdgesCursor.close();
 
 		// if one root return it
-		TreeMutableNode rootNode = makeRootNode();
+		TreeMutableNode rootNode;
 		if (parentLessNodes.size() == 1)
 		{
 			rootNode = parentLessNodes.get(0);
@@ -930,8 +930,8 @@ public abstract class AbstractProvider< //
 				settings.treeEdgeStyle = Utils.parseStyle(readString(settingsCursor, treeEdgeStrokeName), readString(settingsCursor, treeEdgeFromTerminatorName), readString(settingsCursor, treeEdgeToTerminatorName), lineFlag == null ?
 						null :
 						lineFlag.toString(), hiddenFlag == null ? null : hiddenFlag.toString());
-				hiddenFlag = readBoolean(settingsCursor, edgeLineName);
 				hiddenFlag = readBoolean(settingsCursor, edgeHiddenName);
+				lineFlag = readBoolean(settingsCursor, edgeLineName);
 				settings.edgeStyle = Utils.parseStyle(readString(settingsCursor, edgeStrokeName), readString(settingsCursor, edgeFromTerminatorName), readString(settingsCursor, edgeToTerminatorName), lineFlag == null ? null : lineFlag.toString(),
 						hiddenFlag == null ?
 								null :

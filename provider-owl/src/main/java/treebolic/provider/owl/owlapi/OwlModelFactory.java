@@ -31,6 +31,8 @@ import static java.util.stream.Collectors.toList;
  */
 public class OwlModelFactory
 {
+	static private final Integer backgroundColor = 0xffffe0;
+
 	/**
 	 * As tree
 	 */
@@ -658,17 +660,19 @@ public class OwlModelFactory
 		}
 
 		final Settings settings = new Settings();
+		settings.backColor = OwlModelFactory.backgroundColor;
+		settings.treeEdgeColor = Colors.BLACK;
+		settings.treeEdgeStyle = IEdge.SOLID | IEdge.TOTRIANGLE | IEdge.TOFILL;
 		settings.orientation = OwlModelFactory.asTree ? "south" : "radial";
-		settings.hasToolbarFlag = true;
-		settings.backColor = 0xffffe0;
+
 		settings.fontFace = "SansSerif";
 		settings.fontSize = 15;
 		settings.expansion = .9F;
 		settings.sweep = 1.2F;
+
+		settings.hasToolbarFlag = true;
 		settings.hasStatusbarFlag = true;
 		settings.focusOnHoverFlag = false;
-		settings.treeEdgeColor = Colors.BLACK;
-		settings.treeEdgeStyle = IEdge.SOLID | IEdge.TOTRIANGLE | IEdge.TOFILL;
 
 		if (OwlModelFactory.asTree)
 		{
