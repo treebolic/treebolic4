@@ -6,25 +6,18 @@ package treebolic.glue;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.DashPathEffect;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
-import android.graphics.PathEffect;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.Typeface;
 import android.util.TypedValue;
 
-import treebolic.glue.iface.Image;
 import org.treebolic.glue.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import treebolic.glue.iface.Image;
 
 /**
  * Graphics content and toolkit
@@ -322,7 +315,18 @@ public class Graphics implements treebolic.glue.iface.Graphics
 	@Override
 	public void setFont(final String face0, final int style0)
 	{
-		final Typeface typeface = Typeface.create(face0, style0 == Graphics.BOLD ? Typeface.BOLD : Typeface.NORMAL);
+		int style;
+		switch (style0)
+		{
+			case Graphics.BOLD:
+				style = Typeface.BOLD;
+				break;
+			case Graphics.PLAIN:
+			default:
+				style = Typeface.NORMAL;
+				break;
+		}
+		final Typeface typeface = Typeface.create(face0, style);
 		this.paint.setTypeface(typeface);
 	}
 
