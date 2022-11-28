@@ -93,6 +93,20 @@
       <entry_point TYPE="field" FQNAME="treebolic.propertyview.PropertyView.AttributeType NONE" />
       <entry_point TYPE="field" FQNAME="treebolic.site.FtpClient welcomeMsg" />
       <entry_point TYPE="field" FQNAME="treebolic.commons.RadioChoiceDialog value" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.iface.Colors CYAN" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.iface.Colors GREEN" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.iface.Colors PINK" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.iface.Colors YELLOW" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.iface.component.Statusbar.ImageIndices COUNT" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.iface.component.Statusbar.ImageIndices INFO" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.iface.component.Statusbar.ImageIndices LINK" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.iface.component.Statusbar.ImageIndices MOUNT" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.iface.component.Statusbar.ImageIndices SEARCH" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.iface.component.PopupMenu.LabelIndices LABEL_COUNT" />
+      <entry_point TYPE="field" FQNAME="treebolic.glue.iface.component.PopupMenu.ImageIndices IMAGE_COUNT" />
+      <entry_point TYPE="field" FQNAME="treebolic.studio.tree.Renderer italicFont" />
+      <entry_point TYPE="field" FQNAME="treebolic.studio.tree.Tree isDirty" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.sql.SqlProperties SOURCE" />
     </entry_points>
     <pattern value="treebolic.glue.Worker" method="doInBackground" />
     <pattern value="treebolic.glue.Worker" method="job" />
@@ -495,6 +509,72 @@
     <pattern value="treebolic.xml.transformer.DomTransformer" method="fileToDocument" />
     <pattern value="treebolic.dtd.Dtd" method="copyToUTF8Stream" />
     <pattern value="treebolic.xml.transformer.DomTransformer" method="DomTransformer" />
+    <pattern value="treebolic.provider.gxl.Provider" method="makeModel" />
+    <pattern value="treebolic.provider.gxl.Provider" method="makeTree" />
+    <pattern value="treebolic.provider.gxl.Provider" method="Provider" />
+    <pattern value="treebolic.provider.gxl.Provider" method="setContext" />
+    <pattern value="treebolic.provider.gxl.Provider" method="setHandle" />
+    <pattern value="treebolic.provider.gxl.Provider" method="setLocator" />
+    <pattern value="treebolic.provider.sql.AbstractProvider" method="makeModel" />
+    <pattern value="treebolic.provider.sql.AbstractProvider" method="makeTree" />
+    <pattern value="treebolic.provider.sql.AbstractProvider" method="querySettings" />
+    <pattern value="treebolic.provider.sql.AbstractProvider" method="setContext" />
+    <pattern value="treebolic.provider.sql.AbstractProvider" method="setHandle" />
+    <pattern value="treebolic.provider.sql.AbstractProvider" method="setLocator" />
+    <pattern value="treebolic.provider.sql.AbstractProvider" method="AbstractProvider" />
+    <pattern value="treebolic.provider.sql.SqlProperties" method="load" />
+    <pattern value="treebolic.provider.sql.SqlProperties" method="save" />
+    <pattern value="treebolic.provider.sql.SqlProperties" method="toString" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider.JdbcCursor" method="getColumnIndex" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider.JdbcCursor" method="getDouble" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider.JdbcCursor" method="getFloat" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider.JdbcCursor" method="getInt" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider.JdbcCursor" method="getPosition" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider.JdbcCursor" method="getString" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider.JdbcCursor" method="isNull" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider.JdbcCursor" method="moveToNext" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider.JdbcDatabase" method="close" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider.JdbcDatabase" method="getConnection" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider.JdbcDatabase" method="JdbcDatabase" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider" method="openDatabase" />
+    <pattern value="treebolic.provider.sql.jdbc.Provider.JdbcDatabase" method="query" />
+    <pattern value="treebolic.provider.text.indent.Provider" method="makeModel" />
+    <pattern value="treebolic.provider.text.indent.Provider" method="Provider" />
+    <pattern value="treebolic.provider.text.indent.Provider" method="setContext" />
+    <pattern value="treebolic.provider.text.indent.Provider" method="setHandle" />
+    <pattern value="treebolic.provider.text.indent.Provider" method="setLocator" />
+    <pattern value="treebolic.provider.text.indent.tre.Provider" method="makeModel" />
+    <pattern value="treebolic.provider.text.indent.tre.Provider" method="Provider" />
+    <pattern value="treebolic.provider.text.indent.tre.Provider" method="setContext" />
+    <pattern value="treebolic.provider.text.indent.tre.Provider" method="setHandle" />
+    <pattern value="treebolic.provider.text.indent.tre.Provider" method="setLocator" />
+    <pattern value="treebolic.provider.text.pair.Provider" method="makeModel" />
+    <pattern value="treebolic.provider.text.pair.Provider" method="Provider" />
+    <pattern value="treebolic.provider.text.pair.Provider" method="setContext" />
+    <pattern value="treebolic.provider.text.pair.Provider" method="setHandle" />
+    <pattern value="treebolic.provider.text.pair.Provider" method="setLocator" />
+    <pattern value="treebolic.studio.PropertyView.NodeIdGetter" method="get" />
+    <pattern value="treebolic.studio.TextView" method="update" />
+    <pattern value="treebolic.studio.domtree.ElementDecorator" method="getText" />
+    <pattern value="treebolic.glue.iface.Colors" method="make" />
+    <pattern value="treebolic.glue.iface.Colors" method="makeBrighter" />
+    <pattern value="treebolic.glue.iface.Colors" method="makeDarker" />
+    <pattern value="treebolic.glue.iface.Colors" method="parse" />
+    <pattern value="treebolic.glue.component.Container" method="getSplitterPositionPercent" />
+    <pattern value="treebolic.glue.component.Container" method="setSplitterPositionPercent" />
+    <pattern value="treebolic.glue.component.Dialog" method="setBase" />
+    <pattern value="treebolic.glue.component.PopupAdapter" method="onDismiss" />
+    <pattern value="treebolic.glue.component.PopupAdapter" method="setContentView" />
+    <pattern value="treebolic.glue.component.QuickAction.OnActionItemClickListener" method="onItemClick" />
+    <pattern value="treebolic.glue.component.QuickAction" method="QuickAction" />
+    <pattern value="treebolic.glue.component.QuickAction" method="setAnimStyle" />
+    <pattern value="treebolic.glue.component.QuickAction" method="show" />
+    <pattern value="treebolic.glue.component.Statusbar" method="setBase" />
+    <pattern value="treebolic.glue.component.Statusbar" method="setContentProcessor" />
+    <pattern value="treebolic.glue.component.Statusbar" method="setLabelProcessor" />
+    <pattern value="treebolic.glue.component.Surface" method="getThread" />
+    <pattern value="treebolic.glue.component.Tip" method="tip" />
+    <pattern value="treebolic.glue.component.Utils" method="fetchColorsNullable" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
