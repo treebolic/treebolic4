@@ -18,8 +18,8 @@ import javax.swing.text.html.StyleSheet;
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.ColorKit;
-import treebolic.glue.iface.Colors;
 import treebolic.glue.iface.ActionListener;
+import treebolic.glue.iface.Colors;
 
 /**
  * Status bar, derived from JToolbar
@@ -293,32 +293,44 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	@Override
 	public void put(final int image, @Nullable final Function<CharSequence[], String> converter, final String label, @Nullable final String... contents)
 	{
-		// icon and colors
-		this.operationIconLabel.setIcon(Statusbar.icons[image]);
+		Runnable r = () -> {
 
-		// label
-		this.labelTextField.setText(label);
+			// icon and colors
+			this.operationIconLabel.setIcon(Statusbar.icons[image]);
 
-		// content
-		String content;
-		if (contents == null || contents.length == 0)
+			// label
+			this.labelTextField.setText(label);
+
+			// content
+			String content;
+			if (contents == null || contents.length == 0)
+			{
+				content = "";
+			}
+			else if (converter != null)
+			{
+				content = converter.apply(contents);
+			}
+			else
+			{
+				content = String.join("\n", contents);
+			}
+			this.contentTextPane.setText(content);
+			this.contentTextPane.setCaretPosition(0);
+
+			// style
+			final StyledDocument styledDocument = this.contentTextPane.getStyledDocument();
+			styledDocument.setCharacterAttributes(0, styledDocument.getLength(), Statusbar.contentStyle, false);
+		};
+
+		if (!SwingUtilities.isEventDispatchThread())
 		{
-			content = "";
-		}
-		else if (converter != null)
-		{
-			content = converter.apply(contents);
+			SwingUtilities.invokeLater(r);
 		}
 		else
 		{
-			content = String.join("\n", contents);
+			r.run();
 		}
-		this.contentTextPane.setText(content);
-		this.contentTextPane.setCaretPosition(0);
-
-		// style
-		final StyledDocument styledDocument = this.contentTextPane.getStyledDocument();
-		styledDocument.setCharacterAttributes(0, styledDocument.getLength(), Statusbar.contentStyle, false);
 	}
 
 	/**
@@ -329,8 +341,19 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	@Override
 	public void put(final String message)
 	{
-		this.contentTextPane.setText(message);
-		this.contentTextPane.setCaretPosition(0);
+		Runnable r = () -> {
+			this.contentTextPane.setText(message);
+			this.contentTextPane.setCaretPosition(0);
+		};
+
+		if (!SwingUtilities.isEventDispatchThread())
+		{
+			SwingUtilities.invokeLater(r);
+		}
+		else
+		{
+			r.run();
+		}
 	}
 
 	/**

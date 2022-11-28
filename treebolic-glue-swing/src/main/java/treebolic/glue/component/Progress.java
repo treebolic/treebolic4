@@ -96,12 +96,19 @@ public class Progress extends JPanel implements Component, treebolic.glue.iface.
 	@Override
 	public void put(final String message, final boolean fail)
 	{
-		@NonNull final Runnable routine = () -> {
+		@NonNull final Runnable r = () -> {
 			Progress.this.text.setText(message);
 			Progress.this.label.setIcon(fail ? Progress.stopIcon : Progress.workingIcon);
 			Progress.this.progress.setValue(fail ? 0 : Progress.this.progress.getValue() + 10);
 			Progress.this.progress.setVisible(Progress.this.progress.getValue() > 0);
 		};
-		SwingUtilities.invokeLater(routine);
+		if (!SwingUtilities.isEventDispatchThread())
+		{
+			SwingUtilities.invokeLater(r);
+		}
+		else
+		{
+			r.run();
+		}
 	}
 }
