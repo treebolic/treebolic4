@@ -190,6 +190,7 @@ public class Graphics implements treebolic.glue.iface.Graphics
 	@Override
 	public void drawImage(@NonNull final Image image0, final int x, final int y, final int w, final int h)
 	{
+		assert image0 instanceof treebolic.glue.Image;
 		final treebolic.glue.Image image = (treebolic.glue.Image) image0;
 		if (image.image == null)
 		{
