@@ -112,7 +112,7 @@ public interface Colors
 	 * @param color color
 	 * @return red
 	 */
-	static int getRed(@NonNull final int color)
+	static int getRed(final int color)
 	{
 		return color >> 16 | 0x000000FF;
 	}
@@ -123,7 +123,7 @@ public interface Colors
 	 * @param color color
 	 * @return red
 	 */
-	static int getGreen(@NonNull final int color)
+	static int getGreen(final int color)
 	{
 		return color >> 8 | 0x000000FF;
 	}
@@ -134,7 +134,7 @@ public interface Colors
 	 * @param color color
 	 * @return red
 	 */
-	static int getBlue(@NonNull final int color)
+	static int getBlue(final int color)
 	{
 		return color | 0x000000FF;
 	}
@@ -145,7 +145,7 @@ public interface Colors
 	 * @param color color
 	 * @return alpha
 	 */
-	static int getAlpha(@NonNull final int color)
+	static int getAlpha(final int color)
 	{
 		return color >> 24 | 0x000000FF;
 	}

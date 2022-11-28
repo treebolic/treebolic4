@@ -154,7 +154,7 @@ public class GxlParser
 	static private Tree parseTree(final Document document)
 	{
 		// map
-		final Hashtable<String, MutableNode> nodesById = new Hashtable<String, MutableNode>();
+		final Hashtable<String, MutableNode> nodesById = new Hashtable<>();
 
 		// enumerate nodes
 		final NodeList gxlNodes = document.getElementsByTagName("node"); //$NON-NLS-1$
@@ -356,7 +356,7 @@ public class GxlParser
 						final MutableEdge edge = new MutableEdge(fromNode, toNode);
 						if (edges == null)
 						{
-							edges = new ArrayList<IEdge>();
+							edges = new ArrayList<>();
 						}
 						edges.add(edge);
 
@@ -458,21 +458,28 @@ public class GxlParser
 				if (element != null)
 				{
 					final String value = element.getAttribute("xlink:href"); //$NON-NLS-1$
-					if (name.equals("nodes-img-src")) //$NON-NLS-1$
+					switch (name)
 					{
-						settings.defaultNodeImage = value;
-					}
-					else if (name.equals("tree-img-src")) //$NON-NLS-1$
-					{
-						settings.backgroundImageFile = value;
-					}
-					else if (name.equals("nodes-default-treeedge-img-src")) //$NON-NLS-1$
-					{
-						settings.defaultTreeEdgeImage = value;
-					}
-					else if (name.equals("edges-default-edge-img-src")) //$NON-NLS-1$
-					{
-						settings.defaultEdgeImage = value;
+						case "nodes-img-src":
+							//$NON-NLS-1$
+
+							settings.defaultNodeImage = value;
+							break;
+						case "tree-img-src":
+							//$NON-NLS-1$
+
+							settings.backgroundImageFile = value;
+							break;
+						case "nodes-default-treeedge-img-src":
+							//$NON-NLS-1$
+
+							settings.defaultTreeEdgeImage = value;
+							break;
+						case "edges-default-edge-img-src":
+							//$NON-NLS-1$
+
+							settings.defaultEdgeImage = value;
+							break;
 					}
 				}
 
@@ -481,137 +488,172 @@ public class GxlParser
 				if (element2 != null)
 				{
 					final String value = element2.getTextContent();
-					if (name.equals("treebolic-toolbar")) //$NON-NLS-1$
+					switch (name)
 					{
-						settings.hasToolbarFlag = Boolean.valueOf(value);
-					}
-					else if (name.equals("treebolic-statusbar")) //$NON-NLS-1$
-					{
-						settings.hasStatusbarFlag = Boolean.valueOf(value);
-					}
-					else if (name.equals("treebolic-popupmenu")) //$NON-NLS-1$
-					{
-						settings.hasPopUpMenuFlag = Boolean.valueOf(value);
-					}
-					else if (name.equals("treebolic-tooltip")) //$NON-NLS-1$
-					{
-						settings.hasToolTipFlag = Boolean.valueOf(value);
-					}
-					else if (name.equals("treebolic-focus-on-hover")) //$NON-NLS-1$
-					{
-						settings.focusOnHoverFlag = Boolean.valueOf(value);
-					}
-					else if (name.equals("tree-backcolor")) //$NON-NLS-1$
-					{
-						settings.backColor = Utils.stringToColor(value);
-					}
-					else if (name.equals("tree-forecolor")) //$NON-NLS-1$
-					{
-						settings.foreColor = Utils.stringToColor(value);
-					}
-					else if (name.equals("tree-fontface")) //$NON-NLS-1$
-					{
-						settings.fontFace = value;
-					}
-					else if (name.equals("tree-fontsize")) //$NON-NLS-1$
-					{
-						settings.fontSize = Integer.valueOf(value);
-					}
-					else if (name.equals("tree-scalefonts")) //$NON-NLS-1$
-					{
-						settings.downscaleFontsFlag = Boolean.valueOf(value);
-					}
-					else if (name.equals("tree-fontscaler")) //$NON-NLS-1$
-					{
-						settings.fontDownscaler = Utils.stringToFloats(value);
-					}
-					else if (name.equals("tree-scaleimages")) //$NON-NLS-1$
-					{
-						settings.downscaleImagesFlag = Boolean.valueOf(value);
-					}
-					else if (name.equals("tree-imagescaler")) //$NON-NLS-1$
-					{
-						settings.imageDownscaler = Utils.stringToFloats(value);
-					}
-					else if (name.equals("tree-expansion")) //$NON-NLS-1$
-					{
-						settings.expansion = Float.valueOf(value);
-					}
-					else if (name.equals("tree-sweep")) //$NON-NLS-1$
-					{
-						settings.sweep = Float.valueOf(value);
-					}
-					else if (name.equals("tree-orientation")) //$NON-NLS-1$
-					{
-						settings.orientation = value;
-					}
-					else if (name.equals("tree-preserve-orientation")) //$NON-NLS-1$
-					{
-						settings.preserveOrientationFlag = Boolean.valueOf(value);
-					}
-					else if (name.equals("nodes-backcolor")) //$NON-NLS-1$
-					{
-						settings.nodeBackColor = Utils.stringToColor(value);
-					}
-					else if (name.equals("nodes-forecolor")) //$NON-NLS-1$
-					{
-						settings.nodeForeColor = Utils.stringToColor(value);
-					}
-					else if (name.equals("nodes-default-treeedge-color")) //$NON-NLS-1$
-					{
-						settings.treeEdgeColor = Utils.stringToColor(value);
-					}
-					else if (name.equals("nodes-default-treeedge-stroke")) //$NON-NLS-1$
-					{
-						settings.treeEdgeStyle = Utils.modifyStyle(settings.treeEdgeStyle, value, Utils.StyleComponent.STROKE);
-					}
-					else if (name.equals("nodes-default-treeedge-fromterminator")) //$NON-NLS-1$
-					{
-						settings.treeEdgeStyle = Utils.modifyStyle(settings.treeEdgeStyle, value, Utils.StyleComponent.FROMTERMINATOR);
-					}
-					else if (name.equals("nodes-default-treeedge-toterminator")) //$NON-NLS-1$
-					{
-						settings.treeEdgeStyle = Utils.modifyStyle(settings.treeEdgeStyle, value, Utils.StyleComponent.TOTERMINATOR);
-					}
-					else if (name.equals("nodes-border")) //$NON-NLS-1$
-					{
-						settings.borderFlag = Boolean.valueOf(value);
-					}
-					else if (name.equals("nodes-ellipsize")) //$NON-NLS-1$
-					{
-						settings.ellipsizeFlag = Boolean.valueOf(value);
-					}
-					else if (name.equals("nodes-label-max-lines")) //$NON-NLS-1$
-					{
-						settings.labelMaxLines = Integer.valueOf(value);
-					}
-					else if (name.equals("nodes-label-extra-line-factor")) //$NON-NLS-1$
-					{
-						settings.labelExtraLineFactor = Float.valueOf(value);
-					}
-					else if (name.equals("edges-arcs")) //$NON-NLS-1$
-					{
-						settings.edgesAsArcsFlag = Boolean.valueOf(value);
-					}
-					else if (name.equals("edges-default-edge-color")) //$NON-NLS-1$
-					{
-						settings.edgeColor = Utils.stringToColor(value);
-					}
-					else if (name.equals("edges-default-edge-fromterminator")) //$NON-NLS-1$
-					{
-						settings.edgeStyle = Utils.modifyStyle(settings.edgeStyle, value, Utils.StyleComponent.FROMTERMINATOR);
-					}
-					else if (name.equals("edges-default-edge-toterminator")) //$NON-NLS-1$
-					{
-						settings.edgeStyle = Utils.modifyStyle(settings.edgeStyle, value, Utils.StyleComponent.TOTERMINATOR);
-					}
-					else if (name.equals("edges-default-edge-stroke")) //$NON-NLS-1$
-					{
-						settings.edgeStyle = Utils.modifyStyle(settings.edgeStyle, value, Utils.StyleComponent.STROKE);
-					}
-					else
-					{
-						System.err.println("gxl: Unhandled attribute: " + name); //$NON-NLS-1$
+						case "treebolic-toolbar":
+							//$NON-NLS-1$
+
+							settings.hasToolbarFlag = Boolean.valueOf(value);
+							break;
+						case "treebolic-statusbar":
+							//$NON-NLS-1$
+
+							settings.hasStatusbarFlag = Boolean.valueOf(value);
+							break;
+						case "treebolic-popupmenu":
+							//$NON-NLS-1$
+
+							settings.hasPopUpMenuFlag = Boolean.valueOf(value);
+							break;
+						case "treebolic-tooltip":
+							//$NON-NLS-1$
+
+							settings.hasToolTipFlag = Boolean.valueOf(value);
+							break;
+						case "treebolic-focus-on-hover":
+							//$NON-NLS-1$
+
+							settings.focusOnHoverFlag = Boolean.valueOf(value);
+							break;
+						case "tree-backcolor":
+							//$NON-NLS-1$
+
+							settings.backColor = Utils.stringToColor(value);
+							break;
+						case "tree-forecolor":
+							//$NON-NLS-1$
+
+							settings.foreColor = Utils.stringToColor(value);
+							break;
+						case "tree-fontface":
+							//$NON-NLS-1$
+
+							settings.fontFace = value;
+							break;
+						case "tree-fontsize":
+							//$NON-NLS-1$
+
+							settings.fontSize = Integer.valueOf(value);
+							break;
+						case "tree-scalefonts":
+							//$NON-NLS-1$
+
+							settings.downscaleFontsFlag = Boolean.valueOf(value);
+							break;
+						case "tree-fontscaler":
+							//$NON-NLS-1$
+
+							settings.fontDownscaler = Utils.stringToFloats(value);
+							break;
+						case "tree-scaleimages":
+							//$NON-NLS-1$
+
+							settings.downscaleImagesFlag = Boolean.valueOf(value);
+							break;
+						case "tree-imagescaler":
+							//$NON-NLS-1$
+
+							settings.imageDownscaler = Utils.stringToFloats(value);
+							break;
+						case "tree-expansion":
+							//$NON-NLS-1$
+
+							settings.expansion = Float.valueOf(value);
+							break;
+						case "tree-sweep":
+							//$NON-NLS-1$
+
+							settings.sweep = Float.valueOf(value);
+							break;
+						case "tree-orientation":
+							//$NON-NLS-1$
+
+							settings.orientation = value;
+							break;
+						case "tree-preserve-orientation":
+							//$NON-NLS-1$
+
+							settings.preserveOrientationFlag = Boolean.valueOf(value);
+							break;
+						case "nodes-backcolor":
+							//$NON-NLS-1$
+
+							settings.nodeBackColor = Utils.stringToColor(value);
+							break;
+						case "nodes-forecolor":
+							//$NON-NLS-1$
+
+							settings.nodeForeColor = Utils.stringToColor(value);
+							break;
+						case "nodes-default-treeedge-color":
+							//$NON-NLS-1$
+
+							settings.treeEdgeColor = Utils.stringToColor(value);
+							break;
+						case "nodes-default-treeedge-stroke":
+							//$NON-NLS-1$
+
+							settings.treeEdgeStyle = Utils.modifyStyle(settings.treeEdgeStyle, value, Utils.StyleComponent.STROKE);
+							break;
+						case "nodes-default-treeedge-fromterminator":
+							//$NON-NLS-1$
+
+							settings.treeEdgeStyle = Utils.modifyStyle(settings.treeEdgeStyle, value, Utils.StyleComponent.FROMTERMINATOR);
+							break;
+						case "nodes-default-treeedge-toterminator":
+							//$NON-NLS-1$
+
+							settings.treeEdgeStyle = Utils.modifyStyle(settings.treeEdgeStyle, value, Utils.StyleComponent.TOTERMINATOR);
+							break;
+						case "nodes-border":
+							//$NON-NLS-1$
+
+							settings.borderFlag = Boolean.valueOf(value);
+							break;
+						case "nodes-ellipsize":
+							//$NON-NLS-1$
+
+							settings.ellipsizeFlag = Boolean.valueOf(value);
+							break;
+						case "nodes-label-max-lines":
+							//$NON-NLS-1$
+
+							settings.labelMaxLines = Integer.valueOf(value);
+							break;
+						case "nodes-label-extra-line-factor":
+							//$NON-NLS-1$
+
+							settings.labelExtraLineFactor = Float.valueOf(value);
+							break;
+						case "edges-arcs":
+							//$NON-NLS-1$
+
+							settings.edgesAsArcsFlag = Boolean.valueOf(value);
+							break;
+						case "edges-default-edge-color":
+							//$NON-NLS-1$
+
+							settings.edgeColor = Utils.stringToColor(value);
+							break;
+						case "edges-default-edge-fromterminator":
+							//$NON-NLS-1$
+
+							settings.edgeStyle = Utils.modifyStyle(settings.edgeStyle, value, Utils.StyleComponent.FROMTERMINATOR);
+							break;
+						case "edges-default-edge-toterminator":
+							//$NON-NLS-1$
+
+							settings.edgeStyle = Utils.modifyStyle(settings.edgeStyle, value, Utils.StyleComponent.TOTERMINATOR);
+							break;
+						case "edges-default-edge-stroke":
+							//$NON-NLS-1$
+
+							settings.edgeStyle = Utils.modifyStyle(settings.edgeStyle, value, Utils.StyleComponent.STROKE);
+							break;
+						default:
+							System.err.println("gxl: Unhandled attribute: " + name); //$NON-NLS-1$
+
+							break;
 					}
 				}
 
@@ -633,35 +675,48 @@ public class GxlParser
 									continue;
 								}
 
-								if (name.equals("menuitem-action")) //$NON-NLS-1$
+								switch (name)
 								{
-									settings.menu = GxlParser.allocate(settings.menu, k);
-									final MenuItem menuItem = settings.menu.get(k);
-									menuItem.action = Utils.stringToAction(value);
-								}
-								else if (name.equals("menuitem-label")) //$NON-NLS-1$
-								{
-									settings.menu = GxlParser.allocate(settings.menu, k);
-									final MenuItem menuItem = settings.menu.get(k);
-									menuItem.label = value;
-								}
-								else if (name.equals("menuitem-match-target")) //$NON-NLS-1$
-								{
-									settings.menu = GxlParser.allocate(settings.menu, k);
-									final MenuItem menuItem = settings.menu.get(k);
-									menuItem.matchTarget = value;
-								}
-								else if (name.equals("menuitem-match-scope")) //$NON-NLS-1$
-								{
-									settings.menu = GxlParser.allocate(settings.menu, k);
-									final MenuItem menuItem = settings.menu.get(k);
-									menuItem.matchScope = Utils.stringToScope(value);
-								}
-								else if (name.equals("menuitem-match-mode")) //$NON-NLS-1$
-								{
-									settings.menu = GxlParser.allocate(settings.menu, k);
-									final MenuItem menuItem = settings.menu.get(k);
-									menuItem.matchMode = Utils.stringToMode(value);
+									case "menuitem-action":
+										//$NON-NLS-1$
+									{
+										settings.menu = GxlParser.allocate(settings.menu, k);
+										final MenuItem menuItem = settings.menu.get(k);
+										menuItem.action = Utils.stringToAction(value);
+										break;
+									}
+									case "menuitem-label":
+										//$NON-NLS-1$
+									{
+										settings.menu = GxlParser.allocate(settings.menu, k);
+										final MenuItem menuItem = settings.menu.get(k);
+										menuItem.label = value;
+										break;
+									}
+									case "menuitem-match-target":
+										//$NON-NLS-1$
+									{
+										settings.menu = GxlParser.allocate(settings.menu, k);
+										final MenuItem menuItem = settings.menu.get(k);
+										menuItem.matchTarget = value;
+										break;
+									}
+									case "menuitem-match-scope":
+										//$NON-NLS-1$
+									{
+										settings.menu = GxlParser.allocate(settings.menu, k);
+										final MenuItem menuItem = settings.menu.get(k);
+										menuItem.matchScope = Utils.stringToScope(value);
+										break;
+									}
+									case "menuitem-match-mode":
+										//$NON-NLS-1$
+									{
+										settings.menu = GxlParser.allocate(settings.menu, k);
+										final MenuItem menuItem = settings.menu.get(k);
+										menuItem.matchMode = Utils.stringToMode(value);
+										break;
+									}
 								}
 								k++;
 							}
@@ -685,7 +740,7 @@ public class GxlParser
 		List<MenuItem> list = list0;
 		if (list == null)
 		{
-			list = new ArrayList<MenuItem>();
+			list = new ArrayList<>();
 		}
 		if (i > list.size() - 1)
 		{
@@ -703,7 +758,7 @@ public class GxlParser
 	 * @param tagName tag
 	 * @return DOM element if found, null if none
 	 */
-	static private Element getFirstElementByTagName(final Element element, final String tagName)
+	static private Element getFirstElementByTagName(final Element element, @SuppressWarnings("SameParameterValue") final String tagName)
 	{
 		final NodeList list = element.getElementsByTagName(tagName);
 		if (list.getLength() > 0)
@@ -739,7 +794,7 @@ public class GxlParser
 	 */
 	static private List<Element> getLevel1ChildElementsByTagName(final Element element, final String tagName)
 	{
-		final ArrayList<Element> list = new ArrayList<Element>();
+		final ArrayList<Element> list = new ArrayList<>();
 		final NodeList childNodes = element.getChildNodes();
 		for (int i = 0; i < childNodes.getLength(); i++)
 		{

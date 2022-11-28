@@ -29,7 +29,6 @@ import java.util.function.Function;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import treebolic.glue.Color;
 import treebolic.glue.iface.ActionListener;
 
 /**
@@ -105,6 +104,10 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 
 	// P R O C E S S O R
 
+	/**
+	 * Process text for view
+	 * //TODO use BiFunction
+	 */
 	@SuppressWarnings("WeakerAccess")
 	public interface Processor
 	{

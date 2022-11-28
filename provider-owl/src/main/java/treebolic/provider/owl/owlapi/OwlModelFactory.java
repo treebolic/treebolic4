@@ -684,7 +684,7 @@ public class OwlModelFactory
 			}
 			catch (final Exception e)
 			{
-				System.err.println("SETTING " + e.toString());
+				System.err.println("SETTING " + e);
 			}
 		}
 

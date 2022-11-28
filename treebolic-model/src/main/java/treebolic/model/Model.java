@@ -33,7 +33,6 @@ public class Model implements Serializable
 	/**
 	 * Images
 	 */
-	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	@Nullable
 	public final Image[] images;
 

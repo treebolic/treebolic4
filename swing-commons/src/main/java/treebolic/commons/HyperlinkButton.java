@@ -98,27 +98,4 @@ public class HyperlinkButton extends JButton
 		final String format = "<HTML><U>%s</U></HTML>";
 		return String.format(format, text);
 	}
-
-	// /**
-	// * Teest
-	// * @param args
-	// * @throws URISyntaxException
-	// */
-	// public static void main(String[] args)
-	// {
-	// Laf.lookAndFeel(args);
-	// final String uri = "https://play.google.com/store/apps/details?id=org.treebolic.wordnet.browser"; 
-	// final String label = makeURILabel("Treebolic WordNet"); 
-	// final Icon icon = new ImageIcon(HyperlinkButton.class.getResource("images/logo.png")); 
-	// JFrame frame = new JFrame("Links"); 
-	// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	// frame.setSize(400, 400);
-	// Container container = frame.getContentPane();
-	// container.setLayout(new GridBagLayout());
-	// JButton button = new HyperlinkButton(label, uri);
-	// JButton button2 = new HyperlinkButton(icon, uri);
-	// container.add(button);
-	// container.add(button2);
-	// frame.setVisible(true);
-	// }
 }

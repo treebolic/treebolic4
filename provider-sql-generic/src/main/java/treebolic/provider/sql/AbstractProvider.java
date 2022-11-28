@@ -29,7 +29,7 @@ import treebolic.provider.ProviderUtils;
 /**
  * Provider for SQL
  *
- * @param <B> data base type
+ * @param <B> database type
  * @param <C> cursor type
  * @param <E> exception type
  * @author Bernard Bou
@@ -118,6 +118,12 @@ public abstract class AbstractProvider< //
 		void close();
 	}
 
+	/**
+	 * Interface for database
+	 *
+	 * @param <C> cursor type
+	 * @param <E> exception type
+	 */
 	public interface Database<C extends Cursor<E>, E extends Exception>
 	{
 		/**
@@ -221,7 +227,7 @@ public abstract class AbstractProvider< //
 	{
 		this.context = null;
 		this.properties = null;
-		this.nodesById = new Hashtable<String, TreeMutableNode>();
+		this.nodesById = new Hashtable<>();
 	}
 
 	/**
@@ -408,11 +414,7 @@ public abstract class AbstractProvider< //
 				System.out.println("File: " + dbFile); //$NON-NLS-1$
 				return dbFile.getAbsolutePath();
 			}
-			catch (MalformedURLException e)
-			{
-				e.printStackTrace();
-			}
-			catch (URISyntaxException e)
+			catch (MalformedURLException | URISyntaxException e)
 			{
 				e.printStackTrace();
 			}
@@ -509,7 +511,7 @@ public abstract class AbstractProvider< //
 	 *
 	 * @param db connection
 	 * @return tree
-	 * @throws SQLException
+	 * @throws E exception
 	 */
 	@Nullable
 	private Tree queryTree(final B db) throws E
@@ -524,14 +526,14 @@ public abstract class AbstractProvider< //
 	 *
 	 * @param db connection
 	 * @return tree root node
-	 * @throws SQLException
+	 * @throws E exception
 	 */
 	@SuppressWarnings("boxing")
 	private MutableNode queryNodesAndEdges(final B db) throws E
 	{
 		// request type
 		boolean prune = (Boolean) this.properties.get(SqlProperties.PRUNE);
-		boolean balanceLoad = this.properties.containsKey(SqlProperties.BALANCE_LOAD) ? "true".equals(this.properties.get(SqlProperties.BALANCE_LOAD)) : true;
+		boolean balanceLoad = !this.properties.containsKey(SqlProperties.BALANCE_LOAD) || "true".equals(this.properties.get(SqlProperties.BALANCE_LOAD));
 
 		// sql
 		String nodesSql = this.properties.getProperty("nodesSql", AbstractProvider.DEFAULT_NODES_SQL); //$NON-NLS-1$
@@ -571,7 +573,7 @@ public abstract class AbstractProvider< //
 		this.nodesById.clear();
 
 		// N O D E S
-		final C nodesCursor = (C) db.query(nodesSql);
+		final C nodesCursor = db.query(nodesSql);
 		final int idIndex = nodesCursor.getColumnIndex(idName);
 		while (nodesCursor.moveToNext())
 		{
@@ -618,8 +620,8 @@ public abstract class AbstractProvider< //
 		nodesCursor.close();
 
 		// T R E E . E D G E S
-		final List<TreeMutableNode> parentLessNodes = new ArrayList<TreeMutableNode>();
-		final C treeEdgesCursor = (C) db.query(treeEdgesSql);
+		final List<TreeMutableNode> parentLessNodes = new ArrayList<>();
+		final C treeEdgesCursor = db.query(treeEdgesSql);
 		final int fromIndex = treeEdgesCursor.getColumnIndex(fromName);
 		final int toIndex = treeEdgesCursor.getColumnIndex(toName);
 		while (treeEdgesCursor.moveToNext())
@@ -657,7 +659,7 @@ public abstract class AbstractProvider< //
 			List<INode> children = fromNode.getChildren();
 			if (children == null)
 			{
-				children = new ArrayList<INode>();
+				children = new ArrayList<>();
 				fromNode.setChildren(children);
 			}
 			children.add(toNode);
@@ -690,7 +692,7 @@ public abstract class AbstractProvider< //
 				List<INode> children = rootNode.getChildren();
 				if (children == null)
 				{
-					children = new ArrayList<INode>();
+					children = new ArrayList<>();
 					rootNode.setChildren(children);
 				}
 				children.add(parentLessNode);
@@ -745,7 +747,7 @@ public abstract class AbstractProvider< //
 	 *
 	 * @param db connection
 	 * @return edge list
-	 * @throws SQLException
+	 * @throws E exception
 	 */
 	private List<IEdge> queryEdges(final B db) throws E
 	{
@@ -773,7 +775,7 @@ public abstract class AbstractProvider< //
 		List<IEdge> edgeList = null;
 
 		// EDGES
-		final C edgesCursor = (C) db.query(edgesSql);
+		final C edgesCursor = db.query(edgesSql);
 		final int fromIdIndex = edgesCursor.getColumnIndex(fromIdName);
 		final int toIdIndex = edgesCursor.getColumnIndex(toIdName);
 		final int edgeStrokeIndex = edgesCursor.getColumnIndex(edgeStrokeName);
@@ -804,7 +806,7 @@ public abstract class AbstractProvider< //
 			edge.setColor(readColor(edgesCursor, "color")); //$NON-NLS-1$
 			if (edgeList == null)
 			{
-				edgeList = new ArrayList<IEdge>();
+				edgeList = new ArrayList<>();
 			}
 			edgeList.add(edge);
 
@@ -896,8 +898,8 @@ public abstract class AbstractProvider< //
 			final Settings settings = new Settings();
 
 			// first record
-			final C settingsCursor = (C) db.query(settingsSql);
-			while (settingsCursor.moveToNext())
+			final C settingsCursor = db.query(settingsSql);
+			if (settingsCursor.moveToNext())
 			{
 				// boolean
 				settings.hasToolbarFlag = readBoolean(settingsCursor, hasToolbarName);
@@ -960,14 +962,11 @@ public abstract class AbstractProvider< //
 				settings.defaultNodeImage = readString(settingsCursor, nodeImageName);
 				settings.defaultTreeEdgeImage = readString(settingsCursor, treeEdgeImageName);
 				settings.defaultEdgeImage = readString(settingsCursor, edgeImageName);
-
-				// take first if many are returned
-				break;
 			}
 			settingsCursor.close();
 
 			// first record
-			final C menuCursor = (C) db.query(menuSql);
+			final C menuCursor = db.query(menuSql);
 			while (menuCursor.moveToNext())
 			{
 				final MenuItem menuItem = new MenuItem();
@@ -982,7 +981,7 @@ public abstract class AbstractProvider< //
 				// add
 				if (settings.menu == null)
 				{
-					settings.menu = new ArrayList<MenuItem>();
+					settings.menu = new ArrayList<>();
 				}
 				settings.menu.add(menuItem);
 			}
@@ -1046,7 +1045,6 @@ public abstract class AbstractProvider< //
 	 * @param name   field name
 	 * @return Integer value
 	 */
-	@SuppressWarnings("boxing")
 	private Integer readInteger(final C cursor, final String name)
 	{
 		try
@@ -1099,7 +1097,6 @@ public abstract class AbstractProvider< //
 	 * @param name   field name
 	 * @return Double value
 	 */
-	@SuppressWarnings("boxing")
 	private Float readFloat(final C cursor, final String name)
 	{
 		try
@@ -1124,7 +1121,6 @@ public abstract class AbstractProvider< //
 	 * @param name   field name
 	 * @return Double value
 	 */
-	@SuppressWarnings("boxing")
 	private Double readDouble(final C cursor, final String name)
 	{
 		try
@@ -1316,7 +1312,7 @@ public abstract class AbstractProvider< //
 	/**
 	 * Macro pattern: ${macro}
 	 */
-	static final Pattern PATTERN = Pattern.compile("\\$\\{[^}]*\\}"); //$NON-NLS-1$
+	static final Pattern PATTERN = Pattern.compile("\\$\\{[^}]*}"); //$NON-NLS-1$
 
 	/**
 	 * Build macro name-value pairs
@@ -1327,7 +1323,7 @@ public abstract class AbstractProvider< //
 	private Map<String, String> makeMacroMap(final String str)
 	{
 		// macro map (local to this sentence)
-		final Map<String, String> macroMap = new HashMap<String, String>();
+		final Map<String, String> macroMap = new HashMap<>();
 		for (final Matcher matcher = PATTERN.matcher(str); matcher.find(); )
 		{
 			final String match = matcher.group();
@@ -1372,7 +1368,7 @@ public abstract class AbstractProvider< //
 			{
 				value = key;
 			}
-			outstr = outstr.replaceAll("\\$\\{" + key + "\\}", value); //$NON-NLS-1$ //$NON-NLS-2$
+			outstr = outstr.replaceAll("\\$\\{" + key + "}", value); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		return outstr;
 	}

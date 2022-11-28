@@ -139,7 +139,7 @@ public class Provider implements IProvider
 			}
 			catch (final Exception e)
 			{
-				System.err.println("SETTING " + e.toString()); 
+				System.err.println("SETTING " + e);
 			}
 		}
 		return new Model(tree, settings);
@@ -208,7 +208,7 @@ public class Provider implements IProvider
 		}
 		catch (final Exception ex)
 		{
-			System.err.println("Text graph parser: " + ex.toString()); 
+			System.err.println("Text graph parser: " + ex);
 			return null;
 		}
 	}
@@ -223,7 +223,7 @@ public class Provider implements IProvider
 	private Tree parseTree(final String location)
 	{
 		final MutableGraph graph = new MutableGraph();
-		final Map<String, MutableGraphNode> map = new HashMap<String, MutableGraphNode>();
+		final Map<String, MutableGraphNode> map = new HashMap<>();
 		try (InputStream is = Files.newInputStream(Paths.get(location)); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
 		{
 			// parse lines
@@ -240,7 +240,7 @@ public class Provider implements IProvider
 		}
 		catch (final Exception e)
 		{
-			System.err.println("Text graph parser: " + e.toString()); 
+			System.err.println("Text graph parser: " + e);
 			return null;
 		}
 	}

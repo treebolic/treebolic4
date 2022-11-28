@@ -152,7 +152,7 @@ public class QueryEngine
 	 * Get subclasses of object property
 	 *
 	 * @param owlObjectProperty property
-	 * @return stream of sub classes
+	 * @return stream of subclasses
 	 */
 	public Stream<OWLClass> getSubclasses(final OWLObjectProperty owlObjectProperty)
 	{

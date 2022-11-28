@@ -79,7 +79,6 @@ public class LoadBalancer
 	/**
 	 * Image of intermediate node
 	 */
-	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	private Image image;
 
 	// C O N S T R U C T O R

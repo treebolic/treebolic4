@@ -48,7 +48,7 @@ public class TreeMutableNode extends MutableNode
 	}
 
 	/**
-	 * Copy constructor (the resulting node node has no tree parent nor tree children)
+	 * Copy constructor (the resulting node has no tree parent nor tree children)
 	 *
 	 * @param node node
 	 */

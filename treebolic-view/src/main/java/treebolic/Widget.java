@@ -187,19 +187,15 @@ public class Widget extends Container implements IWidget, IProviderContext
 	/**
 	 * Default images
 	 */
-	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	@Nullable
 	private Image backgroundImage;
 
-	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	@Nullable
 	private Image defaultNodeImage;
 
-	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	@Nullable
 	private Image defaultTreeEdgeImage;
 
-	@SuppressWarnings("InstanceVariableOfConcreteClass")
 	@Nullable
 	private Image defaultEdgeImage;
 

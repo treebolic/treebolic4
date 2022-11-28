@@ -171,7 +171,7 @@ public class TreeTransferHandler extends TransferHandler
 	// I M P L E M E N T
 
 	/**
-	 * Get pair of source tree and destination treepaths
+	 * Get the pair of source tree and destination treepaths
 	 *
 	 * @param support transfer support
 	 * @return source tree and destination treepaths

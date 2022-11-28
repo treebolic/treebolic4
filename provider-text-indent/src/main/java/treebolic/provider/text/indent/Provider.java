@@ -46,12 +46,12 @@ public class Provider implements IProvider
 		/**
 		 * Node
 		 */
-		public MutableNode node;
+		public final MutableNode node;
 
 		/**
 		 * Node's level
 		 */
-		public int level;
+		public final int level;
 
 		/**
 		 * Constructor
@@ -164,7 +164,7 @@ public class Provider implements IProvider
 			}
 			catch (final Exception e)
 			{
-				System.err.println("SETTING " + e.toString()); 
+				System.err.println("SETTING " + e);
 			}
 		}
 		return new Model(tree, settings);
@@ -221,7 +221,7 @@ public class Provider implements IProvider
 		rootNode.setBackColor(Colors.RED);
 		rootNode.setForeColor(Colors.WHITE);
 
-		final Deque<StackEntry> stack = new ArrayDeque<StackEntry>();
+		final Deque<StackEntry> stack = new ArrayDeque<>();
 		stack.push(new StackEntry(rootNode, -1));
 
 		try (InputStream is = url.openStream(); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
@@ -248,7 +248,7 @@ public class Provider implements IProvider
 		}
 		catch (final Exception e)
 		{
-			System.err.println("Text graph parser: " + e.toString()); 
+			System.err.println("Text graph parser: " + e);
 			return null;
 		}
 	}
@@ -268,7 +268,7 @@ public class Provider implements IProvider
 		rootNode.setBackColor(Colors.RED);
 		rootNode.setForeColor(Colors.WHITE);
 
-		final Deque<StackEntry> stack = new ArrayDeque<StackEntry>();
+		final Deque<StackEntry> stack = new ArrayDeque<>();
 		stack.push(new StackEntry(rootNode, -1));
 
 		try (InputStream is = Files.newInputStream(Paths.get(location)); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
@@ -295,7 +295,7 @@ public class Provider implements IProvider
 		}
 		catch (final Exception e)
 		{
-			System.err.println("Text graph parser: " + e.toString()); 
+			System.err.println("Text graph parser: " + e);
 			return null;
 		}
 	}

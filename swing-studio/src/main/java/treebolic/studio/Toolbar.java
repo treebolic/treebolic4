@@ -8,7 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- * Tool bar
+ * Toolbar
  *
  * @author Bernard Bou
  */

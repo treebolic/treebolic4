@@ -4,8 +4,6 @@
 
 package treebolic.glue.iface;
 
-import java.net.URL;
-
 /**
  * Glue interface for
  *

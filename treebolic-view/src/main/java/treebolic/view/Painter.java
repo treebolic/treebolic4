@@ -336,7 +336,7 @@ public class Painter extends AbstractPainter
 		/**
 		 * Node image
 		 */
-		@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+		@SuppressWarnings({"WeakerAccess"})
 		@Nullable
 		public Image image;
 
@@ -367,14 +367,14 @@ public class Painter extends AbstractPainter
 		/**
 		 * Node backcolor
 		 */
-		@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+		@SuppressWarnings({"WeakerAccess"})
 		@Nullable
 		public Integer backColor;
 
 		/**
 		 * Node forecolor
 		 */
-		@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+		@SuppressWarnings({"WeakerAccess"})
 		@Nullable
 		public Integer foreColor;
 
@@ -1458,7 +1458,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					@NonNull final Integer color = this.graphics.getColor();
+					@Nullable final Integer color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillPolygon(x, y, x.length);
 					this.graphics.setColor(color);
@@ -1478,7 +1478,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					@NonNull final Integer color = this.graphics.getColor();
+					@Nullable final Integer color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillOval((int) x, (int) y, (int) terminatorHeight, (int) terminatorHeight);
 					this.graphics.setColor(color);
@@ -1498,7 +1498,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					@NonNull final Integer color = this.graphics.getColor();
+					@Nullable final Integer color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillPolygon(x, y, x.length);
 					this.graphics.setColor(color);
@@ -1544,7 +1544,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					@NonNull final Integer color = this.graphics.getColor();
+					@Nullable final Integer color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillPolygon(x, y, x.length);
 					this.graphics.setColor(color);
@@ -1564,7 +1564,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					@NonNull final Integer color = this.graphics.getColor();
+					@Nullable final Integer color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillOval((int) x, (int) y, (int) terminatorHeight, (int) terminatorHeight);
 					this.graphics.setColor(color);
@@ -1584,7 +1584,7 @@ public class Painter extends AbstractPainter
 				}
 				else
 				{
-					@NonNull final Integer color = this.graphics.getColor();
+					@Nullable final Integer color = this.graphics.getColor();
 					this.graphics.setColor(this.backColor);
 					this.graphics.fillPolygon(x, y, x.length);
 					this.graphics.setColor(color);

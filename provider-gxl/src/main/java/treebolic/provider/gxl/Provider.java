@@ -143,15 +143,15 @@ public class Provider implements IProvider
 			}
 			catch (final IOException e)
 			{
-				this.context.warn("GXL parser IO: " + e.toString()); //$NON-NLS-1$
+				this.context.warn("GXL parser IO: " + e); //$NON-NLS-1$
 			}
 			catch (final SAXException e)
 			{
-				this.context.warn("GXL parser SAX: " + e.toString()); //$NON-NLS-1$
+				this.context.warn("GXL parser SAX: " + e); //$NON-NLS-1$
 			}
 			catch (final ParserConfigurationException e)
 			{
-				this.context.warn("GXL parser CONFIG: " + e.toString()); //$NON-NLS-1$
+				this.context.warn("GXL parser CONFIG: " + e); //$NON-NLS-1$
 			}
 			this.context.message("Cannot load GXL file <" + (url != null ? url : source) + ">"); //$NON-NLS-1$ //$NON-NLS-2$
 		}

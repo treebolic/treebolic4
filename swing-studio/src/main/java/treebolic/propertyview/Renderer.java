@@ -72,7 +72,7 @@ class Renderer extends DefaultTableCellRenderer
 	 * Id reference icon
 	 */
 	@SuppressWarnings("ConstantConditions")
-	private final ImageIcon refIdcon = new ImageIcon(Renderer.class.getResource("images/node.png"));
+	private final ImageIcon refIdIcon = new ImageIcon(Renderer.class.getResource("images/node.png"));
 
 	/**
 	 * Text icon
@@ -211,7 +211,7 @@ class Renderer extends DefaultTableCellRenderer
 
 					case REFID:
 						setText((String) attributeValue);
-						setIcon(this.refIdcon);
+						setIcon(this.refIdIcon);
 						return this;
 
 					case LINK:
@@ -302,7 +302,7 @@ class Renderer extends DefaultTableCellRenderer
 						break;
 
 					case REFID:
-						setIcon(this.refIdcon);
+						setIcon(this.refIdIcon);
 						break;
 
 					case STROKE:

@@ -231,42 +231,42 @@ public abstract class AbstractPainter extends Mapper
 	 * Default background color
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Integer backColor;
 
 	/**
 	 * Default foreground color
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Integer foreColor;
 
 	/**
 	 * Default node background color
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Integer nodeBackColor;
 
 	/**
 	 * Default node foreground color
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Integer nodeForeColor;
 
 	/**
 	 * Default tree edge color
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Integer treeEdgeColor;
 
 	/**
 	 * Default edge color
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Integer edgeColor;
 
 	// styles
@@ -286,25 +286,25 @@ public abstract class AbstractPainter extends Mapper
 	/**
 	 * Default node image
 	 */
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	public Image defaultNodeImage;
 
 	/**
 	 * Default tree edge image
 	 */
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	public Image defaultTreeEdgeImage;
 
 	/**
 	 * Default edge image
 	 */
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	public Image defaultEdgeImage;
 
 	/**
 	 * Background (tiled) image
 	 */
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	public Image backgroundImage;
 
 	// C O N S T R U C T O R

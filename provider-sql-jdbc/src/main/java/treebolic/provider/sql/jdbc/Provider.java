@@ -70,7 +70,6 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 					exception.printStackTrace();
 				}
 			}
-			;
 		}
 
 		/*

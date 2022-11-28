@@ -66,14 +66,14 @@ class NodeData implements Serializable
 	 * Background color
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Integer backColor;
 
 	/**
 	 * Foreground color
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Integer foreColor;
 
 	/**
@@ -102,7 +102,7 @@ class NodeData implements Serializable
 	 * Tree edge color
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Integer edgeColor;
 
 	/**
@@ -298,14 +298,14 @@ class XNodeData extends NodeData
 	 * Node image
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Image image;
 
 	/**
 	 * Tree edge image
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Image edgeImage;
 
 	// weight

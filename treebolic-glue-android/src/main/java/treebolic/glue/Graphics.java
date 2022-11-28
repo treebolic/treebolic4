@@ -33,8 +33,14 @@ import androidx.annotation.Nullable;
  */
 public class Graphics implements treebolic.glue.iface.Graphics
 {
+	/**
+	 * Plain font style
+	 */
 	public static final int PLAIN = 0;
 
+	/**
+	 * Bold font style
+	 */
 	@SuppressWarnings("WeakerAccess")
 	public static final int BOLD = 1;
 

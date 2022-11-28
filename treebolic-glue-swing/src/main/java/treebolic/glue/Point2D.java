@@ -4,6 +4,8 @@
 
 package treebolic.glue;
 
+import java.util.Locale;
+
 import treebolic.annotations.NonNull;
 
 /**
@@ -43,6 +45,6 @@ public class Point2D extends java.awt.geom.Point2D.Double implements treebolic.g
 	@Override
 	public String toString()
 	{
-		return String.format("%.1f, %.1f", this.x, this.y);
+		return String.format(Locale.ROOT, "%.1f, %.1f", this.x, this.y);
 	}
 }

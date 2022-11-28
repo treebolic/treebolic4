@@ -21,8 +21,8 @@ public class TreeMutableEdge extends MutableEdge
 	/**
 	 * Constructor
 	 *
-	 * @param fromNode from node (may be null)
-	 * @param toNode   to node (may be null)
+	 * @param fromNode from node (maybe null)
+	 * @param toNode   to node (maybe null)
 	 */
 	public TreeMutableEdge(final INode fromNode, final INode toNode)
 	{

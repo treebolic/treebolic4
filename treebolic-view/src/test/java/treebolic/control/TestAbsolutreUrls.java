@@ -11,8 +11,16 @@ import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test relative to absolute replacement
+ */
 public class TestAbsolutreUrls
 {
+	/**
+	 * Test if replacement words with single quotes
+	 *
+	 * @throws MalformedURLException malformed URL exception
+	 */
 	@Test
 	public void testReplaceQuote1() throws MalformedURLException
 	{
@@ -44,6 +52,11 @@ public class TestAbsolutreUrls
 		assertEquals(expected, actual);
 	}
 
+	/**
+	 * Test if replacement words with double quotes
+	 *
+	 * @throws MalformedURLException malformed URL exception
+	 */
 	@Test
 	public void testReplaceQuote2() throws MalformedURLException
 	{

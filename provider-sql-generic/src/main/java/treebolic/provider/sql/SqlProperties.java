@@ -26,20 +26,44 @@ public class SqlProperties
 	 */
 	public static final String SOURCE = "source"; //$NON-NLS-1$
 
+	/**
+	 * Prune
+	 */
 	public static final String PRUNE = "prune"; //$NON-NLS-1$
 
+	/**
+	 * Truncate nodes
+	 */
 	public static final String TRUNCATE_NODES = "truncate.nodes.where"; //$NON-NLS-1$
 
-	public static final String TRUNCATE_TREEEDGES = "truncate.treeedges.where"; //$NON-NLS-1$
-
+	/**
+	 * Prune nodes
+	 */
 	public static final String PRUNE_NODES = "prune.nodes.where"; //$NON-NLS-1$
 
+	/**
+	 * Truncate tree edges
+	 */
+	public static final String TRUNCATE_TREEEDGES = "truncate.treeedges.where"; //$NON-NLS-1$
+
+	/**
+	 * Prune tree edges
+	 */
 	public static final String PRUNE_TREEEDGES = "prune.treeedges.where"; //$NON-NLS-1$
 
+	/**
+	 * Truncate edges
+	 */
 	public static final String TRUNCATE_EDGES = "truncate.edges.where"; //$NON-NLS-1$
 
+	/**
+	 * Prune edges
+	 */
 	public static final String PRUNE_EDGES = "prune.edges.where"; //$NON-NLS-1$
 
+	/**
+	 * Balance load
+	 */
 	public static final String BALANCE_LOAD = "balance"; //$NON-NLS-1$
 
 	/**
@@ -77,7 +101,7 @@ public class SqlProperties
 		}
 		catch (final IOException e)
 		{
-			System.err.println("Sql: Cannot load <" + url.toString() + ">");
+			System.err.println("Sql: Cannot load <" + url + ">");
 			return null;
 		}
 	}

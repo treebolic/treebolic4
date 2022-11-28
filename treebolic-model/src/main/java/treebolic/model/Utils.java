@@ -755,7 +755,7 @@ public class Utils
 	 * @return prefixless hexadecimal representation of color
 	 */
 	@NonNull
-	static public String colorToString(@SuppressWarnings("TypeMayBeWeakened") @Nullable final Integer color)
+	static public String colorToString(@Nullable final Integer color)
 	{
 		return color == null ? NONE : String.format("%08x",color);
 	}

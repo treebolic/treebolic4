@@ -56,26 +56,6 @@ public class Rectangle2D extends java.awt.geom.Rectangle2D.Double implements tre
 		return super.intersects(rect);
 	}
 
-	/**
-	 * Outcode: bottom
-	 */
-	public static final int OUT_BOTTOM = 1;
-
-	/**
-	 * Outcode: left
-	 */
-	public static final int OUT_LEFT = 2;
-
-	/**
-	 * Outcode: right
-	 */
-	public static final int OUT_RIGHT = 4;
-
-	/**
-	 * Outcode: top
-	 */
-	public static final int OUT_TOP = 8;
-
 	@Override
 	public int outcode(final Point2D point)
 	{
@@ -84,19 +64,19 @@ public class Rectangle2D extends java.awt.geom.Rectangle2D.Double implements tre
 
 		if ((code & java.awt.geom.Rectangle2D.OUT_TOP) != 0)
 		{
-			result |= Rectangle2D.OUT_TOP;
+			result |= treebolic.glue.iface.Rectangle2D.OUT_TOP;
 		}
 		if ((code & java.awt.geom.Rectangle2D.OUT_BOTTOM) != 0)
 		{
-			result |= Rectangle2D.OUT_BOTTOM;
+			result |= treebolic.glue.iface.Rectangle2D.OUT_BOTTOM;
 		}
 		if ((code & java.awt.geom.Rectangle2D.OUT_LEFT) != 0)
 		{
-			result |= Rectangle2D.OUT_LEFT;
+			result |= treebolic.glue.iface.Rectangle2D.OUT_LEFT;
 		}
 		if ((code & java.awt.geom.Rectangle2D.OUT_RIGHT) != 0)
 		{
-			result |= Rectangle2D.OUT_RIGHT;
+			result |= treebolic.glue.iface.Rectangle2D.OUT_RIGHT;
 		}
 
 		return result;

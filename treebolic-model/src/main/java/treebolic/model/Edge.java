@@ -30,7 +30,7 @@ class EdgeData implements Serializable
 	 * Edge color
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Integer color;
 
 	/**
@@ -110,7 +110,7 @@ class XEdgeData extends EdgeData
 	 * Edge image
 	 */
 	@Nullable
-	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
+	@SuppressWarnings({"WeakerAccess"})
 	protected Image image;
 
 	@Nullable

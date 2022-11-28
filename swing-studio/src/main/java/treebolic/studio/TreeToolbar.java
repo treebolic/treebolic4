@@ -8,7 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- * Tool bar for tree view
+ * Toolbar for tree view
  *
  * @author Bernard Bou
  */
