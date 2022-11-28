@@ -4,7 +4,6 @@
 
 package treebolic.glue.iface;
 
-import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 
 /**

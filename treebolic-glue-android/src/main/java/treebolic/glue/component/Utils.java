@@ -15,8 +15,6 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 
-import java.util.function.Function;
-
 import androidx.annotation.*;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
@@ -30,18 +28,27 @@ import androidx.core.graphics.drawable.DrawableCompat;
 @SuppressWarnings("WeakerAccess")
 public class Utils
 {
+	/**
+	 * Fetch colors resources
+	 *
+	 * @param context context
+	 * @param attrs   attributes
+	 * @return array of int resources, with 0 value if not found
+	 */
 	@NonNull
 	static public int[] fetchColors(@NonNull final Context context, @NonNull int... attrs)
 	{
 		final TypedValue typedValue = new TypedValue();
-		final TypedArray array = context.obtainStyledAttributes(typedValue.data, attrs);
-		final int[] colors = new int[attrs.length];
-		for (int i = 0; i < attrs.length; i++)
+		try (final TypedArray array = context.obtainStyledAttributes(typedValue.data, attrs))
 		{
-			colors[i] = array.getColor(i, 0);
+			final int[] colors = new int[attrs.length];
+			for (int i = 0; i < attrs.length; i++)
+			{
+				colors[i] = array.getColor(i, 0);
+			}
+			array.recycle();
+			return colors;
 		}
-		array.recycle();
-		return colors;
 	}
 
 	/*
@@ -68,18 +75,27 @@ public class Utils
 	}
 	*/
 
+	/**
+	 * Fetch colors resources
+	 *
+	 * @param context context
+	 * @param attrs   attributes
+	 * @return array of Integer resources, with null value if not found
+	 */
 	@NonNull
 	static public Integer[] fetchColorsNullable(@NonNull final Context context, @NonNull @SuppressWarnings("SameParameterValue") int... attrs)
 	{
 		final TypedValue typedValue = new TypedValue();
-		final TypedArray array = context.obtainStyledAttributes(typedValue.data, attrs);
-		final Integer[] colors = new Integer[attrs.length];
-		for (int i = 0; i < attrs.length; i++)
+		try (final TypedArray array = context.obtainStyledAttributes(typedValue.data, attrs))
 		{
-			colors[i] = array.hasValue(i) ? array.getColor(i, 0) : null;
+			final Integer[] colors = new Integer[attrs.length];
+			for (int i = 0; i < attrs.length; i++)
+			{
+				colors[i] = array.hasValue(i) ? array.getColor(i, 0) : null;
+			}
+			array.recycle();
+			return colors;
 		}
-		array.recycle();
-		return colors;
 	}
 
 	/*
@@ -101,6 +117,14 @@ public class Utils
 		return typedValue.type == TypedValue.TYPE_NULL ? null : typedValue.data;
 	}
 	*/
+
+	/**
+	 * Get color
+	 *
+	 * @param context context
+	 * @param resId   resource id
+	 * @return color int
+	 */
 	static public int getColor(@NonNull final Context context, @ColorRes @SuppressWarnings("SameParameterValue") int resId)
 	{
 		return ContextCompat.getColor(context, resId);
@@ -138,18 +162,29 @@ public class Utils
 		return drawables;
 	}
 
-	static public void tint(@NonNull final Drawable drawable, @ColorInt int iconTint)
+	/**
+	 * Tint drawable
+	 * @param drawable drawable
+	 * @param tint tint
+	 */
+	static public void tint(@NonNull final Drawable drawable, @ColorInt int tint)
 	{
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
 		{
-			drawable.setTint(iconTint);
+			drawable.setTint(tint);
 		}
 		else
 		{
-			DrawableCompat.setTint(DrawableCompat.wrap(drawable), iconTint);
+			DrawableCompat.setTint(DrawableCompat.wrap(drawable), tint);
 		}
 	}
 
+	/**
+	 * Screen width
+	 *
+	 * @param context context
+	 * @return screen width
+	 */
 	static public int screenWidth(@NonNull final Context context)
 	{
 		final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -169,6 +204,12 @@ public class Utils
 		}
 	}
 
+	/**
+	 * Screen size
+	 *
+	 * @param context context
+	 * @return a point whose x represents width and y represents height
+	 */
 	static public Point screenSize(@NonNull final Context context)
 	{
 		final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -187,6 +228,13 @@ public class Utils
 		}
 	}
 
+	/**
+	 * Join character sequences
+	 *
+	 * @param delim delimiter
+	 * @param strs  input character sequences
+	 * @return string output
+	 */
 	public static String join(@NonNull final CharSequence delim, @Nullable final CharSequence[] strs)
 	{
 		if (strs == null)
@@ -214,6 +262,4 @@ public class Utils
 		}
 		return sb.toString();
 	}
-
-	static private Function<String, String> converter = (s) -> s;
 }

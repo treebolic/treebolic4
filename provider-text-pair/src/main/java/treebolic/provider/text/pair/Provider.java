@@ -5,7 +5,6 @@
  * Copyright : (c) 2001-2014
  * Terms of use : see license agreement at http://treebolic.sourceforge.net/en/license.htm
  * Author : Bernard Bou
- *
  */
 package treebolic.provider.text.pair;
 
@@ -17,6 +16,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -94,19 +94,26 @@ public class Provider implements IProvider
 	{
 		final Tree tree = makeTree(source, base, parameters, false);
 		if (tree == null)
+		{
 			return null;
+		}
+		final List<INode> nonRootTree = tree.getRoot().getChildren();
+		if (nonRootTree == null)
+		{
+			return null;
+		}
 
 		// settings
-		final boolean asTree = tree.getRoot().getChildren().size() < 3;
+		final boolean asTree = nonRootTree.size() < 3;
 		final Settings settings = new Settings();
 		settings.backColor = Provider.backgroundColor;
 		settings.nodeBackColor = Colors.WHITE;
 		settings.nodeForeColor = Colors.BLACK;
 
-		settings.orientation = asTree ? "south" : "radial";  
+		settings.orientation = asTree ? "south" : "radial";
 		settings.hasToolbarFlag = true;
 		settings.backColor = 0xf5f5f0;
-		settings.fontFace = "SansSerif"; 
+		settings.fontFace = "SansSerif";
 		settings.fontSize = 20;
 		settings.expansion = .9F;
 		settings.sweep = 1.2F;
@@ -118,24 +125,21 @@ public class Provider implements IProvider
 
 		// override settings properties
 		Properties properties = null;
-		final String location = parameters == null ? null : parameters.getProperty("settings"); 
+		final String location = parameters == null ? null : parameters.getProperty("settings");
 		if (location != null && !location.isEmpty())
 		{
 			final URL url = ProviderUtils.makeURL(location, base, parameters, this.context);
-			this.context.progress("Loading ..." + (url != null ? url : location), false); 
+			this.context.progress("Loading ..." + (url != null ? url : location), false);
 
 			try
 			{
 				properties = url != null ? Utils.load(url) : Utils.load(location);
-				this.context.progress("Loaded " + (url != null ? url : location), false); 
-				if (properties != null)
-				{
-					settings.load(properties);
-				}
+				this.context.progress("Loaded " + (url != null ? url : location), false);
+				settings.load(properties);
 			}
 			catch (final IOException e)
 			{
-				this.context.message("Cannot load Settings file <" + (url != null ? url : location) + ">");  
+				this.context.message("Cannot load Settings file <" + (url != null ? url : location) + ">");
 			}
 			catch (final Exception e)
 			{
@@ -157,25 +161,25 @@ public class Provider implements IProvider
 		String source = source0;
 		if (source == null)
 		{
-			source = parameters.getProperty("source"); 
+			source = parameters.getProperty("source");
 		}
 
 		if (source != null)
 		{
 			// URL
 			final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
-			this.context.progress("Loading ..." + (url != null ? url : source), false); 
+			this.context.progress("Loading ..." + (url != null ? url : source), false);
 
 			// parse
 			final Tree tree = url != null ? parseTree(url) : parseTree(source);
 			if (tree != null)
 			{
-				this.context.progress("Loaded " + (url != null ? url : source), false); 
+				this.context.progress("Loaded " + (url != null ? url : source), false);
 				return tree;
 			}
 			else
 			{
-				this.context.message("Cannot load text file <" + (url != null ? url : source) + ">");  
+				this.context.message("Cannot load text file <" + (url != null ? url : source) + ">");
 			}
 		}
 		return null;
@@ -198,7 +202,7 @@ public class Provider implements IProvider
 			String line;
 			for (int l = 1; (line = reader.readLine()) != null; l++)
 			{
-				if (line.matches("^\\s*$") || line.startsWith("#"))  
+				if (line.matches("^\\s*$") || line.startsWith("#"))
 				{
 					continue;
 				}
@@ -230,7 +234,7 @@ public class Provider implements IProvider
 			String line;
 			for (int l = 1; (line = reader.readLine()) != null; l++)
 			{
-				if (line.matches("^\\s*$") || line.startsWith("#"))  
+				if (line.matches("^\\s*$") || line.startsWith("#"))
 				{
 					continue;
 				}
@@ -257,16 +261,18 @@ public class Provider implements IProvider
 		// parse
 		// parentid\tid\tlabel\tbackground\tforeground\timg\tlink\tcontent
 		// parent\tchild
-		final String[] fields = line.split("\t", 8); 
+		final String[] fields = line.split("\t", 8);
 		if (fields.length < 2)
+		{
 			return;
+		}
 
 		// parent child ids
 		final String parentId = fields[0].trim();
 		final String childId = fields[1].trim();
 		if (childId.isEmpty())
 		{
-			System.err.println("No Id " + lineNumber); 
+			System.err.println("No Id " + lineNumber);
 		}
 
 		// nodes
@@ -276,7 +282,7 @@ public class Provider implements IProvider
 			parent = map.get(parentId);
 			if (parent == null)
 			{
-				System.err.println("Dummy parent line " + lineNumber); 
+				System.err.println("Dummy parent line " + lineNumber);
 				parent = new MutableGraphNode(parentId);
 				parent.setLabel(parentId);
 				map.put(parentId, parent);
@@ -319,7 +325,7 @@ public class Provider implements IProvider
 		}
 
 		// edge
-		if (parent != null && child != null)
+		if (parent != null)
 		{
 			final GraphEdge graphEdge = new GraphEdge(parent, child, true);
 			graphEdge.setUserData(new MutableEdge(parent, child));

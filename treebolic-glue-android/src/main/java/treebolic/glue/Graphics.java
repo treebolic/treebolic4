@@ -132,7 +132,7 @@ public class Graphics implements treebolic.glue.iface.Graphics
 		this.paint.setAntiAlias(true);
 		this.paint.setHinting(Paint.HINTING_ON); // font
 
-		this.paint.setStrokeWidth(strokeWidthFactor * 1F);
+		this.paint.setStrokeWidth(strokeWidthFactor /* * 1F */);
 		this.paint.setStrokeCap(Cap.BUTT);
 		this.paint.setStrokeJoin(Join.BEVEL);
 		this.paint.setStrokeMiter(1);

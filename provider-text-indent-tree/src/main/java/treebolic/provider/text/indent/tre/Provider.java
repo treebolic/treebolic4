@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Properties;
 
 import treebolic.ILocator;
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.iface.Colors;
 import treebolic.model.*;
@@ -117,9 +118,14 @@ public class Provider implements IProvider
 		final Tree tree = makeTree(source0, base, parameters, false);
 		if (tree == null)
 			return null;
+		final List<INode> nonRootTree = tree.getRoot().getChildren();
+		if (nonRootTree == null)
+		{
+			return null;
+		}
 
 		// settings
-		final boolean asTree = tree.getRoot().getChildren().size() < 3;
+		final boolean asTree = nonRootTree.size() < 3;
 		final Settings settings = new Settings();
 		settings.backColor = Provider.backgroundColor;
 		settings.nodeBackColor = Colors.WHITE;
@@ -149,11 +155,8 @@ public class Provider implements IProvider
 			try
 			{
 				properties = url != null ? Utils.load(url) : Utils.load(source);
-				this.context.progress("Loaded " + (url != null ? url : source), false); 
-				if (properties != null)
-				{
-					settings.load(properties);
-				}
+				this.context.progress("Loaded " + (url != null ? url : source), false);
+				settings.load(properties);
 			}
 			catch (final IOException e)
 			{
@@ -304,7 +307,7 @@ public class Provider implements IProvider
 	 * @param lineNumber line number
 	 * @param stack node stack
 	 */
-	private void processLine(final String line, final int lineNumber, final Deque<StackEntry> stack)
+	private void processLine(final String line, final int lineNumber, @NonNull final Deque<StackEntry> stack)
 	{
 		final int level = getLevel(line);
 		if (level == -1)

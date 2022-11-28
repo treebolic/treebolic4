@@ -46,29 +46,23 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		@Override
 		public void close()
 		{
-			if (this.resultSet != null)
+			try
 			{
-				try
-				{
-					this.resultSet.close();
-				}
-				catch (SQLException exception)
-				{
-					//
-					exception.printStackTrace();
-				}
+				this.resultSet.close();
 			}
-			if (this.statement != null)
+			catch (SQLException exception)
 			{
-				try
-				{
-					this.statement.close();
-				}
-				catch (SQLException exception)
-				{
-					//
-					exception.printStackTrace();
-				}
+				//
+				exception.printStackTrace();
+			}
+			try
+			{
+				this.statement.close();
+			}
+			catch (SQLException exception)
+			{
+				//
+				exception.printStackTrace();
 			}
 		}
 

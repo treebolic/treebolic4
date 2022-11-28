@@ -12,12 +12,12 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import treebolic.ILocator;
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.iface.Colors;
 import treebolic.model.*;
@@ -80,6 +80,7 @@ public abstract class AbstractProvider< //
 		 * @return true if column IS NULL
 		 * @throws E exception
 		 */
+		@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 		boolean isNull(int columnIndex) throws E;
 
 		/**
@@ -444,17 +445,14 @@ public abstract class AbstractProvider< //
 
 			// settings
 			final Settings settings = querySettings(db);
-			if (tree != null)
+			final INode root = tree.getRoot();
+			if (root != null)
 			{
-				final INode root = tree.getRoot();
-				if (root != null)
+				final List<INode> children = root.getChildren();
+				if (children != null && children.size() == 1)
 				{
-					final List<INode> children = root.getChildren();
-					if (children.size() == 1)
-					{
-						settings.orientation = "south"; //$NON-NLS-1$
-						settings.yMoveTo = -0.4F;
-					}
+					settings.orientation = "south"; //$NON-NLS-1$
+					settings.yMoveTo = -0.4F;
 				}
 			}
 
@@ -462,10 +460,6 @@ public abstract class AbstractProvider< //
 			db.close();
 
 			// result
-			if (tree == null)
-			{
-				return null;
-			}
 			return new Model(tree, settings);
 		}
 		catch (final Exception e)
@@ -513,7 +507,7 @@ public abstract class AbstractProvider< //
 	 * @return tree
 	 * @throws E exception
 	 */
-	@Nullable
+	@NonNull
 	private Tree queryTree(final B db) throws E
 	{
 		final INode root = queryNodesAndEdges(db);
@@ -649,7 +643,7 @@ public abstract class AbstractProvider< //
 			}
 
 			// root candidate
-			if (fromNode == null && toNode != null)
+			if (fromNode == null)
 			{
 				parentLessNodes.add(toNode);
 				continue;
@@ -657,11 +651,6 @@ public abstract class AbstractProvider< //
 
 			// make tree
 			List<INode> children = fromNode.getChildren();
-			if (children == null)
-			{
-				children = new ArrayList<>();
-				fromNode.setChildren(children);
-			}
 			children.add(toNode);
 			toNode.setParent(fromNode);
 
@@ -690,11 +679,6 @@ public abstract class AbstractProvider< //
 			for (TreeMutableNode parentLessNode : parentLessNodes)
 			{
 				List<INode> children = rootNode.getChildren();
-				if (children == null)
-				{
-					children = new ArrayList<>();
-					rootNode.setChildren(children);
-				}
 				children.add(parentLessNode);
 				parentLessNode.setParent(rootNode);
 
@@ -1203,15 +1187,14 @@ public abstract class AbstractProvider< //
 		StringBuilder sb = new StringBuilder();
 
 		// remove trailing ; if any
-		int semiColon = sql0.lastIndexOf(';');
-		if (semiColon == -1)
+		String sql = sql0;
+		int semiColon = sql.lastIndexOf(';');
+		if (semiColon > -1)
 		{
-			sb.append(sql0);
+			// strip trailing ';'
+			sql = sql0.substring(0, semiColon);
 		}
-		else
-		{
-			sb.append(sql0.substring(0, semiColon));
-		}
+		sb.append(sql);
 		sb.append(' ');
 
 		boolean start = true;
@@ -1302,9 +1285,8 @@ public abstract class AbstractProvider< //
 			return value;
 		}
 
-		final String key2 = key;
-		final int index = key2.lastIndexOf('.');
-		return index == -1 ? key2 : key2.substring(index + 1);
+		final int index = key.lastIndexOf('.');
+		return index == -1 ? key : key.substring(index + 1);
 	}
 
 	// M A C R O

@@ -23,6 +23,7 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.model.*;
 import treebolic.provider.xml.Parser;
@@ -662,64 +663,61 @@ public class GxlParser
 				if (tupElement != null)
 				{
 					final List<Element> gxlTupleElements = GxlParser.getLevel1ChildElementsByTagName(tupElement, "string"); //$NON-NLS-1$
-					if (gxlTupleElements != null)
+					int k = 0;
+					for (final Element gxlTupleElement : gxlTupleElements)
 					{
-						int k = 0;
-						for (final Element gxlTupleElement : gxlTupleElements)
+						if (gxlTupleElement != null)
 						{
-							if (gxlTupleElement != null)
+							final String value = gxlTupleElement.getTextContent();
+							if (value == null)
 							{
-								final String value = gxlTupleElement.getTextContent();
-								if (value == null)
-								{
-									continue;
-								}
-
-								switch (name)
-								{
-									case "menuitem-action":
-										//$NON-NLS-1$
-									{
-										settings.menu = GxlParser.allocate(settings.menu, k);
-										final MenuItem menuItem = settings.menu.get(k);
-										menuItem.action = Utils.stringToAction(value);
-										break;
-									}
-									case "menuitem-label":
-										//$NON-NLS-1$
-									{
-										settings.menu = GxlParser.allocate(settings.menu, k);
-										final MenuItem menuItem = settings.menu.get(k);
-										menuItem.label = value;
-										break;
-									}
-									case "menuitem-match-target":
-										//$NON-NLS-1$
-									{
-										settings.menu = GxlParser.allocate(settings.menu, k);
-										final MenuItem menuItem = settings.menu.get(k);
-										menuItem.matchTarget = value;
-										break;
-									}
-									case "menuitem-match-scope":
-										//$NON-NLS-1$
-									{
-										settings.menu = GxlParser.allocate(settings.menu, k);
-										final MenuItem menuItem = settings.menu.get(k);
-										menuItem.matchScope = Utils.stringToScope(value);
-										break;
-									}
-									case "menuitem-match-mode":
-										//$NON-NLS-1$
-									{
-										settings.menu = GxlParser.allocate(settings.menu, k);
-										final MenuItem menuItem = settings.menu.get(k);
-										menuItem.matchMode = Utils.stringToMode(value);
-										break;
-									}
-								}
-								k++;
+								continue;
 							}
+
+							switch (name)
+							{
+								case "menuitem-action":
+									//$NON-NLS-1$
+								{
+									settings.menu = GxlParser.allocate(settings.menu, k);
+									final MenuItem menuItem = settings.menu.get(k);
+									menuItem.action = Utils.stringToAction(value);
+									break;
+								}
+								case "menuitem-label":
+									//$NON-NLS-1$
+								{
+									settings.menu = GxlParser.allocate(settings.menu, k);
+									final MenuItem menuItem = settings.menu.get(k);
+									menuItem.label = value;
+									break;
+								}
+								case "menuitem-match-target":
+									//$NON-NLS-1$
+								{
+									settings.menu = GxlParser.allocate(settings.menu, k);
+									final MenuItem menuItem = settings.menu.get(k);
+									menuItem.matchTarget = value;
+									break;
+								}
+								case "menuitem-match-scope":
+									//$NON-NLS-1$
+								{
+									settings.menu = GxlParser.allocate(settings.menu, k);
+									final MenuItem menuItem = settings.menu.get(k);
+									menuItem.matchScope = Utils.stringToScope(value);
+									break;
+								}
+								case "menuitem-match-mode":
+									//$NON-NLS-1$
+								{
+									settings.menu = GxlParser.allocate(settings.menu, k);
+									final MenuItem menuItem = settings.menu.get(k);
+									menuItem.matchMode = Utils.stringToMode(value);
+									break;
+								}
+							}
+							k++;
 						}
 					}
 				}
@@ -792,6 +790,7 @@ public class GxlParser
 	 * @param tagName tag
 	 * @return DOM element if found, null if none
 	 */
+	@NonNull
 	static private List<Element> getLevel1ChildElementsByTagName(final Element element, final String tagName)
 	{
 		final ArrayList<Element> list = new ArrayList<>();
