@@ -25,7 +25,7 @@ import treebolic.core.LayerOut;
 import treebolic.core.Weigher;
 import treebolic.core.location.Complex;
 import treebolic.glue.ActionListener;
-import treebolic.glue.Image;
+import treebolic.glue.iface.Image;
 import treebolic.glue.Worker;
 import treebolic.glue.component.Container;
 import treebolic.glue.component.Dialog;
@@ -1038,7 +1038,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 			}
 
 			// image loading
-			Image image = new Image(url);
+			Image image = new treebolic.glue.Image(url);
 
 			// cache image
 			this.images.put(source, image);

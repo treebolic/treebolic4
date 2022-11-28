@@ -8,7 +8,7 @@ import java.util.List;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.Image;
+import treebolic.glue.iface.Image;
 
 /**
  * Model dump

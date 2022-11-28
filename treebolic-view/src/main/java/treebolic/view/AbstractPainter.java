@@ -8,7 +8,6 @@ import java.util.List;
 
 import treebolic.annotations.Nullable;
 import treebolic.glue.Graphics;
-import treebolic.glue.Image;
 import treebolic.glue.iface.Colors;
 import treebolic.model.IEdge;
 import treebolic.model.INode;
@@ -287,25 +286,25 @@ public abstract class AbstractPainter extends Mapper
 	 * Default node image
 	 */
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	public Image defaultNodeImage;
+	public treebolic.glue.iface.Image defaultNodeImage;
 
 	/**
 	 * Default tree edge image
 	 */
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	public Image defaultTreeEdgeImage;
+	public treebolic.glue.iface.Image defaultTreeEdgeImage;
 
 	/**
 	 * Default edge image
 	 */
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	public Image defaultEdgeImage;
+	public treebolic.glue.iface.Image defaultEdgeImage;
 
 	/**
 	 * Background (tiled) image
 	 */
 	@SuppressWarnings({"WeakerAccess", "InstanceVariableOfConcreteClass"})
-	public Image backgroundImage;
+	public treebolic.glue.iface.Image backgroundImage;
 
 	// C O N S T R U C T O R
 
@@ -504,7 +503,7 @@ public abstract class AbstractPainter extends Mapper
 	 * @param defaultTreeEdgeImage default tree edge image
 	 * @param defaultEdgeImage     default edge image
 	 */
-	public void setImages(final Image backgroundImage, final Image defaultNodeImage, final Image defaultTreeEdgeImage, final Image defaultEdgeImage)
+	public void setImages(final treebolic.glue.iface.Image backgroundImage, final treebolic.glue.iface.Image defaultNodeImage, final treebolic.glue.iface.Image defaultTreeEdgeImage, final treebolic.glue.iface.Image defaultEdgeImage)
 	{
 		this.backgroundImage = backgroundImage;
 		this.defaultNodeImage = defaultNodeImage;

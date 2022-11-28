@@ -4,7 +4,6 @@
 
 package treebolic.glue;
 
-import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 
 /**
@@ -12,7 +11,7 @@ import treebolic.annotations.Nullable;
  *
  * @author Bernard Bou
  */
-public class Graphics implements treebolic.glue.iface.Graphics<Image>
+public class Graphics implements treebolic.glue.iface.Graphics
 {
 	// D R A W
 
@@ -89,13 +88,13 @@ public class Graphics implements treebolic.glue.iface.Graphics<Image>
 	}
 
 	@Override
-	public void drawImage(final Image image, final int x, final int y)
+	public void drawImage(final treebolic.glue.iface.Image image, final int x, final int y)
 	{
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public void drawImage(final Image image, final int x, final int y, final int w, final int h)
+	public void drawImage(final treebolic.glue.iface.Image image, final int x, final int y, final int w, final int h)
 	{
 		throw new NotImplementedException();
 	}

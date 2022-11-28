@@ -54,7 +54,7 @@ public abstract class AbstractProvider< //
 		 * @return true if row is available
 		 * @throws E exception
 		 */
-		public boolean moveToNext() throws E;
+		boolean moveToNext() throws E;
 
 		/**
 		 * Get current position
@@ -127,12 +127,12 @@ public abstract class AbstractProvider< //
 		 * @return cursor
 		 * @throws E exception
 		 */
-		public C query(String sql) throws E;
+		C query(String sql) throws E;
 
 		/**
 		 * Close
 		 */
-		public void close();
+		void close();
 	}
 
 	/**

@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import treebolic.annotations.Nullable;
-import treebolic.glue.Image;
+import treebolic.glue.iface.Image;
 
 /**
  * Node interface

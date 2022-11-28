@@ -30,7 +30,7 @@ import androidx.annotation.Nullable;
  *
  * @author Bernard Bou
  */
-public class Graphics implements treebolic.glue.iface.Graphics<Image>
+public class Graphics implements treebolic.glue.iface.Graphics
 {
 	public static final int PLAIN = 0;
 
@@ -270,8 +270,10 @@ public class Graphics implements treebolic.glue.iface.Graphics<Image>
 
 
 	@Override
-	public void drawImage(@NonNull final Image image, final int x, final int y)
+	public void drawImage(@NonNull final treebolic.glue.iface.Image image0, final int x, final int y)
 	{
+		assert image0 instanceof treebolic.glue.Image;
+		final treebolic.glue.Image image = (treebolic.glue.Image) image0;
 		if (image.bitmap != null)
 		{
 			this.canvas.drawBitmap(image.bitmap, x, y, this.paint);
@@ -280,8 +282,10 @@ public class Graphics implements treebolic.glue.iface.Graphics<Image>
 
 
 	@Override
-	public void drawImage(@NonNull final Image image, final int x, final int y, final int w, final int h)
+	public void drawImage(@NonNull final treebolic.glue.iface.Image image0, final int x, final int y, final int w, final int h)
 	{
+		assert image0 instanceof treebolic.glue.Image;
+		final treebolic.glue.Image image = (treebolic.glue.Image) image0;
 		if (image.bitmap != null)
 		{
 			final Rect r = new Rect(x, y, x + w, y + h);

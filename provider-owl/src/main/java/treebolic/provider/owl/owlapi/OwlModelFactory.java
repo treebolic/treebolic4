@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import treebolic.annotations.NonNull;
-import treebolic.glue.Image;
 import treebolic.glue.iface.Colors;
+import treebolic.glue.iface.Image;
 import treebolic.model.*;
 import treebolic.provider.LoadBalancer;
 
@@ -609,19 +609,19 @@ public class OwlModelFactory
 		this.propertyEdgeStyle = IEdge.DOT | IEdge.TOTRIANGLE | IEdge.TOFILL;
 
 		OwlModelFactory.images = new Image[ImageIndices.COUNT.ordinal()];
-		images[ImageIndices.ROOT.ordinal()] = new Image(Provider.class.getResource("images/root.png"));
-		images[ImageIndices.CLASS.ordinal()] = new Image(Provider.class.getResource("images/class.png"));
-		images[ImageIndices.CLASSWITHINSTANCES.ordinal()] = new Image(Provider.class.getResource("images/classwithinstances.png"));
-		images[ImageIndices.INSTANCES.ordinal()] = new Image(Provider.class.getResource("images/instances.png"));
-		images[ImageIndices.INSTANCE.ordinal()] = new Image(Provider.class.getResource("images/instance.png"));
-		images[ImageIndices.CLASSWITHPROPERTIES.ordinal()] = new Image(Provider.class.getResource("images/classwithproperties.png"));
-		images[ImageIndices.PROPERTIES.ordinal()] = new Image(Provider.class.getResource("images/properties.png"));
-		images[ImageIndices.PROPERTY.ordinal()] = new Image(Provider.class.getResource("images/property.png"));
-		images[ImageIndices.CLASSWITHRELATION.ordinal()] = new Image(Provider.class.getResource("images/classwithrelation.png"));
-		images[ImageIndices.RELATION.ordinal()] = new Image(Provider.class.getResource("images/relation.png"));
-		images[ImageIndices.BRANCH.ordinal()] = new Image(Provider.class.getResource("images/branch.png"));
-		images[ImageIndices.BRANCH_INSTANCES.ordinal()] = new Image(Provider.class.getResource("images/branch_instances.png"));
-		images[ImageIndices.BRANCH_PROPERTIES.ordinal()] = new Image(Provider.class.getResource("images/branch_properties.png"));
+		images[ImageIndices.ROOT.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/root.png"));
+		images[ImageIndices.CLASS.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/class.png"));
+		images[ImageIndices.CLASSWITHINSTANCES.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/classwithinstances.png"));
+		images[ImageIndices.INSTANCES.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/instances.png"));
+		images[ImageIndices.INSTANCE.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/instance.png"));
+		images[ImageIndices.CLASSWITHPROPERTIES.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/classwithproperties.png"));
+		images[ImageIndices.PROPERTIES.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/properties.png"));
+		images[ImageIndices.PROPERTY.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/property.png"));
+		images[ImageIndices.CLASSWITHRELATION.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/classwithrelation.png"));
+		images[ImageIndices.RELATION.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/relation.png"));
+		images[ImageIndices.BRANCH.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/branch.png"));
+		images[ImageIndices.BRANCH_INSTANCES.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/branch_instances.png"));
+		images[ImageIndices.BRANCH_PROPERTIES.ordinal()] = new treebolic.glue.Image(Provider.class.getResource("images/branch_properties.png"));
 	}
 
 	/**

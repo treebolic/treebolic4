@@ -10,7 +10,7 @@ import java.util.Locale;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.Image;
+import treebolic.glue.iface.Image;
 import treebolic.model.INode;
 import treebolic.model.TreeMutableNode;
 

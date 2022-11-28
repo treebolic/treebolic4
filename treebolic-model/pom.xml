@@ -25,9 +25,9 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-glue</artifactId>
+			<artifactId>treebolic-glue-iface</artifactId>
 			<version>${revision}</version>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>

@@ -129,12 +129,4 @@ public class Statusbar extends treebolic.glue.component.Statusbar implements Com
 		setColors(type);
 		super.put(type.ordinal(), converter, label, contents);
 	}
-
-	/*
-	 * Put status
-	 *
-	 * @param message
-	 *            content
-	 */
-	// public void put(final String message);
 }

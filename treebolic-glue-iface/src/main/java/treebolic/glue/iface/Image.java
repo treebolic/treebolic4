@@ -4,6 +4,8 @@
 
 package treebolic.glue.iface;
 
+import java.net.URL;
+
 /**
  * Glue interface for
  *
@@ -11,8 +13,6 @@ package treebolic.glue.iface;
  */
 public interface Image
 {
-	// public Image(URL resource);
-
 	/**
 	 * Image width
 	 *

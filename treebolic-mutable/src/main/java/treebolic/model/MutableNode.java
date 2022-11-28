@@ -4,7 +4,7 @@
 
 package treebolic.model;
 
-import treebolic.glue.Image;
+import treebolic.glue.iface.Image;
 
 /**
  * Mutable node

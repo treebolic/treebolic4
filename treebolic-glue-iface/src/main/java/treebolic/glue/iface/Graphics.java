@@ -4,16 +4,14 @@
 
 package treebolic.glue.iface;
 
-import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 
 /**
  * Glue interface for Graphics context
  *
- * @param <I> image
  * @author Bernard Bou
  */
-public interface Graphics<I>
+public interface Graphics
 {
 	// P O L Y G O N
 
@@ -157,7 +155,7 @@ public interface Graphics<I>
 	 * @param x     x-location
 	 * @param y     y-location
 	 */
-	void drawImage(final I image, final int x, final int y);
+	void drawImage(final treebolic.glue.iface.Image image, final int x, final int y);
 
 	/**
 	 * Draw image
@@ -168,7 +166,7 @@ public interface Graphics<I>
 	 * @param w     width
 	 * @param h     height
 	 */
-	void drawImage(final I image, final int x, final int y, final int w, final int h);
+	void drawImage(final treebolic.glue.iface.Image image, final int x, final int y, final int w, final int h);
 
 	// C O L O R
 
