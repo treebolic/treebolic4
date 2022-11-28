@@ -155,7 +155,7 @@ public interface Graphics
 	 * @param x     x-location
 	 * @param y     y-location
 	 */
-	void drawImage(final treebolic.glue.iface.Image image, final int x, final int y);
+	void drawImage(final Image image, final int x, final int y);
 
 	/**
 	 * Draw image
@@ -166,7 +166,7 @@ public interface Graphics
 	 * @param w     width
 	 * @param h     height
 	 */
-	void drawImage(final treebolic.glue.iface.Image image, final int x, final int y, final int w, final int h);
+	void drawImage(final Image image, final int x, final int y, final int w, final int h);
 
 	// C O L O R
 

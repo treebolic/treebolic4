@@ -12,6 +12,7 @@ import java.util.Stack;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
+import treebolic.glue.iface.Image;
 
 /**
  * Graphics, embeds awt's Graphics
@@ -99,7 +100,7 @@ public class Graphics implements treebolic.glue.iface.Graphics
 	 * @see treebolic.glue.iface.Graphics#drawBackgroundColor(java.lang.Object, int, int, int, int)
 	 */
 	@Override
-	public void drawBackgroundColor(@NonNull final Integer color, final int left, final int top, final int width, final int height)
+	public void drawBackgroundColor(@Nullable final Integer color, final int left, final int top, final int width, final int height)
 	{
 		setColor(color);
 		fillRectangle(left, top, width, height);
@@ -175,7 +176,7 @@ public class Graphics implements treebolic.glue.iface.Graphics
 	}
 
 	@Override
-	public void drawImage(@NonNull final treebolic.glue.iface.Image image0, final int x, final int y)
+	public void drawImage(@NonNull final Image image0, final int x, final int y)
 	{
 		assert image0 instanceof treebolic.glue.Image;
 		final treebolic.glue.Image image = (treebolic.glue.Image) image0;
@@ -187,9 +188,8 @@ public class Graphics implements treebolic.glue.iface.Graphics
 	}
 
 	@Override
-	public void drawImage(@NonNull final treebolic.glue.iface.Image image0, final int x, final int y, final int w, final int h)
+	public void drawImage(@NonNull final Image image0, final int x, final int y, final int w, final int h)
 	{
-		assert image0 instanceof treebolic.glue.Image;
 		final treebolic.glue.Image image = (treebolic.glue.Image) image0;
 		if (image.image == null)
 		{

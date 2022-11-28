@@ -20,6 +20,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.util.TypedValue;
 
+import treebolic.glue.iface.Image;
 import org.treebolic.glue.R;
 
 import androidx.annotation.NonNull;
@@ -270,7 +271,7 @@ public class Graphics implements treebolic.glue.iface.Graphics
 
 
 	@Override
-	public void drawImage(@NonNull final treebolic.glue.iface.Image image0, final int x, final int y)
+	public void drawImage(@NonNull final Image image0, final int x, final int y)
 	{
 		assert image0 instanceof treebolic.glue.Image;
 		final treebolic.glue.Image image = (treebolic.glue.Image) image0;
@@ -282,7 +283,7 @@ public class Graphics implements treebolic.glue.iface.Graphics
 
 
 	@Override
-	public void drawImage(@NonNull final treebolic.glue.iface.Image image0, final int x, final int y, final int w, final int h)
+	public void drawImage(@NonNull final Image image0, final int x, final int y, final int w, final int h)
 	{
 		assert image0 instanceof treebolic.glue.Image;
 		final treebolic.glue.Image image = (treebolic.glue.Image) image0;

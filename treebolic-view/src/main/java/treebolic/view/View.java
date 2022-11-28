@@ -18,6 +18,7 @@ import treebolic.glue.Animator;
 import treebolic.glue.Graphics;
 import treebolic.glue.GraphicsCache;
 import treebolic.glue.component.Surface;
+import treebolic.glue.iface.Image;
 import treebolic.model.INode;
 import treebolic.model.Location;
 import treebolic.model.Model;
@@ -497,7 +498,7 @@ public class View extends Surface
 	 * @param defaultTreeEdgeImage default tree edge image
 	 * @param defaultEdgeImage     default edge image
 	 */
-	public void setImages(final treebolic.glue.iface.Image backgroundImage, final treebolic.glue.iface.Image defaultNodeImage, final treebolic.glue.iface.Image defaultTreeEdgeImage, final treebolic.glue.iface.Image defaultEdgeImage)
+	public void setImages(final Image backgroundImage, final Image defaultNodeImage, final Image defaultTreeEdgeImage, final Image defaultEdgeImage)
 	{
 		this.painter.setImages(backgroundImage, defaultNodeImage, defaultTreeEdgeImage, defaultEdgeImage);
 	}
