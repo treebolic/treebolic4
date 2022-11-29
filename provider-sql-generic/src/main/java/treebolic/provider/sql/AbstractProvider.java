@@ -719,7 +719,7 @@ public abstract class AbstractProvider< //
 			final Integer foreColor = node.getForeColor();
 			final Integer edgeColor = node.getEdgeColor();
 			final LoadBalancer balancer = new LoadBalancer(new int[]{10, 3}, 3);
-			balancer.setGroupNode(null, backColor, foreColor, edgeColor, LOADBALANCING_EDGE_STYLE, -1, null);
+			balancer.setGroupNode(null, backColor, foreColor, edgeColor, LOADBALANCING_EDGE_STYLE, -1, null, null);
 			final List<INode> newChildren = balancer.buildHierarchy(children, 0);
 			children.clear();
 			node.addChildren(newChildren);
