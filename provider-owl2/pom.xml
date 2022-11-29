@@ -7,52 +7,69 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>treebolic</artifactId>
+		<groupId>io.github.treebolic</groupId>
+		<version>4.0-SNAPSHOT</version>
+	</parent>
 
-	<groupId>io.github.treebolic</groupId>
-	<artifactId>treebolic</artifactId>
-	<packaging>pom</packaging>
-	<version>4.0-SNAPSHOT</version>
-
-	<name>treebolic</name>
-	<description>Treebolic top project</description>
-	<url>https://treebolic.github.io/treebolic4/</url>
-
-	<modules>
-		<module>treebolic-glue-iface</module>
-		<module>treebolic-glue</module>
-		<module>treebolic-model</module>
-		<module>treebolic-view</module>
-		<module>treebolic-mutable</module>
-		<module>treebolic-loadbalancer</module>
-		<module>treebolic-graph</module>
-		<module>treebolic-annotations</module>
-		<module>treebolic-glue-swing</module>
-		<module>provider-xml</module>
-		<module>provider-owl</module>
-		<module>provider-sql-generic</module>
-		<module>provider-sql-jdbc</module>
-		<module>transformer-xml</module>
-		<module>swing-studio</module>
-		<module>swing-application</module>
-		<module>swing-application-owl</module>
-		<module>swing-application-owl2</module>
-		<module>swing-application-xml</module>
-		<module>swing-commons</module>
-		<module>swing-browser</module>
-		<module>swing-browser-search</module>
-		<module>android-constants</module>
-		<module>provider-text-pair</module>
-		<module>provider-text-indent</module>
-		<module>provider-text-indent-tree</module>
-		<module>provider-gxl</module>
-	</modules>
+	<artifactId>provider-owl2</artifactId>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>
 		<maven.compiler.target>8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<revision>4.0-SNAPSHOT</revision>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
+			<artifactId>provider-owl</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
+			<artifactId>treebolic-model</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
+			<artifactId>treebolic-mutable</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
+			<artifactId>treebolic-glue-iface</artifactId>
+			<version>${revision}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
+			<artifactId>treebolic-glue</artifactId>
+			<version>${revision}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
+			<artifactId>treebolic-loadbalancer</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.treebolic</groupId>
+			<artifactId>treebolic-annotations</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.owlapi</groupId>
+			<artifactId>owlapi-api</artifactId>
+			<version>5.1.20</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.owlapi</groupId>
+			<artifactId>owlapi-apibinding</artifactId>
+			<version>5.1.20</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -179,16 +196,6 @@
 			</plugin>
 
 		</plugins>
-
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>com.github.wvengen</groupId>
-					<artifactId>proguard-maven-plugin</artifactId>
-					<version>2.6.0</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 
 	<distributionManagement>

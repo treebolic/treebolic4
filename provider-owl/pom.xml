@@ -40,12 +40,6 @@
 		</dependency>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-glue</artifactId>
-			<version>${revision}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-loadbalancer</artifactId>
 			<version>${revision}</version>
 		</dependency>

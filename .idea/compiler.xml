@@ -18,12 +18,14 @@
         <module name="provider-sql-jdbc" />
         <module name="swing-studio" />
         <module name="treebolic-glue-swing" />
+        <module name="provider-owl2" />
         <module name="swing-browser-search" />
         <module name="swing-commons" />
         <module name="provider-sql-generic" />
         <module name="treebolic-annotations" />
         <module name="provider-owl" />
         <module name="swing-application-xml" />
+        <module name="swing-application-owl2" />
         <module name="treebolic-glue-iface" />
         <module name="provider-text-pair" />
         <module name="swing-application-owl" />
