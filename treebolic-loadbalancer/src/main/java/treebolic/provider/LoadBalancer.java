@@ -79,7 +79,14 @@ public class LoadBalancer
 	/**
 	 * Image of intermediate node
 	 */
+	@Nullable
 	private Image image;
+
+	/**
+	 * Image file of intermediate node
+	 */
+	@Nullable
+	private String imageFile;
 
 	// C O N S T R U C T O R
 
@@ -103,8 +110,12 @@ public class LoadBalancer
 	 * @param edgeStyle0  group node edge style
 	 * @param imageIndex0 group node image index
 	 * @param image0      group node image
+	 * @param imageFile0  group node image file
 	 */
-	public void setGroupNode(final String label0, @Nullable final Integer backColor0, @Nullable final Integer foreColor0, @Nullable final Integer edgeColor0, final int edgeStyle0, final int imageIndex0, @SuppressWarnings("SameParameterValue") final Image image0)
+	public void setGroupNode(final String label0, //
+			@Nullable final Integer backColor0, @Nullable final Integer foreColor0, @Nullable final Integer edgeColor0, //
+			final int edgeStyle0, //
+			final int imageIndex0, @SuppressWarnings("SameParameterValue") @Nullable final Image image0, @Nullable final String imageFile0)
 	{
 		this.label = label0;
 		this.backColor = backColor0;
@@ -113,6 +124,7 @@ public class LoadBalancer
 		this.edgeStyle = edgeStyle0;
 		this.imageIndex = imageIndex0;
 		this.image = image0;
+		this.imageFile = imageFile0;
 	}
 
 	// T R E E F A C T O R Y
@@ -123,11 +135,12 @@ public class LoadBalancer
 	 * @param nodes      children nodes
 	 * @param imageIndex image index (-1 is none and resolves to default)
 	 * @param image      image (null is none and resolves to default)
+	 * @param imageFile  image file (null is none and resolves to default)
 	 * @param level      current level
 	 * @return list of parent nodes
 	 */
 	@NonNull
-	private List<INode> buildHierarchy1(@NonNull final List<? extends INode> nodes, final int imageIndex, @Nullable final Image image, final int level)
+	private List<INode> buildHierarchy1(@NonNull final List<? extends INode> nodes, final int imageIndex, @Nullable final Image image, @Nullable final String imageFile, final int level)
 	{
 		@NonNull final List<INode> roots = new ArrayList<>();
 
@@ -169,6 +182,14 @@ public class LoadBalancer
 			else if (this.image != null)
 			{
 				root.setImage(this.image);
+			}
+			if (imageFile != null)
+			{
+				root.setImageFile(imageFile);
+			}
+			else if (this.imageFile != null)
+			{
+				root.setImageFile(this.imageFile);
 			}
 
 			int b = Math.min(i + m0, z);
@@ -223,12 +244,13 @@ public class LoadBalancer
 	 * @param nodes      nodes at level
 	 * @param imageIndex image index (-1 is none and resolves to default)
 	 * @param image      image (null is none and resolves to default)
+	 * @param imageFile  image file (null is none and resolves to default)
 	 * @param level      level
 	 * @return list of tree nodes
 	 */
 	@Nullable
 	@SuppressWarnings({"unchecked", "WeakerAccess"})
-	public List<INode> buildHierarchy(@Nullable final List<? extends INode> nodes, final int imageIndex, final Image image, final int level)
+	public List<INode> buildHierarchy(@Nullable final List<? extends INode> nodes, final int imageIndex, @Nullable final Image image, @Nullable final String imageFile, final int level)
 	{
 		//noinspection ManualMinMaxCalculation
 		int m = this.limitNodesAtLevel[level > this.limitNodesAtLevel.length - 1 ? this.limitNodesAtLevel.length - 1 : level];
@@ -241,8 +263,8 @@ public class LoadBalancer
 		{
 			return (List<INode>) nodes;
 		}
-		@NonNull final List<INode> nodes2 = buildHierarchy1(nodes, imageIndex, image, level);
-		return buildHierarchy(nodes2, imageIndex, image, level + 1);
+		@NonNull final List<INode> nodes2 = buildHierarchy1(nodes, imageIndex, image, imageFile, level);
+		return buildHierarchy(nodes2, imageIndex, image, imageFile, level + 1);
 	}
 
 	/**
@@ -255,7 +277,7 @@ public class LoadBalancer
 	@Nullable
 	public List<INode> buildHierarchy(final List<? extends INode> nodes, @SuppressWarnings("SameParameterValue") final int level)
 	{
-		return buildHierarchy(nodes, -1, null, level);
+		return buildHierarchy(nodes, -1, null, null, level);
 	}
 
 	// H E L P E R S
