@@ -61,7 +61,7 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 		{
 			return ImageIO.read(resource);
 		}
-		catch (IOException ignored)
+		catch (IOException|IllegalArgumentException ignored)
 		{
 		}
 		return null;
