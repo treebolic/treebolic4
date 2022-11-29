@@ -597,6 +597,7 @@
         <option value="$PROJECT_DIR$/swing-studio/pom.xml" />
         <option value="$PROJECT_DIR$/swing-application/pom.xml" />
         <option value="$PROJECT_DIR$/provider-owl2/pom.xml" />
+        <option value="$PROJECT_DIR$/swing-application-owl2/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

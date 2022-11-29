@@ -18,7 +18,6 @@ import treebolic.provider.ProviderUtils;
 
 /**
  * Provider for OWL
- * <F> factory
  *
  * @author Bernard Bou
  */
@@ -38,6 +37,9 @@ public abstract class BaseProvider implements IProvider
 
 	/**
 	 * Get factory
+	 *
+	 * @param properties config properties
+	 * @return factory
 	 */
 	abstract protected OwlModelFactory factory(@NonNull Properties properties);
 

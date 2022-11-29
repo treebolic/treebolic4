@@ -26,25 +26,31 @@
 		<module>treebolic-loadbalancer</module>
 		<module>treebolic-graph</module>
 		<module>treebolic-annotations</module>
+
 		<module>treebolic-glue-swing</module>
+
 		<module>provider-xml</module>
 		<module>provider-owl</module>
+		<module>provider-owl2</module>
 		<module>provider-sql-generic</module>
 		<module>provider-sql-jdbc</module>
-		<module>transformer-xml</module>
-		<module>swing-studio</module>
-		<module>swing-application</module>
-		<module>swing-application-owl</module>
-		<module>swing-application-owl2</module>
-		<module>swing-application-xml</module>
-		<module>swing-commons</module>
-		<module>swing-browser</module>
-		<module>swing-browser-search</module>
-		<module>android-constants</module>
 		<module>provider-text-pair</module>
 		<module>provider-text-indent</module>
 		<module>provider-text-indent-tree</module>
 		<module>provider-gxl</module>
+		<module>transformer-xml</module>
+
+		<module>swing-studio</module>
+		<module>swing-application</module>
+
+		<!-- <module>swing-application-xml</module>-->
+		<!-- <module>swing-application-owl</module>-->
+		<!-- <module>swing-application-owl2</module>-->
+
+		<module>swing-commons</module>
+		<module>swing-browser</module>
+		<module>swing-browser-search</module>
+
 	</modules>
 
 	<properties>

@@ -30,7 +30,6 @@
         <module name="provider-text-pair" />
         <module name="swing-application-owl" />
         <module name="swing-browser" />
-        <module name="android-constants" />
         <module name="provider-text-indent-tree" />
         <module name="treebolic-graph" />
         <module name="treebolic-view" />
@@ -40,6 +39,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="android-constants" target="1.8" />
       <module name="application" target="1.8" />
       <module name="application-owl" target="1.8" />
       <module name="application-xml" target="1.8" />
