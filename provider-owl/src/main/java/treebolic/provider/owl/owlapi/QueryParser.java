@@ -47,12 +47,12 @@ class QueryParser
 	{
 
 		// Set up the parser
-		final OWLOntologyManager manager = this.rootOntology.getOWLOntologyManager();
+		final OWLOntologyManager manager = rootOntology.getOWLOntologyManager();
 		final OWLDataFactory dataFactory = manager.getOWLDataFactory();
 		final OntologyConfigurator configurator = manager.getOntologyConfigurator();
 		final ManchesterOWLSyntaxParser parser = new ManchesterOWLSyntaxParserImpl(configurator, dataFactory);
 		parser.setStringToParse(classExpressionString);
-		parser.setDefaultOntology(this.rootOntology);
+		parser.setDefaultOntology(rootOntology);
 
 		// Specify an entity checker that wil be used to check a class expression contains the correct names.
 		final OWLEntityChecker entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
