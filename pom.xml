@@ -32,7 +32,7 @@
 		<module>provider-xml</module>
 		<module>provider-owl-owlapi</module>
 		<module>provider-owl-jena</module>
-		<module>provider-owl2</module>
+		<module>provider-owl-owlapi2</module>
 		<module>provider-sql-generic</module>
 		<module>provider-sql-jdbc</module>
 		<module>provider-text-pair</module>

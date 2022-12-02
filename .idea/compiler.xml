@@ -19,7 +19,6 @@
         <module name="provider-sql-jdbc" />
         <module name="swing-studio" />
         <module name="treebolic-glue-swing" />
-        <module name="provider-owl2" />
         <module name="swing-browser-search" />
         <module name="provider-owl-owlapi" />
         <module name="swing-commons" />
@@ -30,6 +29,7 @@
         <module name="treebolic-glue-iface" />
         <module name="provider-text-pair" />
         <module name="provider-owl-jena" />
+        <module name="provider-owl-owlapi2" />
         <module name="swing-application-owl" />
         <module name="swing-browser" />
         <module name="provider-text-indent-tree" />

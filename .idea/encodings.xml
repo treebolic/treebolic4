@@ -9,8 +9,8 @@
     <file url="file://$PROJECT_DIR$/provider-owl-jena/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider-owl-owlapi/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider-owl-owlapi/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/provider-owl2/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/provider-owl2/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider-owl-owlapi2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider-owl-owlapi2/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider-sql-generic/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider-sql-generic/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider-sql-jdbc/src/main/java" charset="UTF-8" />

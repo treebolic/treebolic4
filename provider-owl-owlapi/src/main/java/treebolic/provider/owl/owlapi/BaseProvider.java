@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2022. Bernard Bou
  */
-package treebolic.provider.owl.jena;
+package treebolic.provider.owl.owlapi;
 
 import java.io.IOException;
 import java.net.URL;

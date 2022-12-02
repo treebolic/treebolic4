@@ -2,7 +2,7 @@
  * Copyright (c) 2022. Bernard Bou
  */
 
-package treebolic.provider.owl.jena;
+package treebolic.provider.owl.owlapi;
 
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
