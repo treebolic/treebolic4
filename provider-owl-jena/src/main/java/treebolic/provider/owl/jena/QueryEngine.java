@@ -35,7 +35,8 @@ public class QueryEngine
 	public QueryEngine(final OntModel model)
 	{
 		// Object properties
-		model.listAllOntProperties().forEach(p -> owlProperties.put(p.getLocalName(), p));
+		model.listObjectProperties()
+				.forEach(p -> owlProperties.put(p.getLocalName(), p));
 	}
 
 	// C L A S S E S
@@ -184,7 +185,7 @@ public class QueryEngine
 	 * @param model model
 	 * @return top classes
 	 */
-	public Iterator<OntClass> getTopClasses(final OntModel model)
+	public ExtendedIterator<OntClass> getTopClasses(final OntModel model)
 	{
 		return model.listHierarchyRootClasses().filterDrop(c -> c.getLocalName() == null);
 	}

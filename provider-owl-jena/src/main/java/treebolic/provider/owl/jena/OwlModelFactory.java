@@ -784,7 +784,7 @@ public class OwlModelFactory
 					{
 						// relation
 						OntProperty relation = engine.getRelation(owlClass);
-						// visitRelation(owlClassNode, relation);
+						visitRelation(owlClassNode, relation);
 					}
 					// properties
 					if (hasProperties)
@@ -796,7 +796,7 @@ public class OwlModelFactory
 
 						// properties
 						final Stream<OntProperty> properties = engine.getProperties(owlClass);
-						//visitProperties(propertiesNode, properties);
+						visitProperties(propertiesNode, properties);
 					}
 					return new Tree(owlClassNode, null);
 				}
@@ -808,10 +808,24 @@ public class OwlModelFactory
 		}
 		else
 		{
-			// walk classes
-			final OntClass rootClass = engine.getTopClass(model);
-			final MutableNode owlClassNode = visitClassAndSubclasses(null, rootClass, ontologyUrlString);
-			return new Tree(decorateRoot(owlClassNode), null);
+			Set<OntClass> tops = engine.getTopClasses(model).toSet();
+			if (tops.size() == 1)
+			{
+				// walk classes
+				final OntClass rootClass = tops.iterator().next();
+				final MutableNode owlClassNode = visitClassAndSubclasses(null, rootClass, ontologyUrlString);
+				return new Tree(decorateRoot(owlClassNode), null);
+			}
+			else
+			{
+				final OntClass rootClass = model.createClass("#Thing");
+				MutableNode rootNode = visitClass(null, rootClass, ontologyUrlString);
+				for (OntClass top : tops)
+				{
+					final MutableNode owlClassNode = visitClassAndSubclasses(rootNode, top, ontologyUrlString);
+				}
+				return new Tree(decorateRoot(rootNode), null);
+			}
 		}
 	}
 
@@ -916,9 +930,9 @@ public class OwlModelFactory
 			// get instances or properties
 			final ExtendedIterator<OntResource> instances = engine.getInstances(owlClass);
 			final boolean hasInstances = instances.hasNext();
-			// final Stream<OntProperty> properties = engine.getProperties(owlClass);
-			final boolean hasProperties = false; // properties.findAny().isPresent();
-			final boolean isRelation = false; //engine.isRelation(owlClass);
+			final Stream<OntProperty> properties = engine.getProperties(owlClass);
+			final boolean hasProperties = properties.findAny().isPresent();
+			final boolean isRelation = engine.isRelation(owlClass);
 
 			// mountpoint
 			if (hasInstances || hasProperties || isRelation)
