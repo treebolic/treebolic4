@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2022. Bernard Bou
  */
-package treebolic.provider.owl.owlapi;
+package treebolic.provider.owl.jena;
 
 import java.util.Properties;
 

@@ -24,7 +24,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
-			<artifactId>provider-owl</artifactId>
+			<artifactId>provider-owl-owlapi</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2022. Bernard Bou
  */
-package treebolic.provider.owl.owlapi;
+package treebolic.provider.owl.jena;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.io.StreamDocumentSource;
