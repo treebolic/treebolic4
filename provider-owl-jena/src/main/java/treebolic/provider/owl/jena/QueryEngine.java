@@ -20,6 +20,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import treebolic.annotations.NonNull;
+
 /**
  * OWL query engine
  */
@@ -35,8 +37,7 @@ public class QueryEngine
 	public QueryEngine(final OntModel model)
 	{
 		// Object properties
-		model.listObjectProperties()
-				.forEach(p -> owlProperties.put(p.getLocalName(), p));
+		model.listObjectProperties().forEach(p -> owlProperties.put(p.getLocalName(), p));
 	}
 
 	// C L A S S E S
@@ -190,33 +191,18 @@ public class QueryEngine
 		return model.listHierarchyRootClasses().filterDrop(c -> c.getLocalName() == null);
 	}
 
-	/**
-	 * Top class
-	 *
-	 * @param model model
-	 * @return top class
-	 */
-	public OntClass getTopClass(final OntModel model)
-	{
-		final Iterator<OntClass> it = getTopClasses(model);
-		if (!it.hasNext())
-		{
-			return null;
-		}
-		return it.next();
-	}
-
 	// E N T I T I E S
 
 	/**
 	 * Get entity's annotations
 	 *
 	 * @param entity entity
+	 * @param lang   language
 	 * @return stream of annotations
 	 */
-	public ExtendedIterator<RDFNode> getAnnotations(final OntResource entity)
+	public ExtendedIterator<RDFNode> getAnnotations(final OntResource entity, @NonNull final String lang)
 	{
-		return entity.listComments("English");
+		return entity.listComments(lang);
 	}
 
 	public Stream<OntClass> getTypes(final OntResource entity)

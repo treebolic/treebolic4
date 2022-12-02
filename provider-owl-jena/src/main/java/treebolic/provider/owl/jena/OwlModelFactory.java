@@ -34,7 +34,7 @@ public class OwlModelFactory
 {
 	static private final Integer backgroundColor = 0xffffe0;
 
-	static private final String LANG = "EnglishLanguage";
+	static private final String LANG = "";
 
 	/**
 	 * As tree
@@ -912,7 +912,7 @@ public class OwlModelFactory
 	{
 		final String ownClassShortForm = owlClass.getLocalName();
 		final String owlClassId = owlClass.getLocalName();
-		final ExtendedIterator<String> annotations = engine.getAnnotations(owlClass).mapWith(RDFNode::toString);
+		final ExtendedIterator<String> annotations = engine.getAnnotations(owlClass, LANG).mapWith(RDFNode::toString);
 
 		// comment
 		String comment = owlClass.getComment(LANG) + "<br>" + annotationsToString(annotations);
@@ -992,7 +992,7 @@ public class OwlModelFactory
 					final String owlIndividualShortForm = owlNamedIndividual.getLocalName();
 					final String owlIndividualId = owlNamedIndividual.getLocalName();
 					final Stream<OntClass> types = engine.getTypes(owlNamedIndividual);
-					final ExtendedIterator<String> annotations = engine.getAnnotations(owlNamedIndividual).mapWith(RDFNode::toString);
+					final ExtendedIterator<String> annotations = engine.getAnnotations(owlNamedIndividual, LANG).mapWith(RDFNode::toString);
 
 					final MutableNode instanceNode = new MutableNode(null, owlIndividualId);
 					instanceNode.setLabel(owlIndividualShortForm);
