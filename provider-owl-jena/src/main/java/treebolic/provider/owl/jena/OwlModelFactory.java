@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import treebolic.annotations.NonNull;
@@ -991,7 +990,7 @@ public class OwlModelFactory
 
 					final String owlIndividualShortForm = owlNamedIndividual.getLocalName();
 					final String owlIndividualId = owlNamedIndividual.getLocalName();
-					final Stream<OntClass> types = engine.getTypes(owlNamedIndividual);
+					final ExtendedIterator<String> types = engine.getTypes(owlNamedIndividual).mapWith(OntClass::getLocalName);
 					final ExtendedIterator<String> annotations = engine.getAnnotations(owlNamedIndividual, LANG).mapWith(RDFNode::toString);
 
 					final MutableNode instanceNode = new MutableNode(null, owlIndividualId);
@@ -1309,7 +1308,10 @@ public class OwlModelFactory
 	 */
 	private static String annotationsToString(@NonNull final ExtendedIterator<String> annotations)
 	{
-		return "<br>" + "TODO";
+		List<String> annotationElements = annotations //
+				.mapWith(Object::toString) //
+				.toList();
+		return String.join("<br>", annotationElements);
 	}
 
 	/**
@@ -1318,10 +1320,11 @@ public class OwlModelFactory
 	 * @param types stream of types
 	 * @return string
 	 */
-	private static String typesToString(@NonNull final Stream<OntClass> types)
+	private static String typesToString(@NonNull final ExtendedIterator<String> types)
 	{
-		return types //
-				.map(Object::toString) //
-				.collect(Collectors.joining("<br>"));
+		List<String> typeElements = types //
+				.mapWith(Object::toString) //
+				.toList();
+		return String.join("<br>", typeElements);
 	}
 }

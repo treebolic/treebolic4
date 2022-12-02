@@ -15,10 +15,9 @@ import org.apache.jena.util.iterator.ExtendedIterator;
 import org.apache.jena.util.iterator.UniqueFilter;
 import org.apache.jena.vocabulary.RDF;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import treebolic.annotations.NonNull;
 
@@ -42,6 +41,8 @@ public class QueryEngine
 
 	// C L A S S E S
 
+	static final boolean DIRECT_CLASSES = true;
+
 	/**
 	 * Gets the equivalent classes of a class expression
 	 *
@@ -61,7 +62,7 @@ public class QueryEngine
 	 */
 	public ExtendedIterator<OntClass> getSuperClasses(final OntClass clazz)
 	{
-		return clazz.listSuperClasses(true);
+		return clazz.listSuperClasses(DIRECT_CLASSES);
 	}
 
 	// subclasses
@@ -74,10 +75,11 @@ public class QueryEngine
 	 */
 	public ExtendedIterator<OntClass> getSubClasses(final OntClass owlClass)
 	{
-		return owlClass.listSubClasses(true);
+		return owlClass.listSubClasses(DIRECT_CLASSES);
 	}
 
 	// instances
+
 	static final boolean DIRECT_INSTANCES = false;
 
 	/**
@@ -92,7 +94,7 @@ public class QueryEngine
 		return model.listStatements(null, RDF.type, clazz) //
 				.mapWith(Statement::getSubject) //
 				.mapWith(r -> r.as(OntResource.class)) //
-				.filterKeep(o -> o.hasRDFType(clazz, true)) //
+				.filterKeep(o -> o.hasRDFType(clazz, DIRECT_INSTANCES)) //
 				.filterKeep(new UniqueFilter<>()) //
 				;
 	}
@@ -126,7 +128,7 @@ public class QueryEngine
 	 * Get domains of object property
 	 *
 	 * @param property property
-	 * @return stream of domain classes
+	 * @return extended iterator of domain classes
 	 */
 	public ExtendedIterator<OntClass> getDomains(final OntProperty property)
 	{
@@ -137,7 +139,7 @@ public class QueryEngine
 	 * Get ranges of object property
 	 *
 	 * @param property property
-	 * @return stream of domain classes
+	 * @return extended iterator of domain classes
 	 */
 	public ExtendedIterator<OntClass> getRanges(final OntProperty property)
 	{
@@ -148,7 +150,7 @@ public class QueryEngine
 	 * Get sub properties of object property
 	 *
 	 * @param property property
-	 * @return stream of sub properties
+	 * @return extended iterator of sub properties
 	 */
 	public ExtendedIterator<? extends OntProperty> getSubproperties(final OntProperty property)
 	{
@@ -159,7 +161,7 @@ public class QueryEngine
 	 * Get inverse properties of object property
 	 *
 	 * @param property property
-	 * @return stream of inverse properties
+	 * @return extended iterator of inverse properties
 	 */
 	public ExtendedIterator<? extends OntProperty> getInverseProperties(final OntProperty property)
 	{
@@ -184,7 +186,7 @@ public class QueryEngine
 	 * Top classes
 	 *
 	 * @param model model
-	 * @return top classes
+	 * @return extended iterator of top classes
 	 */
 	public ExtendedIterator<OntClass> getTopClasses(final OntModel model)
 	{
@@ -198,15 +200,39 @@ public class QueryEngine
 	 *
 	 * @param entity entity
 	 * @param lang   language
-	 * @return stream of annotations
+	 * @return extended iterator of annotations
 	 */
 	public ExtendedIterator<RDFNode> getAnnotations(final OntResource entity, @NonNull final String lang)
 	{
 		return entity.listComments(lang);
 	}
 
-	public Stream<OntClass> getTypes(final OntResource entity)
+	/**
+	 * Get entity's types
+	 *
+	 * @param entity entity
+	 * @return ExtendedIterator iterator of types
+	 */
+	public ExtendedIterator<OntClass> getTypes(final OntResource entity)
 	{
-		return Stream.empty();
+		return entity.listRDFTypes(false) //
+				.mapWith(t -> t.as(OntClass.class));
+	}
+
+	public static <T> Stream<T> toStream(final ExtendedIterator<T> sourceIterator)
+	{
+		return toStream(sourceIterator);
+	}
+
+	public static <T> Stream<T> toStream(final Iterator<T> sourceIterator)
+	{
+		return StreamSupport.stream(Spliterators.spliteratorUnknownSize(sourceIterator, Spliterator.ORDERED), false);
+	}
+
+
+	public static <T> Stream<T> toStream2(final Iterator<T> sourceIterator)
+	{
+		Iterable<T> iterable = () -> sourceIterator;
+		return StreamSupport.stream(iterable.spliterator(), false);
 	}
 }
