@@ -30,7 +30,7 @@ import static java.util.stream.Collectors.toList;
  *
  * @author Bernard Bou
  */
-public class OwlModelFactory
+public class OwlModelFactory implements ImageDecorator
 {
 	static private final Integer backgroundColor = 0xffffe0;
 
@@ -712,7 +712,7 @@ public class OwlModelFactory
 			}
 			catch (final Exception e)
 			{
-				System.err.println("SETTING " + e);
+				System.err.println("SETTINGS: " + e);
 			}
 		}
 
@@ -753,7 +753,7 @@ public class OwlModelFactory
 			}
 			catch (final Exception e)
 			{
-				System.err.println("Owl:" + e);
+				System.err.println("OWL:" + e);
 				return null;
 			}
 		}
@@ -921,7 +921,7 @@ public class OwlModelFactory
 		final Stream<OWLAnnotation> annotations = engine.getAnnotations(owlClass);
 
 		// comment
-		String comment = owlClass.getIRI().toString() + "<br>" + annotationsToString(annotations);
+		String comment = owlClass.getIRI() + "<br>" + annotationsToString(annotations);
 
 		// node
 		final TreeMutableNode owlClassNode = new TreeMutableNode(parentOwlClassNode, owlClassId);
@@ -1157,7 +1157,7 @@ public class OwlModelFactory
 
 	// D E C O R A T E
 
-	protected void setNodeImage(final MutableNode node, @Nullable final String imageFile, @Nullable final ImageIndex index)
+	private void setNodeImage(final MutableNode node, @Nullable final String imageFile, @Nullable final ImageIndex index)
 	{
 		if (imageFile != null)
 		{
@@ -1165,11 +1165,19 @@ public class OwlModelFactory
 		}
 		else if (index != null)
 		{
-			node.setImageFile(images[index.ordinal()]);
+			setNodeImage(node, index.ordinal());
 		}
 	}
 
-	protected void setNodeEdgeImage(final MutableNode node, @Nullable final String edgeImageFile, @Nullable final ImageIndex index)
+	public void setNodeImage(final MutableNode node, final int index)
+	{
+		if (index != -1)
+		{
+			node.setImageFile(images[index]);
+		}
+	}
+
+	private void setTreeEdgeImage(final MutableNode node, @Nullable final String edgeImageFile, @Nullable final ImageIndex index)
 	{
 		if (edgeImageFile != null)
 		{
@@ -1177,7 +1185,24 @@ public class OwlModelFactory
 		}
 		else if (index != null)
 		{
-			node.setEdgeImageFile(images[index.ordinal()]);
+			setTreeEdgeImage(node, index.ordinal());
+		}
+	}
+
+	public void setTreeEdgeImage(final MutableNode node, final int index)
+	{
+		if (index != -1)
+		{
+			node.setEdgeImageFile(images[index]);
+		}
+	}
+
+	@Override
+	public void setEdgeImage(final MutableEdge edge, final int index)
+	{
+		if (index != -1)
+		{
+			edge.setImageFile(images[index]);
 		}
 	}
 
@@ -1277,7 +1302,7 @@ public class OwlModelFactory
 		node.setEdgeStyle(instanceEdgeStyle);
 		node.setEdgeColor(instanceEdgeColor);
 		setNodeImage(node, instanceImageFile, ImageIndex.INSTANCE);
-		setNodeEdgeImage(node, instanceEdgeImageFile, null);
+		setTreeEdgeImage(node, instanceEdgeImageFile, null);
 		return node;
 	}
 
@@ -1289,7 +1314,7 @@ public class OwlModelFactory
 		node.setEdgeStyle(relationEdgeStyle);
 		node.setEdgeColor(relationEdgeColor);
 		setNodeImage(node, relationImageFile, ImageIndex.RELATION);
-		setNodeEdgeImage(node, relationEdgeImageFile, null);
+		setTreeEdgeImage(node, relationEdgeImageFile, null);
 		return node;
 	}
 
@@ -1301,7 +1326,7 @@ public class OwlModelFactory
 		node.setEdgeStyle(propertyEdgeStyle);
 		node.setEdgeColor(propertyEdgeColor);
 		setNodeImage(node, propertyImageFile, ImageIndex.PROPERTY);
-		setNodeEdgeImage(node, propertyEdgeImageFile, null);
+		setTreeEdgeImage(node, propertyEdgeImageFile, null);
 		return node;
 	}
 

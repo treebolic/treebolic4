@@ -45,7 +45,6 @@ class QueryParser
 	 */
 	public OWLClassExpression parseClassExpression(final String classExpressionString)
 	{
-
 		// Set up the parser
 		final OWLOntologyManager manager = rootOntology.getOWLOntologyManager();
 		final OWLDataFactory dataFactory = manager.getOWLDataFactory();

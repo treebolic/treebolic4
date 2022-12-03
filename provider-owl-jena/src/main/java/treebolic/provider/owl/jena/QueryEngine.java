@@ -218,21 +218,4 @@ public class QueryEngine
 		return entity.listRDFTypes(false) //
 				.mapWith(t -> t.as(OntClass.class));
 	}
-
-	public static <T> Stream<T> toStream(final ExtendedIterator<T> sourceIterator)
-	{
-		return toStream(sourceIterator);
-	}
-
-	public static <T> Stream<T> toStream(final Iterator<T> sourceIterator)
-	{
-		return StreamSupport.stream(Spliterators.spliteratorUnknownSize(sourceIterator, Spliterator.ORDERED), false);
-	}
-
-
-	public static <T> Stream<T> toStream2(final Iterator<T> sourceIterator)
-	{
-		Iterable<T> iterable = () -> sourceIterator;
-		return StreamSupport.stream(iterable.spliterator(), false);
-	}
 }

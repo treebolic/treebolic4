@@ -644,7 +644,7 @@ public class OwlModelFactory
 	{
 		try (InputStream is = new URL(ontologyDocumentUrl).openStream())
 		{
-			model.read(is, url);
+			model.read(is, "http://sf.net/owl");
 		}
 	}
 
@@ -693,7 +693,7 @@ public class OwlModelFactory
 			}
 			catch (final Exception e)
 			{
-				System.err.println("SETTING " + e);
+				System.err.println("SETTINGS: " + e);
 			}
 		}
 
@@ -732,7 +732,7 @@ public class OwlModelFactory
 			}
 			catch (final Exception e)
 			{
-				System.err.println("Owl:" + e);
+				System.err.println("OWL:" + e);
 				return null;
 			}
 		}
@@ -741,14 +741,16 @@ public class OwlModelFactory
 		OntClass owlClass;
 		if (classIri != null || classShortForm != null)
 		{
-			// parse
+			// this is a mount: there were parameters
 			if (classIri != null)
 			{
-				owlClass = model.createClass(classIri);
+				// use class iri
+				owlClass = model.getOntClass(classIri);
 			}
 			else
 			{
-				owlClass = model.getOntClass(classShortForm);
+				// use short form
+				owlClass = model.getOntClass(url + "#" + classShortForm);
 			}
 
 			// class
@@ -807,6 +809,7 @@ public class OwlModelFactory
 		}
 		else
 		{
+			// from top
 			Set<OntClass> tops = engine.getTopClasses(model).toSet();
 			if (tops.size() == 1)
 			{
@@ -877,11 +880,10 @@ public class OwlModelFactory
 	 */
 	public void visitClasses(final TreeMutableNode parentClassNode, final ExtendedIterator<OntClass> owlClasses, final String ontologyUrlString)
 	{
-		final List<INode> childNodes = owlClasses //
+		final List<INode> childNodes = StreamUtils.toStream(owlClasses) //
 
-				//.filter(owlClass -> !owlClass.isOWLNothing()) //
-				//.sorted() //
-				.mapWith(owlClass -> {
+				.sorted(Comparator.comparing(OntClass::getLocalName)) //
+				.map(owlClass -> {
 
 					// node
 					final TreeMutableNode owlClassNode = visitClass(null, owlClass, ontologyUrlString);
@@ -892,9 +894,9 @@ public class OwlModelFactory
 
 					return (INode) owlClassNode;
 				}) //
-				.toList();
+				.collect(toList());
 
-		// balance load
+		// balance load and attach to parent
 		final List<INode> balancedNodes = loadBalancer.buildHierarchy(childNodes, 0);
 		parentClassNode.addChildren(balancedNodes);
 	}
@@ -911,10 +913,10 @@ public class OwlModelFactory
 	{
 		final String ownClassShortForm = owlClass.getLocalName();
 		final String owlClassId = owlClass.getLocalName();
-		final ExtendedIterator<String> annotations = engine.getAnnotations(owlClass, LANG).mapWith(RDFNode::toString);
+		//final ExtendedIterator<String> annotations = engine.getAnnotations(owlClass, LANG).mapWith(RDFNode::toString);
 
 		// comment
-		String comment = owlClass.getComment(LANG) + "<br>" + annotationsToString(annotations);
+		String comment = owlClass.getLocalName() + "<br>" +  owlClass.getComment(LANG) + "<br>" + owlClass.getNameSpace(); //annotationsToString(annotations);
 
 		// node
 		final TreeMutableNode owlClassNode = new TreeMutableNode(parentOwlClassNode, owlClassId);
@@ -985,8 +987,9 @@ public class OwlModelFactory
 	 */
 	public void visitInstances(final TreeMutableNode parentNode, final ExtendedIterator<OntResource> owlIndividuals)
 	{
-		final List<INode> childNodes = owlIndividuals //
-				.mapWith(owlNamedIndividual -> {
+		final List<INode> childNodes = StreamUtils.toStream(owlIndividuals) //
+				.sorted(Comparator.comparing(OntResource::getLocalName)) //
+				.map(owlNamedIndividual -> {
 
 					final String owlIndividualShortForm = owlNamedIndividual.getLocalName();
 					final String owlIndividualId = owlNamedIndividual.getLocalName();
@@ -1000,7 +1003,7 @@ public class OwlModelFactory
 					decorateInstance(instanceNode);
 					return (INode) instanceNode;
 				}) //
-				.toList();
+				.collect(toList());
 
 		// balance load
 		final List<INode> balancedNodes = instancesLoadBalancer.buildHierarchy(childNodes, 0);
@@ -1094,8 +1097,9 @@ public class OwlModelFactory
 	 */
 	public void visitProperties(final TreeMutableNode parentNode, final Stream<OntProperty> owlProperties)
 	{
-		final List<INode> childNodes = owlProperties //
+		final List<INode> childNodes =owlProperties //
 
+				.sorted(Comparator.comparing(OntProperty::getLocalName)) //
 				.map(owlProperty -> {
 					final String owlPropertyShortForm = owlProperty.getLocalName();
 					final String owlPropertyId = owlProperty.getLocalName();
