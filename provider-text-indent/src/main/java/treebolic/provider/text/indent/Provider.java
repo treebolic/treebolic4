@@ -168,7 +168,7 @@ public class Provider implements IProvider
 			}
 			catch (final Exception e)
 			{
-				System.err.println("SETTING " + e);
+				System.err.println("SETTINGS: " + e);
 			}
 		}
 		return new Model(tree, settings);

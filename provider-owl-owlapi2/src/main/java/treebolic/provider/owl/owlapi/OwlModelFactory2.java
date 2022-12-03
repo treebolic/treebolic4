@@ -6,9 +6,9 @@ package treebolic.provider.owl.owlapi;
 import java.util.Properties;
 
 import treebolic.annotations.NonNull;
-import treebolic.annotations.Nullable;
 import treebolic.glue.iface.Image;
 import treebolic.model.Model;
+import treebolic.model.MutableEdge;
 import treebolic.model.MutableNode;
 
 /**
@@ -70,29 +70,31 @@ public class OwlModelFactory2 extends OwlModelFactory
 	}
 
 	// D E C O R A T E
+
 	@Override
-	protected void setNodeImage(final MutableNode node, @Nullable final String imageFile, @Nullable final ImageIndex index)
+	public void setNodeImage(final MutableNode node, final int index)
 	{
-		if (imageFile != null)
+		if (index != -1)
 		{
-			node.setImageFile(imageFile);
-		}
-		else if (index != null)
-		{
-			node.setImageIndex(index.ordinal());
+			node.setImageIndex(index);
 		}
 	}
 
 	@Override
-	protected void setNodeEdgeImage(final MutableNode node, @Nullable final String edgeImageFile, @Nullable final ImageIndex index)
+	public void setTreeEdgeImage(final MutableNode node, final int index)
 	{
-		if (edgeImageFile != null)
+		if (index != -1)
 		{
-			node.setEdgeImageFile(edgeImageFile);
+			node.setEdgeImageIndex(index);
 		}
-		else if (index != null)
+	}
+
+	@Override
+	public void setEdgeImage(final MutableEdge edge, final int index)
+	{
+		if (index != -1)
 		{
-			node.setEdgeImageIndex(index.ordinal());
+			edge.setImageIndex(index);
 		}
 	}
 }
