@@ -24,10 +24,12 @@
         <module name="swing-commons" />
         <module name="provider-sql-generic" />
         <module name="treebolic-annotations" />
+        <module name="provider-xml-sax" />
         <module name="swing-application-xml" />
         <module name="swing-application-owl2" />
         <module name="treebolic-glue-iface" />
         <module name="provider-text-pair" />
+        <module name="provider-xml-stax" />
         <module name="provider-owl-jena" />
         <module name="provider-owl-owlapi2" />
         <module name="swing-application-owl" />
@@ -35,6 +37,7 @@
         <module name="provider-text-indent-tree" />
         <module name="treebolic-graph" />
         <module name="treebolic-view" />
+        <module name="provider-owl-sax" />
         <module name="transformer-xml" />
         <module name="swing-application" />
         <module name="treebolic-glue" />
