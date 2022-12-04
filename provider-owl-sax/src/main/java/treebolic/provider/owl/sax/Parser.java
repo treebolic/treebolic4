@@ -113,7 +113,7 @@ public class Parser
 					if (clazz != null)
 					{
 						String id = attributes.getValue(RESOURCE);
-						clazz.subclasses.add(id);
+						clazz.superclasses.add(id);
 					}
 					break;
 				}
@@ -203,6 +203,7 @@ public class Parser
 
 		public Ontology getResult()
 		{
+			classes.values().forEach(c -> c.superclasses.forEach(sc -> classes.get(sc).subclasses.add(c.id)));
 			return new Ontology(classes, things, properties);
 		}
 	}

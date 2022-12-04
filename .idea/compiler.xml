@@ -41,6 +41,7 @@
         <module name="transformer-xml" />
         <module name="swing-application" />
         <module name="treebolic-glue" />
+        <module name="swing-application-owl-sax" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

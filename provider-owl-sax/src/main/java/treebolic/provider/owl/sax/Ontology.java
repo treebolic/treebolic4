@@ -24,44 +24,44 @@ class Ontology
 
 	final Map<String, Property> properties;
 
-	public Stream<Property> getProperties(final Class owlClass)
+	public Class createClass(final String id)
 	{
-		return null;
-	}
-
-	public Property getRelation(final Class owlClass)
-	{
-		return null;
-	}
-
-	public Class createClass(final String s)
-	{
-		return null;
+		return new Class(id);
 	}
 
 	public Stream<Class> getTopClasses()
 	{
-		return null;
+		return classes.values().stream().filter(clazz -> clazz.superclasses.isEmpty());
 	}
 
 	public Stream<Thing> getInstances(final Class owlClass)
 	{
-		return null;
-	}
-
-	public boolean isRelation(final Class owlClass)
-	{
-		return false;
-	}
-
-	public boolean hasProperties(final Class owlClass)
-	{
-		return false;
+		return things.values().stream().filter(thing -> thing.types.contains(owlClass.id));
 	}
 
 	public boolean hasInstances(final Class owlClass)
 	{
-		return false;
+		return things.values().stream().anyMatch(thing -> thing.types.contains(owlClass.id));
+	}
+
+	public Property getRelation(final Class owlClass)
+	{
+		return properties.get(owlClass.id);
+	}
+
+	public boolean isRelation(final Class owlClass)
+	{
+		return properties.containsKey(owlClass.id);
+	}
+
+	public boolean hasProperties(final Class owlClass)
+	{
+		return properties.values().stream().anyMatch(p -> p.domains.contains(owlClass.id));
+	}
+
+	public Stream<Property> getProperties(final Class owlClass)
+	{
+		return properties.values().stream().filter(p -> p.domains.contains(owlClass.id));
 	}
 
 	static class Resource
@@ -69,6 +69,8 @@ class Ontology
 		final String id;
 
 		public String comment;
+
+		Set<String> annotations = new HashSet<>();
 
 		public Resource(final String id)
 		{
@@ -80,12 +82,10 @@ class Ontology
 			int begin = id.indexOf('#');
 			if (begin != -1)
 			{
-				return id.substring(begin);
+				return id.substring(begin + 1);
 			}
 			return id;
 		}
-
-		Set<String> annotations = new HashSet<>();
 
 		public String getNameSpace()
 		{
@@ -96,6 +96,8 @@ class Ontology
 	static class Class extends Resource
 	{
 		Set<String> subclasses = new HashSet<>();
+
+		Set<String> superclasses = new HashSet<>();
 
 		public Class(final String id)
 		{
