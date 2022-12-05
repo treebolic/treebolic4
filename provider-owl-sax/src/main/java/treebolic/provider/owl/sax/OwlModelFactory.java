@@ -30,8 +30,6 @@ public class OwlModelFactory
 {
 	static private final Integer backgroundColor = 0xffffe0;
 
-	static private final String LANG = "";
-
 	/**
 	 * As tree
 	 */
@@ -762,8 +760,10 @@ public class OwlModelFactory
 						instancesNode.setEdgeColor(defaultInstanceForeColor);
 
 						// instances
-						final Stream<Ontology.Thing> instances = ontology.getInstances(owlClass);
-						visitInstances(instancesNode, instances);
+						if (owlClass.instances != null)
+						{
+							visitInstances(instancesNode, owlClass.instances.stream());
+						}
 					}
 					// relation
 					if (isRelation)
@@ -781,8 +781,10 @@ public class OwlModelFactory
 						propertiesNode.setEdgeColor(defaultPropertyForeColor);
 
 						// properties
-						final Stream<Ontology.Property> properties = ontology.getProperties(owlClass);
-						visitProperties(propertiesNode, properties);
+						if (owlClass.properties != null)
+						{
+							visitProperties(propertiesNode, owlClass.properties.stream());
+						}
 					}
 					return new Tree(owlClassNode, null);
 				}
@@ -867,15 +869,17 @@ public class OwlModelFactory
 	{
 		final List<INode> childNodes = owlClasses //
 
-				.sorted(Comparator.comparing(Ontology.Class::getLocalName)) //
+				.sorted() //
 				.map(owlClass -> {
 
 					// node
 					final TreeMutableNode owlClassNode = visitClass(null, owlClass, ontologyUrlString);
 
 					// recurse
-					final Stream<Ontology.Class> owlSubClasses = owlClass.subclasses.stream().map(s -> ontology.classes.get(s));
-					visitClasses(owlClassNode, owlSubClasses, ontologyUrlString);
+					if (owlClass.subclasses != null)
+					{
+						visitClasses(owlClassNode, owlClass.subclasses.stream(), ontologyUrlString);
+					}
 
 					return (INode) owlClassNode;
 				}) //
@@ -914,8 +918,8 @@ public class OwlModelFactory
 		// if (!owlClass.equals(engine.getTopClass(model))) // TODO
 		{
 			// get instances or properties
-			final boolean hasInstances =  ontology.hasInstances(owlClass);
-			final boolean hasProperties = ontology.hasProperties(owlClass);
+			final boolean hasInstances = owlClass.instances != null;
+			final boolean hasProperties = owlClass.properties != null;
 			final boolean isRelation = ontology.isRelation(owlClass);
 
 			// mountpoint
@@ -936,7 +940,7 @@ public class OwlModelFactory
 				}
 
 				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
-				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass + "&target=" + String.join("+", targets);
+				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIri() + "&target=" + String.join("+", targets);
 				owlClassNode.setMountPoint(mountingPoint);
 			}
 		}
@@ -956,9 +960,11 @@ public class OwlModelFactory
 		final TreeMutableNode owlClassNode = visitClass(parentOwlClassNode, owlClass, ontologyUrlString);
 
 		// recurse
-		final Stream<Ontology.Class> owlSubClasses = owlClass.subclasses.stream().map(s -> ontology.classes.get(s));
-		visitClasses(owlClassNode, owlSubClasses, ontologyUrlString);
-
+		if(owlClass.subclasses!=null)
+		{
+			final Stream<Ontology.Class> owlSubClasses = owlClass.subclasses.stream();
+			visitClasses(owlClassNode, owlSubClasses, ontologyUrlString);
+		}
 		return owlClassNode;
 	}
 
@@ -976,7 +982,7 @@ public class OwlModelFactory
 
 					final String owlIndividualShortForm = owlNamedIndividual.getLocalName();
 					final String owlIndividualId = owlNamedIndividual.getLocalName();
-					final Stream<String> types = owlNamedIndividual.types.stream();
+					final Stream<String> types = owlNamedIndividual.types.stream().map(Object::toString);
 					final Stream<String> annotations = owlNamedIndividual.annotations.stream();
 
 					final MutableNode instanceNode = new MutableNode(null, owlIndividualId);
@@ -1007,8 +1013,8 @@ public class OwlModelFactory
 		relationNode.setEdgeLabel("is relation");
 		decorateRelation(relationNode);
 
-		final List<Ontology.Class> domains = owlProperty.domains.stream().map(s -> ontology.classes.get(s)).collect(toList());
-		if (!domains.isEmpty())
+		final Set<Ontology.Class> domains = owlProperty.domains;
+		if (domains != null && !domains.isEmpty())
 		{
 			final MutableNode domainsNode = new MutableNode(relationNode, owlPropertyShortForm + "-domains");
 			domainsNode.setLabel("domains");
@@ -1023,8 +1029,8 @@ public class OwlModelFactory
 			});
 		}
 
-		final List<Ontology.Class> ranges = owlProperty.ranges.stream().map(s -> ontology.classes.get(s)).collect(toList());
-		if (!ranges.isEmpty())
+		final Set<Ontology.Class> ranges = owlProperty.ranges;
+		if (ranges != null && !ranges.isEmpty())
 		{
 			final MutableNode rangesNode = new MutableNode(relationNode, owlPropertyShortForm + "-ranges");
 			rangesNode.setLabel("ranges");
@@ -1039,8 +1045,8 @@ public class OwlModelFactory
 			});
 		}
 
-		final List<Ontology.Property> subproperties = owlProperty.subproperties.stream().map(s -> ontology.properties.get(s)).collect(toList());
-		if (!subproperties.isEmpty())
+		final Set<Ontology.Property> subproperties = owlProperty.subproperties;
+		if (subproperties != null && !subproperties.isEmpty())
 		{
 			final MutableNode subPropertiesNode = new MutableNode(relationNode, owlPropertyShortForm + "-subproperties");
 			subPropertiesNode.setLabel("subproperties");
@@ -1055,8 +1061,8 @@ public class OwlModelFactory
 			});
 		}
 
-		final List<Ontology.Property> inverses = owlProperty.inverses.stream().map(s -> ontology.properties.get(s)).collect(toList());
-		if (!inverses.isEmpty())
+		final Set<Ontology.Property> inverses = owlProperty.inverses;
+		if (inverses != null && !inverses.isEmpty())
 		{
 			final MutableNode inversesNode = new MutableNode(relationNode, owlPropertyShortForm + "-inverses");
 			inversesNode.setLabel("inverses");

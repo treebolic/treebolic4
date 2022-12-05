@@ -9,8 +9,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -20,31 +19,22 @@ public class Parser
 {
 	public static class SaxHandler extends DefaultHandler
 	{
-
 		private static final String CLASS = "owl:Class";
 		private static final String THING = "owl:Thing";
 		private static final String PROPERTY = "owl:ObjectProperty";
 
 		private static final String COMMENT = "rdfs:comment";
-
 		private static final String DESCRIPTION = "rdf:Description";
-
 		private static final String SUBCLASSOF = "rdfs:subClassOf";
-
 		private static final String SUBPROPERTYOF = "rdfs:subPropertyOf";
-
 		private static final String DOMAIN = "rdfs:domain";
-
 		private static final String RANGE = "rdfs:range";
-
 		private static final String INVERSE = "owl:inverseOf";
-
 		private static final String EQUIVALENT = "owl:equivalentClass";
-
 		private static final String TYPE = "rdf:type";
 
+		private static final String ID = "rdf:ID";
 		private static final String ABOUT = "rdf:about";
-
 		private static final String RESOURCE = "rdf:resource";
 
 		private Map<String, Ontology.Class> classes = new HashMap<>();
@@ -53,7 +43,7 @@ public class Parser
 
 		private Map<String, Ontology.Property> properties = new HashMap<>();
 
-		private Ontology.Class clazz = null;
+		private Stack<Ontology.Class> classStack = new Stack<>();
 
 		private Ontology.Thing thing = null;
 
@@ -79,6 +69,26 @@ public class Parser
 		{
 		}
 
+		private String getIri(String uri, String localName, String qName, Attributes attributes)
+		{
+			if (uri != null && !uri.isEmpty())
+			{
+				System.err.println(uri);
+			}
+
+			String id = attributes.getValue(ID);
+			if (id != null)
+			{
+				return '#' + id;
+			}
+			String about = attributes.getValue(ABOUT);
+			if (about != null)
+			{
+				return about;
+			}
+			return null;
+		}
+
 		@Override
 		public void startElement(String uri, String localName, String qName, Attributes attributes)
 		{
@@ -86,41 +96,93 @@ public class Parser
 			{
 				case CLASS:
 				{
-					String id = attributes.getValue(ABOUT);
-					clazz = new Ontology.Class(id);
-					classes.put(id, clazz);
+					Ontology.Class clazz = null;
+					String iri = getIri(uri, localName, qName, attributes);
+					if (iri != null)
+					{
+						clazz = new Ontology.Class(iri);
+						classes.put(iri, clazz);
+					}
+					classStack.push(clazz);
 					break;
 				}
 
 				case THING:
 				{
-					String id = attributes.getValue(ABOUT);
-					thing = new Ontology.Thing(id);
-					things.put(id, thing);
+					String iri = attributes.getValue(ABOUT);
+					if (iri != null)
+					{
+						thing = new Ontology.Thing(iri);
+						things.put(iri, thing);
+					}
 					break;
 				}
 
 				case PROPERTY:
 				{
-					String id = attributes.getValue(ABOUT);
-					property = new Ontology.Property(id);
-					properties.put(id, property);
+					String iri = attributes.getValue(ABOUT);
+					if (iri != null)
+					{
+						property = new Ontology.Property(iri);
+						properties.put(iri, property);
+					}
 					break;
 				}
 
 				case SUBCLASSOF:
 				{
+					Ontology.Class clazz = classStack.peek();
 					if (clazz != null)
 					{
-						String id = attributes.getValue(RESOURCE);
-						clazz.superclasses.add(id);
+						String iri = attributes.getValue(RESOURCE);
+						if (iri != null)
+						{
+							clazz._superclasses.add(iri);
+						}
+					}
+					break;
+				}
+
+				case DOMAIN:
+				{
+					if (property != null)
+					{
+						String iri = attributes.getValue(RESOURCE);
+						if (iri != null)
+						{
+							property._domains.add(iri);
+						}
+					}
+					break;
+				}
+
+				case RANGE:
+				{
+					if (property != null)
+					{
+						String iri = attributes.getValue(RESOURCE);
+						if (iri != null)
+						{
+							property._ranges.add(iri);
+						}
+					}
+					break;
+				}
+
+				case TYPE:
+				{
+					if (thing != null)
+					{
+						String iri = attributes.getValue(RESOURCE);
+						if (iri != null)
+						{
+							thing._types.add(iri);
+						}
 					}
 					break;
 				}
 
 				case SUBPROPERTYOF:
-				case DOMAIN:
-				case RANGE:
 				case INVERSE:
 				case EQUIVALENT:
 				{
@@ -155,11 +217,6 @@ public class Parser
 					break;
 				}
 
-				case TYPE:
-				{
-					break;
-				}
-
 				default:
 					if (qName.startsWith("rdf:") || qName.startsWith("rdfs:") || qName.startsWith("owl:"))
 					{
@@ -188,7 +245,7 @@ public class Parser
 			switch (qName)
 			{
 				case CLASS:
-					clazz = null;
+					classStack.pop();
 					break;
 
 				case PROPERTY:
@@ -203,7 +260,6 @@ public class Parser
 
 		public Ontology getResult()
 		{
-			classes.values().forEach(c -> c.superclasses.forEach(sc -> classes.get(sc).subclasses.add(c.id)));
 			return new Ontology(classes, things, properties);
 		}
 	}
