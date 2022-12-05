@@ -36,6 +36,10 @@ public class Parser
 
 	/**
 	 * StAX handler
+	 *
+	 * @param reader reader
+	 * @return model
+	 * @throws XMLStreamException xml stream exception
 	 */
 	public static Model parse(XMLEventReader reader) throws XMLStreamException
 	{
