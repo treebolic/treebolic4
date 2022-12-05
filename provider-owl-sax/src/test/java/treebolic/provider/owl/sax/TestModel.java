@@ -22,7 +22,7 @@ public class TestModel
 	@Test
 	public void testModel() throws MalformedURLException
 	{
-		final String source0 = System.getProperty("SOURCE");
+		final String source = System.getProperty("SOURCE");
 		final URL base = new File(System.getProperty("BASE")).toURI().toURL();
 		Provider p = new Provider();
 		p.setContext(new IProviderContext()
@@ -69,7 +69,7 @@ public class TestModel
 			}
 		});
 		final Properties parameters = new Properties();
-		Model model =  p.makeModel(source0, base, parameters);
+		Model model = p.makeModel(source, base, parameters);
 		System.out.println(ModelDump.toString(model));
 	}
 }
