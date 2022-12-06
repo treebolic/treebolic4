@@ -177,11 +177,6 @@ public class OwlModelFactory implements ImageDecorator
 	protected static final Integer LOADBALANCING_EDGECOLOR = Colors.DARK_GRAY;
 
 	/**
-	 * LoadBalancer (classes) : image index
-	 */
-	protected static final int LOADBALANCING_IMAGEINDEX = ImageIndex.BRANCH.ordinal();
-
-	/**
 	 * LoadBalancer (classes) : image
 	 */
 	protected static final Image LOADBALANCING_IMAGE = null;
@@ -214,11 +209,6 @@ public class OwlModelFactory implements ImageDecorator
 	protected static final Integer LOADBALANCING_INSTANCES_EDGECOLOR = defaultInstanceForeColor;
 
 	/**
-	 * LoadBalancer (instances and properties) : image index
-	 */
-	protected static final int LOADBALANCING_INSTANCES_IMAGEINDEX = ImageIndex.BRANCH_INSTANCES.ordinal();
-
-	/**
 	 * LoadBalancer (instances and properties) : image
 	 */
 	protected static final Image LOADBALANCING_INSTANCES_IMAGE = null;
@@ -249,11 +239,6 @@ public class OwlModelFactory implements ImageDecorator
 	 * LoadBalancer (instances and properties) : edge color
 	 */
 	protected static final Integer LOADBALANCING_PROPERTIES_EDGECOLOR = defaultPropertyForeColor;
-
-	/**
-	 * LoadBalancer (instances and properties) : image index
-	 */
-	protected static final int LOADBALANCING_PROPERTIES_IMAGEINDEX = ImageIndex.BRANCH_PROPERTIES.ordinal(); // -1;
 
 	/**
 	 * LoadBalancer (instances and properties) : image
@@ -824,7 +809,7 @@ public class OwlModelFactory implements ImageDecorator
 				MutableNode rootNode = visitClass(null, rootClass, ontologyUrlString);
 				for (OntClass top : tops)
 				{
-					final MutableNode owlClassNode = visitClassAndSubclasses(rootNode, top, ontologyUrlString);
+					visitClassAndSubclasses(rootNode, top, ontologyUrlString);
 				}
 				return new Tree(decorateRoot(rootNode), null);
 			}
@@ -1131,7 +1116,7 @@ public class OwlModelFactory implements ImageDecorator
 		}
 	}
 
-	protected void setNodeEdgeImage(final MutableNode node, @Nullable final String edgeImageFile, @Nullable final ImageIndex index)
+	protected void setNodeEdgeImage(final MutableNode node, @Nullable final String edgeImageFile, @SuppressWarnings("SameParameterValue") @Nullable final ImageIndex index)
 	{
 		if (edgeImageFile != null)
 		{

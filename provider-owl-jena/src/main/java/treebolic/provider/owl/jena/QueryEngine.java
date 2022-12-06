@@ -17,7 +17,6 @@ import org.apache.jena.vocabulary.RDF;
 
 import java.util.*;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 import treebolic.annotations.NonNull;
 

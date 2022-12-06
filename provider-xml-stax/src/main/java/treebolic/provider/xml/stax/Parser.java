@@ -155,6 +155,13 @@ public class Parser
 		return new Model(new Tree(root, edges), new Settings());
 	}
 
+	/**
+	 * Main
+	 *
+	 * @param args command-line arguments
+	 * @throws IOException        io exception
+	 * @throws XMLStreamException xml stream exception
+	 */
 	public static void main(String[] args) throws IOException, XMLStreamException
 	{
 		try (FileReader fr = new FileReader(args[0]))

@@ -293,7 +293,6 @@ public class TreeView extends JScrollPane
 	 * @param className class name
 	 * @return tree node
 	 */
-	@SuppressWarnings("unchecked")
 	private DefaultMutableTreeNode search(final DefaultMutableTreeNode node, final String className)
 	{
 		if (node.getUserObject().getClass().getName().endsWith(className))

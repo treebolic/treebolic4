@@ -1169,7 +1169,7 @@ public class OwlModelFactory implements ImageDecorator
 		}
 	}
 
-	private void setTreeEdgeImage(final MutableNode node, @Nullable final String edgeImageFile, @Nullable final ImageIndex index)
+	private void setTreeEdgeImage(final MutableNode node, @Nullable final String edgeImageFile, @SuppressWarnings("SameParameterValue") @Nullable final ImageIndex index)
 	{
 		if (edgeImageFile != null)
 		{

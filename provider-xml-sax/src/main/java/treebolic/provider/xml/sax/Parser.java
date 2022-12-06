@@ -5,7 +5,6 @@
 package treebolic.provider.xml.sax;
 
 import org.xml.sax.Attributes;
-import org.xml.sax.EntityResolver;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -20,8 +19,14 @@ import javax.xml.parsers.SAXParserFactory;
 import treebolic.annotations.NonNull;
 import treebolic.model.*;
 
+/**
+ * XML SAX parser
+ */
 public class Parser
 {
+	/**
+	 * SAX handler
+	 */
 	public static class SaxHandler extends DefaultHandler
 	{
 		private static final String NODES = "nodes";
@@ -140,12 +145,25 @@ public class Parser
 			}
 		}
 
+		/**
+		 * Get result
+		 *
+		 * @return model
+		 */
 		public Model getResult()
 		{
 			return new Model(new Tree(root, edges), new Settings());
 		}
 	}
 
+	/**
+	 * Main
+	 *
+	 * @param args command-line arguments
+	 * @throws ParserConfigurationException parser configuration exception
+	 * @throws SAXException                 sax exception
+	 * @throws IOException                  io exception
+	 */
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException
 	{
 		SAXParserFactory factory = SAXParserFactory.newInstance();
