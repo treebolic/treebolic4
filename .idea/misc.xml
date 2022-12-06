@@ -575,6 +575,27 @@
     <pattern value="treebolic.glue.component.Surface" method="getThread" />
     <pattern value="treebolic.glue.component.Tip" method="tip" />
     <pattern value="treebolic.glue.component.Utils" method="fetchColorsNullable" />
+    <pattern value="treebolic.provider.owl.owlapi.Provider2" />
+    <pattern value="treebolic.provider.owl.owlapi.BaseProvider" method="BaseProvider" />
+    <pattern value="treebolic.provider.owl.owlapi.Provider" />
+    <pattern value="treebolic.provider.owl.owlapi.QueryParser" method="QueryParser" />
+    <pattern value="treebolic.provider.owl.jena.BaseProvider" method="BaseProvider" />
+    <pattern value="treebolic.provider.owl.jena.QueryEngine" method="getEquivalentClasses" />
+    <pattern value="treebolic.provider.owl.jena.QueryEngine" method="getSuperClasses" />
+    <pattern value="treebolic.provider.owl.jena.Provider" />
+    <pattern value="treebolic.provider.owl.jena.QueryEngine" method="QueryEngine" />
+    <pattern value="treebolic.provider.owl.jena.OwlModelFactory" method="OwlModelFactory" />
+    <pattern value="treebolic.provider.owl.jena.StreamUtils" method="toStream2" />
+    <pattern value="treebolic.model.ImageDecorator" method="setEdgeImage" />
+    <pattern value="treebolic.model.ImageDecorator" method="setNodeImage" />
+    <pattern value="treebolic.model.ImageDecorator" method="setTreeEdgeImage" />
+    <pattern value="treebolic.provider.owl.owlapi.BaseProvider" method="makeModel" />
+    <pattern value="treebolic.provider.owl.sax.BaseProvider" method="makeModel" />
+    <pattern value="treebolic.provider.owl.owlapi.BaseProvider" method="setContext" />
+    <pattern value="treebolic.provider.owl.sax.BaseProvider" method="setContext" />
+    <pattern value="treebolic.provider.owl.sax.OwlModelFactory" method="setEdgeImage" />
+    <pattern value="treebolic.provider.owl.owlapi.BaseProvider" method="setLocator" />
+    <pattern value="treebolic.provider.owl.sax.BaseProvider" method="setLocator" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
