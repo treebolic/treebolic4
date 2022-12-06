@@ -330,7 +330,7 @@ public abstract class AbstractProvider< //
 	 * @see treebolic.model.IProvider#set(treebolic.model.IProviderContext)
 	 */
 	@Override
-	public void setContext(final IProviderContext context)
+	public void setContext(@Nullable final IProviderContext context)
 	{
 		this.context = context;
 	}

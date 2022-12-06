@@ -202,7 +202,7 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 	 * @see treebolic.studio.domtree.Renderer#getIconStyle(org.w3c.dom.Node)
 	 */
 	@Override
-	protected Icon getIconStyle(final Node node)
+	protected Icon getIconStyle(@NonNull @NonNull final Node node)
 	{
 		if (node instanceof Element)
 		{

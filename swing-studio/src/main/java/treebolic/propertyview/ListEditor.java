@@ -113,7 +113,7 @@ class ListEditor extends DefaultCellEditor
 	 *
 	 * @param imageMap string to image map
 	 */
-	public void setImageMap(final Map<String, ImageIcon> imageMap)
+	public void setImageMap(@Nullable final Map<String, ImageIcon> imageMap)
 	{
 		this.imageMap = imageMap;
 	}

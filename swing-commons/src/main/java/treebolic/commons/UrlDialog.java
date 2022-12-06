@@ -329,7 +329,7 @@ public class UrlDialog extends JDialog
 			 * @param key   key
 			 * @param value value
 			 */
-			public Entry(final String key, final String value)
+			public Entry(@Nullable final String key, @Nullable final String value)
 			{
 				this.key = key;
 				this.value = value;

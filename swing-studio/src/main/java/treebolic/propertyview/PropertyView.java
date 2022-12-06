@@ -389,7 +389,7 @@ public class PropertyView extends JPanel implements SelectListener
 	 *
 	 * @param handlerFactory handler factory
 	 */
-	public void setHandlerFactory(final HandlerFactory handlerFactory)
+	public void setHandlerFactory(@Nullable final HandlerFactory handlerFactory)
 	{
 		this.handlerFactory = handlerFactory;
 	}
@@ -559,7 +559,7 @@ public class PropertyView extends JPanel implements SelectListener
 		 * @param object  selected object
 		 * @param handler its handler
 		 */
-		public TableModel(final Object object, final Handler handler)
+		public TableModel(@Nullable final Object object, @Nullable final Handler handler)
 		{
 			this.selectedObject = object;
 			this.handler = handler;
