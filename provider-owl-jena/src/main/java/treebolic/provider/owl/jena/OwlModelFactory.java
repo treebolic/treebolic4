@@ -29,7 +29,7 @@ import static java.util.stream.Collectors.toList;
  *
  * @author Bernard Bou
  */
-public class OwlModelFactory
+public class OwlModelFactory implements ImageDecorator
 {
 	static private final Integer backgroundColor = 0xffffe0;
 
@@ -1127,7 +1127,7 @@ public class OwlModelFactory
 		}
 		else if (index != null)
 		{
-			node.setImageFile(images[index.ordinal()]);
+			setNodeImage(node, index.ordinal());
 		}
 	}
 
@@ -1139,7 +1139,34 @@ public class OwlModelFactory
 		}
 		else if (index != null)
 		{
-			node.setEdgeImageFile(images[index.ordinal()]);
+			setTreeEdgeImage(node, index.ordinal());
+		}
+	}
+
+	@Override
+	public void setNodeImage(final MutableNode node, final int index)
+	{
+		if (index != -1)
+		{
+			node.setImageFile(images[index]);
+		}
+	}
+
+	@Override
+	public void setTreeEdgeImage(final MutableNode node, final int index)
+	{
+		if (index != -1)
+		{
+			node.setEdgeImageFile(images[index]);
+		}
+	}
+
+	@Override
+	public void setEdgeImage(final MutableEdge edge, final int index)
+	{
+		if (index != -1)
+		{
+			edge.setImageFile(images[index]);
 		}
 	}
 

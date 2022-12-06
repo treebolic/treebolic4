@@ -26,7 +26,7 @@ import static java.util.stream.Collectors.toSet;
  *
  * @author Bernard Bou
  */
-public class OwlModelFactory
+public class OwlModelFactory implements ImageDecorator
 {
 	static private final Integer backgroundColor = 0xffffe0;
 
@@ -900,6 +900,7 @@ public class OwlModelFactory
 	 */
 	public TreeMutableNode visitClass(final INode parentOwlClassNode, final Ontology.Class owlClass, final String ontologyUrlString)
 	{
+		final boolean isRelation = ontology.isRelation(owlClass);
 		final String ownClassShortForm = owlClass.getLocalName();
 		final String owlClassId = owlClass.getLocalName();
 		//final Stream<String> annotations = engine.getAnnotations(owlClass, LANG).mapWith(RDFNode::toString);
@@ -909,7 +910,7 @@ public class OwlModelFactory
 
 		// node
 		final TreeMutableNode owlClassNode = new TreeMutableNode(parentOwlClassNode, owlClassId);
-		owlClassNode.setLabel(ownClassShortForm);
+		owlClassNode.setLabel(ownClassShortForm + (isRelation ? "\nRelation" : ""));
 		owlClassNode.setTarget(owlClassId);
 		owlClassNode.setContent(comment);
 		decorateClass(owlClassNode);
@@ -920,7 +921,6 @@ public class OwlModelFactory
 			// get instances or properties
 			final boolean hasInstances = owlClass.instances != null;
 			final boolean hasProperties = owlClass.properties != null;
-			final boolean isRelation = ontology.isRelation(owlClass);
 
 			// mountpoint
 			if (hasInstances || hasProperties || isRelation)
@@ -960,7 +960,7 @@ public class OwlModelFactory
 		final TreeMutableNode owlClassNode = visitClass(parentOwlClassNode, owlClass, ontologyUrlString);
 
 		// recurse
-		if(owlClass.subclasses!=null)
+		if (owlClass.subclasses != null)
 		{
 			final Stream<Ontology.Class> owlSubClasses = owlClass.subclasses.stream();
 			visitClasses(owlClassNode, owlSubClasses, ontologyUrlString);
@@ -1007,7 +1007,7 @@ public class OwlModelFactory
 	 */
 	public void visitRelation(final MutableNode parentNode, final Ontology.Property owlProperty)
 	{
-		final String owlPropertyShortForm = owlProperty.getLocalName();
+		final String owlPropertyShortForm = owlProperty.getLocalName() + (owlProperty.subtype == null ? "" : "\n" + owlProperty.subtype);
 		final MutableNode relationNode = new MutableNode(parentNode, owlPropertyShortForm);
 		relationNode.setLabel(owlPropertyShortForm);
 		relationNode.setEdgeLabel("is relation");
@@ -1116,7 +1116,7 @@ public class OwlModelFactory
 		}
 		else if (index != null)
 		{
-			node.setImageFile(images[index.ordinal()]);
+			setNodeImage(node, index.ordinal());
 		}
 	}
 
@@ -1128,7 +1128,34 @@ public class OwlModelFactory
 		}
 		else if (index != null)
 		{
-			node.setEdgeImageFile(images[index.ordinal()]);
+			setTreeEdgeImage(node, index.ordinal());
+		}
+	}
+
+	@Override
+	public void setNodeImage(final MutableNode node, final int index)
+	{
+		if (index != -1)
+		{
+			node.setImageFile(images[index]);
+		}
+	}
+
+	@Override
+	public void setTreeEdgeImage(final MutableNode node, final int index)
+	{
+		if (index != -1)
+		{
+			node.setEdgeImageFile(images[index]);
+		}
+	}
+
+	@Override
+	public void setEdgeImage(final MutableEdge edge, final int index)
+	{
+		if (index != -1)
+		{
+			edge.setImageFile(images[index]);
 		}
 	}
 

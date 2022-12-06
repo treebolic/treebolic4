@@ -5,16 +5,19 @@
 package treebolic.provider.xml.sax;
 
 import org.xml.sax.Attributes;
+import org.xml.sax.EntityResolver;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.IOException;
 import java.util.*;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import treebolic.annotations.NonNull;
 import treebolic.model.*;
 
 public class Parser
@@ -147,7 +150,11 @@ public class Parser
 	{
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		factory.setValidating(false);
-		factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+		// @formatter:off
+		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_DTD, false);} catch(@NonNull final Exception ignored){}
+		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_SCHEMA, false);} catch(@NonNull final Exception ignored){}
+		try	{ factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false); } catch(@NonNull final Exception ignored){}
+		// @formatter:on
 		SAXParser saxParser = factory.newSAXParser();
 
 		SaxHandler handler = new SaxHandler();

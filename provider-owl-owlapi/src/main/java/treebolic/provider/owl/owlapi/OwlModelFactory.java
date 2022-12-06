@@ -1169,14 +1169,6 @@ public class OwlModelFactory implements ImageDecorator
 		}
 	}
 
-	public void setNodeImage(final MutableNode node, final int index)
-	{
-		if (index != -1)
-		{
-			node.setImageFile(images[index]);
-		}
-	}
-
 	private void setTreeEdgeImage(final MutableNode node, @Nullable final String edgeImageFile, @Nullable final ImageIndex index)
 	{
 		if (edgeImageFile != null)
@@ -1189,6 +1181,16 @@ public class OwlModelFactory implements ImageDecorator
 		}
 	}
 
+	@Override
+	public void setNodeImage(final MutableNode node, final int index)
+	{
+		if (index != -1)
+		{
+			node.setImageFile(images[index]);
+		}
+	}
+
+	@Override
 	public void setTreeEdgeImage(final MutableNode node, final int index)
 	{
 		if (index != -1)

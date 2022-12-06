@@ -10,6 +10,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import java.io.IOException;
 import java.net.URL;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -98,15 +99,12 @@ public class Parser
 		factory.setIgnoringComments(true);
 		factory.setNamespaceAware(false);
 		factory.setIgnoringElementContentWhitespace(true);
-		try
-		{
-			factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", this.validate);
-		}
-		catch (@NonNull final Exception ignored)
-		{
-			//
-		}
 		factory.setValidating(this.validate);
+		// @formatter:off
+		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_DTD, this.validate);} catch(@NonNull final Exception ignored){}
+		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_SCHEMA, this.validate);} catch(@NonNull final Exception ignored){}
+		try	{ factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", this.validate); } catch (@NonNull final Exception ignored) {}
+		// @formatter:on
 		return factory.newDocumentBuilder();
 	}
 

@@ -19,7 +19,12 @@ class Ontology
 		this.properties = properties;
 
 		// resolve
-		this.classes.values().forEach(c -> c.superclasses = c._superclasses.stream().map(classes::get).peek(c2-> {if (c2 == null) System.err.println("NR " + c);}).filter(Objects::nonNull).collect(Collectors.toSet()));
+		this.classes.values().forEach(c -> c.superclasses = c._superclasses.stream().map(classes::get).peek(c2 -> {
+			if (c2 == null)
+			{
+				System.err.println("NR " + c);
+			}
+		}).filter(Objects::nonNull).collect(Collectors.toSet()));
 		this.things.values().forEach(c -> c.types = c._types.stream().map(classes::get).collect(Collectors.toSet()));
 		this.properties.values().forEach(p -> p.domains = p._domains.stream().map(classes::get).collect(Collectors.toSet()));
 		this.properties.values().forEach(p -> p.ranges = p._ranges.stream().map(classes::get).collect(Collectors.toSet()));
@@ -37,7 +42,7 @@ class Ontology
 		}));
 
 		// attach instances to class
-		this.things.values().stream().filter(i -> i.types != null).forEach(i -> i.types.forEach(c -> {
+		this.things.values().stream().filter(i -> i.types != null).forEach(i -> i.types.stream().filter(Objects::nonNull).forEach(c -> {
 
 			if (c.instances == null)
 			{
@@ -74,12 +79,19 @@ class Ontology
 		this.classes.values().forEach(c -> {
 			assert c.iri != null : c;
 		});
-		this.classes.values().stream().filter(c -> c.superclasses != null).flatMap(c -> c.superclasses.stream()).forEach(c -> {
-			assert c != null;
-		});
-		this.classes.values().stream().filter(c -> c.subclasses != null).flatMap(c -> c.subclasses.stream()).forEach(c -> {
-			assert c != null;
-		});
+		this.classes.values().stream().filter(c -> c.superclasses != null).map(c1 -> c1.superclasses).forEach(c2 -> c2.forEach(c3 -> {
+			assert c3 != null;
+		}));
+		this.classes.values().stream().filter(c -> c.subclasses != null).map(c1 -> c1.subclasses).forEach(c2 -> c2.forEach(c3 -> {
+			assert c3 != null;
+		}));
+
+		// this.classes.values().stream().filter(c -> c.superclasses != null).flatMap(c -> c.superclasses.stream()).forEach(c -> {
+		// 	assert c != null;
+		// });
+		// this.classes.values().stream().filter(c -> c.subclasses != null).flatMap(c -> c.subclasses.stream()).forEach(c -> {
+		// 	assert c != null;
+		// });
 	}
 
 	final Map<String, Class> classes;
@@ -191,9 +203,17 @@ class Ontology
 
 	static class Property extends Resource
 	{
+		String subtype;
+
 		public Property(final String iri)
 		{
+			this(iri, null);
+		}
+
+		public Property(final String iri, final String subtype)
+		{
 			super(iri);
+			this.subtype = subtype;
 		}
 
 		public Set<Ontology.Class> domains;

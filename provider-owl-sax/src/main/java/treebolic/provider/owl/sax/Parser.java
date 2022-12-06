@@ -9,11 +9,16 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import treebolic.annotations.NonNull;
 
 public class Parser
 {
@@ -22,6 +27,10 @@ public class Parser
 		private static final String CLASS = "owl:Class";
 		private static final String THING = "owl:Thing";
 		private static final String PROPERTY = "owl:ObjectProperty";
+
+		private static final String SYMMETRICPROPERTY = "owl:SymmetricProperty";
+		private static final String TRANSITIVEPROPERTY = "owl:TransitiveProperty";
+		private static final String FUNCTIONALPROPERTY = "owl:FunctionalProperty";
 
 		private static final String COMMENT = "rdfs:comment";
 		private static final String DESCRIPTION = "rdf:Description";
@@ -71,10 +80,10 @@ public class Parser
 
 		private String getIri(String uri, String localName, String qName, Attributes attributes)
 		{
-			if (uri != null && !uri.isEmpty())
-			{
-				System.err.println(uri);
-			}
+			// if (uri != null && !uri.isEmpty())
+			// {
+			// 	System.err.println(uri);
+			// }
 
 			String id = attributes.getValue(ID);
 			if (id != null)
@@ -119,11 +128,14 @@ public class Parser
 				}
 
 				case PROPERTY:
+				case SYMMETRICPROPERTY:
+				case TRANSITIVEPROPERTY:
+				case FUNCTIONALPROPERTY:
 				{
 					String iri = attributes.getValue(ABOUT);
 					if (iri != null)
 					{
-						property = new Ontology.Property(iri);
+						property = PROPERTY.equals(qName) ? new Ontology.Property(iri) : new Ontology.Property(iri, qName.substring(4, qName.lastIndexOf("Property")));
 						properties.put(iri, property);
 					}
 					break;
@@ -131,7 +143,7 @@ public class Parser
 
 				case SUBCLASSOF:
 				{
-					Ontology.Class clazz = classStack.peek();
+					Ontology.Class clazz = classStack.isEmpty() ? null : classStack.peek();
 					if (clazz != null)
 					{
 						String iri = attributes.getValue(RESOURCE);
@@ -209,6 +221,7 @@ public class Parser
 
 				case COMMENT:
 				{
+
 					break;
 				}
 
@@ -249,11 +262,29 @@ public class Parser
 					break;
 
 				case PROPERTY:
+				case SYMMETRICPROPERTY:
+				case TRANSITIVEPROPERTY:
+				case FUNCTIONALPROPERTY:
 					property = null;
 					break;
 
 				case THING:
 					thing = null;
+					break;
+
+				case COMMENT:
+					if (thing != null)
+					{
+						thing.comment = text;
+					}
+					else if (property != null)
+					{
+						property.comment = text;
+					}
+					else if (!classStack.empty() && classStack.peek() != null)
+					{
+						classStack.peek().comment = text;
+					}
 					break;
 			}
 		}
@@ -268,7 +299,11 @@ public class Parser
 	{
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		factory.setValidating(false);
-		factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+		// @formatter:off
+		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_DTD, false);} catch(@NonNull final Exception ignored){}
+		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_SCHEMA, false);} catch(@NonNull final Exception ignored){}
+		try	{ factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false); } catch(@NonNull final Exception ignored){}
+		// @formatter:on
 		SAXParser saxParser = factory.newSAXParser();
 
 		SaxHandler handler = new SaxHandler();
