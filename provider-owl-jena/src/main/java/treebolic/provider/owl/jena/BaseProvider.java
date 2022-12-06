@@ -42,7 +42,7 @@ public abstract class BaseProvider implements IProvider
 	 * @param properties config properties
 	 * @return factory
 	 */
-	abstract protected OwlModelFactory factory(@NonNull Properties properties);
+	abstract protected OwlModelFactory factory(@Nullable Properties properties);
 
 	/**
 	 * Constructor

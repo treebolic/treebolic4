@@ -181,11 +181,11 @@ public class Provider implements IProvider
 	 */
 	@Nullable
 	@Override
-	public Tree makeTree(final String source0, final URL base, @NonNull final Properties parameters, final boolean checkRecursion)
+	public Tree makeTree(final String source0, final URL base, @Nullable final Properties parameters, final boolean checkRecursion)
 	{
 		// get text file
 		String source = source0;
-		if (source == null)
+		if (source == null && parameters!=null)
 		{
 			source = parameters.getProperty("source");
 		}

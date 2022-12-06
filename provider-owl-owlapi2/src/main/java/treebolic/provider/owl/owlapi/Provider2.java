@@ -6,6 +6,7 @@ package treebolic.provider.owl.owlapi;
 import java.util.Properties;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * Provider for OWL
@@ -15,7 +16,7 @@ import treebolic.annotations.NonNull;
 public class Provider2 extends BaseProvider
 {
 	@NonNull
-	protected OwlModelFactory factory(@NonNull Properties properties)
+	protected OwlModelFactory factory(@Nullable Properties properties)
 	{
 		return new OwlModelFactory2(properties);
 	}

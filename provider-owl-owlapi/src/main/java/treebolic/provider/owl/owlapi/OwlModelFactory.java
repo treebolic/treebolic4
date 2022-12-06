@@ -796,8 +796,6 @@ public class OwlModelFactory implements ImageDecorator
 			{
 				ontology = getOntology(ontologyUrlString);
 				url = ontologyUrlString;
-				// System.out.println("Loaded ontology: " + ontology.getOntologyID());
-
 				engine = new QueryEngine(ontology);
 				parser = new QueryParser(ontology, new SimpleShortFormProvider());
 			}
