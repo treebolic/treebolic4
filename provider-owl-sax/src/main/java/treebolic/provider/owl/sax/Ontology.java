@@ -5,6 +5,7 @@
 package treebolic.provider.owl.sax;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -12,6 +13,13 @@ import treebolic.annotations.NonNull;
 
 class Ontology
 {
+	private static final Consumer<Ontology.Resource> warnIfNull = r -> {
+		if (r == null)
+		{
+			System.err.println("Not resolved");
+		}
+	};
+
 	public Ontology(final Map<String, Class> classes, final Map<String, Thing> things, final Map<String, Property> properties)
 	{
 		this.classes = classes;
@@ -19,17 +27,12 @@ class Ontology
 		this.properties = properties;
 
 		// resolve
-		this.classes.values().forEach(c -> c.superclasses = c._superclasses.stream().map(classes::get).peek(c2 -> {
-			if (c2 == null)
-			{
-				System.err.println("NR " + c);
-			}
-		}).filter(Objects::nonNull).collect(Collectors.toSet()));
-		this.things.values().forEach(c -> c.types = c._types.stream().map(classes::get).collect(Collectors.toSet()));
-		this.properties.values().forEach(p -> p.domains = p._domains.stream().map(classes::get).collect(Collectors.toSet()));
-		this.properties.values().forEach(p -> p.ranges = p._ranges.stream().map(classes::get).collect(Collectors.toSet()));
-		this.properties.values().forEach(p -> p.inverses = p._inverses.stream().map(properties::get).collect(Collectors.toSet()));
-		this.properties.values().forEach(p -> p.subproperties = p._subproperties.stream().map(properties::get).collect(Collectors.toSet()));
+		this.classes.values().forEach(c -> c.superclasses = c._superclasses.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
+		this.things.values().forEach(c -> c.types = c._types.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
+		this.properties.values().forEach(p -> p.domains = p._domains.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
+		this.properties.values().forEach(p -> p.ranges = p._ranges.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
+		this.properties.values().forEach(p -> p.inverses = p._inverses.stream().map(properties::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
+		this.properties.values().forEach(p -> p.subproperties = p._subproperties.stream().map(properties::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
 
 		// reverse tree link (class-to-subclasses) from class-to-superclass
 		this.classes.values().forEach(c -> c.superclasses.forEach(sc -> {
@@ -62,12 +65,8 @@ class Ontology
 		}));
 
 		// clean up
-		this.classes.values().forEach(c -> {
-			c._superclasses = null;
-		});
-		this.things.values().forEach(c -> {
-			c._types = null;
-		});
+		this.classes.values().forEach(c -> c._superclasses = null);
+		this.things.values().forEach(c -> c._types = null);
 		this.properties.values().forEach(c -> {
 			c._domains = null;
 			c._ranges = null;
@@ -124,13 +123,13 @@ class Ontology
 
 	static class Resource
 	{
-		static Comparator<Resource> COMPARATOR = Comparator.comparing(Resource::getIri);
+		static final Comparator<Resource> COMPARATOR = Comparator.comparing(Resource::getIri);
 
 		final String iri;
 
 		public String comment;
 
-		Set<String> annotations = new HashSet<>();
+		public final Set<String> annotations = new HashSet<>();
 
 		public Resource(final String iri)
 		{
@@ -138,7 +137,12 @@ class Ontology
 			this.iri = iri;
 		}
 
-		String getLocalName()
+		public String getIri()
+		{
+			return iri;
+		}
+
+		public String getLocalName()
 		{
 			int begin = iri.indexOf('#');
 			if (begin != -1)
@@ -148,13 +152,13 @@ class Ontology
 			return iri;
 		}
 
-		public String getIri()
-		{
-			return iri;
-		}
-
 		public String getNameSpace()
 		{
+			int begin = iri.indexOf('#');
+			if (begin != -1)
+			{
+				return iri.substring(0, begin);
+			}
 			return "";
 		}
 
@@ -203,7 +207,7 @@ class Ontology
 
 	static class Property extends Resource
 	{
-		String subtype;
+		final String subtype;
 
 		public Property(final String iri)
 		{

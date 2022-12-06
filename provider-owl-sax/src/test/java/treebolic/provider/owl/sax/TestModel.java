@@ -12,13 +12,22 @@ import java.net.URL;
 import java.util.Properties;
 
 import treebolic.ILocator;
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.model.Model;
 import treebolic.model.ModelDump;
 import treebolic.provider.IProviderContext;
 
+/**
+ * Test treebolic model
+ */
 public class TestModel
 {
+	/**
+	 * Test treebolic model
+	 *
+	 * @throws MalformedURLException malformed URL exception
+	 */
 	@Test
 	public void testModel() throws MalformedURLException
 	{
@@ -47,7 +56,7 @@ public class TestModel
 		});
 		p.setLocator(new ILocator()
 		{
-			@Nullable
+			@NonNull
 			@Override
 			public URL getBase()
 			{

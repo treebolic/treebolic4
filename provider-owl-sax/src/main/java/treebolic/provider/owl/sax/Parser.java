@@ -20,8 +20,14 @@ import javax.xml.parsers.SAXParserFactory;
 
 import treebolic.annotations.NonNull;
 
+/**
+ * SAX parser
+ */
 public class Parser
 {
+	/**
+	 * SAX handler
+	 */
 	public static class SaxHandler extends DefaultHandler
 	{
 		private static final String CLASS = "owl:Class";
@@ -46,13 +52,13 @@ public class Parser
 		private static final String ABOUT = "rdf:about";
 		private static final String RESOURCE = "rdf:resource";
 
-		private Map<String, Ontology.Class> classes = new HashMap<>();
+		private final Map<String, Ontology.Class> classes = new HashMap<>();
 
-		private Map<String, Ontology.Thing> things = new HashMap<>();
+		private final Map<String, Ontology.Thing> things = new HashMap<>();
 
-		private Map<String, Ontology.Property> properties = new HashMap<>();
+		private final Map<String, Ontology.Property> properties = new HashMap<>();
 
-		private Stack<Ontology.Class> classStack = new Stack<>();
+		private final Stack<Ontology.Class> classStack = new Stack<>();
 
 		private Ontology.Thing thing = null;
 
@@ -78,7 +84,7 @@ public class Parser
 		{
 		}
 
-		private String getIri(String uri, String localName, String qName, Attributes attributes)
+		private String getIri(String ignoredUri, String ignoredLocalName, String ignoredQName, Attributes attributes)
 		{
 			// if (uri != null && !uri.isEmpty())
 			// {
@@ -90,12 +96,7 @@ public class Parser
 			{
 				return '#' + id;
 			}
-			String about = attributes.getValue(ABOUT);
-			if (about != null)
-			{
-				return about;
-			}
-			return null;
+			return attributes.getValue(ABOUT);
 		}
 
 		@Override
@@ -197,6 +198,8 @@ public class Parser
 				case SUBPROPERTYOF:
 				case INVERSE:
 				case EQUIVALENT:
+				case COMMENT:
+				case DESCRIPTION:
 				{
 					break;
 				}
@@ -219,17 +222,6 @@ public class Parser
 					break;
 				}
 
-				case COMMENT:
-				{
-
-					break;
-				}
-
-				case DESCRIPTION:
-				{
-					break;
-				}
-
 				default:
 					if (qName.startsWith("rdf:") || qName.startsWith("rdfs:") || qName.startsWith("owl:"))
 					{
@@ -248,10 +240,10 @@ public class Parser
 			{
 				text = text.replace('\n', ' ');
 				text = text.trim();
-				if (!text.isEmpty())
-				{
-					//
-				}
+				// if (!text.isEmpty())
+				// {
+				// 	//
+				// }
 			}
 			textSb.setLength(0);
 
@@ -289,12 +281,26 @@ public class Parser
 			}
 		}
 
+		/**
+		 * Retrieve result
+		 *
+		 * @return ontology
+		 */
 		public Ontology getResult()
 		{
 			return new Ontology(classes, things, properties);
 		}
 	}
 
+	/**
+	 * Make ontology
+	 *
+	 * @param uri uri
+	 * @return ontology
+	 * @throws ParserConfigurationException parser configuration exception
+	 * @throws SAXException                 sax exception
+	 * @throws IOException                  io exception
+	 */
 	public static Ontology make(String uri) throws ParserConfigurationException, SAXException, IOException
 	{
 		SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -311,6 +317,14 @@ public class Parser
 		return handler.getResult();
 	}
 
+	/**
+	 * Main
+	 *
+	 * @param args command-line arguments
+	 * @throws ParserConfigurationException parser configuration exception
+	 * @throws SAXException                 sax exception
+	 * @throws IOException                  io exception
+	 */
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException
 	{
 		Ontology ontology = make(args[0]);

@@ -13,8 +13,18 @@ import java.net.URI;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+/**
+ * Test parser ontology
+ */
 public class TestParser
 {
+	/**
+	 * Test ontology
+	 *
+	 * @throws IOException                  io exception
+	 * @throws ParserConfigurationException parser configuration exception
+	 * @throws SAXException                 sax exception
+	 */
 	@Test
 	public void testModel() throws IOException, ParserConfigurationException, SAXException
 	{
@@ -34,27 +44,25 @@ public class TestParser
 
 	void tree(Ontology ontology)
 	{
-		ontology.getTopClasses().sorted().forEach(c -> {
-			visitClass(c, 0);
-		});
+		ontology.getTopClasses().sorted().forEach(c -> visitClass(c, 0));
 	}
 
 	void visitClass(Ontology.Class c, int level)
 	{
-		System.out.println(repeat('\t', level) + c);
+		System.out.println(repeat(level) + c);
 
-		if (level <3 && c.subclasses != null)
+		if (level < 3 && c.subclasses != null)
 		{
 			c.subclasses.forEach(sc -> visitClass(sc, level + 1));
 		}
 	}
 
-	String repeat(char c, int n)
+	String repeat(int n)
 	{
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < n; i++)
 		{
-			sb.append(c);
+			sb.append('	');
 		}
 		return sb.toString();
 	}

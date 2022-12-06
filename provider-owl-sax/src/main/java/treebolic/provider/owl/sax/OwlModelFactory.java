@@ -3,13 +3,8 @@
  */
 package treebolic.provider.owl.sax;
 
-import org.xml.sax.SAXException;
-
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Stream;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
@@ -171,10 +166,12 @@ public class OwlModelFactory implements ImageDecorator
 	 */
 	protected static final Integer LOADBALANCING_EDGECOLOR = Colors.DARK_GRAY;
 
-	/**
-	 * LoadBalancer (classes) : image index
-	 */
-	protected static final int LOADBALANCING_IMAGEINDEX = ImageIndex.BRANCH.ordinal();
+// --Commented out by Inspection START (12/6/22, 1:53 PM):
+//	/**
+//	 * LoadBalancer (classes) : image index
+//	 */
+//	protected static final int LOADBALANCING_IMAGEINDEX = ImageIndex.BRANCH.ordinal();
+// --Commented out by Inspection STOP (12/6/22, 1:53 PM)
 
 	/**
 	 * LoadBalancer (classes) : image
@@ -208,10 +205,12 @@ public class OwlModelFactory implements ImageDecorator
 	 */
 	protected static final Integer LOADBALANCING_INSTANCES_EDGECOLOR = defaultInstanceForeColor;
 
-	/**
-	 * LoadBalancer (instances and properties) : image index
-	 */
-	protected static final int LOADBALANCING_INSTANCES_IMAGEINDEX = ImageIndex.BRANCH_INSTANCES.ordinal();
+// --Commented out by Inspection START (12/6/22, 1:53 PM):
+//	/**
+//	 * LoadBalancer (instances and properties) : image index
+//	 */
+//	protected static final int LOADBALANCING_INSTANCES_IMAGEINDEX = ImageIndex.BRANCH_INSTANCES.ordinal();
+// --Commented out by Inspection STOP (12/6/22, 1:53 PM)
 
 	/**
 	 * LoadBalancer (instances and properties) : image
@@ -245,10 +244,12 @@ public class OwlModelFactory implements ImageDecorator
 	 */
 	protected static final Integer LOADBALANCING_PROPERTIES_EDGECOLOR = defaultPropertyForeColor;
 
-	/**
-	 * LoadBalancer (instances and properties) : image index
-	 */
-	protected static final int LOADBALANCING_PROPERTIES_IMAGEINDEX = ImageIndex.BRANCH_PROPERTIES.ordinal(); // -1;
+// --Commented out by Inspection START (12/6/22, 1:53 PM):
+//	/**
+//	 * LoadBalancer (instances and properties) : image index
+//	 */
+//	protected static final int LOADBALANCING_PROPERTIES_IMAGEINDEX = ImageIndex.BRANCH_PROPERTIES.ordinal(); // -1;
+// --Commented out by Inspection STOP (12/6/22, 1:53 PM)
 
 	/**
 	 * LoadBalancer (instances and properties) : image
@@ -622,17 +623,6 @@ public class OwlModelFactory implements ImageDecorator
 		images[ImageIndex.BRANCH_PROPERTIES.ordinal()] = "branch_properties.png";
 	}
 
-	/**
-	 * Get ontology
-	 *
-	 * @param ontologyDocumentUrl document url
-	 * @throws IOException io exception
-	 */
-	private void readOntology(final String ontologyDocumentUrl) throws IOException, ParserConfigurationException, SAXException
-	{
-		ontology = Parser.make(ontologyDocumentUrl);
-	}
-
 	// P A R S E
 
 	/**
@@ -812,7 +802,7 @@ public class OwlModelFactory implements ImageDecorator
 				final MutableNode rootNode = visitClass(null, rootClass, ontologyUrlString);
 				for (Ontology.Class top : tops)
 				{
-					final MutableNode owlClassNode = visitClassAndSubclasses(rootNode, top, ontologyUrlString);
+					visitClassAndSubclasses(rootNode, top, ontologyUrlString);
 				}
 				return new Tree(decorateRoot(rootNode), null);
 			}
@@ -822,24 +812,24 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Make tree
 	 *
-	 * @param ontologyUrlString0 url string
+	 * @param ontologyUrl0 url string
 	 * @return tree if successful
 	 */
-	public Map<String, String> parseUrl(final String ontologyUrlString0)
+	public Map<String, String> parseUrl(final String ontologyUrl0)
 	{
 		final Map<String, String> map = new HashMap<>();
 
-		String ontologyUrlString = ontologyUrlString0;
+		String ontologyUrl = ontologyUrl0;
 
 		// parameter and url
 		String parameters = null;
-		final int index = ontologyUrlString.indexOf('?');
+		final int index = ontologyUrl.indexOf('?');
 		if (index != -1)
 		{
-			parameters = ontologyUrlString.substring(index + 1);
-			ontologyUrlString = ontologyUrlString.substring(0, index);
+			parameters = ontologyUrl.substring(index + 1);
+			ontologyUrl = ontologyUrl.substring(0, index);
 		}
-		map.put("url", ontologyUrlString);
+		map.put("url", ontologyUrl);
 
 		// parameters
 		if (parameters != null)
@@ -862,27 +852,27 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Walk classes in stream
 	 *
-	 * @param parentClassNode   treebolic parent node to attach to
-	 * @param owlClasses        class stream
-	 * @param ontologyUrlString URL string
+	 * @param parentClassNode treebolic parent node to attach to
+	 * @param classes         class stream
+	 * @param ontologyUrl     URL string
 	 */
-	public void visitClasses(final TreeMutableNode parentClassNode, final Stream<Ontology.Class> owlClasses, final String ontologyUrlString)
+	public void visitClasses(final TreeMutableNode parentClassNode, final Stream<Ontology.Class> classes, final String ontologyUrl)
 	{
-		final List<INode> childNodes = owlClasses //
+		final List<INode> childNodes = classes //
 
 				.sorted() //
-				.map(owlClass -> {
+				.map(c -> {
 
 					// node
-					final TreeMutableNode owlClassNode = visitClass(null, owlClass, ontologyUrlString);
+					final TreeMutableNode classNode = visitClass(null, c, ontologyUrl);
 
 					// recurse
-					if (owlClass.subclasses != null)
+					if (c.subclasses != null)
 					{
-						visitClasses(owlClassNode, owlClass.subclasses.stream(), ontologyUrlString);
+						visitClasses(classNode, c.subclasses.stream(), ontologyUrl);
 					}
 
-					return (INode) owlClassNode;
+					return classNode;
 				}) //
 				.collect(toList());
 
@@ -894,34 +884,34 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Visit class
 	 *
-	 * @param parentOwlClassNode treebolic parent node to attach to
-	 * @param owlClass           class
-	 * @param ontologyUrlString  ontology URL string
+	 * @param parentClassNode treebolic parent node to attach to
+	 * @param clazz           class
+	 * @param ontologyUrl     ontology URL string
 	 * @return treebolic node
 	 */
-	public TreeMutableNode visitClass(final INode parentOwlClassNode, final Ontology.Class owlClass, final String ontologyUrlString)
+	public TreeMutableNode visitClass(final INode parentClassNode, final Ontology.Class clazz, final String ontologyUrl)
 	{
-		final boolean isRelation = ontology.isRelation(owlClass);
-		final String ownClassShortForm = owlClass.getLocalName();
-		final String owlClassId = owlClass.getLocalName();
-		//final Stream<String> annotations = engine.getAnnotations(owlClass, LANG).mapWith(RDFNode::toString);
+		final boolean isRelation = ontology.isRelation(clazz);
+		final String name = clazz.getLocalName();
+		final String id = clazz.getLocalName();
+		//final Stream<String> annotations = clazz.annotations.stream();
 
 		// comment
-		String comment = owlClass.getLocalName() + "<br>" + owlClass.comment + "<br>" + owlClass.getNameSpace(); //annotationsToString(annotations);
+		String comment = clazz.getLocalName() + "<br>" + clazz.comment + "<br>" + clazz.getNameSpace(); //annotationsToString(annotations);
 
 		// node
-		final TreeMutableNode owlClassNode = new TreeMutableNode(parentOwlClassNode, owlClassId);
-		owlClassNode.setLabel(ownClassShortForm + (isRelation ? "\nRelation" : ""));
-		owlClassNode.setTarget(owlClassId);
-		owlClassNode.setContent(comment);
-		decorateClass(owlClassNode);
+		final TreeMutableNode classNode = new TreeMutableNode(parentClassNode, id);
+		classNode.setLabel(name + (isRelation ? "\nRelation" : ""));
+		classNode.setTarget(id);
+		classNode.setContent(comment);
+		decorateClass(classNode);
 
 		// mounts
-		// if (!owlClass.equals(engine.getTopClass(model))) // TODO
+		// if (!isClass.isTopClass()) // TODO
 		{
 			// get instances or properties
-			final boolean hasInstances = owlClass.instances != null;
-			final boolean hasProperties = owlClass.properties != null;
+			final boolean hasInstances = clazz.instances != null;
+			final boolean hasProperties = clazz.properties != null;
 
 			// mountpoint
 			if (hasInstances || hasProperties || isRelation)
@@ -941,57 +931,57 @@ public class OwlModelFactory implements ImageDecorator
 				}
 
 				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
-				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIri() + "&target=" + String.join("+", targets);
-				owlClassNode.setMountPoint(mountingPoint);
+				mountingPoint.url = ontologyUrl + "?iri=" + clazz.getIri() + "&target=" + String.join("+", targets);
+				classNode.setMountPoint(mountingPoint);
 			}
 		}
-		return owlClassNode;
+		return classNode;
 	}
 
 	/**
 	 * Visit classes and subclasses
 	 *
-	 * @param parentOwlClassNode treebolic parent node to attach to
-	 * @param owlClass           class
-	 * @param ontologyUrlString  ontology URL string
+	 * @param parentclassNode treebolic parent node to attach to
+	 * @param clazz           class
+	 * @param ontologyUrl     ontology URL string
 	 * @return treebolic node
 	 */
-	public MutableNode visitClassAndSubclasses(final INode parentOwlClassNode, final Ontology.Class owlClass, final String ontologyUrlString)
+	public MutableNode visitClassAndSubclasses(final INode parentclassNode, final Ontology.Class clazz, final String ontologyUrl)
 	{
-		final TreeMutableNode owlClassNode = visitClass(parentOwlClassNode, owlClass, ontologyUrlString);
+		final TreeMutableNode classNode = visitClass(parentclassNode, clazz, ontologyUrl);
 
 		// recurse
-		if (owlClass.subclasses != null)
+		if (clazz.subclasses != null)
 		{
-			final Stream<Ontology.Class> owlSubClasses = owlClass.subclasses.stream();
-			visitClasses(owlClassNode, owlSubClasses, ontologyUrlString);
+			final Stream<Ontology.Class> subClasses = clazz.subclasses.stream();
+			visitClasses(classNode, subClasses, ontologyUrl);
 		}
-		return owlClassNode;
+		return classNode;
 	}
 
 	/**
 	 * Walk instances in stream
 	 *
-	 * @param parentNode     treebolic parent node to attach to
-	 * @param owlIndividuals individual stream
+	 * @param parentNode treebolic parent node to attach to
+	 * @param things     individual stream
 	 */
-	public void visitInstances(final TreeMutableNode parentNode, final Stream<Ontology.Thing> owlIndividuals)
+	public void visitInstances(final TreeMutableNode parentNode, final Stream<Ontology.Thing> things)
 	{
-		final List<INode> childNodes = owlIndividuals //
+		final List<INode> childNodes = things //
 				.sorted(Comparator.comparing(Ontology.Resource::getLocalName)) //
-				.map(owlNamedIndividual -> {
+				.map(thing -> {
 
-					final String owlIndividualShortForm = owlNamedIndividual.getLocalName();
-					final String owlIndividualId = owlNamedIndividual.getLocalName();
-					final Stream<String> types = owlNamedIndividual.types.stream().map(Ontology.Resource::getLocalName);
-					final Stream<String> annotations = owlNamedIndividual.annotations.stream();
+					final String name = thing.getLocalName();
+					final String id = thing.getLocalName();
+					final Stream<String> types = thing.types.stream().map(Ontology.Resource::getLocalName);
+					final Stream<String> annotations = thing.annotations.stream();
 
-					final MutableNode instanceNode = new MutableNode(null, owlIndividualId);
-					instanceNode.setLabel(owlIndividualShortForm);
-					instanceNode.setTarget(owlIndividualId);
+					final MutableNode instanceNode = new MutableNode(null, id);
+					instanceNode.setLabel(name);
+					instanceNode.setTarget(id);
 					instanceNode.setContent(typesToString(types) + "<br>" + annotationsToString(annotations) + "<br>");
 					decorateInstance(instanceNode);
-					return (INode) instanceNode;
+					return instanceNode;
 				}) //
 				.collect(toList());
 
@@ -1003,77 +993,77 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Walk relation properties
 	 *
-	 * @param parentNode  treebolic parent node to attach to
-	 * @param owlProperty property
+	 * @param parentNode treebolic parent node to attach to
+	 * @param property   property
 	 */
-	public void visitRelation(final MutableNode parentNode, final Ontology.Property owlProperty)
+	public void visitRelation(final MutableNode parentNode, final Ontology.Property property)
 	{
-		final String owlPropertyShortForm = owlProperty.getLocalName() + (owlProperty.subtype == null ? "" : "\n" + owlProperty.subtype);
-		final MutableNode relationNode = new MutableNode(parentNode, owlPropertyShortForm);
-		relationNode.setLabel(owlPropertyShortForm);
+		final String name = property.getLocalName() + (property.subtype == null ? "" : "\n" + property.subtype);
+		final MutableNode relationNode = new MutableNode(parentNode, name);
+		relationNode.setLabel(name);
 		relationNode.setEdgeLabel("is relation");
 		decorateRelation(relationNode);
 
-		final Set<Ontology.Class> domains = owlProperty.domains;
+		final Set<Ontology.Class> domains = property.domains;
 		if (domains != null && !domains.isEmpty())
 		{
-			final MutableNode domainsNode = new MutableNode(relationNode, owlPropertyShortForm + "-domains");
+			final MutableNode domainsNode = new MutableNode(relationNode, name + "-domains");
 			domainsNode.setLabel("domains");
 			decorateRelation(domainsNode);
-			domains.forEach(owlDomainClass -> {
+			domains.forEach(domainClass -> {
 
-				String owlClassId = owlDomainClass.getLocalName();
-				final MutableNode domainNode = new MutableNode(domainsNode, owlClassId);
-				domainNode.setLabel(owlClassId);
-				domainNode.setTarget(owlClassId);
+				String domainName = domainClass.getLocalName();
+				final MutableNode domainNode = new MutableNode(domainsNode, domainName);
+				domainNode.setLabel(domainName);
+				domainNode.setTarget(domainName);
 				decorateRelation(domainNode);
 			});
 		}
 
-		final Set<Ontology.Class> ranges = owlProperty.ranges;
+		final Set<Ontology.Class> ranges = property.ranges;
 		if (ranges != null && !ranges.isEmpty())
 		{
-			final MutableNode rangesNode = new MutableNode(relationNode, owlPropertyShortForm + "-ranges");
+			final MutableNode rangesNode = new MutableNode(relationNode, name + "-ranges");
 			rangesNode.setLabel("ranges");
 			decorateRelation(rangesNode);
-			ranges.forEach(owlRangeClass -> {
+			ranges.forEach(rangeClass -> {
 
-				String owlClassId = owlRangeClass.getLocalName();
-				final MutableNode rangeNode = new MutableNode(rangesNode, owlClassId);
-				rangeNode.setLabel(owlClassId);
-				rangeNode.setTarget(owlClassId);
+				String rangeName = rangeClass.getLocalName();
+				final MutableNode rangeNode = new MutableNode(rangesNode, rangeName);
+				rangeNode.setLabel(rangeName);
+				rangeNode.setTarget(rangeName);
 				decorateRelation(rangeNode);
 			});
 		}
 
-		final Set<Ontology.Property> subproperties = owlProperty.subproperties;
+		final Set<Ontology.Property> subproperties = property.subproperties;
 		if (subproperties != null && !subproperties.isEmpty())
 		{
-			final MutableNode subPropertiesNode = new MutableNode(relationNode, owlPropertyShortForm + "-subproperties");
+			final MutableNode subPropertiesNode = new MutableNode(relationNode, name + "-subproperties");
 			subPropertiesNode.setLabel("subproperties");
 			decorateRelation(subPropertiesNode);
-			subproperties.forEach(owlSubProperty -> {
+			subproperties.forEach(subProperty -> {
 
-				String owlSubpropertyId = owlSubProperty.getLocalName();
-				final MutableNode subPropertyNode = new MutableNode(subPropertiesNode, owlSubpropertyId);
-				subPropertyNode.setLabel(owlSubpropertyId);
-				subPropertyNode.setTarget(owlSubpropertyId);
+				String subpropertyName = subProperty.getLocalName();
+				final MutableNode subPropertyNode = new MutableNode(subPropertiesNode, subpropertyName);
+				subPropertyNode.setLabel(subpropertyName);
+				subPropertyNode.setTarget(subpropertyName);
 				decorateRelation(subPropertyNode);
 			});
 		}
 
-		final Set<Ontology.Property> inverses = owlProperty.inverses;
+		final Set<Ontology.Property> inverses = property.inverses;
 		if (inverses != null && !inverses.isEmpty())
 		{
-			final MutableNode inversesNode = new MutableNode(relationNode, owlPropertyShortForm + "-inverses");
+			final MutableNode inversesNode = new MutableNode(relationNode, name + "-inverses");
 			inversesNode.setLabel("inverses");
 			decorateRelation(inversesNode);
-			inverses.forEach(owlInverseProperty -> {
+			inverses.forEach(inverseProperty -> {
 
-				String owlInverseId = owlInverseProperty.getLocalName();
-				final MutableNode inverseNode = new MutableNode(inversesNode, owlInverseId);
-				inverseNode.setLabel(owlInverseId);
-				inverseNode.setTarget(owlInverseId);
+				String inverseName = inverseProperty.getLocalName();
+				final MutableNode inverseNode = new MutableNode(inversesNode, inverseName);
+				inverseNode.setLabel(inverseName);
+				inverseNode.setTarget(inverseName);
 				decorateRelation(inverseNode);
 			});
 		}
@@ -1083,20 +1073,20 @@ public class OwlModelFactory implements ImageDecorator
 	 * Walk properties in iterator
 	 *
 	 * @param parentNode    treebolic parent node to attach to
-	 * @param owlProperties property stream
+	 * @param properties property stream
 	 */
-	public void visitProperties(final TreeMutableNode parentNode, final Stream<Ontology.Property> owlProperties)
+	public void visitProperties(final TreeMutableNode parentNode, final Stream<Ontology.Property> properties)
 	{
-		final List<INode> childNodes = owlProperties //
+		final List<INode> childNodes = properties //
 
 				.sorted(Comparator.comparing(Ontology.Property::getLocalName)) //
 				.map(owlProperty -> {
-					final String owlPropertyShortForm = owlProperty.getLocalName();
-					final String owlPropertyId = owlProperty.getLocalName();
+					final String name = owlProperty.getLocalName();
+					final String id = owlProperty.getLocalName();
 
-					final MutableNode propertyNode = new MutableNode(null, owlPropertyId);
-					propertyNode.setLabel(owlPropertyShortForm);
-					propertyNode.setTarget(owlPropertyId);
+					final MutableNode propertyNode = new MutableNode(null, id);
+					propertyNode.setLabel(name);
+					propertyNode.setTarget(id);
 					decorateProperty(propertyNode);
 					return propertyNode;
 				}) //
@@ -1121,7 +1111,7 @@ public class OwlModelFactory implements ImageDecorator
 		}
 	}
 
-	protected void setNodeEdgeImage(final MutableNode node, @Nullable final String edgeImageFile, @Nullable final ImageIndex index)
+	protected void setNodeEdgeImage(final MutableNode node, @Nullable final String edgeImageFile, @SuppressWarnings("SameParameterValue") @Nullable final ImageIndex index)
 	{
 		if (edgeImageFile != null)
 		{
