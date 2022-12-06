@@ -176,7 +176,7 @@ public class Renderer implements TreeCellRenderer
 		final DefaultDecorator decorator = makeDecorator(node);
 
 		// strings
-		final String name = decorator.getName();
+		@NonNull final String name = decorator.getName();
 		final String value = decorator.getValue();
 		final int nameLength = name.length();
 

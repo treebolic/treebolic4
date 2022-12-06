@@ -106,7 +106,7 @@ public class ImageListDialog extends ReferenceListDialog
 			public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
 			{
 				final ParameterModel.Entry entry = (ParameterModel.Entry) value;
-				final String imageFile = entry.key;
+				@NonNull final String imageFile = entry.key;
 				setIcon(makeIcon(imageFile));
 				setText(imageFile);
 				return this;

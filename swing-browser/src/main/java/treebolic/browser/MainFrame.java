@@ -51,6 +51,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Persist
 	 */
+	@NonNull
 	private final Properties settings;
 
 	// C O M P O N E N T S

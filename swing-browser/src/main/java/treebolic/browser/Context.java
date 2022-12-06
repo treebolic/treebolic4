@@ -257,7 +257,7 @@ public class Context implements IContext
 	 * @see treebolic.component.Context#linkTo(java.lang.String)
 	 */
 	@Override
-	public boolean linkTo(final String linkUrl, final String linkTarget)
+	public boolean linkTo(@NonNull final String linkUrl, final String linkTarget)
 	{
 		this.browser.linkTo(linkUrl, linkTarget, this.widget, this);
 		return true;

@@ -306,6 +306,7 @@ public class Parser
 	 * @throws SAXException                 sax exception
 	 * @throws IOException                  io exception
 	 */
+	@NonNull
 	public static Ontology make(String uri) throws ParserConfigurationException, SAXException, IOException
 	{
 		SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -332,7 +333,7 @@ public class Parser
 	 */
 	public static void main(@NonNull String[] args) throws ParserConfigurationException, SAXException, IOException
 	{
-		Ontology ontology = make(args[0]);
+		@NonNull Ontology ontology = make(args[0]);
 
 		System.out.println("classes:" + ontology.classes.size());
 		System.out.println("things: " + ontology.things.size());

@@ -372,6 +372,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 *
 	 * @return model
 	 */
+	@Nullable
 	public Model getModel()
 	{
 		return this.model;
@@ -396,6 +397,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	/**
 	 * Settings
 	 */
+	@NonNull
 	private final Properties settings;
 
 	// L I S T E N E R S

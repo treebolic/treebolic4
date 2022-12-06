@@ -171,7 +171,7 @@ class Renderer extends DefaultTableCellRenderer
 			case PropertyView.VALUE:
 			{
 				final Attribute attribute = (Attribute) value;
-				final Object attributeValue = attribute == null ? null : attribute.value;
+				@Nullable final Object attributeValue = attribute == null ? null : attribute.value;
 				if (attributeValue == null)
 				{
 					setText(PropertyView.defaultString);

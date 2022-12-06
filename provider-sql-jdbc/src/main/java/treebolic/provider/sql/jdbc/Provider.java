@@ -218,6 +218,7 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		/**
 		 * @return the connection
 		 */
+		@Nullable
 		public Connection getConnection()
 		{
 			return this.connection;

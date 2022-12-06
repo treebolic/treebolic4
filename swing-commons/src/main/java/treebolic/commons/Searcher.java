@@ -55,7 +55,7 @@ public class Searcher
 	@NonNull
 	static public Map<String, String> findFiles(@NonNull final String pattern)
 	{
-		final String pattern2 = File.separatorChar == '/' ? pattern : pattern.replaceAll("/", "\\\\\\\\");
+		@NonNull final String pattern2 = File.separatorChar == '/' ? pattern : pattern.replaceAll("/", "\\\\\\\\");
 		@NonNull final Map<String, String> list = new TreeMap<>();
 		final String classPath = System.getProperty("java.class.path");
 		@NonNull final String[] pathElements = classPath.split(File.pathSeparator);

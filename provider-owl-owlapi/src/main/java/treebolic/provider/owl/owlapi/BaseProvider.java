@@ -155,7 +155,7 @@ public abstract class BaseProvider implements IProvider
 
 			// parse
 			this.context.progress("Loading ..." + (url != null ? url : source), false);
-			final Tree tree = this.factory.makeTree(url != null ? url.toString() : source);
+			@Nullable final Tree tree = this.factory.makeTree(url != null ? url.toString() : source);
 			if (tree != null)
 			{
 				this.context.progress("Loaded " + (url != null ? url : source), false);

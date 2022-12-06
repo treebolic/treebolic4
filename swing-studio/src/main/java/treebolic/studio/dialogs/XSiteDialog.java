@@ -38,7 +38,7 @@ public class XSiteDialog extends SiteDialog
 	static public void main(final String[] args)
 	{
 		UIManager.put("swing.boldMetal", false);
-		final Properties settings = Persist.getSettings("treebolic-studio");
+		@NonNull final Properties settings = Persist.getSettings("treebolic-studio");
 		@NonNull final XSiteDialog dialog = new XSiteDialog(settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);

@@ -827,7 +827,7 @@ public class OwlModelFactory implements ImageDecorator
 					return new Tree(owlClassNode, null);
 				}
 				// class
-				final MutableNode owlClassNode = visitClassAndSubclasses(null, owlClass, ontologyUrlString);
+				@NonNull final MutableNode owlClassNode = visitClassAndSubclasses(null, owlClass, ontologyUrlString);
 				return new Tree(decorateRoot(owlClassNode), null);
 			}
 			return null;
@@ -840,7 +840,7 @@ public class OwlModelFactory implements ImageDecorator
 			{
 				// walk classes
 				final Ontology.Class rootClass = tops.iterator().next();
-				final MutableNode owlClassNode = visitClassAndSubclasses(null, rootClass, ontologyUrlString);
+				@NonNull final MutableNode owlClassNode = visitClassAndSubclasses(null, rootClass, ontologyUrlString);
 				owlClassNode.setLabel(owlClassNode.getLabel() + "\nroot");
 				return new Tree(decorateRoot(owlClassNode), null);
 			}
@@ -996,6 +996,7 @@ public class OwlModelFactory implements ImageDecorator
 	 * @param ontologyUrl     ontology URL string
 	 * @return treebolic node
 	 */
+	@NonNull
 	public MutableNode visitClassAndSubclasses(final INode parentclassNode, @NonNull final Ontology.Class clazz, final String ontologyUrl)
 	{
 		@NonNull final TreeMutableNode classNode = visitClass(parentclassNode, clazz, ontologyUrl);

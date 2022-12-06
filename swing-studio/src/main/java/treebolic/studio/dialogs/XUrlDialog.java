@@ -38,7 +38,7 @@ public class XUrlDialog extends UrlDialog
 	static public void main(final String[] args)
 	{
 		UIManager.put("swing.boldMetal", false);
-		final Properties settings = Persist.getSettings("treebolic-studio");
+		@NonNull final Properties settings = Persist.getSettings("treebolic-studio");
 		@NonNull final XUrlDialog dialog = new XUrlDialog(settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
