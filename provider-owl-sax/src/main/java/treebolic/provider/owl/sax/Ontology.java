@@ -161,7 +161,7 @@ class Ontology
 		@Override
 		public String toString()
 		{
-			return "'" + iri + '\'';
+			return iri;
 		}
 	}
 

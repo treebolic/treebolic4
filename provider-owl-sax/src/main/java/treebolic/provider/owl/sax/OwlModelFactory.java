@@ -803,12 +803,13 @@ public class OwlModelFactory implements ImageDecorator
 				// walk classes
 				final Ontology.Class rootClass = tops.iterator().next();
 				final MutableNode owlClassNode = visitClassAndSubclasses(null, rootClass, ontologyUrlString);
+				owlClassNode.setLabel(owlClassNode.getLabel() + "\nroot");
 				return new Tree(decorateRoot(owlClassNode), null);
 			}
 			else
 			{
-				final Ontology.Class rootClass = ontology.createClass("#Thing");
-				MutableNode rootNode = visitClass(null, rootClass, ontologyUrlString);
+				final Ontology.Class rootClass = ontology.createClass("#Thing\rroot");
+				final MutableNode rootNode = visitClass(null, rootClass, ontologyUrlString);
 				for (Ontology.Class top : tops)
 				{
 					final MutableNode owlClassNode = visitClassAndSubclasses(rootNode, top, ontologyUrlString);
@@ -982,7 +983,7 @@ public class OwlModelFactory implements ImageDecorator
 
 					final String owlIndividualShortForm = owlNamedIndividual.getLocalName();
 					final String owlIndividualId = owlNamedIndividual.getLocalName();
-					final Stream<String> types = owlNamedIndividual.types.stream().map(Object::toString);
+					final Stream<String> types = owlNamedIndividual.types.stream().map(Ontology.Resource::getLocalName);
 					final Stream<String> annotations = owlNamedIndividual.annotations.stream();
 
 					final MutableNode instanceNode = new MutableNode(null, owlIndividualId);
