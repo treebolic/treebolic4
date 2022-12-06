@@ -18,7 +18,7 @@ import treebolic.annotations.NonNull;
  * @author Herrmann
  */
 @SuppressWarnings("WeakerAccess")
-public abstract class Generator<T> implements Iterable<T>
+public abstract class Generator<T> implements Iterable<T>, AutoCloseable
 {
 	/**
 	 * Condition
@@ -207,19 +207,13 @@ public abstract class Generator<T> implements Iterable<T>
 		this.itemRequested.await();
 	}
 
-	@Override
-	protected void finalize() throws Throwable
-	{
-		terminate();
-		super.finalize();
-	}
-
 	/**
 	 * Terminate generator
 	 *
 	 * @throws InterruptedException interrupted exception
 	 */
-	public void terminate() throws InterruptedException
+	@Override
+	public void close() throws InterruptedException
 	{
 		if (this.producer.isAlive())
 		{

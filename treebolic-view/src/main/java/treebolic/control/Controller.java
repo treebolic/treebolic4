@@ -1057,7 +1057,7 @@ public class Controller extends Commander
 		try
 		{
 			assert this.traverser != null;
-			this.traverser.terminate();
+			this.traverser.close();
 		}
 		catch (InterruptedException ignored)
 		{
