@@ -14,6 +14,8 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.TableCellEditor;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.model.Utils;
 import treebolic.propertyview.PropertyView.Attribute;
 import treebolic.propertyview.PropertyView.Handler;
@@ -38,11 +40,13 @@ public class Editor implements TableCellEditor, CellEditorListener
 	/**
 	 * Attribute being edited
 	 */
+	@Nullable
 	private Attribute attribute;
 
 	/**
 	 * Color editor
 	 */
+	@NonNull
 	private final ColorEditor colorEditor;
 
 	/**
@@ -63,6 +67,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	/**
 	 * Default editor
 	 */
+	@NonNull
 	private final DefaultCellEditor defaultEditor;
 
 	/**
@@ -94,11 +99,12 @@ public class Editor implements TableCellEditor, CellEditorListener
 				private static final long serialVersionUID = 8570059590275656633L;
 
 				@Override
-				public void setValue(Object value)
+				public void setValue(@Nullable Object value)
 				{
 					textField.setText((value != null) ? value.toString().replaceAll("\n", "\\\\n") : "");
 				}
 
+				@NonNull
 				@Override
 				public Object getCellEditorValue()
 				{
@@ -146,6 +152,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 * (non-Javadoc)
 	 * @see javax.swing.table.TableCellEditor#getTableCellEditorComponent(javax.swing.JTable, java.lang.Object, boolean, int, int)
 	 */
+	@Nullable
 	@Override
 	public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected, final int row, final int column)
 	{
@@ -251,7 +258,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	@Override
 	public Object getCellEditorValue()
 	{
-		Object value = null;
+		@Nullable Object value = null;
 		switch (this.attribute.descriptor.type)
 		{
 			// conversion
@@ -383,6 +390,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 *
 	 * @return image repository as file
 	 */
+	@Nullable
 	private File getImageRepository()
 	{
 		try
@@ -406,7 +414,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 *
 	 * @param combo combobox
 	 */
-	private void populateWithIds(final JComboBox<String> combo)
+	private void populateWithIds(@NonNull final JComboBox<String> combo)
 	{
 		final Set<String> ids = this.handler.idGetter.ids();
 		combo.removeAllItems();
@@ -422,7 +430,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 *
 	 * @param combo combobox
 	 */
-	private void populateWithStrokes(final JComboBox<String> combo)
+	private void populateWithStrokes(@NonNull final JComboBox<String> combo)
 	{
 		populateWithStrings(combo, PropertyView.strokeStrings);
 	}
@@ -442,7 +450,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 *
 	 * @param combo combobox
 	 */
-	private void populateWithUrls(final JComboBox<String> combo)
+	private void populateWithUrls(@NonNull final JComboBox<String> combo)
 	{
 		populateWithStrings(combo, new String[]{"http://", "ftp://"});
 	}
@@ -452,7 +460,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 *
 	 * @param combo combobox
 	 */
-	private void addPopulateWithSharpIds(final JComboBox<String> combo)
+	private void addPopulateWithSharpIds(@NonNull final JComboBox<String> combo)
 	{
 		final Set<String> ids = this.handler.idGetter.ids();
 		for (final String string : ids)
@@ -470,7 +478,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	{
 		populateWithStrings(combo, new String[]{"SansSerif", "Serif", "MonoSpaced", "Dialog", "DialogInput"});
 		final Font[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
-		for (final Font font : fonts)
+		for (@NonNull final Font font : fonts)
 		{
 			combo.addItem(font.getFontName());
 		}
@@ -481,7 +489,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 *
 	 * @param combo combobox
 	 */
-	private void populateWithTerminators(final JComboBox<String> combo)
+	private void populateWithTerminators(@NonNull final JComboBox<String> combo)
 	{
 		populateWithStrings(combo, PropertyView.terminatorStrings);
 	}
@@ -492,7 +500,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 * @param combo   combobox
 	 * @param strings list of strings
 	 */
-	private void populateWithStrings(final JComboBox<String> combo, final String[] strings)
+	private void populateWithStrings(@NonNull final JComboBox<String> combo, @NonNull final String[] strings)
 	{
 		combo.removeAllItems();
 		combo.setMaximumRowCount(strings.length + 1);
@@ -535,7 +543,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	@Override
 	public void addCellEditorListener(final CellEditorListener listener)
 	{
-		for (final CellEditor subEditor : this.subEditors)
+		for (@NonNull final CellEditor subEditor : this.subEditors)
 		{
 			subEditor.addCellEditorListener(listener);
 		}
@@ -548,7 +556,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	@Override
 	public void removeCellEditorListener(final CellEditorListener listener)
 	{
-		for (final CellEditor subEditor : this.subEditors)
+		for (@NonNull final CellEditor subEditor : this.subEditors)
 		{
 			subEditor.removeCellEditorListener(listener);
 		}

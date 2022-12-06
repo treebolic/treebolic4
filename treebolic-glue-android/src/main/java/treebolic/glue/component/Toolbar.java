@@ -139,7 +139,7 @@ public class Toolbar extends FrameLayout implements treebolic.glue.iface.compone
 		this.panel.setBackgroundColor(background);
 
 		// scroll
-		final FrameLayout scroll = isHorizontal ? new ScrollView(activity) : new HorizontalScrollView(activity);
+		@treebolic.annotations.NonNull final FrameLayout scroll = isHorizontal ? new ScrollView(activity) : new HorizontalScrollView(activity);
 		scroll.addView(this.panel);
 		scroll.setBackgroundColor(background);
 
@@ -172,12 +172,12 @@ public class Toolbar extends FrameLayout implements treebolic.glue.iface.compone
 	{
 		// interface button to implementation
 		final String name = button.name();
-		final ButtonImplementation impl = ButtonImplementation.valueOf(name);
+		@treebolic.annotations.NonNull final ButtonImplementation impl = ButtonImplementation.valueOf(name);
 
 		final Context context = getContext();
 
 		// new button
-		final ImageButton imageButton = new ImageButton(context);
+		@treebolic.annotations.NonNull final ImageButton imageButton = new ImageButton(context);
 		imageButton.setLayoutParams(new LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
 		final int index = impl.getIndex();
 

@@ -19,6 +19,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * SAX parser
@@ -60,10 +61,13 @@ public class Parser
 
 		private final Stack<Ontology.Class> classStack = new Stack<>();
 
+		@Nullable
 		private Ontology.Thing thing = null;
 
+		@Nullable
 		private Ontology.Property property = null;
 
+		@Nullable
 		private StringBuilder textSb = null;
 
 		@Override
@@ -84,7 +88,7 @@ public class Parser
 		{
 		}
 
-		private String getIri(String ignoredUri, String ignoredLocalName, String ignoredQName, Attributes attributes)
+		private String getIri(String ignoredUri, String ignoredLocalName, String ignoredQName, @NonNull Attributes attributes)
 		{
 			// if (uri != null && !uri.isEmpty())
 			// {
@@ -100,13 +104,13 @@ public class Parser
 		}
 
 		@Override
-		public void startElement(String uri, String localName, String qName, Attributes attributes)
+		public void startElement(String uri, String localName, @NonNull String qName, @NonNull Attributes attributes)
 		{
 			switch (qName)
 			{
 				case CLASS:
 				{
-					Ontology.Class clazz = null;
+					@Nullable Ontology.Class clazz = null;
 					String iri = getIri(uri, localName, qName, attributes);
 					if (iri != null)
 					{
@@ -231,11 +235,11 @@ public class Parser
 		}
 
 		@Override
-		public void endElement(String uri, String localName, String qName)
+		public void endElement(String uri, String localName, @NonNull String qName)
 		{
 			// System.err.printf("<%s q=%s u=%s%n", localName, qName, uri);
 
-			String text = textSb.toString();
+			@NonNull String text = textSb.toString();
 			if (!text.isEmpty())
 			{
 				text = text.replace('\n', ' ');

@@ -11,6 +11,8 @@ import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
+import treebolic.annotations.NonNull;
+
 /**
  * HTML view
  *
@@ -37,7 +39,7 @@ public class HtmlView extends JEditorPane implements HyperlinkListener
 	 * @see javax.swing.event.HyperlinkListener#hyperlinkUpdate(javax.swing.event.HyperlinkEvent)
 	 */
 	@Override
-	public void hyperlinkUpdate(final HyperlinkEvent event)
+	public void hyperlinkUpdate(@NonNull final HyperlinkEvent event)
 	{
 		if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED)
 		{

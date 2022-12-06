@@ -3,6 +3,8 @@
  */
 package treebolic.xml.transformer;
 
+import treebolic.annotations.NonNull;
+
 /**
  * @author Bernard Bou
  */
@@ -13,7 +15,7 @@ public class Main
 	 *
 	 * @param args arguments
 	 */
-	public static void main(final String[] args)
+	public static void main(@NonNull final String[] args)
 	{
 		try
 		{

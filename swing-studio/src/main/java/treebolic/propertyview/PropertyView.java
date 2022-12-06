@@ -19,6 +19,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Property view
  *
@@ -78,6 +81,7 @@ public class PropertyView extends JPanel implements SelectListener
 		 * @param attributeName attribute name
 		 * @return attribute value
 		 */
+		@Nullable
 		Object get(Object object, String attributeName);
 	}
 
@@ -460,7 +464,7 @@ public class PropertyView extends JPanel implements SelectListener
 
 		// model
 		final Handler handler = this.handlerFactory.create(object);
-		final javax.swing.table.TableModel model = new TableModel(object, handler);
+		@NonNull final javax.swing.table.TableModel model = new TableModel(object, handler);
 		this.attributeTable.setModel(model);
 
 		// renderer and editor
@@ -477,7 +481,7 @@ public class PropertyView extends JPanel implements SelectListener
 	 * @param string encode URL string
 	 * @return decoded URL string
 	 */
-	static String decode(final String string)
+	static String decode(@NonNull final String string)
 	{
 		try
 		{
@@ -496,7 +500,7 @@ public class PropertyView extends JPanel implements SelectListener
 	 * @param string encode URL string
 	 * @return decoded URL string
 	 */
-	static String encode(final String string)
+	static String encode(@NonNull final String string)
 	{
 		try
 		{
@@ -523,6 +527,7 @@ public class PropertyView extends JPanel implements SelectListener
 		/**
 		 * The selected object
 		 */
+		@Nullable
 		private final Object selectedObject;
 
 		/**
@@ -533,6 +538,7 @@ public class PropertyView extends JPanel implements SelectListener
 		/**
 		 * Its attributes
 		 */
+		@Nullable
 		private Vector<Attribute> attributes;
 
 		/**
@@ -585,7 +591,7 @@ public class PropertyView extends JPanel implements SelectListener
 		{
 			if (this.selectedObject != null)
 			{
-				for (final Attribute attribute : this.attributes)
+				for (@NonNull final Attribute attribute : this.attributes)
 				{
 					this.handler.setter.set(this.selectedObject, attribute.descriptor.name, attribute.value);
 				}
@@ -635,6 +641,7 @@ public class PropertyView extends JPanel implements SelectListener
 		 * (non-Javadoc)
 		 * @see javax.swing.table.TableModel#getValueAt(int, int)
 		 */
+		@Nullable
 		@Override
 		public Object getValueAt(final int y, final int x)
 		{
@@ -676,6 +683,7 @@ public class PropertyView extends JPanel implements SelectListener
 		 * (non-Javadoc)
 		 * @see javax.swing.table.AbstractTableModel#getColumnName(int)
 		 */
+		@NonNull
 		@Override
 		public String getColumnName(final int x)
 		{

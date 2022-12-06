@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
 import treebolic.commons.Persist;
 import treebolic.commons.SettingsDialog;
 
@@ -63,7 +64,7 @@ public class XSettingsDialog extends SettingsDialog
 	{
 		UIManager.put("swing.boldMetal", false);
 		final Properties settings = Persist.getSettings("treebolic-studio");
-		final XSettingsDialog dialog = new XSettingsDialog(settings);
+		@NonNull final XSettingsDialog dialog = new XSettingsDialog(settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

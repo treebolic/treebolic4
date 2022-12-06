@@ -8,6 +8,7 @@ import org.w3c.dom.Node;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+import treebolic.annotations.NonNull;
 import treebolic.studio.domtree.ElementDecorator;
 
 /**
@@ -35,6 +36,7 @@ public class LinkDecorator extends ElementDecorator
 	 * (non-Javadoc)
 	 * @see treebolic.studio.domtree.ElementDecorator#getName()
 	 */
+	@NonNull
 	@Override
 	public String getName()
 	{

@@ -8,6 +8,8 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Site dialog
  *
@@ -91,7 +93,7 @@ public class SiteDialog extends JDialog
 		setResizable(true);
 
 		// images
-		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(SiteDialog.class.getResource("images/sitemake.png"));
+		@NonNull @SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(SiteDialog.class.getResource("images/sitemake.png"));
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
@@ -99,8 +101,8 @@ public class SiteDialog extends JDialog
 		headerLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
 		headerLabel.setText(Messages.getString("SiteDialog.header"));
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		@SuppressWarnings("ConstantConditions") final Icon fileIcon = new ImageIcon(SiteDialog.class.getResource("images/local.png"));
-		@SuppressWarnings("ConstantConditions") final Icon httpIcon = new ImageIcon(SiteDialog.class.getResource("images/net.png"));
+		@NonNull @SuppressWarnings("ConstantConditions") final Icon fileIcon = new ImageIcon(SiteDialog.class.getResource("images/local.png"));
+		@NonNull @SuppressWarnings("ConstantConditions") final Icon httpIcon = new ImageIcon(SiteDialog.class.getResource("images/net.png"));
 
 		// mode combo
 		final Object[] options = {Mode.FILE, Mode.NET};
@@ -109,8 +111,9 @@ public class SiteDialog extends JDialog
 		{
 			private final JLabel label = new JLabel();
 
+			@NonNull
 			@Override
-			public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+			public Component getListCellRendererComponent(final JList<?> list, @NonNull final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
 			{
 				this.label.setText(value.toString());
 				this.label.setIcon(value.equals(Mode.FILE) ? fileIcon : httpIcon);
@@ -126,9 +129,9 @@ public class SiteDialog extends JDialog
 		this.pathTextField = new JTextField(16);
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("SiteDialog.ok"));
+		@NonNull final JButton oKButton = new JButton(Messages.getString("SiteDialog.ok"));
 		final JButton cancelButton = new JButton(Messages.getString("SiteDialog.cancel"));
-		final JButton browsePathButton = new JButton(Messages.getString("SiteDialog.browse"));
+		@NonNull final JButton browsePathButton = new JButton(Messages.getString("SiteDialog.browse"));
 
 		// panels
 		final JPanel selectionPanel = new JPanel();
@@ -136,17 +139,17 @@ public class SiteDialog extends JDialog
 		selectionPanel.setLayout(new FlowLayout());
 		selectionPanel.add(this.comboBox);
 
-		final JPanel pathPanel = new JPanel();
+		@NonNull final JPanel pathPanel = new JPanel();
 		pathPanel.setLayout(new FlowLayout());
 		pathPanel.add(new JLabel(Messages.getString("SiteDialog.localdir")));
 		pathPanel.add(this.pathTextField);
 
-		final JPanel filePanel = new JPanel();
+		@NonNull final JPanel filePanel = new JPanel();
 		filePanel.setLayout(new FlowLayout());
 		filePanel.add(pathPanel);
 		filePanel.add(browsePathButton);
 
-		final JPanel fTPPanel = new JPanel();
+		@NonNull final JPanel fTPPanel = new JPanel();
 		fTPPanel.setLayout(new GridBagLayout());
 		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.server")), new GridBagConstraints(0, 0, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0));
 		fTPPanel.add(new JLabel(Messages.getString("SiteDialog.serverdir")), new GridBagConstraints(0, 1, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 20, 0, 10), 0, 0));
@@ -157,13 +160,13 @@ public class SiteDialog extends JDialog
 		fTPPanel.add(this.loginTextField, new GridBagConstraints(1, 2, 1, 1, 1., 0., GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 20), 0, 0));
 		fTPPanel.add(this.passwordTextField, new GridBagConstraints(1, 3, 1, 1, 1., 0., GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 20), 0, 0));
 
-		final JPanel buttonPanel = new JPanel();
+		@NonNull final JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
 		buttonPanel.add(cancelButton);
 		buttonPanel.add(oKButton);
 
 		// tab init
-		final JTabbedPane tabbedPanel = new JTabbedPane();
+		@NonNull final JTabbedPane tabbedPanel = new JTabbedPane();
 		tabbedPanel.addTab(Mode.FILE.toString(), fileIcon, filePanel, Messages.getString("SiteDialog.local"));
 		tabbedPanel.addTab(Mode.NET.toString(), httpIcon, fTPPanel, Messages.getString("SiteDialog.net"));
 
@@ -196,7 +199,7 @@ public class SiteDialog extends JDialog
 		cancelButton.addActionListener(e -> setVisible(false));
 
 		// assemble
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(Box.createRigidArea(new Dimension(0, 10)));
 		panel.add(headerLabel);

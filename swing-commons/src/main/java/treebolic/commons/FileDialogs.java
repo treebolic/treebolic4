@@ -12,6 +12,9 @@ import java.net.URISyntaxException;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * File dialog utilities
  *
@@ -77,10 +80,10 @@ public class FileDialogs
 		 * @see javax.swing.filechooser.FileFilter#accept(java.io.File)
 		 */
 		@Override
-		public boolean accept(final File file)
+		public boolean accept(@NonNull final File file)
 		{
 			final String name = file.getName().toLowerCase();
-			for (final String filter : this.filters)
+			for (@NonNull final String filter : this.filters)
 			{
 				if (name.matches(filter))
 				{
@@ -109,9 +112,9 @@ public class FileDialogs
 		 * @see javax.swing.filechooser.FileFilter#accept(java.io.File)
 		 */
 		@Override
-		public boolean accept(final File file)
+		public boolean accept(@NonNull final File file)
 		{
-			final String name = file.getName().toLowerCase();
+			@NonNull final String name = file.getName().toLowerCase();
 			for (final String filter : this.filters)
 			{
 				if (name.matches(filter))
@@ -164,6 +167,7 @@ public class FileDialogs
 	 * @param currentDirectory current directory
 	 * @return string for executable
 	 */
+	@Nullable
 	static public String getExec(final String currentDirectory)
 	{
 		return getFile(currentDirectory, FileDialogs.executableFileFilter);
@@ -175,6 +179,7 @@ public class FileDialogs
 	 * @param currentDirectory current directory
 	 * @return string for property file
 	 */
+	@Nullable
 	static public String getPropertyFile(final String currentDirectory)
 	{
 		return getFile(currentDirectory, FileDialogs.propertyFileFilter);
@@ -186,6 +191,7 @@ public class FileDialogs
 	 * @param currentDirectory current directory
 	 * @return string for zip file path
 	 */
+	@Nullable
 	static public String getZip(final String currentDirectory)
 	{
 		return getFile(currentDirectory, FileDialogs.zipFileFilter);
@@ -197,6 +203,7 @@ public class FileDialogs
 	 * @param currentDirectory current directory
 	 * @return string for zip file path
 	 */
+	@Nullable
 	static public String getSer(final String currentDirectory)
 	{
 		return getFile(currentDirectory, FileDialogs.serFileFilter);
@@ -208,6 +215,7 @@ public class FileDialogs
 	 * @param currentDirectory current directory
 	 * @return string for XML file path
 	 */
+	@Nullable
 	static public String getXml(final String currentDirectory)
 	{
 		return getFile(currentDirectory, FileDialogs.xmlFileFilter);
@@ -219,6 +227,7 @@ public class FileDialogs
 	 * @param currentDirectory current directory
 	 * @return string for any file path
 	 */
+	@Nullable
 	static public String getAny(final String currentDirectory)
 	{
 		return getFile(currentDirectory, null); // FileDialogs.anyFileFilter);
@@ -233,7 +242,7 @@ public class FileDialogs
 	 */
 	static private String getFile(final String currentDirectory, final FileFilter fileFilter)
 	{
-		final JFileChooser chooser = FileDialogs.makeFileChooser();
+		@NonNull final JFileChooser chooser = FileDialogs.makeFileChooser();
 		FileDialogs.setCurrentDirectory(chooser, currentDirectory);
 		if (fileFilter != null)
 		{
@@ -264,6 +273,7 @@ public class FileDialogs
 	 * @param currentDirectory current directory
 	 * @return string for XML file url
 	 */
+	@Nullable
 	static public String getXmlUrl(final String currentDirectory)
 	{
 		return getUrl(currentDirectory, FileDialogs.xmlFileFilter);
@@ -275,6 +285,7 @@ public class FileDialogs
 	 * @param currentDirectory current directory
 	 * @return string for XSL file url
 	 */
+	@Nullable
 	static public String getXslUrl(final String currentDirectory)
 	{
 		return getUrl(currentDirectory, FileDialogs.xslFileFilter);
@@ -286,6 +297,7 @@ public class FileDialogs
 	 * @param currentDirectory current directory
 	 * @return string for XML file url
 	 */
+	@Nullable
 	static public String getAnyUrl(final String currentDirectory)
 	{
 		return getUrl(currentDirectory, null);
@@ -298,9 +310,9 @@ public class FileDialogs
 	 * @param fileFilter       file filter
 	 * @return string for XML file url
 	 */
-	static private String getUrl(final String currentDirectory, final FileFilter fileFilter)
+	static private String getUrl(final String currentDirectory, @Nullable final FileFilter fileFilter)
 	{
-		final JFileChooser chooser = FileDialogs.makeFileChooser();
+		@NonNull final JFileChooser chooser = FileDialogs.makeFileChooser();
 		FileDialogs.setCurrentDirectory(chooser, currentDirectory);
 		if (fileFilter != null)
 		{
@@ -330,9 +342,10 @@ public class FileDialogs
 	 * @param currentDirectory current directory
 	 * @return string for directory path
 	 */
+	@Nullable
 	static public String getFolder(final String currentDirectory)
 	{
-		final JFileChooser chooser = FileDialogs.makeFolderChooser();
+		@NonNull final JFileChooser chooser = FileDialogs.makeFolderChooser();
 		FileDialogs.setCurrentDirectory(chooser, currentDirectory);
 		if (JFileChooser.APPROVE_OPTION == chooser.showOpenDialog(null))
 		{
@@ -346,9 +359,10 @@ public class FileDialogs
 	 *
 	 * @return file chooser
 	 */
+	@NonNull
 	static private JFileChooser makeFileChooser()
 	{
-		final JFileChooser chooser = new JFileChooser();
+		@NonNull final JFileChooser chooser = new JFileChooser();
 		chooser.setDialogTitle(Messages.getString("FileDialogs.title"));
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		return chooser;
@@ -359,19 +373,21 @@ public class FileDialogs
 	 *
 	 * @return folder chooser
 	 */
+	@NonNull
 	static private JFileChooser makeFolderChooser()
 	{
-		final JFileChooser chooser = new JFileChooser();
+		@NonNull final JFileChooser chooser = new JFileChooser();
 		chooser.setDialogTitle(Messages.getString("FileDialogs.title"));
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setFileFilter(new javax.swing.filechooser.FileFilter()
 		{
 			@Override
-			public boolean accept(final File file)
+			public boolean accept(@NonNull final File file)
 			{
 				return file.isDirectory();
 			}
 
+			@NonNull
 			@Override
 			public String getDescription()
 			{
@@ -387,13 +403,13 @@ public class FileDialogs
 	 * @param chooser          file chooser
 	 * @param currentDirectory directory to set as current
 	 */
-	static private void setCurrentDirectory(final JFileChooser chooser, final String currentDirectory)
+	static private void setCurrentDirectory(@NonNull final JFileChooser chooser, @Nullable final String currentDirectory)
 	{
 		if (currentDirectory == null || currentDirectory.isEmpty())
 		{
 			return;
 		}
-		File directory = null;
+		@Nullable File directory = null;
 		if (currentDirectory.startsWith("file:"))
 		{
 			try

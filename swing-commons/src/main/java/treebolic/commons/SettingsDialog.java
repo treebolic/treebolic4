@@ -9,6 +9,9 @@ import java.util.Set;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Settings dialog
  *
@@ -138,8 +141,8 @@ public class SettingsDialog extends JDialog
 		setResizable(true);
 
 		// images
-		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(SettingsDialog.class.getResource("images/settings.png"));
-		final JLabel headerLabel = new JLabel();
+		@NonNull @SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(SettingsDialog.class.getResource("images/settings.png"));
+		@NonNull final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -153,7 +156,7 @@ public class SettingsDialog extends JDialog
 			SettingsDialog.this.ok = true;
 			setVisible(false);
 		});
-		final JButton cancelButton = new JButton(Messages.getString("SettingsDialog.cancel"));
+		@NonNull final JButton cancelButton = new JButton(Messages.getString("SettingsDialog.cancel"));
 		cancelButton.addActionListener(event -> setVisible(false));
 
 		// panels
@@ -161,7 +164,7 @@ public class SettingsDialog extends JDialog
 		this.dataPanel.setLayout(new GridBagLayout());
 
 		// buttons
-		final JPanel buttonPanel = new JPanel();
+		@NonNull final JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
 		buttonPanel.add(cancelButton);
 		buttonPanel.add(oKButton);
@@ -200,7 +203,7 @@ public class SettingsDialog extends JDialog
 		if ((this.flags & 1 << SettingsDialog.IMAGEBASEIDX) != 0)
 		{
 			// label
-			final JLabel imageBaseFolderLabel = new JLabel(Messages.getString("SettingsDialog.images"));
+			@NonNull final JLabel imageBaseFolderLabel = new JLabel(Messages.getString("SettingsDialog.images"));
 
 			// input
 			this.imageBaseTextField = new JTextField(32);
@@ -209,7 +212,7 @@ public class SettingsDialog extends JDialog
 			this.imageBaseTextField.setToolTipText(Messages.getString("SettingsDialog.tooltip_images"));
 
 			// button
-			final JButton imageBaseBrowseButton = new JButton(Messages.getString("SettingsDialog.browse"));
+			@NonNull final JButton imageBaseBrowseButton = new JButton(Messages.getString("SettingsDialog.browse"));
 
 			// action
 			imageBaseBrowseButton.addActionListener(event -> {
@@ -230,7 +233,7 @@ public class SettingsDialog extends JDialog
 		if ((this.flags & 1 << SettingsDialog.HELPIDX) != 0)
 		{
 			// label
-			final JLabel helpFolderLabel = new JLabel(Messages.getString("SettingsDialog.help"));
+			@NonNull final JLabel helpFolderLabel = new JLabel(Messages.getString("SettingsDialog.help"));
 
 			// input
 			this.helpTextField = new JTextField(32);
@@ -243,7 +246,7 @@ public class SettingsDialog extends JDialog
 
 			// action
 			helpBrowseButton.addActionListener(event -> {
-				final String folder = FileDialogs.getFolder(SettingsDialog.this.settings.getProperty("base", "."));
+				@Nullable final String folder = FileDialogs.getFolder(SettingsDialog.this.settings.getProperty("base", "."));
 				if (folder != null && !folder.isEmpty())
 				{
 					SettingsDialog.this.helpTextField.setText(folder);
@@ -260,7 +263,7 @@ public class SettingsDialog extends JDialog
 		if ((this.flags & 1 << SettingsDialog.BROWSERIDX) != 0)
 		{
 			// label
-			final JLabel browserLabel = new JLabel(Messages.getString("SettingsDialog.browser"));
+			@NonNull final JLabel browserLabel = new JLabel(Messages.getString("SettingsDialog.browser"));
 
 			// input
 			this.browserTextField = new JTextField(32);
@@ -269,11 +272,11 @@ public class SettingsDialog extends JDialog
 			this.browserTextField.setToolTipText(Messages.getString("SettingsDialog.tooltip_browser"));
 
 			// button
-			final JButton browserBrowseButton = new JButton(Messages.getString("SettingsDialog.browse"));
+			@NonNull final JButton browserBrowseButton = new JButton(Messages.getString("SettingsDialog.browse"));
 
 			// action
 			browserBrowseButton.addActionListener(event -> {
-				final String folder = FileDialogs.getExec(SettingsDialog.this.settings.getProperty("base", "."));
+				@Nullable final String folder = FileDialogs.getExec(SettingsDialog.this.settings.getProperty("base", "."));
 				if (folder != null && !folder.isEmpty())
 				{
 					SettingsDialog.this.browserTextField.setText(folder);
@@ -318,7 +321,7 @@ public class SettingsDialog extends JDialog
 			});
 
 			// providers
-			final Set<String> providers = Searcher.findClasses(".*\\.Provider");
+			@NonNull final Set<String> providers = Searcher.findClasses(".*\\.Provider");
 			for (final String item : providers)
 			{
 				this.providerComboBox.addItem(item);
@@ -365,9 +368,9 @@ public class SettingsDialog extends JDialog
 	 * @param message message
 	 * @return input
 	 */
-	protected String ask(final String message)
+	protected String ask(@NonNull final String message)
 	{
-		final String[] lines = message.split("\n");
+		@NonNull final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines);
 	}
 
@@ -445,8 +448,8 @@ public class SettingsDialog extends JDialog
 	static public void main(final String[] args)
 	{
 		UIManager.put("swing.boldMetal", false);
-		final Properties settings = Persist.getSettings("treebolic-browser");
-		final SettingsDialog dialog = new SettingsDialog(settings, SettingsDialog.PROVIDER | SettingsDialog.BASE);
+		@NonNull final Properties settings = Persist.getSettings("treebolic-browser");
+		@NonNull final SettingsDialog dialog = new SettingsDialog(settings, SettingsDialog.PROVIDER | SettingsDialog.BASE);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

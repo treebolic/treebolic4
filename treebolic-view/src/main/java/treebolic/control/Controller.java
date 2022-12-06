@@ -723,9 +723,9 @@ public class Controller extends Commander
 		return content;
 	}
 
-	static String tweakImageSrcs(String content, URL imageBase)
+	static String tweakImageSrcs(@NonNull String content, URL imageBase)
 	{
-		StringBuffer sb = new StringBuffer();
+		@NonNull StringBuffer sb = new StringBuffer();
 		@NonNull Matcher m1 = SCR_QUOTE1_PATTERN.matcher(content);
 		while (m1.find())
 		{

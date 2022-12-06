@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
 import treebolic.commons.Persist;
 import treebolic.commons.UrlDialog;
 
@@ -38,7 +39,7 @@ public class XUrlDialog extends UrlDialog
 	{
 		UIManager.put("swing.boldMetal", false);
 		final Properties settings = Persist.getSettings("treebolic-studio");
-		final XUrlDialog dialog = new XUrlDialog(settings);
+		@NonNull final XUrlDialog dialog = new XUrlDialog(settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

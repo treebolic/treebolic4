@@ -88,7 +88,7 @@ public class Provider implements IProvider
 	@Override
 	public Tree makeTree(final String source, final URL base, final Properties parameters, final boolean checkRecursion)
 	{
-		final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
+		@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 		if (url == null)
 		{
 			return null;
@@ -126,7 +126,7 @@ public class Provider implements IProvider
 
 		this.url = url;
 		this.context.progress("Loading ..." + url, false);
-		final Model model = makeModel(url, base, parameters);
+		@Nullable final Model model = makeModel(url, base, parameters);
 		if (model != null)
 		{
 			this.context.progress("Loaded ..." + url, false);
@@ -148,7 +148,7 @@ public class Provider implements IProvider
 	@SuppressWarnings("WeakerAccess")
 	protected Model makeModel(@NonNull final URL url, final URL base, final Properties parameters)
 	{
-		final Document document = makeDocument(url);
+		@Nullable final Document document = makeDocument(url);
 		if (document == null)
 		{
 			return null;

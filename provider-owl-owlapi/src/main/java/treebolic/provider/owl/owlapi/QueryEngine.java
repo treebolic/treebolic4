@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+import treebolic.annotations.NonNull;
+
 import static java.util.stream.Collectors.toMap;
 
 /**
@@ -26,6 +28,7 @@ public class QueryEngine
 
 	private final OWLReasoner reasoner;
 
+	@NonNull
 	private final Map<String, OWLObjectProperty> owlProperties;
 
 	/**
@@ -38,7 +41,7 @@ public class QueryEngine
 		this.ontology = ontology;
 
 		// Create a reasoner factory.
-		final OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
+		@NonNull final OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
 
 		// We need to create an instance of OWLReasoner.
 		// An OWLReasoner provides/ the basic query functionality that we need to
@@ -96,7 +99,7 @@ public class QueryEngine
 	 * @param owlClass The class expression.
 	 * @return The instances of the specified class expression.
 	 */
-	public Stream<OWLNamedIndividual> getInstances(final OWLClass owlClass)
+	public Stream<OWLNamedIndividual> getInstances(@NonNull final OWLClass owlClass)
 	{
 		return this.reasoner.instances(owlClass, DIRECT_INSTANCES);
 	}
@@ -143,7 +146,7 @@ public class QueryEngine
 	 * @param owlObjectProperty property
 	 * @return stream of domain classes
 	 */
-	public Stream<OWLClass> getRanges(final OWLObjectProperty owlObjectProperty)
+	public Stream<OWLClass> getRanges(@NonNull final OWLObjectProperty owlObjectProperty)
 	{
 		return this.reasoner.objectPropertyRanges(owlObjectProperty, true);
 	}
@@ -165,7 +168,7 @@ public class QueryEngine
 	 * @param owlObjectProperty property
 	 * @return stream of super classes
 	 */
-	public Stream<OWLClass> getSuperclasses(final OWLObjectProperty owlObjectProperty)
+	public Stream<OWLClass> getSuperclasses(@NonNull final OWLObjectProperty owlObjectProperty)
 	{
 		return this.reasoner.superClasses(owlObjectProperty.asOWLClass(), true);
 	}
@@ -176,6 +179,7 @@ public class QueryEngine
 	 * @param owlObjectProperty property
 	 * @return stream of sub properties
 	 */
+	@NonNull
 	public Stream<OWLObjectProperty> getSubproperties(final OWLObjectProperty owlObjectProperty)
 	{
 		return this.reasoner.subObjectProperties(owlObjectProperty, true) //
@@ -189,6 +193,7 @@ public class QueryEngine
 	 * @param owlObjectProperty property
 	 * @return stream of inverse properties
 	 */
+	@NonNull
 	public Stream<OWLObjectProperty> getInverseProperties(final OWLObjectProperty owlObjectProperty)
 	{
 		return this.reasoner.inverseObjectProperties(owlObjectProperty) //
@@ -216,6 +221,7 @@ public class QueryEngine
 	 *
 	 * @return top classes
 	 */
+	@NonNull
 	public Iterator<OWLClass> getTopClasses()
 	{
 		return this.reasoner.getTopClassNode().iterator();
@@ -244,7 +250,7 @@ public class QueryEngine
 	 * @param owlIndividual individual
 	 * @return stream of class expressions
 	 */
-	public Stream<OWLClassExpression> getTypes(final OWLIndividual owlIndividual)
+	public Stream<OWLClassExpression> getTypes(@NonNull final OWLIndividual owlIndividual)
 	{
 		return EntitySearcher.getTypes(owlIndividual, this.ontology);
 	}
@@ -257,7 +263,7 @@ public class QueryEngine
 	 * @param entity entity
 	 * @return stream of annotations
 	 */
-	public Stream<OWLAnnotation> getAnnotations(final OWLEntity entity)
+	public Stream<OWLAnnotation> getAnnotations(@NonNull final OWLEntity entity)
 	{
 		return EntitySearcher.getAnnotations(entity, this.ontology);
 	}

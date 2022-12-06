@@ -14,6 +14,9 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * URL dialog
  *
@@ -68,8 +71,8 @@ public class UrlDialog extends JDialog
 		setResizable(true);
 
 		// label
-		final JLabel urlLabel = new JLabel(Messages.getString("UrlDialog.url"));
-		final JLabel queryLabel = new JLabel(Messages.getString("UrlDialog.query"));
+		@NonNull final JLabel urlLabel = new JLabel(Messages.getString("UrlDialog.url"));
+		@NonNull final JLabel queryLabel = new JLabel(Messages.getString("UrlDialog.query"));
 		urlLabel.setToolTipText(Messages.getString("UrlDialog.tooltip_url"));
 		queryLabel.setToolTipText(Messages.getString("UrlDialog.tooltip_query"));
 
@@ -87,7 +90,7 @@ public class UrlDialog extends JDialog
 		scrollPane.setPreferredSize(new Dimension(0, 60));
 
 		// buttons
-		final JButton okButton = new JButton(Messages.getString("UrlDialog.ok"));
+		@NonNull final JButton okButton = new JButton(Messages.getString("UrlDialog.ok"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -96,13 +99,13 @@ public class UrlDialog extends JDialog
 			UrlDialog.this.ok = true;
 			setVisible(false);
 		});
-		final JButton cancelButton = new JButton(Messages.getString("UrlDialog.cancel"));
+		@NonNull final JButton cancelButton = new JButton(Messages.getString("UrlDialog.cancel"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
 		cancelButton.addActionListener(e -> setVisible(false));
-		final JButton addParameter = new JButton(Messages.getString("UrlDialog.add"));
+		@NonNull final JButton addParameter = new JButton(Messages.getString("UrlDialog.add"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -114,7 +117,7 @@ public class UrlDialog extends JDialog
 				model.newRow(null);
 			}
 		});
-		final JButton removeParameter = new JButton(Messages.getString("UrlDialog.remove"));
+		@NonNull final JButton removeParameter = new JButton(Messages.getString("UrlDialog.remove"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -129,14 +132,14 @@ public class UrlDialog extends JDialog
 		});
 
 		// button panel
-		final JPanel buttonPanel = new JPanel();
+		@NonNull final JPanel buttonPanel = new JPanel();
 		buttonPanel.add(addParameter, null);
 		buttonPanel.add(removeParameter, null);
 		buttonPanel.add(cancelButton, null);
 		buttonPanel.add(okButton, null);
 
 		// assemble
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		panel.add(urlLabel, new GridBagConstraints(0, 1, 1, 1, 0., 0., GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(10, 10, 0, 10), 0, 0));
 		panel.add(this.urlTextField, new GridBagConstraints(0, 2, 1, 1, 0., 0., GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 10, 10), 0, 0));
@@ -191,10 +194,11 @@ public class UrlDialog extends JDialog
 	 * @param query queries
 	 * @return property set
 	 */
+	@NonNull
 	static private Properties query2Properties(final String query)
 	{
 		final Properties properties = new Properties();
-		final StringTokenizer stringTokenizer = new StringTokenizer(query, "&");
+		@NonNull final StringTokenizer stringTokenizer = new StringTokenizer(query, "&");
 		while (stringTokenizer.hasMoreTokens())
 		{
 			final StringTokenizer stringTokenizer2 = new StringTokenizer(stringTokenizer.nextToken(), "=");
@@ -216,14 +220,14 @@ public class UrlDialog extends JDialog
 	 * @param params properties
 	 * @return query string
 	 */
-	static private String properties2Query(final Properties params)
+	static private String properties2Query(@Nullable final Properties params)
 	{
 		if (params == null)
 		{
 			return null;
 		}
 
-		StringBuilder query = new StringBuilder();
+		@NonNull StringBuilder query = new StringBuilder();
 		int i = 0;
 		for (final String key : params.stringPropertyNames())
 		{
@@ -335,7 +339,7 @@ public class UrlDialog extends JDialog
 		 *
 		 * @param params parameters
 		 */
-		public ParameterModel(final Properties params)
+		public ParameterModel(@Nullable final Properties params)
 		{
 			if (params == null)
 			{
@@ -358,7 +362,7 @@ public class UrlDialog extends JDialog
 		 * @return row index
 		 */
 		@SuppressWarnings("UnusedReturnValue")
-		public int newRow(final Entry entry)
+		public int newRow(@Nullable final Entry entry)
 		{
 			this.entries.add(entry != null ? entry : new Entry());
 			final int rowIdx = this.entries.size() - 1;
@@ -386,10 +390,11 @@ public class UrlDialog extends JDialog
 		 *
 		 * @return properties
 		 */
+		@Nullable
 		public Properties getProperties()
 		{
-			Properties properties = null;
-			for (final Entry entry : this.entries)
+			@Nullable Properties properties = null;
+			for (@NonNull final Entry entry : this.entries)
 			{
 				if (entry.key != null && !entry.key.isEmpty() && entry.value != null && !entry.value.isEmpty())
 				{
@@ -458,6 +463,7 @@ public class UrlDialog extends JDialog
 		 * (non-Javadoc)
 		 * @see javax.swing.table.TableModel#getValueAt(int, int)
 		 */
+		@Nullable
 		@Override
 		public Object getValueAt(final int y, final int x)
 		{
@@ -477,6 +483,7 @@ public class UrlDialog extends JDialog
 		 * (non-Javadoc)
 		 * @see javax.swing.table.TableModel#getColumnName(int)
 		 */
+		@NonNull
 		@Override
 		public String getColumnName(final int x)
 		{
@@ -517,7 +524,7 @@ public class UrlDialog extends JDialog
 				}
 				if (query != null)
 				{
-					final Properties parameters = UrlDialog.query2Properties(query);
+					@NonNull final Properties parameters = UrlDialog.query2Properties(query);
 					final ParameterModel model = new ParameterModel(parameters);
 					this.queryTable.setModel(model);
 					this.queryTable.getColumnModel().getColumn(0).setMaxWidth(90);

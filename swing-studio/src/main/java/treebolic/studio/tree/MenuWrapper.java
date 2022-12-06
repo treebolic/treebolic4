@@ -5,6 +5,7 @@ package treebolic.studio.tree;
 
 import java.util.List;
 
+import treebolic.annotations.NonNull;
 import treebolic.studio.Messages;
 import treebolic.model.MenuItem;
 import treebolic.model.Settings;
@@ -33,6 +34,7 @@ public class MenuWrapper extends SettingsWrapper
 		this.menu = menu;
 	}
 
+	@NonNull
 	@Override
 	public String toString()
 	{

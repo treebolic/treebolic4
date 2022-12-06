@@ -9,6 +9,8 @@ import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.studio.Messages;
 import treebolic.model.MenuItem;
 import treebolic.model.*;
@@ -27,36 +29,43 @@ public class Renderer extends DefaultTreeCellRenderer
 	/**
 	 * Treebolic icon
 	 */
+	@NonNull
 	static protected final ImageIcon treebolicIcon;
 
 	/**
 	 * Tree icon
 	 */
+	@NonNull
 	static protected final ImageIcon treeIcon;
 
 	/**
 	 * Nodes icon
 	 */
+	@NonNull
 	static protected final ImageIcon nodesIcon;
 
 	/**
 	 * Root icon
 	 */
+	@NonNull
 	static protected final ImageIcon rootIcon;
 
 	/**
 	 * Node icon
 	 */
+	@NonNull
 	static protected final ImageIcon nodeIcon;
 
 	/**
 	 * Node special icon
 	 */
+	@NonNull
 	static protected final ImageIcon nodeSpecialIcon;
 
 	/**
 	 * Edges icon
 	 */
+	@NonNull
 	static protected final ImageIcon edgesIcon;
 
 	/**
@@ -72,11 +81,13 @@ public class Renderer extends DefaultTreeCellRenderer
 	/**
 	 * Menu icon
 	 */
+	@NonNull
 	static protected final ImageIcon menuIcon;
 
 	/**
 	 * Default icon
 	 */
+	@NonNull
 	static protected final ImageIcon defaultIcon;
 
 	// font used
@@ -89,6 +100,7 @@ public class Renderer extends DefaultTreeCellRenderer
 	/**
 	 * Bold font
 	 */
+	@NonNull
 	static protected final Font boldFont;
 
 	/**
@@ -158,12 +170,12 @@ public class Renderer extends DefaultTreeCellRenderer
 			{
 				label = label.replaceAll("\n", "\\\\n");
 			}
-			String tooltip = node.getLabel();
+			@Nullable String tooltip = node.getLabel();
 			if (tooltip != null)
 			{
 				tooltip = tooltip.replaceAll("\n", "<br>");
 			}
-			final String content = node.getContent();
+			@Nullable final String content = node.getContent();
 			final boolean isSpecial = node.getLink() != null || node.getMountPoint() != null;
 			final boolean isRoot = node.getParent() == null;
 			setText(label);
@@ -265,9 +277,10 @@ public class Renderer extends DefaultTreeCellRenderer
 	 * @param content node content
 	 * @return tooltip string
 	 */
-	private String getNodeTooltip(final String label, final String content)
+	@NonNull
+	private String getNodeTooltip(final String label, @Nullable final String content)
 	{
-		final StringBuilder buffer = new StringBuilder();
+		@NonNull final StringBuilder buffer = new StringBuilder();
 		buffer.append("<html><strong>Node</strong><br>");
 		buffer.append(label);
 		buffer.append("<br>");

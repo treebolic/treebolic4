@@ -239,7 +239,7 @@ public class TreebolicThread extends Thread
 			// int h = canvas.getHeight() / 2;
 			// canvas.drawCircle(w, h, Math.min(w, h), paint);
 
-			final Graphics g = new Graphics(canvas);
+			@treebolic.annotations.NonNull final Graphics g = new Graphics(canvas);
 			assert this.surface != null;
 			this.surface.paint(g);
 

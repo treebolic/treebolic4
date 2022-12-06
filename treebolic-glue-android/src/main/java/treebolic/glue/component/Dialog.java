@@ -127,7 +127,7 @@ public class Dialog extends AppCompatDialogFragment implements treebolic.glue.if
 		}
 
 		// colors
-		int[] colors = Utils.fetchColors(this.activity, R.attr.treebolic_dialog_background, R.attr.treebolic_dialog_foreground, R.attr.treebolic_dialog_foreground_enhanced, R.attr.treebolic_dialog_foreground_icon);
+		@treebolic.annotations.NonNull int[] colors = Utils.fetchColors(this.activity, R.attr.treebolic_dialog_background, R.attr.treebolic_dialog_foreground, R.attr.treebolic_dialog_foreground_enhanced, R.attr.treebolic_dialog_foreground_icon);
 		this.background = colors[0];
 		this.foreground = colors[1];
 		// int foregroundEnhanced = colors[2];
@@ -148,7 +148,7 @@ public class Dialog extends AppCompatDialogFragment implements treebolic.glue.if
 	{
 		// use the Builder class for convenient dialog construction
 		final Activity activity = requireActivity();
-		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		@treebolic.annotations.NonNull final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
 		// get the layout inflater
 		final LayoutInflater inflater = activity.getLayoutInflater();
@@ -215,11 +215,12 @@ public class Dialog extends AppCompatDialogFragment implements treebolic.glue.if
 		;
 
 		// create the dialog object and return it
-		final AppCompatDialog dialog = builder.create();
+		@treebolic.annotations.NonNull final AppCompatDialog dialog = builder.create();
 		dialog.setCanceledOnTouchOutside(true);
 		return dialog;
 	}
 
+	@treebolic.annotations.NonNull
 	private WebViewClient makeWebViewClient()
 	{
 		return new WebViewClient()

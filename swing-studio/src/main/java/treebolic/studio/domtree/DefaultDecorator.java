@@ -6,6 +6,8 @@ package treebolic.studio.domtree;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Node decorator
  *
@@ -91,9 +93,10 @@ public class DefaultDecorator
 	 *
 	 * @return string
 	 */
+	@NonNull
 	protected String childrenToString()
 	{
-		final StringBuilder buffer = new StringBuilder();
+		@NonNull final StringBuilder buffer = new StringBuilder();
 		final NodeList list = this.node.getChildNodes();
 		for (int i = 0; i < list.getLength(); i++)
 		{

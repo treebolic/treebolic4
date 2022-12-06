@@ -5,6 +5,7 @@ package treebolic.studio.dialogs;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
 import treebolic.commons.OpenDialog;
 
 /**
@@ -36,7 +37,7 @@ public class XOpenDialog extends OpenDialog
 	static public void main(final String[] args)
 	{
 		UIManager.put("swing.boldMetal", false);
-		final XOpenDialog dialog = new XOpenDialog(null, null, null);
+		@NonNull final XOpenDialog dialog = new XOpenDialog(null, null, null);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

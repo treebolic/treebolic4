@@ -3,6 +3,7 @@
  */
 package treebolic;
 
+import treebolic.annotations.NonNull;
 import treebolic.commons.Laf;
 import treebolic.studio.MainFrame;
 
@@ -23,7 +24,7 @@ public class Studio
 	 *
 	 * @param args program arguments
 	 */
-	public Studio(final String[] args)
+	public Studio(@NonNull final String[] args)
 	{
 		// System.out.println("CLASSPATH=<" + System.getProperty("java.class.path", ".") + ">");
 
@@ -38,6 +39,7 @@ public class Studio
 	 *
 	 * @return version
 	 */
+	@NonNull
 	static public String getVersion()
 	{
 		return Studio.version;
@@ -48,7 +50,7 @@ public class Studio
 	 *
 	 * @param args aruments
 	 */
-	public static void main(final String[] args)
+	public static void main(@NonNull final String[] args)
 	{
 		Laf.lookAndFeel(args);
 		//noinspection InstantiationOfUtilityClass

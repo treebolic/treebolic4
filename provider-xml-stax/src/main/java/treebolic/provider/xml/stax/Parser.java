@@ -17,6 +17,8 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.model.*;
 
 
@@ -43,17 +45,17 @@ public class Parser
 	 */
 	public static Model parse(XMLEventReader reader) throws XMLStreamException
 	{
-		Deque<MutableNode> stack = null;
+		@Nullable Deque<MutableNode> stack = null;
 
 		Map<String, MutableNode> nodes = null;
 
-		INode root = null;
+		@Nullable INode root = null;
 
 		List<IEdge> edges = null;
 
 		MutableNode node = null;
 
-		MutableEdge edge = null;
+		@Nullable MutableEdge edge = null;
 
 		while (reader.hasNext())
 		{
@@ -162,13 +164,13 @@ public class Parser
 	 * @throws IOException        io exception
 	 * @throws XMLStreamException xml stream exception
 	 */
-	public static void main(String[] args) throws IOException, XMLStreamException
+	public static void main(@NonNull String[] args) throws IOException, XMLStreamException
 	{
-		try (FileReader fr = new FileReader(args[0]))
+		try (@NonNull FileReader fr = new FileReader(args[0]))
 		{
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 			XMLEventReader reader = factory.createXMLEventReader(fr);
-			Model model = parse(reader);
+			@NonNull Model model = parse(reader);
 
 			System.out.println(ModelDump.toString(model));
 		}

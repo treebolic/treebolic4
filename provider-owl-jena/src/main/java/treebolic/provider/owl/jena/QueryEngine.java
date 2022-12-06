@@ -48,7 +48,7 @@ public class QueryEngine
 	 * @param clazz The class expression.
 	 * @return The equivalent classes of the specified class expression If there was a problem parsing the class expression.
 	 */
-	public ExtendedIterator<OntClass> getEquivalentClasses(final OntClass clazz)
+	public ExtendedIterator<OntClass> getEquivalentClasses(@NonNull final OntClass clazz)
 	{
 		return clazz.listEquivalentClasses();
 	}
@@ -59,7 +59,7 @@ public class QueryEngine
 	 * @param clazz The class expression.
 	 * @return The superclasses of the specified class expression If there was a problem parsing the class expression.
 	 */
-	public ExtendedIterator<OntClass> getSuperClasses(final OntClass clazz)
+	public ExtendedIterator<OntClass> getSuperClasses(@NonNull final OntClass clazz)
 	{
 		return clazz.listSuperClasses(DIRECT_CLASSES);
 	}
@@ -72,7 +72,7 @@ public class QueryEngine
 	 * @param owlClass The class expression.
 	 * @return The subclasses of the specified class expression If there was a problem parsing the class expression.
 	 */
-	public ExtendedIterator<OntClass> getSubClasses(final OntClass owlClass)
+	public ExtendedIterator<OntClass> getSubClasses(@NonNull final OntClass owlClass)
 	{
 		return owlClass.listSubClasses(DIRECT_CLASSES);
 	}
@@ -129,7 +129,7 @@ public class QueryEngine
 	 * @param property property
 	 * @return extended iterator of domain classes
 	 */
-	public ExtendedIterator<OntClass> getDomains(final OntProperty property)
+	public ExtendedIterator<OntClass> getDomains(@NonNull final OntProperty property)
 	{
 		return property.asObjectProperty().listDomain().mapWith(OntResource::asClass);
 	}
@@ -151,7 +151,7 @@ public class QueryEngine
 	 * @param property property
 	 * @return extended iterator of sub properties
 	 */
-	public ExtendedIterator<? extends OntProperty> getSubproperties(final OntProperty property)
+	public ExtendedIterator<? extends OntProperty> getSubproperties(@NonNull final OntProperty property)
 	{
 		return property.asObjectProperty().listSubProperties();
 	}
@@ -162,7 +162,7 @@ public class QueryEngine
 	 * @param property property
 	 * @return extended iterator of inverse properties
 	 */
-	public ExtendedIterator<? extends OntProperty> getInverseProperties(final OntProperty property)
+	public ExtendedIterator<? extends OntProperty> getInverseProperties(@NonNull final OntProperty property)
 	{
 		return property.asObjectProperty().listInverse();
 	}
@@ -187,7 +187,7 @@ public class QueryEngine
 	 * @param model model
 	 * @return extended iterator of top classes
 	 */
-	public ExtendedIterator<OntClass> getTopClasses(final OntModel model)
+	public ExtendedIterator<OntClass> getTopClasses(@NonNull final OntModel model)
 	{
 		return model.listHierarchyRootClasses().filterDrop(c -> c.getLocalName() == null);
 	}
@@ -201,7 +201,7 @@ public class QueryEngine
 	 * @param lang   language
 	 * @return extended iterator of annotations
 	 */
-	public ExtendedIterator<RDFNode> getAnnotations(final OntResource entity, @NonNull final String lang)
+	public ExtendedIterator<RDFNode> getAnnotations(@NonNull final OntResource entity, @NonNull final String lang)
 	{
 		return entity.listComments(lang);
 	}
@@ -212,7 +212,7 @@ public class QueryEngine
 	 * @param entity entity
 	 * @return ExtendedIterator iterator of types
 	 */
-	public ExtendedIterator<OntClass> getTypes(final OntResource entity)
+	public ExtendedIterator<OntClass> getTypes(@NonNull final OntResource entity)
 	{
 		return entity.listRDFTypes(false) //
 				.mapWith(t -> t.as(OntClass.class));

@@ -12,6 +12,8 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.commons.Utils;
 import treebolic.studio.ReferenceListDialog.ParameterModel.Entry;
 
@@ -92,7 +94,7 @@ public class ReferenceListDialog extends JDialog
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
 		updateButton.addActionListener(e -> update());
-		final JButton cancelButton = new JButton(Messages.getString("ReferenceListDialog.cancel"));
+		@NonNull final JButton cancelButton = new JButton(Messages.getString("ReferenceListDialog.cancel"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -105,7 +107,7 @@ public class ReferenceListDialog extends JDialog
 		this.buttonPanel.add(updateButton, null);
 
 		// assemble
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		panel.add(this.label, new GridBagConstraints(0, 0, 1, 1, 0., 0., GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(10, 10, 0, 10), 0, 0));
 		panel.add(this.scrollPane, new GridBagConstraints(0, 1, 1, 1, 1., 1., GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 10, 5, 10), 0, 0));
@@ -130,6 +132,7 @@ public class ReferenceListDialog extends JDialog
 			 * (non-Javadoc)
 			 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
 			 */
+			@NonNull
 			@Override
 			public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
 			{
@@ -149,6 +152,7 @@ public class ReferenceListDialog extends JDialog
 			 * (non-Javadoc)
 			 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
 			 */
+			@NonNull
 			@Override
 			public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
 			{
@@ -171,7 +175,7 @@ public class ReferenceListDialog extends JDialog
 		this.referenceTable.setModel(model);
 
 		// sort
-		final TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
+		@NonNull final TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
 		this.referenceTable.setRowSorter(sorter);
 		sorter.setComparator(0, Comparator.comparing((Entry entry) -> entry.key));
 		sorter.setComparator(1, Comparator.comparing((Entry entry) -> entry.value));
@@ -228,6 +232,7 @@ public class ReferenceListDialog extends JDialog
 			/**
 			 * Value
 			 */
+			@NonNull
 			public final String value;
 
 			/**
@@ -241,7 +246,7 @@ public class ReferenceListDialog extends JDialog
 			 * @param key   key
 			 * @param value value
 			 */
-			public Entry(final String key, final String value, final int valueCount)
+			public Entry(@NonNull final String key, final String value, final int valueCount)
 			{
 				this.key = key.trim();
 				this.value = value.trim();
@@ -254,18 +259,18 @@ public class ReferenceListDialog extends JDialog
 		 *
 		 * @param targetToLocationMap target location map
 		 */
-		public ParameterModel(final Map<String, SortedSet<String>> targetToLocationMap)
+		public ParameterModel(@Nullable final Map<String, SortedSet<String>> targetToLocationMap)
 		{
 			if (targetToLocationMap == null)
 			{
 				return;
 			}
 
-			for (final String target : targetToLocationMap.keySet())
+			for (@NonNull final String target : targetToLocationMap.keySet())
 			{
 				final SortedSet<String> locations = targetToLocationMap.get(target);
 				final int count = locations.size();
-				for (final String location : locations)
+				for (@NonNull final String location : locations)
 				{
 					newRow(new Entry(target, location, count));
 				}
@@ -331,6 +336,7 @@ public class ReferenceListDialog extends JDialog
 		 * (non-Javadoc)
 		 * @see javax.swing.table.TableModel#getColumnName(int)
 		 */
+		@Nullable
 		@Override
 		public String getColumnName(final int x)
 		{

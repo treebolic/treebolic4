@@ -5,6 +5,7 @@ package treebolic.studio.domtree.treebolic;
 
 import org.w3c.dom.Node;
 
+import treebolic.annotations.NonNull;
 import treebolic.studio.domtree.ElementDecorator;
 
 /**
@@ -32,6 +33,7 @@ public class EdgeDecorator extends ElementDecorator
 	 * (non-Javadoc)
 	 * @see treebolic.studio.domtree.ElementDecorator#getName()
 	 */
+	@NonNull
 	@Override
 	public String getName()
 	{

@@ -11,6 +11,8 @@ import java.net.URISyntaxException;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Hyperlink button
  */
@@ -38,13 +40,13 @@ public class HyperlinkButton extends JButton
 	 * @param label label
 	 * @param uri   url
 	 */
-	public HyperlinkButton(final String label, final String uri)
+	public HyperlinkButton(final String label, @NonNull final String uri)
 	{
 		super(label);
 		init(uri);
 	}
 
-	void init(final String uri)
+	void init(@NonNull final String uri)
 	{
 		try
 		{
@@ -95,7 +97,7 @@ public class HyperlinkButton extends JButton
 	static public String makeURILabel(final String text)
 	{
 		// final String format = "<HTML><FONT color=\"#000099\"><U>%s</U></FONT></HTML>";
-		final String format = "<HTML><U>%s</U></HTML>";
+		@NonNull final String format = "<HTML><U>%s</U></HTML>";
 		return String.format(format, text);
 	}
 }

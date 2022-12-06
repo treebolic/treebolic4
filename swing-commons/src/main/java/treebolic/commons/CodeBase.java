@@ -6,6 +6,8 @@ package treebolic.commons;
 
 import java.net.URL;
 
+import treebolic.annotations.Nullable;
+
 /**
  * DetermineCode base
  *
@@ -20,7 +22,7 @@ public class CodeBase
 	 */
 	static public String getJarLocation()
 	{
-		URL url = Persist.class.getResource("CodeBase.class");
+		@Nullable URL url = Persist.class.getResource("CodeBase.class");
 		if (url != null)
 		{
 			String urlString = url.toString();

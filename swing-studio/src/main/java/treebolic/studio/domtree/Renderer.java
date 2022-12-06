@@ -21,6 +21,9 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import javax.swing.tree.TreeCellRenderer;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Renderer
  *
@@ -212,14 +215,14 @@ public class Renderer implements TreeCellRenderer
 	 * @param string value string
 	 * @param offset offset of value in text
 	 */
-	protected void applyStyleToPatterns(final String string, final int offset)
+	protected void applyStyleToPatterns(@Nullable final String string, final int offset)
 	{
 		if (string != null)
 		{
 			final StyledDocument styledDocument = this.textComponent.getStyledDocument();
 			for (final Pattern pattern : this.patterns)
 			{
-				final Matcher matcher = pattern.matcher(string);
+				@NonNull final Matcher matcher = pattern.matcher(string);
 				while (matcher.find())
 				{
 					for (int g = 1; g < matcher.groupCount(); g++)

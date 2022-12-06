@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * File editor
  *
@@ -32,6 +35,7 @@ class LongTextEditor extends AbstractCellEditor implements TableCellEditor
 	/**
 	 * Button component
 	 */
+	@NonNull
 	private final JButton button;
 
 	/**
@@ -85,6 +89,7 @@ class LongTextEditor extends AbstractCellEditor implements TableCellEditor
 	 * (non-Javadoc)
 	 * @see javax.swing.CellEditor#getCellEditorValue()
 	 */
+	@Nullable
 	@Override
 	public Object getCellEditorValue()
 	{

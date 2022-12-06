@@ -11,6 +11,9 @@ import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Class searcher
  *
@@ -25,6 +28,7 @@ public class Searcher
 	 * @param pattern0 pattern
 	 * @return result set
 	 */
+	@NonNull
 	static public Set<String> findClasses(final String pattern0)
 	{
 		String pattern = pattern0;
@@ -48,17 +52,18 @@ public class Searcher
 	 * @param pattern pattern
 	 * @return result set
 	 */
+	@NonNull
 	static public Map<String, String> findFiles(final String pattern)
 	{
 		final String pattern2 = File.separatorChar == '/' ? pattern : pattern.replaceAll("/", "\\\\\\\\");
-		final Map<String, String> list = new TreeMap<>();
+		@NonNull final Map<String, String> list = new TreeMap<>();
 		final String classPath = System.getProperty("java.class.path");
 		final String[] pathElements = classPath.split(File.pathSeparator);
-		for (final String pathElement : pathElements)
+		for (@NonNull final String pathElement : pathElements)
 		{
 			try
 			{
-				final File file = new File(pathElement);
+				@NonNull final File file = new File(pathElement);
 				if (file.isDirectory())
 				{
 					list.putAll(Searcher.findInDirectory(file, pattern2, pathElement));
@@ -84,13 +89,14 @@ public class Searcher
 	 * @return file with matching file path
 	 * @throws IOException io exception
 	 */
-	static private Map<String, String> findInFile(final File file, final String pattern) throws IOException
+	@NonNull
+	static private Map<String, String> findInFile(@NonNull final File file, final String pattern) throws IOException
 	{
 		final Map<String, String> map = new TreeMap<>();
 		if (file.canRead() && file.getAbsolutePath().endsWith(".jar"))
 		{
 			@SuppressWarnings("resource") final JarFile jar = new JarFile(file);
-			for (final Enumeration<JarEntry> entries = jar.entries(); entries.hasMoreElements(); )
+			for (@NonNull final Enumeration<JarEntry> entries = jar.entries(); entries.hasMoreElements(); )
 			{
 				final JarEntry entry = entries.nextElement();
 				if (entry.getName().matches(pattern))
@@ -111,16 +117,17 @@ public class Searcher
 	 * @return matching entry
 	 * @throws IOException io exception
 	 */
-	static public Collection<String> findZipEntries(final File file, final String positivePattern, final String negativePattern) throws IOException
+	@NonNull
+	static public Collection<String> findZipEntries(@NonNull final File file, final String positivePattern, final String negativePattern) throws IOException
 	{
 		final Collection<String> set = new TreeSet<>();
 		if (file.canRead())
 		{
-			@SuppressWarnings("resource") final ZipFile zip = new ZipFile(file);
+			@NonNull @SuppressWarnings("resource") final ZipFile zip = new ZipFile(file);
 			for (final Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements(); )
 			{
 				final ZipEntry entry = entries.nextElement();
-				final String name = entry.getName();
+				@NonNull final String name = entry.getName();
 				if (positivePattern != null && !name.matches(positivePattern))
 				{
 					continue;
@@ -143,13 +150,14 @@ public class Searcher
 	 * @return file with matching file path
 	 * @throws IOException io exception
 	 */
-	static private Map<String, String> findInDirectory(final File directory, final String pattern, final String pathElement) throws IOException
+	@NonNull
+	static private Map<String, String> findInDirectory(@NonNull final File directory, @NonNull final String pattern, final String pathElement) throws IOException
 	{
-		final Map<String, String> map = new TreeMap<>();
-		File[] files = directory.listFiles();
+		@NonNull final Map<String, String> map = new TreeMap<>();
+		@Nullable File[] files = directory.listFiles();
 		if (files != null)
 		{
-			for (final File directoryEntry : files)
+			for (@NonNull final File directoryEntry : files)
 			{
 				if (directoryEntry.getAbsolutePath().matches(pattern))
 				{
@@ -175,7 +183,8 @@ public class Searcher
 	 * @param pattern pattern
 	 * @return list of urls
 	 */
-	static public List<String> findFileUrls(final String pattern)
+	@NonNull
+	static public List<String> findFileUrls(@NonNull final String pattern)
 	{
 		return Searcher.toUrls(Searcher.findFiles(pattern));
 	}
@@ -186,10 +195,11 @@ public class Searcher
 	 * @param map path to container map
 	 * @return list of urls
 	 */
-	static public List<String> toUrls(final Map<String, String> map)
+	@NonNull
+	static public List<String> toUrls(@NonNull final Map<String, String> map)
 	{
-		final List<String> urls = new ArrayList<>();
-		for (final Map.Entry<String, String> entry : map.entrySet())
+		@NonNull final List<String> urls = new ArrayList<>();
+		for (@NonNull final Map.Entry<String, String> entry : map.entrySet())
 		{
 			final String container = entry.getValue();
 			final String path = entry.getKey();
@@ -219,7 +229,7 @@ public class Searcher
 			System.out.println("PROVIDER CLASS: " + className);
 		}
 
-		for (final Map.Entry<String, String> entry : Searcher.findFiles(".*xsl$").entrySet())
+		for (@NonNull final Map.Entry<String, String> entry : Searcher.findFiles(".*xsl$").entrySet())
 		{
 			System.out.println("XSL FILE: " + entry.getKey() + " @ " + entry.getValue());
 		}

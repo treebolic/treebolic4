@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.Map;
 import java.util.SortedSet;
 
+import treebolic.annotations.NonNull;
 import treebolic.studio.model.ModelUtils;
 
 /**
@@ -38,7 +39,7 @@ public class MountListDialog extends ReferenceListDialog
 	@Override
 	protected void update()
 	{
-		final Map<String, SortedSet<String>> mountToLocationMap = ModelUtils.getMountMap(this.controller.getModel());
+		@NonNull final Map<String, SortedSet<String>> mountToLocationMap = ModelUtils.getMountMap(this.controller.getModel());
 		setModel(mountToLocationMap);
 		super.update();
 	}

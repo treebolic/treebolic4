@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
 import treebolic.commons.Persist;
 import treebolic.commons.SiteDialog;
 
@@ -38,7 +39,7 @@ public class XSiteDialog extends SiteDialog
 	{
 		UIManager.put("swing.boldMetal", false);
 		final Properties settings = Persist.getSettings("treebolic-studio");
-		final XSiteDialog dialog = new XSiteDialog(settings);
+		@NonNull final XSiteDialog dialog = new XSiteDialog(settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

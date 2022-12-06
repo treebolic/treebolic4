@@ -122,7 +122,7 @@ public class Parser
 		try
 		{
 			// xsl
-			final Source xslSource = new StreamSource(xslt.openStream());
+			@NonNull final Source xslSource = new StreamSource(xslt.openStream());
 
 			// in
 			Source source;
@@ -138,7 +138,7 @@ public class Parser
 			}
 
 			// out
-			final DOMResult result = new DOMResult();
+			@NonNull final DOMResult result = new DOMResult();
 
 			// transform
 			final TransformerFactory factory = TransformerFactory.newInstance();

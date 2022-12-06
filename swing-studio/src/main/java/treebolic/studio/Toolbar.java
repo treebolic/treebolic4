@@ -7,6 +7,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Toolbar
  *
@@ -49,19 +51,19 @@ public class Toolbar extends JToolBar
 		final JButton openButton = makeButton(Messages.getString("Toolbar.open"), Messages.getString("Toolbar.tooltip_open"), "open.png");
 		openButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.OPEN, 0));
 
-		final JButton openHttpButton = makeButton(Messages.getString("Toolbar.open_url"), Messages.getString("Toolbar.tooltip_open_url"), "openurl.png");
+		@NonNull final JButton openHttpButton = makeButton(Messages.getString("Toolbar.open_url"), Messages.getString("Toolbar.tooltip_open_url"), "openurl.png");
 		openHttpButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.OPENURL, 0));
 
 		final JButton newButton = makeButton(Messages.getString("Toolbar.new"), Messages.getString("Toolbar.tooltip_new"), "newdoc.png");
 		newButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.NEW, 0));
 
-		final JButton saveButton = makeButton(Messages.getString("Toolbar.save"), Messages.getString("Toolbar.tooltip_save"), "save.png");
+		@NonNull final JButton saveButton = makeButton(Messages.getString("Toolbar.save"), Messages.getString("Toolbar.tooltip_save"), "save.png");
 		saveButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.SAVE, 0));
 
-		final JButton helpButton = makeButton(Messages.getString("Toolbar.help"), Messages.getString("Toolbar.tooltip_help"), "help.png");
+		@NonNull final JButton helpButton = makeButton(Messages.getString("Toolbar.help"), Messages.getString("Toolbar.tooltip_help"), "help.png");
 		helpButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.HELP, 0));
 
-		final JButton updateNodeButton = makeButton(Messages.getString("Toolbar.update"), Messages.getString("Toolbar.tooltip_update"), "refresh.png");
+		@NonNull final JButton updateNodeButton = makeButton(Messages.getString("Toolbar.update"), Messages.getString("Toolbar.tooltip_update"), "refresh.png");
 		updateNodeButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.UPDATE, 0));
 
 		this.add(openButton);
@@ -80,9 +82,10 @@ public class Toolbar extends JToolBar
 	 * @param image       image
 	 * @return button
 	 */
+	@NonNull
 	private JButton makeButton(final String ignoredText, final String tooltip, final String image)
 	{
-		final JButton button = new JButton();
+		@NonNull final JButton button = new JButton();
 		button.setToolTipText(tooltip);
 		//noinspection ConstantConditions
 		button.setIcon(new ImageIcon(Toolbar.class.getResource("images/" + image)));

@@ -14,6 +14,8 @@ import java.nio.file.Paths;
 import java.util.Enumeration;
 import java.util.Properties;
 
+import treebolic.annotations.NonNull;
+
 /**
  * SQL properties
  *
@@ -72,7 +74,7 @@ public class SqlProperties
 	 * @param file property files
 	 * @return properties
 	 */
-	static public Properties load(final File file)
+	static public Properties load(@NonNull final File file)
 	{
 		try
 		{
@@ -91,11 +93,11 @@ public class SqlProperties
 	 * @param url url
 	 * @return properties
 	 */
-	static public Properties load(final URL url)
+	static public Properties load(@NonNull final URL url)
 	{
 		try (InputStream is = url.openStream())
 		{
-			final Properties properties = new Properties();
+			@NonNull final Properties properties = new Properties();
 			properties.load(is);
 			return properties;
 		}
@@ -112,11 +114,11 @@ public class SqlProperties
 	 * @param location location
 	 * @return properties
 	 */
-	static public Properties load(final String location)
+	static public Properties load(@NonNull final String location)
 	{
 		try (InputStream is = Files.newInputStream(Paths.get(location)))
 		{
-			final Properties properties = new Properties();
+			@NonNull final Properties properties = new Properties();
 			properties.load(is);
 			return properties;
 		}
@@ -133,7 +135,7 @@ public class SqlProperties
 	 * @param properties           properties to save
 	 * @param propertyFileLocation property file path
 	 */
-	static void save(final Properties properties, final String propertyFileLocation)
+	static void save(@NonNull final Properties properties, @NonNull final String propertyFileLocation)
 	{
 		try (OutputStream os = Files.newOutputStream(Paths.get(propertyFileLocation)))
 		{
@@ -151,9 +153,10 @@ public class SqlProperties
 	 * @param properties properties to save
 	 * @return string
 	 */
-	static public String toString(final Properties properties)
+	@NonNull
+	static public String toString(@NonNull final Properties properties)
 	{
-		final StringBuilder sb = new StringBuilder();
+		@NonNull final StringBuilder sb = new StringBuilder();
 		for (final Enumeration<?> names = properties.propertyNames(); names.hasMoreElements(); )
 		{
 			final String name = (String) names.nextElement();

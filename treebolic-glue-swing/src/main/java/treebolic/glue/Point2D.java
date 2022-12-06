@@ -42,6 +42,7 @@ public class Point2D extends java.awt.geom.Point2D.Double implements treebolic.g
 
 	// public double getY();
 
+	@NonNull
 	@Override
 	public String toString()
 	{

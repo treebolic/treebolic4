@@ -3,6 +3,8 @@
  */
 package treebolic.commons;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Java version
  *
@@ -20,9 +22,10 @@ public class JavaVersion
 	 *
 	 * @return string array of name=value pairs
 	 */
+	@NonNull
 	static public String[] getJavaProps()
 	{
-		final String[] result = new String[JavaVersion.names.length];
+		@NonNull final String[] result = new String[JavaVersion.names.length];
 
 		String prop;
 		for (int i = 0; i < JavaVersion.names.length; i++)
@@ -50,9 +53,10 @@ public class JavaVersion
 	 *
 	 * @return s string
 	 */
+	@NonNull
 	static public String getJavaPropsString()
 	{
-		final String[] strings = JavaVersion.getJavaProps();
+		@NonNull final String[] strings = JavaVersion.getJavaProps();
 		final StringBuilder buffer = new StringBuilder();
 		for (final String string : strings)
 		{
@@ -98,7 +102,7 @@ public class JavaVersion
 	 */
 	static public void main(final String[] args)
 	{
-		final String[] props = JavaVersion.getJavaProps();
+		@NonNull final String[] props = JavaVersion.getJavaProps();
 		for (final String prop : props)
 		{
 			System.out.println(prop);

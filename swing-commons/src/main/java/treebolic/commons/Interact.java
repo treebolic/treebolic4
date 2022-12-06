@@ -6,6 +6,8 @@ package treebolic.commons;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Interact with user
  *
@@ -18,9 +20,9 @@ public class Interact
 	 *
 	 * @param message message
 	 */
-	static public void warn(final String message)
+	static public void warn(@NonNull final String message)
 	{
-		final String[] lines = message.split("\n");
+		@NonNull final String[] lines = message.split("\n");
 		JOptionPane.showMessageDialog(null, lines, Messages.getString("Interact.title"), JOptionPane.WARNING_MESSAGE);
 	}
 
@@ -45,7 +47,7 @@ public class Interact
 	 */
 	static public String ask2(final String message, final String initial)
 	{
-		final String[] lines = message.split("\n");
+		@NonNull final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines, initial);
 	}
 }

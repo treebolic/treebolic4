@@ -17,6 +17,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.model.*;
 
 /**
@@ -42,10 +43,13 @@ public class Parser
 
 		private List<IEdge> edges;
 
+		@Nullable
 		private MutableNode node = null;
 
+		@Nullable
 		private MutableEdge edge = null;
 
+		@Nullable
 		private StringBuilder textSb = null;
 
 		@Override
@@ -67,7 +71,7 @@ public class Parser
 		}
 
 		@Override
-		public void startElement(String uri, String localName, String qName, Attributes attributes)
+		public void startElement(String uri, String localName, @NonNull String qName, @NonNull Attributes attributes)
 		{
 			switch (qName)
 			{
@@ -104,9 +108,9 @@ public class Parser
 		}
 
 		@Override
-		public void endElement(String uri, String localName, String qName)
+		public void endElement(String uri, String localName, @NonNull String qName)
 		{
-			String text = textSb.toString();
+			@NonNull String text = textSb.toString();
 			if (!text.isEmpty())
 			{
 				text = text.replace('\n', ' ');
@@ -150,6 +154,7 @@ public class Parser
 		 *
 		 * @return model
 		 */
+		@NonNull
 		public Model getResult()
 		{
 			return new Model(new Tree(root, edges), new Settings());
@@ -175,9 +180,9 @@ public class Parser
 		// @formatter:on
 		SAXParser saxParser = factory.newSAXParser();
 
-		SaxHandler handler = new SaxHandler();
+		@NonNull SaxHandler handler = new SaxHandler();
 		saxParser.parse(args[0], handler);
-		Model model = handler.getResult();
+		@NonNull Model model = handler.getResult();
 
 		System.out.println(ModelDump.toString(model));
 	}

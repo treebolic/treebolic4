@@ -14,6 +14,7 @@ import treebolic.annotations.NonNull;
  */
 public class Provider2 extends BaseProvider
 {
+	@NonNull
 	protected OwlModelFactory factory(@NonNull Properties properties)
 	{
 		return new OwlModelFactory2(properties);

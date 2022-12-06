@@ -11,6 +11,8 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.studio.Messages;
 
 /**
@@ -29,7 +31,7 @@ public class DomTreeView extends JTree
 	 *
 	 * @param renderer renderer
 	 */
-	public DomTreeView(final TreeCellRenderer renderer)
+	public DomTreeView(@Nullable final TreeCellRenderer renderer)
 	{
 		super((TreeModel) null);
 
@@ -54,7 +56,7 @@ public class DomTreeView extends JTree
 	 *
 	 * @param document document
 	 */
-	public void setDocument(final Document document)
+	public void setDocument(@Nullable final Document document)
 	{
 		if (document == null)
 		{
@@ -63,7 +65,7 @@ public class DomTreeView extends JTree
 		else
 		{
 			// set
-			final TreeModel model = new TreeModelAdapter(document, null, false);
+			@NonNull final TreeModel model = new TreeModelAdapter(document, null, false);
 			setModel(model);
 
 			// visibility
@@ -83,7 +85,7 @@ public class DomTreeView extends JTree
 		{
 			return;
 		}
-		final TreePath path = new TreePath(root);
+		@NonNull final TreePath path = new TreePath(root);
 		expandAll(path);
 	}
 

@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 class Ontology
 {
@@ -20,7 +21,7 @@ class Ontology
 		}
 	};
 
-	public Ontology(final Map<String, Class> classes, final Map<String, Thing> things, final Map<String, Property> properties)
+	public Ontology(@NonNull final Map<String, Class> classes, final Map<String, Thing> things, @NonNull final Map<String, Property> properties)
 	{
 		this.classes = classes;
 		this.things = things;
@@ -99,9 +100,10 @@ class Ontology
 
 	final Map<String, Property> properties;
 
-	public Class createClass(final String iri)
+	@NonNull
+	public Class createClass(@NonNull final String iri)
 	{
-		Class c = new Class(iri);
+		@NonNull Class c = new Class(iri);
 		classes.put(iri, c);
 		return c;
 	}
@@ -111,12 +113,12 @@ class Ontology
 		return classes.values().stream().filter(clazz -> clazz.superclasses.isEmpty());
 	}
 
-	public Property getRelation(final Class owlClass)
+	public Property getRelation(@NonNull final Class owlClass)
 	{
 		return properties.get(owlClass.iri);
 	}
 
-	public boolean isRelation(final Class owlClass)
+	public boolean isRelation(@NonNull final Class owlClass)
 	{
 		return properties.containsKey(owlClass.iri);
 	}
@@ -125,13 +127,14 @@ class Ontology
 	{
 		static final Comparator<Resource> COMPARATOR = Comparator.comparing(Resource::getIri);
 
+		@NonNull
 		final String iri;
 
 		public String comment;
 
 		public final Set<String> annotations = new HashSet<>();
 
-		public Resource(final String iri)
+		public Resource(@NonNull final String iri)
 		{
 			assert iri != null;
 			this.iri = iri;
@@ -142,6 +145,7 @@ class Ontology
 			return iri;
 		}
 
+		@NonNull
 		public String getLocalName()
 		{
 			int begin = iri.indexOf('#');
@@ -152,6 +156,7 @@ class Ontology
 			return iri;
 		}
 
+		@NonNull
 		public String getNameSpace()
 		{
 			int begin = iri.indexOf('#');
@@ -162,6 +167,7 @@ class Ontology
 			return "";
 		}
 
+		@NonNull
 		@Override
 		public String toString()
 		{
@@ -179,6 +185,7 @@ class Ontology
 
 		public Set<Ontology.Property> properties;
 
+		@Nullable
 		Set<String> _superclasses = new HashSet<>();
 
 		public Class(final String iri)
@@ -209,7 +216,7 @@ class Ontology
 	{
 		final String subtype;
 
-		public Property(final String iri)
+		public Property(@NonNull final String iri)
 		{
 			this(iri, null);
 		}
@@ -230,6 +237,7 @@ class Ontology
 
 		Set<String> _domains = new HashSet<>();
 
+		@Nullable
 		Set<String> _ranges = new HashSet<>();
 
 		Set<String> _subproperties = new HashSet<>();

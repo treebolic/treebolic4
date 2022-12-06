@@ -168,6 +168,7 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * LoadBalancer (classes) : fore color
 	 */
+	@Nullable
 	protected static final Integer LOADBALANCING_FORECOLOR = null;
 
 	/**
@@ -183,6 +184,7 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * LoadBalancer (classes) : image
 	 */
+	@Nullable
 	protected static final Image LOADBALANCING_IMAGE = null;
 
 	/**
@@ -220,6 +222,7 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * LoadBalancer (instances and properties) : image
 	 */
+	@Nullable
 	protected static final Image LOADBALANCING_INSTANCES_IMAGE = null;
 
 	/**
@@ -301,6 +304,7 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Class with relation fore color
 	 */
+	@Nullable
 	private Integer classWithRelationForeColor;
 
 	/**
@@ -316,11 +320,13 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Class with instances fore color
 	 */
+	@Nullable
 	private Integer classWithInstancesForeColor;
 
 	/**
 	 * Class with instances image
 	 */
+	@Nullable
 	private String classWithInstancesImageFile;
 
 	/**
@@ -331,6 +337,7 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Class with properties fore color
 	 */
+	@Nullable
 	private Integer classWithPropertiesForeColor;
 
 	/**
@@ -348,11 +355,13 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Root fore color
 	 */
+	@Nullable
 	private Integer rootForeColor;
 
 	/**
 	 * Root fore color
 	 */
+	@Nullable
 	private Integer rootBackColor;
 
 	/**
@@ -375,6 +384,7 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Instances fore color
 	 */
+	@Nullable
 	private Integer instancesBackColor;
 
 	/**
@@ -390,6 +400,7 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Instance fore color
 	 */
+	@Nullable
 	private Integer instanceBackColor;
 
 	/**
@@ -400,6 +411,7 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Instance edge color
 	 */
+	@Nullable
 	private Integer instanceEdgeColor;
 
 	/**
@@ -410,21 +422,25 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Instance edge image file
 	 */
+	@Nullable
 	private String instanceEdgeImageFile;
 
 	/**
 	 * Instance fore color
 	 */
+	@Nullable
 	private Integer relationForeColor;
 
 	/**
 	 * Relation fore color
 	 */
+	@Nullable
 	private Integer relationBackColor;
 
 	/**
 	 * Relation image
 	 */
+	@Nullable
 	private String relationImageFile;
 
 	/**
@@ -440,6 +456,7 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Relation edge image file
 	 */
+	@Nullable
 	private String relationEdgeImageFile;
 
 	// properties
@@ -467,6 +484,7 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Property fore color
 	 */
+	@Nullable
 	private Integer propertyForeColor;
 
 	/**
@@ -477,11 +495,13 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Property image
 	 */
+	@Nullable
 	private String propertyImageFile;
 
 	/**
 	 * Property edge color
 	 */
+	@Nullable
 	private Integer propertyEdgeColor;
 
 	/**
@@ -492,6 +512,7 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Property edge image file
 	 */
+	@Nullable
 	private String propertyEdgeImageFile;
 
 	// M E M B E R S
@@ -499,16 +520,19 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Ontology
 	 */
+	@Nullable
 	private OWLOntology ontology;
 
 	/**
 	 * Engine
 	 */
+	@Nullable
 	private QueryParser parser;
 
 	/**
 	 * Engine
 	 */
+	@Nullable
 	private QueryEngine engine;
 
 	/**
@@ -524,21 +548,25 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Url engine was build from
 	 */
+	@Nullable
 	private String url;
 
 	/**
 	 * Load balancer (classes)
 	 */
+	@NonNull
 	protected final LoadBalancer loadBalancer;
 
 	/**
 	 * Load balancer (instances)
 	 */
+	@NonNull
 	protected final LoadBalancer instancesLoadBalancer;
 
 	/**
 	 * Load balancer (properties)
 	 */
+	@NonNull
 	protected final LoadBalancer propertiesLoadBalancer;
 
 	// C O N S T R U C T O R
@@ -659,7 +687,7 @@ public class OwlModelFactory implements ImageDecorator
 	 * @throws IOException                  io exception
 	 * @throws OWLOntologyCreationException owl ontology creation exception
 	 */
-	private OWLOntology getOntology(final String ontologyDocumentUrl) throws MalformedURLException, IOException, OWLOntologyCreationException
+	private OWLOntology getOntology(@NonNull final String ontologyDocumentUrl) throws MalformedURLException, IOException, OWLOntologyCreationException
 	{
 		try (InputStream is = new URL(ontologyDocumentUrl).openStream())
 		{
@@ -675,15 +703,16 @@ public class OwlModelFactory implements ImageDecorator
 	 * @param ontologyUrlString ontology URL string
 	 * @return model if successful
 	 */
+	@Nullable
 	public Model makeModel(final String ontologyUrlString)
 	{
-		final Tree tree = makeTree(ontologyUrlString);
+		@Nullable final Tree tree = makeTree(ontologyUrlString);
 		if (tree == null)
 		{
 			return null;
 		}
 
-		final Settings settings = new Settings();
+		@NonNull final Settings settings = new Settings();
 		settings.backColor = OwlModelFactory.backgroundColor;
 		settings.treeEdgeColor = Colors.BLACK;
 		settings.treeEdgeStyle = IEdge.SOLID | IEdge.TOTRIANGLE | IEdge.TOFILL;
@@ -728,7 +757,7 @@ public class OwlModelFactory implements ImageDecorator
 	public Tree makeTree(final String urlString)
 	{
 		// parameter and url
-		final Map<String, String> parse = parseUrl(urlString);
+		@NonNull final Map<String, String> parse = parseUrl(urlString);
 		final String ontologyUrlString = parse.get("url");
 		final String classIri = parse.get("iri");
 		final String classShortForm = parse.get("class");
@@ -782,7 +811,7 @@ public class OwlModelFactory implements ImageDecorator
 					boolean isRelation = target.contains("relation");
 
 					// root
-					final MutableNode owlClassNode = new MutableNode(null, "root");
+					@NonNull final MutableNode owlClassNode = new MutableNode(null, "root");
 					owlClassNode.setLabel(owlClass.getIRI().getShortForm());
 					decorateClassWith(owlClassNode, hasInstances, hasProperties, isRelation);
 					owlClassNode.setEdgeColor(defaultClassForeColor);
@@ -791,7 +820,7 @@ public class OwlModelFactory implements ImageDecorator
 					if (hasInstances)
 					{
 						// instances root
-						final TreeMutableNode instancesNode = new TreeMutableNode(owlClassNode, classIri + "-instances");
+						@NonNull final TreeMutableNode instancesNode = new TreeMutableNode(owlClassNode, classIri + "-instances");
 						decorateInstances(instancesNode);
 						instancesNode.setEdgeColor(defaultInstanceForeColor);
 
@@ -815,13 +844,13 @@ public class OwlModelFactory implements ImageDecorator
 						propertiesNode.setEdgeColor(defaultPropertyForeColor);
 
 						// properties
-						final Stream<OWLObjectProperty> properties = engine.getProperties(owlClass);
+						@NonNull final Stream<OWLObjectProperty> properties = engine.getProperties(owlClass);
 						visitProperties(propertiesNode, properties);
 					}
 					return new Tree(owlClassNode, null);
 				}
 				// class
-				final MutableNode owlClassNode = visitClassAndSubclasses(null, owlClass, ontologyUrlString);
+				@NonNull final MutableNode owlClassNode = visitClassAndSubclasses(null, owlClass, ontologyUrlString);
 				return new Tree(decorateRoot(owlClassNode), null);
 			}
 			return null;
@@ -841,9 +870,10 @@ public class OwlModelFactory implements ImageDecorator
 	 * @param ontologyUrlString0 url string
 	 * @return tree if successful
 	 */
+	@NonNull
 	public Map<String, String> parseUrl(final String ontologyUrlString0)
 	{
-		final Map<String, String> map = new HashMap<>();
+		@NonNull final Map<String, String> map = new HashMap<>();
 
 		String ontologyUrlString = ontologyUrlString0;
 
@@ -882,9 +912,9 @@ public class OwlModelFactory implements ImageDecorator
 	 * @param owlClasses        class stream
 	 * @param ontologyUrlString URL string
 	 */
-	public void visitClasses(final TreeMutableNode parentClassNode, final Stream<OWLClass> owlClasses, final String ontologyUrlString)
+	public void visitClasses(final TreeMutableNode parentClassNode, @NonNull final Stream<OWLClass> owlClasses, final String ontologyUrlString)
 	{
-		final List<INode> childNodes = owlClasses //
+		@NonNull final List<INode> childNodes = owlClasses //
 
 				.filter(owlClass -> !owlClass.isOWLNothing()) //
 				.sorted() //
@@ -914,7 +944,8 @@ public class OwlModelFactory implements ImageDecorator
 	 * @param ontologyUrlString  ontology URL string
 	 * @return treebolic node
 	 */
-	public TreeMutableNode visitClass(final INode parentOwlClassNode, final OWLClass owlClass, final String ontologyUrlString)
+	@NonNull
+	public TreeMutableNode visitClass(final INode parentOwlClassNode, @NonNull final OWLClass owlClass, final String ontologyUrlString)
 	{
 		final String ownClassShortForm = owlClass.getIRI().getShortForm();
 		final String owlClassId = owlClass.getIRI().getShortForm();
@@ -924,7 +955,7 @@ public class OwlModelFactory implements ImageDecorator
 		String comment = owlClass.getIRI() + "<br>" + annotationsToString(annotations);
 
 		// node
-		final TreeMutableNode owlClassNode = new TreeMutableNode(parentOwlClassNode, owlClassId);
+		@NonNull final TreeMutableNode owlClassNode = new TreeMutableNode(parentOwlClassNode, owlClassId);
 		owlClassNode.setLabel(ownClassShortForm);
 		owlClassNode.setTarget(owlClassId);
 		owlClassNode.setContent(comment);
@@ -935,7 +966,7 @@ public class OwlModelFactory implements ImageDecorator
 		{
 			// get instances or properties
 			final Stream<OWLNamedIndividual> instances = engine.getInstances(owlClass);
-			final Stream<OWLObjectProperty> properties = engine.getProperties(owlClass);
+			@NonNull final Stream<OWLObjectProperty> properties = engine.getProperties(owlClass);
 			final boolean hasInstances = instances.findAny().isPresent();
 			final boolean hasProperties = properties.findAny().isPresent();
 			final boolean isRelation = engine.isRelation(owlClass.asOWLClass());
@@ -943,7 +974,7 @@ public class OwlModelFactory implements ImageDecorator
 			// mountpoint
 			if (hasInstances || hasProperties || isRelation)
 			{
-				List<String> targets = new ArrayList<>();
+				@NonNull List<String> targets = new ArrayList<>();
 				if (hasInstances)
 				{
 					targets.add("instances");
@@ -957,7 +988,7 @@ public class OwlModelFactory implements ImageDecorator
 					targets.add("properties");
 				}
 
-				final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
+				@NonNull final MountPoint.Mounting mountingPoint = new MountPoint.Mounting();
 				mountingPoint.url = ontologyUrlString + "?iri=" + owlClass.getIRI().toString() + "&target=" + String.join("+", targets);
 				owlClassNode.setMountPoint(mountingPoint);
 			}
@@ -973,9 +1004,10 @@ public class OwlModelFactory implements ImageDecorator
 	 * @param ontologyUrlString  ontology URL string
 	 * @return treebolic node
 	 */
+	@NonNull
 	public MutableNode visitClassAndSubclasses(final INode parentOwlClassNode, final OWLClass owlClass, final String ontologyUrlString)
 	{
-		final TreeMutableNode owlClassNode = visitClass(parentOwlClassNode, owlClass, ontologyUrlString);
+		@NonNull final TreeMutableNode owlClassNode = visitClass(parentOwlClassNode, owlClass, ontologyUrlString);
 
 		// recurse
 		final Stream<OWLClass> owlSubClasses = engine.getSubClasses(owlClass);
@@ -992,7 +1024,7 @@ public class OwlModelFactory implements ImageDecorator
 	 */
 	public void visitInstances(final TreeMutableNode parentNode, final Stream<OWLNamedIndividual> owlIndividuals)
 	{
-		final List<INode> childNodes = owlIndividuals //
+		@NonNull final List<INode> childNodes = owlIndividuals //
 				.map(owlNamedIndividual -> {
 
 					final String owlIndividualShortForm = owlNamedIndividual.getIRI().getShortForm();
@@ -1000,7 +1032,7 @@ public class OwlModelFactory implements ImageDecorator
 					final Stream<OWLClassExpression> types = engine.getTypes(owlNamedIndividual);
 					final Stream<OWLAnnotation> annotations = engine.getAnnotations(owlNamedIndividual);
 
-					final MutableNode instanceNode = new MutableNode(null, owlIndividualId);
+					@NonNull final MutableNode instanceNode = new MutableNode(null, owlIndividualId);
 					instanceNode.setLabel(owlIndividualShortForm);
 					instanceNode.setTarget(owlIndividualId);
 					instanceNode.setContent(typesToString(types) + "<br>" + annotationsToString(annotations) + "<br>");
@@ -1020,15 +1052,15 @@ public class OwlModelFactory implements ImageDecorator
 	 * @param parentNode  treebolic parent node to attach to
 	 * @param owlProperty property
 	 */
-	public void visitRelation(final MutableNode parentNode, final OWLObjectProperty owlProperty)
+	public void visitRelation(final MutableNode parentNode, @NonNull final OWLObjectProperty owlProperty)
 	{
 		final String owlPropertyShortForm = owlProperty.getIRI().getShortForm();
-		final MutableNode relationNode = new MutableNode(parentNode, owlPropertyShortForm);
+		@NonNull final MutableNode relationNode = new MutableNode(parentNode, owlPropertyShortForm);
 		relationNode.setLabel(owlPropertyShortForm);
 		relationNode.setEdgeLabel("is relation");
 		decorateRelation(relationNode);
 
-		final List<OWLClass> domains = engine.getDomains(owlProperty).collect(toList());
+		@NonNull final List<OWLClass> domains = engine.getDomains(owlProperty).collect(toList());
 		if (!domains.isEmpty())
 		{
 			final MutableNode domainsNode = new MutableNode(relationNode, owlPropertyShortForm + "-domains");
@@ -1044,7 +1076,7 @@ public class OwlModelFactory implements ImageDecorator
 			});
 		}
 
-		final List<OWLClass> ranges = engine.getRanges(owlProperty).collect(toList());
+		@NonNull final List<OWLClass> ranges = engine.getRanges(owlProperty).collect(toList());
 		if (!ranges.isEmpty())
 		{
 			final MutableNode rangesNode = new MutableNode(relationNode, owlPropertyShortForm + "-ranges");
@@ -1053,14 +1085,14 @@ public class OwlModelFactory implements ImageDecorator
 			ranges.forEach(owlRangeClass -> {
 
 				String owlClassId = owlRangeClass.asOWLClass().getIRI().getShortForm();
-				final MutableNode rangeNode = new MutableNode(rangesNode, owlClassId);
+				@NonNull final MutableNode rangeNode = new MutableNode(rangesNode, owlClassId);
 				rangeNode.setLabel(owlClassId);
 				rangeNode.setTarget(owlClassId);
 				decorateRelation(rangeNode);
 			});
 		}
 
-		final List<OWLObjectProperty> subproperties = engine.getSubproperties(owlProperty).collect(toList());
+		@NonNull final List<OWLObjectProperty> subproperties = engine.getSubproperties(owlProperty).collect(toList());
 		if (!subproperties.isEmpty())
 		{
 			final MutableNode subPropertiesNode = new MutableNode(relationNode, owlPropertyShortForm + "-subproperties");
@@ -1069,23 +1101,23 @@ public class OwlModelFactory implements ImageDecorator
 			subproperties.forEach(owlSubProperty -> {
 
 				String owlSubpropertyId = owlSubProperty.getIRI().getShortForm();
-				final MutableNode subPropertyNode = new MutableNode(subPropertiesNode, owlSubpropertyId);
+				@NonNull final MutableNode subPropertyNode = new MutableNode(subPropertiesNode, owlSubpropertyId);
 				subPropertyNode.setLabel(owlSubpropertyId);
 				subPropertyNode.setTarget(owlSubpropertyId);
 				decorateRelation(subPropertyNode);
 			});
 		}
 
-		final List<OWLObjectProperty> inverses = engine.getInverseProperties(owlProperty).collect(toList());
+		@NonNull final List<OWLObjectProperty> inverses = engine.getInverseProperties(owlProperty).collect(toList());
 		if (!inverses.isEmpty())
 		{
-			final MutableNode inversesNode = new MutableNode(relationNode, owlPropertyShortForm + "-inverses");
+			@NonNull final MutableNode inversesNode = new MutableNode(relationNode, owlPropertyShortForm + "-inverses");
 			inversesNode.setLabel("inverses");
 			decorateRelation(inversesNode);
 			inverses.forEach(owlInverseProperty -> {
 
 				String owlInverseId = owlInverseProperty.getIRI().getShortForm();
-				final MutableNode inverseNode = new MutableNode(inversesNode, owlInverseId);
+				@NonNull final MutableNode inverseNode = new MutableNode(inversesNode, owlInverseId);
 				inverseNode.setLabel(owlInverseId);
 				inverseNode.setTarget(owlInverseId);
 				decorateRelation(inverseNode);
@@ -1097,7 +1129,7 @@ public class OwlModelFactory implements ImageDecorator
 			final List<OWLClass> subclasses = engine.getSubclasses(owlProperty).collect(toList());
 			if (!subclasses.isEmpty())
 			{
-				final MutableNode subclassesNode = new MutableNode(relationNode, owlPropertyShortForm + "-subclasses");
+				@NonNull final MutableNode subclassesNode = new MutableNode(relationNode, owlPropertyShortForm + "-subclasses");
 				subclassesNode.setLabel("subclasses");
 				decorateRelation(subclassesNode);
 				subclasses.forEach(owlSubclass -> {
@@ -1110,16 +1142,16 @@ public class OwlModelFactory implements ImageDecorator
 				});
 			}
 
-			final List<OWLClass> superclasses = engine.getSuperclasses(owlProperty).collect(toList());
+			@NonNull final List<OWLClass> superclasses = engine.getSuperclasses(owlProperty).collect(toList());
 			if (!superclasses.isEmpty())
 			{
-				final MutableNode superclassesNode = new MutableNode(relationNode, owlPropertyShortForm + "-superclasses");
+				@NonNull final MutableNode superclassesNode = new MutableNode(relationNode, owlPropertyShortForm + "-superclasses");
 				superclassesNode.setLabel("superclasses");
 				decorateRelation(superclassesNode);
 				superclasses.forEach(owlSuperclass -> {
 
 					String owlSuperclassId = owlSuperclass.getIRI().getShortForm();
-					final MutableNode superclassNode = new MutableNode(superclassesNode, owlSuperclassId);
+					@NonNull final MutableNode superclassNode = new MutableNode(superclassesNode, owlSuperclassId);
 					superclassNode.setLabel(owlSuperclassId);
 					superclassNode.setTarget(owlSuperclassId);
 					decorateRelation(superclassNode);
@@ -1136,7 +1168,7 @@ public class OwlModelFactory implements ImageDecorator
 	 */
 	public void visitProperties(final TreeMutableNode parentNode, final Stream<OWLObjectProperty> owlProperties)
 	{
-		final List<INode> childNodes = owlProperties //
+		@NonNull final List<INode> childNodes = owlProperties //
 
 				.map(owlProperty -> {
 					final String owlPropertyShortForm = owlProperty.getIRI().getShortForm();
@@ -1151,13 +1183,13 @@ public class OwlModelFactory implements ImageDecorator
 				.collect(toList());
 
 		// balance load
-		final List<INode> balancedNodes = propertiesLoadBalancer.buildHierarchy(childNodes, 0);
+		@Nullable final List<INode> balancedNodes = propertiesLoadBalancer.buildHierarchy(childNodes, 0);
 		parentNode.addChildren(balancedNodes);
 	}
 
 	// D E C O R A T E
 
-	private void setNodeImage(final MutableNode node, @Nullable final String imageFile, @Nullable final ImageIndex index)
+	private void setNodeImage(@NonNull final MutableNode node, @Nullable final String imageFile, @Nullable final ImageIndex index)
 	{
 		if (imageFile != null)
 		{
@@ -1182,7 +1214,7 @@ public class OwlModelFactory implements ImageDecorator
 	}
 
 	@Override
-	public void setNodeImage(final MutableNode node, final int index)
+	public void setNodeImage(@NonNull final MutableNode node, final int index)
 	{
 		if (index != -1)
 		{
@@ -1208,7 +1240,7 @@ public class OwlModelFactory implements ImageDecorator
 		}
 	}
 
-	private MutableNode decorateRoot(final MutableNode node)
+	private MutableNode decorateRoot(@NonNull final MutableNode node)
 	{
 		if (node.getLabel() == null)
 		{
@@ -1220,7 +1252,8 @@ public class OwlModelFactory implements ImageDecorator
 		return node;
 	}
 
-	private MutableNode decorateClass(final MutableNode node)
+	@NonNull
+	private MutableNode decorateClass(@NonNull final MutableNode node)
 	{
 		node.setBackColor(classBackColor);
 		node.setForeColor(classForeColor);
@@ -1229,7 +1262,7 @@ public class OwlModelFactory implements ImageDecorator
 	}
 
 	@SuppressWarnings("UnusedReturnValue")
-	private MutableNode decorateClassWith(final MutableNode node, boolean hasInstances, boolean hasProperties, boolean isRelation)
+	private MutableNode decorateClassWith(@NonNull final MutableNode node, boolean hasInstances, boolean hasProperties, boolean isRelation)
 	{
 		if (isRelation)
 		{
@@ -1246,6 +1279,7 @@ public class OwlModelFactory implements ImageDecorator
 		return decorateClass(node);
 	}
 
+	@NonNull
 	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateClassWithRelation(final MutableNode node)
 	{
@@ -1256,6 +1290,7 @@ public class OwlModelFactory implements ImageDecorator
 	}
 
 
+	@NonNull
 	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateClassWithInstances(final MutableNode node)
 	{
@@ -1265,6 +1300,7 @@ public class OwlModelFactory implements ImageDecorator
 		return node;
 	}
 
+	@NonNull
 	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateClassWithProperties(final MutableNode node)
 	{
@@ -1275,7 +1311,7 @@ public class OwlModelFactory implements ImageDecorator
 	}
 
 	@SuppressWarnings("UnusedReturnValue")
-	private MutableNode decorateProperties(final MutableNode node)
+	private MutableNode decorateProperties(@NonNull final MutableNode node)
 	{
 		node.setLabel(propertiesLabel);
 		node.setBackColor(propertiesBackColor);
@@ -1285,6 +1321,7 @@ public class OwlModelFactory implements ImageDecorator
 		return node;
 	}
 
+	@NonNull
 	@SuppressWarnings("UnusedReturnValue")
 	private MutableNode decorateInstances(final MutableNode node)
 	{
@@ -1309,7 +1346,7 @@ public class OwlModelFactory implements ImageDecorator
 	}
 
 	@SuppressWarnings("UnusedReturnValue")
-	private MutableNode decorateRelation(final MutableNode node)
+	private MutableNode decorateRelation(@NonNull final MutableNode node)
 	{
 		node.setBackColor(relationBackColor);
 		node.setForeColor(relationForeColor);
@@ -1321,7 +1358,7 @@ public class OwlModelFactory implements ImageDecorator
 	}
 
 	@SuppressWarnings("UnusedReturnValue")
-	private MutableNode decorateProperty(final MutableNode node)
+	private MutableNode decorateProperty(@NonNull final MutableNode node)
 	{
 		node.setBackColor(propertyBackColor);
 		node.setForeColor(propertyForeColor);
@@ -1352,6 +1389,7 @@ public class OwlModelFactory implements ImageDecorator
 	 * @param colorValue forecolor value
 	 * @return color
 	 */
+	@Nullable
 	private Integer getColor(final String colorKey, final Integer colorValue)
 	{
 		final String colorString = properties == null ? null : properties.getProperty(colorKey);
@@ -1391,6 +1429,7 @@ public class OwlModelFactory implements ImageDecorator
 	 * @param types stream of types
 	 * @return string
 	 */
+	@NonNull
 	private static String typesToString(@NonNull final Stream<OWLClassExpression> types)
 	{
 		return types //

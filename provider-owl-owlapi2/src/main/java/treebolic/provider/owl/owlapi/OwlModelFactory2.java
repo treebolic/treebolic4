@@ -24,9 +24,10 @@ public class OwlModelFactory2 extends OwlModelFactory
 	 * @param imageUrls image urls
 	 * @return images
 	 */
+	@NonNull
 	public Image[] makeImages(@NonNull final String[] imageUrls)
 	{
-		Image[] images = new Image[imageUrls.length];
+		@NonNull Image[] images = new Image[imageUrls.length];
 		for (int i = 0; i < imageUrls.length; i++)
 		{
 			images[i] = new treebolic.glue.Image(Provider2.class.getResource("images/" + imageUrls[i]));
@@ -62,6 +63,7 @@ public class OwlModelFactory2 extends OwlModelFactory
 	 * @param ontologyUrlString ontology URL string
 	 * @return model if successful
 	 */
+	@NonNull
 	@Override
 	public Model makeModel(final String ontologyUrlString)
 	{
@@ -72,7 +74,7 @@ public class OwlModelFactory2 extends OwlModelFactory
 	// D E C O R A T E
 
 	@Override
-	public void setNodeImage(final MutableNode node, final int index)
+	public void setNodeImage(@NonNull final MutableNode node, final int index)
 	{
 		if (index != -1)
 		{
@@ -81,7 +83,7 @@ public class OwlModelFactory2 extends OwlModelFactory
 	}
 
 	@Override
-	public void setTreeEdgeImage(final MutableNode node, final int index)
+	public void setTreeEdgeImage(@NonNull final MutableNode node, final int index)
 	{
 		if (index != -1)
 		{
@@ -90,7 +92,7 @@ public class OwlModelFactory2 extends OwlModelFactory
 	}
 
 	@Override
-	public void setEdgeImage(final MutableEdge edge, final int index)
+	public void setEdgeImage(@NonNull final MutableEdge edge, final int index)
 	{
 		if (index != -1)
 		{

@@ -7,6 +7,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Element decorator
  *
@@ -32,6 +35,7 @@ public class ElementDecorator extends DefaultDecorator
 	 * (non-Javadoc)
 	 * @see treebolic.studio.domtree.DefaultDecorator#toName()
 	 */
+	@NonNull
 	@Override
 	public String getName()
 	{
@@ -67,6 +71,7 @@ public class ElementDecorator extends DefaultDecorator
 	 *
 	 * @return element text
 	 */
+	@Nullable
 	protected String getText()
 	{
 		final Node child = this.node.getFirstChild();

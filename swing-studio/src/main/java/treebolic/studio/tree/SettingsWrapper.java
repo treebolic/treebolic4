@@ -3,6 +3,7 @@
  */
 package treebolic.studio.tree;
 
+import treebolic.annotations.NonNull;
 import treebolic.studio.Messages;
 import treebolic.model.Settings;
 
@@ -28,6 +29,7 @@ public class SettingsWrapper
 		this.settings = settings;
 	}
 
+	@NonNull
 	@Override
 	public String toString()
 	{

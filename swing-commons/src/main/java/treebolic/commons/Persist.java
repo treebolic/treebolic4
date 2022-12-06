@@ -11,6 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Properties;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Persist
  *
@@ -26,13 +29,13 @@ public class Persist
 	 */
 	static public Properties getSettings(final String persistFile)
 	{
-		final Properties settings = Persist.loadSettings(persistFile);
+		@NonNull final Properties settings = Persist.loadSettings(persistFile);
 		if (settings.size() == 0)
 		{
-			String location = CodeBase.getJarLocation();
+			@Nullable String location = CodeBase.getJarLocation();
 			if (location == null)
 			{
-				final File file = new File(System.getProperty("user.dir"));
+				@NonNull final File file = new File(System.getProperty("user.dir"));
 				try
 				{
 					location = file.toURI().toURL().toString();
@@ -64,14 +67,15 @@ public class Persist
 	 * @param persistFile persist file
 	 * @return properties
 	 */
+	@NonNull
 	static public Properties loadSettings(final String persistFile)
 	{
-		final Properties settings = new Properties();
+		@NonNull final Properties settings = new Properties();
 
 		try
 		{
-			final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile;
-			final InputStream propStream = Files.newInputStream(Paths.get(filePath));
+			@NonNull final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile;
+			@NonNull final InputStream propStream = Files.newInputStream(Paths.get(filePath));
 			settings.load(propStream);
 			return settings;
 		}
@@ -81,8 +85,8 @@ public class Persist
 		}
 		try
 		{
-			final String filePath = System.getProperty("user.dir") + File.separator + "." + persistFile;
-			final InputStream propStream = Files.newInputStream(Paths.get(filePath));
+			@NonNull final String filePath = System.getProperty("user.dir") + File.separator + "." + persistFile;
+			@NonNull final InputStream propStream = Files.newInputStream(Paths.get(filePath));
 			settings.load(propStream);
 			return settings;
 		}
@@ -105,7 +109,7 @@ public class Persist
 	{
 		try
 		{
-			final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile;
+			@NonNull final String filePath = System.getProperty("user.home") + File.separator + "." + persistFile;
 			final OutputStream propStream = Files.newOutputStream(Paths.get(filePath));
 			settings.store(propStream, "treebolic");
 			return true;

@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import treebolic.annotations.NonNull;
 import treebolic.studio.DocumentSearch;
 import treebolic.xml.transformer.DomTransformer;
 
@@ -68,13 +69,13 @@ public class ZipMaker
 				final File imageFile = new File(imageFileName);
 				final String name = imageFile.getName();
 
-				final ZipEntry zei = new ZipEntry(name);
+				@NonNull final ZipEntry zei = new ZipEntry(name);
 
-				final URL url = this.imageBase == null ? new URL(imageFileName) : new URL(this.imageBase, imageFileName);
+				@NonNull final URL url = this.imageBase == null ? new URL(imageFileName) : new URL(this.imageBase, imageFileName);
 				try
 				{
 					// open image stream
-					final InputStream inputStream = new BufferedInputStream(url.openStream());
+					@NonNull final InputStream inputStream = new BufferedInputStream(url.openStream());
 
 					// coppy image stream into entry
 					zos.putNextEntry(zei);
@@ -96,9 +97,9 @@ public class ZipMaker
 		//
 	}
 
-	static private void copyStreams(final InputStream instream, final OutputStream outstream) throws IOException
+	static private void copyStreams(final InputStream instream, @NonNull final OutputStream outstream) throws IOException
 	{
-		final byte[] buffer = new byte[1024];
+		@NonNull final byte[] buffer = new byte[1024];
 		int length;
 		while ((length = instream.read(buffer)) > 0)
 		{

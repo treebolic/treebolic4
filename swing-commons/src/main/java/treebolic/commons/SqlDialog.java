@@ -13,6 +13,9 @@ import java.util.Properties;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * SQL statement dialog
  *
@@ -52,11 +55,13 @@ public class SqlDialog extends JDialog
 	/**
 	 * Querier text area
 	 */
+	@NonNull
 	private final JTextField userTextField;
 
 	/**
 	 * Password field
 	 */
+	@NonNull
 	private final JPasswordField passwdField;
 
 	/**
@@ -67,21 +72,25 @@ public class SqlDialog extends JDialog
 	/**
 	 * Nodes SQL statement text area
 	 */
+	@NonNull
 	private final JTextArea nodesSqlTextArea;
 
 	/**
 	 * Tree Edges SQL statement text area
 	 */
+	@NonNull
 	private final JTextArea treeEdgesSqlTextArea;
 
 	/**
 	 * Edges SQL statement text area
 	 */
+	@NonNull
 	private final JTextArea edgesSqlTextArea;
 
 	/**
 	 * Settings SQL statement text area
 	 */
+	@NonNull
 	private final JTextArea settingsSqlTextArea;
 
 	/**
@@ -112,16 +121,16 @@ public class SqlDialog extends JDialog
 	 */
 	private void initialize()
 	{
-		final JLabel titleLabel = new JLabel(Messages.getString("SqlDialog.title"));
+		@NonNull final JLabel titleLabel = new JLabel(Messages.getString("SqlDialog.title"));
 		titleLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 
 		final JLabel uRLLabel = new JLabel(Messages.getString("SqlDialog.url"));
-		final JLabel userLabel = new JLabel(Messages.getString("SqlDialog.user"));
+		@NonNull final JLabel userLabel = new JLabel(Messages.getString("SqlDialog.user"));
 		final JLabel passwdLabel = new JLabel(Messages.getString("SqlDialog.password"));
-		final JLabel sqlLabel = new JLabel(Messages.getString("SqlDialog.sql"));
-		final JLabel mapLabel = new JLabel(Messages.getString("SqlDialog.map"));
+		@NonNull final JLabel sqlLabel = new JLabel(Messages.getString("SqlDialog.sql"));
+		@NonNull final JLabel mapLabel = new JLabel(Messages.getString("SqlDialog.map"));
 
 		this.uRLField.setEditable(true);
 		this.uRLField.setToolTipText(Messages.getString("SqlDialog.tooltip_url"));
@@ -165,15 +174,15 @@ public class SqlDialog extends JDialog
 		this.settingsSqlTextArea.setRows(4);
 
 		final JScrollPane nodesSqlScrollPane = new JScrollPane(this.nodesSqlTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		final JScrollPane treeEdgesSqlScrollPane = new JScrollPane(this.treeEdgesSqlTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		final JScrollPane edgesSqlScrollPane = new JScrollPane(this.edgesSqlTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		final JScrollPane settingsSqlScrollPane = new JScrollPane(this.settingsSqlTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		@NonNull final JScrollPane treeEdgesSqlScrollPane = new JScrollPane(this.treeEdgesSqlTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		@NonNull final JScrollPane edgesSqlScrollPane = new JScrollPane(this.edgesSqlTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		@NonNull final JScrollPane settingsSqlScrollPane = new JScrollPane(this.settingsSqlTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		nodesSqlScrollPane.setBorder(null);
 		treeEdgesSqlScrollPane.setBorder(null);
 		edgesSqlScrollPane.setBorder(null);
 		settingsSqlScrollPane.setBorder(null);
 
-		final JTabbedPane tabbedPane = new JTabbedPane();
+		@NonNull final JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.add(Messages.getString("SqlDialog.tab_nodes"), nodesSqlScrollPane);
 		tabbedPane.add(Messages.getString("SqlDialog.tab_treeedges"), treeEdgesSqlScrollPane);
 		tabbedPane.add(Messages.getString("SqlDialog.tab_edges"), edgesSqlScrollPane);
@@ -183,7 +192,7 @@ public class SqlDialog extends JDialog
 		final JScrollPane mapsSqlScrollPane = new JScrollPane(this.nameTable, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		mapsSqlScrollPane.setPreferredSize(new Dimension(500, 100));
 
-		final JButton okButton = new JButton();
+		@NonNull final JButton okButton = new JButton();
 		okButton.setText(Messages.getString("SqlDialog.ok"));
 		/*
 		 * (non-Javadoc)
@@ -194,7 +203,7 @@ public class SqlDialog extends JDialog
 			setVisible(false);
 		});
 
-		final JButton cancelButton = new JButton();
+		@NonNull final JButton cancelButton = new JButton();
 		cancelButton.setText(Messages.getString("SqlDialog.cancel"));
 		/*
 		 * (non-Javadoc)
@@ -209,7 +218,7 @@ public class SqlDialog extends JDialog
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
 		loadButton.addActionListener(e -> {
-			final JFileChooser fileChooser = new JFileChooser();
+			@NonNull final JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter()
 			{
 				/*
@@ -226,6 +235,7 @@ public class SqlDialog extends JDialog
 				 * (non-Javadoc)
 				 * @see javax.swing.filechooser.FileFilter#getDescription()
 				 */
+				@NonNull
 				@Override
 				public String getDescription()
 				{
@@ -248,7 +258,7 @@ public class SqlDialog extends JDialog
 				}
 			}
 		});
-		final JPanel buttonPanel = new JPanel();
+		@NonNull final JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
 		buttonPanel.add(loadButton);
 		buttonPanel.add(cancelButton);
@@ -280,9 +290,10 @@ public class SqlDialog extends JDialog
 	 *
 	 * @return properties
 	 */
+	@NonNull
 	public Properties getProperties()
 	{
-		final Properties properties = new Properties();
+		@NonNull final Properties properties = new Properties();
 		properties.put("url", this.uRLField.getText() == null ? "" : this.uRLField.getText());
 		properties.put("user", this.userTextField.getText());
 		properties.put("passwd", new String(this.passwdField.getPassword()));
@@ -310,7 +321,7 @@ public class SqlDialog extends JDialog
 	 *
 	 * @param properties properties
 	 */
-	public void setProperties(final Properties properties)
+	public void setProperties(@NonNull final Properties properties)
 	{
 		this.uRLField.setText((String) properties.get("url"));
 		this.userTextField.setText((String) properties.get("user"));
@@ -343,7 +354,7 @@ public class SqlDialog extends JDialog
 		try
 		{
 			final URL url = new URL(this.propertyUrlString);
-			final Properties properties = SqlProperties.load(url);
+			@Nullable final Properties properties = SqlProperties.load(url);
 			if (properties != null)
 			{
 				setProperties(properties);
@@ -367,7 +378,7 @@ public class SqlDialog extends JDialog
 		try
 		{
 			final File file = new File(new URL(this.propertyUrlString).toURI());
-			final Properties properties = getProperties();
+			@NonNull final Properties properties = getProperties();
 			SqlProperties.save(properties, file.getAbsolutePath());
 		}
 		catch (final MalformedURLException | URISyntaxException exception)
@@ -396,7 +407,7 @@ public class SqlDialog extends JDialog
 	 *
 	 * @param component component to center
 	 */
-	static public void center(final Component component)
+	static public void center(@NonNull final Component component)
 	{
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		final Dimension componentSize = component.getSize();
@@ -416,10 +427,10 @@ public class SqlDialog extends JDialog
 	 *
 	 * @param args arguments
 	 */
-	static public void main(final String[] args)
+	static public void main(@NonNull final String[] args)
 	{
 		UIManager.put("swing.boldMetal", false);
-		final SqlDialog dialog = new SqlDialog(args.length > 0 ? args[0] : null);
+		@NonNull final SqlDialog dialog = new SqlDialog(args.length > 0 ? args[0] : null);
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);

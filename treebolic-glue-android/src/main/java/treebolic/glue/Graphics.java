@@ -161,14 +161,14 @@ public class Graphics implements treebolic.glue.iface.Graphics
 	@Override
 	public void drawArc(final float x, final float y, final float w, final float h, final float start, final float extent)
 	{
-		final RectF oval = Rectangle2D.makeRect(x, y, w, h);
+		@treebolic.annotations.NonNull final RectF oval = Rectangle2D.makeRect(x, y, w, h);
 		this.paint.setStyle(Style.STROKE);
 		this.canvas.drawArc(oval, -start, -extent, false, this.paint); // android: angles start at 3:00 and rotate clockwise
 	}
 
 
 	@Override
-	public void drawPolyline(final int[] x, final int[] y, final int length)
+	public void drawPolyline(@treebolic.annotations.NonNull final int[] x, @treebolic.annotations.NonNull final int[] y, final int length)
 	{
 		final Path path = new Path();
 		path.reset(); // only needed when reusing this path for a new build
@@ -184,9 +184,9 @@ public class Graphics implements treebolic.glue.iface.Graphics
 
 
 	@Override
-	public void drawPolygon(final int[] x, final int[] y, final int length)
+	public void drawPolygon(@treebolic.annotations.NonNull final int[] x, final int[] y, final int length)
 	{
-		final Path path = new Path();
+		@treebolic.annotations.NonNull final Path path = new Path();
 		path.reset(); // only needed when reusing this path for a new build
 		path.moveTo(x[0], y[0]); // used for first point
 		for (int i = 1; i < length; i++)
@@ -200,9 +200,9 @@ public class Graphics implements treebolic.glue.iface.Graphics
 
 
 	@Override
-	public void fillPolygon(final int[] x, final int[] y, final int length)
+	public void fillPolygon(@treebolic.annotations.NonNull final int[] x, @treebolic.annotations.NonNull final int[] y, final int length)
 	{
-		final Path path = new Path();
+		@treebolic.annotations.NonNull final Path path = new Path();
 		path.reset(); // only needed when reusing this path for a new build
 		path.moveTo(x[0], y[0]); // used for first point
 		for (int i = 1; i < length; i++)
@@ -218,7 +218,7 @@ public class Graphics implements treebolic.glue.iface.Graphics
 	@Override
 	public void fillRectangle(final int left, final int top, final int width, final int height)
 	{
-		final RectF rect = Rectangle2D.makeRect(left, top, width, height);
+		@treebolic.annotations.NonNull final RectF rect = Rectangle2D.makeRect(left, top, width, height);
 		this.paint.setStyle(Style.FILL_AND_STROKE);
 		this.canvas.drawRect(rect, this.paint);
 	}
@@ -254,7 +254,7 @@ public class Graphics implements treebolic.glue.iface.Graphics
 	@Override
 	public void fillOval(final float left, final float top, final float width, final float height)
 	{
-		final RectF rect = Rectangle2D.makeRect(left, top, width, height);
+		@treebolic.annotations.NonNull final RectF rect = Rectangle2D.makeRect(left, top, width, height);
 		this.paint.setStyle(Style.FILL_AND_STROKE);
 		this.canvas.drawOval(rect, this.paint);
 	}
@@ -273,7 +273,7 @@ public class Graphics implements treebolic.glue.iface.Graphics
 	public void drawImage(@NonNull final Image image0, final int x, final int y)
 	{
 		assert image0 instanceof treebolic.glue.Image;
-		final treebolic.glue.Image image = (treebolic.glue.Image) image0;
+		@treebolic.annotations.NonNull final treebolic.glue.Image image = (treebolic.glue.Image) image0;
 		if (image.bitmap != null)
 		{
 			this.canvas.drawBitmap(image.bitmap, x, y, this.paint);
@@ -285,10 +285,10 @@ public class Graphics implements treebolic.glue.iface.Graphics
 	public void drawImage(@NonNull final Image image0, final int x, final int y, final int w, final int h)
 	{
 		assert image0 instanceof treebolic.glue.Image;
-		final treebolic.glue.Image image = (treebolic.glue.Image) image0;
+		@treebolic.annotations.NonNull final treebolic.glue.Image image = (treebolic.glue.Image) image0;
 		if (image.bitmap != null)
 		{
-			final Rect r = new Rect(x, y, x + w, y + h);
+			@treebolic.annotations.NonNull final Rect r = new Rect(x, y, x + w, y + h);
 			this.canvas.drawBitmap(image.bitmap, null, r, this.paint);
 		}
 	}

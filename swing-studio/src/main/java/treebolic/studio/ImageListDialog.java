@@ -15,6 +15,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.studio.model.ModelUtils;
 
 /**
@@ -29,6 +31,7 @@ public class ImageListDialog extends ReferenceListDialog
 	/**
 	 * Image repository
 	 */
+	@Nullable
 	private URL imageRepository;
 
 	// C O N S T R U C T O R
@@ -46,13 +49,13 @@ public class ImageListDialog extends ReferenceListDialog
 		this.referenceTable.setRowHeight(32);
 		this.scrollPane.setPreferredSize(new Dimension(300, 320));
 
-		final JButton checkMissingButton = new JButton(Messages.getString("ImageListDialog.missing"));
+		@NonNull final JButton checkMissingButton = new JButton(Messages.getString("ImageListDialog.missing"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 		 */
 		checkMissingButton.addActionListener(e -> checkMissing());
-		final JButton checkUnusedButton = new JButton(Messages.getString("ImageListDialog.unused"));
+		@NonNull final JButton checkUnusedButton = new JButton(Messages.getString("ImageListDialog.unused"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -73,7 +76,7 @@ public class ImageListDialog extends ReferenceListDialog
 	{
 		this.label.setText(Messages.getString("ImageListDialog.label"));
 		this.imageRepository = this.controller.makeImageRepositoryURL();
-		final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
+		@NonNull final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
 		setModel(imageToLocationMap);
 	}
 
@@ -97,6 +100,7 @@ public class ImageListDialog extends ReferenceListDialog
 			 * (non-Javadoc)
 			 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
 			 */
+			@NonNull
 			@SuppressWarnings("synthetic-access")
 			@Override
 			public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
@@ -118,6 +122,7 @@ public class ImageListDialog extends ReferenceListDialog
 			 * (non-Javadoc)
 			 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
 			 */
+			@NonNull
 			@Override
 			public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
 			{
@@ -163,8 +168,8 @@ public class ImageListDialog extends ReferenceListDialog
 	private void checkMissing()
 	{
 		this.imageRepository = this.controller.makeImageRepositoryURL();
-		final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
-		final Set<String> images = imageToLocationMap.keySet();
+		@NonNull final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
+		@NonNull final Set<String> images = imageToLocationMap.keySet();
 
 		if (this.imageRepository.getProtocol().equals("file"))
 		{
@@ -174,12 +179,12 @@ public class ImageListDialog extends ReferenceListDialog
 				final File file = new File(uri);
 				if (file.isDirectory())
 				{
-					final File[] files = file.listFiles();
+					@Nullable final File[] files = file.listFiles();
 					if (files != null)
 					{
-						for (final File directoryEntry : files)
+						for (@NonNull final File directoryEntry : files)
 						{
-							final String name = directoryEntry.getName();
+							@NonNull final String name = directoryEntry.getName();
 							if (images.contains(name))
 							{
 								imageToLocationMap.remove(name);
@@ -205,17 +210,17 @@ public class ImageListDialog extends ReferenceListDialog
 		this.imageRepository = this.controller.makeImageRepositoryURL();
 		final Map<String, SortedSet<String>> unusedToLocationMap = new TreeMap<>();
 		final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
-		final Set<String> images = imageToLocationMap.keySet();
+		@NonNull final Set<String> images = imageToLocationMap.keySet();
 
 		if (this.imageRepository.getProtocol().equals("file"))
 		{
 			try
 			{
-				final URI uri = this.imageRepository.toURI();
-				final File file = new File(uri);
+				@NonNull final URI uri = this.imageRepository.toURI();
+				@NonNull final File file = new File(uri);
 				if (file.isDirectory())
 				{
-					final File[] files = file.listFiles();
+					@Nullable final File[] files = file.listFiles();
 					if (files != null)
 					{
 						for (final File directoryEntry : files)
@@ -227,7 +232,7 @@ public class ImageListDialog extends ReferenceListDialog
 							final String name = directoryEntry.getName();
 							if (!images.contains(name))
 							{
-								final SortedSet<String> value = new TreeSet<>();
+								@NonNull final SortedSet<String> value = new TreeSet<>();
 								value.add(Messages.getString("ImageListDialog.is_unused"));
 								unusedToLocationMap.put(name, value);
 							}
@@ -250,11 +255,12 @@ public class ImageListDialog extends ReferenceListDialog
 	 * @param imageFile image file
 	 * @return icon
 	 */
-	private Icon makeIcon(final String imageFile)
+	@Nullable
+	private Icon makeIcon(@NonNull final String imageFile)
 	{
 		try
 		{
-			final URL url = new URL(this.imageRepository, imageFile);
+			@NonNull final URL url = new URL(this.imageRepository, imageFile);
 			return new ImageIcon(url);
 		}
 		catch (final MalformedURLException e)

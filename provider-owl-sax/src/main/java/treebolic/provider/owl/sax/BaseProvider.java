@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import treebolic.ILocator;
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.model.Model;
 import treebolic.model.Tree;
 import treebolic.model.Utils;
@@ -86,7 +87,7 @@ public abstract class BaseProvider implements IProvider
 	 * @see treebolic.provider.IProvider#makeModel(java.lang.String, java.net.URL, java.util.Properties)
 	 */
 	@Override
-	public Model makeModel(final String source0, final URL base, final Properties parameters)
+	public Model makeModel(final String source0, final URL base, @NonNull final Properties parameters)
 	{
 		// get owl file
 		String source = source0;
@@ -99,7 +100,7 @@ public abstract class BaseProvider implements IProvider
 		if (source != null)
 		{
 			// settings properties
-			Properties properties = getSettings(base, parameters);
+			@Nullable Properties properties = getSettings(base, parameters);
 
 			// factory
 			if (this.factory == null)
@@ -108,7 +109,7 @@ public abstract class BaseProvider implements IProvider
 			}
 
 			// URL
-			final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
+			@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 
 			// parse
 			this.context.progress("Loading ..." + (url != null ? url : source), false);
@@ -128,7 +129,7 @@ public abstract class BaseProvider implements IProvider
 	 * @see treebolic.provider.IProvider#makeTree(java.lang.String, java.net.URL, java.util.Properties, boolean)
 	 */
 	@Override
-	public Tree makeTree(final String source0, final URL base, final Properties parameters, final boolean checkRecursion)
+	public Tree makeTree(final String source0, final URL base, @NonNull final Properties parameters, final boolean checkRecursion)
 	{
 		// get owl file
 		String source = source0;
@@ -141,10 +142,10 @@ public abstract class BaseProvider implements IProvider
 		if (source != null)
 		{
 			// URL
-			final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
+			@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 
 			// settings properties
-			final Properties properties = getSettings(base, parameters);
+			@Nullable final Properties properties = getSettings(base, parameters);
 
 			// parser
 			if (this.factory == null)
@@ -172,10 +173,10 @@ public abstract class BaseProvider implements IProvider
 	 * @param parameters parameters
 	 * @return properties
 	 */
-	private Properties getSettings(final URL base, final Properties parameters)
+	private Properties getSettings(final URL base, @Nullable final Properties parameters)
 	{
 		// settings properties from configuration file set by settings=file
-		Properties properties = null;
+		@Nullable Properties properties = null;
 		final String location = parameters == null ? null : parameters.getProperty("settings");
 		if (location != null && !location.isEmpty())
 		{
@@ -195,7 +196,7 @@ public abstract class BaseProvider implements IProvider
 
 		// settings properties from command-line override
 		assert parameters != null;
-		for (String parameter : parameters.stringPropertyNames())
+		for (@NonNull String parameter : parameters.stringPropertyNames())
 		{
 			switch (parameter)
 			{

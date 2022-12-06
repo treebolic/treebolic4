@@ -15,6 +15,7 @@ import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import treebolic.annotations.NonNull;
 import treebolic.studio.domtree.DefaultDecorator;
 
 /**
@@ -110,6 +111,7 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 	/**
 	 * Value styles for classes
 	 */
+	@NonNull
 	private final Map<String, SimpleAttributeSet> typeToValueStyleMap;
 
 	/**
@@ -202,7 +204,7 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 	{
 		if (node instanceof Element)
 		{
-			final Element element = (Element) node;
+			@NonNull final Element element = (Element) node;
 			final Icon icon = this.typeToIconMap.get(element.getNodeName());
 			if (icon != null)
 			{
@@ -221,7 +223,7 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 	{
 		if (node instanceof Element)
 		{
-			final Element element = (Element) node;
+			@NonNull final Element element = (Element) node;
 			final SimpleAttributeSet style = this.typeToNameStyleMap.get(element.getNodeName());
 			if (style != null)
 			{
@@ -240,7 +242,7 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 	{
 		if (node instanceof Element)
 		{
-			final Element element = (Element) node;
+			@NonNull final Element element = (Element) node;
 			final SimpleAttributeSet style = this.typeToValueStyleMap.get(element.getNodeName());
 			if (style != null)
 			{
@@ -262,7 +264,7 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 			return super.makeDecorator(node);
 		}
 
-		final Element element = (Element) node;
+		@NonNull final Element element = (Element) node;
 		final String tag = element.getTagName();
 		switch (tag)
 		{

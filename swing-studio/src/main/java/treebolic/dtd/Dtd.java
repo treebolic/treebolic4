@@ -7,6 +7,9 @@ import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * DTD
  *
@@ -24,9 +27,10 @@ public class Dtd
 	 *
 	 * @return DTD as string
 	 */
+	@Nullable
 	static public String getString()
 	{
-		try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); BufferedOutputStream outputStream = new BufferedOutputStream(byteArrayOutputStream))
+		try (@NonNull ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); BufferedOutputStream outputStream = new BufferedOutputStream(byteArrayOutputStream))
 		{
 			if (Dtd.copyToStream(outputStream))
 			{
@@ -72,14 +76,14 @@ public class Dtd
 	 * @return true if successful
 	 */
 	@SuppressWarnings("UnusedReturnValue")
-	static public boolean copyToUTF8Stream(final OutputStream outstream)
+	static public boolean copyToUTF8Stream(@NonNull final OutputStream outstream)
 	{
 		final String str = Dtd.getString();
 		if (str == null)
 		{
 			return false;
 		}
-		try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(outstream, StandardCharsets.UTF_8), false))
+		try (@NonNull PrintWriter writer = new PrintWriter(new OutputStreamWriter(outstream, StandardCharsets.UTF_8), false))
 		{
 			writer.print(str);
 			return true;
@@ -98,12 +102,12 @@ public class Dtd
 	 * @param outstream output stream
 	 * @return true if successful
 	 */
-	static private boolean copyStreams(final InputStream instream, final OutputStream outstream)
+	static private boolean copyStreams(@NonNull final InputStream instream, @NonNull final OutputStream outstream)
 	{
 		final int bufferSize = 512;
 		try (BufferedInputStream reader = new BufferedInputStream(instream, bufferSize); BufferedOutputStream writer = new BufferedOutputStream(outstream))
 		{
-			final byte[] buffer = new byte[bufferSize];
+			@NonNull final byte[] buffer = new byte[bufferSize];
 			int count;
 			while ((count = reader.read(buffer, 0, bufferSize)) != -1)
 			{

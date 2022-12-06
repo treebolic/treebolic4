@@ -7,6 +7,9 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Button tab component
  */
@@ -38,6 +41,7 @@ public class ButtonTabComponent extends JPanel
 	/**
 	 * Reference to tabbed pane
 	 */
+	@NonNull
 	private final JTabbedPane tabbedPane;
 
 	/**
@@ -45,7 +49,7 @@ public class ButtonTabComponent extends JPanel
 	 *
 	 * @param pane tabbed pane
 	 */
-	public ButtonTabComponent(final JTabbedPane pane)
+	public ButtonTabComponent(@Nullable final JTabbedPane pane)
 	{
 		// unset default FlowLayout' gaps
 		super(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -59,13 +63,14 @@ public class ButtonTabComponent extends JPanel
 		// L A B E L
 
 		// make label read titles from JTabbedPane
-		final JLabel label = new JLabel()
+		@NonNull final JLabel label = new JLabel()
 		{
 			/**
 			 *
 			 */
 			private static final long serialVersionUID = -393007019999118052L;
 
+			@Nullable
 			@Override
 			public String getText()
 			{
@@ -83,7 +88,7 @@ public class ButtonTabComponent extends JPanel
 
 		// B U T T O N
 
-		final JButton button = new JButton();
+		@NonNull final JButton button = new JButton();
 
 		// tooltip
 		button.setToolTipText(Messages.getString("ButtonTabComponent.close"));

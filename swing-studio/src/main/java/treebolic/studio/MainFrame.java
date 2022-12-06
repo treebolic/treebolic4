@@ -13,6 +13,8 @@ import javax.swing.tree.TreeCellRenderer;
 import treebolic.IContext;
 import treebolic.IWidget;
 import treebolic.Widget;
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.studio.domtree.DomTreeView;
 import treebolic.studio.tree.TreeView;
 
@@ -55,6 +57,7 @@ public class MainFrame extends JFrame
 	/**
 	 * Controller
 	 */
+	@NonNull
 	private final Controller controller;
 
 	/**
@@ -104,7 +107,7 @@ public class MainFrame extends JFrame
 		setVisible(true);
 
 		// open
-		Properties parameters = this.controller.getParameters();
+		@Nullable Properties parameters = this.controller.getParameters();
 		final String documentPath = parameters == null ? null : parameters.getProperty("doc");
 		if (documentPath != null && !documentPath.isEmpty())
 		{
@@ -150,7 +153,7 @@ public class MainFrame extends JFrame
 	 * @see java.awt.Window#processWindowEvent(java.awt.event.WindowEvent)
 	 */
 	@Override
-	protected void processWindowEvent(final WindowEvent event)
+	protected void processWindowEvent(@NonNull final WindowEvent event)
 	{
 		if (event.getID() == WindowEvent.WINDOW_CLOSING)
 		{
@@ -166,9 +169,10 @@ public class MainFrame extends JFrame
 	 *
 	 * @return javax.swing.JMenuBar
 	 */
+	@NonNull
 	private Menubar makeMenubar(final Controller controller)
 	{
-		final Menubar menubar = new Menubar();
+		@NonNull final Menubar menubar = new Menubar();
 		menubar.setController(controller);
 		return menubar;
 	}
@@ -192,9 +196,10 @@ public class MainFrame extends JFrame
 	 *
 	 * @return javax.swing.JToolBar
 	 */
+	@NonNull
 	private Toolbar makeToolbar(final Controller controller)
 	{
-		final Toolbar toolBar = new Toolbar();
+		@NonNull final Toolbar toolBar = new Toolbar();
 		toolBar.setController(controller);
 		return toolBar;
 	}
@@ -204,9 +209,10 @@ public class MainFrame extends JFrame
 	 *
 	 * @return javax.swing.JToolBar
 	 */
+	@NonNull
 	private TreeToolbar makeTreeToolbar(final Controller controller)
 	{
-		final TreeToolbar toolBar = new TreeToolbar();
+		@NonNull final TreeToolbar toolBar = new TreeToolbar();
 		toolBar.setController(controller);
 		return toolBar;
 	}
@@ -216,7 +222,7 @@ public class MainFrame extends JFrame
 	 *
 	 * @return javax.swing.JTabbedPane
 	 */
-	private JTabbedPane makeTabbedPane(final Controller controller)
+	private JTabbedPane makeTabbedPane(@NonNull final Controller controller)
 	{
 		this.tabbedPane = new JTabbedPane();
 
@@ -244,7 +250,7 @@ public class MainFrame extends JFrame
 	 * @param component  component
 	 * @param action     component update runnable
 	 */
-	private void makeTab(final JTabbedPane tabbedPane, final String title, final Icon icon, final Component component, final Runnable action)
+	private void makeTab(@NonNull final JTabbedPane tabbedPane, final String title, final Icon icon, final Component component, final Runnable action)
 	{
 		tabbedPane.addTab(title, icon, component, null);
 		this.controller.updateMap.put(component, action);
@@ -255,6 +261,7 @@ public class MainFrame extends JFrame
 	 *
 	 * @return javax.swing.JPanel
 	 */
+	@NonNull
 	private TreeView makeTreeView(final Controller controller)
 	{
 		final TreeView treeView = new TreeView();
@@ -268,10 +275,11 @@ public class MainFrame extends JFrame
 	 *
 	 * @return treebolic view
 	 */
+	@NonNull
 	@SuppressWarnings("RedundantSuppression")
 	private JPanel makeView(final Controller ignoredController)
 	{
-		final JPanel view = new JPanel();
+		@NonNull final JPanel view = new JPanel();
 		view.setLayout(new BorderLayout());
 		//noinspection ConstantConditions
 		assert widget instanceof Component;
@@ -284,6 +292,7 @@ public class MainFrame extends JFrame
 	 *
 	 * @return widget
 	 */
+	@NonNull
 	private Widget makeWidget(final IContext context)
 	{
 		return new Widget(context, null);
@@ -294,6 +303,7 @@ public class MainFrame extends JFrame
 	 *
 	 * @return text view
 	 */
+	@NonNull
 	private TextView makeTextView()
 	{
 		return new TextView();
@@ -304,9 +314,9 @@ public class MainFrame extends JFrame
 	 *
 	 * @return property view
 	 */
-	private PropertyView makePropertyView(final Controller controller)
+	private PropertyView makePropertyView(@NonNull final Controller controller)
 	{
-		final PropertyView propertyView = new PropertyView();
+		@NonNull final PropertyView propertyView = new PropertyView();
 		propertyView.setImageRepository(controller.makeImageRepositoryURL());
 		propertyView.setCellEditorListener(controller);
 		return propertyView;
@@ -317,9 +327,10 @@ public class MainFrame extends JFrame
 	 *
 	 * @return Dom tree view
 	 */
+	@NonNull
 	private DomTreeView makeDomTreeView()
 	{
-		final TreeCellRenderer renderer = MainFrame.hasTreebolicRendering ? new treebolic.studio.domtree.treebolic.Renderer() : new treebolic.studio.domtree.Renderer();
+		@NonNull final TreeCellRenderer renderer = MainFrame.hasTreebolicRendering ? new treebolic.studio.domtree.treebolic.Renderer() : new treebolic.studio.domtree.Renderer();
 		return new DomTreeView(renderer);
 	}
 
@@ -328,9 +339,10 @@ public class MainFrame extends JFrame
 	 *
 	 * @return javax.swing.JComponent
 	 */
+	@NonNull
 	private JComponent makeEditor(final Controller controller)
 	{
-		final JSplitPane pane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		@NonNull final JSplitPane pane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		pane.setDividerSize(8);
 		pane.setOneTouchExpandable(true);
 		pane.add(this.treeView, JSplitPane.LEFT);
@@ -343,9 +355,10 @@ public class MainFrame extends JFrame
 	 *
 	 * @return javax.swing.JComponent
 	 */
+	@NonNull
 	private JComponent makeSubEditor(final Controller controller)
 	{
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		panel.add(this.propertyView, BorderLayout.CENTER);
 		panel.add(makeDefaultsPanel(controller), BorderLayout.SOUTH);
@@ -357,9 +370,9 @@ public class MainFrame extends JFrame
 	 *
 	 * @return javax.swing.JPanel
 	 */
-	private JPanel makeDefaultsPanel(final Controller controller)
+	private JPanel makeDefaultsPanel(@NonNull final Controller controller)
 	{
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
 		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.globals"), "top.png", Controller.Code.SELECTTOP));
 		panel.add(makeGlobalsButton(controller, Messages.getString("MainFrame.tree"), "tree.png", Controller.Code.SELECTTREE));
@@ -373,9 +386,10 @@ public class MainFrame extends JFrame
 	 *
 	 * @return javax.swing.JButton
 	 */
+	@NonNull
 	private JButton makeGlobalsButton(final Controller controller, final String label, final String image, final Controller.Code code)
 	{
-		final JButton button = new JButton();
+		@NonNull final JButton button = new JButton();
 		//noinspection ConstantConditions
 		button.setIcon(new ImageIcon(getClass().getResource("images/" + image)));
 		button.setToolTipText(label);

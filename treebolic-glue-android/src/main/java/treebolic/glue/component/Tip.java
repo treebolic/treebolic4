@@ -74,7 +74,7 @@ public class Tip extends AppCompatDialogFragment
 	{
 		// use the Builder class for convenient dialog construction
 		final Activity activity = requireActivity();
-		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		@treebolic.annotations.NonNull final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
 		// get the layout inflater
 		final LayoutInflater inflater = activity.getLayoutInflater();
@@ -116,7 +116,7 @@ public class Tip extends AppCompatDialogFragment
 		;
 
 		// create the dialog and return it
-		final AppCompatDialog dialog = builder.create();
+		@treebolic.annotations.NonNull final AppCompatDialog dialog = builder.create();
 		dialog.setCanceledOnTouchOutside(true);
 		return dialog;
 	}

@@ -435,6 +435,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 *
 	 * @return parameters
 	 */
+	@NonNull
 	public Properties getParameters()
 	{
 		return this.settings;
@@ -749,7 +750,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param widget     widget
 	 * @param context    widget's context
 	 */
-	public void linkTo(final String linkUrl, @SuppressWarnings("unused") final String linkTarget, @SuppressWarnings("unused") final IWidget widget, @NonNull final Context context)
+	public void linkTo(@NonNull final String linkUrl, @SuppressWarnings("unused") final String linkTarget, @SuppressWarnings("unused") final IWidget widget, @NonNull final Context context)
 	{
 		@Nullable final URL url = context.makeURL(linkUrl);
 		if (url == null)

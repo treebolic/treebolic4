@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import treebolic.ILocator;
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.iface.Colors;
 import treebolic.model.*;
@@ -90,14 +91,14 @@ public class Provider implements IProvider
 	 */
 	@Nullable
 	@Override
-	public Model makeModel(final String source, final URL base, final Properties parameters)
+	public Model makeModel(final String source, final URL base, @Nullable final Properties parameters)
 	{
-		final Tree tree = makeTree(source, base, parameters, false);
+		@Nullable final Tree tree = makeTree(source, base, parameters, false);
 		if (tree == null)
 		{
 			return null;
 		}
-		final List<INode> nonRootTree = tree.getRoot().getChildren();
+		@Nullable final List<INode> nonRootTree = tree.getRoot().getChildren();
 		if (nonRootTree == null)
 		{
 			return null;
@@ -155,7 +156,7 @@ public class Provider implements IProvider
 	 */
 	@Override
 	@Nullable
-	public Tree makeTree(final String source0, final URL base, final Properties parameters, final boolean checkRecursion)
+	public Tree makeTree(final String source0, final URL base, @NonNull final Properties parameters, final boolean checkRecursion)
 	{
 		// get text file
 		String source = source0;
@@ -167,7 +168,7 @@ public class Provider implements IProvider
 		if (source != null)
 		{
 			// URL
-			final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
+			@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 			this.context.progress("Loading ..." + (url != null ? url : source), false);
 
 			// parse
@@ -195,8 +196,8 @@ public class Provider implements IProvider
 	private Tree parseTree(final URL url)
 	{
 		final MutableGraph graph = new MutableGraph();
-		final Map<String, MutableGraphNode> map = new HashMap<>();
-		try (InputStream is = url.openStream(); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
+		@NonNull final Map<String, MutableGraphNode> map = new HashMap<>();
+		try (InputStream is = url.openStream(); @NonNull BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
 		{
 			// parse lines
 			String line;
@@ -224,10 +225,10 @@ public class Provider implements IProvider
 	 * @return tree
 	 */
 	@Nullable
-	private Tree parseTree(final String location)
+	private Tree parseTree(@NonNull final String location)
 	{
 		final MutableGraph graph = new MutableGraph();
-		final Map<String, MutableGraphNode> map = new HashMap<>();
+		@NonNull final Map<String, MutableGraphNode> map = new HashMap<>();
 		try (InputStream is = Files.newInputStream(Paths.get(location)); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
 		{
 			// parse lines
@@ -256,7 +257,7 @@ public class Provider implements IProvider
 	 * @param lineNumber line number
 	 * @param map node stack
 	 */
-	private void processLine(final String line, final int lineNumber, final MutableGraph graph, final Map<String, MutableGraphNode> map)
+	private void processLine(@NonNull final String line, final int lineNumber, @NonNull final MutableGraph graph, @NonNull final Map<String, MutableGraphNode> map)
 	{
 		// parse
 		// parentid\tid\tlabel\tbackground\tforeground\timg\tlink\tcontent
@@ -268,8 +269,8 @@ public class Provider implements IProvider
 		}
 
 		// parent child ids
-		final String parentId = fields[0].trim();
-		final String childId = fields[1].trim();
+		@NonNull final String parentId = fields[0].trim();
+		@NonNull final String childId = fields[1].trim();
 		if (childId.isEmpty())
 		{
 			System.err.println("No Id " + lineNumber);
@@ -327,7 +328,7 @@ public class Provider implements IProvider
 		// edge
 		if (parent != null)
 		{
-			final GraphEdge graphEdge = new GraphEdge(parent, child, true);
+			@NonNull final GraphEdge graphEdge = new GraphEdge(parent, child, true);
 			graphEdge.setUserData(new MutableEdge(parent, child));
 			graph.add(graphEdge);
 		}

@@ -13,6 +13,9 @@ import javax.swing.plaf.metal.DefaultMetalTheme;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Look and feel
  *
@@ -25,7 +28,7 @@ public class Laf
 	 *
 	 * @param args command line arguments
 	 */
-	static public void lookAndFeel(final String[] args)
+	static public void lookAndFeel(@NonNull final String[] args)
 	{
 		// "com.incors.plaf.kunststoff.KunststoffLookAndFeel"
 		// "com.jgoodies.looks.plastic.PlasticLookAndFeel"
@@ -83,7 +86,7 @@ public class Laf
 	private static void setDefault()
 	{
 		final boolean isJava7 = JavaVersion.getJavaVersion() >= 1.7F;
-		final String plafName = isJava7 ? "javax.swing.plaf.nimbus.NimbusLookAndFeel" : "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"; //"javax.swing.plaf.metal.MetalLookAndFeel";  
+		@NonNull final String plafName = isJava7 ? "javax.swing.plaf.nimbus.NimbusLookAndFeel" : "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"; //"javax.swing.plaf.metal.MetalLookAndFeel";
 		try
 		{
 			UIManager.setLookAndFeel(plafName);
@@ -114,7 +117,7 @@ public class Laf
 	@SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
 	static public boolean setLookAndFeel(final String lafName) throws UnsupportedLookAndFeelException
 	{
-		final LookAndFeel laf = Laf.getLaf(lafName);
+		@Nullable final LookAndFeel laf = Laf.getLaf(lafName);
 		UIManager.setLookAndFeel(laf);
 		return true;
 	}
@@ -130,11 +133,11 @@ public class Laf
 		try
 		{
 			final Class<?> clazz = Class.forName(className);
-			final Class<?>[] argsClass = new Class[]{};
-			final Object[] args = new Object[]{};
+			@NonNull final Class<?>[] argsClass = new Class[]{};
+			@NonNull final Object[] args = new Object[]{};
 
-			final Constructor<?> constructor = clazz.getConstructor(argsClass);
-			final Object instance = constructor.newInstance(args);
+			@NonNull final Constructor<?> constructor = clazz.getConstructor(argsClass);
+			@NonNull final Object instance = constructor.newInstance(args);
 			return (LookAndFeel) instance;
 		}
 		catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException nfe)
@@ -169,8 +172,8 @@ public class Laf
 		try
 		{
 			final Class<?> clazz = Class.forName(className);
-			final Class<?>[] argsClass = new Class[]{MetalTheme.class};
-			final Method method = clazz.getMethod("setCurrentTheme", argsClass);
+			@NonNull final Class<?>[] argsClass = new Class[]{MetalTheme.class};
+			@NonNull final Method method = clazz.getMethod("setCurrentTheme", argsClass);
 			method.invoke(null, theme);
 		}
 		catch (final Exception e)
@@ -185,6 +188,7 @@ public class Laf
 	 *
 	 * @return metal theme
 	 */
+	@NonNull
 	static private MetalTheme makeCustomTheme()
 	{
 		return new DefaultMetalTheme()

@@ -7,6 +7,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * About dialog
  *
@@ -51,7 +53,7 @@ public class AboutDialog extends JDialog
 	 */
 	public AboutDialog(final String product, final String version, final boolean sysInfo)
 	{
-		final JPanel panel = initialize(product, version, sysInfo);
+		@NonNull final JPanel panel = initialize(product, version, sysInfo);
 		setContentPane(panel);
 	}
 
@@ -67,26 +69,26 @@ public class AboutDialog extends JDialog
 	{
 		setTitle(Messages.getString("AboutDialog.title"));
 
-		final JLabel titleLabel = new JLabel(product);
+		@NonNull final JLabel titleLabel = new JLabel(product);
 		titleLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
 
 		final HyperlinkButton authorLabel = new HyperlinkButton(HyperlinkButton.makeURILabel(AboutDialog.author), AboutDialog.email);
 
-		final JLabel copyrightLabel = new JLabel(AboutDialog.copyright);
-		final JLabel versionLabel = new JLabel(version);
+		@NonNull final JLabel copyrightLabel = new JLabel(AboutDialog.copyright);
+		@NonNull final JLabel versionLabel = new JLabel(version);
 
-		final JLabel image = new JLabel();
+		@NonNull final JLabel image = new JLabel();
 		//noinspection ConstantConditions
 		image.setIcon(new ImageIcon(AboutDialog.class.getResource("images/logo.png")));
 
-		final JButton oKButton = new JButton(Messages.getString("AboutDialog.ok"));
+		@NonNull final JButton oKButton = new JButton(Messages.getString("AboutDialog.ok"));
 		oKButton.addActionListener(e -> setVisible(false));
 
-		final JPanel commandPanel = new JPanel();
+		@NonNull final JPanel commandPanel = new JPanel();
 		commandPanel.setLayout(new FlowLayout());
 		commandPanel.add(oKButton);
 
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		panel.add(titleLabel, new GridBagConstraints(0, 0, 1, 1, 0., 0., GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(20, 10, 0, 10), 0, 0));
 		panel.add(versionLabel, new GridBagConstraints(0, 10, 1, 1, 0., 0., GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 10, 0, 10), 0, 0));
@@ -97,8 +99,8 @@ public class AboutDialog extends JDialog
 
 		if (sysInfo)
 		{
-			final String props = JavaVersion.getJavaPropsString();
-			final JTextArea javaInfo = new JTextArea();
+			@NonNull final String props = JavaVersion.getJavaPropsString();
+			@NonNull final JTextArea javaInfo = new JTextArea();
 			javaInfo.setEditable(false);
 			javaInfo.setText(props);
 			javaInfo.setCaretPosition(0);

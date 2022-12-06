@@ -10,6 +10,9 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Import dialog
  *
@@ -60,7 +63,7 @@ public class XslImportDialog extends JDialog
 		super();
 		this.properties = properties;
 
-		final List<String> presetXsls = new ArrayList<>(Searcher.findFileUrls(".*2treebolic.*\\.xsl$"));
+		@NonNull final List<String> presetXsls = new ArrayList<>(Searcher.findFileUrls(".*2treebolic.*\\.xsl$"));
 		initialize(presetXsls);
 	}
 
@@ -69,13 +72,13 @@ public class XslImportDialog extends JDialog
 	 *
 	 * @param presetXslts preset xslt
 	 */
-	protected void initialize(final List<String> presetXslts)
+	protected void initialize(@NonNull final List<String> presetXslts)
 	{
 		setTitle(Messages.getString("XslImportDialog.title"));
 		setResizable(true);
 
 		// images
-		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(XslImportDialog.class.getResource("images/xsl.png"));
+		@NonNull @SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(XslImportDialog.class.getResource("images/xsl.png"));
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
@@ -85,8 +88,8 @@ public class XslImportDialog extends JDialog
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// labels
-		final JLabel importLabel = new JLabel(Messages.getString("XslImportDialog.input"));
-		final JLabel xslLabel = new JLabel(Messages.getString("XslImportDialog.xsl"));
+		@NonNull final JLabel importLabel = new JLabel(Messages.getString("XslImportDialog.input"));
+		@NonNull final JLabel xslLabel = new JLabel(Messages.getString("XslImportDialog.xsl"));
 
 		// text
 		final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
@@ -131,10 +134,10 @@ public class XslImportDialog extends JDialog
 		this.xslComboBox.setToolTipText(Messages.getString("XslImportDialog.tooltip_xsl"));
 
 		// buttons
-		final JButton importBrowseButton = new JButton(Messages.getString("XslImportDialog.browse"));
-		final JButton xslBrowseButton = new JButton(Messages.getString("XslImportDialog.browse"));
-		final JButton oKButton = new JButton(Messages.getString("XslImportDialog.ok"));
-		final JButton cancelButton = new JButton(Messages.getString("XslImportDialog.cancel"));
+		@NonNull final JButton importBrowseButton = new JButton(Messages.getString("XslImportDialog.browse"));
+		@NonNull final JButton xslBrowseButton = new JButton(Messages.getString("XslImportDialog.browse"));
+		@NonNull final JButton oKButton = new JButton(Messages.getString("XslImportDialog.ok"));
+		@NonNull final JButton cancelButton = new JButton(Messages.getString("XslImportDialog.cancel"));
 
 		// panels
 		this.dataPanel = new JPanel();
@@ -146,21 +149,21 @@ public class XslImportDialog extends JDialog
 		this.dataPanel.add(importBrowseButton, new GridBagConstraints(1, 1, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 10, 0, 20), 0, 0));
 		this.dataPanel.add(xslBrowseButton, new GridBagConstraints(1, 3, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 10, 0, 20), 0, 0));
 
-		final JPanel buttonPanel = new JPanel();
+		@NonNull final JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
 		buttonPanel.add(cancelButton);
 		buttonPanel.add(oKButton);
 
 		// action
 		importBrowseButton.addActionListener(event -> {
-			final String url = FileDialogs.getXmlUrl(XslImportDialog.this.properties.getProperty("base", "."));
+			@Nullable final String url = FileDialogs.getXmlUrl(XslImportDialog.this.properties.getProperty("base", "."));
 			if (url != null && !url.isEmpty())
 			{
 				XslImportDialog.this.importTextField.setText(url);
 			}
 		});
 		xslBrowseButton.addActionListener(event -> {
-			final String url = FileDialogs.getXslUrl(XslImportDialog.this.properties.getProperty("base", "."));
+			@Nullable final String url = FileDialogs.getXslUrl(XslImportDialog.this.properties.getProperty("base", "."));
 			if (url != null && !url.isEmpty())
 			{
 				XslImportDialog.this.xslComboBox.getEditor().setItem(url);

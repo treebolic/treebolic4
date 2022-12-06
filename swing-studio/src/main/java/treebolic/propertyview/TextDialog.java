@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
 import treebolic.commons.Utils;
 
 /**
@@ -68,14 +69,14 @@ public class TextDialog extends JDialog
 		this.textArea = new JTextArea();
 		this.textArea.setLineWrap(true);
 		this.textArea.setToolTipText(Messages.getString("TextDialog.tooltip"));
-		final JScrollPane scrollPane = new JScrollPane(this.textArea);
+		@NonNull final JScrollPane scrollPane = new JScrollPane(this.textArea);
 		scrollPane.setPreferredSize(new Dimension(300, 100));
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("TextDialog.ok"));
-		final JButton cancelButton = new JButton(Messages.getString("TextDialog.cancel"));
+		@NonNull final JButton oKButton = new JButton(Messages.getString("TextDialog.ok"));
+		@NonNull final JButton cancelButton = new JButton(Messages.getString("TextDialog.cancel"));
 
-		final JPanel buttonPanel = new JPanel();
+		@NonNull final JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
 		buttonPanel.add(cancelButton);
 		buttonPanel.add(oKButton);
@@ -92,7 +93,7 @@ public class TextDialog extends JDialog
 		});
 
 		// assemble
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		panel.add(scrollPane, BorderLayout.CENTER);
 		panel.add(buttonPanel, BorderLayout.SOUTH);

@@ -59,6 +59,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 	/**
 	 * Web content status view
 	 */
+	@treebolic.annotations.Nullable
 	private final WebView webContentView;
 
 	/**
@@ -155,7 +156,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 		this.isHorizontal = !isHorizontalScreen;
 
 		// colors
-		final int[] colors = Utils.fetchColors(this.activity, R.attr.treebolic_statusbar_background, R.attr.treebolic_statusbar_foreground, R.attr.treebolic_statusbar_foreground_icon);
+		@treebolic.annotations.NonNull final int[] colors = Utils.fetchColors(this.activity, R.attr.treebolic_statusbar_background, R.attr.treebolic_statusbar_foreground, R.attr.treebolic_statusbar_foreground_icon);
 		this.background = colors[0];
 		this.foreground = colors[1];
 		this.iconTint = colors[2];
@@ -165,7 +166,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 		assert inflater != null;
 		TextView statusView0;
 		WebView webContentView0 = null;
-		TextView textContentView0 = null;
+		@treebolic.annotations.Nullable TextView textContentView0 = null;
 		try
 		{
 			final ViewGroup wrappedView = (ViewGroup) inflater.inflate(isHorizontalScreen ? R.layout.status_h : R.layout.status_v, this);
@@ -320,7 +321,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 		}
 
 		// label
-		String label = label0;
+		@treebolic.annotations.Nullable String label = label0;
 		if (Statusbar.labelProcessor != null)
 		{
 			label = labelProcessor.process(label, this);
@@ -330,7 +331,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 		// content
 		if (this.webContentView != null)
 		{
-			String content = converter == null ? Utils.join("<br>", content0) : converter.apply(content0);
+			@treebolic.annotations.Nullable String content = converter == null ? Utils.join("<br>", content0) : converter.apply(content0);
 			if (Statusbar.contentProcessor != null)
 			{
 				content = contentProcessor.process(content, this);

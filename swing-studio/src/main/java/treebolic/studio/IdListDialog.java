@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.Map;
 import java.util.SortedSet;
 
+import treebolic.annotations.NonNull;
 import treebolic.studio.model.ModelUtils;
 
 /**
@@ -38,7 +39,7 @@ public class IdListDialog extends ReferenceListDialog
 	@Override
 	protected void update()
 	{
-		final Map<String, SortedSet<String>> idToLocationMap = ModelUtils.getIdMap(this.controller.getModel());
+		@NonNull final Map<String, SortedSet<String>> idToLocationMap = ModelUtils.getIdMap(this.controller.getModel());
 		setModel(idToLocationMap);
 		super.update();
 	}

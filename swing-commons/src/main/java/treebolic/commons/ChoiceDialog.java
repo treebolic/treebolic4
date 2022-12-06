@@ -8,6 +8,9 @@ import java.util.Collection;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Import dialog
  *
@@ -34,11 +37,13 @@ public class ChoiceDialog extends JDialog
 	/**
 	 * Combo
 	 */
+	@NonNull
 	protected final JComboBox<String> comboBox;
 
 	/**
 	 * Data panel
 	 */
+	@NonNull
 	protected final JPanel dataPanel;
 
 	/**
@@ -50,7 +55,7 @@ public class ChoiceDialog extends JDialog
 	 * @param headerLabelText label
 	 * @param canAdd          if value can be added
 	 */
-	public ChoiceDialog(final String value, final Collection<String> values, final String title, final String headerLabelText, final boolean canAdd)
+	public ChoiceDialog(final String value, @Nullable final Collection<String> values, final String title, final String headerLabelText, final boolean canAdd)
 	{
 		super();
 		this.value = value;
@@ -59,8 +64,8 @@ public class ChoiceDialog extends JDialog
 		setResizable(true);
 
 		// images
-		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(ChoiceDialog.class.getResource("images/open.png"));
-		final JLabel headerLabel = new JLabel();
+		@NonNull @SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(ChoiceDialog.class.getResource("images/open.png"));
+		@NonNull final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -69,7 +74,7 @@ public class ChoiceDialog extends JDialog
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// text
-		final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
+		@NonNull final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
 		{
 			private static final long serialVersionUID = -2940683342675209960L;
 
@@ -105,15 +110,15 @@ public class ChoiceDialog extends JDialog
 		}
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("ChoiceDialog.ok"));
-		final JButton cancelButton = new JButton(Messages.getString("ChoiceDialog.cancel"));
+		@NonNull final JButton oKButton = new JButton(Messages.getString("ChoiceDialog.ok"));
+		@NonNull final JButton cancelButton = new JButton(Messages.getString("ChoiceDialog.cancel"));
 
 		// panels
 		this.dataPanel = new JPanel();
 		this.dataPanel.setLayout(new GridBagLayout());
 		this.dataPanel.add(this.comboBox, new GridBagConstraints(0, 0, 1, 1, 1., 0., GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 20, 0, 10), 0, 0));
 
-		final JPanel buttonPanel = new JPanel();
+		@NonNull final JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
 		buttonPanel.add(cancelButton);
 		buttonPanel.add(oKButton);
@@ -126,7 +131,7 @@ public class ChoiceDialog extends JDialog
 
 		if (canAdd)
 		{
-			final JButton addButton = new JButton(Messages.getString("ChoiceDialog.add"));
+			@NonNull final JButton addButton = new JButton(Messages.getString("ChoiceDialog.add"));
 
 			// action
 			addButton.addActionListener(event -> {
@@ -141,7 +146,7 @@ public class ChoiceDialog extends JDialog
 		}
 
 		// assemble
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(Box.createRigidArea(new Dimension(0, 10)));
 		panel.add(headerLabel);
@@ -190,7 +195,7 @@ public class ChoiceDialog extends JDialog
 	 * @param message message
 	 * @return input
 	 */
-	protected String ask(final String message)
+	protected String ask(@NonNull final String message)
 	{
 		final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines);

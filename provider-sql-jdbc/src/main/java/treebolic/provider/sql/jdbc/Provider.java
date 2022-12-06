@@ -135,6 +135,7 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		 * (non-Javadoc)
 		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#getFloat(int)
 		 */
+		@NonNull
 		@Override
 		public Float getFloat(int columnIndex) throws SQLException
 		{
@@ -145,6 +146,7 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		 * (non-Javadoc)
 		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#getDouble(int)
 		 */
+		@NonNull
 		@Override
 		public Double getDouble(int columnIndex) throws SQLException
 		{
@@ -156,7 +158,7 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 	{
 		private Connection connection;
 
-		public JdbcDatabase(Properties properties)
+		public JdbcDatabase(@NonNull Properties properties)
 		{
 			// url/user/password
 			final String url = makeUrl(properties);
@@ -201,6 +203,7 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		 * (non-Javadoc)
 		 * @see treebolic.provider.sqlx.AbstractProvider.Database#query(java.lang.String)
 		 */
+		@NonNull
 		@Override
 		public JdbcCursor query(@NonNull final String nodesSql) throws SQLException
 		{
@@ -250,8 +253,9 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 	 * (non-Javadoc)
 	 * @see treebolic.provider.sqlx.AbstractProvider#openDatabase(java.util.Properties)
 	 */
+	@NonNull
 	@Override
-	protected JdbcDatabase openDatabase(Properties properties)
+	protected JdbcDatabase openDatabase(@NonNull Properties properties)
 	{
 		return new JdbcDatabase(properties);
 	}

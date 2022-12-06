@@ -115,14 +115,14 @@ public class Provider implements IProvider
 	 */
 	@Nullable
 	@Override
-	public Model makeModel(final String source0, final URL base, final Properties parameters)
+	public Model makeModel(final String source0, final URL base, @Nullable final Properties parameters)
 	{
 		final Tree tree = makeTree(source0, base, parameters, false);
 		if (tree == null)
 		{
 			return null;
 		}
-		final List<INode> nonRootTree = tree.getRoot().getChildren();
+		@Nullable final List<INode> nonRootTree = tree.getRoot().getChildren();
 		if (nonRootTree == null)
 		{
 			return null;
@@ -154,7 +154,7 @@ public class Provider implements IProvider
 		final String source = parameters == null ? null : parameters.getProperty("settings");
 		if (source != null && !source.isEmpty())
 		{
-			final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
+			@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 			this.context.progress("Loading ..." + (url != null ? url : source), false);
 
 			try
@@ -181,7 +181,7 @@ public class Provider implements IProvider
 	 */
 	@Nullable
 	@Override
-	public Tree makeTree(final String source0, final URL base, final Properties parameters, final boolean checkRecursion)
+	public Tree makeTree(final String source0, final URL base, @NonNull final Properties parameters, final boolean checkRecursion)
 	{
 		// get text file
 		String source = source0;
@@ -193,11 +193,11 @@ public class Provider implements IProvider
 		if (source != null)
 		{
 			// URL
-			final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
+			@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 			this.context.progress("Loading ..." + (url != null ? url : source), false);
 
 			// parse
-			final Tree tree = url != null ? parseTree(url) : parseTree(source);
+			@Nullable final Tree tree = url != null ? parseTree(url) : parseTree(source);
 			if (tree != null)
 			{
 				this.context.progress("Loaded " + (url != null ? url : source), false);
@@ -218,7 +218,7 @@ public class Provider implements IProvider
 	 * @return tree
 	 */
 	@Nullable
-	private Tree parseTree(final URL url)
+	private Tree parseTree(@NonNull final URL url)
 	{
 		// root
 		MutableNode rootNode = new MutableNode(null, "root");
@@ -226,7 +226,7 @@ public class Provider implements IProvider
 		rootNode.setBackColor(Colors.RED);
 		rootNode.setForeColor(Colors.WHITE);
 
-		final Deque<StackEntry> stack = new ArrayDeque<>();
+		@NonNull final Deque<StackEntry> stack = new ArrayDeque<>();
 		stack.push(new StackEntry(rootNode, -1));
 
 		try (InputStream is = url.openStream(); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
@@ -276,7 +276,7 @@ public class Provider implements IProvider
 		final Deque<StackEntry> stack = new ArrayDeque<>();
 		stack.push(new StackEntry(rootNode, -1));
 
-		try (InputStream is = Files.newInputStream(Paths.get(location)); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
+		try (@NonNull InputStream is = Files.newInputStream(Paths.get(location)); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
 		{
 			// parse lines
 			String line;
@@ -290,7 +290,7 @@ public class Provider implements IProvider
 			}
 
 			// graph
-			final List<INode> children = rootNode.getChildren();
+			@NonNull final List<INode> children = rootNode.getChildren();
 			if (children.size() == 1)
 			{
 				rootNode = (MutableNode) children.get(0);
@@ -362,15 +362,15 @@ public class Provider implements IProvider
 
 		// parse
 		// link;label;backcolor;forecolor;img;id;content
-		final String[] fields = line.substring(level).split(";", 7);
-		String id = "ID" + lineNumber;
+		@NonNull final String[] fields = line.substring(level).split(";", 7);
+		@NonNull String id = "ID" + lineNumber;
 		if (fields.length >= 6 && !fields[5].isEmpty())
 		{
 			id = fields[5];
 		}
 
 		// new node
-		final MutableNode node = new MutableNode(parent, id);
+		@NonNull final MutableNode node = new MutableNode(parent, id);
 		stack.push(new StackEntry(node, level));
 
 		// node data
@@ -406,7 +406,7 @@ public class Provider implements IProvider
 	 * @param line line
 	 * @return level
 	 */
-	private int getLevel(final String line)
+	private int getLevel(@NonNull final String line)
 	{
 		for (int i = 0; i < line.length(); i++)
 		{

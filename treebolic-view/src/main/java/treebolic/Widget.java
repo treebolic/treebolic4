@@ -1034,7 +1034,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 			}
 
 			// image loading
-			Image image = new treebolic.glue.Image(url);
+			@NonNull Image image = new treebolic.glue.Image(url);
 
 			// cache image
 			this.images.put(source, image);

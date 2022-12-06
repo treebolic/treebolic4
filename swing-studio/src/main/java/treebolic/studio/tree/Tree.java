@@ -14,6 +14,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.plaf.basic.BasicTreeUI;
 import javax.swing.tree.*;
 
+import treebolic.annotations.NonNull;
 import treebolic.studio.Controller;
 import treebolic.model.INode;
 import treebolic.model.TreeMutableNode;
@@ -111,7 +112,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 			}
 
 			@Override
-			public void keyPressed(KeyEvent keyEvent)
+			public void keyPressed(@NonNull KeyEvent keyEvent)
 			{
 				if ((keyEvent.getKeyCode() == KeyEvent.VK_UP) && ((keyEvent.getModifiersEx() & InputEvent.CTRL_DOWN_MASK) != 0))
 				{
@@ -149,7 +150,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		{
 			return;
 		}
-		final TreePath path = new TreePath(root);
+		@NonNull final TreePath path = new TreePath(root);
 		expandAll(path);
 	}
 
@@ -164,14 +165,14 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		{
 			return;
 		}
-		final DefaultMutableTreeNode[] nodes = { //
+		@NonNull final DefaultMutableTreeNode[] nodes = { //
 				(DefaultMutableTreeNode) root.getChildAt(0).getChildAt(0).getChildAt(0), // root node
 				(DefaultMutableTreeNode) root.getChildAt(0).getChildAt(1), // edges
 				(DefaultMutableTreeNode) root.getChildAt(1) // tools
 		};
 		for (final DefaultMutableTreeNode node : nodes)
 		{
-			final TreePath path = new TreePath(node.getPath());
+			@NonNull final TreePath path = new TreePath(node.getPath());
 			collapseAll(path);
 		}
 	}
@@ -256,7 +257,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		model.insertNodeInto(node, parentNode, 0);
 
 		// select
-		final TreePath path = new TreePath(model.getPathToRoot(node));
+		@NonNull final TreePath path = new TreePath(model.getPathToRoot(node));
 		makeVisible(path);
 		scrollPathToVisible(path);
 		if (!Tree.focusParent)
@@ -271,7 +272,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	 *
 	 * @param node node
 	 */
-	public void removeFromParent(final DefaultMutableTreeNode node)
+	public void removeFromParent(@NonNull final DefaultMutableTreeNode node)
 	{
 		// model
 		final DefaultTreeModel model = (DefaultTreeModel) getModel();
@@ -334,8 +335,8 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		model.insertNodeInto(treeNode, parentTreeNode, j);
 
 		// objects
-		final TreeMutableNode parentNode = (TreeMutableNode) parentObject;
-		final INode node = (INode) object;
+		@NonNull final TreeMutableNode parentNode = (TreeMutableNode) parentObject;
+		@NonNull final INode node = (INode) object;
 
 		// object remove + add
 		TreeMutableNode.remove(parentNode, node);
@@ -371,11 +372,12 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		fireSelect(node);
 	}
 
+	@NonNull
 	@SuppressWarnings("unused")
 	static private String toString(final TreeSelectionEvent event)
 	{
 
-		final StringBuilder buffer = new StringBuilder();
+		@NonNull final StringBuilder buffer = new StringBuilder();
 		buffer.append("source:");
 		buffer.append(event.getSource());
 		// TreePath path = event.getPath();
@@ -410,7 +412,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	 *
 	 * @param node node
 	 */
-	public void fireSelect(final DefaultMutableTreeNode node)
+	public void fireSelect(@NonNull final DefaultMutableTreeNode node)
 	{
 		// System.err.println("TREE: fire select " + node.getUserObject());
 		this.controller.onSelected(node.getUserObject());

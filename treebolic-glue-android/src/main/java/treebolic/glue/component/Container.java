@@ -59,7 +59,7 @@ public class Container extends LinearLayout implements Component, treebolic.glue
 		super(context);
 
 		// determine orientation
-		final Point size = Utils.screenSize(context);
+		@treebolic.annotations.NonNull final Point size = Utils.screenSize(context);
 		this.isHorizontal = size.x >= size.y;
 		setOrientation(this.isHorizontal ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
 
@@ -88,7 +88,7 @@ public class Container extends LinearLayout implements Component, treebolic.glue
 		switch (position)
 		{
 			case PANE:
-				final LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.F);
+				@treebolic.annotations.NonNull final LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.F);
 				addView(viewToAdd, params);
 				break;
 
@@ -126,16 +126,16 @@ public class Container extends LinearLayout implements Component, treebolic.glue
 	@Override
 	public void validate()
 	{
-		@SuppressWarnings("UnusedAssignment") LayoutParams params = null;
+		@treebolic.annotations.Nullable @SuppressWarnings("UnusedAssignment") LayoutParams params = null;
 		if (this.toolbar != null)
 		{
 			params = new LayoutParams(this.isHorizontal ? ViewGroup.LayoutParams.WRAP_CONTENT : ViewGroup.LayoutParams.MATCH_PARENT, this.isHorizontal ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT, 0.F);
 			addView(this.toolbar, params);
 		}
-		ViewGroup layout = this;
+		@treebolic.annotations.NonNull ViewGroup layout = this;
 		if (this.view != null && this.statusbar != null)
 		{
-			final SplitPaneLayout splitLayout = new SplitPaneLayout(getContext());
+			@treebolic.annotations.NonNull final SplitPaneLayout splitLayout = new SplitPaneLayout(getContext());
 			splitLayout.setOrientation(this.isHorizontal ? 0 : 1);
 			splitLayout.setSplitterPositionPercent(Container.splitterPositionPercent);
 			splitLayout.setSplitterMovable(true);

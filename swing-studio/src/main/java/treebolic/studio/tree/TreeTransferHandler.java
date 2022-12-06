@@ -14,6 +14,8 @@ import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.studio.Pair;
 import treebolic.model.INode;
 import treebolic.model.MenuItem;
@@ -97,6 +99,7 @@ public class TreeTransferHandler extends TransferHandler
 		 * (non-Javadoc)
 		 * @see java.awt.datatransfer.Transferable#getTransferData(java.awt.datatransfer.DataFlavor)
 		 */
+		@NonNull
 		@Override
 		public Object getTransferData(final DataFlavor flavor)
 		{
@@ -145,9 +148,9 @@ public class TreeTransferHandler extends TransferHandler
 	 * @see javax.swing.TransferHandler#importData(javax.swing.TransferHandler.TransferSupport)
 	 */
 	@Override
-	public boolean importData(final TransferSupport support)
+	public boolean importData(@NonNull final TransferSupport support)
 	{
-		final Pair<TreePath, TreePath> nodes = getNodes(support);
+		@Nullable final Pair<TreePath, TreePath> nodes = getNodes(support);
 		if (nodes != null)
 		{
 			if (support.isDrop())
@@ -206,7 +209,7 @@ public class TreeTransferHandler extends TransferHandler
 		{
 			return null;
 		}
-		final DefaultMutableTreeNode node = (DefaultMutableTreeNode) data;
+		@NonNull final DefaultMutableTreeNode node = (DefaultMutableTreeNode) data;
 		final Object sourceObject = node.getUserObject();
 		sourcePath = new TreePath(node.getPath());
 
@@ -230,7 +233,7 @@ public class TreeTransferHandler extends TransferHandler
 	 * @param destination destination node
 	 * @return true if source node can drag and drop to destination node
 	 */
-	private boolean testMove(final TreePath source, final TreePath destination)
+	private boolean testMove(@Nullable final TreePath source, final TreePath destination)
 	{
 		if (destination != null && source != null)
 		{
@@ -258,7 +261,7 @@ public class TreeTransferHandler extends TransferHandler
 	 * @return true if successful
 	 */
 	@SuppressWarnings("SameReturnValue")
-	private boolean move(final Tree tree, final TreePath source, final TreePath destination, @SuppressWarnings("SameParameterValue") boolean prepend)
+	private boolean move(@NonNull final Tree tree, @NonNull final TreePath source, final TreePath destination, @SuppressWarnings("SameParameterValue") boolean prepend)
 	{
 		// tree
 		final DefaultMutableTreeNode parentTreeNode = (DefaultMutableTreeNode) destination.getLastPathComponent();
@@ -283,7 +286,7 @@ public class TreeTransferHandler extends TransferHandler
 
 		if (object instanceof TreeMutableNode && parentObject instanceof TreeMutableNode)
 		{
-			final TreeMutableNode parentNode = (TreeMutableNode) parentObject;
+			@NonNull final TreeMutableNode parentNode = (TreeMutableNode) parentObject;
 			final INode node = (INode) object;
 
 			// object remove
@@ -303,7 +306,7 @@ public class TreeTransferHandler extends TransferHandler
 		{
 			final MenuWrapper parentNode = (MenuWrapper) parentObject;
 			assert object instanceof MenuItemWrapper;
-			final MenuItemWrapper node = (MenuItemWrapper) object;
+			@NonNull final MenuItemWrapper node = (MenuItemWrapper) object;
 			final List<MenuItem> menu = parentNode.menu;
 			final MenuItem menuItem = node.menuItem;
 			menu.remove(menuItem);

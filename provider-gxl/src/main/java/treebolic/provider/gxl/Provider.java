@@ -18,6 +18,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import treebolic.ILocator;
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.model.Model;
 import treebolic.model.Tree;
@@ -94,11 +95,11 @@ public class Provider implements IProvider
 		if (source != null)
 		{
 			// URL
-			final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
+			@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 
 			// parse
 			this.context.progress("Loading ..." + (url != null ? url : source), false); //$NON-NLS-1$
-			final Model model = url != null ? GxlParser.parseModel(url) : GxlParser.parseModel(source);
+			@Nullable final Model model = url != null ? GxlParser.parseModel(url) : GxlParser.parseModel(source);
 			if (model != null)
 			{
 				this.context.progress("Loaded " + (url != null ? url : source), false); //$NON-NLS-1$
@@ -115,7 +116,7 @@ public class Provider implements IProvider
 	 */
 	@Nullable
 	@Override
-	public Tree makeTree(final String source0, final URL base, final Properties parameters, final boolean checkRecursion)
+	public Tree makeTree(final String source0, final URL base, @NonNull final Properties parameters, final boolean checkRecursion)
 	{
 		// get xml file
 		String source = source0;
@@ -128,13 +129,13 @@ public class Provider implements IProvider
 		if (source != null)
 		{
 			// URL
-			final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
+			@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 
 			// parse
 			this.context.progress("Loading ..." + (url != null ? url : source), false); //$NON-NLS-1$
 			try
 			{
-				Tree tree = url != null ? GxlParser.parseTree(url) : GxlParser.parseTree(source);
+				@Nullable Tree tree = url != null ? GxlParser.parseTree(url) : GxlParser.parseTree(source);
 				if (tree != null)
 				{
 					this.context.progress("Loaded " + (url != null ? url : source), false); //$NON-NLS-1$

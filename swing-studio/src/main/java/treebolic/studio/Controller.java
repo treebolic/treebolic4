@@ -35,6 +35,7 @@ import treebolic.IContext;
 import treebolic.IWidget;
 import treebolic.Widget;
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.commons.*;
 import treebolic.dtd.Dtd;
 import treebolic.studio.dialogs.XSettingsDialog;
@@ -76,6 +77,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	/**
 	 * Id to node map
 	 */
+	@Nullable
 	private Map<String, MutableNode> idToNodeMap;
 
 	// D O C U M E N T
@@ -83,11 +85,13 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	/**
 	 * Document
 	 */
+	@Nullable
 	private Document document;
 
 	/**
 	 * Document url
 	 */
+	@Nullable
 	private URL url;
 
 	/**
@@ -337,7 +341,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		}
 
 		// document -> model
-		final DocumentAdapter adapter = new DocumentAdapter()
+		@NonNull final DocumentAdapter adapter = new DocumentAdapter()
 		{
 			@NonNull
 			@Override
@@ -455,7 +459,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 * @see javax.swing.event.HyperlinkListener#hyperlinkUpdate(javax.swing.event.HyperlinkEvent)
 	 */
 	@Override
-	public void hyperlinkUpdate(final HyperlinkEvent event)
+	public void hyperlinkUpdate(@NonNull final HyperlinkEvent event)
 	{
 		if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED)
 		{
@@ -480,7 +484,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 * @param code  code
 	 * @param value value parameter
 	 */
-	public void execute(final Code code, @SuppressWarnings("unused") final int value)
+	public void execute(@NonNull final Code code, @SuppressWarnings("unused") final int value)
 	{
 		switch (code)
 		{
@@ -651,7 +655,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	private void newDocument()
 	{
 		checkSave();
-		final Model model = new Model(new Tree(ModelUtils.makeDefaultTree(), null), new Settings());
+		@NonNull final Model model = new Model(new Tree(ModelUtils.makeDefaultTree(), null), new Settings());
 		setModel(model, ModelUtils.makeIdToNodeMap(model));
 		update(Mode.NEW);
 	}
@@ -675,7 +679,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	private void openUrl()
 	{
 		checkSave();
-		final XUrlDialog dialog = new XUrlDialog(this.settings);
+		@NonNull final XUrlDialog dialog = new XUrlDialog(this.settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -692,7 +696,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	public void open(final String urlString)
 	{
-		final URL url = makeURL(urlString);
+		@Nullable final URL url = makeURL(urlString);
 		if (url == null)
 		{
 			return;
@@ -705,9 +709,9 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 *
 	 * @param url Url
 	 */
-	private void open(final URL url)
+	private void open(@NonNull final URL url)
 	{
-		final URL dtdUrl = Dtd.class.getResource("Treebolic.dtd");
+		@Nullable final URL dtdUrl = Dtd.class.getResource("Treebolic.dtd");
 		assert dtdUrl != null;
 		try (InputStream dtdIs = dtdUrl.openStream())
 		{
@@ -728,6 +732,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 * @param url Url
 	 * @return file
 	 */
+	@Nullable
 	static private File getFile(final URL url)
 	{
 		try
@@ -784,7 +789,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		{
 			return;
 		}
-		final File file = new File(filePath);
+		@NonNull final File file = new File(filePath);
 		if (file.exists() && !Interact.confirm(new String[]{filePath, Messages.getString("Controller.exists"), Messages.getString("Controller.prompt_overwrite")}))
 		{
 			return;
@@ -845,7 +850,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	private void importXsl()
 	{
 		checkSave();
-		final XslImportDialog dialog = new XslImportDialog(this.settings);
+		@NonNull final XslImportDialog dialog = new XslImportDialog(this.settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -858,7 +863,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 				this.url = null;
 				try
 				{
-					final URL xmlUrl = new URL(xml);
+					@NonNull final URL xmlUrl = new URL(xml);
 					final URL xsltUrl = new URL(xslt);
 					setDocument(new Parser().makeDocument(xmlUrl, xsltUrl, null), xmlUrl);
 					update(Mode.IMPORT);
@@ -877,7 +882,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	private void importProvider()
 	{
 		checkSave();
-		final OpenDialog dialog = new OpenDialog(this.settings.getProperty("provider"), this.settings.getProperty("source"), this.settings.getProperty("base"));
+		@NonNull final OpenDialog dialog = new OpenDialog(this.settings.getProperty("provider"), this.settings.getProperty("source"), this.settings.getProperty("base"));
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
@@ -888,29 +893,29 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			if (providerName != null && !providerName.isEmpty() && source != null && !source.isEmpty())
 			{
 				// make provider
-				final IProvider provider = makeProvider(providerName);
+				@Nullable final IProvider provider = makeProvider(providerName);
 				if (provider == null)
 				{
-					final String[] lines = {Messages.getString("Controller.provider"), providerName, Messages.getString("Controller.provider_null")};
+					@NonNull final String[] lines = {Messages.getString("Controller.provider"), providerName, Messages.getString("Controller.provider_null")};
 					JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				provider.setContext(this);
 
 				// make model
-				final Model model = provider.makeModel(source, getBase(), null);
+				@Nullable final Model model = provider.makeModel(source, getBase(), null);
 				if (model == null)
 				{
-					final String[] lines = {Messages.getString("Controller.provider"), providerName, Messages.getString("Controller.model_null_source"), source};
+					@NonNull final String[] lines = {Messages.getString("Controller.provider"), providerName, Messages.getString("Controller.model_null_source"), source};
 					JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 
 				// make model mutable
-				final Pair<Model, Map<String, MutableNode>> result = ModelUtils.toMutable(model);
+				@NonNull final Pair<Model, Map<String, MutableNode>> result = ModelUtils.toMutable(model);
 				if (result.first == null)
 				{
-					final String[] lines = {Messages.getString("Controller.provider"), providerName, Messages.getString("Controller.modelmutable_null_source"), source};
+					@NonNull final String[] lines = {Messages.getString("Controller.provider"), providerName, Messages.getString("Controller.modelmutable_null_source"), source};
 					JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE);
 					return;
 				}
@@ -926,7 +931,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	private void exportDocument()
 	{
-		final XslExportDialog dialog = new XslExportDialog(this.settings);
+		@NonNull final XslExportDialog dialog = new XslExportDialog(this.settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -955,7 +960,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		{
 			return;
 		}
-		final File archive = new File(filePath);
+		@NonNull final File archive = new File(filePath);
 		if (archive.exists() && !Interact.confirm(new String[]{filePath, Messages.getString("Controller.archive"), Messages.getString("Controller.prompt_overwrite")}))
 		{
 			return;
@@ -966,7 +971,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			return;
 		}
 		final Document document = makeDocument(this.model);
-		final URL imagesBase = getImagesBase();
+		@Nullable final URL imagesBase = getImagesBase();
 		if (document != null)
 		{
 			new ZipMaker(document, imagesBase, archive, entry).make();
@@ -983,7 +988,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		{
 			return;
 		}
-		final File archive = new File(filePath);
+		@NonNull final File archive = new File(filePath);
 		if (!archive.exists())
 		{
 			return;
@@ -993,7 +998,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		String entry;
 		try
 		{
-			final ZipEntryDialog dialog = new ZipEntryDialog(archive);
+			@NonNull final ZipEntryDialog dialog = new ZipEntryDialog(archive);
 			dialog.setModal(true);
 			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
@@ -1013,7 +1018,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		{
 			final String archiveUrl = archive.toURI().toURL().toString();
 			final String urlString = String.format("jar:%s!/%s", archiveUrl, entry);
-			final URL url = new URL(urlString);
+			@NonNull final URL url = new URL(urlString);
 
 			final String imagesUrlString = String.format("jar:%s!/", archiveUrl);
 			final URL imageUrl = new URL(imagesUrlString);
@@ -1038,7 +1043,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		{
 			return;
 		}
-		final File file = new File(filePath);
+		@NonNull final File file = new File(filePath);
 		if (file.exists() && !Interact.confirm(new String[]{filePath, Messages.getString("Controller.file"), Messages.getString("Controller.prompt_overwrite")}))
 		{
 			return;
@@ -1050,7 +1055,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		}
 		catch (final IOException exception)
 		{
-			final String[] lines = {exception.toString(), exception.getMessage()};
+			@NonNull final String[] lines = {exception.toString(), exception.getMessage()};
 			JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE);
 		}
 	}
@@ -1080,7 +1085,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		}
 		catch (final Exception exception)
 		{
-			final String[] lines = {exception.toString(), exception.getMessage()};
+			@NonNull final String[] lines = {exception.toString(), exception.getMessage()};
 			JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE);
 		}
 	}
@@ -1162,7 +1167,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		{
 			return;
 		}
-		final LinkListDialog dialog = new LinkListDialog(this);
+		@NonNull final LinkListDialog dialog = new LinkListDialog(this);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
@@ -1176,7 +1181,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		{
 			return;
 		}
-		final MountListDialog dialog = new MountListDialog(this);
+		@NonNull final MountListDialog dialog = new MountListDialog(this);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
@@ -1190,7 +1195,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		{
 			return;
 		}
-		final IdListDialog dialog = new IdListDialog(this);
+		@NonNull final IdListDialog dialog = new IdListDialog(this);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
@@ -1202,14 +1207,14 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	public void dtd()
 	{
-		final TextView view = makeTextView();
+		@NonNull final TextView view = makeTextView();
 		final JComponent component = new JScrollPane(view);
 		this.tabbedPane.addTab("DTD", null, component, null);
 		final int index = this.tabbedPane.indexOfComponent(component);
 		this.tabbedPane.setTabComponentAt(index, new ButtonTabComponent(this.tabbedPane));
 		this.tabbedPane.setSelectedIndex(index);
 
-		final String text = Dtd.getString();
+		@Nullable final String text = Dtd.getString();
 		view.setText(text);
 		view.setCaretPosition(0);
 	}
@@ -1223,7 +1228,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	{
 		final TreeCellRenderer renderer0 = this.domTreeView.getCellRenderer();
 		final boolean isSpecific = renderer0 instanceof treebolic.studio.domtree.treebolic.Renderer;
-		final TreeCellRenderer renderer = isSpecific ? new treebolic.studio.domtree.Renderer() : new treebolic.studio.domtree.treebolic.Renderer();
+		@NonNull final TreeCellRenderer renderer = isSpecific ? new treebolic.studio.domtree.Renderer() : new treebolic.studio.domtree.treebolic.Renderer();
 		this.domTreeView.setCellRenderer(renderer);
 		this.domTreeView.repaint();
 	}
@@ -1252,14 +1257,14 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 * @param exportUrl     export url
 	 * @param xsltUrlString xslt url
 	 */
-	public void transformToView(final String exportUrl, final String xsltUrlString)
+	public void transformToView(@NonNull final String exportUrl, final String xsltUrlString)
 	{
 		if (this.document != null)
 		{
 			// type of view
 			final boolean isHtml = exportUrl.endsWith("html");
-			final JTextComponent view = isHtml ? makeHtmlView(this) : makeTextView();
-			final JComponent component = new JScrollPane(view);
+			@NonNull final JTextComponent view = isHtml ? makeHtmlView(this) : makeTextView();
+			@NonNull final JComponent component = new JScrollPane(view);
 
 			// tab
 			this.tabbedPane.addTab(Messages.getString("Controller.export"), null, component, null);
@@ -1270,7 +1275,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 
 			try
 			{
-				final URL xsltUrl = new URL(xsltUrlString);
+				@NonNull final URL xsltUrl = new URL(xsltUrlString);
 				final DomTransformer transformer = new DomTransformer(isHtml, null);
 				final String text = transformer.documentToString(this.document, xsltUrl);
 				view.setText(text);
@@ -1284,7 +1289,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			}
 			return;
 		}
-		final String[] lines = {Messages.getString("Controller.err_document_null")};
+		@NonNull final String[] lines = {Messages.getString("Controller.err_document_null")};
 		JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE);
 	}
 
@@ -1295,7 +1300,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 * @param xsltUrlString xslt url
 	 * @param outputFileUrl output file url
 	 */
-	public void transformToFile(final String exportUrl, final String xsltUrlString, final String outputFileUrl)
+	public void transformToFile(@NonNull final String exportUrl, @NonNull final String xsltUrlString, @NonNull final String outputFileUrl)
 	{
 		if (this.document != null)
 		{
@@ -1303,23 +1308,23 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			final boolean isHtml = exportUrl.endsWith("html");
 			try
 			{
-				final File outputFile = Controller.getFile(outputFileUrl);
+				@Nullable final File outputFile = Controller.getFile(outputFileUrl);
 				if (outputFile == null || (outputFile.exists() && !Interact.confirm(new String[]{outputFileUrl, Messages.getString("Controller.file"), Messages.getString("Controller.prompt_overwrite")})))
 				{
 					return;
 				}
-				final URL xsltUrl = new URL(xsltUrlString);
-				final DomTransformer transformer = new DomTransformer(isHtml, null);
+				@NonNull final URL xsltUrl = new URL(xsltUrlString);
+				@NonNull final DomTransformer transformer = new DomTransformer(isHtml, null);
 				transformer.documentToFile(this.document, xsltUrl, outputFile);
 			}
 			catch (final IOException | TransformerException exception)
 			{
-				final String[] lines = {exception.toString(), exception.getMessage()};
+				@NonNull final String[] lines = {exception.toString(), exception.getMessage()};
 				JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE);
 			}
 			return;
 		}
-		final String[] lines = {Messages.getString("Controller.err_document_null")};
+		@NonNull final String[] lines = {Messages.getString("Controller.err_document_null")};
 		JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE);
 	}
 
@@ -1330,7 +1335,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	private void settings()
 	{
-		final XSettingsDialog dialog = new XSettingsDialog(this.settings);
+		@NonNull final XSettingsDialog dialog = new XSettingsDialog(this.settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -1347,7 +1352,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	private void base()
 	{
-		final XSiteDialog dialog = new XSiteDialog(this.settings);
+		@NonNull final XSiteDialog dialog = new XSiteDialog(this.settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -1358,7 +1363,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	private void url()
 	{
-		final XUrlDialog dialog = new XUrlDialog(this.settings);
+		@NonNull final XUrlDialog dialog = new XUrlDialog(this.settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -1387,9 +1392,9 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 *
 	 * @param className class name of tree node to select
 	 */
-	private void select(final String className)
+	private void select(@NonNull final String className)
 	{
-		final DefaultMutableTreeNode node = this.treeView.search(className);
+		@Nullable final DefaultMutableTreeNode node = this.treeView.search(className);
 		if (node != null)
 		{
 			this.treeView.select(node);
@@ -1539,7 +1544,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	private HtmlView makeHtmlView(final Controller controller)
 	{
-		final HtmlView htmlView = new HtmlView();
+		@NonNull final HtmlView htmlView = new HtmlView();
 		htmlView.addHyperlinkListener(controller);
 		return htmlView;
 	}
@@ -1549,6 +1554,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 *
 	 * @return text view
 	 */
+	@NonNull
 	private TextView makeTextView()
 	{
 		final TextView textView = new TextView();
@@ -1563,6 +1569,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 *
 	 * @return image repository Url
 	 */
+	@Nullable
 	public URL makeImageRepositoryURL()
 	{
 		final String imageRepositoryPath = this.settings.getProperty("images");
@@ -1617,7 +1624,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 * @param filename filename
 	 * @return url
 	 */
-	private URL makeBasedURL(@SuppressWarnings("SameParameterValue") final String subPath, final String filename)
+	private URL makeBasedURL(@Nullable @SuppressWarnings("SameParameterValue") final String subPath, final String filename)
 	{
 		if (filename == null)
 		{
@@ -1665,7 +1672,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		}
 
 		// try to consider it file
-		final File file = new File(source);
+		@NonNull final File file = new File(source);
 		if (file.exists() && file.canRead())
 		{
 			try
@@ -1690,16 +1697,17 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 * @param providerName provider name
 	 * @return provider
 	 */
+	@Nullable
 	private IProvider makeProvider(final String providerName)
 	{
 		try
 		{
-			final Class<?> clazz = Class.forName(providerName);
+			@NonNull final Class<?> clazz = Class.forName(providerName);
 			final Class<?>[] argsClass = new Class[]{};
-			final Object[] args = new Object[]{};
+			@NonNull final Object[] args = new Object[]{};
 
-			final Constructor<?> constructor = clazz.getConstructor(argsClass);
-			final Object instance = constructor.newInstance(args);
+			@NonNull final Constructor<?> constructor = clazz.getConstructor(argsClass);
+			@NonNull final Object instance = constructor.newInstance(args);
 			return (IProvider) instance;
 		}
 		catch (final ClassNotFoundException | InvocationTargetException | IllegalArgumentException | InstantiationException | IllegalAccessException | NoSuchMethodException e)
@@ -1718,7 +1726,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	@Override
 	public URL getBase()
 	{
-		Properties parameters = getParameters();
+		@Nullable Properties parameters = getParameters();
 
 		// base parameter
 		final String baseSetting = this.settings.getProperty("base");
@@ -1741,7 +1749,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			// make from folder
 			try
 			{
-				final File folder = new File(uRLString);
+				@NonNull final File folder = new File(uRLString);
 				return folder.toURI().toURL();
 			}
 			catch (final MalformedURLException e2)
@@ -1768,7 +1776,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 * @param args command-line arguments
 	 * @return parameters
 	 */
-	private Properties makeParameters(final String[] args)
+	private Properties makeParameters(@Nullable final String[] args)
 	{
 		// param1=<val> param2=<"val with spaces"> ...
 		if (args == null)
@@ -1776,10 +1784,10 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			return null;
 		}
 
-		final Properties parameters = new Properties();
+		@NonNull final Properties parameters = new Properties();
 		for (final String arg : args)
 		{
-			final String[] pair = arg.split("=");
+			@NonNull final String[] pair = arg.split("=");
 			if (pair.length != 2)
 			{
 				continue;
@@ -1865,7 +1873,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 * @see treebolic.IContext#warn(java.lang.String)
 	 */
 	@Override
-	public void warn(final String message)
+	public void warn(@NonNull final String message)
 	{
 		final String[] lines = message.split("\n");
 		JOptionPane.showMessageDialog(null, lines, Messages.getString("Controller.title"), JOptionPane.WARNING_MESSAGE);

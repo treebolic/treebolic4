@@ -15,10 +15,13 @@ import org.semanticweb.owlapi.util.mansyntax.ManchesterOWLSyntaxParser;
 
 import java.util.Set;
 
+import treebolic.annotations.NonNull;
+
 class QueryParser
 {
 	private final OWLOntology rootOntology;
 
+	@NonNull
 	private final BidirectionalShortFormProvider bidiShortFormProvider;
 
 	/**
@@ -27,7 +30,7 @@ class QueryParser
 	 * @param rootOntology      The root ontology. This essentially provides the domain vocabulary for the query.
 	 * @param shortFormProvider A short form provider to be used for mapping back and forth between entities and their short names (renderings).
 	 */
-	public QueryParser(final OWLOntology rootOntology, final ShortFormProvider shortFormProvider)
+	public QueryParser(@NonNull final OWLOntology rootOntology, @NonNull final ShortFormProvider shortFormProvider)
 	{
 		this.rootOntology = rootOntology;
 		final OWLOntologyManager manager = rootOntology.getOWLOntologyManager();
@@ -43,18 +46,18 @@ class QueryParser
 	 * @param classExpressionString The class expression string
 	 * @return The corresponding class expression if the class expression string is malformed or contains unknown entity names.
 	 */
-	public OWLClassExpression parseClassExpression(final String classExpressionString)
+	public OWLClassExpression parseClassExpression(@NonNull final String classExpressionString)
 	{
 		// Set up the parser
 		final OWLOntologyManager manager = rootOntology.getOWLOntologyManager();
 		final OWLDataFactory dataFactory = manager.getOWLDataFactory();
 		final OntologyConfigurator configurator = manager.getOntologyConfigurator();
-		final ManchesterOWLSyntaxParser parser = new ManchesterOWLSyntaxParserImpl(configurator, dataFactory);
+		@NonNull final ManchesterOWLSyntaxParser parser = new ManchesterOWLSyntaxParserImpl(configurator, dataFactory);
 		parser.setStringToParse(classExpressionString);
 		parser.setDefaultOntology(rootOntology);
 
 		// Specify an entity checker that wil be used to check a class expression contains the correct names.
-		final OWLEntityChecker entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
+		@NonNull final OWLEntityChecker entityChecker = new ShortFormEntityChecker(this.bidiShortFormProvider);
 		parser.setOWLEntityChecker(entityChecker);
 
 		// Do the actual parsing

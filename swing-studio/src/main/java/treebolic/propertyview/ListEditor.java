@@ -10,6 +10,9 @@ import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * List editor
  *
@@ -22,6 +25,7 @@ class ListEditor extends DefaultCellEditor
 	/**
 	 * String to image map
 	 */
+	@Nullable
 	private Map<String, ImageIcon> imageMap = null;
 
 	/**
@@ -32,13 +36,13 @@ class ListEditor extends DefaultCellEditor
 		super(new JComboBox<String>());
 
 		// renderer
-		final DefaultListCellRenderer renderer = new DefaultListCellRenderer()
+		@NonNull final DefaultListCellRenderer renderer = new DefaultListCellRenderer()
 		{
 			private static final long serialVersionUID = 1L;
 
 			@SuppressWarnings("synthetic-access")
 			@Override
-			public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+			public Component getListCellRendererComponent(@NonNull final JList<?> list, @Nullable final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
 			{
 				if (ListEditor.this.imageMap == null)
 				{
@@ -120,10 +124,11 @@ class ListEditor extends DefaultCellEditor
 	 * (non-Javadoc)
 	 * @see javax.swing.DefaultCellEditor#getCellEditorValue()
 	 */
+	@Nullable
 	@Override
 	public Object getCellEditorValue()
 	{
-		String value = (String) super.getCellEditorValue();
+		@Nullable String value = (String) super.getCellEditorValue();
 		if (PropertyView.defaultString.equals(value))
 		{
 			value = null;

@@ -10,6 +10,8 @@ import org.w3c.dom.NodeList;
 import java.util.Set;
 import java.util.TreeSet;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Document search
  *
@@ -23,9 +25,10 @@ public class DocumentSearch
 	 * @param document document
 	 * @return image list
 	 */
-	static public Set<String> makeImageList(final Document document)
+	@NonNull
+	static public Set<String> makeImageList(@NonNull final Document document)
 	{
-		final Set<String> set = new TreeSet<>();
+		@NonNull final Set<String> set = new TreeSet<>();
 
 		// <img>
 		final NodeList nodes = document.getElementsByTagName("img");

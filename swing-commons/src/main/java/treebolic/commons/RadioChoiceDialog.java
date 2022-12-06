@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Import dialog
  *
@@ -30,11 +32,13 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 	/**
 	 * Buttons
 	 */
+	@NonNull
 	protected final JRadioButton[] buttons;
 
 	/**
 	 * Data panel
 	 */
+	@NonNull
 	protected final JPanel dataPanel;
 
 	/**
@@ -46,7 +50,7 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 	 * @param title  title
 	 * @param label  label
 	 */
-	public RadioChoiceDialog(final String value0, final String[] values, final String[] labels, final String title, final String label)
+	public RadioChoiceDialog(final String value0, @NonNull final String[] values, final String[] labels, final String title, final String label)
 	{
 		super();
 		this.value = value0;
@@ -59,7 +63,7 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 		headerLabel.setText(label);
 
 		// value buttons
-		final ButtonGroup group = new ButtonGroup();
+		@NonNull final ButtonGroup group = new ButtonGroup();
 		this.buttons = new JRadioButton[values.length];
 		for (int i = 0; i < values.length; i++)
 		{
@@ -71,8 +75,8 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 		}
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("RadioChoiceDialog.ok"));
-		final JButton cancelButton = new JButton(Messages.getString("RadioChoiceDialog.cancel"));
+		@NonNull final JButton oKButton = new JButton(Messages.getString("RadioChoiceDialog.ok"));
+		@NonNull final JButton cancelButton = new JButton(Messages.getString("RadioChoiceDialog.cancel"));
 
 		// buttons panel
 		this.dataPanel = new JPanel();
@@ -104,7 +108,7 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e)
+	public void actionPerformed(@NonNull ActionEvent e)
 	{
 		this.value = e.getActionCommand();
 		// System.err.println(this.value);

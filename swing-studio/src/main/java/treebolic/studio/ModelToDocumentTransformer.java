@@ -17,6 +17,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.model.*;
 
@@ -35,7 +36,7 @@ public class ModelToDocumentTransformer
 	 * @param model model
 	 * @return DOM document
 	 */
-	public static Document transform(final Model model)
+	public static Document transform(@Nullable final Model model)
 	{
 		if (model == null)
 		{
@@ -184,7 +185,7 @@ public class ModelToDocumentTransformer
 				// edge iteration
 				if (edges != null)
 				{
-					for (final IEdge edge : edges)
+					for (@NonNull final IEdge edge : edges)
 					{
 						if (edge.getFrom() != null && edge.getTo() != null)
 						{
@@ -203,9 +204,9 @@ public class ModelToDocumentTransformer
 				final Element menuElement = document.createElement("menu");
 				toolsElement.appendChild(menuElement);
 
-				for (final MenuItem menuItem : model.settings.menu)
+				for (@NonNull final MenuItem menuItem : model.settings.menu)
 				{
-					final Element menuItemElement = ModelToDocumentTransformer.makeMenuItem(document, menuItem);
+					@NonNull final Element menuItemElement = ModelToDocumentTransformer.makeMenuItem(document, menuItem);
 					menuElement.appendChild(menuItemElement);
 				}
 			}
@@ -242,15 +243,15 @@ public class ModelToDocumentTransformer
 	 * @param node0    node
 	 * @return node element
 	 */
-	static private Element makeNode(final Document document, final INode node0)
+	static private Element makeNode(@NonNull final Document document, final INode node0)
 	{
-		INode node = node0;
+		@Nullable INode node = node0;
 
 		// mounted node : substitute mounting node
-		MountPoint mountPoint = node.getMountPoint();
+		@Nullable MountPoint mountPoint = node.getMountPoint();
 		if (mountPoint instanceof MountPoint.Mounted)
 		{
-			final MountPoint.Mounted mountedPoint = (MountPoint.Mounted) mountPoint;
+			@NonNull final MountPoint.Mounted mountedPoint = (MountPoint.Mounted) mountPoint;
 			node = mountedPoint.mountingNode;
 			assert node != null;
 			mountPoint = node.getMountPoint();
@@ -293,10 +294,10 @@ public class ModelToDocumentTransformer
 		}
 
 		// treeedge
-		final String edgeLabel = node.getEdgeLabel();
-		final String edgeImage = node.getEdgeImageFile();
-		final Integer edgeColor = node.getEdgeColor();
-		final Integer edgeStyle = node.getEdgeStyle();
+		@Nullable final String edgeLabel = node.getEdgeLabel();
+		@Nullable final String edgeImage = node.getEdgeImageFile();
+		@Nullable final Integer edgeColor = node.getEdgeColor();
+		@Nullable final Integer edgeStyle = node.getEdgeStyle();
 		if (edgeLabel != null || edgeImage != null || edgeColor != null || edgeStyle != null)
 		{
 			final Element treeEdgeElement = document.createElement("treeedge");
@@ -340,12 +341,12 @@ public class ModelToDocumentTransformer
 		// mount
 		if (mountPoint instanceof MountPoint.Mounting)
 		{
-			final MountPoint.Mounting mountingPoint = (MountPoint.Mounting) mountPoint;
+			@NonNull final MountPoint.Mounting mountingPoint = (MountPoint.Mounting) mountPoint;
 			nodeElement.appendChild(ModelToDocumentTransformer.makeMountPoint(document, mountingPoint));
 		}
 
 		// recurse
-		List<INode> children = node.getChildren();
+		@Nullable List<INode> children = node.getChildren();
 		if (children != null)
 		{
 			for (final INode child : children)
@@ -362,6 +363,7 @@ public class ModelToDocumentTransformer
 	 *
 	 * @return edge element
 	 */
+	@NonNull
 	static private Element makeEdge(final Document document, final IEdge edge)
 	{
 		final Element edgeElement = document.createElement("edge");
@@ -370,7 +372,7 @@ public class ModelToDocumentTransformer
 		// from,to,color,stroke,toterminator,fromterminator,hidden
 		edgeElement.setAttribute("from", edge.getFrom().getId());
 		edgeElement.setAttribute("to", edge.getTo().getId());
-		final Integer style = edge.getStyle();
+		@Nullable final Integer style = edge.getStyle();
 		if (style != null)
 		{
 			ModelToDocumentTransformer.setStyleAttributes(edgeElement, style);
@@ -389,7 +391,7 @@ public class ModelToDocumentTransformer
 		}
 
 		// img
-		final String image = edge.getImageFile();
+		@Nullable final String image = edge.getImageFile();
 		if (image != null)
 		{
 			edgeElement.appendChild(ModelToDocumentTransformer.makeImage(document, image));
@@ -405,7 +407,8 @@ public class ModelToDocumentTransformer
 	 * @param string   label
 	 * @return label element
 	 */
-	static private Element makeLabel(final Document document, final String string)
+	@NonNull
+	static private Element makeLabel(@NonNull final Document document, final String string)
 	{
 		final Element element = document.createElement("label");
 		final Text text = document.createTextNode(string);
@@ -420,7 +423,8 @@ public class ModelToDocumentTransformer
 	 * @param string   content
 	 * @return content element
 	 */
-	static private Element makeContent(final Document document, final String string)
+	@NonNull
+	static private Element makeContent(@NonNull final Document document, final String string)
 	{
 		final Element contentElement = document.createElement("content");
 		final CDATASection contentCData = document.createCDATASection(string);
@@ -435,7 +439,8 @@ public class ModelToDocumentTransformer
 	 * @param imageSrc image source
 	 * @return image element
 	 */
-	static public Element makeImage(final Document document, final String imageSrc)
+	@NonNull
+	static public Element makeImage(@NonNull final Document document, final String imageSrc)
 	{
 		final Element element = document.createElement("img");
 		element.setAttribute("src", imageSrc);
@@ -449,7 +454,8 @@ public class ModelToDocumentTransformer
 	 * @param href     link href
 	 * @return link element
 	 */
-	static private Element makeLink(final Document document, final String href, final String target)
+	@NonNull
+	static private Element makeLink(final Document document, final String href, @Nullable final String target)
 	{
 		final Element element = document.createElement("a");
 		element.setAttribute("href", href);
@@ -467,7 +473,8 @@ public class ModelToDocumentTransformer
 	 * @param mountPoint mountpoint
 	 * @return mountpoint element
 	 */
-	static private Element makeMountPoint(final Document document, final MountPoint.Mounting mountPoint)
+	@NonNull
+	static private Element makeMountPoint(final Document document, @NonNull final MountPoint.Mounting mountPoint)
 	{
 		final Element mountPointElement = document.createElement("mountpoint");
 
@@ -491,13 +498,14 @@ public class ModelToDocumentTransformer
 	 * @param menuItem menuitem
 	 * @return menuitem
 	 */
-	static private Element makeMenuItem(final Document document, final MenuItem menuItem)
+	@NonNull
+	static private Element makeMenuItem(@NonNull final Document document, final MenuItem menuItem)
 	{
 		final Element menuItemElement = document.createElement("menuitem");
 
 		// attributes
 		// action (goto|search|focus), match-target, match-scope, match-mode (equals|startswith|includes)
-		final String[] strings = Utils.toStrings(menuItem);
+		@NonNull final String[] strings = Utils.toStrings(menuItem);
 		if (strings[0] != null)
 		{
 			menuItemElement.setAttribute("action", strings[0]);
@@ -537,19 +545,19 @@ public class ModelToDocumentTransformer
 	 * @param element element
 	 * @param style   style
 	 */
-	static private void setStyleAttributes(final Element element, final Integer style)
+	static private void setStyleAttributes(@NonNull final Element element, @Nullable final Integer style)
 	{
 		if (style != null)
 		{
-			String string = Utils.toString(style, Utils.StyleComponent.STROKE);
+			@Nullable String string = Utils.toString(style, Utils.StyleComponent.STROKE);
 			if (string != null && !string.isEmpty())
 			{
 				element.setAttribute("stroke", string);
 			}
-			String string2 = Utils.toString(style, Utils.StyleComponent.STROKEWIDTH);
+			@Nullable String string2 = Utils.toString(style, Utils.StyleComponent.STROKEWIDTH);
 			if (string2 != null && !string2.isEmpty())
 			{
-				StringBuilder builder = new StringBuilder();
+				@NonNull StringBuilder builder = new StringBuilder();
 				if (string != null && !string.isEmpty())
 				{
 					builder.append(string);
@@ -585,7 +593,7 @@ public class ModelToDocumentTransformer
 	 * @param element    element
 	 * @param attributes attributes
 	 */
-	static private void setAttributes(final Element element, final Map<String, Object> attributes)
+	static private void setAttributes(final Element element, @NonNull final Map<String, Object> attributes)
 	{
 		for (final String key : attributes.keySet())
 		{

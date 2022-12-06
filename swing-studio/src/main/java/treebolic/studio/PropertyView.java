@@ -5,6 +5,8 @@ package treebolic.studio;
 
 import java.util.*;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.studio.tree.*;
 import treebolic.model.*;
 import treebolic.model.Types.MatchMode;
@@ -161,7 +163,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODE_MOUNT_NOW))
 			{
-				final MountPoint.Mounting mountingPoint = (MountPoint.Mounting) node.getMountPoint();
+				@Nullable final MountPoint.Mounting mountingPoint = (MountPoint.Mounting) node.getMountPoint();
 				return mountingPoint == null ? null : mountingPoint.now;
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODE_WEIGHT))
@@ -185,7 +187,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void set(final Object object, final String propertyName, final Object propertyValue)
+		public void set(final Object object, @NonNull final String propertyName, @Nullable final Object propertyValue)
 		{
 			if (!(object instanceof TreeMutableNode))
 			{
@@ -194,11 +196,11 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 
 			PropertyView.this.dirty = true;
-			final TreeMutableNode node = (TreeMutableNode) object;
+			@NonNull final TreeMutableNode node = (TreeMutableNode) object;
 			if (propertyName.equals(PropertyView.LABEL_NODE_ID))
 			{
 				final String id2 = (String) propertyValue;
-				final String id = node.getId();
+				@Nullable final String id = node.getId();
 				PropertyView.this.idToNodeMap.remove(id);
 				PropertyView.this.idToNodeMap.put(id2, node);
 				node.setId(id2);
@@ -267,7 +269,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			{
 				if (propertyValue != null)
 				{
-					MountPoint.Mounting mountingPoint = (MountPoint.Mounting) node.getMountPoint();
+					@Nullable MountPoint.Mounting mountingPoint = (MountPoint.Mounting) node.getMountPoint();
 					if (mountingPoint == null)
 					{
 						mountingPoint = new MountPoint.Mounting();
@@ -284,7 +286,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			{
 				if (propertyValue != null)
 				{
-					final MountPoint.Mounting mountingPoint = (MountPoint.Mounting) node.getMountPoint();
+					@Nullable final MountPoint.Mounting mountingPoint = (MountPoint.Mounting) node.getMountPoint();
 					if (mountingPoint != null)
 					{
 						mountingPoint.now = (Boolean) propertyValue;
@@ -339,9 +341,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 * (non-Javadoc)
 		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
 		 */
+		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public Object get(final Object object, final String propertyName)
+		public Object get(final Object object, @NonNull final String propertyName)
 		{
 			final Edge edge = (Edge) object;
 			if (propertyName.equals(PropertyView.LABEL_EDGE_FROM))
@@ -406,7 +409,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void set(final Object object, final String propertyName, final Object propertyValue)
+		public void set(final Object object, @NonNull final String propertyName, final Object propertyValue)
 		{
 			if (!(object instanceof TreeMutableEdge))
 			{
@@ -415,7 +418,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 
 			PropertyView.this.dirty = true;
-			final TreeMutableEdge edge = (TreeMutableEdge) object;
+			@NonNull final TreeMutableEdge edge = (TreeMutableEdge) object;
 			if (propertyName.equals(PropertyView.LABEL_EDGE_FROM))
 			{
 				final String id = (String) propertyValue;
@@ -504,9 +507,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 * (non-Javadoc)
 		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
 		 */
+		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public Object get(final Object object, final String propertyName)
+		public Object get(final Object object, @NonNull final String propertyName)
 		{
 			final TopWrapper topSettings = (TopWrapper) object;
 			final Settings settings = topSettings.settings;
@@ -571,7 +575,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void set(final Object object, final String propertyName, final Object propertyValue)
+		public void set(final Object object, @NonNull final String propertyName, final Object propertyValue)
 		{
 			PropertyView.this.dirty = true;
 			final TopWrapper topSettings = (TopWrapper) object;
@@ -666,7 +670,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public Object get(final Object object, final String propertyName)
+		public Object get(final Object object, @NonNull final String propertyName)
 		{
 			final TreeWrapper treeSettings = (TreeWrapper) object;
 			final Settings settings = treeSettings.settings;
@@ -738,7 +742,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void set(final Object object, final String propertyName, final Object propertyValue)
+		public void set(final Object object, @NonNull final String propertyName, final Object propertyValue)
 		{
 			PropertyView.this.dirty = true;
 			final TreeWrapper treeSettings = (TreeWrapper) object;
@@ -847,7 +851,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public Object get(final Object object, final String propertyName)
+		public Object get(final Object object, @NonNull final String propertyName)
 		{
 			final NodesWrapper nodesSettings = (NodesWrapper) object;
 			final Settings settings = nodesSettings.settings;
@@ -927,7 +931,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void set(final Object object, final String propertyName, final Object propertyValue)
+		public void set(final Object object, @NonNull final String propertyName, final Object propertyValue)
 		{
 			PropertyView.this.dirty = true;
 			final NodesWrapper nodesSettings = (NodesWrapper) object;
@@ -1028,9 +1032,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 * (non-Javadoc)
 		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
 		 */
+		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public Object get(final Object object, final String propertyName)
+		public Object get(final Object object, @NonNull final String propertyName)
 		{
 			final EdgesWrapper edgesSettings = (EdgesWrapper) object;
 			final Settings settings = edgesSettings.settings;
@@ -1087,7 +1092,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void set(final Object object, final String propertyName, final Object propertyValue)
+		public void set(final Object object, @NonNull final String propertyName, final Object propertyValue)
 		{
 			PropertyView.this.dirty = true;
 			final EdgesWrapper edgesSettings = (EdgesWrapper) object;
@@ -1158,9 +1163,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 * (non-Javadoc)
 		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
 		 */
+		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public Object get(final Object object, final String propertyName)
+		public Object get(final Object object, @NonNull final String propertyName)
 		{
 			final MenuItemWrapper menuItemWrapper = (MenuItemWrapper) object;
 			final MenuItem menuItem = menuItemWrapper.menuItem;
@@ -1204,7 +1210,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public void set(final Object object, final String propertyName, final Object propertyValue)
+		public void set(final Object object, @NonNull final String propertyName, final Object propertyValue)
 		{
 			PropertyView.this.dirty = true;
 			final MenuItemWrapper menuItemWrapper = (MenuItemWrapper) object;
@@ -1276,6 +1282,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 * (non-Javadoc)
 		 * @see treebolic.propertyview.PropertyView.IdGetter#ids()
 		 */
+		@NonNull
 		@Override
 		public Set<String> ids()
 		{
@@ -1455,6 +1462,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 * @param idGetter id getter
 	 * @return handler
 	 */
+	@NonNull
 	private Handler makeHandler(final Object[][] features, final Getter getter, final Setter setter, @SuppressWarnings("SameParameterValue") final IdGetter idGetter)
 	{
 		Handler handler;
@@ -1464,7 +1472,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		for (final Object[] feature : features)
 		{
 			final String id = (String) feature[0];
-			final AttributeDescriptor descriptor = new AttributeDescriptor();
+			@NonNull final AttributeDescriptor descriptor = new AttributeDescriptor();
 			descriptor.name = id;
 			descriptor.type = (AttributeType) feature[1];
 			descriptor.isMandatory = (Boolean) feature[2];
@@ -1488,7 +1496,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	@SuppressWarnings("synthetic-access")
 	private Map<Class<?>, Handler> makeHandlers()
 	{
-		final Map<Class<?>, Handler> handlers = new Hashtable<>();
+		@NonNull final Map<Class<?>, Handler> handlers = new Hashtable<>();
 		handlers.put(MutableNode.class, makeHandler(PropertyView.nodeFeatures, new NodeGetter(), new NodeSetter(), null));
 		handlers.put(MutableEdge.class, makeHandler(PropertyView.edgeFeatures, new EdgeGetter(), new EdgeSetter(), null));
 

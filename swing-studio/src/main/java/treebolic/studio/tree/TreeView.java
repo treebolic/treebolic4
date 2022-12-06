@@ -12,6 +12,8 @@ import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.*;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.studio.Controller;
 import treebolic.studio.model.ModelUtils;
 import treebolic.model.IEdge;
@@ -33,6 +35,7 @@ public class TreeView extends JScrollPane
 	/**
 	 * Tree component
 	 */
+	@NonNull
 	private final Tree tree;
 
 	/**
@@ -70,7 +73,7 @@ public class TreeView extends JScrollPane
 	 *
 	 * @param treeModel model
 	 */
-	public void set(final TreeModel treeModel)
+	public void set(@Nullable final TreeModel treeModel)
 	{
 		// add listener to tree model
 		if (treeModel != null)
@@ -117,7 +120,7 @@ public class TreeView extends JScrollPane
 	public void editAdd()
 	{
 		// selected tree node
-		final TreePath parentPath = this.tree.getSelectionPath();
+		@Nullable final TreePath parentPath = this.tree.getSelectionPath();
 		if (parentPath == null)
 		{
 			return;
@@ -138,13 +141,13 @@ public class TreeView extends JScrollPane
 		if (object instanceof treebolic.model.MutableNode)
 		{
 			// parent
-			final TreeMutableNode parentNode = (TreeMutableNode) object;
+			@NonNull final TreeMutableNode parentNode = (TreeMutableNode) object;
 
 			// id
 			final String id = ModelUtils.makeNodeId();
 
 			// label
-			String label = parentNode.getLabel();
+			@Nullable String label = parentNode.getLabel();
 			if (label == null)
 			{
 				label = "";
@@ -163,7 +166,7 @@ public class TreeView extends JScrollPane
 			parentNode.addChild(node);
 
 			// new tree node
-			final DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode();
+			@NonNull final DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode();
 			treeNode.setUserObject(node);
 
 			// tree add to parent
@@ -171,7 +174,7 @@ public class TreeView extends JScrollPane
 		}
 		else if (object instanceof EdgesWrapper)
 		{
-			final EdgesWrapper wrapper = (EdgesWrapper) object;
+			@NonNull final EdgesWrapper wrapper = (EdgesWrapper) object;
 			List<IEdge> edgeList = wrapper.edgeList;
 			if (edgeList == null)
 			{
@@ -181,7 +184,7 @@ public class TreeView extends JScrollPane
 			}
 
 			// new edge
-			final TreeMutableEdge edge = new TreeMutableEdge(null, null);
+			@NonNull final TreeMutableEdge edge = new TreeMutableEdge(null, null);
 
 			// object add
 			edgeList.add(edge);
@@ -205,7 +208,7 @@ public class TreeView extends JScrollPane
 			}
 
 			// new menu item
-			final MenuItem menuItem = new MenuItem();
+			@NonNull final MenuItem menuItem = new MenuItem();
 
 			// object add
 			menu.add(menuItem);
@@ -225,7 +228,7 @@ public class TreeView extends JScrollPane
 	public void editRemove()
 	{
 		// selected tree node
-		final TreePath path = this.tree.getSelectionPath();
+		@Nullable final TreePath path = this.tree.getSelectionPath();
 		if (path == null)
 		{
 			return;
@@ -253,12 +256,12 @@ public class TreeView extends JScrollPane
 		}
 		else if (parentObject instanceof EdgesWrapper)
 		{
-			final EdgesWrapper wrapper = (EdgesWrapper) parentObject;
+			@NonNull final EdgesWrapper wrapper = (EdgesWrapper) parentObject;
 			wrapper.edgeList.remove((IEdge) object);
 		}
 		else if (parentObject instanceof MenuWrapper)
 		{
-			final MenuWrapper menuWrapper = (MenuWrapper) parentObject;
+			@NonNull final MenuWrapper menuWrapper = (MenuWrapper) parentObject;
 			final MenuItemWrapper menuItemWrapper = (MenuItemWrapper) object;
 			menuWrapper.menu.remove(menuItemWrapper.menuItem);
 		}
@@ -277,7 +280,7 @@ public class TreeView extends JScrollPane
 	 * @param className class name
 	 * @return tree node
 	 */
-	public DefaultMutableTreeNode search(final String className)
+	public DefaultMutableTreeNode search(@NonNull final String className)
 	{
 		final TreeModel model = this.tree.getModel();
 		final DefaultMutableTreeNode node = (DefaultMutableTreeNode) model.getRoot();
@@ -293,7 +296,7 @@ public class TreeView extends JScrollPane
 	 * @param className class name
 	 * @return tree node
 	 */
-	private DefaultMutableTreeNode search(final DefaultMutableTreeNode node, final String className)
+	private DefaultMutableTreeNode search(@NonNull final DefaultMutableTreeNode node, @NonNull final String className)
 	{
 		if (node.getUserObject().getClass().getName().endsWith(className))
 		{
@@ -303,7 +306,7 @@ public class TreeView extends JScrollPane
 		for (final Enumeration<TreeNode> children = node.children(); children.hasMoreElements(); )
 		{
 			final DefaultMutableTreeNode child = (DefaultMutableTreeNode) children.nextElement();
-			final DefaultMutableTreeNode result = search(child, className);
+			@Nullable final DefaultMutableTreeNode result = search(child, className);
 			if (result != null)
 			{
 				return result;
@@ -340,7 +343,7 @@ public class TreeView extends JScrollPane
 	 *
 	 * @param node node
 	 */
-	public void select(final DefaultMutableTreeNode node)
+	public void select(@NonNull final DefaultMutableTreeNode node)
 	{
 		// System.err.println("TREEVIEW: select");
 

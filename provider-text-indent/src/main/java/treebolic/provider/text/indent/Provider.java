@@ -115,9 +115,9 @@ public class Provider implements IProvider
 	 */
 	@Nullable
 	@Override
-	public Model makeModel(final String source, final URL base, final Properties parameters)
+	public Model makeModel(final String source, final URL base, @Nullable final Properties parameters)
 	{
-		final Tree tree = makeTree(source, base, parameters, false);
+		@Nullable final Tree tree = makeTree(source, base, parameters, false);
 		if (tree == null)
 		{
 			return null;
@@ -153,7 +153,7 @@ public class Provider implements IProvider
 		final String location = parameters == null ? null : parameters.getProperty("settings");
 		if (location != null && !location.isEmpty())
 		{
-			final URL url = ProviderUtils.makeURL(location, base, parameters, this.context);
+			@Nullable final URL url = ProviderUtils.makeURL(location, base, parameters, this.context);
 			this.context.progress("Loading ..." + (url != null ? url : location), false);
 
 			try
@@ -180,7 +180,7 @@ public class Provider implements IProvider
 	 */
 	@Nullable
 	@Override
-	public Tree makeTree(final String source0, final URL base, final Properties parameters, final boolean checkRecursion)
+	public Tree makeTree(final String source0, final URL base, @NonNull final Properties parameters, final boolean checkRecursion)
 	{
 		// get text file
 		String source = source0;
@@ -196,7 +196,7 @@ public class Provider implements IProvider
 			this.context.progress("Loading ..." + (url != null ? url : source), false);
 
 			// parse
-			final Tree tree = url != null ? parseTree(url) : parseTree(source);
+			@Nullable final Tree tree = url != null ? parseTree(url) : parseTree(source);
 			if (tree != null)
 			{
 				this.context.progress("Loaded " + (url != null ? url : source), false);
@@ -217,7 +217,7 @@ public class Provider implements IProvider
 	 * @return tree
 	 */
 	@Nullable
-	private Tree parseTree(final URL url)
+	private Tree parseTree(@NonNull final URL url)
 	{
 		// root
 		MutableNode rootNode = new MutableNode(null, "root");
@@ -242,7 +242,7 @@ public class Provider implements IProvider
 			}
 
 			// graph
-			final List<INode> children = rootNode.getChildren();
+			@NonNull final List<INode> children = rootNode.getChildren();
 			if (children.size() == 1)
 			{
 				rootNode = (MutableNode) children.get(0);
@@ -264,7 +264,7 @@ public class Provider implements IProvider
 	 * @return tree
 	 */
 	@Nullable
-	private Tree parseTree(final String location)
+	private Tree parseTree(@NonNull final String location)
 	{
 		// root
 		MutableNode rootNode = new MutableNode(null, "root");
@@ -275,7 +275,7 @@ public class Provider implements IProvider
 		final Deque<StackEntry> stack = new ArrayDeque<>();
 		stack.push(new StackEntry(rootNode, -1));
 
-		try (InputStream is = Files.newInputStream(Paths.get(location)); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
+		try (InputStream is = Files.newInputStream(Paths.get(location)); @NonNull BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
 		{
 			// parse lines
 			String line;
@@ -289,7 +289,7 @@ public class Provider implements IProvider
 			}
 
 			// graph
-			final List<INode> children = rootNode.getChildren();
+			@NonNull final List<INode> children = rootNode.getChildren();
 			if (children.size() == 1)
 			{
 				rootNode = (MutableNode) children.get(0);
@@ -361,11 +361,11 @@ public class Provider implements IProvider
 
 		// parse
 		// label:id:backcolor:forecolor:img:link:content
-		final String[] fields = line.substring(level).split(":", 7);
+		@NonNull final String[] fields = line.substring(level).split(":", 7);
 		final String id = fields.length > 1 ? fields[1] : "N" + lineNumber;
 
 		// new node
-		final MutableNode node = new MutableNode(parent, id);
+		@NonNull final MutableNode node = new MutableNode(parent, id);
 		stack.push(new StackEntry(node, level));
 
 		// node data

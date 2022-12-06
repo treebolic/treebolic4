@@ -130,7 +130,7 @@ public abstract class Surface extends SurfaceView implements SurfaceHolder.Callb
 				case MotionEvent.ACTION_POINTER_DOWN:
 				{
 
-					final PointF f = new PointF();
+					@treebolic.annotations.NonNull final PointF f = new PointF();
 					f.x = event.getX(pointerIndex);
 					f.y = event.getY(pointerIndex);
 					this.activePointers.put(pointerId, f);
@@ -320,8 +320,8 @@ public abstract class Surface extends SurfaceView implements SurfaceHolder.Callb
 
 				// zoom or scale
 				final XScaleGestureDetector xdetector = (XScaleGestureDetector) detector;
-				PointF left = null;
-				PointF right = null;
+				@treebolic.annotations.Nullable PointF left = null;
+				@treebolic.annotations.Nullable PointF right = null;
 				for (int i = 0; i < xdetector.activePointers.size(); i++)
 				{
 					final int key = xdetector.activePointers.keyAt(i);

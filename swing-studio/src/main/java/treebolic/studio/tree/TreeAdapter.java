@@ -10,6 +10,8 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.model.*;
 
 /**
@@ -37,7 +39,7 @@ public class TreeAdapter extends DefaultTreeModel
 	 * @param model treebolic model
 	 * @return tree model
 	 */
-	public static TreeNode makeTreeModel(final Model model)
+	public static TreeNode makeTreeModel(@Nullable final Model model)
 	{
 		if (model == null)
 		{
@@ -46,29 +48,29 @@ public class TreeAdapter extends DefaultTreeModel
 
 		// root
 		final Node node = (Node) model.tree.getRoot();
-		final MutableTreeNode rootTreeNode = TreeAdapter.makeNode(node, null);
+		@NonNull final MutableTreeNode rootTreeNode = TreeAdapter.makeNode(node, null);
 
 		// nodes
-		final DefaultMutableTreeNode nodesTreeNode = new DefaultMutableTreeNode();
+		@NonNull final DefaultMutableTreeNode nodesTreeNode = new DefaultMutableTreeNode();
 		nodesTreeNode.setUserObject(new NodesWrapper(model.settings));
 		nodesTreeNode.add(rootTreeNode);
 		nodesTreeNode.add(rootTreeNode);
 
 		// edges
 		final List<IEdge> edges = model.tree.getEdges();
-		final MutableTreeNode edgesTreeNode = TreeAdapter.makeEdges(edges, model, model.settings);
+		@NonNull final MutableTreeNode edgesTreeNode = TreeAdapter.makeEdges(edges, model, model.settings);
 
 		// tree
-		final DefaultMutableTreeNode treeTreeNode = new DefaultMutableTreeNode();
+		@NonNull final DefaultMutableTreeNode treeTreeNode = new DefaultMutableTreeNode();
 		treeTreeNode.setUserObject(new TreeWrapper(model.settings));
 		treeTreeNode.add(nodesTreeNode);
 		treeTreeNode.add(edgesTreeNode);
 
 		// tools
-		final MutableTreeNode toolsTreeNode = TreeAdapter.makeTools(model.settings.menu, model.settings);
+		@NonNull final MutableTreeNode toolsTreeNode = TreeAdapter.makeTools(model.settings.menu, model.settings);
 
 		// top
-		final DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode();
+		@NonNull final DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode();
 		treeNode.setUserObject(new TopWrapper(model.settings));
 		treeNode.add(treeTreeNode);
 		treeNode.add(toolsTreeNode);
@@ -84,14 +86,14 @@ public class TreeAdapter extends DefaultTreeModel
 	 */
 	private static MutableTreeNode makeNode(final Node node, final MutableTreeNode ignoredParentTreeNode)
 	{
-		final DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode();
+		@NonNull final DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode();
 		treeNode.setUserObject(node);
 
 		// recurse
 		for (final INode iChild : node.getChildren())
 		{
 			final Node child = (Node) iChild;
-			final MutableTreeNode childTreeNode = TreeAdapter.makeNode(child, treeNode);
+			@NonNull final MutableTreeNode childTreeNode = TreeAdapter.makeNode(child, treeNode);
 
 			// attach child to parent
 			treeNode.add(childTreeNode);
@@ -107,10 +109,11 @@ public class TreeAdapter extends DefaultTreeModel
 	 * @param settings settings
 	 * @return tree node
 	 */
-	private static MutableTreeNode makeEdges(final List<IEdge> edgeList, final Model model, final Settings settings)
+	@NonNull
+	private static MutableTreeNode makeEdges(@Nullable final List<IEdge> edgeList, final Model model, final Settings settings)
 	{
 		// container
-		final DefaultMutableTreeNode edgesTreeNode = new DefaultMutableTreeNode();
+		@NonNull final DefaultMutableTreeNode edgesTreeNode = new DefaultMutableTreeNode();
 		edgesTreeNode.setUserObject(new EdgesWrapper(edgeList, model, settings));
 
 		// iterate
@@ -118,7 +121,7 @@ public class TreeAdapter extends DefaultTreeModel
 		{
 			for (final IEdge edge : edgeList)
 			{
-				final DefaultMutableTreeNode edgeTreeNode = new DefaultMutableTreeNode();
+				@NonNull final DefaultMutableTreeNode edgeTreeNode = new DefaultMutableTreeNode();
 				edgeTreeNode.setUserObject(edge);
 
 				// attach to container
@@ -135,12 +138,13 @@ public class TreeAdapter extends DefaultTreeModel
 	 * @param settings    settings
 	 * @return tree node
 	 */
+	@NonNull
 	private static MutableTreeNode makeTools(final List<MenuItem> ignoredMenu, final Settings settings)
 	{
-		final DefaultMutableTreeNode toolsTreeNode = new DefaultMutableTreeNode();
+		@NonNull final DefaultMutableTreeNode toolsTreeNode = new DefaultMutableTreeNode();
 		toolsTreeNode.setUserObject(new ToolsWrapper(settings));
 
-		final DefaultMutableTreeNode menuTreeNode = new DefaultMutableTreeNode();
+		@NonNull final DefaultMutableTreeNode menuTreeNode = new DefaultMutableTreeNode();
 		menuTreeNode.setUserObject(new MenuWrapper(settings.menu, settings));
 		toolsTreeNode.add(menuTreeNode);
 

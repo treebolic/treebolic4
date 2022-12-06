@@ -8,6 +8,9 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Menu bar
  *
@@ -40,37 +43,37 @@ public class Menubar extends JMenuBar
 	private void initialize()
 	{
 		final JMenuItem openMenuItem = makeItem(Messages.getString("Menubar.open"), "open.png", Controller.Code.OPEN, KeyStroke.getKeyStroke('O', InputEvent.CTRL_DOWN_MASK));
-		final JMenuItem openUrlMenuItem = makeItem(Messages.getString("Menubar.open_url"), "openurl.png", Controller.Code.OPENURL, null);
-		final JMenuItem importXslMenuItem = makeItem(Messages.getString("Menubar.open_xsl"), "import.png", Controller.Code.IMPORTXSL, null);
-		final JMenuItem importProviderMenuItem = makeItem(Messages.getString("Menubar.open_provider"), "importprovider.png", Controller.Code.IMPORTPROVIDER, null);
-		final JMenuItem newMenuItem = makeItem(Messages.getString("Menubar.new"), "newdoc.png", Controller.Code.NEW, KeyStroke.getKeyStroke('N', InputEvent.CTRL_DOWN_MASK));
+		@NonNull final JMenuItem openUrlMenuItem = makeItem(Messages.getString("Menubar.open_url"), "openurl.png", Controller.Code.OPENURL, null);
+		@NonNull final JMenuItem importXslMenuItem = makeItem(Messages.getString("Menubar.open_xsl"), "import.png", Controller.Code.IMPORTXSL, null);
+		@NonNull final JMenuItem importProviderMenuItem = makeItem(Messages.getString("Menubar.open_provider"), "importprovider.png", Controller.Code.IMPORTPROVIDER, null);
+		@NonNull final JMenuItem newMenuItem = makeItem(Messages.getString("Menubar.new"), "newdoc.png", Controller.Code.NEW, KeyStroke.getKeyStroke('N', InputEvent.CTRL_DOWN_MASK));
 		final JMenuItem saveMenuItem = makeItem(Messages.getString("Menubar.save"), "save.png", Controller.Code.SAVE, KeyStroke.getKeyStroke('S', InputEvent.CTRL_DOWN_MASK));
 		final JMenuItem saveAsMenuItem = makeItem(Messages.getString("Menubar.saveas"), "saveas.png", Controller.Code.SAVEAS, null);
 		final JMenuItem exportMenuItem = makeItem(Messages.getString("Menubar.export"), "export.png", Controller.Code.EXPORT, null);
-		final JMenuItem exportSettingsMenuItem = makeItem(Messages.getString("Menubar.export_rendering"), null, Controller.Code.EXPORTSETTINGS, null);
+		@NonNull final JMenuItem exportSettingsMenuItem = makeItem(Messages.getString("Menubar.export_rendering"), null, Controller.Code.EXPORTSETTINGS, null);
 		final JMenuItem zipMenuItem = makeItem(Messages.getString("Menubar.zip"), "zip.png", Controller.Code.ZIP, null);
-		final JMenuItem unZipMenuItem = makeItem(Messages.getString("Menubar.unzip"), "unzip.png", Controller.Code.UNZIP, null);
-		final JMenuItem serializeMenuItem = makeItem(Messages.getString("Menubar.serialize"), "serialize.png", Controller.Code.SERIALIZE, null);
+		@NonNull final JMenuItem unZipMenuItem = makeItem(Messages.getString("Menubar.unzip"), "unzip.png", Controller.Code.UNZIP, null);
+		@NonNull final JMenuItem serializeMenuItem = makeItem(Messages.getString("Menubar.serialize"), "serialize.png", Controller.Code.SERIALIZE, null);
 		final JMenuItem deserializeMenuItem = makeItem(Messages.getString("Menubar.deserialize"), "deserialize.png", Controller.Code.DESERIALIZE, null);
 
-		final JMenuItem newElementMenuItem = makeItem(Messages.getString("Menubar.new_item"), "new.png", Controller.Code.NEWELEMENT, KeyStroke.getKeyStroke(KeyEvent.VK_INSERT, 0));
+		@NonNull final JMenuItem newElementMenuItem = makeItem(Messages.getString("Menubar.new_item"), "new.png", Controller.Code.NEWELEMENT, KeyStroke.getKeyStroke(KeyEvent.VK_INSERT, 0));
 		final JMenuItem removeElementMenuItem = makeItem(Messages.getString("Menubar.remove_item"), "delete.png", Controller.Code.REMOVEELEMENT, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0));
-		final JMenuItem normalizeIdsMenuItem = makeItem(Messages.getString("Menubar.normalize_ids"), null, Controller.Code.NORMALIZEIDS, null);
-		final JMenuItem listImagesMenuItem = makeItem(Messages.getString("Menubar.list_images"), null, Controller.Code.LISTIMAGES, null);
-		final JMenuItem listLinksMenuItem = makeItem(Messages.getString("Menubar.list_links"), null, Controller.Code.LISTLINKS, null);
+		@NonNull final JMenuItem normalizeIdsMenuItem = makeItem(Messages.getString("Menubar.normalize_ids"), null, Controller.Code.NORMALIZEIDS, null);
+		@NonNull final JMenuItem listImagesMenuItem = makeItem(Messages.getString("Menubar.list_images"), null, Controller.Code.LISTIMAGES, null);
+		@NonNull final JMenuItem listLinksMenuItem = makeItem(Messages.getString("Menubar.list_links"), null, Controller.Code.LISTLINKS, null);
 		final JMenuItem listMountsMenuItem = makeItem(Messages.getString("Menubar.list_mounts"), null, Controller.Code.LISTMOUNTS, null);
-		final JMenuItem listIdsMenuItem = makeItem(Messages.getString("Menubar.list_ids"), null, Controller.Code.LISTIDS, null);
+		@NonNull final JMenuItem listIdsMenuItem = makeItem(Messages.getString("Menubar.list_ids"), null, Controller.Code.LISTIDS, null);
 
-		final JMenuItem settingsMenuItem = makeItem(Messages.getString("Menubar.settings"), "settings.png", Controller.Code.SETTINGS, null);
+		@NonNull final JMenuItem settingsMenuItem = makeItem(Messages.getString("Menubar.settings"), "settings.png", Controller.Code.SETTINGS, null);
 		// final JMenuItem baseMenuItem = makeItem(Messages.getString("Menubar.site"), "site.png", Controller.Code.SETTINGSBASE, null);
 		// final JMenuItem urlMenuItem = makeItem(Messages.getString("Menubar.url"), "url.png", Controller.Code.SETTINGSURL, null);
-		final JCheckBoxMenuItem treebolicRendererMenuItem = makeCheckboxItem(Messages.getString("Menubar.renderer"), null, Controller.Code.OPTIONTREEBOLICRENDERER, null, MainFrame.hasTreebolicRendering);
-		final JCheckBoxMenuItem validateMenuItem = makeCheckboxItem(Messages.getString("Menubar.validate"), null, Controller.Code.OPTIONVALIDATEXML, null, Controller.validate);
-		final JCheckBoxMenuItem focusParentMenuItem = makeCheckboxItem(Messages.getString("Menubar.focus"), null, Controller.Code.OPTIONFOCUSPARENT, null, treebolic.studio.tree.Tree.focusParent);
+		@NonNull final JCheckBoxMenuItem treebolicRendererMenuItem = makeCheckboxItem(Messages.getString("Menubar.renderer"), null, Controller.Code.OPTIONTREEBOLICRENDERER, null, MainFrame.hasTreebolicRendering);
+		@NonNull final JCheckBoxMenuItem validateMenuItem = makeCheckboxItem(Messages.getString("Menubar.validate"), null, Controller.Code.OPTIONVALIDATEXML, null, Controller.validate);
+		@NonNull final JCheckBoxMenuItem focusParentMenuItem = makeCheckboxItem(Messages.getString("Menubar.focus"), null, Controller.Code.OPTIONFOCUSPARENT, null, treebolic.studio.tree.Tree.focusParent);
 
-		final JMenuItem dtdMenuItem = makeItem(Messages.getString("Menubar.dtd"), "dtd.png", Controller.Code.DTD, null);
+		@NonNull final JMenuItem dtdMenuItem = makeItem(Messages.getString("Menubar.dtd"), "dtd.png", Controller.Code.DTD, null);
 
-		final JMenuItem aboutMenuItem = makeItem(Messages.getString("Menubar.about"), "about.png", Controller.Code.ABOUT, null);
+		@NonNull final JMenuItem aboutMenuItem = makeItem(Messages.getString("Menubar.about"), "about.png", Controller.Code.ABOUT, null);
 		final JMenuItem helpMenuItem = makeItem(Messages.getString("Menubar.help"), "help.png", Controller.Code.HELP, null);
 
 		final JMenu filesMenu = new JMenu();
@@ -92,7 +95,7 @@ public class Menubar extends JMenuBar
 		filesMenu.add(serializeMenuItem);
 		filesMenu.add(deserializeMenuItem);
 
-		final JMenu elementsMenu = new JMenu();
+		@NonNull final JMenu elementsMenu = new JMenu();
 		elementsMenu.setText(Messages.getString("Menubar.menu_items"));
 		elementsMenu.add(newElementMenuItem);
 		elementsMenu.add(removeElementMenuItem);
@@ -104,7 +107,7 @@ public class Menubar extends JMenuBar
 		elementsMenu.add(listMountsMenuItem);
 		elementsMenu.add(listIdsMenuItem);
 
-		final JMenu optionsMenu = new JMenu();
+		@NonNull final JMenu optionsMenu = new JMenu();
 		optionsMenu.setText(Messages.getString("Menubar.menu_options"));
 		optionsMenu.add(settingsMenuItem);
 		// optionsMenu.add(baseMenuItem);
@@ -114,7 +117,7 @@ public class Menubar extends JMenuBar
 		optionsMenu.add(validateMenuItem);
 		optionsMenu.add(focusParentMenuItem);
 
-		final JMenu helpMenu = new JMenu();
+		@NonNull final JMenu helpMenu = new JMenu();
 		helpMenu.setText(Messages.getString("Menubar.menu_help"));
 		helpMenu.add(aboutMenuItem);
 		helpMenu.add(helpMenuItem);
@@ -149,9 +152,10 @@ public class Menubar extends JMenuBar
 	 * @param acceleratorKey accelerator key
 	 * @return menu item
 	 */
-	private JMenuItem makeItem(final String text, final String image, final Controller.Code command, final KeyStroke acceleratorKey)
+	@NonNull
+	private JMenuItem makeItem(final String text, final String image, @NonNull final Controller.Code command, @Nullable final KeyStroke acceleratorKey)
 	{
-		final JMenuItem item = new JMenuItem();
+		@NonNull final JMenuItem item = new JMenuItem();
 		item.setText(text);
 		if (image != null)
 		{
@@ -175,7 +179,8 @@ public class Menubar extends JMenuBar
 	 * @param acceleratorKey accelerator key
 	 * @return menu item
 	 */
-	private JCheckBoxMenuItem makeCheckboxItem(final String text, @SuppressWarnings("SameParameterValue") final String image, final Controller.Code command, @SuppressWarnings("SameParameterValue") final KeyStroke acceleratorKey, final boolean state)
+	@NonNull
+	private JCheckBoxMenuItem makeCheckboxItem(final String text, @Nullable @SuppressWarnings("SameParameterValue") final String image, @NonNull final Controller.Code command, @SuppressWarnings("SameParameterValue") final KeyStroke acceleratorKey, final boolean state)
 	{
 		final JCheckBoxMenuItem item = new JCheckBoxMenuItem();
 		item.setText(text);

@@ -128,7 +128,7 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 		{
 			return null;
 		}
-		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		@treebolic.annotations.NonNull final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		this.bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
 		return baos.toByteArray();
 	}
@@ -156,7 +156,7 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	 */
 	private void writeObject(@NonNull final ObjectOutputStream out) throws IOException
 	{
-		final byte[] imageBytes = getByteArray();
+		@treebolic.annotations.Nullable final byte[] imageBytes = getByteArray();
 		out.writeObject(imageBytes);
 	}
 

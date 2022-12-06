@@ -13,6 +13,9 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Tree model adapter
  */
@@ -100,6 +103,7 @@ public class TreeModelAdapter implements TreeModel
 	 * (non-Javadoc)
 	 * @see javax.swing.tree.TreeModel#getChild(java.lang.Object, int)
 	 */
+	@Nullable
 	@Override
 	public Object getChild(final Object node, final int index)
 	{
@@ -133,7 +137,7 @@ public class TreeModelAdapter implements TreeModel
 	 * @see javax.swing.tree.TreeModel#addTreeModelListener(javax.swing.event.TreeModelListener)
 	 */
 	@Override
-	public void addTreeModelListener(final TreeModelListener listener)
+	public void addTreeModelListener(@Nullable final TreeModelListener listener)
 	{
 		if (listener != null && !this.listenerList.contains(listener))
 		{
@@ -146,7 +150,7 @@ public class TreeModelAdapter implements TreeModel
 	 * @see javax.swing.tree.TreeModel#removeTreeModelListener(javax.swing.event.TreeModelListener)
 	 */
 	@Override
-	public void removeTreeModelListener(final TreeModelListener listener)
+	public void removeTreeModelListener(@Nullable final TreeModelListener listener)
 	{
 		if (listener != null)
 		{
@@ -163,7 +167,8 @@ public class TreeModelAdapter implements TreeModel
 	 * @param targetIndex index
 	 * @return nth child
 	 */
-	private Node nthChildOf(final Node node, final int targetIndex)
+	@Nullable
+	private Node nthChildOf(@NonNull final Node node, final int targetIndex)
 	{
 		if (!this.elementsOnly)
 		{
@@ -189,7 +194,7 @@ public class TreeModelAdapter implements TreeModel
 	 * @param node node
 	 * @return number of children
 	 */
-	private int childCountOf(final Node node)
+	private int childCountOf(@NonNull final Node node)
 	{
 		if (!this.elementsOnly)
 		{

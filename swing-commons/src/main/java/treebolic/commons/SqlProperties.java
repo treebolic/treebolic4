@@ -11,6 +11,9 @@ import java.nio.file.Paths;
 import java.util.Enumeration;
 import java.util.Properties;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * SQL properties
  *
@@ -24,11 +27,12 @@ public class SqlProperties
 	 * @param url properties url
 	 * @return properties
 	 */
+	@Nullable
 	static public Properties load(final URL url)
 	{
 		try
 		{
-			final Properties properties = new Properties();
+			@NonNull final Properties properties = new Properties();
 			final InputStream inputStream = url.openStream();
 			properties.load(inputStream);
 			return properties;
@@ -43,7 +47,7 @@ public class SqlProperties
 	/**
 	 * Save properties
 	 */
-	static void save(final Properties properties, final String propertyFile)
+	static void save(@NonNull final Properties properties, final String propertyFile)
 	{
 		try
 		{
@@ -61,7 +65,7 @@ public class SqlProperties
 	 * @param properties properties
 	 * @return string for properties
 	 */
-	static public String toString(final Properties properties)
+	static public String toString(@NonNull final Properties properties)
 	{
 		final StringBuilder buffer = new StringBuilder();
 		for (final Enumeration<?> it = properties.propertyNames(); it.hasMoreElements(); )

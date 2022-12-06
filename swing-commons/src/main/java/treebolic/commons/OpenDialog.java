@@ -9,6 +9,9 @@ import java.util.Set;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Import dialog
  *
@@ -71,7 +74,7 @@ public class OpenDialog extends JDialog
 		this.source = source;
 		this.base = base;
 
-		final Set<String> presetProviders = Searcher.findClasses(".*\\.Provider");
+		@NonNull final Set<String> presetProviders = Searcher.findClasses(".*\\.Provider");
 		initialize(presetProviders);
 	}
 
@@ -80,14 +83,14 @@ public class OpenDialog extends JDialog
 	 *
 	 * @param providers providers
 	 */
-	protected void initialize(final Collection<String> providers)
+	protected void initialize(@Nullable final Collection<String> providers)
 	{
 		setTitle(Messages.getString("OpenDialog.title"));
 		setResizable(true);
 
 		// images
 		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(OpenDialog.class.getResource("images/open.png"));
-		final JLabel headerLabel = new JLabel();
+		@NonNull final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -100,7 +103,7 @@ public class OpenDialog extends JDialog
 		final JLabel providerLabel = new JLabel(Messages.getString("OpenDialog.provider"));
 
 		// text
-		final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
+		@NonNull final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
 		{
 			/**
 			 *
@@ -144,9 +147,9 @@ public class OpenDialog extends JDialog
 		this.providerComboBox.setToolTipText(Messages.getString("OpenDialog.tooltip_provider"));
 
 		// buttons
-		final JButton sourceBrowseButton = new JButton(Messages.getString("OpenDialog.browse"));
-		final JButton providerAddButton = new JButton(Messages.getString("OpenDialog.add"));
-		final JButton oKButton = new JButton(Messages.getString("OpenDialog.ok"));
+		@NonNull final JButton sourceBrowseButton = new JButton(Messages.getString("OpenDialog.browse"));
+		@NonNull final JButton providerAddButton = new JButton(Messages.getString("OpenDialog.add"));
+		@NonNull final JButton oKButton = new JButton(Messages.getString("OpenDialog.ok"));
 		final JButton cancelButton = new JButton(Messages.getString("OpenDialog.cancel"));
 
 		// panels
@@ -159,7 +162,7 @@ public class OpenDialog extends JDialog
 		this.dataPanel.add(sourceBrowseButton, new GridBagConstraints(1, 1, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 10, 0, 20), 0, 0));
 		this.dataPanel.add(providerAddButton, new GridBagConstraints(1, 3, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 10, 0, 20), 0, 0));
 
-		final JPanel buttonPanel = new JPanel();
+		@NonNull final JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
 		buttonPanel.add(cancelButton);
 		buttonPanel.add(oKButton);
@@ -187,7 +190,7 @@ public class OpenDialog extends JDialog
 		cancelButton.addActionListener(event -> setVisible(false));
 
 		// assemble
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(Box.createRigidArea(new Dimension(0, 10)));
 		panel.add(headerLabel);
@@ -237,7 +240,7 @@ public class OpenDialog extends JDialog
 	 */
 	protected String ask(final String message)
 	{
-		final String[] lines = message.split("\n");
+		@NonNull final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines);
 	}
 
@@ -246,9 +249,9 @@ public class OpenDialog extends JDialog
 	 *
 	 * @param message message
 	 */
-	protected void inform(final String message)
+	protected void inform(@NonNull final String message)
 	{
-		final String[] lines = message.split("\n");
+		@NonNull final String[] lines = message.split("\n");
 		JOptionPane.showMessageDialog(null, lines, Messages.getString("OpenDialog.app"), JOptionPane.WARNING_MESSAGE);
 	}
 }
