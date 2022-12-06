@@ -48,13 +48,13 @@ public class Toolbar extends JToolBar
 	 */
 	private void initialize()
 	{
-		final JButton openButton = makeButton(Messages.getString("Toolbar.open"), Messages.getString("Toolbar.tooltip_open"), "open.png");
+		@NonNull final JButton openButton = makeButton(Messages.getString("Toolbar.open"), Messages.getString("Toolbar.tooltip_open"), "open.png");
 		openButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.OPEN, 0));
 
 		@NonNull final JButton openHttpButton = makeButton(Messages.getString("Toolbar.open_url"), Messages.getString("Toolbar.tooltip_open_url"), "openurl.png");
 		openHttpButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.OPENURL, 0));
 
-		final JButton newButton = makeButton(Messages.getString("Toolbar.new"), Messages.getString("Toolbar.tooltip_new"), "newdoc.png");
+		@NonNull final JButton newButton = makeButton(Messages.getString("Toolbar.new"), Messages.getString("Toolbar.tooltip_new"), "newdoc.png");
 		newButton.addActionListener(e -> Toolbar.this.controller.execute(Controller.Code.NEW, 0));
 
 		@NonNull final JButton saveButton = makeButton(Messages.getString("Toolbar.save"), Messages.getString("Toolbar.tooltip_save"), "save.png");

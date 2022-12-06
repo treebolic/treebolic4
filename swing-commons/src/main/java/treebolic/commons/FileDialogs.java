@@ -82,7 +82,7 @@ public class FileDialogs
 		@Override
 		public boolean accept(@NonNull final File file)
 		{
-			final String name = file.getName().toLowerCase();
+			@NonNull final String name = file.getName().toLowerCase();
 			for (@NonNull final String filter : this.filters)
 			{
 				if (name.matches(filter))
@@ -115,7 +115,7 @@ public class FileDialogs
 		public boolean accept(@NonNull final File file)
 		{
 			@NonNull final String name = file.getName().toLowerCase();
-			for (final String filter : this.filters)
+			for (@NonNull final String filter : this.filters)
 			{
 				if (name.matches(filter))
 				{
@@ -240,7 +240,8 @@ public class FileDialogs
 	 * @param fileFilter       file filter
 	 * @return string for XML file path
 	 */
-	static private String getFile(final String currentDirectory, final FileFilter fileFilter)
+	@Nullable
+	static private String getFile(final String currentDirectory, @Nullable final FileFilter fileFilter)
 	{
 		@NonNull final JFileChooser chooser = FileDialogs.makeFileChooser();
 		FileDialogs.setCurrentDirectory(chooser, currentDirectory);
@@ -310,6 +311,7 @@ public class FileDialogs
 	 * @param fileFilter       file filter
 	 * @return string for XML file url
 	 */
+	@Nullable
 	static private String getUrl(final String currentDirectory, @Nullable final FileFilter fileFilter)
 	{
 		@NonNull final JFileChooser chooser = FileDialogs.makeFileChooser();

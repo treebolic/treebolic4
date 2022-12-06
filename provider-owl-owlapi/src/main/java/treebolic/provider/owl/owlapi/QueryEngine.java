@@ -16,6 +16,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 import static java.util.stream.Collectors.toMap;
 
@@ -61,7 +62,7 @@ public class QueryEngine
 	 * @param classExpression The class expression.
 	 * @return The equivalent classes of the specified class expression If there was a problem parsing the class expression.
 	 */
-	public Stream<OWLClass> getEquivalentClasses(final OWLClassExpression classExpression)
+	public Stream<OWLClass> getEquivalentClasses(@NonNull final OWLClassExpression classExpression)
 	{
 		return this.reasoner.equivalentClasses(classExpression);
 	}
@@ -72,7 +73,7 @@ public class QueryEngine
 	 * @param classExpression The class expression.
 	 * @return The superclasses of the specified class expression If there was a problem parsing the class expression.
 	 */
-	public Stream<OWLClass> getSuperClasses(final OWLClassExpression classExpression)
+	public Stream<OWLClass> getSuperClasses(@NonNull final OWLClassExpression classExpression)
 	{
 		return this.reasoner.superClasses(classExpression, true);
 	}
@@ -85,7 +86,7 @@ public class QueryEngine
 	 * @param owlClass The class expression.
 	 * @return The subclasses of the specified class expression If there was a problem parsing the class expression.
 	 */
-	public Stream<OWLClass> getSubClasses(final OWLClass owlClass)
+	public Stream<OWLClass> getSubClasses(@NonNull final OWLClass owlClass)
 	{
 		return this.reasoner.subClasses(owlClass, true);
 	}
@@ -112,7 +113,7 @@ public class QueryEngine
 	 * @param owlEntity OWL entity
 	 * @return The objectproperty matching the specified entity (by name).
 	 */
-	public OWLObjectProperty getRelation(final OWLEntity owlEntity)
+	public OWLObjectProperty getRelation(@NonNull final OWLEntity owlEntity)
 	{
 		String key = owlEntity.getIRI().getShortForm();
 		return owlProperties.get(key);
@@ -124,7 +125,7 @@ public class QueryEngine
 	 * @param owlEntity OWL entity
 	 * @return true is this entity is a relation
 	 */
-	public boolean isRelation(final OWLEntity owlEntity)
+	public boolean isRelation(@NonNull final OWLEntity owlEntity)
 	{
 		return getRelation(owlEntity) != null;
 	}
@@ -135,7 +136,7 @@ public class QueryEngine
 	 * @param owlObjectProperty property
 	 * @return stream of domain classes
 	 */
-	public Stream<OWLClass> getDomains(final OWLObjectProperty owlObjectProperty)
+	public Stream<OWLClass> getDomains(@NonNull final OWLObjectProperty owlObjectProperty)
 	{
 		return this.reasoner.objectPropertyDomains(owlObjectProperty, true);
 	}
@@ -157,7 +158,7 @@ public class QueryEngine
 	 * @param owlObjectProperty property
 	 * @return stream of subclasses
 	 */
-	public Stream<OWLClass> getSubclasses(final OWLObjectProperty owlObjectProperty)
+	public Stream<OWLClass> getSubclasses(@NonNull final OWLObjectProperty owlObjectProperty)
 	{
 		return this.reasoner.subClasses(owlObjectProperty.asOWLClass(), true);
 	}
@@ -180,7 +181,7 @@ public class QueryEngine
 	 * @return stream of sub properties
 	 */
 	@NonNull
-	public Stream<OWLObjectProperty> getSubproperties(final OWLObjectProperty owlObjectProperty)
+	public Stream<OWLObjectProperty> getSubproperties(@NonNull final OWLObjectProperty owlObjectProperty)
 	{
 		return this.reasoner.subObjectProperties(owlObjectProperty, true) //
 				.filter(OWLObjectPropertyExpression::isNamed) //
@@ -194,7 +195,7 @@ public class QueryEngine
 	 * @return stream of inverse properties
 	 */
 	@NonNull
-	public Stream<OWLObjectProperty> getInverseProperties(final OWLObjectProperty owlObjectProperty)
+	public Stream<OWLObjectProperty> getInverseProperties(@NonNull final OWLObjectProperty owlObjectProperty)
 	{
 		return this.reasoner.inverseObjectProperties(owlObjectProperty) //
 				.filter(OWLObjectPropertyExpression::isNamed) //
@@ -207,6 +208,7 @@ public class QueryEngine
 	 * @param owlClass OWL class
 	 * @return stream of properties
 	 */
+	@NonNull
 	public Stream<OWLObjectProperty> getProperties(final OWLClass owlClass)
 	{
 		return this.owlProperties.values().stream() //
@@ -232,9 +234,10 @@ public class QueryEngine
 	 *
 	 * @return top class
 	 */
+	@Nullable
 	public OWLClass getTopClass()
 	{
-		final Iterator<OWLClass> it = getTopClasses();
+		@NonNull final Iterator<OWLClass> it = getTopClasses();
 		if (!it.hasNext())
 		{
 			return null;

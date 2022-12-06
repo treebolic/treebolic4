@@ -45,7 +45,7 @@ public class Interact
 	 * @param initial initial value
 	 * @return input
 	 */
-	static public String ask2(final String message, final String initial)
+	static public String ask2(@NonNull final String message, final String initial)
 	{
 		@NonNull final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines, initial);

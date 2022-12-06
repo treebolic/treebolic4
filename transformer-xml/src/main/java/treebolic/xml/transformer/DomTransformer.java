@@ -107,7 +107,7 @@ public class DomTransformer
 	 * @throws TransformerException              transformer exception
 	 * @throws IOException                       io exception
 	 */
-	public void documentToFile(final Document document, final URL xsltUrl, final File outputFile) throws TransformerConfigurationException, TransformerException, IOException
+	public void documentToFile(final Document document, @NonNull final URL xsltUrl, @NonNull final File outputFile) throws TransformerConfigurationException, TransformerException, IOException
 	{
 		@NonNull final StreamSource xslt = new StreamSource(xsltUrl.openStream());
 		toFile(document, xslt, outputFile);
@@ -139,7 +139,7 @@ public class DomTransformer
 	 */
 	public String documentToString(final Document document, @NonNull final File xsltFile) throws TransformerConfigurationException, TransformerException
 	{
-		final StreamSource xslt = new StreamSource(xsltFile);
+		@NonNull final StreamSource xslt = new StreamSource(xsltFile);
 		return toString(document, xslt);
 	}
 
@@ -155,7 +155,7 @@ public class DomTransformer
 	 */
 	public String documentToString(final Document document, @NonNull final URL xsltUrl) throws TransformerConfigurationException, TransformerException, IOException
 	{
-		final StreamSource xslt = new StreamSource(xsltUrl.openStream());
+		@NonNull final StreamSource xslt = new StreamSource(xsltUrl.openStream());
 		return toString(document, xslt);
 	}
 
@@ -171,7 +171,7 @@ public class DomTransformer
 	 */
 	public void documentToStream(final Document document, final OutputStream outputStream) throws TransformerConfigurationException, TransformerException
 	{
-		final StreamResult result = new StreamResult(outputStream);
+		@NonNull final StreamResult result = new StreamResult(outputStream);
 		toStream(document, null, result);
 	}
 
@@ -189,7 +189,7 @@ public class DomTransformer
 	 */
 	public Document fileToDocument(@NonNull final URL xmlUrl, @NonNull final URL xsltUrl) throws TransformerConfigurationException, TransformerException, IOException
 	{
-		final StreamSource xml = new StreamSource(xmlUrl.openStream());
+		@NonNull final StreamSource xml = new StreamSource(xmlUrl.openStream());
 		@NonNull final StreamSource xslt = new StreamSource(xsltUrl.openStream());
 		return toDocument(xml, xslt);
 	}
@@ -239,9 +239,9 @@ public class DomTransformer
 	 * @throws TransformerConfigurationException transformer configuration exception
 	 * @throws TransformerException              transformer exception
 	 */
-	protected void toFile(final Document document, final Source xslt, final File file) throws TransformerConfigurationException, TransformerException
+	protected void toFile(final Document document, final Source xslt, @NonNull final File file) throws TransformerConfigurationException, TransformerException
 	{
-		final StreamResult resultStream = new StreamResult(file);
+		@NonNull final StreamResult resultStream = new StreamResult(file);
 		toStream(document, xslt, resultStream);
 	}
 
@@ -283,7 +283,7 @@ public class DomTransformer
 	 */
 	protected Document toDocument(final Source source, @Nullable final Source xslt) throws TransformerConfigurationException, TransformerException
 	{
-		final DOMResult result = new DOMResult();
+		@NonNull final DOMResult result = new DOMResult();
 
 		// transform
 		final TransformerFactory transformerFactory = TransformerFactory.newInstance();

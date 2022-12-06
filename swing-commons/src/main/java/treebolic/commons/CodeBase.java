@@ -20,6 +20,7 @@ public class CodeBase
 	 *
 	 * @return code base
 	 */
+	@Nullable
 	static public String getJarLocation()
 	{
 		@Nullable URL url = Persist.class.getResource("CodeBase.class");

@@ -290,6 +290,7 @@ public class Parser
 		 *
 		 * @return ontology
 		 */
+		@NonNull
 		public Ontology getResult()
 		{
 			return new Ontology(classes, things, properties);
@@ -316,7 +317,7 @@ public class Parser
 		// @formatter:on
 		SAXParser saxParser = factory.newSAXParser();
 
-		SaxHandler handler = new SaxHandler();
+		@NonNull SaxHandler handler = new SaxHandler();
 		saxParser.parse(uri, handler);
 		return handler.getResult();
 	}
@@ -329,7 +330,7 @@ public class Parser
 	 * @throws SAXException                 sax exception
 	 * @throws IOException                  io exception
 	 */
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException
+	public static void main(@NonNull String[] args) throws ParserConfigurationException, SAXException, IOException
 	{
 		Ontology ontology = make(args[0]);
 

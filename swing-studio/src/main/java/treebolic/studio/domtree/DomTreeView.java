@@ -94,7 +94,7 @@ public class DomTreeView extends JTree
 	 *
 	 * @param path tree path
 	 */
-	public void expandAll(final TreePath path)
+	public void expandAll(@NonNull final TreePath path)
 	{
 		// this
 		expandPath(path);

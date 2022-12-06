@@ -5,6 +5,7 @@ package treebolic.studio.tree;
 
 import java.util.List;
 
+import treebolic.annotations.NonNull;
 import treebolic.studio.Messages;
 import treebolic.model.IEdge;
 import treebolic.model.Model;
@@ -41,6 +42,7 @@ public class EdgesWrapper extends SettingsWrapper
 		this.model = model;
 	}
 
+	@NonNull
 	@Override
 	public String toString()
 	{

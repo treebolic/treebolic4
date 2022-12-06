@@ -97,6 +97,7 @@ class ColorEditor extends AbstractCellEditor implements TableCellEditor
 	 * (non-Javadoc)
 	 * @see javax.swing.CellEditor#getCellEditorValue()
 	 */
+	@Nullable
 	@Override
 	public Object getCellEditorValue()
 	{

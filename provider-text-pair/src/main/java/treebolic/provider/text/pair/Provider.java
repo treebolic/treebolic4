@@ -106,7 +106,7 @@ public class Provider implements IProvider
 
 		// settings
 		final boolean asTree = nonRootTree.size() < 3;
-		final Settings settings = new Settings();
+		@NonNull final Settings settings = new Settings();
 		settings.backColor = Provider.backgroundColor;
 		settings.nodeBackColor = Colors.WHITE;
 		settings.nodeForeColor = Colors.BLACK;
@@ -129,7 +129,7 @@ public class Provider implements IProvider
 		final String location = parameters == null ? null : parameters.getProperty("settings");
 		if (location != null && !location.isEmpty())
 		{
-			final URL url = ProviderUtils.makeURL(location, base, parameters, this.context);
+			@Nullable final URL url = ProviderUtils.makeURL(location, base, parameters, this.context);
 			this.context.progress("Loading ..." + (url != null ? url : location), false);
 
 			try
@@ -172,7 +172,7 @@ public class Provider implements IProvider
 			this.context.progress("Loading ..." + (url != null ? url : source), false);
 
 			// parse
-			final Tree tree = url != null ? parseTree(url) : parseTree(source);
+			@Nullable final Tree tree = url != null ? parseTree(url) : parseTree(source);
 			if (tree != null)
 			{
 				this.context.progress("Loaded " + (url != null ? url : source), false);
@@ -193,9 +193,9 @@ public class Provider implements IProvider
 	 * @return tree
 	 */
 	@Nullable
-	private Tree parseTree(final URL url)
+	private Tree parseTree(@NonNull final URL url)
 	{
-		final MutableGraph graph = new MutableGraph();
+		@NonNull final MutableGraph graph = new MutableGraph();
 		@NonNull final Map<String, MutableGraphNode> map = new HashMap<>();
 		try (InputStream is = url.openStream(); @NonNull BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
 		{
@@ -227,9 +227,9 @@ public class Provider implements IProvider
 	@Nullable
 	private Tree parseTree(@NonNull final String location)
 	{
-		final MutableGraph graph = new MutableGraph();
+		@NonNull final MutableGraph graph = new MutableGraph();
 		@NonNull final Map<String, MutableGraphNode> map = new HashMap<>();
-		try (InputStream is = Files.newInputStream(Paths.get(location)); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
+		try (@NonNull InputStream is = Files.newInputStream(Paths.get(location)); @NonNull BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
 		{
 			// parse lines
 			String line;
@@ -262,7 +262,7 @@ public class Provider implements IProvider
 		// parse
 		// parentid\tid\tlabel\tbackground\tforeground\timg\tlink\tcontent
 		// parent\tchild
-		final String[] fields = line.split("\t", 8);
+		@NonNull final String[] fields = line.split("\t", 8);
 		if (fields.length < 2)
 		{
 			return;
@@ -277,7 +277,7 @@ public class Provider implements IProvider
 		}
 
 		// nodes
-		MutableGraphNode parent = null;
+		@Nullable MutableGraphNode parent = null;
 		if (!parentId.isEmpty())
 		{
 			parent = map.get(parentId);

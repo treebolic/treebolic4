@@ -91,7 +91,7 @@ public class XslExportDialog extends JDialog
 		setResizable(true);
 
 		// images
-		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(XslExportDialog.class.getResource("images/xsl.png"));
+		@NonNull @SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(XslExportDialog.class.getResource("images/xsl.png"));
 		@NonNull final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
@@ -171,7 +171,7 @@ public class XslExportDialog extends JDialog
 
 		// action
 		xmlBrowseButton.addActionListener(event -> {
-			final String url = FileDialogs.getXmlUrl(XslExportDialog.this.properties.getProperty("base", "."));
+			@Nullable final String url = FileDialogs.getXmlUrl(XslExportDialog.this.properties.getProperty("base", "."));
 			if (url != null && !url.isEmpty())
 			{
 				XslExportDialog.this.exportComboBox.getEditor().setItem(url);
@@ -191,7 +191,7 @@ public class XslExportDialog extends JDialog
 		cancelButton.addActionListener(event -> setVisible(false));
 
 		// assemble
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(Box.createRigidArea(new Dimension(0, 10)));
 		panel.add(headerLabel);

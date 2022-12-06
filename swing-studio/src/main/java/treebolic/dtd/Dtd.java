@@ -30,7 +30,7 @@ public class Dtd
 	@Nullable
 	static public String getString()
 	{
-		try (@NonNull ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); BufferedOutputStream outputStream = new BufferedOutputStream(byteArrayOutputStream))
+		try (@NonNull ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(); @NonNull BufferedOutputStream outputStream = new BufferedOutputStream(byteArrayOutputStream))
 		{
 			if (Dtd.copyToStream(outputStream))
 			{
@@ -50,9 +50,9 @@ public class Dtd
 	 * @param outputStream output stream
 	 * @return true if successful
 	 */
-	static public boolean copyToStream(final OutputStream outputStream)
+	static public boolean copyToStream(@NonNull final OutputStream outputStream)
 	{
-		final URL uRL = Dtd.class.getResource(Dtd.DTD_FILE);
+		@Nullable final URL uRL = Dtd.class.getResource(Dtd.DTD_FILE);
 		if (uRL == null)
 		{
 			return false;
@@ -78,7 +78,7 @@ public class Dtd
 	@SuppressWarnings("UnusedReturnValue")
 	static public boolean copyToUTF8Stream(@NonNull final OutputStream outstream)
 	{
-		final String str = Dtd.getString();
+		@Nullable final String str = Dtd.getString();
 		if (str == null)
 		{
 			return false;
@@ -105,7 +105,7 @@ public class Dtd
 	static private boolean copyStreams(@NonNull final InputStream instream, @NonNull final OutputStream outstream)
 	{
 		final int bufferSize = 512;
-		try (BufferedInputStream reader = new BufferedInputStream(instream, bufferSize); BufferedOutputStream writer = new BufferedOutputStream(outstream))
+		try (@NonNull BufferedInputStream reader = new BufferedInputStream(instream, bufferSize); @NonNull BufferedOutputStream writer = new BufferedOutputStream(outstream))
 		{
 			@NonNull final byte[] buffer = new byte[bufferSize];
 			int count;

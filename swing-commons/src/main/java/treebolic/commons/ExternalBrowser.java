@@ -119,7 +119,7 @@ public class ExternalBrowser
 	 *
 	 * @param command command line
 	 */
-	static private void run(final String command)
+	static private void run(@Nullable final String command)
 	{
 		if (command != null)
 		{

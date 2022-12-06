@@ -101,7 +101,7 @@ public class PopupMenu implements treebolic.glue.iface.component.PopupMenu<Compo
 			return;
 		}
 
-		final ActionItem item = new ActionItem(label, getDrawable(resource), false, listener);
+		@treebolic.annotations.NonNull final ActionItem item = new ActionItem(label, getDrawable(resource), false, listener);
 		this.quickAction.addActionItem(item);
 	}
 

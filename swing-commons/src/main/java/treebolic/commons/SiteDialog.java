@@ -9,6 +9,7 @@ import java.util.Properties;
 import javax.swing.*;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * Site dialog
@@ -94,7 +95,7 @@ public class SiteDialog extends JDialog
 
 		// images
 		@NonNull @SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(SiteDialog.class.getResource("images/sitemake.png"));
-		final JLabel headerLabel = new JLabel();
+		@NonNull final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -105,7 +106,7 @@ public class SiteDialog extends JDialog
 		@NonNull @SuppressWarnings("ConstantConditions") final Icon httpIcon = new ImageIcon(SiteDialog.class.getResource("images/net.png"));
 
 		// mode combo
-		final Object[] options = {Mode.FILE, Mode.NET};
+		@NonNull final Object[] options = {Mode.FILE, Mode.NET};
 		this.comboBox = new JComboBox<>(options);
 		this.comboBox.setRenderer(new ListCellRenderer<Object>()
 		{
@@ -130,11 +131,11 @@ public class SiteDialog extends JDialog
 
 		// buttons
 		@NonNull final JButton oKButton = new JButton(Messages.getString("SiteDialog.ok"));
-		final JButton cancelButton = new JButton(Messages.getString("SiteDialog.cancel"));
+		@NonNull final JButton cancelButton = new JButton(Messages.getString("SiteDialog.cancel"));
 		@NonNull final JButton browsePathButton = new JButton(Messages.getString("SiteDialog.browse"));
 
 		// panels
-		final JPanel selectionPanel = new JPanel();
+		@NonNull final JPanel selectionPanel = new JPanel();
 		selectionPanel.add(new JLabel(Messages.getString("SiteDialog.mode")));
 		selectionPanel.setLayout(new FlowLayout());
 		selectionPanel.add(this.comboBox);
@@ -181,12 +182,12 @@ public class SiteDialog extends JDialog
 		});
 
 		// assemble tabs
-		final JPanel settingsPanel = new JPanel();
+		@NonNull final JPanel settingsPanel = new JPanel();
 		settingsPanel.add(tabbedPanel);
 
 		// events
 		browsePathButton.addActionListener(e -> {
-			final String path = FileDialogs.getFolder(SiteDialog.this.properties.getProperty("base", "."));
+			@Nullable final String path = FileDialogs.getFolder(SiteDialog.this.properties.getProperty("base", "."));
 			if (path != null)
 			{
 				SiteDialog.this.pathTextField.setText(path);
@@ -229,7 +230,7 @@ public class SiteDialog extends JDialog
 			this.passwordTextField.setText(this.properties.getProperty("password"));
 			this.pathTextField.setText(this.properties.getProperty("path"));
 
-			final Mode mode = this.properties.getProperty("mode") != null ? Mode.valueOf(this.properties.getProperty("mode")) : Mode.FILE;
+			@NonNull final Mode mode = this.properties.getProperty("mode") != null ? Mode.valueOf(this.properties.getProperty("mode")) : Mode.FILE;
 			this.comboBox.setSelectedItem(mode);
 
 			pack();
@@ -240,7 +241,7 @@ public class SiteDialog extends JDialog
 			if (this.ok)
 			{
 				// update properties from components
-				final Mode mode = (Mode) this.comboBox.getSelectedItem();
+				@Nullable final Mode mode = (Mode) this.comboBox.getSelectedItem();
 				assert mode != null;
 				this.properties.setProperty("mode", mode.toString());
 				switch (mode)

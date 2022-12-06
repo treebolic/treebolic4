@@ -3,6 +3,7 @@
  */
 package treebolic.studio.tree;
 
+import treebolic.annotations.NonNull;
 import treebolic.studio.Messages;
 import treebolic.model.Settings;
 
@@ -23,6 +24,7 @@ public class ToolsWrapper extends SettingsWrapper
 		super(settings);
 	}
 
+	@NonNull
 	@Override
 	public String toString()
 	{

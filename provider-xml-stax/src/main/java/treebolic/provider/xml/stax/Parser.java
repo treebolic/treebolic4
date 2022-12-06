@@ -43,17 +43,18 @@ public class Parser
 	 * @return model
 	 * @throws XMLStreamException xml stream exception
 	 */
-	public static Model parse(XMLEventReader reader) throws XMLStreamException
+	@NonNull
+	public static Model parse(@NonNull XMLEventReader reader) throws XMLStreamException
 	{
 		@Nullable Deque<MutableNode> stack = null;
 
-		Map<String, MutableNode> nodes = null;
+		@Nullable Map<String, MutableNode> nodes = null;
 
 		@Nullable INode root = null;
 
-		List<IEdge> edges = null;
+		@Nullable List<IEdge> edges = null;
 
-		MutableNode node = null;
+		@Nullable MutableNode node = null;
 
 		@Nullable MutableEdge edge = null;
 

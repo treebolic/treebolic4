@@ -41,6 +41,7 @@ public class DefaultDecorator
 	 *
 	 * @return node name
 	 */
+	@NonNull
 	public String getName()
 	{
 		return this.node.getNodeName();
@@ -53,7 +54,7 @@ public class DefaultDecorator
 	 */
 	public String getValue()
 	{
-		final StringBuilder buffer = new StringBuilder();
+		@NonNull final StringBuilder buffer = new StringBuilder();
 
 		// value
 		String value = this.node.getNodeValue();
@@ -79,7 +80,7 @@ public class DefaultDecorator
 		}
 
 		// children
-		final String childrenText = childrenToString();
+		@NonNull final String childrenText = childrenToString();
 		if (childrenText != null)
 		{
 			buffer.append(childrenText);
@@ -97,7 +98,7 @@ public class DefaultDecorator
 	protected String childrenToString()
 	{
 		@NonNull final StringBuilder buffer = new StringBuilder();
-		final NodeList list = this.node.getChildNodes();
+		@NonNull final NodeList list = this.node.getChildNodes();
 		for (int i = 0; i < list.getLength(); i++)
 		{
 			final Node node = list.item(i);

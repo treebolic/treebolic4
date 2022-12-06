@@ -52,16 +52,19 @@ public class Editor implements TableCellEditor, CellEditorListener
 	/**
 	 * File editor
 	 */
+	@NonNull
 	private final FileEditor fileEditor;
 
 	/**
 	 * List editor
 	 */
+	@NonNull
 	private final ListEditor listEditor;
 
 	/**
 	 * Long text editor
 	 */
+	@NonNull
 	private final LongTextEditor longTextEditor;
 
 	/**
@@ -78,6 +81,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	/**
 	 * The subeditors
 	 */
+	@NonNull
 	private final TableCellEditor[] subEditors;
 
 	static class TextEditor extends DefaultCellEditor
@@ -255,6 +259,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 * (non-Javadoc)
 	 * @see javax.swing.CellEditor#getCellEditorValue()
 	 */
+	@NonNull
 	@Override
 	public Object getCellEditorValue()
 	{
@@ -312,7 +317,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 				final String editedValue = (String) this.subEditor.getCellEditorValue();
 				if (editedValue != null && !PropertyView.defaultString.equals(editedValue) && !editedValue.isEmpty())
 				{
-					final float[] floats = Utils.stringToFloats(editedValue);
+					@Nullable final float[] floats = Utils.stringToFloats(editedValue);
 					if (floats != null)
 					{
 						value = new Floats(floats);
@@ -440,7 +445,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 *
 	 * @param combo combobox
 	 */
-	private void populateWithTrueFalse(final JComboBox<String> combo)
+	private void populateWithTrueFalse(@NonNull final JComboBox<String> combo)
 	{
 		populateWithStrings(combo, new String[]{"false", "true"});
 	}
@@ -474,7 +479,7 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 *
 	 * @param combo combobox
 	 */
-	private void populateWithFonts(final JComboBox<String> combo)
+	private void populateWithFonts(@NonNull final JComboBox<String> combo)
 	{
 		populateWithStrings(combo, new String[]{"SansSerif", "Serif", "MonoSpaced", "Dialog", "DialogInput"});
 		final Font[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();

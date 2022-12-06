@@ -28,7 +28,7 @@ public class HyperlinkButton extends JButton
 	 * @param image image
 	 * @param uri   url
 	 */
-	public HyperlinkButton(final Icon image, final String uri)
+	public HyperlinkButton(final Icon image, @NonNull final String uri)
 	{
 		super(image);
 		init(uri);

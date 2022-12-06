@@ -151,7 +151,7 @@ public class SettingsDialog extends JDialog
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("SettingsDialog.ok"));
+		@NonNull final JButton oKButton = new JButton(Messages.getString("SettingsDialog.ok"));
 		oKButton.addActionListener(event -> {
 			SettingsDialog.this.ok = true;
 			setVisible(false);
@@ -173,7 +173,7 @@ public class SettingsDialog extends JDialog
 		if ((this.flags & 1 << SettingsDialog.BASEIDX) != 0)
 		{
 			// label
-			final JLabel workFolderLabel = new JLabel(Messages.getString("SettingsDialog.base"));
+			@NonNull final JLabel workFolderLabel = new JLabel(Messages.getString("SettingsDialog.base"));
 
 			// input
 			this.baseTextField = new JTextField(32);
@@ -182,11 +182,11 @@ public class SettingsDialog extends JDialog
 			this.baseTextField.setToolTipText(Messages.getString("SettingsDialog.tooltip_base"));
 
 			// button
-			final JButton baseBrowseButton = new JButton(Messages.getString("SettingsDialog.browse"));
+			@NonNull final JButton baseBrowseButton = new JButton(Messages.getString("SettingsDialog.browse"));
 
 			// action
 			baseBrowseButton.addActionListener(event -> {
-				final String folder = FileDialogs.getFolder(SettingsDialog.this.settings.getProperty("base", "."));
+				@Nullable final String folder = FileDialogs.getFolder(SettingsDialog.this.settings.getProperty("base", "."));
 				if (folder != null && !folder.isEmpty())
 				{
 					SettingsDialog.this.baseTextField.setText(folder);
@@ -216,7 +216,7 @@ public class SettingsDialog extends JDialog
 
 			// action
 			imageBaseBrowseButton.addActionListener(event -> {
-				final String folder = FileDialogs.getFolder(SettingsDialog.this.settings.getProperty("base", "."));
+				@Nullable final String folder = FileDialogs.getFolder(SettingsDialog.this.settings.getProperty("base", "."));
 				if (folder != null && !folder.isEmpty())
 				{
 					SettingsDialog.this.imageBaseTextField.setText(folder);
@@ -242,7 +242,7 @@ public class SettingsDialog extends JDialog
 			this.helpTextField.setToolTipText(Messages.getString("SettingsDialog.tooltip_help"));
 
 			// button
-			final JButton helpBrowseButton = new JButton(Messages.getString("SettingsDialog.browse"));
+			@NonNull final JButton helpBrowseButton = new JButton(Messages.getString("SettingsDialog.browse"));
 
 			// action
 			helpBrowseButton.addActionListener(event -> {
@@ -331,10 +331,10 @@ public class SettingsDialog extends JDialog
 			this.providerComboBox.setToolTipText(Messages.getString("SettingsDialog.tooltip_provider"));
 
 			// label
-			final JLabel providerLabel = new JLabel(Messages.getString("SettingsDialog.provider"));
+			@NonNull final JLabel providerLabel = new JLabel(Messages.getString("SettingsDialog.provider"));
 
 			// button
-			final JButton providerAddButton = new JButton(Messages.getString("SettingsDialog.add"));
+			@NonNull final JButton providerAddButton = new JButton(Messages.getString("SettingsDialog.add"));
 			providerAddButton.addActionListener(event -> {
 				final String provider = ask(Messages.getString("SettingsDialog.prompt_provider"));
 				if (provider != null && !provider.isEmpty())
@@ -351,7 +351,7 @@ public class SettingsDialog extends JDialog
 		}
 
 		// assemble
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(Box.createRigidArea(new Dimension(0, 10)));
 		panel.add(headerLabel);

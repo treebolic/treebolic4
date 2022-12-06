@@ -9,6 +9,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Where (base location)
  */
@@ -19,6 +22,7 @@ public class Where
 	 *
 	 * @return base location
 	 */
+	@Nullable
 	@SuppressWarnings("UnusedReturnValue")
 	static public String makeBaseLocation()
 	{
@@ -33,7 +37,7 @@ public class Where
 			System.out.println("decoded " + location);
 			final String parent = new File(location).getParent();
 			System.out.println("parent " + parent);
-			final File dir = new File(parent, "database/");
+			@NonNull final File dir = new File(parent, "database/");
 			System.out.println("database " + dir);
 			return dir.getAbsolutePath();
 		}

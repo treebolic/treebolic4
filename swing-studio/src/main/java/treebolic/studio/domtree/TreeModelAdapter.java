@@ -65,6 +65,7 @@ public class TreeModelAdapter implements TreeModel
 	 * (non-Javadoc)
 	 * @see javax.swing.tree.TreeModel#getRoot()
 	 */
+	@Nullable
 	@Override
 	public Object getRoot()
 	{
@@ -221,12 +222,12 @@ public class TreeModelAdapter implements TreeModel
 	 * @param targetChild child
 	 * @return index or -1 if not found
 	 */
-	private int indexOf(final Node node, final Node targetChild)
+	private int indexOf(@NonNull final Node node, final Node targetChild)
 	{
 		final int count = childCountOf(node);
 		for (int i = 0; i < count; i++)
 		{
-			final Node child = nthChildOf(node, i);
+			@Nullable final Node child = nthChildOf(node, i);
 			if (child == targetChild)
 			{
 				return i;

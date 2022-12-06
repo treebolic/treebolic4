@@ -27,6 +27,7 @@ public class Persist
 	 * @param persistFile persist file
 	 * @return properties
 	 */
+	@NonNull
 	static public Properties getSettings(final String persistFile)
 	{
 		@NonNull final Properties settings = Persist.loadSettings(persistFile);
@@ -105,7 +106,7 @@ public class Persist
 	 * @return true if successful
 	 */
 	@SuppressWarnings("UnusedReturnValue")
-	static public boolean saveSettings(final String persistFile, final Properties settings)
+	static public boolean saveSettings(final String persistFile, @NonNull final Properties settings)
 	{
 		try
 		{

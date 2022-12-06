@@ -32,7 +32,7 @@ public class QueryEngine
 	 *
 	 * @param model The ontology
 	 */
-	public QueryEngine(final OntModel model)
+	public QueryEngine(@NonNull final OntModel model)
 	{
 		// Object properties
 		model.listObjectProperties().forEach(p -> owlProperties.put(p.getLocalName(), p));
@@ -87,7 +87,7 @@ public class QueryEngine
 	 * @param clazz The class expression.
 	 * @return The instances of the specified class expression.
 	 */
-	public ExtendedIterator<OntResource> getInstances(final OntClass clazz)
+	public ExtendedIterator<OntResource> getInstances(@NonNull final OntClass clazz)
 	{
 		Model model = clazz.getModel();
 		return model.listStatements(null, RDF.type, clazz) //
@@ -106,7 +106,7 @@ public class QueryEngine
 	 * @param entity OWL entity
 	 * @return The objectproperty matching the specified entity (by name).
 	 */
-	public OntProperty getRelation(final OntResource entity)
+	public OntProperty getRelation(@NonNull final OntResource entity)
 	{
 		String key = entity.getLocalName();
 		return owlProperties.get(key);
@@ -118,7 +118,7 @@ public class QueryEngine
 	 * @param entity OWL entity
 	 * @return true is this entity is a relation
 	 */
-	public boolean isRelation(final OntResource entity)
+	public boolean isRelation(@NonNull final OntResource entity)
 	{
 		return getRelation(entity) != null;
 	}
@@ -140,7 +140,7 @@ public class QueryEngine
 	 * @param property property
 	 * @return extended iterator of domain classes
 	 */
-	public ExtendedIterator<OntClass> getRanges(final OntProperty property)
+	public ExtendedIterator<OntClass> getRanges(@NonNull final OntProperty property)
 	{
 		return property.asObjectProperty().listRange().mapWith(OntResource::asClass);
 	}
@@ -173,6 +173,7 @@ public class QueryEngine
 	 * @param owlClass OWL class
 	 * @return stream of properties
 	 */
+	@NonNull
 	public Stream<OntProperty> getProperties(final OntClass owlClass)
 	{
 		return this.owlProperties.values().stream() //

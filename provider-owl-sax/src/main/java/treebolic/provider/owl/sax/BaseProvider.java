@@ -113,7 +113,7 @@ public abstract class BaseProvider implements IProvider
 
 			// parse
 			this.context.progress("Loading ..." + (url != null ? url : source), false);
-			final Model model = this.factory.makeModel(url != null ? url.toString() : source);
+			@Nullable final Model model = this.factory.makeModel(url != null ? url.toString() : source);
 			if (model != null)
 			{
 				this.context.progress("Loaded " + (url != null ? url : source), false);
@@ -155,7 +155,7 @@ public abstract class BaseProvider implements IProvider
 
 			// parse
 			this.context.progress("Loading ..." + (url != null ? url : source), false);
-			final Tree tree = this.factory.makeTree(url != null ? url.toString() : source);
+			@Nullable final Tree tree = this.factory.makeTree(url != null ? url.toString() : source);
 			if (tree != null)
 			{
 				this.context.progress("Loaded " + (url != null ? url : source), false);
@@ -173,6 +173,7 @@ public abstract class BaseProvider implements IProvider
 	 * @param parameters parameters
 	 * @return properties
 	 */
+	@Nullable
 	private Properties getSettings(final URL base, @Nullable final Properties parameters)
 	{
 		// settings properties from configuration file set by settings=file
@@ -180,7 +181,7 @@ public abstract class BaseProvider implements IProvider
 		final String location = parameters == null ? null : parameters.getProperty("settings");
 		if (location != null && !location.isEmpty())
 		{
-			final URL url = ProviderUtils.makeURL(location, base, parameters, this.context);
+			@Nullable final URL url = ProviderUtils.makeURL(location, base, parameters, this.context);
 
 			this.context.progress("Loading ..." + (url != null ? url : location), false);
 			try

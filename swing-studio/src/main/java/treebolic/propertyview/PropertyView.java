@@ -166,6 +166,7 @@ public class PropertyView extends JPanel implements SelectListener
 		/**
 		 * Value
 		 */
+		@Nullable
 		public Object value;
 
 		/**
@@ -239,6 +240,7 @@ public class PropertyView extends JPanel implements SelectListener
 	/**
 	 * Handler factory
 	 */
+	@Nullable
 	protected HandlerFactory handlerFactory;
 
 	/**
@@ -360,7 +362,7 @@ public class PropertyView extends JPanel implements SelectListener
 	private void initialize()
 	{
 		this.attributeTable.setToolTipText(null);
-		final JLabel attributesLabel = new JLabel(Messages.getString("PropertyView.attributes"));
+		@NonNull final JLabel attributesLabel = new JLabel(Messages.getString("PropertyView.attributes"));
 		setLayout(new BorderLayout());
 		this.add(attributesLabel, BorderLayout.NORTH);
 		this.add(new JScrollPane(this.attributeTable), BorderLayout.CENTER);
@@ -533,6 +535,7 @@ public class PropertyView extends JPanel implements SelectListener
 		/**
 		 * Its handler
 		 */
+		@Nullable
 		public final Handler handler;
 
 		/**
@@ -577,7 +580,7 @@ public class PropertyView extends JPanel implements SelectListener
 				this.attributes = new Vector<>();
 				for (final AttributeDescriptor attributeDescriptor : this.handler.attributeDescriptors)
 				{
-					final Attribute attribute = new Attribute(attributeDescriptor);
+					@NonNull final Attribute attribute = new Attribute(attributeDescriptor);
 					attribute.value = this.handler.getter.get(this.selectedObject, attribute.descriptor.name);
 					this.attributes.add(attribute);
 				}

@@ -55,7 +55,7 @@ public class ModelUtils
 		@NonNull final String[][] data = { //
 				{"id1", "one\n1", "id11", "eleven\n11", "id12", "twelve\n12", "id13", "thirteen\n13", "id14", "fourteen\n14"},          //$NON-NLS-10$
 				{"id2", "two\n2", "id21", "twenty-one\n21", "id22", "twenty-two\n22", "id23", "twenty-three\n23"}, {"id3", "three\n3", "id31", "thirty-one\n31", "id32", "thirty-two\n32"}, {"id4", "four\n4", "id41", "forty-one\n41"}, {"id5", "five\n5"}};
-		final TreeMutableNode root = new TreeMutableNode(null, "root");
+		@NonNull final TreeMutableNode root = new TreeMutableNode(null, "root");
 		root.setLabel("root");
 		root.setBackColor(Colors.ORANGE);
 		root.setForeColor(Colors.BLACK);
@@ -87,10 +87,10 @@ public class ModelUtils
 		@NonNull final Map<INode, MutableNode> oldToNewNodeMap = new HashMap<>();
 
 		// nodes
-		final INode root = ModelUtils.toMutable(model.tree.getRoot(), idToNodeMap, oldToNewNodeMap);
+		@NonNull final INode root = ModelUtils.toMutable(model.tree.getRoot(), idToNodeMap, oldToNewNodeMap);
 
 		// edges
-		List<IEdge> edges = null;
+		@Nullable List<IEdge> edges = null;
 		final List<IEdge> edges0 = model.tree.getEdges();
 		if (edges0 != null)
 		{
@@ -115,7 +115,7 @@ public class ModelUtils
 	 * @return equivalent model with mutable nodes
 	 */
 	@NonNull
-	static public TreeMutableNode toMutable(final INode node0, final Map<String, MutableNode> idToNodeMap, final Map<INode, MutableNode> oldToNewNodeMap)
+	static public TreeMutableNode toMutable(@NonNull final INode node0, @NonNull final Map<String, MutableNode> idToNodeMap, @NonNull final Map<INode, MutableNode> oldToNewNodeMap)
 	{
 		// this node
 		@NonNull final TreeMutableNode node = new TreeMutableNode(node0);
@@ -127,7 +127,7 @@ public class ModelUtils
 		if (children0 != null)
 		{
 			@NonNull final List<INode> children = new ArrayList<>();
-			for (final INode childNode0 : children0)
+			for (@NonNull final INode childNode0 : children0)
 			{
 				@NonNull final TreeMutableNode child = ModelUtils.toMutable(childNode0, idToNodeMap, oldToNewNodeMap);
 
@@ -150,7 +150,7 @@ public class ModelUtils
 	 * @return id to node map
 	 */
 	@NonNull
-	static public Map<String, MutableNode> makeIdToNodeMap(final Model model)
+	static public Map<String, MutableNode> makeIdToNodeMap(@NonNull final Model model)
 	{
 		@NonNull final Map<String, MutableNode> idToNodeMap = new TreeMap<>();
 		ModelUtils.makeIdToNodeMap((MutableNode) model.tree.getRoot(), idToNodeMap);
@@ -204,10 +204,10 @@ public class ModelUtils
 	 * @param idToNodeMap     id to node result map
 	 * @param oldIdToNewIdMap old id to new id result map
 	 */
-	static private void normalizeId(@NonNull final TreeMutableNode node, final String prefix, @NonNull final Map<String, MutableNode> idToNodeMap, final Map<String, String> oldIdToNewIdMap)
+	static private void normalizeId(@NonNull final TreeMutableNode node, final String prefix, @NonNull final Map<String, MutableNode> idToNodeMap, @NonNull final Map<String, String> oldIdToNewIdMap)
 	{
 		// this node
-		final String oldId = node.getId();
+		@Nullable final String oldId = node.getId();
 		final String id = node.getParent() == null ? "root" : prefix;
 		node.setId(id);
 
@@ -230,7 +230,7 @@ public class ModelUtils
 	 * @param node            start node
 	 * @param oldIdToNewIdMap old id to new id map
 	 */
-	static private void normalizeLinks(@NonNull final TreeMutableNode node, final Map<String, String> oldIdToNewIdMap)
+	static private void normalizeLinks(@NonNull final TreeMutableNode node, @NonNull final Map<String, String> oldIdToNewIdMap)
 	{
 		// this node
 		@Nullable String link = node.getLink();
@@ -240,7 +240,7 @@ public class ModelUtils
 			final int pos = link.indexOf('#');
 			if (pos != -1 && link.length() > pos + 1)
 			{
-				final String oldId = link.substring(pos + 1);
+				@NonNull final String oldId = link.substring(pos + 1);
 				final String newId = oldIdToNewIdMap.get(oldId);
 				if (newId != null)
 				{
@@ -266,7 +266,8 @@ public class ModelUtils
 	 * @param model model
 	 * @return map of images to locations
 	 */
-	static public Map<String, SortedSet<String>> getImageMap(final Model model)
+	@NonNull
+	static public Map<String, SortedSet<String>> getImageMap(@NonNull final Model model)
 	{
 		@NonNull final Map<String, SortedSet<String>> map = new TreeMap<>();
 
@@ -340,7 +341,7 @@ public class ModelUtils
 		}
 
 		// recurse
-		final List<INode> children = node.getChildren();
+		@Nullable final List<INode> children = node.getChildren();
 		if (children != null)
 		{
 			for (@NonNull final INode child : children)
@@ -415,7 +416,7 @@ public class ModelUtils
 	 * @param node start node
 	 * @param map  map to collect results
 	 */
-	static private void getLinkMap(final INode node, @NonNull final Map<String, SortedSet<String>> map)
+	static private void getLinkMap(@NonNull final INode node, @NonNull final Map<String, SortedSet<String>> map)
 	{
 		// this node
 		@Nullable final String link = node.getLink();
@@ -444,7 +445,7 @@ public class ModelUtils
 	 * @return map of ids to locations
 	 */
 	@NonNull
-	static public Map<String, SortedSet<String>> getIdMap(final Model model)
+	static public Map<String, SortedSet<String>> getIdMap(@NonNull final Model model)
 	{
 		@NonNull final Map<String, SortedSet<String>> map = new TreeMap<>();
 		ModelUtils.getIdMap(model.tree.getRoot(), map);
@@ -457,10 +458,10 @@ public class ModelUtils
 	 * @param node start node
 	 * @param map  map to collect results
 	 */
-	static private void getIdMap(@NonNull final INode node, final Map<String, SortedSet<String>> map)
+	static private void getIdMap(@NonNull final INode node, @NonNull final Map<String, SortedSet<String>> map)
 	{
 		// this node
-		String id = node.getId();
+		@Nullable String id = node.getId();
 		if (id == null || id.isEmpty())
 		{
 			id = "null";
@@ -488,9 +489,9 @@ public class ModelUtils
 	 * @param key   key
 	 * @param value value
 	 */
-	static private void putReferenceMapKeyValue(final Map<String, SortedSet<String>> map, final String key, final String value)
+	static private void putReferenceMapKeyValue(@NonNull final Map<String, SortedSet<String>> map, final String key, final String value)
 	{
-		SortedSet<String> locations = map.computeIfAbsent(key, k -> new TreeSet<>());
+		@NonNull SortedSet<String> locations = map.computeIfAbsent(key, k -> new TreeSet<>());
 		locations.add(value);
 	}
 
@@ -521,7 +522,7 @@ public class ModelUtils
 	 * @param string encode URL string
 	 * @return decoded URL string
 	 */
-	static private String encode(final String string)
+	static private String encode(@NonNull final String string)
 	{
 		try
 		{
@@ -540,7 +541,7 @@ public class ModelUtils
 	 * @param settings     settings to save
 	 * @param propertyFile property file to save to
 	 */
-	static public void saveSettings(@NonNull final Settings settings, final String propertyFile)
+	static public void saveSettings(@NonNull final Settings settings, @NonNull final String propertyFile)
 	{
 		@NonNull final Properties properties = ModelUtils.settingsToProperty(settings);
 		try
@@ -560,9 +561,9 @@ public class ModelUtils
 	 * @return properties
 	 */
 	@NonNull
-	static public Properties settingsToProperty(final Settings settings)
+	static public Properties settingsToProperty(@NonNull final Settings settings)
 	{
-		final Properties properties = new Properties();
+		@NonNull final Properties properties = new Properties();
 
 		// top
 		if (settings.hasToolbarFlag != null)
@@ -791,7 +792,7 @@ public class ModelUtils
 		{
 			for (@NonNull final MenuItem menuItem : settings.menu)
 			{
-				final StringBuilder param = new StringBuilder();
+				@NonNull final StringBuilder param = new StringBuilder();
 				param.append(menuItem.label);
 				param.append(sep);
 				if (menuItem.action != null)

@@ -147,7 +147,7 @@ public class Dialog extends AppCompatDialogFragment implements treebolic.glue.if
 	public AppCompatDialog onCreateDialog(final Bundle savedInstanceState)
 	{
 		// use the Builder class for convenient dialog construction
-		final Activity activity = requireActivity();
+		@treebolic.annotations.NonNull final Activity activity = requireActivity();
 		@treebolic.annotations.NonNull final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
 		// get the layout inflater
@@ -166,7 +166,7 @@ public class Dialog extends AppCompatDialogFragment implements treebolic.glue.if
 
 			// content
 			final WebView webView = view.findViewById(R.id.content);
-			final StringBuilder html = new StringBuilder();
+			@treebolic.annotations.NonNull final StringBuilder html = new StringBuilder();
 			html.append("<html><head>");
 			html.append("<style type='text/css'>");
 			html.append(getDefaultBaseStyle());

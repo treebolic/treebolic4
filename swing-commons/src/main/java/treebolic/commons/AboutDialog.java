@@ -65,6 +65,7 @@ public class AboutDialog extends JDialog
 	 * @param sysInfo whether to add sysinfo
 	 * @return panel
 	 */
+	@NonNull
 	protected JPanel initialize(final String product, final String version, final boolean sysInfo)
 	{
 		setTitle(Messages.getString("AboutDialog.title"));
@@ -72,7 +73,7 @@ public class AboutDialog extends JDialog
 		@NonNull final JLabel titleLabel = new JLabel(product);
 		titleLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
 
-		final HyperlinkButton authorLabel = new HyperlinkButton(HyperlinkButton.makeURILabel(AboutDialog.author), AboutDialog.email);
+		@NonNull final HyperlinkButton authorLabel = new HyperlinkButton(HyperlinkButton.makeURILabel(AboutDialog.author), AboutDialog.email);
 
 		@NonNull final JLabel copyrightLabel = new JLabel(AboutDialog.copyright);
 		@NonNull final JLabel versionLabel = new JLabel(version);

@@ -73,7 +73,7 @@ public class Tip extends AppCompatDialogFragment
 	public AppCompatDialog onCreateDialog(final Bundle savedInstanceState)
 	{
 		// use the Builder class for convenient dialog construction
-		final Activity activity = requireActivity();
+		@treebolic.annotations.NonNull final Activity activity = requireActivity();
 		@treebolic.annotations.NonNull final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
 		// get the layout inflater
@@ -140,7 +140,7 @@ public class Tip extends AppCompatDialogFragment
 	 */
 	static public void tip(@NonNull FragmentManager manager, final String text)
 	{
-		Tip tip = new Tip();
+		@treebolic.annotations.NonNull Tip tip = new Tip();
 		tip.setText(text);
 		tip.show(manager, STATE_TEXT);
 	}

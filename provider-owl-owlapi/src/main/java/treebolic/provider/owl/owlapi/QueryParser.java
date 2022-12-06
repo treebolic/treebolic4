@@ -19,6 +19,7 @@ import treebolic.annotations.NonNull;
 
 class QueryParser
 {
+	@NonNull
 	private final OWLOntology rootOntology;
 
 	@NonNull

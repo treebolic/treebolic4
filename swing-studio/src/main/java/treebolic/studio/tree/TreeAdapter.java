@@ -84,7 +84,8 @@ public class TreeAdapter extends DefaultTreeModel
 	 * @param ignoredParentTreeNode parent tree node
 	 * @return tree node
 	 */
-	private static MutableTreeNode makeNode(final Node node, final MutableTreeNode ignoredParentTreeNode)
+	@NonNull
+	private static MutableTreeNode makeNode(@NonNull final Node node, final MutableTreeNode ignoredParentTreeNode)
 	{
 		@NonNull final DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode();
 		treeNode.setUserObject(node);
@@ -139,7 +140,7 @@ public class TreeAdapter extends DefaultTreeModel
 	 * @return tree node
 	 */
 	@NonNull
-	private static MutableTreeNode makeTools(final List<MenuItem> ignoredMenu, final Settings settings)
+	private static MutableTreeNode makeTools(final List<MenuItem> ignoredMenu, @NonNull final Settings settings)
 	{
 		@NonNull final DefaultMutableTreeNode toolsTreeNode = new DefaultMutableTreeNode();
 		toolsTreeNode.setUserObject(new ToolsWrapper(settings));
@@ -152,7 +153,7 @@ public class TreeAdapter extends DefaultTreeModel
 		{
 			for (final MenuItem menuItem : settings.menu)
 			{
-				final DefaultMutableTreeNode menuItemTreeNode = new DefaultMutableTreeNode();
+				@NonNull final DefaultMutableTreeNode menuItemTreeNode = new DefaultMutableTreeNode();
 				menuItemTreeNode.setUserObject(new MenuItemWrapper(menuItem, settings));
 				menuTreeNode.add(menuItemTreeNode);
 			}

@@ -35,7 +35,7 @@ public class DocumentSearch
 		for (int i = 0; i < nodes.getLength(); i++)
 		{
 			final Element imageElement = (Element) nodes.item(i);
-			final String imageFile = imageElement.getAttribute("src");
+			@NonNull final String imageFile = imageElement.getAttribute("src");
 			if (!imageFile.isEmpty())
 			{
 				set.add(imageFile);

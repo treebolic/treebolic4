@@ -706,7 +706,7 @@ public class SplitPaneLayout extends ViewGroup
 			super.onRestoreInstanceState(state);
 			return;
 		}
-		final SavedState savedState = (SavedState) state;
+		@treebolic.annotations.NonNull final SavedState savedState = (SavedState) state;
 		super.onRestoreInstanceState(savedState.getSuperState());
 		setSplitterPositionPercent(savedState.splitterPositionPercent);
 	}

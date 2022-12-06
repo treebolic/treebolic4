@@ -151,7 +151,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 		this.activity = activity0;
 
 		// determine orientation
-		final Point size = Utils.screenSize(this.activity);
+		@treebolic.annotations.NonNull final Point size = Utils.screenSize(this.activity);
 		final boolean isHorizontalScreen = size.x >= size.y;
 		this.isHorizontal = !isHorizontalScreen;
 
@@ -165,7 +165,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 		final LayoutInflater inflater = (LayoutInflater) this.activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		assert inflater != null;
 		TextView statusView0;
-		WebView webContentView0 = null;
+		@treebolic.annotations.Nullable WebView webContentView0 = null;
 		@treebolic.annotations.Nullable TextView textContentView0 = null;
 		try
 		{
@@ -351,7 +351,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 			}
 			else
 			{
-				final StringBuilder html = new StringBuilder();
+				@treebolic.annotations.NonNull final StringBuilder html = new StringBuilder();
 				html.append("<html><head>");
 				html.append("<style type='text/css'>");
 				html.append(getDefaultBaseStyle());

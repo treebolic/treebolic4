@@ -31,6 +31,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	/**
 	 * The per-class handler map
 	 */
+	@NonNull
 	private final Map<Class<?>, Handler> classHandler;
 
 	/**
@@ -87,9 +88,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 * (non-Javadoc)
 		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
 		 */
+		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public Object get(final Object object, final String propertyName)
+		public Object get(final Object object, @NonNull final String propertyName)
 		{
 			final MutableNode node = (MutableNode) object;
 			if (propertyName.equals(PropertyView.LABEL_NODE_ID))
@@ -158,7 +160,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODE_MOUNT_URL))
 			{
-				final MountPoint.Mounting mountingPoint = (MountPoint.Mounting) node.getMountPoint();
+				@Nullable final MountPoint.Mounting mountingPoint = (MountPoint.Mounting) node.getMountPoint();
 				return mountingPoint == null ? null : mountingPoint.url;
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODE_MOUNT_NOW))
@@ -199,7 +201,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			@NonNull final TreeMutableNode node = (TreeMutableNode) object;
 			if (propertyName.equals(PropertyView.LABEL_NODE_ID))
 			{
-				final String id2 = (String) propertyValue;
+				@Nullable final String id2 = (String) propertyValue;
 				@Nullable final String id = node.getId();
 				PropertyView.this.idToNodeMap.remove(id);
 				PropertyView.this.idToNodeMap.put(id2, node);
@@ -295,7 +297,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			}
 			else if (propertyName.equals(PropertyView.LABEL_NODE_WEIGHT))
 			{
-				final Double weight = (Double) propertyValue;
+				@Nullable final Double weight = (Double) propertyValue;
 				if (weight != null)
 				{
 					node.setWeight(-weight);
@@ -668,6 +670,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 * (non-Javadoc)
 		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
 		 */
+		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public Object get(final Object object, @NonNull final String propertyName)
@@ -849,6 +852,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 		 * (non-Javadoc)
 		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
 		 */
+		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public Object get(final Object object, @NonNull final String propertyName)
@@ -1444,7 +1448,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	public void setIdToNodeMap(final Map<String, MutableNode> idToNodeMap)
 	{
 		this.idToNodeMap = idToNodeMap;
-		final IdGetter idGetter = new NodeIdGetter(this.idToNodeMap);
+		@NonNull final IdGetter idGetter = new NodeIdGetter(this.idToNodeMap);
 		this.classHandler.get(TreeMutableNode.class).idGetter = idGetter;
 		this.classHandler.get(TreeMutableEdge.class).idGetter = idGetter;
 		this.classHandler.get(TopWrapper.class).idGetter = idGetter;
@@ -1463,7 +1467,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 * @return handler
 	 */
 	@NonNull
-	private Handler makeHandler(final Object[][] features, final Getter getter, final Setter setter, @SuppressWarnings("SameParameterValue") final IdGetter idGetter)
+	private Handler makeHandler(@NonNull final Object[][] features, final Getter getter, final Setter setter, @SuppressWarnings("SameParameterValue") final IdGetter idGetter)
 	{
 		Handler handler;
 		handler = new PropertyView.Handler();
@@ -1493,6 +1497,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 *
 	 * @return class to handler map
 	 */
+	@NonNull
 	@SuppressWarnings("synthetic-access")
 	private Map<Class<?>, Handler> makeHandlers()
 	{
@@ -1517,7 +1522,8 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 * @param handlerMap handler map
 	 * @return handler factory
 	 */
-	public HandlerFactory makeHandlerFactory(final Map<Class<?>, Handler> handlerMap)
+	@NonNull
+	public HandlerFactory makeHandlerFactory(@NonNull final Map<Class<?>, Handler> handlerMap)
 	{
 		return object -> {
 			if (object == null)

@@ -127,7 +127,7 @@ public class ImageListDialog extends ReferenceListDialog
 			public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
 			{
 				final ParameterModel.Entry entry = (ParameterModel.Entry) value;
-				final String location = entry.value;
+				@NonNull final String location = entry.value;
 				if (location.startsWith("default") || location.equals("background"))
 				{
 					setBackground(Color.LIGHT_GRAY);
@@ -175,8 +175,8 @@ public class ImageListDialog extends ReferenceListDialog
 		{
 			try
 			{
-				final URI uri = this.imageRepository.toURI();
-				final File file = new File(uri);
+				@NonNull final URI uri = this.imageRepository.toURI();
+				@NonNull final File file = new File(uri);
 				if (file.isDirectory())
 				{
 					@Nullable final File[] files = file.listFiles();
@@ -208,8 +208,8 @@ public class ImageListDialog extends ReferenceListDialog
 	private void checkUnused()
 	{
 		this.imageRepository = this.controller.makeImageRepositoryURL();
-		final Map<String, SortedSet<String>> unusedToLocationMap = new TreeMap<>();
-		final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
+		@NonNull final Map<String, SortedSet<String>> unusedToLocationMap = new TreeMap<>();
+		@NonNull final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
 		@NonNull final Set<String> images = imageToLocationMap.keySet();
 
 		if (this.imageRepository.getProtocol().equals("file"))
@@ -223,13 +223,13 @@ public class ImageListDialog extends ReferenceListDialog
 					@Nullable final File[] files = file.listFiles();
 					if (files != null)
 					{
-						for (final File directoryEntry : files)
+						for (@NonNull final File directoryEntry : files)
 						{
 							if (directoryEntry.isDirectory())
 							{
 								continue;
 							}
-							final String name = directoryEntry.getName();
+							@NonNull final String name = directoryEntry.getName();
 							if (!images.contains(name))
 							{
 								@NonNull final SortedSet<String> value = new TreeSet<>();

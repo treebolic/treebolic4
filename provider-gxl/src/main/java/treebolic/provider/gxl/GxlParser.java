@@ -52,7 +52,7 @@ public class GxlParser
 				return null;
 			}
 
-			final Tree tree = GxlParser.parseTree(document);
+			@Nullable final Tree tree = GxlParser.parseTree(document);
 			if (tree == null)
 			{
 				return null;
@@ -155,7 +155,7 @@ public class GxlParser
 	static private Tree parseTree(@NonNull final Document document)
 	{
 		// map
-		final Hashtable<String, MutableNode> nodesById = new Hashtable<>();
+		@NonNull final Hashtable<String, MutableNode> nodesById = new Hashtable<>();
 
 		// enumerate nodes
 		final NodeList gxlNodes = document.getElementsByTagName("node"); //$NON-NLS-1$
@@ -168,7 +168,7 @@ public class GxlParser
 			@NonNull final String id = gxlNodeElement.getAttribute("id"); //$NON-NLS-1$
 
 			// create node
-			final MutableNode node = new MutableNode(null, id);
+			@NonNull final MutableNode node = new MutableNode(null, id);
 			nodesById.put(id, node);
 
 			// attributes
@@ -177,11 +177,11 @@ public class GxlParser
 			{
 				final Node gxlAttr = gxlAttrs.item(j);
 				final Element gxlAttrElement = (Element) gxlAttr;
-				final String attributeName = gxlAttrElement.getAttribute("name"); //$NON-NLS-1$
+				@NonNull final String attributeName = gxlAttrElement.getAttribute("name"); //$NON-NLS-1$
 
 				if (attributeName.equalsIgnoreCase("label")) //$NON-NLS-1$
 				{
-					final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); //$NON-NLS-1$
+					@Nullable final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); //$NON-NLS-1$
 					if (element != null)
 					{
 						node.setLabel(element.getTextContent());
@@ -197,7 +197,7 @@ public class GxlParser
 				}
 				else if (attributeName.equalsIgnoreCase("link")) //$NON-NLS-1$
 				{
-					final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "locator"); //$NON-NLS-1$
+					@Nullable final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "locator"); //$NON-NLS-1$
 					if (element != null)
 					{
 						@NonNull final String hRef = element.getAttribute("xlink:href"); //$NON-NLS-1$
@@ -238,7 +238,7 @@ public class GxlParser
 				}
 				else if (attributeName.equalsIgnoreCase("backcolor")) //$NON-NLS-1$
 				{
-					final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); //$NON-NLS-1$
+					@Nullable final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); //$NON-NLS-1$
 					if (element != null)
 					{
 						node.setBackColor(Utils.stringToColor(element.getTextContent()));
@@ -246,7 +246,7 @@ public class GxlParser
 				}
 				else if (attributeName.equalsIgnoreCase("forecolor")) //$NON-NLS-1$
 				{
-					final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); //$NON-NLS-1$
+					@Nullable final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); //$NON-NLS-1$
 					if (element != null)
 					{
 						node.setForeColor(Utils.stringToColor(element.getTextContent()));
@@ -362,7 +362,7 @@ public class GxlParser
 						edges.add(edge);
 
 						// attributes
-						final NodeList gxlAttrs = gxlEdgeElement.getElementsByTagName("attr"); //$NON-NLS-1$
+						@NonNull final NodeList gxlAttrs = gxlEdgeElement.getElementsByTagName("attr"); //$NON-NLS-1$
 						for (int j = 0; j < gxlAttrs.getLength(); j++)
 						{
 							final Node gxlAttr = gxlAttrs.item(j);
@@ -381,13 +381,13 @@ public class GxlParser
 								@Nullable final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "locator"); //$NON-NLS-1$
 								if (element != null)
 								{
-									final String hRef = element.getAttribute("xlink:href"); //$NON-NLS-1$
+									@NonNull final String hRef = element.getAttribute("xlink:href"); //$NON-NLS-1$
 									edge.setImageFile(hRef);
 								}
 							}
 							else if (attributeName.equalsIgnoreCase("color")) //$NON-NLS-1$
 							{
-								final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); //$NON-NLS-1$
+								@Nullable final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); //$NON-NLS-1$
 								if (element != null)
 								{
 									edge.setColor(Utils.stringToColor(element.getTextContent()));
@@ -411,7 +411,7 @@ public class GxlParser
 							}
 							else if (attributeName.equals("toterminator")) //$NON-NLS-1$
 							{
-								final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); //$NON-NLS-1$
+								@Nullable final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); //$NON-NLS-1$
 								if (element != null)
 								{
 									edge.setStyle(Utils.modifyStyle(edge.getStyle(), element.getTextContent(), Utils.StyleComponent.TOTERMINATOR));
@@ -446,11 +446,11 @@ public class GxlParser
 		settings.hasToolbarFlag = true;
 		settings.hasStatusbarFlag = true;
 
-		final Element gxlGraphElement = GxlParser.getFirstElementByTagName(document.getDocumentElement(), "graph"); //$NON-NLS-1$
+		@Nullable final Element gxlGraphElement = GxlParser.getFirstElementByTagName(document.getDocumentElement(), "graph"); //$NON-NLS-1$
 		if (gxlGraphElement != null)
 		{
 			// enumerate attrs
-			final List<Element> gxlAttrElements = GxlParser.getLevel1ChildElementsByTagName(gxlGraphElement, "attr"); //$NON-NLS-1$
+			@NonNull final List<Element> gxlAttrElements = GxlParser.getLevel1ChildElementsByTagName(gxlGraphElement, "attr"); //$NON-NLS-1$
 			for (@NonNull final Element gxlAttrElement : gxlAttrElements)
 			{
 				@NonNull final String name = gxlAttrElement.getAttribute("name"); //$NON-NLS-1$
@@ -665,7 +665,7 @@ public class GxlParser
 				{
 					@NonNull final List<Element> gxlTupleElements = GxlParser.getLevel1ChildElementsByTagName(tupElement, "string"); //$NON-NLS-1$
 					int k = 0;
-					for (final Element gxlTupleElement : gxlTupleElements)
+					for (@Nullable final Element gxlTupleElement : gxlTupleElements)
 					{
 						if (gxlTupleElement != null)
 						{
@@ -759,7 +759,7 @@ public class GxlParser
 	 * @return DOM element if found, null if none
 	 */
 	@Nullable
-	static private Element getFirstElementByTagName(final Element element, @SuppressWarnings("SameParameterValue") final String tagName)
+	static private Element getFirstElementByTagName(@NonNull final Element element, @SuppressWarnings("SameParameterValue") final String tagName)
 	{
 		@NonNull final NodeList list = element.getElementsByTagName(tagName);
 		if (list.getLength() > 0)
@@ -777,7 +777,7 @@ public class GxlParser
 	 * @return DOM element if found, null if none
 	 */
 	@Nullable
-	static private Element getFirstLevel1ElementByTagName(final Element element, final String tagName)
+	static private Element getFirstLevel1ElementByTagName(@NonNull final Element element, final String tagName)
 	{
 		@NonNull final List<Element> childElements = GxlParser.getLevel1ChildElementsByTagName(element, tagName);
 		if (!childElements.isEmpty())
@@ -804,7 +804,7 @@ public class GxlParser
 			final Node childNode = childNodes.item(i);
 			if (childNode instanceof Element)
 			{
-				final Element childElement = (Element) childNode;
+				@NonNull final Element childElement = (Element) childNode;
 				if (childElement.getTagName().equals(tagName))
 				{
 					list.add(childElement);

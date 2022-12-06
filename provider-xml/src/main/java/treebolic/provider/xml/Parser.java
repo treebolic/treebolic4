@@ -69,7 +69,7 @@ public class Parser
 	 */
 	public Document makeDocument(@NonNull final URL url, @Nullable final EntityResolver resolver) throws ParserConfigurationException, SAXException, IOException
 	{
-		final ParseErrorLogger handler = new ParseErrorLogger();
+		@NonNull final ParseErrorLogger handler = new ParseErrorLogger();
 		try
 		{
 			final DocumentBuilder builder = makeDocumentBuilder();

@@ -293,7 +293,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	@Override
 	public void put(final int image, @Nullable final Function<CharSequence[], String> converter, final String label, @Nullable final String... contents)
 	{
-		Runnable r = () -> {
+		@NonNull Runnable r = () -> {
 
 			// icon and colors
 			this.operationIconLabel.setIcon(Statusbar.icons[image]);
@@ -341,7 +341,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	@Override
 	public void put(final String message)
 	{
-		Runnable r = () -> {
+		@NonNull Runnable r = () -> {
 			this.contentTextPane.setText(message);
 			this.contentTextPane.setCaretPosition(0);
 		};

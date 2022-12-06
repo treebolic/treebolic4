@@ -79,7 +79,7 @@ public class XslImportDialog extends JDialog
 
 		// images
 		@NonNull @SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(XslImportDialog.class.getResource("images/xsl.png"));
-		final JLabel headerLabel = new JLabel();
+		@NonNull final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -92,7 +92,7 @@ public class XslImportDialog extends JDialog
 		@NonNull final JLabel xslLabel = new JLabel(Messages.getString("XslImportDialog.xsl"));
 
 		// text
-		final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
+		@NonNull final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
 		{
 			/**
 			 *
@@ -176,7 +176,7 @@ public class XslImportDialog extends JDialog
 		cancelButton.addActionListener(event -> setVisible(false));
 
 		// assemble
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(Box.createRigidArea(new Dimension(0, 10)));
 		panel.add(headerLabel);

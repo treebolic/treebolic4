@@ -141,7 +141,7 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	@SuppressWarnings({"WeakerAccess"})
 	public void setFromByteArray(@Nullable final byte[] imageByteArray)
 	{
-		final Options opt = new Options();
+		@treebolic.annotations.NonNull final Options opt = new Options();
 		//noinspection deprecation
 		opt.inDither = true;
 		opt.inPreferredConfig = Bitmap.Config.ARGB_8888;

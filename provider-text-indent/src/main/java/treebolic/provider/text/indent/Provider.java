@@ -122,7 +122,7 @@ public class Provider implements IProvider
 		{
 			return null;
 		}
-		final List<INode> nonRootTree = tree.getRoot().getChildren();
+		@Nullable final List<INode> nonRootTree = tree.getRoot().getChildren();
 		if (nonRootTree == null)
 		{
 			return null;
@@ -130,7 +130,7 @@ public class Provider implements IProvider
 
 		// settings
 		final boolean asTree = nonRootTree.size() < 3;
-		final Settings settings = new Settings();
+		@NonNull final Settings settings = new Settings();
 
 		settings.backColor = Provider.backgroundColor;
 		settings.nodeBackColor = Colors.WHITE;
@@ -192,7 +192,7 @@ public class Provider implements IProvider
 		if (source != null)
 		{
 			// URL
-			final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
+			@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 			this.context.progress("Loading ..." + (url != null ? url : source), false);
 
 			// parse
@@ -225,10 +225,10 @@ public class Provider implements IProvider
 		rootNode.setBackColor(Colors.RED);
 		rootNode.setForeColor(Colors.WHITE);
 
-		final Deque<StackEntry> stack = new ArrayDeque<>();
+		@NonNull final Deque<StackEntry> stack = new ArrayDeque<>();
 		stack.push(new StackEntry(rootNode, -1));
 
-		try (InputStream is = url.openStream(); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
+		try (InputStream is = url.openStream(); @NonNull BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
 		{
 			// parse lines
 			String line;
@@ -272,10 +272,10 @@ public class Provider implements IProvider
 		rootNode.setBackColor(Colors.RED);
 		rootNode.setForeColor(Colors.WHITE);
 
-		final Deque<StackEntry> stack = new ArrayDeque<>();
+		@NonNull final Deque<StackEntry> stack = new ArrayDeque<>();
 		stack.push(new StackEntry(rootNode, -1));
 
-		try (InputStream is = Files.newInputStream(Paths.get(location)); @NonNull BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
+		try (@NonNull InputStream is = Files.newInputStream(Paths.get(location)); @NonNull BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
 		{
 			// parse lines
 			String line;
@@ -398,7 +398,7 @@ public class Provider implements IProvider
 	 * @param line line
 	 * @return level
 	 */
-	private int getLevel(final String line)
+	private int getLevel(@NonNull final String line)
 	{
 		for (int i = 0; i < line.length(); i++)
 		{

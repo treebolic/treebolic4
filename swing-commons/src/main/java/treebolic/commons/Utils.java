@@ -5,6 +5,8 @@ package treebolic.commons;
 
 import java.awt.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Utilities
  *
@@ -19,7 +21,7 @@ public class Utils
 	 *
 	 * @param component component to center
 	 */
-	static public void center(final Component component)
+	static public void center(@NonNull final Component component)
 	{
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		final Dimension componentSize = component.getSize();

@@ -86,7 +86,7 @@ public class UrlDialog extends JDialog
 		this.queryTable.setModel(new ParameterModel(null));
 		this.queryTable.getColumnModel().getColumn(0).setMaxWidth(90);
 		this.queryTable.setToolTipText(Messages.getString("UrlDialog.tooltip_parameters"));
-		final JScrollPane scrollPane = new JScrollPane(this.queryTable);
+		@NonNull final JScrollPane scrollPane = new JScrollPane(this.queryTable);
 		scrollPane.setPreferredSize(new Dimension(0, 60));
 
 		// buttons
@@ -157,7 +157,7 @@ public class UrlDialog extends JDialog
 	 *
 	 * @return url end point
 	 */
-	private String getURL(final String url, final String query)
+	private String getURL(final String url, @Nullable final String query)
 	{
 		String result = url;
 		if (query != null)
@@ -173,11 +173,11 @@ public class UrlDialog extends JDialog
 	 *
 	 * @return stringified query
 	 */
-	private String getQuery(final ParameterModel model)
+	private String getQuery(@Nullable final ParameterModel model)
 	{
 		if (model != null)
 		{
-			final Properties parameters = model.getProperties();
+			@Nullable final Properties parameters = model.getProperties();
 			if (parameters != null && parameters.size() != 0)
 			{
 				return UrlDialog.properties2Query(parameters);
@@ -195,13 +195,13 @@ public class UrlDialog extends JDialog
 	 * @return property set
 	 */
 	@NonNull
-	static private Properties query2Properties(final String query)
+	static private Properties query2Properties(@NonNull final String query)
 	{
-		final Properties properties = new Properties();
+		@NonNull final Properties properties = new Properties();
 		@NonNull final StringTokenizer stringTokenizer = new StringTokenizer(query, "&");
 		while (stringTokenizer.hasMoreTokens())
 		{
-			final StringTokenizer stringTokenizer2 = new StringTokenizer(stringTokenizer.nextToken(), "=");
+			@NonNull final StringTokenizer stringTokenizer2 = new StringTokenizer(stringTokenizer.nextToken(), "=");
 			if (stringTokenizer2.countTokens() != 2)
 			{
 				continue;
@@ -249,7 +249,7 @@ public class UrlDialog extends JDialog
 	 * @param string encode URL string
 	 * @return decoded URL string
 	 */
-	static private String decode(final String string)
+	static private String decode(@NonNull final String string)
 	{
 		try
 		{
@@ -268,7 +268,7 @@ public class UrlDialog extends JDialog
 	 * @param string encode URL string
 	 * @return decoded URL string
 	 */
-	static private String encode(final String string)
+	static private String encode(@NonNull final String string)
 	{
 		try
 		{
@@ -305,11 +305,13 @@ public class UrlDialog extends JDialog
 			/**
 			 * Key
 			 */
+			@Nullable
 			public String key;
 
 			/**
 			 * Value
 			 */
+			@Nullable
 			public String value;
 
 			/**
@@ -514,7 +516,7 @@ public class UrlDialog extends JDialog
 			final String property = this.properties.getProperty("openurl");
 			if (property != null)
 			{
-				final String[] fields = property.split("\\?");
+				@NonNull final String[] fields = property.split("\\?");
 				final String url = fields.length > 0 ? fields[0] : null;
 				final String query = fields.length > 1 ? fields[1] : null;
 				if (url != null)
@@ -525,7 +527,7 @@ public class UrlDialog extends JDialog
 				if (query != null)
 				{
 					@NonNull final Properties parameters = UrlDialog.query2Properties(query);
-					final ParameterModel model = new ParameterModel(parameters);
+					@NonNull final ParameterModel model = new ParameterModel(parameters);
 					this.queryTable.setModel(model);
 					this.queryTable.getColumnModel().getColumn(0).setMaxWidth(90);
 				}

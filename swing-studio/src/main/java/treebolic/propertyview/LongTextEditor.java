@@ -30,6 +30,7 @@ class LongTextEditor extends AbstractCellEditor implements TableCellEditor
 	/**
 	 * Dialog
 	 */
+	@NonNull
 	private final TextDialog textDialog;
 
 	/**
@@ -77,6 +78,7 @@ class LongTextEditor extends AbstractCellEditor implements TableCellEditor
 	 * (non-Javadoc)
 	 * @see javax.swing.table.TableCellEditor#getTableCellEditorComponent(javax.swing.JTable, java.lang.Object, boolean, int, int)
 	 */
+	@NonNull
 	@Override
 	public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected, final int row, final int column)
 	{
@@ -93,7 +95,7 @@ class LongTextEditor extends AbstractCellEditor implements TableCellEditor
 	@Override
 	public Object getCellEditorValue()
 	{
-		final String text = this.textDialog.getText();
+		@Nullable final String text = this.textDialog.getText();
 		return text == null || text.isEmpty() ? null : text;
 	}
 }

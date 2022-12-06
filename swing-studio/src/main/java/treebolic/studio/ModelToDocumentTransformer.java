@@ -49,7 +49,7 @@ public class ModelToDocumentTransformer
 			builder = ModelToDocumentTransformer.makeDocumentBuilder();
 			final Document document = builder.newDocument();
 			document.appendChild(document.createComment("created " + new Date()));
-			final Map<String, Object> attributes = new HashMap<String, Object>()
+			@NonNull final Map<String, Object> attributes = new HashMap<String, Object>()
 			{
 				/**
 				 *
@@ -61,7 +61,7 @@ public class ModelToDocumentTransformer
 				 * @see java.util.Hashtable#put(java.lang.String, java.lang.Object)
 				 */
 				@Override
-				public Object put(final String key, final Object value)
+				public Object put(final String key, @Nullable final Object value)
 				{
 					if (value == null)
 					{
@@ -243,6 +243,7 @@ public class ModelToDocumentTransformer
 	 * @param node0    node
 	 * @return node element
 	 */
+	@NonNull
 	static private Element makeNode(@NonNull final Document document, final INode node0)
 	{
 		@Nullable INode node = node0;
@@ -279,7 +280,7 @@ public class ModelToDocumentTransformer
 		}
 
 		// label
-		String string;
+		@Nullable String string;
 		string = node.getLabel();
 		if (string != null && !string.isEmpty())
 		{
@@ -364,7 +365,7 @@ public class ModelToDocumentTransformer
 	 * @return edge element
 	 */
 	@NonNull
-	static private Element makeEdge(final Document document, final IEdge edge)
+	static private Element makeEdge(@NonNull final Document document, @NonNull final IEdge edge)
 	{
 		final Element edgeElement = document.createElement("edge");
 
@@ -384,7 +385,7 @@ public class ModelToDocumentTransformer
 		}
 
 		// label
-		final String label = edge.getLabel();
+		@Nullable final String label = edge.getLabel();
 		if (label != null && !label.isEmpty())
 		{
 			edgeElement.appendChild(ModelToDocumentTransformer.makeLabel(document, label));
@@ -455,7 +456,7 @@ public class ModelToDocumentTransformer
 	 * @return link element
 	 */
 	@NonNull
-	static private Element makeLink(final Document document, final String href, @Nullable final String target)
+	static private Element makeLink(@NonNull final Document document, final String href, @Nullable final String target)
 	{
 		final Element element = document.createElement("a");
 		element.setAttribute("href", href);
@@ -474,7 +475,7 @@ public class ModelToDocumentTransformer
 	 * @return mountpoint element
 	 */
 	@NonNull
-	static private Element makeMountPoint(final Document document, @NonNull final MountPoint.Mounting mountPoint)
+	static private Element makeMountPoint(@NonNull final Document document, @NonNull final MountPoint.Mounting mountPoint)
 	{
 		final Element mountPointElement = document.createElement("mountpoint");
 
@@ -499,7 +500,7 @@ public class ModelToDocumentTransformer
 	 * @return menuitem
 	 */
 	@NonNull
-	static private Element makeMenuItem(@NonNull final Document document, final MenuItem menuItem)
+	static private Element makeMenuItem(@NonNull final Document document, @NonNull final MenuItem menuItem)
 	{
 		final Element menuItemElement = document.createElement("menuitem");
 
@@ -593,7 +594,7 @@ public class ModelToDocumentTransformer
 	 * @param element    element
 	 * @param attributes attributes
 	 */
-	static private void setAttributes(final Element element, @NonNull final Map<String, Object> attributes)
+	static private void setAttributes(@NonNull final Element element, @NonNull final Map<String, Object> attributes)
 	{
 		for (final String key : attributes.keySet())
 		{

@@ -491,7 +491,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 					final IWidget widget = (IWidget) component;
 
 					// serialized file
-					final String filePath = FileDialogs.getSer(this.settings.getProperty("base", "."));
+					@Nullable final String filePath = FileDialogs.getSer(this.settings.getProperty("base", "."));
 					if (filePath == null)
 					{
 						return;

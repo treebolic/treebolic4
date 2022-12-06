@@ -129,7 +129,7 @@ public class MainFrame extends JFrame
 
 		this.treeView.setPreferredSize(new Dimension(400, 0));
 
-		final JPanel contentPane = new JPanel();
+		@NonNull final JPanel contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout());
 		contentPane.add(makeTabbedPane(this.controller), BorderLayout.CENTER);
 		contentPane.add(this.toolbarPanel, BorderLayout.EAST);
@@ -182,9 +182,10 @@ public class MainFrame extends JFrame
 	 *
 	 * @return javax.swing.JToolBar
 	 */
+	@NonNull
 	private JPanel makeToolbarPanel(final Controller controller)
 	{
-		final JPanel toolbarPanel = new JPanel();
+		@NonNull final JPanel toolbarPanel = new JPanel();
 		toolbarPanel.setLayout(new BoxLayout(toolbarPanel, BoxLayout.Y_AXIS));
 		toolbarPanel.add(makeToolbar(controller));
 		toolbarPanel.add(makeTreeToolbar(controller));
@@ -264,7 +265,7 @@ public class MainFrame extends JFrame
 	@NonNull
 	private TreeView makeTreeView(final Controller controller)
 	{
-		final TreeView treeView = new TreeView();
+		@NonNull final TreeView treeView = new TreeView();
 		treeView.connect(controller);
 		treeView.setPreferredSize(new Dimension(300, 500));
 		return treeView;
@@ -314,6 +315,7 @@ public class MainFrame extends JFrame
 	 *
 	 * @return property view
 	 */
+	@NonNull
 	private PropertyView makePropertyView(@NonNull final Controller controller)
 	{
 		@NonNull final PropertyView propertyView = new PropertyView();
@@ -340,7 +342,7 @@ public class MainFrame extends JFrame
 	 * @return javax.swing.JComponent
 	 */
 	@NonNull
-	private JComponent makeEditor(final Controller controller)
+	private JComponent makeEditor(@NonNull final Controller controller)
 	{
 		@NonNull final JSplitPane pane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		pane.setDividerSize(8);
@@ -356,7 +358,7 @@ public class MainFrame extends JFrame
 	 * @return javax.swing.JComponent
 	 */
 	@NonNull
-	private JComponent makeSubEditor(final Controller controller)
+	private JComponent makeSubEditor(@NonNull final Controller controller)
 	{
 		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
@@ -370,6 +372,7 @@ public class MainFrame extends JFrame
 	 *
 	 * @return javax.swing.JPanel
 	 */
+	@NonNull
 	private JPanel makeDefaultsPanel(@NonNull final Controller controller)
 	{
 		@NonNull final JPanel panel = new JPanel();
@@ -387,7 +390,7 @@ public class MainFrame extends JFrame
 	 * @return javax.swing.JButton
 	 */
 	@NonNull
-	private JButton makeGlobalsButton(final Controller controller, final String label, final String image, final Controller.Code code)
+	private JButton makeGlobalsButton(@NonNull final Controller controller, final String label, final String image, @NonNull final Controller.Code code)
 	{
 		@NonNull final JButton button = new JButton();
 		//noinspection ConstantConditions

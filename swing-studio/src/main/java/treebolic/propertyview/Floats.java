@@ -4,6 +4,7 @@
 
 package treebolic.propertyview;
 
+import treebolic.annotations.NonNull;
 import treebolic.model.Utils;
 
 /**
@@ -31,6 +32,7 @@ public class Floats
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
+	@NonNull
 	@Override
 	public String toString()
 	{

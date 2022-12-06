@@ -10,6 +10,8 @@ import java.net.URL;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.propertyview.PropertyView.Attribute;
 import treebolic.propertyview.PropertyView.AttributeType;
 
@@ -25,6 +27,7 @@ class Renderer extends DefaultTableCellRenderer
 	/**
 	 * Color panel
 	 */
+	@NonNull
 	private final JPanel colorPanel;
 
 	/**
@@ -227,7 +230,7 @@ class Renderer extends DefaultTableCellRenderer
 						return this;
 
 					case IMAGE:
-						final String imageFile = (String) attributeValue;
+						@NonNull final String imageFile = (String) attributeValue;
 						setIcon(makeIcon(imageFile));
 						setText(imageFile);
 						return this;
@@ -346,11 +349,12 @@ class Renderer extends DefaultTableCellRenderer
 	 * @param imageFile image file
 	 * @return icon
 	 */
-	private Icon makeIcon(final String imageFile)
+	@Nullable
+	private Icon makeIcon(@NonNull final String imageFile)
 	{
 		try
 		{
-			final URL url = new URL(this.propertyView.getImageRepository(), imageFile);
+			@NonNull final URL url = new URL(this.propertyView.getImageRepository(), imageFile);
 			return new ImageIcon(url);
 		}
 		catch (final MalformedURLException e)

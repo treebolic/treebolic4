@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.commons.Utils;
 
 /**
@@ -117,6 +118,7 @@ public class TextDialog extends JDialog
 	 *
 	 * @return text
 	 */
+	@Nullable
 	public String getText()
 	{
 		if (this.ok)

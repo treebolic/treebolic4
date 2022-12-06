@@ -197,7 +197,7 @@ public class ChoiceDialog extends JDialog
 	 */
 	protected String ask(@NonNull final String message)
 	{
-		final String[] lines = message.split("\n");
+		@NonNull final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines);
 	}
 }

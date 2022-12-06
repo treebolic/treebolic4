@@ -55,19 +55,19 @@ public class ZipMaker
 		{
 			return;
 		}
-		try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(this.archive, true)))
+		try (@NonNull ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(this.archive, true)))
 		{
 			// XML
-			final ZipEntry ze = new ZipEntry(this.entry);
+			@NonNull final ZipEntry ze = new ZipEntry(this.entry);
 			zos.putNextEntry(ze);
 			new DomTransformer(false, "Treebolic.dtd").documentToStream(this.document, zos);
 			zos.closeEntry();
 
 			// images
-			for (final String imageFileName : DocumentSearch.makeImageList(this.document))
+			for (@NonNull final String imageFileName : DocumentSearch.makeImageList(this.document))
 			{
-				final File imageFile = new File(imageFileName);
-				final String name = imageFile.getName();
+				@NonNull final File imageFile = new File(imageFileName);
+				@NonNull final String name = imageFile.getName();
 
 				@NonNull final ZipEntry zei = new ZipEntry(name);
 
@@ -97,7 +97,7 @@ public class ZipMaker
 		//
 	}
 
-	static private void copyStreams(final InputStream instream, @NonNull final OutputStream outstream) throws IOException
+	static private void copyStreams(@NonNull final InputStream instream, @NonNull final OutputStream outstream) throws IOException
 	{
 		@NonNull final byte[] buffer = new byte[1024];
 		int length;

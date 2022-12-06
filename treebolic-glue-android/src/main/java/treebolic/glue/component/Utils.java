@@ -225,7 +225,7 @@ public class Utils
 		else
 		{
 			@SuppressWarnings("deprecation") final Display display = wm.getDefaultDisplay();
-			final Point size = new Point();
+			@treebolic.annotations.NonNull final Point size = new Point();
 			//noinspection deprecation
 			display.getSize(size);
 			return size;
@@ -249,7 +249,7 @@ public class Utils
 
 		@treebolic.annotations.NonNull StringBuilder sb = new StringBuilder();
 		boolean first = true;
-		for (CharSequence str : strs)
+		for (@treebolic.annotations.Nullable CharSequence str : strs)
 		{
 			if (str == null || str.length() == 0)
 			{

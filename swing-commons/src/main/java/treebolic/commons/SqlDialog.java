@@ -50,6 +50,7 @@ public class SqlDialog extends JDialog
 	/**
 	 * URL combo box
 	 */
+	@NonNull
 	private final JTextField uRLField;
 
 	/**
@@ -67,6 +68,7 @@ public class SqlDialog extends JDialog
 	/**
 	 * Name table
 	 */
+	@NonNull
 	private final JTable nameTable;
 
 	/**
@@ -126,9 +128,9 @@ public class SqlDialog extends JDialog
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 
-		final JLabel uRLLabel = new JLabel(Messages.getString("SqlDialog.url"));
+		@NonNull final JLabel uRLLabel = new JLabel(Messages.getString("SqlDialog.url"));
 		@NonNull final JLabel userLabel = new JLabel(Messages.getString("SqlDialog.user"));
-		final JLabel passwdLabel = new JLabel(Messages.getString("SqlDialog.password"));
+		@NonNull final JLabel passwdLabel = new JLabel(Messages.getString("SqlDialog.password"));
 		@NonNull final JLabel sqlLabel = new JLabel(Messages.getString("SqlDialog.sql"));
 		@NonNull final JLabel mapLabel = new JLabel(Messages.getString("SqlDialog.map"));
 
@@ -173,7 +175,7 @@ public class SqlDialog extends JDialog
 		this.settingsSqlTextArea.setText(null);
 		this.settingsSqlTextArea.setRows(4);
 
-		final JScrollPane nodesSqlScrollPane = new JScrollPane(this.nodesSqlTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		@NonNull final JScrollPane nodesSqlScrollPane = new JScrollPane(this.nodesSqlTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		@NonNull final JScrollPane treeEdgesSqlScrollPane = new JScrollPane(this.treeEdgesSqlTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		@NonNull final JScrollPane edgesSqlScrollPane = new JScrollPane(this.edgesSqlTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		@NonNull final JScrollPane settingsSqlScrollPane = new JScrollPane(this.settingsSqlTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -189,7 +191,7 @@ public class SqlDialog extends JDialog
 		tabbedPane.add(Messages.getString("SqlDialog.tab_settings"), settingsSqlScrollPane);
 
 		this.nameTable.setToolTipText(Messages.getString("SqlDialog.tooltip_value"));
-		final JScrollPane mapsSqlScrollPane = new JScrollPane(this.nameTable, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		@NonNull final JScrollPane mapsSqlScrollPane = new JScrollPane(this.nameTable, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		mapsSqlScrollPane.setPreferredSize(new Dimension(500, 100));
 
 		@NonNull final JButton okButton = new JButton();
@@ -211,7 +213,7 @@ public class SqlDialog extends JDialog
 		 */
 		cancelButton.addActionListener(e -> setVisible(false));
 
-		final JButton loadButton = new JButton();
+		@NonNull final JButton loadButton = new JButton();
 		loadButton.setText(Messages.getString("SqlDialog.load"));
 		/*
 		 * (non-Javadoc)
@@ -226,7 +228,7 @@ public class SqlDialog extends JDialog
 				 * @see javax.swing.filechooser.FileFilter#accept(java.io.File)
 				 */
 				@Override
-				public boolean accept(final File file)
+				public boolean accept(@NonNull final File file)
 				{
 					return file.getName().toLowerCase().endsWith(".properties") || file.isDirectory();
 				}
@@ -264,7 +266,7 @@ public class SqlDialog extends JDialog
 		buttonPanel.add(cancelButton);
 		buttonPanel.add(okButton);
 
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		panel.add(titleLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(5, 5, 20, 5), 0, 0));
 
@@ -353,7 +355,7 @@ public class SqlDialog extends JDialog
 
 		try
 		{
-			final URL url = new URL(this.propertyUrlString);
+			@NonNull final URL url = new URL(this.propertyUrlString);
 			@Nullable final Properties properties = SqlProperties.load(url);
 			if (properties != null)
 			{
@@ -377,7 +379,7 @@ public class SqlDialog extends JDialog
 		}
 		try
 		{
-			final File file = new File(new URL(this.propertyUrlString).toURI());
+			@NonNull final File file = new File(new URL(this.propertyUrlString).toURI());
 			@NonNull final Properties properties = getProperties();
 			SqlProperties.save(properties, file.getAbsolutePath());
 		}

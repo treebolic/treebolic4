@@ -6,6 +6,7 @@ package treebolic.provider.owl.owlapi;
 import java.util.Properties;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.glue.iface.Image;
 import treebolic.model.Model;
 import treebolic.model.MutableEdge;
@@ -67,7 +68,7 @@ public class OwlModelFactory2 extends OwlModelFactory
 	@Override
 	public Model makeModel(final String ontologyUrlString)
 	{
-		Model model = super.makeModel(ontologyUrlString);
+		@Nullable Model model = super.makeModel(ontologyUrlString);
 		return new Model(model.tree, model.settings, images2);
 	}
 

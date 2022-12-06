@@ -15,6 +15,7 @@ import java.util.Enumeration;
 import java.util.Properties;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * SQL properties
@@ -74,6 +75,7 @@ public class SqlProperties
 	 * @param file property files
 	 * @return properties
 	 */
+	@Nullable
 	static public Properties load(@NonNull final File file)
 	{
 		try
@@ -93,6 +95,7 @@ public class SqlProperties
 	 * @param url url
 	 * @return properties
 	 */
+	@Nullable
 	static public Properties load(@NonNull final URL url)
 	{
 		try (InputStream is = url.openStream())
@@ -114,9 +117,10 @@ public class SqlProperties
 	 * @param location location
 	 * @return properties
 	 */
+	@Nullable
 	static public Properties load(@NonNull final String location)
 	{
-		try (InputStream is = Files.newInputStream(Paths.get(location)))
+		try (@NonNull InputStream is = Files.newInputStream(Paths.get(location)))
 		{
 			@NonNull final Properties properties = new Properties();
 			properties.load(is);

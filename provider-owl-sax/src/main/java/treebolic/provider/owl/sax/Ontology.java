@@ -94,10 +94,12 @@ class Ontology
 		// });
 	}
 
+	@NonNull
 	final Map<String, Class> classes;
 
 	final Map<String, Thing> things;
 
+	@NonNull
 	final Map<String, Property> properties;
 
 	@NonNull
@@ -108,6 +110,7 @@ class Ontology
 		return c;
 	}
 
+	@NonNull
 	public Stream<Class> getTopClasses()
 	{
 		return classes.values().stream().filter(clazz -> clazz.superclasses.isEmpty());
@@ -140,6 +143,7 @@ class Ontology
 			this.iri = iri;
 		}
 
+		@NonNull
 		public String getIri()
 		{
 			return iri;
@@ -188,7 +192,7 @@ class Ontology
 		@Nullable
 		Set<String> _superclasses = new HashSet<>();
 
-		public Class(final String iri)
+		public Class(@NonNull final String iri)
 		{
 			super(iri);
 		}
@@ -202,13 +206,14 @@ class Ontology
 
 	static class Thing extends Resource
 	{
-		public Thing(final String iri)
+		public Thing(@NonNull final String iri)
 		{
 			super(iri);
 		}
 
 		public Set<Ontology.Class> types;
 
+		@Nullable
 		Set<String> _types = new HashSet<>();
 	}
 
@@ -221,7 +226,7 @@ class Ontology
 			this(iri, null);
 		}
 
-		public Property(final String iri, final String subtype)
+		public Property(@NonNull final String iri, final String subtype)
 		{
 			super(iri);
 			this.subtype = subtype;
@@ -235,13 +240,16 @@ class Ontology
 
 		public Set<Ontology.Property> inverses;
 
+		@Nullable
 		Set<String> _domains = new HashSet<>();
 
 		@Nullable
 		Set<String> _ranges = new HashSet<>();
 
+		@Nullable
 		Set<String> _subproperties = new HashSet<>();
 
+		@Nullable
 		Set<String> _inverses = new HashSet<>();
 	}
 }

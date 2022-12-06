@@ -220,7 +220,7 @@ public class Renderer implements TreeCellRenderer
 		if (string != null)
 		{
 			final StyledDocument styledDocument = this.textComponent.getStyledDocument();
-			for (final Pattern pattern : this.patterns)
+			for (@NonNull final Pattern pattern : this.patterns)
 			{
 				@NonNull final Matcher matcher = pattern.matcher(string);
 				while (matcher.find())
@@ -275,7 +275,7 @@ public class Renderer implements TreeCellRenderer
 	 * @param node node
 	 * @return style
 	 */
-	protected Icon getIconStyle(final Node node)
+	protected Icon getIconStyle(@NonNull final Node node)
 	{
 		switch (node.getNodeType())
 		{

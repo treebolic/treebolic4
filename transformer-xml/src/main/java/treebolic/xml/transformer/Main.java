@@ -4,6 +4,7 @@
 package treebolic.xml.transformer;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * @author Bernard Bou
@@ -28,7 +29,7 @@ public class Main
 				final String flag = args[3];
 				outputHtml = flag.equalsIgnoreCase("html");
 			}
-			String dtd = null;
+			@Nullable String dtd = null;
 			if (args.length > 4)
 			{
 				dtd = args[4];

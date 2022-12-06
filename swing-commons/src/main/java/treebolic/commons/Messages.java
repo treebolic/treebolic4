@@ -27,7 +27,7 @@ public class Messages
 	 * @return localized message
 	 */
 	@NonNull
-	public static String getString(final String key)
+	public static String getString(@NonNull final String key)
 	{
 		try
 		{

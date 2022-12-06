@@ -76,6 +76,7 @@ public class TreeTransferHandler extends TransferHandler
 		 * (non-Javadoc)
 		 * @see java.awt.datatransfer.Transferable#getTransferDataFlavors()
 		 */
+		@NonNull
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public DataFlavor[] getTransferDataFlavors()
@@ -89,7 +90,7 @@ public class TreeTransferHandler extends TransferHandler
 		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
-		public boolean isDataFlavorSupported(final DataFlavor flavor)
+		public boolean isDataFlavorSupported(@NonNull final DataFlavor flavor)
 		{
 			return flavor.equals(TreeTransferHandler.flavor);
 		}
@@ -133,9 +134,9 @@ public class TreeTransferHandler extends TransferHandler
 	 * @see javax.swing.TransferHandler#canImport(javax.swing.TransferHandler.TransferSupport)
 	 */
 	@Override
-	public boolean canImport(final TransferSupport support)
+	public boolean canImport(@NonNull final TransferSupport support)
 	{
-		final Pair<TreePath, TreePath> nodes = getNodes(support);
+		@Nullable final Pair<TreePath, TreePath> nodes = getNodes(support);
 		if (nodes != null)
 		{
 			return testMove(nodes.first, nodes.second);
@@ -179,7 +180,8 @@ public class TreeTransferHandler extends TransferHandler
 	 * @param support transfer support
 	 * @return source tree and destination treepaths
 	 */
-	private Pair<TreePath, TreePath> getNodes(final TransferSupport support)
+	@Nullable
+	private Pair<TreePath, TreePath> getNodes(@NonNull final TransferSupport support)
 	{
 		// source flavour
 		if (!support.isDataFlavorSupported(TreeTransferHandler.flavor))
@@ -233,7 +235,7 @@ public class TreeTransferHandler extends TransferHandler
 	 * @param destination destination node
 	 * @return true if source node can drag and drop to destination node
 	 */
-	private boolean testMove(@Nullable final TreePath source, final TreePath destination)
+	private boolean testMove(@Nullable final TreePath source, @Nullable final TreePath destination)
 	{
 		if (destination != null && source != null)
 		{
@@ -261,7 +263,7 @@ public class TreeTransferHandler extends TransferHandler
 	 * @return true if successful
 	 */
 	@SuppressWarnings("SameReturnValue")
-	private boolean move(@NonNull final Tree tree, @NonNull final TreePath source, final TreePath destination, @SuppressWarnings("SameParameterValue") boolean prepend)
+	private boolean move(@NonNull final Tree tree, @NonNull final TreePath source, @NonNull final TreePath destination, @SuppressWarnings("SameParameterValue") boolean prepend)
 	{
 		// tree
 		final DefaultMutableTreeNode parentTreeNode = (DefaultMutableTreeNode) destination.getLastPathComponent();
@@ -287,7 +289,7 @@ public class TreeTransferHandler extends TransferHandler
 		if (object instanceof TreeMutableNode && parentObject instanceof TreeMutableNode)
 		{
 			@NonNull final TreeMutableNode parentNode = (TreeMutableNode) parentObject;
-			final INode node = (INode) object;
+			@NonNull final INode node = (INode) object;
 
 			// object remove
 			TreeMutableNode.remove(parentNode, node);

@@ -15,6 +15,7 @@ import javax.swing.plaf.basic.BasicTreeUI;
 import javax.swing.tree.*;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.studio.Controller;
 import treebolic.model.INode;
 import treebolic.model.TreeMutableNode;
@@ -170,7 +171,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 				(DefaultMutableTreeNode) root.getChildAt(0).getChildAt(1), // edges
 				(DefaultMutableTreeNode) root.getChildAt(1) // tools
 		};
-		for (final DefaultMutableTreeNode node : nodes)
+		for (@NonNull final DefaultMutableTreeNode node : nodes)
 		{
 			@NonNull final TreePath path = new TreePath(node.getPath());
 			collapseAll(path);
@@ -182,7 +183,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	 *
 	 * @param path tree path to expand
 	 */
-	public void expandAll(final TreePath path)
+	public void expandAll(@NonNull final TreePath path)
 	{
 		// this
 		expandPath(path);
@@ -201,7 +202,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	 *
 	 * @param path tree path to collapse
 	 */
-	public void collapseAll(final TreePath path)
+	public void collapseAll(@NonNull final TreePath path)
 	{
 		// recursive call for each child
 		final Object node = path.getLastPathComponent();
@@ -232,7 +233,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		model.insertNodeInto(node, parentNode, model.getChildCount(parentNode));
 
 		// select
-		final TreePath path = new TreePath(model.getPathToRoot(node));
+		@NonNull final TreePath path = new TreePath(model.getPathToRoot(node));
 		makeVisible(path);
 		scrollPathToVisible(path);
 		if (!Tree.focusParent)
@@ -306,7 +307,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	public void move(int step)
 	{
 		// tree
-		final TreePath selected = getSelectionPath();
+		@Nullable final TreePath selected = getSelectionPath();
 		assert selected != null;
 		DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) selected.getLastPathComponent();
 		DefaultMutableTreeNode parentTreeNode = (DefaultMutableTreeNode) treeNode.getParent();
@@ -355,7 +356,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 	 * @see javax.swing.event.TreeSelectionListener#valueChanged(javax.swing.event.TreeSelectionEvent)
 	 */
 	@Override
-	public void valueChanged(final TreeSelectionEvent event)
+	public void valueChanged(@NonNull final TreeSelectionEvent event)
 	{
 		// System.err.println("TREE: selection " + toString(event)); 
 
@@ -374,7 +375,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 
 	@NonNull
 	@SuppressWarnings("unused")
-	static private String toString(final TreeSelectionEvent event)
+	static private String toString(@NonNull final TreeSelectionEvent event)
 	{
 
 		@NonNull final StringBuilder buffer = new StringBuilder();
@@ -384,7 +385,7 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 		// buffer.append(path.getLastPathComponent());
 		buffer.append(" changed:");
 		TreePath[] paths = event.getPaths();
-		for (TreePath path2 : paths)
+		for (@NonNull TreePath path2 : paths)
 		{
 			buffer.append(path2.getLastPathComponent());
 			buffer.append(' ');

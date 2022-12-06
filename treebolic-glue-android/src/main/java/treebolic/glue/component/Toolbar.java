@@ -114,7 +114,7 @@ public class Toolbar extends FrameLayout implements treebolic.glue.iface.compone
 		super(activity);
 
 		// orientation
-		final Point size = Utils.screenSize(activity);
+		@treebolic.annotations.NonNull final Point size = Utils.screenSize(activity);
 		final boolean isHorizontal = size.x >= size.y;
 
 		// panel
@@ -128,7 +128,7 @@ public class Toolbar extends FrameLayout implements treebolic.glue.iface.compone
 		this.panel.setGravity(Gravity.CENTER);
 
 		// colors
-		final int[] colors = Utils.fetchColors(activity, R.attr.treebolic_toolbar_background, R.attr.treebolic_toolbar_foreground_icon);
+		@treebolic.annotations.NonNull final int[] colors = Utils.fetchColors(activity, R.attr.treebolic_toolbar_background, R.attr.treebolic_toolbar_foreground_icon);
 		final int background = colors[0];
 		this.iconTint = colors[1];
 
@@ -171,7 +171,7 @@ public class Toolbar extends FrameLayout implements treebolic.glue.iface.compone
 	public void addButton(@NonNull final Button button, @NonNull final ActionListener listener)
 	{
 		// interface button to implementation
-		final String name = button.name();
+		@treebolic.annotations.NonNull final String name = button.name();
 		@treebolic.annotations.NonNull final ButtonImplementation impl = ButtonImplementation.valueOf(name);
 
 		final Context context = getContext();

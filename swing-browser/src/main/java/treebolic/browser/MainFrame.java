@@ -289,7 +289,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		{
 			case OPEN:
 			{
-				final String url = FileDialogs.getAnyUrl(this.settings.getProperty("base"));
+				@Nullable final String url = FileDialogs.getAnyUrl(this.settings.getProperty("base"));
 				if (url == null || url.isEmpty())
 				{
 					return;
@@ -357,7 +357,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 				}
 
 				// archive
-				final String source = FileDialogs.getZip(this.settings.getProperty("base", "."));
+				@Nullable final String source = FileDialogs.getZip(this.settings.getProperty("base", "."));
 				if (source == null || source.isEmpty())
 				{
 					return;
@@ -400,7 +400,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			case OPENDESERIALIZE:
 			{
 				// serialized file
-				final String source = FileDialogs.getSer(this.settings.getProperty("base", "."));
+				@Nullable final String source = FileDialogs.getSer(this.settings.getProperty("base", "."));
 				if (source == null)
 				{
 					return;
@@ -433,7 +433,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 					final IWidget widget = (IWidget) component;
 
 					// serialized file
-					final String filePath = FileDialogs.getSer(this.settings.getProperty("base", "."));
+					@Nullable final String filePath = FileDialogs.getSer(this.settings.getProperty("base", "."));
 					if (filePath == null)
 					{
 						return;
@@ -967,7 +967,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @param widget     widget
 	 * @param context    widget's context
 	 */
-	public void linkTo(final String linkUrl, @SuppressWarnings("unused") final String linkTarget, @SuppressWarnings("unused") final IWidget widget, @NonNull final Context context)
+	public void linkTo(@NonNull final String linkUrl, @SuppressWarnings("unused") final String linkTarget, @SuppressWarnings("unused") final IWidget widget, @NonNull final Context context)
 	{
 		@Nullable final URL url = context.makeURL(linkUrl);
 		if (url == null)

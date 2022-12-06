@@ -151,7 +151,7 @@ public class DocumentAdapter
 		{
 			return null;
 		}
-		final Settings settings = DocumentAdapter.toSettings(document);
+		@NonNull final Settings settings = DocumentAdapter.toSettings(document);
 		return new Model(tree, settings);
 	}
 
@@ -208,12 +208,12 @@ public class DocumentAdapter
 	private Tree toTree(@NonNull final Document document)
 	{
 		// nodes
-		final Element rootElement = DocumentAdapter.getFirstElementByTagName(document.getDocumentElement(), "node");
+		@Nullable final Element rootElement = DocumentAdapter.getFirstElementByTagName(document.getDocumentElement(), "node");
 		if (rootElement == null)
 		{
 			return null;
 		}
-		final MutableNode root = toNode(rootElement, null);
+		@NonNull final MutableNode root = toNode(rootElement, null);
 
 		// edges
 		@Nullable final List<IEdge> edges = toEdges(document);
@@ -221,7 +221,7 @@ public class DocumentAdapter
 		// run protracted mount tasks (had to be protracted until edges become available)
 		if (this.mountTasks != null)
 		{
-			for (final MountTask task : this.mountTasks)
+			for (@NonNull final MountTask task : this.mountTasks)
 			{
 				task.run(edges);
 			}
@@ -243,7 +243,7 @@ public class DocumentAdapter
 	private MutableNode toNode(@NonNull final Element nodeElement, final MutableNode parent)
 	{
 		// id
-		final String id = nodeElement.getAttribute("id");
+		@NonNull final String id = nodeElement.getAttribute("id");
 
 		// make
 		@NonNull final MutableNode node = makeNode(parent, id);
@@ -320,7 +320,7 @@ public class DocumentAdapter
 		if (element != null)
 		{
 			// label
-			final Element labelElement = DocumentAdapter.getFirstLevel1ElementByTagName(element, "label");
+			@Nullable final Element labelElement = DocumentAdapter.getFirstLevel1ElementByTagName(element, "label");
 			if (labelElement != null)
 			{
 				final String label = labelElement.getTextContent();
@@ -331,7 +331,7 @@ public class DocumentAdapter
 			}
 
 			// image
-			final Element imageElement = DocumentAdapter.getFirstLevel1ElementByTagName(element, "img");
+			@Nullable final Element imageElement = DocumentAdapter.getFirstLevel1ElementByTagName(element, "img");
 			if (imageElement != null)
 			{
 				@NonNull final String edgeImageSrc = imageElement.getAttribute("src");
@@ -371,10 +371,10 @@ public class DocumentAdapter
 		element = DocumentAdapter.getFirstLevel1ElementByTagName(nodeElement, "mountpoint");
 		if (element != null)
 		{
-			final Element aElement = DocumentAdapter.getFirstElementByTagName(element, "a");
+			@Nullable final Element aElement = DocumentAdapter.getFirstElementByTagName(element, "a");
 			if (aElement != null)
 			{
-				final String href = aElement.getAttribute("href");
+				@NonNull final String href = aElement.getAttribute("href");
 				if (!href.isEmpty())
 				{
 					@NonNull final MountPoint.Mounting mountPoint = new MountPoint.Mounting();
@@ -418,10 +418,10 @@ public class DocumentAdapter
 	private MutableEdge toEdge(@NonNull final Element edgeElement)
 	{
 		@NonNull final String fromId = edgeElement.getAttribute("from");
-		final String toId = edgeElement.getAttribute("to");
+		@NonNull final String toId = edgeElement.getAttribute("to");
 		final MutableNode fromNode = this.idToNodeMap.get(fromId);
 		final MutableNode toNode = this.idToNodeMap.get(toId);
-		final MutableEdge edge = makeEdge(fromNode, toNode);
+		@NonNull final MutableEdge edge = makeEdge(fromNode, toNode);
 
 		// label
 		@Nullable final Element labelElement = DocumentAdapter.getFirstLevel1ElementByTagName(edgeElement, "label");
@@ -446,7 +446,7 @@ public class DocumentAdapter
 		}
 
 		// color
-		final Integer color = Utils.stringToColor(edgeElement.getAttribute("color"));
+		@Nullable final Integer color = Utils.stringToColor(edgeElement.getAttribute("color"));
 		if (color != null)
 		{
 			edge.setColor(color);
@@ -470,7 +470,7 @@ public class DocumentAdapter
 	@Nullable
 	private List<IEdge> toEdges(@NonNull final Document document)
 	{
-		List<IEdge> edgeList = null;
+		@Nullable List<IEdge> edgeList = null;
 		final NodeList children = document.getElementsByTagName("edge");
 		for (int i = 0; i < children.getLength(); i++)
 		{
@@ -501,7 +501,7 @@ public class DocumentAdapter
 		@Nullable Element element = document.getDocumentElement();
 		if (element != null && element.getNodeName().equals("treebolic"))
 		{
-			String attribute = element.getAttribute("toolbar");
+			@NonNull String attribute = element.getAttribute("toolbar");
 			if (!attribute.isEmpty())
 			{
 				settings.hasToolbarFlag = Boolean.valueOf(attribute);
@@ -563,7 +563,7 @@ public class DocumentAdapter
 		if (element != null)
 		{
 			// img
-			final Element imageElement = DocumentAdapter.getFirstLevel1ElementByTagName(element, "img");
+			@Nullable final Element imageElement = DocumentAdapter.getFirstLevel1ElementByTagName(element, "img");
 			if (imageElement != null)
 			{
 				@NonNull final String src = imageElement.getAttribute("src");
@@ -685,7 +685,7 @@ public class DocumentAdapter
 		if (element != null)
 		{
 			// img
-			final Element imageElement = DocumentAdapter.getFirstLevel1ElementByTagName(element, "img");
+			@Nullable final Element imageElement = DocumentAdapter.getFirstLevel1ElementByTagName(element, "img");
 			if (imageElement != null)
 			{
 				@NonNull final String src = imageElement.getAttribute("src");
@@ -711,7 +711,7 @@ public class DocumentAdapter
 			@Nullable final Element imageElement = DocumentAdapter.getFirstElementByTagName(element, "img");
 			if (imageElement != null)
 			{
-				final String src = imageElement.getAttribute("src");
+				@NonNull final String src = imageElement.getAttribute("src");
 				if (!src.isEmpty())
 				{
 					settings.defaultTreeEdgeImage = src;
@@ -738,7 +738,7 @@ public class DocumentAdapter
 		if (element != null)
 		{
 			// img
-			final Element imageElement = DocumentAdapter.getFirstElementByTagName(element, "img");
+			@Nullable final Element imageElement = DocumentAdapter.getFirstElementByTagName(element, "img");
 			if (imageElement != null)
 			{
 				@NonNull final String src = imageElement.getAttribute("src");
@@ -756,7 +756,7 @@ public class DocumentAdapter
 			}
 
 			// style
-			final Integer style = Utils.parseStyle(element.getAttribute("stroke"), element.getAttribute("fromterminator"), element.getAttribute("toterminator"), element.getAttribute("line"), element.getAttribute("hidden"));
+			@Nullable final Integer style = Utils.parseStyle(element.getAttribute("stroke"), element.getAttribute("fromterminator"), element.getAttribute("toterminator"), element.getAttribute("line"), element.getAttribute("hidden"));
 			if (style != null)
 			{
 				settings.edgeStyle = style;
@@ -764,13 +764,13 @@ public class DocumentAdapter
 		}
 
 		// D E F A U L T . E D G E
-		List<MenuItem> menuItemList = null;
+		@Nullable List<MenuItem> menuItemList = null;
 		final NodeList children = document.getElementsByTagName("menuitem");
 		for (int i = 0; i < children.getLength(); i++)
 		{
 			final Node node = children.item(i);
 			element = (Element) node;
-			final MenuItem menuItem = DocumentAdapter.toMenuItem(element);
+			@NonNull final MenuItem menuItem = DocumentAdapter.toMenuItem(element);
 
 			if (menuItemList == null)
 			{
@@ -799,7 +799,7 @@ public class DocumentAdapter
 		menuItem.matchTarget = element.getAttribute("match-target");
 
 		// label
-		final Element labelElement = DocumentAdapter.getFirstElementByTagName(element, "label");
+		@Nullable final Element labelElement = DocumentAdapter.getFirstElementByTagName(element, "label");
 		if (labelElement != null)
 		{
 			menuItem.label = labelElement.getTextContent();
@@ -867,7 +867,7 @@ public class DocumentAdapter
 	@NonNull
 	static private List<Element> getLevel1ChildElementsByTagName(@NonNull final Element element, final String tagName)
 	{
-		final ArrayList<Element> elements = new ArrayList<>();
+		@NonNull final ArrayList<Element> elements = new ArrayList<>();
 		@NonNull final NodeList children = element.getChildNodes();
 		for (int i = 0; i < children.getLength(); i++)
 		{

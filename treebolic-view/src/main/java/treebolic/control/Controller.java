@@ -707,6 +707,7 @@ public class Controller extends Commander
 	 * @param content content
 	 * @return changed content
 	 */
+	@NonNull
 	private String absoluteImageSrcs(@NonNull String content)
 	{
 		// "<IMG src='image'>"
@@ -723,6 +724,7 @@ public class Controller extends Commander
 		return content;
 	}
 
+	@NonNull
 	static String tweakImageSrcs(@NonNull String content, URL imageBase)
 	{
 		@NonNull StringBuffer sb = new StringBuffer();
@@ -771,7 +773,7 @@ public class Controller extends Commander
 	{
 		try
 		{
-			URI uri = new URI(urlSpec);
+			@NonNull URI uri = new URI(urlSpec);
 			if (uri.isAbsolute())
 			{
 				return null;

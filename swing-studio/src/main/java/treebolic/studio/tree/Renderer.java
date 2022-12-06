@@ -71,11 +71,13 @@ public class Renderer extends DefaultTreeCellRenderer
 	/**
 	 * Edge icon
 	 */
+	@NonNull
 	static protected final ImageIcon edgeIcon;
 
 	/**
 	 * Tools icon
 	 */
+	@NonNull
 	static protected final ImageIcon toolsIcon;
 
 	/**
@@ -95,6 +97,7 @@ public class Renderer extends DefaultTreeCellRenderer
 	/**
 	 * Default font
 	 */
+	@NonNull
 	static protected final Font defaultFont;
 
 	/**
@@ -106,6 +109,7 @@ public class Renderer extends DefaultTreeCellRenderer
 	/**
 	 * Italic font
 	 */
+	@NonNull
 	static protected final Font italicFont;
 
 	static
@@ -165,7 +169,7 @@ public class Renderer extends DefaultTreeCellRenderer
 		if (object instanceof MutableNode)
 		{
 			final Node node = (Node) treeNode.getUserObject();
-			String label = node.getLabel();
+			@Nullable String label = node.getLabel();
 			if (label != null)
 			{
 				label = label.replaceAll("\n", "\\\\n");

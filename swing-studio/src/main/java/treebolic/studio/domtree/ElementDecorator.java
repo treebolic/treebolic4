@@ -87,9 +87,10 @@ public class ElementDecorator extends DefaultDecorator
 	 *
 	 * @return attribute string
 	 */
+	@NonNull
 	protected String getAttributes()
 	{
-		StringBuilder result = new StringBuilder();
+		@NonNull StringBuilder result = new StringBuilder();
 		final NamedNodeMap map = getElement().getAttributes();
 		if (map != null)
 		{

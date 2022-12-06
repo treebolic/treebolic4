@@ -84,6 +84,7 @@ public class Arc2D extends java.awt.geom.Arc2D.Double implements treebolic.glue.
 		return this.counterclockwise;
 	}
 
+	@NonNull
 	@Override
 	public String toString()
 	{

@@ -42,26 +42,26 @@ public class Menubar extends JMenuBar
 	 */
 	private void initialize()
 	{
-		final JMenuItem openMenuItem = makeItem(Messages.getString("Menubar.open"), "open.png", Controller.Code.OPEN, KeyStroke.getKeyStroke('O', InputEvent.CTRL_DOWN_MASK));
+		@NonNull final JMenuItem openMenuItem = makeItem(Messages.getString("Menubar.open"), "open.png", Controller.Code.OPEN, KeyStroke.getKeyStroke('O', InputEvent.CTRL_DOWN_MASK));
 		@NonNull final JMenuItem openUrlMenuItem = makeItem(Messages.getString("Menubar.open_url"), "openurl.png", Controller.Code.OPENURL, null);
 		@NonNull final JMenuItem importXslMenuItem = makeItem(Messages.getString("Menubar.open_xsl"), "import.png", Controller.Code.IMPORTXSL, null);
 		@NonNull final JMenuItem importProviderMenuItem = makeItem(Messages.getString("Menubar.open_provider"), "importprovider.png", Controller.Code.IMPORTPROVIDER, null);
 		@NonNull final JMenuItem newMenuItem = makeItem(Messages.getString("Menubar.new"), "newdoc.png", Controller.Code.NEW, KeyStroke.getKeyStroke('N', InputEvent.CTRL_DOWN_MASK));
-		final JMenuItem saveMenuItem = makeItem(Messages.getString("Menubar.save"), "save.png", Controller.Code.SAVE, KeyStroke.getKeyStroke('S', InputEvent.CTRL_DOWN_MASK));
-		final JMenuItem saveAsMenuItem = makeItem(Messages.getString("Menubar.saveas"), "saveas.png", Controller.Code.SAVEAS, null);
-		final JMenuItem exportMenuItem = makeItem(Messages.getString("Menubar.export"), "export.png", Controller.Code.EXPORT, null);
+		@NonNull final JMenuItem saveMenuItem = makeItem(Messages.getString("Menubar.save"), "save.png", Controller.Code.SAVE, KeyStroke.getKeyStroke('S', InputEvent.CTRL_DOWN_MASK));
+		@NonNull final JMenuItem saveAsMenuItem = makeItem(Messages.getString("Menubar.saveas"), "saveas.png", Controller.Code.SAVEAS, null);
+		@NonNull final JMenuItem exportMenuItem = makeItem(Messages.getString("Menubar.export"), "export.png", Controller.Code.EXPORT, null);
 		@NonNull final JMenuItem exportSettingsMenuItem = makeItem(Messages.getString("Menubar.export_rendering"), null, Controller.Code.EXPORTSETTINGS, null);
-		final JMenuItem zipMenuItem = makeItem(Messages.getString("Menubar.zip"), "zip.png", Controller.Code.ZIP, null);
+		@NonNull final JMenuItem zipMenuItem = makeItem(Messages.getString("Menubar.zip"), "zip.png", Controller.Code.ZIP, null);
 		@NonNull final JMenuItem unZipMenuItem = makeItem(Messages.getString("Menubar.unzip"), "unzip.png", Controller.Code.UNZIP, null);
 		@NonNull final JMenuItem serializeMenuItem = makeItem(Messages.getString("Menubar.serialize"), "serialize.png", Controller.Code.SERIALIZE, null);
-		final JMenuItem deserializeMenuItem = makeItem(Messages.getString("Menubar.deserialize"), "deserialize.png", Controller.Code.DESERIALIZE, null);
+		@NonNull final JMenuItem deserializeMenuItem = makeItem(Messages.getString("Menubar.deserialize"), "deserialize.png", Controller.Code.DESERIALIZE, null);
 
 		@NonNull final JMenuItem newElementMenuItem = makeItem(Messages.getString("Menubar.new_item"), "new.png", Controller.Code.NEWELEMENT, KeyStroke.getKeyStroke(KeyEvent.VK_INSERT, 0));
-		final JMenuItem removeElementMenuItem = makeItem(Messages.getString("Menubar.remove_item"), "delete.png", Controller.Code.REMOVEELEMENT, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0));
+		@NonNull final JMenuItem removeElementMenuItem = makeItem(Messages.getString("Menubar.remove_item"), "delete.png", Controller.Code.REMOVEELEMENT, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0));
 		@NonNull final JMenuItem normalizeIdsMenuItem = makeItem(Messages.getString("Menubar.normalize_ids"), null, Controller.Code.NORMALIZEIDS, null);
 		@NonNull final JMenuItem listImagesMenuItem = makeItem(Messages.getString("Menubar.list_images"), null, Controller.Code.LISTIMAGES, null);
 		@NonNull final JMenuItem listLinksMenuItem = makeItem(Messages.getString("Menubar.list_links"), null, Controller.Code.LISTLINKS, null);
-		final JMenuItem listMountsMenuItem = makeItem(Messages.getString("Menubar.list_mounts"), null, Controller.Code.LISTMOUNTS, null);
+		@NonNull final JMenuItem listMountsMenuItem = makeItem(Messages.getString("Menubar.list_mounts"), null, Controller.Code.LISTMOUNTS, null);
 		@NonNull final JMenuItem listIdsMenuItem = makeItem(Messages.getString("Menubar.list_ids"), null, Controller.Code.LISTIDS, null);
 
 		@NonNull final JMenuItem settingsMenuItem = makeItem(Messages.getString("Menubar.settings"), "settings.png", Controller.Code.SETTINGS, null);
@@ -74,9 +74,9 @@ public class Menubar extends JMenuBar
 		@NonNull final JMenuItem dtdMenuItem = makeItem(Messages.getString("Menubar.dtd"), "dtd.png", Controller.Code.DTD, null);
 
 		@NonNull final JMenuItem aboutMenuItem = makeItem(Messages.getString("Menubar.about"), "about.png", Controller.Code.ABOUT, null);
-		final JMenuItem helpMenuItem = makeItem(Messages.getString("Menubar.help"), "help.png", Controller.Code.HELP, null);
+		@NonNull final JMenuItem helpMenuItem = makeItem(Messages.getString("Menubar.help"), "help.png", Controller.Code.HELP, null);
 
-		final JMenu filesMenu = new JMenu();
+		@NonNull final JMenu filesMenu = new JMenu();
 		filesMenu.setText(Messages.getString("Menubar.menu_files"));
 		filesMenu.add(newMenuItem);
 		filesMenu.add(openMenuItem);
@@ -122,7 +122,7 @@ public class Menubar extends JMenuBar
 		helpMenu.add(aboutMenuItem);
 		helpMenu.add(helpMenuItem);
 
-		final JMenu toolsMenu = new JMenu();
+		@NonNull final JMenu toolsMenu = new JMenu();
 		toolsMenu.setText(Messages.getString("Menubar.menu_tools"));
 		toolsMenu.add(dtdMenuItem);
 
@@ -153,7 +153,7 @@ public class Menubar extends JMenuBar
 	 * @return menu item
 	 */
 	@NonNull
-	private JMenuItem makeItem(final String text, final String image, @NonNull final Controller.Code command, @Nullable final KeyStroke acceleratorKey)
+	private JMenuItem makeItem(final String text, @Nullable final String image, @NonNull final Controller.Code command, @Nullable final KeyStroke acceleratorKey)
 	{
 		@NonNull final JMenuItem item = new JMenuItem();
 		item.setText(text);
@@ -180,9 +180,9 @@ public class Menubar extends JMenuBar
 	 * @return menu item
 	 */
 	@NonNull
-	private JCheckBoxMenuItem makeCheckboxItem(final String text, @Nullable @SuppressWarnings("SameParameterValue") final String image, @NonNull final Controller.Code command, @SuppressWarnings("SameParameterValue") final KeyStroke acceleratorKey, final boolean state)
+	private JCheckBoxMenuItem makeCheckboxItem(final String text, @Nullable @SuppressWarnings("SameParameterValue") final String image, @NonNull final Controller.Code command, @Nullable @SuppressWarnings("SameParameterValue") final KeyStroke acceleratorKey, final boolean state)
 	{
-		final JCheckBoxMenuItem item = new JCheckBoxMenuItem();
+		@NonNull final JCheckBoxMenuItem item = new JCheckBoxMenuItem();
 		item.setText(text);
 		item.setSelected(state);
 		if (image != null)

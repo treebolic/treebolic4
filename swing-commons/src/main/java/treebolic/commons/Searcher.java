@@ -32,11 +32,11 @@ public class Searcher
 	static public Set<String> findClasses(final String pattern0)
 	{
 		String pattern = pattern0;
-		final Set<String> list = new TreeSet<>();
+		@NonNull final Set<String> list = new TreeSet<>();
 		pattern = pattern.replaceAll("\\\\.", "/");
-		for (final String fileName : Searcher.findFiles(pattern + "\\.class$").keySet())
+		for (@NonNull final String fileName : Searcher.findFiles(pattern + "\\.class$").keySet())
 		{
-			String className = fileName.replace('/', '.');
+			@NonNull String className = fileName.replace('/', '.');
 			if (File.separatorChar == '\\')
 			{
 				className = className.replace('\\', '.');
@@ -53,12 +53,12 @@ public class Searcher
 	 * @return result set
 	 */
 	@NonNull
-	static public Map<String, String> findFiles(final String pattern)
+	static public Map<String, String> findFiles(@NonNull final String pattern)
 	{
 		final String pattern2 = File.separatorChar == '/' ? pattern : pattern.replaceAll("/", "\\\\\\\\");
 		@NonNull final Map<String, String> list = new TreeMap<>();
 		final String classPath = System.getProperty("java.class.path");
-		final String[] pathElements = classPath.split(File.pathSeparator);
+		@NonNull final String[] pathElements = classPath.split(File.pathSeparator);
 		for (@NonNull final String pathElement : pathElements)
 		{
 			try
@@ -90,12 +90,12 @@ public class Searcher
 	 * @throws IOException io exception
 	 */
 	@NonNull
-	static private Map<String, String> findInFile(@NonNull final File file, final String pattern) throws IOException
+	static private Map<String, String> findInFile(@NonNull final File file, @NonNull final String pattern) throws IOException
 	{
-		final Map<String, String> map = new TreeMap<>();
+		@NonNull final Map<String, String> map = new TreeMap<>();
 		if (file.canRead() && file.getAbsolutePath().endsWith(".jar"))
 		{
-			@SuppressWarnings("resource") final JarFile jar = new JarFile(file);
+			@NonNull @SuppressWarnings("resource") final JarFile jar = new JarFile(file);
 			for (@NonNull final Enumeration<JarEntry> entries = jar.entries(); entries.hasMoreElements(); )
 			{
 				final JarEntry entry = entries.nextElement();
@@ -118,13 +118,13 @@ public class Searcher
 	 * @throws IOException io exception
 	 */
 	@NonNull
-	static public Collection<String> findZipEntries(@NonNull final File file, final String positivePattern, final String negativePattern) throws IOException
+	static public Collection<String> findZipEntries(@NonNull final File file, @Nullable final String positivePattern, @Nullable final String negativePattern) throws IOException
 	{
-		final Collection<String> set = new TreeSet<>();
+		@NonNull final Collection<String> set = new TreeSet<>();
 		if (file.canRead())
 		{
 			@NonNull @SuppressWarnings("resource") final ZipFile zip = new ZipFile(file);
-			for (final Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements(); )
+			for (@NonNull final Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements(); )
 			{
 				final ZipEntry entry = entries.nextElement();
 				@NonNull final String name = entry.getName();
@@ -151,7 +151,7 @@ public class Searcher
 	 * @throws IOException io exception
 	 */
 	@NonNull
-	static private Map<String, String> findInDirectory(@NonNull final File directory, @NonNull final String pattern, final String pathElement) throws IOException
+	static private Map<String, String> findInDirectory(@NonNull final File directory, @NonNull final String pattern, @NonNull final String pathElement) throws IOException
 	{
 		@NonNull final Map<String, String> map = new TreeMap<>();
 		@Nullable File[] files = directory.listFiles();
@@ -161,7 +161,7 @@ public class Searcher
 			{
 				if (directoryEntry.getAbsolutePath().matches(pattern))
 				{
-					final String fileName = directoryEntry.getAbsolutePath().substring(pathElement.length() + 1);
+					@NonNull final String fileName = directoryEntry.getAbsolutePath().substring(pathElement.length() + 1);
 					map.put(fileName, pathElement);
 				}
 				else if (directoryEntry.isDirectory())

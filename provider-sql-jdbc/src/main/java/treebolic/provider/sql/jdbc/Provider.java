@@ -13,6 +13,7 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.provider.sql.AbstractProvider;
 
 /**
@@ -125,6 +126,7 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		 * (non-Javadoc)
 		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#getInt(int)
 		 */
+		@NonNull
 		@Override
 		public Integer getInt(int columnIndex) throws SQLException
 		{
@@ -156,12 +158,13 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 
 	static class JdbcDatabase implements AbstractProvider.Database<JdbcCursor, SQLException>
 	{
+		@Nullable
 		private Connection connection;
 
 		public JdbcDatabase(@NonNull Properties properties)
 		{
 			// url/user/password
-			final String url = makeUrl(properties);
+			@NonNull final String url = makeUrl(properties);
 			System.out.println("Sqlx provider URL: " + url); //$NON-NLS-1$
 			final String user = properties.getProperty("user"); //$NON-NLS-1$
 			final String passwd = properties.getProperty("passwd"); //$NON-NLS-1$
@@ -229,7 +232,8 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		 *        properties
 		 * @return url string
 		 */
-		private String makeUrl(final Properties properties)
+		@NonNull
+		private String makeUrl(@NonNull final Properties properties)
 		{
 			String uRL = properties.getProperty("url"); //$NON-NLS-1$
 			if (uRL == null || uRL.isEmpty())

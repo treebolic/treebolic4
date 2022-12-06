@@ -82,7 +82,7 @@ public class Provider implements IProvider
 	 */
 	@Nullable
 	@Override
-	public Model makeModel(final String source0, final URL base, final Properties parameters)
+	public Model makeModel(final String source0, final URL base, @NonNull final Properties parameters)
 	{
 		// get xml file
 		String source = source0;

@@ -106,6 +106,7 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 	/**
 	 * Name styles for classes
 	 */
+	@NonNull
 	private final Map<String, SimpleAttributeSet> typeToNameStyleMap;
 
 	/**
@@ -117,6 +118,7 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 	/**
 	 * Icons for classes
 	 */
+	@NonNull
 	private final Map<String, Icon> typeToIconMap;
 
 	static
@@ -257,7 +259,7 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 	 * @see treebolic.studio.domtree.Renderer#makeDecorator(org.w3c.dom.Node)
 	 */
 	@Override
-	protected DefaultDecorator makeDecorator(final Node node)
+	protected DefaultDecorator makeDecorator(@NonNull final Node node)
 	{
 		if (node.getNodeType() != Node.ELEMENT_NODE)
 		{

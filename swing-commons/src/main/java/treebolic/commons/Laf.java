@@ -36,9 +36,9 @@ public class Laf
 		// "com.sun.java.swing.plaf.windows.WindowsLookAndFeel"
 
 		// look and feel
-		String laf = null;
+		@Nullable String laf = null;
 		boolean customTheme = false;
-		for (final String arg : args)
+		for (@NonNull final String arg : args)
 		{
 			if (arg.startsWith("laf="))
 			{
@@ -128,11 +128,12 @@ public class Laf
 	 * @param className LAF class name
 	 * @return instance of this class
 	 */
+	@Nullable
 	static LookAndFeel getLaf(final String className)
 	{
 		try
 		{
-			final Class<?> clazz = Class.forName(className);
+			@NonNull final Class<?> clazz = Class.forName(className);
 			@NonNull final Class<?>[] argsClass = new Class[]{};
 			@NonNull final Object[] args = new Object[]{};
 
@@ -156,7 +157,7 @@ public class Laf
 	@SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
 	static public boolean setCustomTheme(final String lafName)
 	{
-		final MetalTheme theme = Laf.makeCustomTheme();
+		@NonNull final MetalTheme theme = Laf.makeCustomTheme();
 		Laf.setCurrentTheme(lafName, theme);
 		return true;
 	}
@@ -167,11 +168,11 @@ public class Laf
 	 * @param className LAF class name (may have overridden 'setCurrentTheme()')
 	 * @param theme     theme
 	 */
-	static void setCurrentTheme(final String className, final MetalTheme theme)
+	static void setCurrentTheme(final String className, @NonNull final MetalTheme theme)
 	{
 		try
 		{
-			final Class<?> clazz = Class.forName(className);
+			@NonNull final Class<?> clazz = Class.forName(className);
 			@NonNull final Class<?>[] argsClass = new Class[]{MetalTheme.class};
 			@NonNull final Method method = clazz.getMethod("setCurrentTheme", argsClass);
 			method.invoke(null, theme);

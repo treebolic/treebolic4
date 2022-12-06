@@ -117,7 +117,7 @@ public class Provider implements IProvider
 	@Override
 	public Model makeModel(final String source0, final URL base, @Nullable final Properties parameters)
 	{
-		final Tree tree = makeTree(source0, base, parameters, false);
+		@Nullable final Tree tree = makeTree(source0, base, parameters, false);
 		if (tree == null)
 		{
 			return null;
@@ -130,7 +130,7 @@ public class Provider implements IProvider
 
 		// settings
 		final boolean asTree = nonRootTree.size() < 3;
-		final Settings settings = new Settings();
+		@NonNull final Settings settings = new Settings();
 
 		settings.backColor = Provider.backgroundColor;
 		settings.nodeBackColor = Colors.WHITE;
@@ -229,7 +229,7 @@ public class Provider implements IProvider
 		@NonNull final Deque<StackEntry> stack = new ArrayDeque<>();
 		stack.push(new StackEntry(rootNode, -1));
 
-		try (InputStream is = url.openStream(); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
+		try (InputStream is = url.openStream(); @NonNull BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
 		{
 			// parse lines
 			String line;
@@ -243,7 +243,7 @@ public class Provider implements IProvider
 			}
 
 			// graph
-			final List<INode> children = rootNode.getChildren();
+			@NonNull final List<INode> children = rootNode.getChildren();
 			if (children.size() == 1)
 			{
 				rootNode = (MutableNode) children.get(0);
@@ -265,7 +265,7 @@ public class Provider implements IProvider
 	 * @return tree
 	 */
 	@Nullable
-	private Tree parseTree(final String location)
+	private Tree parseTree(@NonNull final String location)
 	{
 		// root
 		MutableNode rootNode = new MutableNode(null, "root");
@@ -273,10 +273,10 @@ public class Provider implements IProvider
 		rootNode.setBackColor(Colors.RED);
 		rootNode.setForeColor(Colors.WHITE);
 
-		final Deque<StackEntry> stack = new ArrayDeque<>();
+		@NonNull final Deque<StackEntry> stack = new ArrayDeque<>();
 		stack.push(new StackEntry(rootNode, -1));
 
-		try (@NonNull InputStream is = Files.newInputStream(Paths.get(location)); BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
+		try (@NonNull InputStream is = Files.newInputStream(Paths.get(location)); @NonNull BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
 		{
 			// parse lines
 			String line;
@@ -312,7 +312,7 @@ public class Provider implements IProvider
 	 * @param lineNumber line number
 	 * @param stack node stack
 	 */
-	private void processLine(final String line, final int lineNumber, @NonNull final Deque<StackEntry> stack)
+	private void processLine(@NonNull final String line, final int lineNumber, @NonNull final Deque<StackEntry> stack)
 	{
 		final int level = getLevel(line);
 		if (level == -1)

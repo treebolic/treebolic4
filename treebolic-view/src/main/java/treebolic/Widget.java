@@ -1085,7 +1085,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 
 	@SuppressWarnings("WeakerAccess")
 	@Override
-	public void progress(final String message, final boolean fail)
+	public void progress(@NonNull final String message, final boolean fail)
 	{
 		this.progress.put(message, fail);
 	}

@@ -57,7 +57,7 @@ public class JavaVersion
 	static public String getJavaPropsString()
 	{
 		@NonNull final String[] strings = JavaVersion.getJavaProps();
-		final StringBuilder buffer = new StringBuilder();
+		@NonNull final StringBuilder buffer = new StringBuilder();
 		for (final String string : strings)
 		{
 			buffer.append(string);

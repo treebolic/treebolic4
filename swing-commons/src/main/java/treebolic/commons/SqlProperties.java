@@ -28,7 +28,7 @@ public class SqlProperties
 	 * @return properties
 	 */
 	@Nullable
-	static public Properties load(final URL url)
+	static public Properties load(@NonNull final URL url)
 	{
 		try
 		{
@@ -47,7 +47,7 @@ public class SqlProperties
 	/**
 	 * Save properties
 	 */
-	static void save(@NonNull final Properties properties, final String propertyFile)
+	static void save(@NonNull final Properties properties, @NonNull final String propertyFile)
 	{
 		try
 		{
@@ -65,9 +65,10 @@ public class SqlProperties
 	 * @param properties properties
 	 * @return string for properties
 	 */
+	@NonNull
 	static public String toString(@NonNull final Properties properties)
 	{
-		final StringBuilder buffer = new StringBuilder();
+		@NonNull final StringBuilder buffer = new StringBuilder();
 		for (final Enumeration<?> it = properties.propertyNames(); it.hasMoreElements(); )
 		{
 			final String name = (String) it.nextElement();

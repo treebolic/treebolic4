@@ -59,7 +59,7 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 		setResizable(true);
 
 		// label
-		final JLabel headerLabel = new JLabel();
+		@NonNull final JLabel headerLabel = new JLabel();
 		headerLabel.setText(label);
 
 		// value buttons
@@ -88,7 +88,7 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 		}
 
 		// command panel
-		final JPanel commandPanel = new JPanel();
+		@NonNull final JPanel commandPanel = new JPanel();
 		commandPanel.setLayout(new FlowLayout());
 		commandPanel.add(cancelButton);
 		commandPanel.add(oKButton);
@@ -97,7 +97,7 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 		cancelButton.addActionListener(event -> setVisible(false));
 
 		// assemble
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(Box.createRigidArea(new Dimension(0, 10)));
 		panel.add(this.dataPanel);

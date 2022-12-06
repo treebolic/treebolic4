@@ -89,7 +89,7 @@ public class OpenDialog extends JDialog
 		setResizable(true);
 
 		// images
-		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(OpenDialog.class.getResource("images/open.png"));
+		@NonNull @SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(OpenDialog.class.getResource("images/open.png"));
 		@NonNull final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
@@ -99,8 +99,8 @@ public class OpenDialog extends JDialog
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// labels
-		final JLabel sourceLabel = new JLabel(Messages.getString("OpenDialog.source"));
-		final JLabel providerLabel = new JLabel(Messages.getString("OpenDialog.provider"));
+		@NonNull final JLabel sourceLabel = new JLabel(Messages.getString("OpenDialog.source"));
+		@NonNull final JLabel providerLabel = new JLabel(Messages.getString("OpenDialog.provider"));
 
 		// text
 		@NonNull final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
@@ -150,7 +150,7 @@ public class OpenDialog extends JDialog
 		@NonNull final JButton sourceBrowseButton = new JButton(Messages.getString("OpenDialog.browse"));
 		@NonNull final JButton providerAddButton = new JButton(Messages.getString("OpenDialog.add"));
 		@NonNull final JButton oKButton = new JButton(Messages.getString("OpenDialog.ok"));
-		final JButton cancelButton = new JButton(Messages.getString("OpenDialog.cancel"));
+		@NonNull final JButton cancelButton = new JButton(Messages.getString("OpenDialog.cancel"));
 
 		// panels
 		this.dataPanel = new JPanel();
@@ -169,7 +169,7 @@ public class OpenDialog extends JDialog
 
 		// action
 		sourceBrowseButton.addActionListener(event -> {
-			final String url = FileDialogs.getAnyUrl(OpenDialog.this.base != null ? OpenDialog.this.base : ".");
+			@Nullable final String url = FileDialogs.getAnyUrl(OpenDialog.this.base != null ? OpenDialog.this.base : ".");
 			if (url != null && !url.isEmpty())
 			{
 				OpenDialog.this.sourceTextField.setText(url);
@@ -238,7 +238,7 @@ public class OpenDialog extends JDialog
 	 * @param message message
 	 * @return input
 	 */
-	protected String ask(final String message)
+	protected String ask(@NonNull final String message)
 	{
 		@NonNull final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines);

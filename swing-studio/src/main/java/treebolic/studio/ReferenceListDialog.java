@@ -88,7 +88,7 @@ public class ReferenceListDialog extends JDialog
 		this.scrollPane = new JScrollPane(this.referenceTable);
 
 		// buttons
-		final JButton updateButton = new JButton(Messages.getString("ReferenceListDialog.update"));
+		@NonNull final JButton updateButton = new JButton(Messages.getString("ReferenceListDialog.update"));
 		/*
 		 * (non-Javadoc)
 		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -157,7 +157,7 @@ public class ReferenceListDialog extends JDialog
 			public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
 			{
 				final ParameterModel.Entry entry = (ParameterModel.Entry) value;
-				final String location = entry.value;
+				@NonNull final String location = entry.value;
 				setText(location);
 				return this;
 			}
@@ -171,7 +171,7 @@ public class ReferenceListDialog extends JDialog
 	 */
 	protected void setModel(final Map<String, SortedSet<String>> targetToLocationMap)
 	{
-		final TableModel model = new ParameterModel(targetToLocationMap);
+		@NonNull final TableModel model = new ParameterModel(targetToLocationMap);
 		this.referenceTable.setModel(model);
 
 		// sort
@@ -227,6 +227,7 @@ public class ReferenceListDialog extends JDialog
 			/**
 			 * Key
 			 */
+			@NonNull
 			public final String key;
 
 			/**
@@ -246,7 +247,7 @@ public class ReferenceListDialog extends JDialog
 			 * @param key   key
 			 * @param value value
 			 */
-			public Entry(@NonNull final String key, final String value, final int valueCount)
+			public Entry(@NonNull final String key, @NonNull final String value, final int valueCount)
 			{
 				this.key = key.trim();
 				this.value = value.trim();
