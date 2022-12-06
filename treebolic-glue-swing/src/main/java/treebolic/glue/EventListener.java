@@ -72,7 +72,7 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 	public void mouseClicked(@NonNull final MouseEvent e)
 	{
 		boolean consume = false;
-		if ((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK)
+		if ((e.getModifiersEx() & InputEvent.BUTTON3_DOWN_MASK) == InputEvent.BUTTON3_DOWN_MASK)
 		{
 			consume = onMenu(e.getX(), e.getY());
 		}
