@@ -16,9 +16,9 @@ import javax.swing.tree.*;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.studio.Controller;
 import treebolic.model.INode;
 import treebolic.model.TreeMutableNode;
+import treebolic.studio.Controller;
 
 /**
  * Tree

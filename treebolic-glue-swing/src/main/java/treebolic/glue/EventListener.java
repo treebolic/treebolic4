@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.*;
+
 import treebolic.annotations.NonNull;
 
 /**
@@ -72,7 +74,7 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 	public void mouseClicked(@NonNull final MouseEvent e)
 	{
 		boolean consume = false;
-		if ((e.getModifiersEx() & InputEvent.BUTTON3_DOWN_MASK) == InputEvent.BUTTON3_DOWN_MASK)
+		if (SwingUtilities.isRightMouseButton(e))
 		{
 			consume = onMenu(e.getX(), e.getY());
 		}
