@@ -81,10 +81,7 @@ public class DefaultDecorator
 
 		// children
 		@NonNull final String childrenText = childrenToString();
-		if (childrenText != null)
-		{
-			buffer.append(childrenText);
-		}
+		buffer.append(childrenText);
 
 		return buffer.toString();
 	}

@@ -210,6 +210,7 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		@Override
 		public JdbcCursor query(@NonNull final String nodesSql) throws SQLException
 		{
+			assert this.connection != null;
 			final Statement statement = this.connection.createStatement();
 			final ResultSet resultSet = statement.executeQuery(nodesSql);
 			return new JdbcCursor(statement, resultSet);
@@ -260,7 +261,7 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 	 */
 	@NonNull
 	@Override
-	protected JdbcDatabase openDatabase(@NonNull Properties properties)
+	protected JdbcDatabase openDatabase(@NonNull final Properties properties)
 	{
 		return new JdbcDatabase(properties);
 	}

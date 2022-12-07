@@ -77,7 +77,7 @@ public class ZipMaker
 					// open image stream
 					@NonNull final InputStream inputStream = new BufferedInputStream(url.openStream());
 
-					// coppy image stream into entry
+					// copy image stream into entry
 					zos.putNextEntry(zei);
 					ZipMaker.copyStreams(inputStream, zos);
 					inputStream.close();

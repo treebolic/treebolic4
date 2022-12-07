@@ -48,7 +48,7 @@ public class Studio
 	/**
 	 * Main
 	 *
-	 * @param args aruments
+	 * @param args arguments
 	 */
 	public static void main(@NonNull final String[] args)
 	{

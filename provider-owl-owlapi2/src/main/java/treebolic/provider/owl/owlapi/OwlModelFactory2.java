@@ -64,11 +64,15 @@ public class OwlModelFactory2 extends OwlModelFactory
 	 * @param ontologyUrlString ontology URL string
 	 * @return model if successful
 	 */
-	@NonNull
+	@Nullable
 	@Override
 	public Model makeModel(final String ontologyUrlString)
 	{
 		@Nullable Model model = super.makeModel(ontologyUrlString);
+		if (model == null)
+		{
+			return null;
+		}
 		return new Model(model.tree, model.settings, images2);
 	}
 

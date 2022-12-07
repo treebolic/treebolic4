@@ -1102,7 +1102,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 */
 	private void exportSettings()
 	{
-		if (this.model == null || this.settings == null)
+		if (this.model == null)
 		{
 			return;
 		}
@@ -1142,6 +1142,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		{
 			return;
 		}
+		assert this.model != null;
 		this.idToNodeMap = ModelUtils.normalizeIds(this.model, prefix);
 		this.document = makeDocument(this.model);
 		updateView();
@@ -1415,7 +1416,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	 *
 	 * @param mode mode
 	 */
-	public void update(final Mode mode)
+	public void update(@NonNull final Mode mode)
 	{
 		this.mode = mode;
 

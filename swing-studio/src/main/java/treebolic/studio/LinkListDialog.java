@@ -39,6 +39,7 @@ public class LinkListDialog extends ReferenceListDialog
 	@Override
 	protected void update()
 	{
+		assert this.controller.getModel() != null;
 		@NonNull final Map<String, SortedSet<String>> linkToLocationMap = ModelUtils.getLinkMap(this.controller.getModel());
 		setModel(linkToLocationMap);
 		super.update();

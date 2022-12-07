@@ -259,10 +259,14 @@ public class Editor implements TableCellEditor, CellEditorListener
 	 * (non-Javadoc)
 	 * @see javax.swing.CellEditor#getCellEditorValue()
 	 */
-	@NonNull
+	@Nullable
 	@Override
 	public Object getCellEditorValue()
 	{
+		if (this.attribute == null)
+		{
+			return null;
+		}
 		@Nullable Object value = null;
 		switch (this.attribute.descriptor.type)
 		{

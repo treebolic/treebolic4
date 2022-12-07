@@ -107,6 +107,8 @@
       <entry_point TYPE="field" FQNAME="treebolic.studio.tree.Renderer italicFont" />
       <entry_point TYPE="field" FQNAME="treebolic.studio.tree.Tree isDirty" />
       <entry_point TYPE="field" FQNAME="treebolic.provider.sql.SqlProperties SOURCE" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.xml.stax.Parser TREE" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.xml.stax.Parser TREEBOLIC" />
     </entry_points>
     <pattern value="treebolic.glue.Worker" method="doInBackground" />
     <pattern value="treebolic.glue.Worker" method="job" />
@@ -596,6 +598,19 @@
     <pattern value="treebolic.provider.owl.sax.OwlModelFactory" method="setEdgeImage" />
     <pattern value="treebolic.provider.owl.owlapi.BaseProvider" method="setLocator" />
     <pattern value="treebolic.provider.owl.sax.BaseProvider" method="setLocator" />
+    <pattern value="treebolic.provider.owl.jena.Provider" method="factory" />
+    <pattern value="treebolic.provider.owl.jena.OwlModelFactory" method="setEdgeImage" />
+    <pattern value="treebolic.provider.owl.jena.OwlModelFactory" method="visitRelation" />
+    <pattern value="treebolic.provider.owl.owlapi.OwlModelFactory" method="setEdgeImage" />
+    <pattern value="treebolic.provider.owl.owlapi.Provider" method="factory" />
+    <pattern value="treebolic.provider.owl.owlapi.OwlModelFactory2" method="makeModel" />
+    <pattern value="treebolic.provider.owl.owlapi.OwlModelFactory2" method="setNodeImage" />
+    <pattern value="treebolic.provider.owl.owlapi.OwlModelFactory2" method="setTreeEdgeImage" />
+    <pattern value="treebolic.provider.owl.owlapi.Provider2" method="factory" />
+    <pattern value="treebolic.provider.owl.sax.BaseProvider" method="BaseProvider" />
+    <pattern value="treebolic.provider.owl.owlapi.OwlModelFactory2" method="setEdgeImage" />
+    <pattern value="treebolic.glue.Graphics" />
+    <pattern value="treebolic.glue.component.Toolbar" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">

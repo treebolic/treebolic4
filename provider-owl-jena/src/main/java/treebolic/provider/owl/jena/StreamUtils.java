@@ -20,7 +20,7 @@ public class StreamUtils
 	/**
 	 * Convert to stream
 	 *
-	 * @param sourceIterator soure iterator
+	 * @param sourceIterator source iterator
 	 * @param <T>            type of objects in stream
 	 * @return stream
 	 */
@@ -33,7 +33,7 @@ public class StreamUtils
 	/**
 	 * Convert to stream
 	 *
-	 * @param sourceIterator soure iterator
+	 * @param sourceIterator source iterator
 	 * @param <T>            type of objects in stream
 	 * @return stream
 	 */

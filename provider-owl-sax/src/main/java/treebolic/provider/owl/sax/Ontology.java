@@ -28,11 +28,17 @@ class Ontology
 		this.properties = properties;
 
 		// resolve
+		//noinspection ConstantConditions
 		this.classes.values().forEach(c -> c.superclasses = c._superclasses.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
+		//noinspection ConstantConditions
 		this.things.values().forEach(c -> c.types = c._types.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
+		//noinspection ConstantConditions
 		this.properties.values().forEach(p -> p.domains = p._domains.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
+		//noinspection ConstantConditions
 		this.properties.values().forEach(p -> p.ranges = p._ranges.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
+		//noinspection ConstantConditions
 		this.properties.values().forEach(p -> p.inverses = p._inverses.stream().map(properties::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
+		//noinspection ConstantConditions
 		this.properties.values().forEach(p -> p.subproperties = p._subproperties.stream().map(properties::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
 
 		// reverse tree link (class-to-subclasses) from class-to-superclass
@@ -76,9 +82,6 @@ class Ontology
 		});
 
 		// check
-		this.classes.values().forEach(c -> {
-			assert c.iri != null : c;
-		});
 		this.classes.values().stream().filter(c -> c.superclasses != null).map(c1 -> c1.superclasses).forEach(c2 -> c2.forEach(c3 -> {
 			assert c3 != null;
 		}));
@@ -139,7 +142,6 @@ class Ontology
 
 		public Resource(@NonNull final String iri)
 		{
-			assert iri != null;
 			this.iri = iri;
 		}
 

@@ -353,7 +353,7 @@ public class MainFrame extends JFrame
 	}
 
 	/**
-	 * Make thesubeditor
+	 * Make the subeditor
 	 *
 	 * @return javax.swing.JComponent
 	 */

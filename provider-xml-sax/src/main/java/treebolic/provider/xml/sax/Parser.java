@@ -110,6 +110,7 @@ public class Parser
 		@Override
 		public void endElement(String uri, String localName, @NonNull String qName)
 		{
+			assert textSb != null;
 			@NonNull String text = textSb.toString();
 			if (!text.isEmpty())
 			{

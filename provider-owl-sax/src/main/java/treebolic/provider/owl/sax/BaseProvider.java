@@ -42,7 +42,7 @@ public abstract class BaseProvider implements IProvider
 	 * @param properties config properties
 	 * @return factory
 	 */
-	abstract protected OwlModelFactory factory(@NonNull Properties properties);
+	abstract protected OwlModelFactory factory(@Nullable Properties properties);
 
 	/**
 	 * Constructor
@@ -129,11 +129,11 @@ public abstract class BaseProvider implements IProvider
 	 * @see treebolic.provider.IProvider#makeTree(java.lang.String, java.net.URL, java.util.Properties, boolean)
 	 */
 	@Override
-	public Tree makeTree(final String source0, final URL base, @NonNull final Properties parameters, final boolean checkRecursion)
+	public Tree makeTree(final String source0, final URL base, @Nullable final Properties parameters, final boolean checkRecursion)
 	{
 		// get owl file
 		String source = source0;
-		if (source == null)
+		if (source == null && parameters != null)
 		{
 			source = parameters.getProperty("source");
 		}

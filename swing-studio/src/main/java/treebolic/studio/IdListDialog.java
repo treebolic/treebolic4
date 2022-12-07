@@ -39,6 +39,7 @@ public class IdListDialog extends ReferenceListDialog
 	@Override
 	protected void update()
 	{
+		assert this.controller.getModel() != null;
 		@NonNull final Map<String, SortedSet<String>> idToLocationMap = ModelUtils.getIdMap(this.controller.getModel());
 		setModel(idToLocationMap);
 		super.update();

@@ -154,6 +154,7 @@ public class Parser
 						String iri = attributes.getValue(RESOURCE);
 						if (iri != null)
 						{
+							assert clazz._superclasses != null;
 							clazz._superclasses.add(iri);
 						}
 					}
@@ -167,6 +168,7 @@ public class Parser
 						String iri = attributes.getValue(RESOURCE);
 						if (iri != null)
 						{
+							assert property._domains != null;
 							property._domains.add(iri);
 						}
 					}
@@ -180,6 +182,7 @@ public class Parser
 						String iri = attributes.getValue(RESOURCE);
 						if (iri != null)
 						{
+							assert property._ranges != null;
 							property._ranges.add(iri);
 						}
 					}
@@ -193,6 +196,7 @@ public class Parser
 						String iri = attributes.getValue(RESOURCE);
 						if (iri != null)
 						{
+							assert thing._types != null;
 							thing._types.add(iri);
 						}
 					}
@@ -239,6 +243,7 @@ public class Parser
 		{
 			// System.err.printf("<%s q=%s u=%s%n", localName, qName, uri);
 
+			assert textSb != null;
 			@NonNull String text = textSb.toString();
 			if (!text.isEmpty())
 			{

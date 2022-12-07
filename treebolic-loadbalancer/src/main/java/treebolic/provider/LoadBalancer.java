@@ -33,7 +33,7 @@ public class LoadBalancer
 	// P A R A M E T E R S
 
 	/**
-	 * Max children nodes at level 0, 1 ... n. Level is just above leaves. Last value i holds for level i to n.
+	 * Max children nodes at level 0, 1 ... n. Level is just above leaves. Last value 'i' holds for level 'i' to 'n'.
 	 */
 	@NonNull
 	private final int[] limitNodesAtLevel;

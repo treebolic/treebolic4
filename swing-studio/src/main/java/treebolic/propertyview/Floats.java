@@ -8,7 +8,7 @@ import treebolic.annotations.NonNull;
 import treebolic.model.Utils;
 
 /**
- * Wrapper around arry of floats
+ * Wrapper around array of floats
  */
 public class Floats
 {

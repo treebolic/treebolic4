@@ -976,23 +976,20 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			return;
 		}
 
-		if (this.settings != null)
+		// try internal browser
+		if ("true".equals(this.settings.getProperty("internal.browser")))
 		{
-			// try internal browser
-			if ("true".equals(this.settings.getProperty("internal.browser")))
-			{
-				@NonNull final JComponent component = makeBrowserPane(url);
-				addTab(component, mangle(linkUrl), linkUrl);
-				return;
-			}
+			@NonNull final JComponent component = makeBrowserPane(url);
+			addTab(component, mangle(linkUrl), linkUrl);
+			return;
+		}
 
-			// try the browser in settings
-			final String browser = this.settings.getProperty("browser");
-			if (browser != null && !browser.isEmpty())
-			{
-				ExternalBrowser.browse(browser, url.toString());
-				return;
-			}
+		// try the browser in settings
+		final String browser = this.settings.getProperty("browser");
+		if (browser != null && !browser.isEmpty())
+		{
+			ExternalBrowser.browse(browser, url.toString());
+			return;
 		}
 
 		// default

@@ -289,7 +289,7 @@ public abstract class AbstractProvider< //
 			this.properties = url != null ? SqlProperties.load(url) : SqlProperties.load(queryFile);
 
 			// add parameters
-			if (this.properties != null && parameters != null)
+			if (this.properties != null)
 			{
 				this.properties.putAll(parameters);
 			}
@@ -438,6 +438,7 @@ public abstract class AbstractProvider< //
 	@Nullable
 	private Model queryModel()
 	{
+		assert this.properties != null;
 		this.properties.put("database", makeDatabasePath(this.properties)); //$NON-NLS-1$
 		try
 		{
@@ -530,6 +531,8 @@ public abstract class AbstractProvider< //
 	@SuppressWarnings("boxing")
 	private MutableNode queryNodesAndEdges(@NonNull final B db) throws E
 	{
+		assert this.properties != null;
+
 		// request type
 		boolean prune = (Boolean) this.properties.get(SqlProperties.PRUNE);
 		boolean balanceLoad = !this.properties.containsKey(SqlProperties.BALANCE_LOAD) || "true".equals(this.properties.get(SqlProperties.BALANCE_LOAD));
@@ -741,6 +744,8 @@ public abstract class AbstractProvider< //
 	@Nullable
 	private List<IEdge> queryEdges(@NonNull final B db) throws E
 	{
+		assert this.properties != null;
+
 		// request type
 		boolean prune = (Boolean) this.properties.get(SqlProperties.PRUNE);
 
@@ -823,6 +828,8 @@ public abstract class AbstractProvider< //
 	@NonNull
 	private Settings querySettings(@NonNull final B db)
 	{
+		assert this.properties != null;
+
 		// sql
 		String settingsSql = this.properties.getProperty("settingsSql", AbstractProvider.DEFAULT_SETTINGS_SQL); //$NON-NLS-1$
 		settingsSql = macroExpand(settingsSql);
@@ -996,6 +1003,7 @@ public abstract class AbstractProvider< //
 	@NonNull
 	private TreeMutableNode makeRootNode()
 	{
+		assert this.properties != null;
 		@NonNull final TreeMutableNode rootNode = new TreeMutableNode(null, "root"); //$NON-NLS-1$
 		rootNode.setLabel(this.properties.getProperty("root_label")); //$NON-NLS-1$
 		rootNode.setBackColor(Utils.stringToColor(this.properties.getProperty("root_bcolor"))); //$NON-NLS-1$
@@ -1219,6 +1227,7 @@ public abstract class AbstractProvider< //
 			{
 				continue;
 			}
+			assert this.properties != null;
 			final String clause = this.properties.getProperty(key);
 			if (clause != null && clause.length() > 0)
 			{
@@ -1298,6 +1307,7 @@ public abstract class AbstractProvider< //
 	@NonNull
 	private String getName(@NonNull final String key)
 	{
+		assert this.properties != null;
 		final String value = (String) this.properties.get(key);
 		if (value != null)
 		{
@@ -1332,6 +1342,7 @@ public abstract class AbstractProvider< //
 			@NonNull final String key = match.substring(2, match.length() - 1);
 			if (!macroMap.containsKey(key))
 			{
+				assert this.properties != null;
 				String value = (String) this.properties.get(key);
 				if (PATTERN.matcher(str).find())
 				{
@@ -1363,7 +1374,7 @@ public abstract class AbstractProvider< //
 		@NonNull final Map<String, String> macroMap = makeMacroMap(str);
 
 		// macro substitution
-		@NonNull String outstr = str;
+		@NonNull String result = str;
 		for (final String key : macroMap.keySet())
 		{
 			String value = macroMap.get(key);
@@ -1371,8 +1382,8 @@ public abstract class AbstractProvider< //
 			{
 				value = key;
 			}
-			outstr = outstr.replaceAll("\\$\\{" + key + "}", value); //$NON-NLS-1$ //$NON-NLS-2$
+			result = result.replaceAll("\\$\\{" + key + "}", value); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		return outstr;
+		return result;
 	}
 }

@@ -44,7 +44,7 @@ public class PropertyView extends JPanel implements SelectListener
 	public enum AttributeType
 	{
 		// @formatter:off
-		/** Nonr */ NONE, /** Boolean */ BOOLEAN, /** Integer */ INTEGER, /** Float */ FLOAT, /** Floats */ FLOATS,
+		/** None */ NONE, /** Boolean */ BOOLEAN, /** Integer */ INTEGER, /** Float */ FLOAT, /** Floats */ FLOATS,
 		/** Label */ LABEL, /** Text */ TEXT, /** Long text */ LONGTEXT,
 		/** Color */ COLOR,
 		/** Id */ ID, /** Id reference */ REFID,
@@ -465,6 +465,7 @@ public class PropertyView extends JPanel implements SelectListener
 		// System.err.println("PROPERTYVIEW: selected " + object);
 
 		// model
+		assert this.handlerFactory != null;
 		final Handler handler = this.handlerFactory.create(object);
 		@NonNull final javax.swing.table.TableModel model = new TableModel(object, handler);
 		this.attributeTable.setModel(model);
@@ -594,8 +595,10 @@ public class PropertyView extends JPanel implements SelectListener
 		{
 			if (this.selectedObject != null)
 			{
+				assert this.attributes != null;
 				for (@NonNull final Attribute attribute : this.attributes)
 				{
+					assert this.handler != null;
 					this.handler.setter.set(this.selectedObject, attribute.descriptor.name, attribute.value);
 				}
 			}
@@ -634,6 +637,7 @@ public class PropertyView extends JPanel implements SelectListener
 		{
 			if (x == PropertyView.VALUE)
 			{
+				assert this.attributes != null;
 				final Attribute row = this.attributes.elementAt(y);
 				return !row.descriptor.isReadOnly;
 			}
@@ -648,6 +652,7 @@ public class PropertyView extends JPanel implements SelectListener
 		@Override
 		public Object getValueAt(final int y, final int x)
 		{
+			assert this.attributes != null;
 			final Attribute attribute = this.attributes.elementAt(y);
 			switch (x)
 			{
@@ -675,6 +680,7 @@ public class PropertyView extends JPanel implements SelectListener
 			if (x == PropertyView.VALUE)
 			{
 				final Attribute attribute0 = (Attribute) value;
+				assert this.attributes != null;
 				final Attribute attribute = this.attributes.elementAt(y);
 				attribute.value = attribute0.value;
 				set();

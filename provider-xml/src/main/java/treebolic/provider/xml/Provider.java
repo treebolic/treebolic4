@@ -141,7 +141,7 @@ public class Provider implements IProvider
 	 *
 	 * @param url        url
 	 * @param base       base
-	 * @param parameters parametes
+	 * @param parameters parameters
 	 * @return model
 	 */
 	@Nullable
@@ -161,7 +161,7 @@ public class Provider implements IProvider
 	 *
 	 * @param url        url
 	 * @param base       base
-	 * @param parameters parametes
+	 * @param parameters parameters
 	 * @return tree
 	 */
 	@Nullable

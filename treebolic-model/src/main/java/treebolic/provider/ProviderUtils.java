@@ -31,11 +31,11 @@ public class ProviderUtils
 	 * @return url
 	 */
 	@Nullable
-	static public URL makeURL(@Nullable final String source, final URL base, @SuppressWarnings("unused") @Nullable final Properties extras, @NonNull final IProviderContext context)
+	static public URL makeURL(@Nullable final String source, final URL base, @SuppressWarnings("unused") @Nullable final Properties extras, @Nullable final IProviderContext context)
 	{
 		if (source == null)
 		{
-			if (DEBUG)
+			if (DEBUG && context != null)
 			{
 				context.warn("URL= null (null source)");
 			}
@@ -46,7 +46,7 @@ public class ProviderUtils
 		try
 		{
 			@NonNull final URL url = new URL(source);
-			if (DEBUG)
+			if (DEBUG && context != null)
 			{
 				context.message("URL=" + url);
 			}
@@ -61,7 +61,7 @@ public class ProviderUtils
 		try
 		{
 			@NonNull final URL url = new URL(base, source);
-			if (DEBUG)
+			if (DEBUG && context != null)
 			{
 				context.message("URL=" + url); // + " from BASE URL=" + base.toString());
 			}
@@ -71,7 +71,7 @@ public class ProviderUtils
 		{
 			// do nothing
 		}
-		if (DEBUG)
+		if (DEBUG && context != null)
 		{
 			context.warn("URL= null (fail)");
 		}

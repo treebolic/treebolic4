@@ -46,7 +46,7 @@ public class Parser
 	@NonNull
 	public static Model parse(@NonNull XMLEventReader reader) throws XMLStreamException
 	{
-		@Nullable Deque<MutableNode> stack = null;
+		@Nullable Stack<MutableNode> stack = new Stack<>();
 
 		@Nullable Map<String, MutableNode> nodes = null;
 
@@ -69,14 +69,12 @@ public class Parser
 				{
 					case NODES:
 						nodes = new HashMap<>();
-						stack = new ArrayDeque<>();
 						break;
 
 					case NODE:
 						Attribute idAttribute = startElement.getAttributeByName(new QName("id"));
 						String id = idAttribute.getValue();
-						assert stack != null;
-						INode parent = stack.peek();
+						INode parent = stack.empty() ? null : stack.peek();
 						node = new MutableNode(parent, id);
 						assert nodes != null;
 						nodes.put(id, node);
@@ -96,9 +94,11 @@ public class Parser
 						Attribute toAttribute = startElement.getAttributeByName(new QName("to"));
 						String from = fromAttribute.getValue();
 						String to = toAttribute.getValue();
+						assert nodes != null;
 						INode fromNode = nodes.get(from);
 						INode toNode = nodes.get(to);
 						edge = new MutableEdge(fromNode, toNode);
+						assert edges != null;
 						edges.add(edge);
 						break;
 

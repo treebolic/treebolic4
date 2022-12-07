@@ -39,6 +39,7 @@ public class MountListDialog extends ReferenceListDialog
 	@Override
 	protected void update()
 	{
+		assert this.controller.getModel() != null;
 		@NonNull final Map<String, SortedSet<String>> mountToLocationMap = ModelUtils.getMountMap(this.controller.getModel());
 		setModel(mountToLocationMap);
 		super.update();

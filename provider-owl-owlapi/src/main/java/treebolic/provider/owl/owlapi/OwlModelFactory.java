@@ -151,7 +151,7 @@ public class OwlModelFactory implements ImageDecorator
 	// class nodes
 
 	/**
-	 * LoadBalancer : Max children nodes at level 0, 1 ... n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for level i to n.
+	 * LoadBalancer : Max children nodes at level 0, 1 ... n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value 'i' holds for level 'i' to 'n'.
 	 */
 	static private final int[] MAX_AT_LEVEL = {8, 3};
 
@@ -795,6 +795,10 @@ public class OwlModelFactory implements ImageDecorator
 			try
 			{
 				ontology = getOntology(ontologyUrlString);
+				if (ontology == null)
+				{
+					throw new RuntimeException("Null ontology");
+				}
 				url = ontologyUrlString;
 				engine = new QueryEngine(ontology);
 				parser = new QueryParser(ontology, new SimpleShortFormProvider());
@@ -878,6 +882,10 @@ public class OwlModelFactory implements ImageDecorator
 		{
 			// walk classes
 			@Nullable final OWLClass rootClass = engine.getTopClass();
+			if (rootClass == null)
+			{
+				return null;
+			}
 			@NonNull final MutableNode owlClassNode = visitClassAndSubclasses(null, rootClass, ontologyUrlString);
 			return new Tree(decorateRoot(owlClassNode), null);
 		}
@@ -943,6 +951,7 @@ public class OwlModelFactory implements ImageDecorator
 					@NonNull final TreeMutableNode owlClassNode = visitClass(null, owlClass.asOWLClass(), ontologyUrlString);
 
 					// recurse
+					assert engine != null;
 					final Stream<OWLClass> owlSubClasses = engine.getSubClasses(owlClass);
 					visitClasses(owlClassNode, owlSubClasses, ontologyUrlString);
 
@@ -968,6 +977,7 @@ public class OwlModelFactory implements ImageDecorator
 	{
 		final String ownClassShortForm = owlClass.getIRI().getShortForm();
 		final String owlClassId = owlClass.getIRI().getShortForm();
+		assert engine != null;
 		final Stream<OWLAnnotation> annotations = engine.getAnnotations(owlClass);
 
 		// comment
@@ -1029,6 +1039,7 @@ public class OwlModelFactory implements ImageDecorator
 		@NonNull final TreeMutableNode owlClassNode = visitClass(parentOwlClassNode, owlClass, ontologyUrlString);
 
 		// recurse
+		assert engine != null;
 		final Stream<OWLClass> owlSubClasses = engine.getSubClasses(owlClass);
 		visitClasses(owlClassNode, owlSubClasses.sorted(), ontologyUrlString);
 
@@ -1048,6 +1059,7 @@ public class OwlModelFactory implements ImageDecorator
 
 					final String owlIndividualShortForm = owlNamedIndividual.getIRI().getShortForm();
 					final String owlIndividualId = owlNamedIndividual.getIRI().getShortForm();
+					assert engine != null;
 					final Stream<OWLClassExpression> types = engine.getTypes(owlNamedIndividual);
 					final Stream<OWLAnnotation> annotations = engine.getAnnotations(owlNamedIndividual);
 
@@ -1079,6 +1091,7 @@ public class OwlModelFactory implements ImageDecorator
 		relationNode.setEdgeLabel("is relation");
 		decorateRelation(relationNode);
 
+		assert engine != null;
 		@NonNull final List<OWLClass> domains = engine.getDomains(owlProperty).collect(toList());
 		if (!domains.isEmpty())
 		{

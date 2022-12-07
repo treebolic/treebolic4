@@ -150,7 +150,7 @@ public class OwlModelFactory implements ImageDecorator
 	// class nodes
 
 	/**
-	 * LoadBalancer : Max children nodes at level 0, 1 ... n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for level i to n.
+	 * LoadBalancer : Max children nodes at level 0, 1 ... n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value 'i' holds for level 'i' to 'n'.
 	 */
 	static private final int[] MAX_AT_LEVEL = {8, 3};
 
@@ -740,6 +740,7 @@ public class OwlModelFactory implements ImageDecorator
 		// load document
 		if (!argUrl.equals(url) || model == null || engine == null)
 		{
+			assert url != null;
 			try (InputStream is = new URL(url).openStream())
 			{
 				model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
@@ -1113,7 +1114,7 @@ public class OwlModelFactory implements ImageDecorator
 				String inverseName = inverseProperty.getLocalName();
 				String inverseId = inverseProperty.getLocalName();
 				@NonNull final MutableNode inverseNode = new MutableNode(inversesNode, inverseId);
-				inverseNode.setLabel(inverseId);
+				inverseNode.setLabel(inverseName);
 				inverseNode.setTarget(inverseId);
 				decorateRelation(inverseNode);
 			});

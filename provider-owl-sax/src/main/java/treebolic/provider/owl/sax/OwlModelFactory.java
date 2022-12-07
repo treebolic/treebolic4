@@ -142,7 +142,7 @@ public class OwlModelFactory implements ImageDecorator
 	// class nodes
 
 	/**
-	 * LoadBalancer : Max children nodes at level 0, 1 ... n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for level i to n.
+	 * LoadBalancer : Max children nodes at level 0, 1 ... n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value 'i' holds for level 'i' to 'n'.
 	 */
 	static private final int[] MAX_AT_LEVEL = {8, 3};
 
@@ -941,6 +941,7 @@ public class OwlModelFactory implements ImageDecorator
 	@NonNull
 	public TreeMutableNode visitClass(final INode parentClassNode, @NonNull final Ontology.Class clazz, final String ontologyUrl)
 	{
+		assert ontology != null;
 		final boolean isRelation = ontology.isRelation(clazz);
 		@NonNull final String name = clazz.getLocalName();
 		@NonNull final String id = clazz.getLocalName();

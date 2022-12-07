@@ -56,8 +56,8 @@ public class Provider implements IProvider
 		/**
 		 * Constructor
 		 *
-		 * @param node node
-		 * @param level itslevel
+		 * @param node  node
+		 * @param level its level
 		 */
 		public StackEntry(final MutableNode node, final int level)
 		{
@@ -185,7 +185,7 @@ public class Provider implements IProvider
 	{
 		// get text file
 		String source = source0;
-		if (source == null && parameters!=null)
+		if (source == null && parameters != null)
 		{
 			source = parameters.getProperty("source");
 		}
@@ -308,9 +308,9 @@ public class Provider implements IProvider
 	/**
 	 * Process line
 	 *
-	 * @param line line
+	 * @param line       line
 	 * @param lineNumber line number
-	 * @param stack node stack
+	 * @param stack      node stack
 	 */
 	private void processLine(@NonNull final String line, final int lineNumber, @NonNull final Deque<StackEntry> stack)
 	{

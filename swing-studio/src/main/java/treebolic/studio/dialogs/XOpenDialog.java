@@ -32,7 +32,7 @@ public class XOpenDialog extends OpenDialog
 	/**
 	 * Main
 	 *
-	 * @param args argumes
+	 * @param args arguments
 	 */
 	static public void main(final String[] args)
 	{

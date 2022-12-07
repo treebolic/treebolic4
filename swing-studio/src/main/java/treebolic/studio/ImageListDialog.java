@@ -74,6 +74,7 @@ public class ImageListDialog extends ReferenceListDialog
 	@Override
 	protected void update()
 	{
+		assert this.controller.getModel() != null;
 		this.label.setText(Messages.getString("ImageListDialog.label"));
 		this.imageRepository = this.controller.makeImageRepositoryURL();
 		@NonNull final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
@@ -167,7 +168,11 @@ public class ImageListDialog extends ReferenceListDialog
 	 */
 	private void checkMissing()
 	{
+		assert this.controller.getModel() != null;
 		this.imageRepository = this.controller.makeImageRepositoryURL();
+		if (this.imageRepository != null)
+			return;
+
 		@NonNull final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
 		@NonNull final Set<String> images = imageToLocationMap.keySet();
 
@@ -207,7 +212,11 @@ public class ImageListDialog extends ReferenceListDialog
 	 */
 	private void checkUnused()
 	{
+		assert this.controller.getModel() != null;
 		this.imageRepository = this.controller.makeImageRepositoryURL();
+		if (this.imageRepository != null)
+			return;
+
 		@NonNull final Map<String, SortedSet<String>> unusedToLocationMap = new TreeMap<>();
 		@NonNull final Map<String, SortedSet<String>> imageToLocationMap = ModelUtils.getImageMap(this.controller.getModel());
 		@NonNull final Set<String> images = imageToLocationMap.keySet();

@@ -244,7 +244,7 @@ public class ModelToDocumentTransformer
 	 * @return node element
 	 */
 	@NonNull
-	static private Element makeNode(@NonNull final Document document, final INode node0)
+	static private Element makeNode(@NonNull final Document document, @NonNull final INode node0)
 	{
 		@Nullable INode node = node0;
 
