@@ -668,13 +668,13 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Make model
 	 *
-	 * @param ontologyUrlString ontology URL string
+	 * @param ontologyUrl ontology URL string
 	 * @return model if successful
 	 */
 	@Nullable
-	public Model makeModel(final String ontologyUrlString)
+	public Model makeModel(final String ontologyUrl)
 	{
-		@Nullable final Tree tree = makeTree(ontologyUrlString);
+		@Nullable final Tree tree = makeTree(ontologyUrl);
 		if (tree == null)
 		{
 			return null;
@@ -820,8 +820,8 @@ public class OwlModelFactory implements ImageDecorator
 					return new Tree(classNode, null);
 				}
 				// class
-				@NonNull final MutableNode owlClassNode = visitClassAndSubclasses(null, clazz, argUrl);
-				return new Tree(decorateRoot(owlClassNode), null);
+				@NonNull final MutableNode classNode = visitClassAndSubclasses(null, clazz, argUrl);
+				return new Tree(decorateRoot(classNode), null);
 			}
 			return null;
 		}
@@ -893,9 +893,9 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Walk classes in stream
 	 *
-	 * @param parentClassNode   treebolic parent node to attach to
-	 * @param classes        class stream
-	 * @param ontologyUrl URL string
+	 * @param parentClassNode treebolic parent node to attach to
+	 * @param classes         class stream
+	 * @param ontologyUrl     URL string
 	 */
 	public void visitClasses(@NonNull final TreeMutableNode parentClassNode, final ExtendedIterator<OntClass> classes, final String ontologyUrl)
 	{
@@ -925,8 +925,8 @@ public class OwlModelFactory implements ImageDecorator
 	 * Visit class
 	 *
 	 * @param parentOwlClassNode treebolic parent node to attach to
-	 * @param clazz           class
-	 * @param ontologyUrl  ontology URL string
+	 * @param clazz              class
+	 * @param ontologyUrl        ontology URL string
 	 * @return treebolic node
 	 */
 	@NonNull
@@ -986,28 +986,28 @@ public class OwlModelFactory implements ImageDecorator
 	 * Visit classes and subclasses
 	 *
 	 * @param parentOwlClassNode treebolic parent node to attach to
-	 * @param owlClass           class
-	 * @param ontologyUrlString  ontology URL string
+	 * @param clazz              class
+	 * @param ontologyUrl        ontology URL string
 	 * @return treebolic node
 	 */
 	@NonNull
-	public MutableNode visitClassAndSubclasses(final INode parentOwlClassNode, @NonNull final OntClass owlClass, final String ontologyUrlString)
+	public MutableNode visitClassAndSubclasses(final INode parentOwlClassNode, @NonNull final OntClass clazz, final String ontologyUrl)
 	{
-		@NonNull final TreeMutableNode owlClassNode = visitClass(parentOwlClassNode, owlClass, ontologyUrlString);
+		@NonNull final TreeMutableNode classNode = visitClass(parentOwlClassNode, clazz, ontologyUrl);
 
 		// recurse
 		assert engine != null;
-		final ExtendedIterator<OntClass> owlSubClasses = engine.getSubClasses(owlClass);
-		visitClasses(owlClassNode, owlSubClasses, ontologyUrlString);
+		final ExtendedIterator<OntClass> subClasses = engine.getSubClasses(clazz);
+		visitClasses(classNode, subClasses, ontologyUrl);
 
-		return owlClassNode;
+		return classNode;
 	}
 
 	/**
 	 * Walk instances in stream
 	 *
-	 * @param parentNode     treebolic parent node to attach to
-	 * @param instances individual stream
+	 * @param parentNode treebolic parent node to attach to
+	 * @param instances  individual stream
 	 */
 	public void visitInstances(@NonNull final TreeMutableNode parentNode, final ExtendedIterator<OntResource> instances)
 	{
@@ -1038,8 +1038,8 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Walk relation properties
 	 *
-	 * @param parentNode  treebolic parent node to attach to
-	 * @param property property
+	 * @param parentNode treebolic parent node to attach to
+	 * @param property   property
 	 */
 	public void visitRelation(final MutableNode parentNode, @NonNull final OntProperty property)
 	{
@@ -1124,21 +1124,21 @@ public class OwlModelFactory implements ImageDecorator
 	/**
 	 * Walk properties in iterator
 	 *
-	 * @param parentNode    treebolic parent node to attach to
-	 * @param owlProperties property stream
+	 * @param parentNode treebolic parent node to attach to
+	 * @param properties property stream
 	 */
-	public void visitProperties(@NonNull final TreeMutableNode parentNode, @NonNull final Stream<OntProperty> owlProperties)
+	public void visitProperties(@NonNull final TreeMutableNode parentNode, @NonNull final Stream<OntProperty> properties)
 	{
-		@NonNull final List<INode> childNodes = owlProperties //
+		@NonNull final List<INode> childNodes = properties //
 
 				.sorted(Comparator.comparing(OntProperty::getLocalName)) //
-				.map(owlProperty -> {
-					final String owlPropertyShortForm = owlProperty.getLocalName();
-					final String owlPropertyId = owlProperty.getLocalName();
+				.map(property -> {
+					final String name = property.getLocalName();
+					final String id = property.getLocalName();
 
-					@NonNull final MutableNode propertyNode = new MutableNode(null, owlPropertyId);
-					propertyNode.setLabel(owlPropertyShortForm);
-					propertyNode.setTarget(owlPropertyId);
+					@NonNull final MutableNode propertyNode = new MutableNode(null, id);
+					propertyNode.setLabel(name);
+					propertyNode.setTarget(id);
 					decorateProperty(propertyNode);
 					return propertyNode;
 				}) //
