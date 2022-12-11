@@ -13,9 +13,9 @@ import java.util.*;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.studio.Pair;
 import treebolic.glue.iface.Colors;
 import treebolic.model.*;
+import treebolic.studio.Pair;
 
 /**
  * Model utilities
@@ -53,8 +53,11 @@ public class ModelUtils
 	public static INode makeDefaultTree()
 	{
 		@NonNull final String[][] data = { //
-				{"id1", "one\n1", "id11", "eleven\n11", "id12", "twelve\n12", "id13", "thirteen\n13", "id14", "fourteen\n14"},          //$NON-NLS-10$
-				{"id2", "two\n2", "id21", "twenty-one\n21", "id22", "twenty-two\n22", "id23", "twenty-three\n23"}, {"id3", "three\n3", "id31", "thirty-one\n31", "id32", "thirty-two\n32"}, {"id4", "four\n4", "id41", "forty-one\n41"}, {"id5", "five\n5"}};
+				{"id1", "one\n1", "id11", "eleven\n11", "id12", "twelve\n12", "id13", "thirteen\n13", "id14", "fourteen\n14"}, //
+				{"id2", "two\n2", "id21", "twenty-one\n21", "id22", "twenty-two\n22", "id23", "twenty-three\n23"}, //
+				{"id3", "three\n3", "id31", "thirty-one\n31", "id32", "thirty-two\n32"}, //
+				{"id4", "four\n4", "id41", "forty-one\n41"}, //
+				{"id5", "five\n5"}};
 		@NonNull final TreeMutableNode root = new TreeMutableNode(null, "root");
 		root.setLabel("root");
 		root.setBackColor(Colors.ORANGE);

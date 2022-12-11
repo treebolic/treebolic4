@@ -611,6 +611,7 @@
     <pattern value="treebolic.provider.owl.owlapi.OwlModelFactory2" method="setEdgeImage" />
     <pattern value="treebolic.glue.Graphics" />
     <pattern value="treebolic.glue.component.Toolbar" />
+    <pattern value="treebolic.provider.xml.stax.Provider" method="Provider" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">

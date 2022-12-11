@@ -292,26 +292,7 @@ public class DocumentAdapter
 			final String content = element.getTextContent();
 			if (content != null && !content.isEmpty())
 			{
-				if (imageSrc != null && !imageSrc.isEmpty())
-				{
-					@NonNull String sb = "<p><img src='" + //
-							imageSrc + //
-							"' style='float:left;margin-right:10px;'/>" + //
-							content + //
-							"</p>";
-					/*
-					sb.append("<table><tr><td valign='top'><img src='");
-					sb.append(imageSrc);
-					sb.append("'/></td><td>");
-					sb.append(content);
-					sb.append("</td></tr></table>");
-					*/
-					node.setContent(sb);
-				}
-				else
-				{
-					node.setContent(content);
-				}
+				node.setContent(toContent(content, imageSrc));
 			}
 		}
 
@@ -763,7 +744,7 @@ public class DocumentAdapter
 			}
 		}
 
-		// D E F A U L T . E D G E
+		// M E N U
 		@Nullable List<MenuItem> menuItemList = null;
 		final NodeList children = document.getElementsByTagName("menuitem");
 		for (int i = 0; i < children.getLength(); i++)
@@ -817,6 +798,27 @@ public class DocumentAdapter
 	}
 
 	// H E L P E R S
+
+	private static @NonNull String toContent(@NonNull final String content, @Nullable final String imageSrc)
+	{
+		if (imageSrc != null && !imageSrc.isEmpty())
+		{
+			@NonNull String sb = "<p><img src='" + //
+					imageSrc + //
+					"' style='float:left;margin-right:10px;'/>" + //
+					content + //
+					"</p>";
+					/*
+					sb.append("<table><tr><td valign='top'><img src='");
+					sb.append(imageSrc);
+					sb.append("'/></td><td>");
+					sb.append(content);
+					sb.append("</td></tr></table>");
+					*/
+			return sb;
+		}
+		return content;
+	}
 
 	/**
 	 * Find DOM element with given tag

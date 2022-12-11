@@ -46,60 +46,9 @@ public class Parser
 
 	private static final String MOUNTPOINT = "mountpoint";
 
-	private static final String DEFAULTTREEEDGE = "default.treeedge";
+	private static final String DEFAULT_TREEEDGE = "default.treeedge";
 
-	private static final String DEFAULTEDGE = "default.edge";
-
-	private static void setAttribute(final StartElement element, final String qName, final Consumer<String> consumer)
-	{
-		Attribute attribute = element.getAttributeByName(new QName(qName));
-		if (attribute != null)
-		{
-			String val = attribute.getValue();
-			if (val != null)
-			{
-				consumer.accept(val);
-			}
-		}
-	}
-
-	private static <T> void setAttribute(final StartElement element, final String qName, final Function<String, T> transformer, final Consumer<T> consumer)
-	{
-		Attribute attribute = element.getAttributeByName(new QName(qName));
-		if (attribute != null)
-		{
-			String val = attribute.getValue();
-			if (val != null)
-			{
-				T val2 = transformer.apply(val);
-				if (val2 != null)
-				{
-					consumer.accept(val2);
-				}
-			}
-		}
-	}
-
-	private static <T> void setStyleAttribute(final StartElement element, final String strokeQName, final String fromTerminatorQName, final String toTerminatorQName, final String lineQName, final String hiddenQName, final Consumer<Integer> consumer)
-	{
-		Attribute strokeAttribute = element.getAttributeByName(new QName(strokeQName));
-		Attribute fromTerminatorAttribute = element.getAttributeByName(new QName(fromTerminatorQName));
-		Attribute toTerminatorAttribute = element.getAttributeByName(new QName(toTerminatorQName));
-		Attribute lineAttribute = element.getAttributeByName(new QName(lineQName));
-		Attribute hiddenAttribute = element.getAttributeByName(new QName(hiddenQName));
-
-		String stroke = strokeAttribute == null ? null : strokeAttribute.getValue();
-		String fromTerminator = fromTerminatorAttribute == null ? null : fromTerminatorAttribute.getValue();
-		String toTerminator = toTerminatorAttribute == null ? null : toTerminatorAttribute.getValue();
-		String line = lineAttribute == null ? null : lineAttribute.getValue();
-		String hidden = hiddenAttribute == null ? null : hiddenAttribute.getValue();
-
-		Integer sval = Utils.parseStyle(stroke, fromTerminator, toTerminator, line, hidden);
-		if (sval != null)
-		{
-			consumer.accept(sval);
-		}
-	}
+	private static final String DEFAULT_EDGE = "default.edge";
 
 	/**
 	 * StAX handler
@@ -180,7 +129,7 @@ public class Parser
 						stack = new Stack<>();
 
 						setAttribute(startElement, "backcolor", Parser::parseColor, (v) -> settings.nodeBackColor = v);
-						setAttribute(startElement, "forecolor", Parser::parseColor, (v) -> settings.foreColor = v);
+						setAttribute(startElement, "forecolor", Parser::parseColor, (v) -> settings.nodeForeColor = v);
 						setAttribute(startElement, "border", Parser::parseBoolean, (v) -> settings.borderFlag = v);
 						setAttribute(startElement, "ellipsize", Parser::parseBoolean, (v) -> settings.ellipsizeFlag = v);
 						break;
@@ -206,6 +155,7 @@ public class Parser
 							root = node;
 						}
 
+						// node content
 						parseNode(reader, node);
 						break;
 					}
@@ -228,6 +178,98 @@ public class Parser
 						MutableEdge edge = new MutableEdge(fromNode, toNode);
 						assert edges != null;
 						edges.add(edge);
+
+						setStyleAttribute(startElement, "stroke", "fromterminator", "toterminator", "line", "hidden", edge::setStyle);
+						setAttribute(startElement, "color", Parser::parseColor, edge::setColor);
+
+						XMLEvent event3 = reader.peek();
+						if (event3.isStartElement())
+						{
+							StartElement startElement3 = event3.asStartElement();
+							if (LABEL.equals(startElement3.getName().getLocalPart()))
+							{
+								reader.nextEvent(); // consume
+								String label = reader.getElementText();
+								if (!label.isEmpty())
+								{
+									edge.setLabel(label);
+								}
+							}
+						}
+						event3 = reader.peek();
+						if (event3.isStartElement())
+						{
+							StartElement startElement3 = event3.asStartElement();
+							if (IMG.equals(startElement3.getName().getLocalPart()))
+							{
+								reader.nextEvent(); // consume
+								setAttribute(startElement3, "src", edge::setImageFile);
+							}
+						}
+
+						break;
+					}
+
+					case DEFAULT_TREEEDGE:
+					{
+						setStyleAttribute(startElement, "stroke", "fromterminator", "toterminator", "line", "hidden", v -> settings.treeEdgeStyle = v);
+						setAttribute(startElement, "color", Parser::parseColor, (v) -> settings.treeEdgeColor = v);
+
+						XMLEvent event3 = reader.peek();
+						// if (event3.isStartElement())
+						// {
+						// 	StartElement startElement3 = event3.asStartElement();
+						// 	if (LABEL.equals(startElement3.getName().getLocalPart()))
+						// 	{
+						// 		reader.nextEvent(); // consume
+						// 		String label = reader.getElementText();
+						// 		if (!label.isEmpty())
+						// 		{
+						// 			settings.treeedgeLabel = label;
+						// 		}
+						// 	}
+						// }
+						// event3 = reader.peek();
+						if (event3.isStartElement())
+						{
+							StartElement startElement3 = event3.asStartElement();
+							if (IMG.equals(startElement3.getName().getLocalPart()))
+							{
+								reader.nextEvent(); // consume
+								setAttribute(startElement3, "src", (v) -> settings.defaultTreeEdgeImage = v);
+							}
+						}
+						break;
+					}
+					case DEFAULT_EDGE:
+					{
+						setStyleAttribute(startElement, "stroke", "fromterminator", "toterminator", "line", "hidden", (v) -> settings.edgeStyle = v);
+						setAttribute(startElement, "color", Parser::parseColor, (v) -> settings.edgeColor = v);
+
+						XMLEvent event3 = reader.peek();
+						// if (event3.isStartElement())
+						// {
+						// 	StartElement startElement3 = event3.asStartElement();
+						// 	if (LABEL.equals(startElement3.getName().getLocalPart()))
+						// 	{
+						// 		reader.nextEvent(); // consume
+						// 		String label = reader.getElementText();
+						// 		if (!label.isEmpty())
+						// 		{
+						// 			settings.edgeLabel = label;
+						// 		}
+						// 	}
+						// }
+						// event3 = reader.peek();
+						if (event3.isStartElement())
+						{
+							StartElement startElement3 = event3.asStartElement();
+							if (IMG.equals(startElement3.getName().getLocalPart()))
+							{
+								reader.nextEvent(); // consume
+								setAttribute(startElement3, "src", (v) -> settings.defaultEdgeImage = v);
+							}
+						}
 						break;
 					}
 				}
@@ -236,22 +278,10 @@ public class Parser
 			else if (event.isEndElement())
 			{
 				EndElement endElement = event.asEndElement();
-				switch (endElement.getName().getLocalPart())
+				if (NODE.equals(endElement.getName().getLocalPart()))
 				{
-					case NODE:
-					{
-						assert !stack.empty();
-						stack.pop();
-						break;
-					}
-					case NODES:
-					{
-						break;
-					}
-					case EDGES:
-					{
-						break;
-					}
+					assert !stack.empty();
+					stack.pop();
 				}
 			}
 
@@ -263,6 +293,13 @@ public class Parser
 		return new Model(new Tree(root, edges), settings);
 	}
 
+	/**
+	 * Parse node content (label, content, img, a, treeedge, mountpoint
+	 *
+	 * @param reader event reader positioned on 'node' start element
+	 * @param node   current node
+	 * @throws XMLStreamException XML stream exception
+	 */
 	public static void parseNode(@NonNull XMLEventReader reader, @NotNull MutableNode node) throws XMLStreamException
 	{
 		// enter node mode
@@ -299,6 +336,17 @@ public class Parser
 					{
 						reader.nextEvent(); // consume
 						setAttribute(startElement2, "src", node::setImageFile);
+
+						// img comes after label
+						String img = node.getImageFile();
+						if (img != null && !img.isEmpty())
+						{
+							String content = node.getContent();
+							if (content != null && !content.isEmpty())
+							{
+								node.setContent(toContent(content, node.getImageFile()));
+							}
+						}
 						break;
 					}
 					case A:
@@ -344,10 +392,10 @@ public class Parser
 					{
 						MountPoint.Mounting mountpoint = new MountPoint.Mounting();
 						StartElement mountpointElement = reader.nextEvent().asStartElement(); // consume
-						setAttribute(mountpointElement, "now", Parser::parseBoolean, v -> mountpoint.now = v);
+						setAttribute(mountpointElement, "now", Parser::parseBoolean, (v) -> mountpoint.now = v);
 						StartElement aElement = reader.nextEvent().asStartElement();
 						assert A.equals(aElement.getName().getLocalPart());
-						setAttribute(aElement, "href", v -> mountpoint.url = v);
+						setAttribute(aElement, "href", (v) -> mountpoint.url = v);
 						node.setMountPoint(mountpoint);
 						break;
 					}
@@ -437,6 +485,89 @@ public class Parser
 			return null;
 		}
 		return Boolean.parseBoolean(val);
+	}
+
+	private static void setAttribute(final StartElement element, final String qName, final Consumer<String> consumer)
+	{
+		Attribute attribute = element.getAttributeByName(new QName(qName));
+		if (attribute != null)
+		{
+			String val = attribute.getValue();
+			if (val != null)
+			{
+				consumer.accept(val);
+			}
+		}
+	}
+
+	private static <T> void setAttribute(final StartElement element, final String qName, final Function<String, T> transformer, final Consumer<T> consumer)
+	{
+		Attribute attribute = element.getAttributeByName(new QName(qName));
+		if (attribute != null)
+		{
+			String val = attribute.getValue();
+			if (val != null)
+			{
+				T val2 = transformer.apply(val);
+				if (val2 != null)
+				{
+					consumer.accept(val2);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Set style attribute
+	 *
+	 * @param element             element
+	 * @param strokeQName         stroke qname
+	 * @param fromTerminatorQName from-terminator qname
+	 * @param toTerminatorQName   to-terminator qname
+	 * @param lineQName           line qname
+	 * @param hiddenQName         hidden qname
+	 * @param consumer            consumer of produced value
+	 */
+	private static void setStyleAttribute(final StartElement element, @SuppressWarnings("SameParameterValue") final String strokeQName, @SuppressWarnings("SameParameterValue") final String fromTerminatorQName, @SuppressWarnings("SameParameterValue") final String toTerminatorQName, @SuppressWarnings("SameParameterValue") final String lineQName, @SuppressWarnings("SameParameterValue") final String hiddenQName, final Consumer<Integer> consumer)
+	{
+		Attribute strokeAttribute = element.getAttributeByName(new QName(strokeQName));
+		Attribute fromTerminatorAttribute = element.getAttributeByName(new QName(fromTerminatorQName));
+		Attribute toTerminatorAttribute = element.getAttributeByName(new QName(toTerminatorQName));
+		Attribute lineAttribute = element.getAttributeByName(new QName(lineQName));
+		Attribute hiddenAttribute = element.getAttributeByName(new QName(hiddenQName));
+
+		String stroke = strokeAttribute == null ? null : strokeAttribute.getValue();
+		String fromTerminator = fromTerminatorAttribute == null ? null : fromTerminatorAttribute.getValue();
+		String toTerminator = toTerminatorAttribute == null ? null : toTerminatorAttribute.getValue();
+		String line = lineAttribute == null ? null : lineAttribute.getValue();
+		String hidden = hiddenAttribute == null ? null : hiddenAttribute.getValue();
+
+		Integer sval = Utils.parseStyle(stroke, fromTerminator, toTerminator, line, hidden);
+		if (sval != null)
+		{
+			consumer.accept(sval);
+		}
+	}
+
+	private static @NonNull String toContent(@NonNull final String content, @Nullable final String imageSrc)
+	{
+		if (imageSrc != null && !imageSrc.isEmpty())
+		{
+			@NonNull String sb = "<p><img src='" + //
+					imageSrc + //
+					"' style='float:left;margin-right:10px;'/>" + //
+					content + //
+					"</p>";
+					/*
+					sb.append("<table><tr><td valign='top'><img src='");
+					sb.append(imageSrc);
+					sb.append("'/></td><td>");
+					sb.append(content);
+					sb.append("</td></tr></table>");
+					*/
+			return sb;
+		}
+		return content;
 	}
 
 	/**

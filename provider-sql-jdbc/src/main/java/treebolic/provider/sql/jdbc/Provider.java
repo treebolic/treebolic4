@@ -165,9 +165,9 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		{
 			// url/user/password
 			@NonNull final String url = makeUrl(properties);
-			System.out.println("Sqlx provider URL: " + url); //$NON-NLS-1$
-			final String user = properties.getProperty("user"); //$NON-NLS-1$
-			final String passwd = properties.getProperty("passwd"); //$NON-NLS-1$
+			System.out.println("Sqlx provider URL: " + url); 
+			final String user = properties.getProperty("user"); 
+			final String passwd = properties.getProperty("passwd"); 
 
 			try
 			{
@@ -178,7 +178,7 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 			catch (final SQLException exception)
 			{
 				this.connection = null;
-				System.err.println("Sqlx exception : " + exception.getMessage()); //$NON-NLS-1$
+				System.err.println("Sqlx exception : " + exception.getMessage()); 
 			}
 		}
 
@@ -237,20 +237,20 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		@NonNull
 		private String makeUrl(@NonNull final Properties properties)
 		{
-			String uRL = properties.getProperty("url"); //$NON-NLS-1$
+			String uRL = properties.getProperty("url"); 
 			if (uRL == null || uRL.isEmpty())
 			{
-				final String protocol = properties.getProperty("protocol"); //$NON-NLS-1$
-				String server = properties.getProperty("server"); //$NON-NLS-1$
+				final String protocol = properties.getProperty("protocol"); 
+				String server = properties.getProperty("server"); 
 				if (server == null || server.isEmpty())
 				{
-					server = "localhost"; //$NON-NLS-1$
+					server = "localhost"; 
 				}
-				final String database = properties.getProperty("database"); //$NON-NLS-1$
-				uRL = protocol + "://" + server + "/" + database; //$NON-NLS-1$ //$NON-NLS-2$
+				final String database = properties.getProperty("database"); 
+				uRL = protocol + "://" + server + "/" + database;  
 			}
-			final String database = properties.getProperty("database"); //$NON-NLS-1$
-			uRL = uRL.replaceAll("%database%", Matcher.quoteReplacement(database)); //$NON-NLS-1$
+			final String database = properties.getProperty("database"); 
+			uRL = uRL.replaceAll("%database%", Matcher.quoteReplacement(database)); 
 			return uRL;
 		}
 	}

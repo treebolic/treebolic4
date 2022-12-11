@@ -27,47 +27,47 @@ public class SqlProperties
 	/**
 	 * Properties in 'more' bundle
 	 */
-	public static final String SOURCE = "source"; //$NON-NLS-1$
+	public static final String SOURCE = "source"; 
 
 	/**
 	 * Prune
 	 */
-	public static final String PRUNE = "prune"; //$NON-NLS-1$
+	public static final String PRUNE = "prune"; 
 
 	/**
 	 * Truncate nodes
 	 */
-	public static final String TRUNCATE_NODES = "truncate.nodes.where"; //$NON-NLS-1$
+	public static final String TRUNCATE_NODES = "truncate.nodes.where"; 
 
 	/**
 	 * Prune nodes
 	 */
-	public static final String PRUNE_NODES = "prune.nodes.where"; //$NON-NLS-1$
+	public static final String PRUNE_NODES = "prune.nodes.where"; 
 
 	/**
 	 * Truncate tree edges
 	 */
-	public static final String TRUNCATE_TREEEDGES = "truncate.treeedges.where"; //$NON-NLS-1$
+	public static final String TRUNCATE_TREEEDGES = "truncate.treeedges.where"; 
 
 	/**
 	 * Prune tree edges
 	 */
-	public static final String PRUNE_TREEEDGES = "prune.treeedges.where"; //$NON-NLS-1$
+	public static final String PRUNE_TREEEDGES = "prune.treeedges.where"; 
 
 	/**
 	 * Truncate edges
 	 */
-	public static final String TRUNCATE_EDGES = "truncate.edges.where"; //$NON-NLS-1$
+	public static final String TRUNCATE_EDGES = "truncate.edges.where"; 
 
 	/**
 	 * Prune edges
 	 */
-	public static final String PRUNE_EDGES = "prune.edges.where"; //$NON-NLS-1$
+	public static final String PRUNE_EDGES = "prune.edges.where"; 
 
 	/**
 	 * Balance load
 	 */
-	public static final String BALANCE_LOAD = "balance"; //$NON-NLS-1$
+	public static final String BALANCE_LOAD = "balance"; 
 
 	/**
 	 * Load properties

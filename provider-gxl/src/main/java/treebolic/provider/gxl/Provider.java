@@ -88,7 +88,7 @@ public class Provider implements IProvider
 		String source = source0;
 		if (source == null)
 		{
-			source = parameters.getProperty("source"); //$NON-NLS-1$
+			source = parameters.getProperty("source"); 
 		}
 
 		// parse XML file
@@ -98,14 +98,14 @@ public class Provider implements IProvider
 			@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 
 			// parse
-			this.context.progress("Loading ..." + (url != null ? url : source), false); //$NON-NLS-1$
+			this.context.progress("Loading ..." + (url != null ? url : source), false); 
 			@Nullable final Model model = url != null ? GxlParser.parseModel(url) : GxlParser.parseModel(source);
 			if (model != null)
 			{
-				this.context.progress("Loaded " + (url != null ? url : source), false); //$NON-NLS-1$
+				this.context.progress("Loaded " + (url != null ? url : source), false); 
 				return model;
 			}
-			this.context.message("Cannot load GXL file <" + (url != null ? url : source) + ">"); //$NON-NLS-1$ //$NON-NLS-2$
+			this.context.message("Cannot load GXL file <" + (url != null ? url : source) + ">");  
 		}
 		return null;
 	}
@@ -122,7 +122,7 @@ public class Provider implements IProvider
 		String source = source0;
 		if (source == null && parameters != null)
 		{
-			source = parameters.getProperty("source"); //$NON-NLS-1$
+			source = parameters.getProperty("source"); 
 		}
 
 		// parse XML file
@@ -132,29 +132,29 @@ public class Provider implements IProvider
 			@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 
 			// parse
-			this.context.progress("Loading ..." + (url != null ? url : source), false); //$NON-NLS-1$
+			this.context.progress("Loading ..." + (url != null ? url : source), false); 
 			try
 			{
 				@Nullable Tree tree = url != null ? GxlParser.parseTree(url) : GxlParser.parseTree(source);
 				if (tree != null)
 				{
-					this.context.progress("Loaded " + (url != null ? url : source), false); //$NON-NLS-1$
+					this.context.progress("Loaded " + (url != null ? url : source), false); 
 					return tree;
 				}
 			}
 			catch (final IOException e)
 			{
-				this.context.warn("GXL parser IO: " + e); //$NON-NLS-1$
+				this.context.warn("GXL parser IO: " + e); 
 			}
 			catch (final SAXException e)
 			{
-				this.context.warn("GXL parser SAX: " + e); //$NON-NLS-1$
+				this.context.warn("GXL parser SAX: " + e); 
 			}
 			catch (final ParserConfigurationException e)
 			{
-				this.context.warn("GXL parser CONFIG: " + e); //$NON-NLS-1$
+				this.context.warn("GXL parser CONFIG: " + e); 
 			}
-			this.context.message("Cannot load GXL file <" + (url != null ? url : source) + ">"); //$NON-NLS-1$ //$NON-NLS-2$
+			this.context.message("Cannot load GXL file <" + (url != null ? url : source) + ">");  
 		}
 		return null;
 	}

@@ -155,42 +155,42 @@ public abstract class AbstractProvider< //
 	/**
 	 * Property files
 	 */
-	static private final String DEFAULT_PROPERTY_FILE = "query.properties"; //$NON-NLS-1$
+	static private final String DEFAULT_PROPERTY_FILE = "query.properties"; 
 
 	/**
 	 * Get nodes SQL statement
 	 */
-	static private final String DEFAULT_NODES_SQL = "SELECT * FROM %nodes%;"; //$NON-NLS-1$
+	static private final String DEFAULT_NODES_SQL = "SELECT * FROM %nodes%;"; 
 
 	/**
 	 * Get tree edges SQL statement
 	 */
-	static private final String DEFAULT_TREEEDGES_SQL = "SELECT * FROM %edges% WHERE %istree% = 1;"; //$NON-NLS-1$
+	static private final String DEFAULT_TREEEDGES_SQL = "SELECT * FROM %edges% WHERE %istree% = 1;"; 
 
 	/**
 	 * Get edges SQL statement
 	 */
-	static private final String DEFAULT_EDGES_SQL = "SELECT * FROM %edges% WHERE %istree% = 0;"; //$NON-NLS-1$
+	static private final String DEFAULT_EDGES_SQL = "SELECT * FROM %edges% WHERE %istree% = 0;"; 
 
 	/**
 	 * Get settings SQL statement
 	 */
-	static private final String DEFAULT_SETTINGS_SQL = "SELECT * FROM %settings%;"; //$NON-NLS-1$
+	static private final String DEFAULT_SETTINGS_SQL = "SELECT * FROM %settings%;"; 
 
 	/**
 	 * Get menu item SQL statement
 	 */
-	static private final String DEFAULT_MENU_SQL = "SELECT * FROM %menu% WHERE %menuid% = 0;"; //$NON-NLS-1$
+	static private final String DEFAULT_MENU_SQL = "SELECT * FROM %menu% WHERE %menuid% = 0;"; 
 
 	/**
 	 * Goto url scheme
 	 */
-	private static final String GOTO_SCHEME = "goto:"; //$NON-NLS-1$
+	private static final String GOTO_SCHEME = "goto:"; 
 
 	/**
 	 * Mount url scheme
 	 */
-	private static final String MOUNT_SCHEME = "mount:"; //$NON-NLS-1$
+	private static final String MOUNT_SCHEME = "mount:"; 
 
 	/**
 	 * LoadBalancer : Edge style
@@ -242,19 +242,19 @@ public abstract class AbstractProvider< //
 	 */
 	private boolean initialize(final String source0, final URL base, @NonNull final Properties parameters)
 	{
-		System.out.println("Sqlx provider source: " + source0); //$NON-NLS-1$
+		System.out.println("Sqlx provider source: " + source0); 
 		String source = source0;
 		boolean isGoto = false;
 		if (source.startsWith(GOTO_SCHEME))
 		{
-			System.out.println("Sqlx GOTO"); //$NON-NLS-1$
+			System.out.println("Sqlx GOTO"); 
 			source = source.substring(GOTO_SCHEME.length());
 			isGoto = true;
 		}
 		boolean isMount = false;
 		if (source.startsWith(MOUNT_SCHEME))
 		{
-			System.out.println("Sqlx MOUNT"); //$NON-NLS-1$
+			System.out.println("Sqlx MOUNT"); 
 			source = source.substring(MOUNT_SCHEME.length());
 			isMount = true;
 		}
@@ -263,7 +263,7 @@ public abstract class AbstractProvider< //
 		this.base = base;
 
 		// source=query-file,path(,)
-		@NonNull final String[] fields = source.split(","); //$NON-NLS-1$
+		@NonNull final String[] fields = source.split(","); 
 		String queryFile = fields[0];
 
 		// ensure query file if no properties
@@ -271,7 +271,7 @@ public abstract class AbstractProvider< //
 		{
 			if (queryFile == null)
 			{
-				queryFile = parameters.getProperty("query"); //$NON-NLS-1$
+				queryFile = parameters.getProperty("query"); 
 			}
 			if (queryFile == null)
 			{
@@ -305,7 +305,7 @@ public abstract class AbstractProvider< //
 		if (fields.length > 1)
 		{
 			String path = fields[1];
-			if (path.startsWith("where:")) //$NON-NLS-1$
+			if (path.startsWith("where:")) 
 			{
 				// where-clause is truncate clause
 				@NonNull String where = path.substring(6);
@@ -315,7 +315,7 @@ public abstract class AbstractProvider< //
 		}
 
 		// 3rd (empty) part of source stops pruning
-		boolean hasTrailingComma = source.endsWith(","); //$NON-NLS-1$
+		boolean hasTrailingComma = source.endsWith(","); 
 
 		// apply pruning
 		this.properties.put(SqlProperties.PRUNE, isMount || isGoto || hasTrailingComma);
@@ -396,11 +396,11 @@ public abstract class AbstractProvider< //
 	@Nullable
 	protected String makeDatabasePath(@NonNull final Properties properties)
 	{
-		String databaseName = properties.getProperty("database"); //$NON-NLS-1$
+		String databaseName = properties.getProperty("database"); 
 		if (databaseName != null && databaseName.length() > 0)
 		{
-			System.out.println("Base: " + this.base); //$NON-NLS-1$
-			System.out.println("Name: " + databaseName); //$NON-NLS-1$
+			System.out.println("Base: " + this.base); 
+			System.out.println("Name: " + databaseName); 
 			@NonNull File dbFile = new File(databaseName);
 			if (dbFile.exists())
 			{
@@ -414,9 +414,9 @@ public abstract class AbstractProvider< //
 				// File f = new File(base, databaseName);
 
 				@NonNull URL url = new URL(this.base, databaseName);
-				System.out.println("Url: " + url); //$NON-NLS-1$
+				System.out.println("Url: " + url); 
 				dbFile = new File(url.toURI());
-				System.out.println("File: " + dbFile); //$NON-NLS-1$
+				System.out.println("File: " + dbFile); 
 				return dbFile.getAbsolutePath();
 			}
 			catch (MalformedURLException | URISyntaxException e)
@@ -439,7 +439,7 @@ public abstract class AbstractProvider< //
 	private Model queryModel()
 	{
 		assert this.properties != null;
-		this.properties.put("database", makeDatabasePath(this.properties)); //$NON-NLS-1$
+		this.properties.put("database", makeDatabasePath(this.properties)); 
 		try
 		{
 			// connect
@@ -456,7 +456,7 @@ public abstract class AbstractProvider< //
 				@Nullable final List<INode> children = root.getChildren();
 				if (children != null && children.size() == 1)
 				{
-					settings.orientation = "south"; //$NON-NLS-1$
+					settings.orientation = "south"; 
 					settings.yMoveTo = -0.4F;
 				}
 			}
@@ -469,7 +469,7 @@ public abstract class AbstractProvider< //
 		}
 		catch (final Exception e)
 		{
-			System.err.println("Sqlx queryModel: " + e.getMessage()); //$NON-NLS-1$
+			System.err.println("Sqlx queryModel: " + e.getMessage()); 
 			e.printStackTrace();
 		}
 		return null;
@@ -499,7 +499,7 @@ public abstract class AbstractProvider< //
 		}
 		catch (final Exception e)
 		{
-			System.err.println("Sqlx queryTree: " + e.getMessage()); //$NON-NLS-1$
+			System.err.println("Sqlx queryTree: " + e.getMessage()); 
 			e.printStackTrace();
 		}
 		return null;
@@ -538,38 +538,38 @@ public abstract class AbstractProvider< //
 		boolean balanceLoad = !this.properties.containsKey(SqlProperties.BALANCE_LOAD) || "true".equals(this.properties.get(SqlProperties.BALANCE_LOAD));
 
 		// sql
-		String nodesSql = this.properties.getProperty("nodesSql", AbstractProvider.DEFAULT_NODES_SQL); //$NON-NLS-1$
+		String nodesSql = this.properties.getProperty("nodesSql", AbstractProvider.DEFAULT_NODES_SQL); 
 		nodesSql = narrowNodeSql(nodesSql, prune);
 		nodesSql = macroExpand(nodesSql);
 		System.out.println(nodesSql);
 
-		String treeEdgesSql = this.properties.getProperty("treeEdgesSql", AbstractProvider.DEFAULT_TREEEDGES_SQL); //$NON-NLS-1$
+		String treeEdgesSql = this.properties.getProperty("treeEdgesSql", AbstractProvider.DEFAULT_TREEEDGES_SQL); 
 		treeEdgesSql = narrowTreeEdgeSql(treeEdgesSql, prune);
 		treeEdgesSql = macroExpand(treeEdgesSql);
 		System.out.println(treeEdgesSql);
 
 		// field names
-		@NonNull final String idName = getName("nodes.id"); //$NON-NLS-1$
-		@NonNull final String labelName = getName("nodes.label"); //$NON-NLS-1$
-		@NonNull final String contentName = getName("nodes.content"); //$NON-NLS-1$
-		@NonNull final String backcolorName = getName("nodes.backcolor"); //$NON-NLS-1$
-		@NonNull final String forecolorName = getName("nodes.forecolor"); //$NON-NLS-1$
-		@NonNull final String imageName = getName("nodes.image"); //$NON-NLS-1$
-		@NonNull final String linkName = getName("nodes.link"); //$NON-NLS-1$
-		@NonNull final String targetName = getName("nodes.target"); //$NON-NLS-1$
-		@NonNull final String weightName = getName("nodes.weight"); //$NON-NLS-1$
-		@NonNull final String mountpointName = getName("nodes.mountpoint"); //$NON-NLS-1$
+		@NonNull final String idName = getName("nodes.id"); 
+		@NonNull final String labelName = getName("nodes.label"); 
+		@NonNull final String contentName = getName("nodes.content"); 
+		@NonNull final String backcolorName = getName("nodes.backcolor"); 
+		@NonNull final String forecolorName = getName("nodes.forecolor"); 
+		@NonNull final String imageName = getName("nodes.image"); 
+		@NonNull final String linkName = getName("nodes.link"); 
+		@NonNull final String targetName = getName("nodes.target"); 
+		@NonNull final String weightName = getName("nodes.weight"); 
+		@NonNull final String mountpointName = getName("nodes.mountpoint"); 
 
-		@NonNull final String fromName = getName("edges.from"); //$NON-NLS-1$
-		@NonNull final String toName = getName("edges.to"); //$NON-NLS-1$
-		@NonNull final String edgeLabelName = getName("edges.label"); //$NON-NLS-1$
-		@NonNull final String edgeImageName = getName("edges.image"); //$NON-NLS-1$
-		@NonNull final String edgeColorName = getName("edges.color"); //$NON-NLS-1$
-		@NonNull final String edgeLineName = getName("edges.line"); //$NON-NLS-1$
-		@NonNull final String edgeHiddenName = getName("edges.hidden"); //$NON-NLS-1$
-		@NonNull final String edgeStrokeName = getName("edges.stroke"); //$NON-NLS-1$
-		@NonNull final String edgeFromTerminatorName = getName("edges.fromterminator"); //$NON-NLS-1$
-		@NonNull final String edgeToTerminatorName = getName("edges.toterminator"); //$NON-NLS-1$
+		@NonNull final String fromName = getName("edges.from"); 
+		@NonNull final String toName = getName("edges.to"); 
+		@NonNull final String edgeLabelName = getName("edges.label"); 
+		@NonNull final String edgeImageName = getName("edges.image"); 
+		@NonNull final String edgeColorName = getName("edges.color"); 
+		@NonNull final String edgeLineName = getName("edges.line"); 
+		@NonNull final String edgeHiddenName = getName("edges.hidden"); 
+		@NonNull final String edgeStrokeName = getName("edges.stroke"); 
+		@NonNull final String edgeFromTerminatorName = getName("edges.fromterminator"); 
+		@NonNull final String edgeToTerminatorName = getName("edges.toterminator"); 
 
 		// id to node map
 		this.nodesById.clear();
@@ -583,7 +583,7 @@ public abstract class AbstractProvider< //
 			final String id = nodesCursor.getString(idIndex);
 			if (id == null)
 			{
-				System.err.println("Sqlx queryNodes: " + nodesCursor.getPosition() + "th edge record with null id"); //$NON-NLS-1$ //$NON-NLS-2$
+				System.err.println("Sqlx queryNodes: " + nodesCursor.getPosition() + "th edge record with null id");  
 				continue;
 			}
 
@@ -612,10 +612,10 @@ public abstract class AbstractProvider< //
 				@NonNull final MountPoint.Mounting mountPoint = new MountPoint.Mounting();
 				mountPoint.url = value;
 				node.setMountPoint(mountPoint);
-				@Nullable final Boolean now = readBoolean(nodesCursor, "now"); //$NON-NLS-1$
+				@Nullable final Boolean now = readBoolean(nodesCursor, "now"); 
 				if (now != null && now)
 				{
-					System.err.println("Sqlx queryNodes: Recursive mounting not implemented"); //$NON-NLS-1$
+					System.err.println("Sqlx queryNodes: Recursive mounting not implemented"); 
 				}
 			}
 		}
@@ -633,7 +633,7 @@ public abstract class AbstractProvider< //
 			final String toId = treeEdgesCursor.getString(toIndex);
 			if ((fromId == null || fromId.length() == 0) && (toId == null || toId.length() == 0))
 			{
-				System.err.println("Sqlx queryNodes: " + treeEdgesCursor.getPosition() + "th tree edge record with null ids : from-id = <" + fromId + "> and to-id=<" + toId + ">"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				System.err.println("Sqlx queryNodes: " + treeEdgesCursor.getPosition() + "th tree edge record with null ids : from-id = <" + fromId + "> and to-id=<" + toId + ">");    
 				continue;
 			}
 
@@ -646,7 +646,7 @@ public abstract class AbstractProvider< //
 			// ill-formed nodes
 			if (fromNode == null && toNode == null)
 			{
-				System.err.println("Sqlx queryNodes: " + treeEdgesCursor.getPosition() + "th tree edge record with not found end nodes : from-id = <" + fromId + "> and to-id=<" + toId + ">"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				System.err.println("Sqlx queryNodes: " + treeEdgesCursor.getPosition() + "th tree edge record with not found end nodes : from-id = <" + fromId + "> and to-id=<" + toId + ">");    
 				continue;
 			}
 
@@ -750,22 +750,22 @@ public abstract class AbstractProvider< //
 		boolean prune = (Boolean) this.properties.get(SqlProperties.PRUNE);
 
 		// sql
-		String edgesSql = this.properties.getProperty("edgesSql", AbstractProvider.DEFAULT_EDGES_SQL); //$NON-NLS-1$
+		String edgesSql = this.properties.getProperty("edgesSql", AbstractProvider.DEFAULT_EDGES_SQL); 
 		edgesSql = narrowEdgeSql(edgesSql, prune);
 		edgesSql = macroExpand(edgesSql);
 		System.out.println(edgesSql);
 
 		// field names
-		@NonNull final String fromIdName = getName("edges.from"); //$NON-NLS-1$
-		@NonNull final String toIdName = getName("edges.to"); //$NON-NLS-1$
-		@NonNull final String edgeLabelName = getName("edges.label"); //$NON-NLS-1$
-		@NonNull final String edgeImageName = getName("edges.image"); //$NON-NLS-1$
-		@NonNull final String edgeColorName = getName("edges.color"); //$NON-NLS-1$
-		@NonNull final String edgeLineName = getName("edges.line"); //$NON-NLS-1$
-		@NonNull final String edgeHiddenName = getName("edges.hidden"); //$NON-NLS-1$
-		@NonNull final String edgeStrokeName = getName("edges.stroke"); //$NON-NLS-1$
-		@NonNull final String edgeFromTerminatorName = getName("edges.fromterminator"); //$NON-NLS-1$
-		@NonNull final String edgeToTerminatorName = getName("edges.toterminator"); //$NON-NLS-1$
+		@NonNull final String fromIdName = getName("edges.from"); 
+		@NonNull final String toIdName = getName("edges.to"); 
+		@NonNull final String edgeLabelName = getName("edges.label"); 
+		@NonNull final String edgeImageName = getName("edges.image"); 
+		@NonNull final String edgeColorName = getName("edges.color"); 
+		@NonNull final String edgeLineName = getName("edges.line"); 
+		@NonNull final String edgeHiddenName = getName("edges.hidden"); 
+		@NonNull final String edgeStrokeName = getName("edges.stroke"); 
+		@NonNull final String edgeFromTerminatorName = getName("edges.fromterminator"); 
+		@NonNull final String edgeToTerminatorName = getName("edges.toterminator"); 
 
 		@Nullable List<IEdge> edgeList = null;
 
@@ -783,7 +783,7 @@ public abstract class AbstractProvider< //
 			final String toId = edgesCursor.getString(toIdIndex);
 			if (fromId == null || toId == null)
 			{
-				System.err.println("Sqlx queryEdges: " + edgesCursor.getPosition() + "th edge record with null from/to id"); //$NON-NLS-1$ //$NON-NLS-2$
+				System.err.println("Sqlx queryEdges: " + edgesCursor.getPosition() + "th edge record with null from/to id");  
 				continue;
 			}
 
@@ -792,13 +792,13 @@ public abstract class AbstractProvider< //
 			final MutableNode toNode = this.nodesById.get(toId);
 			if (fromNode == null || toNode == null)
 			{
-				System.err.println("Sqlx queryEdges: " + edgesCursor.getPosition() + "th edge record with null from/to node"); //$NON-NLS-1$ //$NON-NLS-2$
+				System.err.println("Sqlx queryEdges: " + edgesCursor.getPosition() + "th edge record with null from/to node");  
 				continue;
 			}
 
 			// make edge
 			@NonNull final MutableEdge edge = new MutableEdge(fromNode, toNode);
-			edge.setColor(readColor(edgesCursor, "color")); //$NON-NLS-1$
+			edge.setColor(readColor(edgesCursor, "color")); 
 			if (edgeList == null)
 			{
 				edgeList = new ArrayList<>();
@@ -831,65 +831,65 @@ public abstract class AbstractProvider< //
 		assert this.properties != null;
 
 		// sql
-		String settingsSql = this.properties.getProperty("settingsSql", AbstractProvider.DEFAULT_SETTINGS_SQL); //$NON-NLS-1$
+		String settingsSql = this.properties.getProperty("settingsSql", AbstractProvider.DEFAULT_SETTINGS_SQL); 
 		settingsSql = macroExpand(settingsSql);
-		String menuSql = this.properties.getProperty("menuSql", AbstractProvider.DEFAULT_MENU_SQL); //$NON-NLS-1$
+		String menuSql = this.properties.getProperty("menuSql", AbstractProvider.DEFAULT_MENU_SQL); 
 		menuSql = macroExpand(menuSql);
 
 		// field names
-		@NonNull final String backImageName = getName("settings.backimage"); //$NON-NLS-1$
-		@NonNull final String backcolorName = getName("settings.backcolor"); //$NON-NLS-1$
-		@NonNull final String forecolorName = getName("settings.forecolor"); //$NON-NLS-1$
-		@NonNull final String fontFaceName = getName("settings.fontface"); //$NON-NLS-1$
-		@NonNull final String fontSizeName = getName("settings.fontsize"); //$NON-NLS-1$
-		@NonNull final String scaleFontsName = getName("settings.scalefonts"); //$NON-NLS-1$
-		@NonNull final String fontScalerName = getName("settings.fontscaler"); //$NON-NLS-1$
-		@NonNull final String scaleImagesName = getName("settings.scaleimages"); //$NON-NLS-1$
-		@NonNull final String imageScalerName = getName("settings.imagescaler"); //$NON-NLS-1$
-		@NonNull final String orientationName = getName("settings.orientation"); //$NON-NLS-1$
-		@NonNull final String expansionName = getName("settings.expansion"); //$NON-NLS-1$
-		@NonNull final String sweepName = getName("settings.sweep"); //$NON-NLS-1$
-		@NonNull final String preserveOrientationName = getName("settings.preserveorientation"); //$NON-NLS-1$
-		@NonNull final String hasToolbarName = getName("settings.hastoolbar"); //$NON-NLS-1$
-		@NonNull final String hasStatusbarName = getName("settings.hasstatusbar"); //$NON-NLS-1$
-		@NonNull final String hasPopupMenuName = getName("settings.haspopupmenu"); //$NON-NLS-1$
-		@NonNull final String hasTooltipName = getName("settings.hastooltip"); //$NON-NLS-1$
-		@NonNull final String tooltipDisplaysContentName = getName("settings.tooltipdisplayscontent"); //$NON-NLS-1$
-		@NonNull final String focusOnHoverName = getName("settings.focusonhover"); //$NON-NLS-1$
-		@NonNull final String focusName = getName("settings.focus"); //$NON-NLS-1$
-		@NonNull final String xMoveToName = getName("settings.xmoveto"); //$NON-NLS-1$
-		@NonNull final String yMoveToName = getName("settings.ymoveto"); //$NON-NLS-1$
-		@NonNull final String xShiftName = getName("settings.xshift"); //$NON-NLS-1$
-		@NonNull final String yShiftName = getName("settings.yshift"); //$NON-NLS-1$
-		@NonNull final String nodeBackcolorName = getName("settings.nodebackcolor"); //$NON-NLS-1$
-		@NonNull final String nodeForecolorName = getName("settings.nodeforecolor"); //$NON-NLS-1$
-		@NonNull final String nodeImageName = getName("settings.nodeimage"); //$NON-NLS-1$
-		@NonNull final String nodeBorderName = getName("settings.nodeborder"); //$NON-NLS-1$
-		@NonNull final String nodeEllipsizeName = getName("settings.nodeellipsize"); //$NON-NLS-1$
-		@NonNull final String nodeLabelMaxLinesName = getName("settings.nodelabelmaxlines"); //$NON-NLS-1$
-		@NonNull final String nodeLabelExtraLineFactorName = getName("settings.nodelabelextralinefactor"); //$NON-NLS-1$
-		@NonNull final String treeEdgeColorName = getName("settings.treeedgecolor"); //$NON-NLS-1$
-		@NonNull final String treeEdgeLineName = getName("settings.treeedgeline"); //$NON-NLS-1$
-		@NonNull final String treeEdgeHiddenName = getName("settings.treeedgehidden"); //$NON-NLS-1$
-		@NonNull final String treeEdgeStrokeName = getName("settings.treeedgestroke"); //$NON-NLS-1$
-		@NonNull final String treeEdgeFromTerminatorName = getName("settings.treeedgefromterminator"); //$NON-NLS-1$
-		@NonNull final String treeEdgeToTerminatorName = getName("settings.treeedgetoterminator"); //$NON-NLS-1$
-		@NonNull final String treeEdgeImageName = getName("settings.treeedgeimage"); //$NON-NLS-1$
-		@NonNull final String edgesAsArcsName = getName("settings.edgearc"); //$NON-NLS-1$
-		@NonNull final String edgeColorName = getName("settings.edgecolor"); //$NON-NLS-1$
-		@NonNull final String edgeLineName = getName("settings.edgeline"); //$NON-NLS-1$
-		@NonNull final String edgeHiddenName = getName("settings.edgehidden"); //$NON-NLS-1$
-		@NonNull final String edgeStrokeName = getName("settings.edgestroke"); //$NON-NLS-1$
-		@NonNull final String edgeFromTerminatorName = getName("settings.edgefromterminator"); //$NON-NLS-1$
-		@NonNull final String edgeToTerminatorName = getName("settings.edgetoterminator"); //$NON-NLS-1$
-		@NonNull final String edgeImageName = getName("settings.edgeimage"); //$NON-NLS-1$
+		@NonNull final String backImageName = getName("settings.backimage"); 
+		@NonNull final String backcolorName = getName("settings.backcolor"); 
+		@NonNull final String forecolorName = getName("settings.forecolor"); 
+		@NonNull final String fontFaceName = getName("settings.fontface"); 
+		@NonNull final String fontSizeName = getName("settings.fontsize"); 
+		@NonNull final String scaleFontsName = getName("settings.scalefonts"); 
+		@NonNull final String fontScalerName = getName("settings.fontscaler"); 
+		@NonNull final String scaleImagesName = getName("settings.scaleimages"); 
+		@NonNull final String imageScalerName = getName("settings.imagescaler"); 
+		@NonNull final String orientationName = getName("settings.orientation"); 
+		@NonNull final String expansionName = getName("settings.expansion"); 
+		@NonNull final String sweepName = getName("settings.sweep"); 
+		@NonNull final String preserveOrientationName = getName("settings.preserveorientation"); 
+		@NonNull final String hasToolbarName = getName("settings.hastoolbar"); 
+		@NonNull final String hasStatusbarName = getName("settings.hasstatusbar"); 
+		@NonNull final String hasPopupMenuName = getName("settings.haspopupmenu"); 
+		@NonNull final String hasTooltipName = getName("settings.hastooltip"); 
+		@NonNull final String tooltipDisplaysContentName = getName("settings.tooltipdisplayscontent"); 
+		@NonNull final String focusOnHoverName = getName("settings.focusonhover"); 
+		@NonNull final String focusName = getName("settings.focus"); 
+		@NonNull final String xMoveToName = getName("settings.xmoveto"); 
+		@NonNull final String yMoveToName = getName("settings.ymoveto"); 
+		@NonNull final String xShiftName = getName("settings.xshift"); 
+		@NonNull final String yShiftName = getName("settings.yshift"); 
+		@NonNull final String nodeBackcolorName = getName("settings.nodebackcolor"); 
+		@NonNull final String nodeForecolorName = getName("settings.nodeforecolor"); 
+		@NonNull final String nodeImageName = getName("settings.nodeimage"); 
+		@NonNull final String nodeBorderName = getName("settings.nodeborder"); 
+		@NonNull final String nodeEllipsizeName = getName("settings.nodeellipsize"); 
+		@NonNull final String nodeLabelMaxLinesName = getName("settings.nodelabelmaxlines"); 
+		@NonNull final String nodeLabelExtraLineFactorName = getName("settings.nodelabelextralinefactor"); 
+		@NonNull final String treeEdgeColorName = getName("settings.treeedgecolor"); 
+		@NonNull final String treeEdgeLineName = getName("settings.treeedgeline"); 
+		@NonNull final String treeEdgeHiddenName = getName("settings.treeedgehidden"); 
+		@NonNull final String treeEdgeStrokeName = getName("settings.treeedgestroke"); 
+		@NonNull final String treeEdgeFromTerminatorName = getName("settings.treeedgefromterminator"); 
+		@NonNull final String treeEdgeToTerminatorName = getName("settings.treeedgetoterminator"); 
+		@NonNull final String treeEdgeImageName = getName("settings.treeedgeimage"); 
+		@NonNull final String edgesAsArcsName = getName("settings.edgearc"); 
+		@NonNull final String edgeColorName = getName("settings.edgecolor"); 
+		@NonNull final String edgeLineName = getName("settings.edgeline"); 
+		@NonNull final String edgeHiddenName = getName("settings.edgehidden"); 
+		@NonNull final String edgeStrokeName = getName("settings.edgestroke"); 
+		@NonNull final String edgeFromTerminatorName = getName("settings.edgefromterminator"); 
+		@NonNull final String edgeToTerminatorName = getName("settings.edgetoterminator"); 
+		@NonNull final String edgeImageName = getName("settings.edgeimage"); 
 
-		@NonNull final String menuActionName = getName("menu.action"); //$NON-NLS-1$
-		@NonNull final String menuLabelName = getName("menu.label"); //$NON-NLS-1$
-		@NonNull final String menuTargetName = getName("menu.target"); //$NON-NLS-1$
-		@NonNull final String menuScopeName = getName("menu.scope"); //$NON-NLS-1$
-		@NonNull final String menuModeName = getName("menu.mode"); //$NON-NLS-1$
-		@NonNull final String menuLinkName = getName("menu.link"); //$NON-NLS-1$
+		@NonNull final String menuActionName = getName("menu.action"); 
+		@NonNull final String menuLabelName = getName("menu.label"); 
+		@NonNull final String menuTargetName = getName("menu.target"); 
+		@NonNull final String menuScopeName = getName("menu.scope"); 
+		@NonNull final String menuModeName = getName("menu.mode"); 
+		@NonNull final String menuLinkName = getName("menu.link"); 
 
 		try
 		{
@@ -989,7 +989,7 @@ public abstract class AbstractProvider< //
 		}
 		catch (final Exception e)
 		{
-			System.err.println("Sqlx querySettings: Cannot read Settings." + e.getMessage()); //$NON-NLS-1$
+			System.err.println("Sqlx querySettings: Cannot read Settings." + e.getMessage()); 
 		}
 		// return default
 		return new Settings();
@@ -1004,11 +1004,11 @@ public abstract class AbstractProvider< //
 	private TreeMutableNode makeRootNode()
 	{
 		assert this.properties != null;
-		@NonNull final TreeMutableNode rootNode = new TreeMutableNode(null, "root"); //$NON-NLS-1$
-		rootNode.setLabel(this.properties.getProperty("root_label")); //$NON-NLS-1$
-		rootNode.setBackColor(Utils.stringToColor(this.properties.getProperty("root_bcolor"))); //$NON-NLS-1$
-		rootNode.setForeColor(Utils.stringToColor(this.properties.getProperty("root_fcolor"))); //$NON-NLS-1$
-		rootNode.setImageFile(this.properties.getProperty("root_image")); //$NON-NLS-1$
+		@NonNull final TreeMutableNode rootNode = new TreeMutableNode(null, "root"); 
+		rootNode.setLabel(this.properties.getProperty("root_label")); 
+		rootNode.setBackColor(Utils.stringToColor(this.properties.getProperty("root_bcolor"))); 
+		rootNode.setForeColor(Utils.stringToColor(this.properties.getProperty("root_fcolor"))); 
+		rootNode.setImageFile(this.properties.getProperty("root_image")); 
 		return rootNode;
 	}
 
@@ -1237,16 +1237,16 @@ public abstract class AbstractProvider< //
 					start = false;
 
 					// detect where-clause
-					int wherePos = sb.indexOf("WHERE"); //$NON-NLS-1$
+					int wherePos = sb.indexOf("WHERE"); 
 
 					// add WHERE keyword or AND if already there
-					sb.append(wherePos == -1 ? "WHERE" : "AND"); //$NON-NLS-1$ //$NON-NLS-2$
+					sb.append(wherePos == -1 ? "WHERE" : "AND");  
 					sb.append(' ');
 				}
 				else
 				{
 					sb.append(' ');
-					sb.append("AND"); //$NON-NLS-1$
+					sb.append("AND"); 
 					sb.append(' ');
 				}
 
@@ -1323,7 +1323,7 @@ public abstract class AbstractProvider< //
 	/**
 	 * Macro pattern: ${macro}
 	 */
-	static final Pattern PATTERN = Pattern.compile("\\$\\{[^}]*}"); //$NON-NLS-1$
+	static final Pattern PATTERN = Pattern.compile("\\$\\{[^}]*}"); 
 
 	/**
 	 * Build macro name-value pairs
@@ -1352,7 +1352,7 @@ public abstract class AbstractProvider< //
 					}
 					else
 					{
-						System.err.println(match + " has no value"); //$NON-NLS-1$
+						System.err.println(match + " has no value"); 
 					}
 				}
 				macroMap.put(key, value);
@@ -1382,7 +1382,7 @@ public abstract class AbstractProvider< //
 			{
 				value = key;
 			}
-			result = result.replaceAll("\\$\\{" + key + "}", value); //$NON-NLS-1$ //$NON-NLS-2$
+			result = result.replaceAll("\\$\\{" + key + "}", value);  
 		}
 		return result;
 	}

@@ -675,7 +675,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		@Nullable final String url = FileDialogs.getXmlUrl(this.settings.getProperty("base", "."));
 		if (url != null)
 		{
-			open(url); // $NON-NLS-1$
+			open(url);
 		}
 	}
 
@@ -1110,7 +1110,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		@Nullable final String filePath = FileDialogs.getPropertyFile(this.settings.getProperty("base", "."));
 		if (filePath != null)
 		{
-			ModelUtils.saveSettings(settings, filePath); // $NON-NLS-1$
+			ModelUtils.saveSettings(settings, filePath);
 		}
 	}
 
