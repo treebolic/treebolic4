@@ -223,7 +223,7 @@ public class ModelDump
 				.append("DefaultEdgeImage=").append(settings.defaultEdgeImage).append('\n');
 		if (settings.menu == null)
 		{
-			sb.append("Menu=null");
+			sb.append("Menu=null").append('\n');
 		}
 		else
 		{
