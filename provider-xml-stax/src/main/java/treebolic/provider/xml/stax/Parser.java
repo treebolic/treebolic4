@@ -14,11 +14,13 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import javax.xml.namespace.QName;
-import javax.xml.stream.EventFilter;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.*;
+import javax.xml.stream.events.Attribute;
+import javax.xml.stream.events.EndElement;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
@@ -78,57 +80,25 @@ public class Parser
 		}
 	}
 
-	public static String parseText(@NonNull XMLEventReader reader) throws XMLStreamException
+	private static <T> void setStyleAttribute(final StartElement element, final String strokeQName, final String fromTerminatorQName, final String toTerminatorQName, final String lineQName, final String hiddenQName, final Consumer<Integer> consumer)
 	{
-		StringBuilder sb = new StringBuilder();
-		while (reader.hasNext() && reader.peek().isCharacters())
+		Attribute strokeAttribute = element.getAttributeByName(new QName(strokeQName));
+		Attribute fromTerminatorAttribute = element.getAttributeByName(new QName(fromTerminatorQName));
+		Attribute toTerminatorAttribute = element.getAttributeByName(new QName(toTerminatorQName));
+		Attribute lineAttribute = element.getAttributeByName(new QName(lineQName));
+		Attribute hiddenAttribute = element.getAttributeByName(new QName(hiddenQName));
+
+		String stroke = strokeAttribute == null ? null : strokeAttribute.getValue();
+		String fromTerminator = fromTerminatorAttribute == null ? null : fromTerminatorAttribute.getValue();
+		String toTerminator = toTerminatorAttribute == null ? null : toTerminatorAttribute.getValue();
+		String line = lineAttribute == null ? null : lineAttribute.getValue();
+		String hidden = hiddenAttribute == null ? null : hiddenAttribute.getValue();
+
+		Integer sval = Utils.parseStyle(stroke, fromTerminator, toTerminator, line, hidden);
+		if (sval != null)
 		{
-			// consume
-			XMLEvent event = reader.nextEvent();
-
-			String text = event.asCharacters().getData();
-			if (!text.isEmpty())
-			{
-				//text = text.replace('\n', ' ');
-				text = text.trim();
-				sb.append(text);
-			}
+			consumer.accept(sval);
 		}
-		return sb.toString();
-	}
-
-	public static Model parse00(@NonNull XMLEventReader reader) throws XMLStreamException
-	{
-		while (reader.hasNext())
-		{
-			System.out.println(reader.nextEvent());
-		}
-		return null;
-	}
-
-	public static Model parse0(@NonNull XMLEventReader reader) throws XMLStreamException
-	{
-		while (reader.hasNext())
-		{
-			XMLEvent event = reader.nextEvent();
-
-			if (event.isStartElement())
-			{
-				StartElement startElement = event.asStartElement();
-				System.out.println("<" + startElement.getName().getLocalPart() + ">");
-			}
-			else if (event.isEndElement())
-			{
-				EndElement endElement = event.asEndElement();
-				System.out.println("</" + endElement.getName().getLocalPart() + ">");
-			}
-			else if (event.isCharacters())
-			{
-				Characters chars = event.asCharacters();
-				throw new RuntimeException("[" + chars.getData() + "]");
-			}
-		}
-		return null;
 	}
 
 	/**
@@ -197,8 +167,8 @@ public class Parser
 							StartElement startElement2 = event2.asStartElement();
 							if (IMG.equals(startElement2.getName().getLocalPart()))
 							{
-								setAttribute(startElement2, "src", val -> settings.backgroundImageFile = val);
 								reader.nextEvent(); // consume
+								setAttribute(startElement2, "src", val -> settings.backgroundImageFile = val);
 							}
 						}
 						break;
@@ -260,11 +230,6 @@ public class Parser
 						edges.add(edge);
 						break;
 					}
-
-					// case LABEL:
-					// {
-					// 	break;
-					// }
 				}
 			}
 
@@ -312,7 +277,7 @@ public class Parser
 				{
 					case LABEL:
 					{
-						reader.nextEvent();
+						reader.nextEvent(); // consume
 						String label = reader.getElementText();
 						if (!label.isEmpty())
 						{
@@ -322,7 +287,7 @@ public class Parser
 					}
 					case CONTENT:
 					{
-						reader.nextEvent();
+						reader.nextEvent(); // consume
 						String content = reader.getElementText();
 						if (!content.isEmpty())
 						{
@@ -332,24 +297,58 @@ public class Parser
 					}
 					case IMG:
 					{
-						reader.nextEvent();
+						reader.nextEvent(); // consume
 						setAttribute(startElement2, "src", node::setImageFile);
 						break;
 					}
 					case A:
 					{
-						reader.nextEvent();
+						reader.nextEvent(); // consume
 						setAttribute(startElement2, "href", node::setLink);
 						break;
 					}
 					case TREEEDGE:
 					{
-						reader.nextEvent();
+						reader.nextEvent(); // consume
+						setStyleAttribute(startElement2, "stroke", "fromterminator", "toterminator", "line", "hidden", node::setEdgeStyle);
+						setAttribute(startElement2, "color", Parser::parseColor, node::setEdgeColor);
+
+						XMLEvent event3 = reader.peek();
+						if (event3.isStartElement())
+						{
+							StartElement startElement3 = event3.asStartElement();
+							if (LABEL.equals(startElement3.getName().getLocalPart()))
+							{
+								reader.nextEvent(); // consume
+								String label = reader.getElementText();
+								if (!label.isEmpty())
+								{
+									node.setEdgeLabel(label);
+								}
+							}
+						}
+						event3 = reader.peek();
+						if (event3.isStartElement())
+						{
+							StartElement startElement3 = event3.asStartElement();
+							if (IMG.equals(startElement3.getName().getLocalPart()))
+							{
+								reader.nextEvent(); // consume
+								setAttribute(startElement3, "src", node::setEdgeImageFile);
+							}
+						}
+
 						break;
 					}
 					case MOUNTPOINT:
 					{
-						reader.nextEvent();
+						MountPoint.Mounting mountpoint = new MountPoint.Mounting();
+						StartElement mountpointElement = reader.nextEvent().asStartElement(); // consume
+						setAttribute(mountpointElement, "now", Parser::parseBoolean, v -> mountpoint.now = v);
+						StartElement aElement = reader.nextEvent().asStartElement();
+						assert A.equals(aElement.getName().getLocalPart());
+						setAttribute(aElement, "href", v -> mountpoint.url = v);
+						node.setMountPoint(mountpoint);
 						break;
 					}
 					default:
@@ -370,7 +369,7 @@ public class Parser
 					case TREEEDGE:
 					case MOUNTPOINT:
 					{
-						reader.nextEvent();
+						reader.nextEvent(); // consume
 						break;
 					}
 					default:
