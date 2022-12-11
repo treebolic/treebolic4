@@ -50,6 +50,8 @@
 		<!-- <module>swing-application-xml</module>-->
 		<!-- <module>swing-application-owl</module>-->
 		<!-- <module>swing-application-owl2</module>-->
+		<!-- <module>swing-application-xml-sax</module>-->
+		<!-- <module>swing-application-xml-stax</module>-->
 
 		<module>swing-commons</module>
 		<module>swing-browser</module>

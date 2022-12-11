@@ -638,6 +638,7 @@
         <option value="$PROJECT_DIR$/swing-application-owl-jena/pom.xml" />
         <option value="$PROJECT_DIR$/provider-owl-owlapi/pom.xml" />
         <option value="$PROJECT_DIR$/swing-application-owl-sax/pom.xml" />
+        <option value="$PROJECT_DIR$/swing-application-xml-stax/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

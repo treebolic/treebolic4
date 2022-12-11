@@ -19,6 +19,7 @@
         <module name="provider-sql-jdbc" />
         <module name="swing-studio" />
         <module name="treebolic-glue-swing" />
+        <module name="swing-application-xml-stax" />
         <module name="swing-browser-search" />
         <module name="provider-owl-owlapi" />
         <module name="swing-commons" />
