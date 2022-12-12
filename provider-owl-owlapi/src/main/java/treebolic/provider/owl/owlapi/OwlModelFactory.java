@@ -779,27 +779,27 @@ public class OwlModelFactory implements ImageDecorator
 	{
 		// parameter and url
 		@NonNull final Map<String, String> parse = parseUrl(urlString);
-		final String ontologyUrlString = parse.get("url");
-		final String classIri = parse.get("iri");
-		final String classShortForm = parse.get("class");
+		final String argUrl = parse.get("url");
+		final String argClassIri = parse.get("iri");
+		final String argClassName = parse.get("class");
 		final String target = parse.get("target");
 
-		if (ontologyUrlString == null)
+		if (argUrl == null)
 		{
 			return null;
 		}
 
 		// load document
-		if (!ontologyUrlString.equals(url) || ontology == null || engine == null || parser == null)
+		if (!argUrl.equals(url) || ontology == null || engine == null || parser == null)
 		{
 			try
 			{
-				ontology = getOntology(ontologyUrlString);
+				ontology = getOntology(argUrl);
 				if (ontology == null)
 				{
 					throw new RuntimeException("Null ontology");
 				}
-				url = ontologyUrlString;
+				url = argUrl;
 				engine = new QueryEngine(ontology);
 				parser = new QueryParser(ontology, new SimpleShortFormProvider());
 			}
@@ -812,16 +812,16 @@ public class OwlModelFactory implements ImageDecorator
 
 		// root
 		OWLClass clazz;
-		if (classIri != null || classShortForm != null)
+		if (argClassIri != null || argClassName != null)
 		{
 			// parse
-			if (classIri != null)
+			if (argClassIri != null)
 			{
-				clazz = dataFactory.getOWLClass(IRI.create(classIri));
+				clazz = dataFactory.getOWLClass(IRI.create(argClassIri));
 			}
 			else
 			{
-				clazz = parser.parseClassExpression(classShortForm).asOWLClass();
+				clazz = parser.parseClassExpression(argClassName).asOWLClass();
 			}
 
 			// class
@@ -835,7 +835,7 @@ public class OwlModelFactory implements ImageDecorator
 
 					// root
 					@NonNull final MutableNode classNode = new MutableNode(null, "root");
-					classNode.setLabel(clazz.getIRI().getShortForm());
+					classNode.setLabel(clazz.getIRI().getShortForm() + "\nroot");
 					decorateClassWith(classNode, hasInstances, hasProperties, isRelation);
 					classNode.setEdgeColor(defaultClassForeColor);
 
@@ -843,7 +843,7 @@ public class OwlModelFactory implements ImageDecorator
 					if (hasInstances)
 					{
 						// instances root
-						@NonNull final TreeMutableNode instancesNode = new TreeMutableNode(classNode, classIri + "-instances");
+						@NonNull final TreeMutableNode instancesNode = new TreeMutableNode(classNode, argClassIri + "-instances");
 						decorateInstances(instancesNode);
 						instancesNode.setEdgeColor(defaultInstanceForeColor);
 
@@ -862,7 +862,7 @@ public class OwlModelFactory implements ImageDecorator
 					if (hasProperties)
 					{
 						// properties root
-						@NonNull final TreeMutableNode propertiesNode = new TreeMutableNode(classNode, classIri + "-properties");
+						@NonNull final TreeMutableNode propertiesNode = new TreeMutableNode(classNode, argClassIri + "-properties");
 						decorateProperties(propertiesNode);
 						propertiesNode.setEdgeColor(defaultPropertyForeColor);
 
@@ -873,7 +873,7 @@ public class OwlModelFactory implements ImageDecorator
 					return new Tree(classNode, null);
 				}
 				// class
-				@NonNull final MutableNode classNode = visitClassAndSubclasses(null, clazz, ontologyUrlString);
+				@NonNull final MutableNode classNode = visitClassAndSubclasses(null, clazz, argUrl);
 				return new Tree(decorateRoot(classNode), null);
 			}
 			return null;
@@ -886,8 +886,9 @@ public class OwlModelFactory implements ImageDecorator
 			{
 				return null;
 			}
-			@NonNull final MutableNode classNode = visitClassAndSubclasses(null, rootClass, ontologyUrlString);
-			return new Tree(decorateRoot(classNode), null);
+			@NonNull final MutableNode rootNode = visitClassAndSubclasses(null, rootClass, argUrl);
+			rootNode.setLabel(rootNode.getLabel() + "\nroot");
+			return new Tree(decorateRoot(rootNode), null);
 		}
 	}
 
@@ -978,6 +979,7 @@ public class OwlModelFactory implements ImageDecorator
 		final String name = clazz.getIRI().getShortForm();
 		final String id = clazz.getIRI().getShortForm();
 		assert engine != null;
+		final boolean isRelation = engine.isRelation(clazz.asOWLClass());
 		final Stream<OWLAnnotation> annotations = engine.getAnnotations(clazz);
 
 		// comment
@@ -985,7 +987,7 @@ public class OwlModelFactory implements ImageDecorator
 
 		// node
 		@NonNull final TreeMutableNode classNode = new TreeMutableNode(parentOwlClassNode, id);
-		classNode.setLabel(name);
+		classNode.setLabel(isRelation ? name + "\nRelation" : name);
 		classNode.setTarget(id);
 		classNode.setContent(comment);
 		decorateClass(classNode);
@@ -998,7 +1000,6 @@ public class OwlModelFactory implements ImageDecorator
 			@NonNull final Stream<OWLObjectProperty> properties = engine.getProperties(clazz);
 			final boolean hasInstances = instances.findAny().isPresent();
 			final boolean hasProperties = properties.findAny().isPresent();
-			final boolean isRelation = engine.isRelation(clazz.asOWLClass());
 
 			// mountpoint
 			if (hasInstances || hasProperties || isRelation)

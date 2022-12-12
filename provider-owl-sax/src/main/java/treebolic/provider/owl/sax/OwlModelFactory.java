@@ -841,19 +841,21 @@ public class OwlModelFactory implements ImageDecorator
 			{
 				// walk classes
 				final Ontology.Class rootClass = tops.iterator().next();
-				@NonNull final MutableNode classNode = visitClassAndSubclasses(null, rootClass, ontologyUrl);
-				classNode.setLabel(classNode.getLabel() + "\nroot");
-				classNode.setTarget("root");
-				return new Tree(decorateRoot(classNode), null);
+				@NonNull final MutableNode rootNode = visitClassAndSubclasses(null, rootClass, ontologyUrl);
+				rootNode.setLabel(rootNode.getLabel() + "\nroot");
+				rootNode.setTarget("root");
+				return new Tree(decorateRoot(rootNode), null);
 			}
 			else
 			{
-				@NonNull final Ontology.Class rootClass = ontology.createClass("#Thing\rroot");
+				@NonNull final Ontology.Class rootClass = ontology.createClass("#Thing");
 				@NonNull final MutableNode rootNode = visitClass(null, rootClass, ontologyUrl);
 				for (@NonNull Ontology.Class top : tops)
 				{
 					visitClassAndSubclasses(rootNode, top, ontologyUrl);
 				}
+				rootNode.setLabel(rootNode.getLabel() + "\nroot");
+				rootNode.setTarget("root");
 				return new Tree(decorateRoot(rootNode), null);
 			}
 		}

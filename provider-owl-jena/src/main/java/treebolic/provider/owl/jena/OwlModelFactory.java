@@ -740,11 +740,10 @@ public class OwlModelFactory implements ImageDecorator
 		// load document
 		if (!argUrl.equals(url) || model == null || engine == null)
 		{
-			assert url != null;
-			try (InputStream is = new URL(url).openStream())
+			try (InputStream is = new URL(argUrl).openStream())
 			{
 				model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
-				model.read(is, url);
+				model.read(is, argUrl);
 				url = argUrl;
 				engine = new QueryEngine(model);
 			}
@@ -782,7 +781,7 @@ public class OwlModelFactory implements ImageDecorator
 
 					// root
 					@NonNull final MutableNode classNode = new MutableNode(null, "root");
-					classNode.setLabel(clazz.getLocalName());
+					classNode.setLabel(clazz.getLocalName() + "\nroot");
 					decorateClassWith(classNode, hasInstances, hasProperties, isRelation);
 					classNode.setEdgeColor(defaultClassForeColor);
 
@@ -833,13 +832,15 @@ public class OwlModelFactory implements ImageDecorator
 			{
 				// walk classes
 				final OntClass rootClass = tops.iterator().next();
-				@NonNull final MutableNode classNode = visitClassAndSubclasses(null, rootClass, argUrl);
-				return new Tree(decorateRoot(classNode), null);
+				@NonNull final MutableNode rootNode = visitClassAndSubclasses(null, rootClass, argUrl);
+				rootNode.setLabel(rootNode.getLabel() + "\nroot");
+				return new Tree(decorateRoot(rootNode), null);
 			}
 			else
 			{
 				final OntClass rootClass = model.createClass("#Thing");
 				@NonNull MutableNode rootNode = visitClass(null, rootClass, argUrl);
+				rootNode.setLabel(rootNode.getLabel() + "\nroot");
 				for (@NonNull OntClass top : tops)
 				{
 					visitClassAndSubclasses(rootNode, top, argUrl);
@@ -934,28 +935,27 @@ public class OwlModelFactory implements ImageDecorator
 	{
 		final String className = clazz.getLocalName();
 		final String classId = clazz.getLocalName();
-		//final ExtendedIterator<String> annotations = engine.getAnnotations(clazz, LANG).mapWith(RDFNode::toString);
+		assert engine != null;
+		final boolean isRelation = engine.isRelation(clazz);
 
 		// comment
 		@NonNull String comment = clazz.getLocalName() + "<br>" + clazz.getComment(LANG) + "<br>" + clazz.getNameSpace(); //annotationsToString(annotations);
 
 		// node
 		@NonNull final TreeMutableNode classNode = new TreeMutableNode(parentOwlClassNode, classId);
-		classNode.setLabel(className);
+		classNode.setLabel(isRelation ? className + "\nRelation" : className);
 		classNode.setTarget(classId);
 		classNode.setContent(comment);
 		decorateClass(classNode);
 
 		// mounts
-		// if (!class.equals(engine.getTopClass(model))) // TODO
+		// if (!class.equals(engine.getTopClass(model)))
 		{
 			// get instances or properties
-			assert engine != null;
 			final ExtendedIterator<OntResource> instances = engine.getInstances(clazz);
 			final boolean hasInstances = instances.hasNext();
 			@NonNull final Stream<OntProperty> properties = engine.getProperties(clazz);
 			final boolean hasProperties = properties.findAny().isPresent();
-			final boolean isRelation = engine.isRelation(clazz);
 
 			// mountpoint
 			if (hasInstances || hasProperties || isRelation)

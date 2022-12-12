@@ -4,8 +4,6 @@
 
 package treebolic.provider.xml.stax;
 
-import com.sun.istack.internal.NotNull;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -300,7 +298,7 @@ public class Parser
 	 * @param node   current node
 	 * @throws XMLStreamException XML stream exception
 	 */
-	public static void parseNode(@NonNull XMLEventReader reader, @NotNull MutableNode node) throws XMLStreamException
+	public static void parseNode(@NonNull XMLEventReader reader, @NonNull MutableNode node) throws XMLStreamException
 	{
 		// enter node mode
 		while (reader.hasNext())
