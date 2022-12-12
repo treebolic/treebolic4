@@ -642,11 +642,12 @@
         <option value="$PROJECT_DIR$/swing-application-xml-stax/pom.xml" />
         <option value="$PROJECT_DIR$/swing-application-xml-dom/pom.xml" />
         <option value="$PROJECT_DIR$/provider-xml-dom/pom.xml" />
+        <option value="$PROJECT_DIR$/provider-xml-sax/pom.xml" />
+        <option value="$PROJECT_DIR$/swing-application-xml-sax/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
-        <option value="$PROJECT_DIR$/provider-xml-sax/pom.xml" />
         <option value="$PROJECT_DIR$/provider-xml/owl-application/pom.xml" />
         <option value="$PROJECT_DIR$/treebolic-iface/pom.xml" />
       </set>

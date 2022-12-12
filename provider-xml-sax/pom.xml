@@ -13,7 +13,7 @@
 		<version>4.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>provider-xml-stax</artifactId>
+	<artifactId>provider-xml-sax</artifactId>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>
@@ -30,11 +30,6 @@
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-mutable</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-annotations</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<dependency>

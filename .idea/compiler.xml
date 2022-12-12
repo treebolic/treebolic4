@@ -23,7 +23,9 @@
         <module name="provider-owl-owlapi" />
         <module name="swing-commons" />
         <module name="provider-sql-generic" />
+        <module name="swing-application-xml-sax" />
         <module name="treebolic-annotations" />
+        <module name="provider-xml-sax" />
         <module name="swing-application-owl2" />
         <module name="treebolic-glue-iface" />
         <module name="provider-text-pair" />
@@ -52,7 +54,6 @@
       <module name="browser" target="1.8" />
       <module name="browser2" target="1.8" />
       <module name="commons" target="1.8" />
-      <module name="provider-xml-sax" target="1.8" />
       <module name="studio" target="1.8" />
       <module name="swing-application-xml" target="1.8" />
       <module name="swing.application" target="1.8" />

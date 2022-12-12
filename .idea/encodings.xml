@@ -41,6 +41,8 @@
     <file url="file://$PROJECT_DIR$/swing-application-owl2/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/swing-application-xml-dom/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/swing-application-xml-dom/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/swing-application-xml-sax/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/swing-application-xml-sax/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/swing-application-xml-stax/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/swing-application-xml-stax/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/swing-application/src/main/java" charset="UTF-8" />

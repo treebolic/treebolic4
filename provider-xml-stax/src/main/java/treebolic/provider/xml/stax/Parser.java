@@ -41,11 +41,8 @@ public class Parser
 	private static final String CONTENT = "content";
 	private static final String IMG = "img";
 	private static final String A = "a";
-
 	private static final String MOUNTPOINT = "mountpoint";
-
 	private static final String DEFAULT_TREEEDGE = "default.treeedge";
-
 	private static final String DEFAULT_EDGE = "default.edge";
 
 	/**
@@ -130,6 +127,31 @@ public class Parser
 						setAttribute(startElement, "forecolor", Parser::parseColor, (v) -> settings.nodeForeColor = v);
 						setAttribute(startElement, "border", Parser::parseBoolean, (v) -> settings.borderFlag = v);
 						setAttribute(startElement, "ellipsize", Parser::parseBoolean, (v) -> settings.ellipsizeFlag = v);
+
+						XMLEvent event3 = reader.peek();
+						// if (event3.isStartElement())
+						// {
+						// 	StartElement startElement3 = event3.asStartElement();
+						// 	if (LABEL.equals(startElement3.getName().getLocalPart()))
+						// 	{
+						// 		reader.nextEvent(); // consume
+						// 		String label = reader.getElementText();
+						// 		if (!label.isEmpty())
+						// 		{
+						// 			settings.treeedgeLabel = label;
+						// 		}
+						// 	}
+						// }
+						// event3 = reader.peek();
+						if (event3.isStartElement())
+						{
+							StartElement startElement3 = event3.asStartElement();
+							if (IMG.equals(startElement3.getName().getLocalPart()))
+							{
+								reader.nextEvent(); // consume
+								setAttribute(startElement3, "src", (v) -> settings.defaultNodeImage = v);
+							}
+						}
 						break;
 					}
 
@@ -161,6 +183,8 @@ public class Parser
 					case EDGES:
 					{
 						edges = new ArrayList<>();
+
+						setAttribute(startElement, "arcs", Parser::parseBoolean, (v) -> settings.edgesAsArcsFlag = v);
 						break;
 					}
 
@@ -239,6 +263,7 @@ public class Parser
 						}
 						break;
 					}
+
 					case DEFAULT_EDGE:
 					{
 						setStyleAttribute(startElement, "stroke", "fromterminator", "toterminator", "line", "hidden", (v) -> settings.edgeStyle = v);
@@ -320,6 +345,7 @@ public class Parser
 						}
 						break;
 					}
+
 					case CONTENT:
 					{
 						reader.nextEvent(); // consume
@@ -330,6 +356,7 @@ public class Parser
 						}
 						break;
 					}
+
 					case IMG:
 					{
 						reader.nextEvent(); // consume
@@ -347,12 +374,14 @@ public class Parser
 						}
 						break;
 					}
+
 					case A:
 					{
 						reader.nextEvent(); // consume
 						setAttribute(startElement2, "href", node::setLink);
 						break;
 					}
+
 					case TREEEDGE:
 					{
 						reader.nextEvent(); // consume
@@ -386,6 +415,7 @@ public class Parser
 
 						break;
 					}
+
 					case MOUNTPOINT:
 					{
 						MountPoint.Mounting mountpoint = new MountPoint.Mounting();
@@ -397,6 +427,7 @@ public class Parser
 						node.setMountPoint(mountpoint);
 						break;
 					}
+
 					default:
 					{
 						return;
@@ -568,6 +599,29 @@ public class Parser
 		return content;
 	}
 
+	private static XMLEventReader makeReader(@NonNull final Reader reader) throws IOException, XMLStreamException
+	{
+		XMLInputFactory factory = XMLInputFactory.newInstance();
+		return factory.createFilteredReader(factory.createXMLEventReader(reader), event -> event.isEndElement() || event.isStartElement());
+	}
+
+	/**
+	 * Make model
+	 *
+	 * @param filePath file path
+	 * @return model
+	 * @throws IOException        io exception
+	 * @throws XMLStreamException xml stream exception
+	 */
+	public static Model makeModel(@NonNull final String filePath) throws IOException, XMLStreamException
+	{
+		try (@NonNull Reader reader = new FileReader(filePath))
+		{
+			XMLEventReader eventReader = makeReader(reader);
+			return parse(eventReader);
+		}
+	}
+
 	/**
 	 * Main
 	 *
@@ -575,16 +629,9 @@ public class Parser
 	 * @throws IOException        io exception
 	 * @throws XMLStreamException xml stream exception
 	 */
-	public static void main(@NonNull String[] args) throws IOException, XMLStreamException
+	public static void main(@NonNull final String[] args) throws IOException, XMLStreamException
 	{
-		try (@NonNull Reader fr = new FileReader(args[0]))
-		{
-			XMLInputFactory factory = XMLInputFactory.newInstance();
-			XMLEventReader reader = factory.createFilteredReader(factory.createXMLEventReader(fr), event -> event.isEndElement() || event.isStartElement());
-
-			@NonNull Model model = parse(reader);
-
-			System.out.println(ModelDump.toString(model));
-		}
+		@NonNull Model model = makeModel(args[0]);
+		System.out.println(ModelDump.toString(model));
 	}
 }
