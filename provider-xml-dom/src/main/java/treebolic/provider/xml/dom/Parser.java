@@ -11,7 +11,11 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -27,6 +31,8 @@ import javax.xml.transform.stream.StreamSource;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
+import treebolic.model.Model;
+import treebolic.model.ModelDump;
 
 /**
  * DOM Parser
@@ -62,6 +68,28 @@ public class Parser
 	}
 
 	/**
+	 * Make Document builder
+	 *
+	 * @return document builder
+	 * @throws ParserConfigurationException parser configuration exception
+	 */
+	private DocumentBuilder makeDocumentBuilder() throws ParserConfigurationException
+	{
+		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setCoalescing(true);
+		factory.setIgnoringComments(true);
+		factory.setNamespaceAware(false);
+		factory.setIgnoringElementContentWhitespace(true);
+		factory.setValidating(this.validate);
+		// @formatter:off
+		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_DTD, this.validate);} catch(@NonNull final Exception ignored){}
+		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_SCHEMA, this.validate);} catch(@NonNull final Exception ignored){}
+		try	{ factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", this.validate); } catch (@NonNull final Exception ignored) {}
+		// @formatter:on
+		return factory.newDocumentBuilder();
+	}
+
+	/**
 	 * Make document
 	 *
 	 * @param url      in data url
@@ -91,25 +119,32 @@ public class Parser
 	}
 
 	/**
-	 * Make Document builder
+	 * Make document
 	 *
-	 * @return document builder
+	 * @param filePath in data file path
+	 * @param resolver entity resolver
+	 * @return DOM document
 	 * @throws ParserConfigurationException parser configuration exception
+	 * @throws IOException                  io exception
+	 * @throws SAXException                 sax parser exception
 	 */
-	private DocumentBuilder makeDocumentBuilder() throws ParserConfigurationException
+	public Document makeDocument(@NonNull final String filePath, @Nullable final EntityResolver resolver) throws ParserConfigurationException, SAXException, IOException
 	{
-		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		factory.setCoalescing(true);
-		factory.setIgnoringComments(true);
-		factory.setNamespaceAware(false);
-		factory.setIgnoringElementContentWhitespace(true);
-		factory.setValidating(this.validate);
-		// @formatter:off
-		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_DTD, this.validate);} catch(@NonNull final Exception ignored){}
-		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_SCHEMA, this.validate);} catch(@NonNull final Exception ignored){}
-		try	{ factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", this.validate); } catch (@NonNull final Exception ignored) {}
-		// @formatter:on
-		return factory.newDocumentBuilder();
+		@NonNull final ParseErrorLogger handler = new ParseErrorLogger();
+		try (InputStream is = Files.newInputStream(Paths.get(filePath)))
+		{
+			final DocumentBuilder builder = makeDocumentBuilder();
+			builder.setErrorHandler(handler);
+			if (resolver != null)
+			{
+				builder.setEntityResolver(resolver);
+			}
+			return builder.parse(is);
+		}
+		finally
+		{
+			handler.terminate();
+		}
 	}
 
 	/**
@@ -157,5 +192,60 @@ public class Parser
 			System.err.println("Dom parser: " + e.getMessage());
 		}
 		return null;
+	}
+
+	/**
+	 * Make DOM document from its Url
+	 *
+	 * @param filePath document filePath
+	 * @return DOM document
+	 */
+	@Nullable
+	@SuppressWarnings("WeakerAccess")
+	private static Document makeDocument(@NonNull String filePath) throws ParserConfigurationException, IOException, SAXException
+	{
+		return new Parser().makeDocument(filePath, (publicId, systemId) -> {
+			if (systemId.contains("Treebolic.dtd"))
+			{
+				return new InputSource(new StringReader(""));
+			}
+			else
+			{
+				return null;
+			}
+		});
+	}
+
+	/**
+	 * Make model
+	 *
+	 * @param filePath command-line arguments
+	 * @return model
+	 * @throws ParserConfigurationException parser configuration exception
+	 * @throws SAXException                 sax exception
+	 * @throws IOException                  io exception
+	 */
+	public static Model makeModel(@NonNull final String filePath) throws ParserConfigurationException, SAXException, IOException
+	{
+		@Nullable final Document document = makeDocument(filePath);
+		if (document == null)
+		{
+			return null;
+		}
+		return new BaseDocumentAdapter().makeModel(document);
+	}
+
+	/**
+	 * Main
+	 *
+	 * @param args command-line arguments
+	 * @throws ParserConfigurationException parser configuration exception
+	 * @throws SAXException                 sax exception
+	 * @throws IOException                  io exception
+	 */
+	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException
+	{
+		@Nullable Model model = makeModel(args[0]);
+		System.out.println(ModelDump.toString(model));
 	}
 }
