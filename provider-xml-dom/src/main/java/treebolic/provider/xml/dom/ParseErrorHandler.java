@@ -1,4 +1,8 @@
-package treebolic.provider.xml;
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+
+package treebolic.provider.xml.dom;
 
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;

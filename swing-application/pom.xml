@@ -50,7 +50,7 @@
 			<dependencies>
 				<dependency>
 					<groupId>io.github.treebolic</groupId>
-					<artifactId>provider-xml</artifactId>
+					<artifactId>provider-xml-dom</artifactId>
 					<version>${revision}</version>
 					<scope>runtime</scope>
 				</dependency>
@@ -61,7 +61,7 @@
 			<dependencies>
 				<dependency>
 					<groupId>io.github.treebolic</groupId>
-					<artifactId>provider-owl</artifactId>
+					<artifactId>provider-owl-sax</artifactId>
 					<version>${revision}</version>
 					<scope>runtime</scope>
 				</dependency>

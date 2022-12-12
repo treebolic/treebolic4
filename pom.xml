@@ -27,10 +27,7 @@
 		<module>treebolic-graph</module>
 		<module>treebolic-annotations</module>
 
-		<module>treebolic-glue-swing</module>
-
-		<module>provider-xml</module>
-		<module>provider-xml-sax</module>
+		<module>provider-xml-dom</module>
 		<module>provider-xml-stax</module>
 		<module>provider-owl-owlapi</module>
 		<module>provider-owl-jena</module>
@@ -44,14 +41,15 @@
 		<module>provider-gxl</module>
 		<module>transformer-xml</module>
 
+		<module>treebolic-glue-swing</module>
+
 		<module>swing-studio</module>
 		<module>swing-application</module>
 
-		<!-- <module>swing-application-xml</module>-->
+		<!-- <module>swing-application-xml-dom</module>-->
+		<!-- <module>swing-application-xml-stax</module>-->
 		<!-- <module>swing-application-owl</module>-->
 		<!-- <module>swing-application-owl2</module>-->
-		<!-- <module>swing-application-xml-sax</module>-->
-		<!-- <module>swing-application-xml-stax</module>-->
 
 		<module>swing-commons</module>
 		<module>swing-browser</module>

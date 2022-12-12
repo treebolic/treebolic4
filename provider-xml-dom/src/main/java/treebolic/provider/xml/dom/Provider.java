@@ -1,16 +1,19 @@
-package treebolic.provider.xml.sax;
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
 
+package treebolic.provider.xml.dom;
+
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.StringReader;
 import java.net.URL;
 import java.util.Properties;
 
-import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import treebolic.ILocator;
 import treebolic.annotations.NonNull;
@@ -104,20 +107,12 @@ public class Provider implements IProvider
 
 		this.url = url;
 		this.context.progress("Loading ..." + url, false);
-		@Nullable final Tree tree;
-		try
+		@Nullable final Tree tree = makeTree(url, base, parameters);
+		if (tree != null)
 		{
-			tree = makeTree(url);
-			if (tree != null)
-			{
-				this.context.progress("Loaded ..." + url, false);
-			}
-			return tree;
+			this.context.progress("Loaded ..." + url, false);
 		}
-		catch (ParserConfigurationException | SAXException | IOException e)
-		{
-			throw new RuntimeException(e);
-		}
+		return tree;
 	}
 
 	/*
@@ -135,20 +130,12 @@ public class Provider implements IProvider
 
 		this.url = url;
 		this.context.progress("Loading ..." + url, false);
-		@Nullable final Model model;
-		try
+		@Nullable final Model model = makeModel(url, base, parameters);
+		if (model != null)
 		{
-			model = makeModel(url);
-			if (model != null)
-			{
-				this.context.progress("Loaded ..." + url, false);
-			}
-			return model;
+			this.context.progress("Loaded ..." + url, false);
 		}
-		catch (ParserConfigurationException | SAXException | IOException e)
-		{
-			throw new RuntimeException(e);
-		}
+		return model;
 	}
 
 	// P A R S E
@@ -156,54 +143,78 @@ public class Provider implements IProvider
 	/**
 	 * Make model from url
 	 *
-	 * @param url url
+	 * @param url        url
+	 * @param base       base
+	 * @param parameters parameters
 	 * @return model
 	 */
 	@Nullable
 	@SuppressWarnings("WeakerAccess")
-	protected Model makeModel(@NonNull final URL url) throws ParserConfigurationException, SAXException, IOException
+	protected Model makeModel(@NonNull final URL url, final URL base, final Properties parameters)
 	{
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		factory.setValidating(false);
-		// @formatter:off
-		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_DTD, false);} catch(@NonNull final Exception ignored){}
-		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_SCHEMA, false);} catch(@NonNull final Exception ignored){}
-		try	{ factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false); } catch(@NonNull final Exception ignored){}
-		// @formatter:on
-		SAXParser saxParser = factory.newSAXParser();
-
-		@NonNull Parser.SaxHandler handler = new Parser.SaxHandler();
-		try (InputStream is = url.openStream())
+		@Nullable final Document document = makeDocument(url);
+		if (document == null)
 		{
-			saxParser.parse(is, handler);
-			return handler.getResult();
+			return null;
 		}
+		return new DocumentAdapter(this, base, parameters).makeModel(document);
 	}
 
 	/**
 	 * Make tree from url
 	 *
-	 * @param url url
+	 * @param url        url
+	 * @param base       base
+	 * @param parameters parameters
 	 * @return tree
 	 */
 	@Nullable
 	@SuppressWarnings("WeakerAccess")
-	protected Tree makeTree(@NonNull final URL url) throws ParserConfigurationException, SAXException, IOException
+	protected Tree makeTree(@NonNull final URL url, final URL base, final Properties parameters)
 	{
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		factory.setValidating(false);
-		// @formatter:off
-		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_DTD, false);} catch(@NonNull final Exception ignored){}
-		try	{ factory.setFeature(XMLConstants.ACCESS_EXTERNAL_SCHEMA, false);} catch(@NonNull final Exception ignored){}
-		try	{ factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false); } catch(@NonNull final Exception ignored){}
-		// @formatter:on
-		SAXParser saxParser = factory.newSAXParser();
-
-		@NonNull Parser.SaxHandler handler = new Parser.SaxHandler();
-		try (InputStream is = url.openStream())
+		@Nullable final Document document = makeDocument(url);
+		if (document == null)
 		{
-			saxParser.parse(is, handler);
-			return handler.getResult().tree;
+			return null;
 		}
+		return new DocumentAdapter(this, base, parameters).makeTree(document);
+	}
+
+	/**
+	 * Make DOM document from its Url
+	 *
+	 * @param url document url
+	 * @return DOM document
+	 */
+	@Nullable
+	@SuppressWarnings("WeakerAccess")
+	protected Document makeDocument(@NonNull final URL url)
+	{
+		try
+		{
+			return new Parser().makeDocument(url, (publicId, systemId) -> {
+				if (systemId.contains("Treebolic.dtd"))
+				{
+					return new InputSource(new StringReader(""));
+				}
+				else
+				{
+					return null;
+				}
+			});
+		}
+		catch (@NonNull final IOException e)
+		{
+			this.context.warn("DOM parser IO: " + e);
+		}
+		catch (@NonNull final SAXException e)
+		{
+			this.context.warn("DOM parser SAX: " + e);
+		}
+		catch (@NonNull final ParserConfigurationException e)
+		{
+			this.context.warn("DOM parser CONFIG: " + e);
+		}
+		return null;
 	}
 }

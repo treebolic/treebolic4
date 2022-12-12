@@ -1,4 +1,8 @@
-package treebolic.provider.xml;
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+
+package treebolic.provider.xml.dom;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

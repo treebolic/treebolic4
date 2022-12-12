@@ -26,7 +26,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.model.*;
-import treebolic.provider.xml.Parser;
+import treebolic.provider.xml.dom.Parser;
 
 /**
  * GXL parser

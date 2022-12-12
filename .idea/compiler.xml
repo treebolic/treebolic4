@@ -13,7 +13,6 @@
         <module name="treebolic-loadbalancer" />
         <module name="treebolic-mutable" />
         <module name="swing-application-owl-jena" />
-        <module name="provider-xml" />
         <module name="treebolic-model" />
         <module name="provider-gxl" />
         <module name="provider-sql-jdbc" />
@@ -25,8 +24,6 @@
         <module name="swing-commons" />
         <module name="provider-sql-generic" />
         <module name="treebolic-annotations" />
-        <module name="provider-xml-sax" />
-        <module name="swing-application-xml" />
         <module name="swing-application-owl2" />
         <module name="treebolic-glue-iface" />
         <module name="provider-text-pair" />
@@ -35,7 +32,9 @@
         <module name="provider-owl-owlapi2" />
         <module name="swing-application-owl" />
         <module name="swing-browser" />
+        <module name="swing-application-xml-dom" />
         <module name="provider-text-indent-tree" />
+        <module name="provider-xml-dom" />
         <module name="treebolic-graph" />
         <module name="treebolic-view" />
         <module name="provider-owl-sax" />
@@ -53,7 +52,9 @@
       <module name="browser" target="1.8" />
       <module name="browser2" target="1.8" />
       <module name="commons" target="1.8" />
+      <module name="provider-xml-sax" target="1.8" />
       <module name="studio" target="1.8" />
+      <module name="swing-application-xml" target="1.8" />
       <module name="swing.application" target="1.8" />
       <module name="treebolic-iface" target="1.8" />
     </bytecodeTargetLevel>

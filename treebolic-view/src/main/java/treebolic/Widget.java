@@ -76,7 +76,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 	 * Default provider
 	 */
 	@SuppressWarnings("WeakerAccess")
-	static public final String DEFAULT_PROVIDER = "treebolic.provider.xml.Provider";
+	static public final String DEFAULT_PROVIDER = "treebolic.provider.xml.dom.Provider";
 
 	// V E R S I O N
 

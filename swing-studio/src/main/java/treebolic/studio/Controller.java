@@ -50,8 +50,8 @@ import treebolic.model.*;
 import treebolic.propertyview.SelectListener;
 import treebolic.provider.IProvider;
 import treebolic.provider.IProviderContext;
-import treebolic.provider.xml.DocumentAdapter;
-import treebolic.provider.xml.Parser;
+import treebolic.provider.xml.dom.DocumentAdapter;
+import treebolic.provider.xml.dom.Parser;
 import treebolic.xml.transformer.DomTransformer;
 import treebolic.zip.ZipMaker;
 
