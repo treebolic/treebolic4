@@ -44,6 +44,8 @@ public class Parser
 	private static final String MOUNTPOINT = "mountpoint";
 	private static final String DEFAULT_TREEEDGE = "default.treeedge";
 	private static final String DEFAULT_EDGE = "default.edge";
+	private static final String MENU = "menu";
+	private static final String MENUITEM = "menuitem";
 
 	/**
 	 * StAX handler
@@ -291,6 +293,50 @@ public class Parser
 							{
 								reader.nextEvent(); // consume
 								setAttribute(startElement3, "src", (v) -> settings.defaultEdgeImage = v);
+							}
+						}
+						break;
+					}
+
+					case MENU:
+					{
+						settings.menu = new ArrayList<>();
+						break;
+					}
+
+					case MENUITEM:
+					{
+						MenuItem menuItem = new MenuItem();
+						setAttribute(startElement, "action", MenuItem.Action::valueOf, (v) -> menuItem.action = v );
+						setAttribute(startElement, "match-target",(v) -> menuItem.matchTarget = v);
+						setAttribute(startElement, "match-scope",Utils::stringToScope,(v) -> menuItem.matchScope = v);
+						setAttribute(startElement, "match-mode",Utils::stringToMode,(v) -> menuItem.matchMode = v);
+						assert settings.menu != null;
+						settings.menu.add(menuItem);
+
+						XMLEvent event3 = reader.peek();
+						if (event3.isStartElement())
+						{
+							StartElement startElement3 = event3.asStartElement();
+							if (LABEL.equals(startElement3.getName().getLocalPart()))
+							{
+								reader.nextEvent(); // consume
+								String label = reader.getElementText();
+								if (!label.isEmpty())
+								{
+									menuItem.label = label;
+								}
+							}
+						}
+						event3 = reader.peek();
+						if (event3.isStartElement())
+						{
+							StartElement startElement3 = event3.asStartElement();
+							if (A.equals(startElement3.getName().getLocalPart()))
+							{
+								reader.nextEvent(); // consume
+								setAttribute(startElement3, "href", (v) -> menuItem.link = v);
+								setAttribute(startElement3, "target", (v) -> menuItem.target = v);
 							}
 						}
 						break;

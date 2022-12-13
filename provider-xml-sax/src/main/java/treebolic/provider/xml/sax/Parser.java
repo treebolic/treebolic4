@@ -46,7 +46,8 @@ public class Parser
 		private static final String MOUNTPOINT = "mountpoint";
 		private static final String DEFAULT_TREEEDGE = "default.treeedge";
 		private static final String DEFAULT_EDGE = "default.edge";
-		private static final String TOOLS = "tools";
+
+		// private static final String TOOLS = "tools";
 		private static final String MENU = "menu";
 		private static final String MENUITEM = "menuitem";
 
@@ -70,6 +71,9 @@ public class Parser
 
 		@Nullable
 		private String link;
+
+		@Nullable
+		private String linkTarget;
 
 		@Nullable
 		private MountPoint.Mounting mountpoint;
@@ -196,9 +200,8 @@ public class Parser
 					// node
 					// mountpoint
 					// menuitem
-					String href = attributes.getValue("href"); // href CDATA #REQUIRED
-					String target = attributes.getValue("target"); // target CDATA #IMPLIED
-					link = href;
+					link = attributes.getValue("href"); // href CDATA #REQUIRED
+					linkTarget = attributes.getValue("target"); // target CDATA #IMPLIED
 					break;
 				}
 
@@ -227,6 +230,7 @@ public class Parser
 						}
 						case EDGE:
 						{
+							assert edge != null;
 							edge.setImageFile(src);
 							break;
 						}
@@ -254,30 +258,10 @@ public class Parser
 					break;
 				}
 
-				case LABEL:
-				{
-					// node
-					// treeedge
-					// edge
-					// menuitem
-					break;
-				}
-
-				case CONTENT:
-				{
-					// node
-					break;
-				}
-
 				case MOUNTPOINT:
 				{
 					mountpoint = new MountPoint.Mounting();
 					setAttribute(attributes, "now", Parser::parseBoolean, (v) -> mountpoint.now = v);
-					break;
-				}
-
-				case TOOLS:
-				{
 					break;
 				}
 
@@ -295,13 +279,18 @@ public class Parser
 					String match_mode = attributes.getValue("match-mode"); // match-mode (equals|startswith|includes|EQUALS|STARTSWITH|INCLUDES) #IMPLIED
 					MenuItem menuItem = new MenuItem();
 					menuItem.action = MenuItem.Action.valueOf(action);
-					menuItem.target = match_target;
+					menuItem.matchTarget = match_target;
 					menuItem.matchScope = Utils.stringToScope(match_scope);
 					menuItem.matchMode = Utils.stringToMode(match_mode);
 					assert settings.menu != null;
 					settings.menu.add(menuItem);
 					// label
 					// link
+					break;
+				}
+
+				default:
+				{
 					break;
 				}
 			}
@@ -400,19 +389,32 @@ public class Parser
 					switch (state)
 					{
 						case NODE:
+						{
 							stack.peek().setLink(link);
 							link = null;
+							linkTarget = null;
 							break;
+						}
 
 						case MENUITEM:
-							settings.menu.get(settings.menu.size() - 1).link = link;
+						{
+							assert settings.menu != null;
+							MenuItem menuItem = settings.menu.get(settings.menu.size() - 1);
+							menuItem.link = link;
+							menuItem.target = linkTarget;
 							link = null;
+							linkTarget = null;
 							break;
+						}
 
 						case MOUNTPOINT:
+						{
+							assert mountpoint != null;
 							mountpoint.url = link;
 							link = null;
+							linkTarget = null;
 							break;
+						}
 					}
 					break;
 				}
@@ -426,7 +428,6 @@ public class Parser
 
 				case MENUITEM:
 				{
-					MenuItem menuItem = null;
 					break;
 				}
 			}
