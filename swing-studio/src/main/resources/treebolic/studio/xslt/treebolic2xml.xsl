@@ -16,10 +16,6 @@
 		<xsl:value-of select="normalize-space()" />
 	</xsl:template>
 
-	<xsl:template match="tree.descriptor">
-		<xsl:apply-templates select="./tree" />
-	</xsl:template>
-
 	<xsl:template match="tree">
 		<xsl:apply-templates select="./nodes" />
 	</xsl:template>

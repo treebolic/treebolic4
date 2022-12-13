@@ -58,7 +58,7 @@ public class XSettingsDialog extends SettingsDialog
 	/**
 	 * Main entry point
 	 *
-	 * @param args argmuments
+	 * @param args arguments
 	 */
 	static public void main(final String[] args)
 	{

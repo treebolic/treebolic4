@@ -612,6 +612,25 @@
     <pattern value="treebolic.glue.Graphics" />
     <pattern value="treebolic.glue.component.Toolbar" />
     <pattern value="treebolic.provider.xml.stax.Provider" method="Provider" />
+    <pattern value="treebolic.provider.xml.stax.Provider" method="makeModel" />
+    <pattern value="treebolic.provider.xml.stax.Provider" method="setContext" />
+    <pattern value="treebolic.provider.xml.stax.Provider" method="setLocator" />
+    <pattern value="treebolic.provider.owl.jena.BaseProvider" method="makeModel" />
+    <pattern value="treebolic.provider.owl.jena.BaseProvider" method="setContext" />
+    <pattern value="treebolic.provider.owl.jena.BaseProvider" method="setLocator" />
+    <pattern value="treebolic.glue.iface.component.Statusbar.ImageIndices" />
+    <pattern value="treebolic.provider.xml.dom.Provider" method="makeModel" />
+    <pattern value="treebolic.provider.xml.sax.Provider" method="makeModel" />
+    <pattern value="treebolic.provider.xml.dom.Provider" method="makeTree" />
+    <pattern value="treebolic.provider.xml.sax.Provider" method="makeTree" />
+    <pattern value="treebolic.provider.xml.dom.Provider" method="Provider" />
+    <pattern value="treebolic.provider.xml.sax.Provider" method="Provider" />
+    <pattern value="treebolic.provider.xml.dom.Provider" method="setContext" />
+    <pattern value="treebolic.provider.xml.sax.Provider" method="setContext" />
+    <pattern value="treebolic.provider.xml.dom.Provider" method="setHandle" />
+    <pattern value="treebolic.provider.xml.sax.Provider" method="setHandle" />
+    <pattern value="treebolic.provider.xml.dom.Provider" method="setLocator" />
+    <pattern value="treebolic.provider.xml.sax.Provider" method="setLocator" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
@@ -705,5 +724,43 @@
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11 (3)" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="org.intellij.lang.xpath.xslt.associations.impl.FileAssociationsManagerImpl">
+    <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources/treebolic/studio/xslt/freemind2treebolic.xsl">
+      <association url="file://$PROJECT_DIR$/swing-studio/data/import/mm/freemind.mm" />
+    </file>
+    <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources/treebolic/studio/xslt/gxl2treebolic.xsl">
+      <association url="file://$PROJECT_DIR$/swing-studio/data/import/gxl/test.gxl" />
+    </file>
+    <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources/treebolic/studio/xslt/treebolic2dot.xsl">
+      <association url="file://$PROJECT_DIR$/provider-xml-dom/data/test.xml" />
+    </file>
+    <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources/treebolic/studio/xslt/treebolic2gxl.xsl">
+      <association url="file://$PROJECT_DIR$/provider-xml-dom/data/test.xml" />
+    </file>
+    <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources/treebolic/studio/xslt/treebolic2html.xsl">
+      <association url="file://$PROJECT_DIR$/provider-xml-dom/data/test.xml" />
+    </file>
+    <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources/treebolic/studio/xslt/treebolic2mysql.xsl">
+      <association url="file://$PROJECT_DIR$/provider-xml-dom/data/test.xml" />
+    </file>
+    <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources/treebolic/studio/xslt/treebolic2sqlite.xsl">
+      <association url="file://$PROJECT_DIR$/provider-xml-dom/data/test.xml" />
+    </file>
+    <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources/treebolic/studio/xslt/treebolic2tre.xsl">
+      <association url="file://$PROJECT_DIR$/provider-xml-dom/data/test.xml" />
+    </file>
+    <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources/treebolic/studio/xslt/treebolic2txtindent.xsl">
+      <association url="file://$PROJECT_DIR$/provider-xml-dom/data/test.xml" />
+    </file>
+    <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources/treebolic/studio/xslt/treebolic2txtpair.xsl">
+      <association url="file://$PROJECT_DIR$/provider-xml-dom/data/test.xml" />
+    </file>
+    <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources/treebolic/studio/xslt/treebolic2txttree.xsl">
+      <association url="file://$PROJECT_DIR$/provider-xml-dom/data/test.xml" />
+    </file>
+    <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources/treebolic/studio/xslt/treebolic2xml.xsl">
+      <association url="file://$PROJECT_DIR$/provider-xml-dom/data/test.xml" />
+    </file>
   </component>
 </project>

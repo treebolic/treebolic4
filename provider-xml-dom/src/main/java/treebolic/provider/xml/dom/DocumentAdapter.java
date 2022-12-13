@@ -77,6 +77,10 @@ public class DocumentAdapter extends BaseDocumentAdapter
 	protected Tree toTree(@NonNull final Document document)
 	{
 		@Nullable final Tree tree = super.toTree(document);
+		if (tree == null)
+		{
+			return null;
+		}
 
 		// edges
 		@Nullable final List<IEdge> edges = tree.getEdges();
@@ -98,6 +102,7 @@ public class DocumentAdapter extends BaseDocumentAdapter
 	/**
 	 * Graft mounted tree
 	 *
+	 * @param task       mount task to perform
 	 * @param provider   provider
 	 * @param base       document base
 	 * @param parameters parameters
