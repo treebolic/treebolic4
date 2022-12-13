@@ -39,11 +39,6 @@
 		</dependency>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-annotations</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
 			<artifactId>provider-xml-dom</artifactId>
 			<version>${revision}</version>
 			<scope>test</scope>

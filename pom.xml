@@ -28,6 +28,7 @@
 		<module>treebolic-annotations</module>
 
 		<module>provider-xml-dom</module>
+		<module>provider-xml-sax</module>
 		<module>provider-xml-stax</module>
 		<module>provider-owl-owlapi</module>
 		<module>provider-owl-jena</module>
@@ -96,7 +97,6 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M7</version>
 				<configuration>
-					<skip>true</skip>
 					<systemProperties>
 						<property>
 							<name>SILENT</name>

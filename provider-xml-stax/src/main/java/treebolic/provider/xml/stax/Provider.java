@@ -160,6 +160,10 @@ public class Provider implements IProvider
 	 *
 	 * @param url url
 	 * @return model
+	 * @throws ParserConfigurationException parser configuration exception
+	 * @throws SAXException                 sax exception
+	 * @throws IOException                  io exception
+	 * @throws XMLStreamException           xml stream exception
 	 */
 	@Nullable
 	@SuppressWarnings("WeakerAccess")
@@ -178,6 +182,10 @@ public class Provider implements IProvider
 	 *
 	 * @param url url
 	 * @return tree
+	 * @throws ParserConfigurationException parser configuration exception
+	 * @throws SAXException                 sax exception
+	 * @throws IOException                  io exception
+	 * @throws XMLStreamException           xml stream exception
 	 */
 	@Nullable
 	@SuppressWarnings("WeakerAccess")
