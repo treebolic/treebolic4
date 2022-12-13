@@ -59,7 +59,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 	/**
 	 * Web content status view
 	 */
-	@treebolic.annotations.Nullable
+	@Nullable
 	private final WebView webContentView;
 
 	/**
@@ -151,12 +151,12 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 		this.activity = activity0;
 
 		// determine orientation
-		@treebolic.annotations.NonNull final Point size = Utils.screenSize(this.activity);
+		@NonNull final Point size = Utils.screenSize(this.activity);
 		final boolean isHorizontalScreen = size.x >= size.y;
 		this.isHorizontal = !isHorizontalScreen;
 
 		// colors
-		@treebolic.annotations.NonNull final int[] colors = Utils.fetchColors(this.activity, R.attr.treebolic_statusbar_background, R.attr.treebolic_statusbar_foreground, R.attr.treebolic_statusbar_foreground_icon);
+		@NonNull final int[] colors = Utils.fetchColors(this.activity, R.attr.treebolic_statusbar_background, R.attr.treebolic_statusbar_foreground, R.attr.treebolic_statusbar_foreground_icon);
 		this.background = colors[0];
 		this.foreground = colors[1];
 		this.iconTint = colors[2];
@@ -165,8 +165,8 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 		final LayoutInflater inflater = (LayoutInflater) this.activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		assert inflater != null;
 		TextView statusView0;
-		@treebolic.annotations.Nullable WebView webContentView0 = null;
-		@treebolic.annotations.Nullable TextView textContentView0 = null;
+		@Nullable WebView webContentView0 = null;
+		@Nullable TextView textContentView0 = null;
 		try
 		{
 			final ViewGroup wrappedView = (ViewGroup) inflater.inflate(isHorizontalScreen ? R.layout.status_h : R.layout.status_v, this);
@@ -321,7 +321,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 		}
 
 		// label
-		@treebolic.annotations.Nullable String label = label0;
+		@Nullable String label = label0;
 		if (Statusbar.labelProcessor != null)
 		{
 			label = labelProcessor.process(label, this);
@@ -331,7 +331,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 		// content
 		if (this.webContentView != null)
 		{
-			@treebolic.annotations.Nullable String content = converter == null ? Utils.join("<br>", content0) : converter.apply(content0);
+			@Nullable String content = converter == null ? Utils.join("<br>", content0) : converter.apply(content0);
 			if (Statusbar.contentProcessor != null)
 			{
 				content = contentProcessor.process(content, this);
@@ -351,7 +351,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 			}
 			else
 			{
-				@treebolic.annotations.NonNull final StringBuilder html = new StringBuilder();
+				@NonNull final StringBuilder html = new StringBuilder();
 				html.append("<html><head>");
 				html.append("<style type='text/css'>");
 				html.append(getDefaultBaseStyle());

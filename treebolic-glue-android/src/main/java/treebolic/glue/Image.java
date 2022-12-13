@@ -128,7 +128,7 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 		{
 			return null;
 		}
-		@treebolic.annotations.NonNull final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		@NonNull final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		this.bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
 		return baos.toByteArray();
 	}
@@ -141,7 +141,7 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	@SuppressWarnings({"WeakerAccess"})
 	public void setFromByteArray(@Nullable final byte[] imageByteArray)
 	{
-		@treebolic.annotations.NonNull final Options opt = new Options();
+		@NonNull final Options opt = new Options();
 		//noinspection deprecation
 		opt.inDither = true;
 		opt.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -156,7 +156,7 @@ public class Image implements treebolic.glue.iface.Image, Serializable
 	 */
 	private void writeObject(@NonNull final ObjectOutputStream out) throws IOException
 	{
-		@treebolic.annotations.Nullable final byte[] imageBytes = getByteArray();
+		@Nullable final byte[] imageBytes = getByteArray();
 		out.writeObject(imageBytes);
 	}
 

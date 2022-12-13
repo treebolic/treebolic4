@@ -307,10 +307,10 @@ public class Parser
 					case MENUITEM:
 					{
 						MenuItem menuItem = new MenuItem();
-						setAttribute(startElement, "action", MenuItem.Action::valueOf, (v) -> menuItem.action = v );
-						setAttribute(startElement, "match-target",(v) -> menuItem.matchTarget = v);
-						setAttribute(startElement, "match-scope",Utils::stringToScope,(v) -> menuItem.matchScope = v);
-						setAttribute(startElement, "match-mode",Utils::stringToMode,(v) -> menuItem.matchMode = v);
+						setAttribute(startElement, "action", s -> MenuItem.Action.valueOf(s.toUpperCase()), (v) -> menuItem.action = v);
+						setAttribute(startElement, "match-target", (v) -> menuItem.matchTarget = v);
+						setAttribute(startElement, "match-scope", Utils::stringToScope, (v) -> menuItem.matchScope = v);
+						setAttribute(startElement, "match-mode", Utils::stringToMode, (v) -> menuItem.matchMode = v);
 						assert settings.menu != null;
 						settings.menu.add(menuItem);
 

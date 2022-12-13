@@ -153,7 +153,7 @@ public class TreebolicThread extends Thread
 		while (!this.terminateFlag)
 		{
 			// draw cycle
-			@treebolic.annotations.Nullable Canvas canvas = null;
+			@Nullable Canvas canvas = null;
 			try
 			{
 				assert this.surfaceHolder != null;
@@ -239,7 +239,7 @@ public class TreebolicThread extends Thread
 			// int h = canvas.getHeight() / 2;
 			// canvas.drawCircle(w, h, Math.min(w, h), paint);
 
-			@treebolic.annotations.NonNull final Graphics g = new Graphics(canvas);
+			@NonNull final Graphics g = new Graphics(canvas);
 			assert this.surface != null;
 			this.surface.paint(g);
 

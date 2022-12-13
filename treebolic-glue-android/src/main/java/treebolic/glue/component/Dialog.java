@@ -127,7 +127,7 @@ public class Dialog extends AppCompatDialogFragment implements treebolic.glue.if
 		}
 
 		// colors
-		@treebolic.annotations.NonNull int[] colors = Utils.fetchColors(this.activity, R.attr.treebolic_dialog_background, R.attr.treebolic_dialog_foreground, R.attr.treebolic_dialog_foreground_enhanced, R.attr.treebolic_dialog_foreground_icon);
+		@NonNull int[] colors = Utils.fetchColors(this.activity, R.attr.treebolic_dialog_background, R.attr.treebolic_dialog_foreground, R.attr.treebolic_dialog_foreground_enhanced, R.attr.treebolic_dialog_foreground_icon);
 		this.background = colors[0];
 		this.foreground = colors[1];
 		// int foregroundEnhanced = colors[2];
@@ -147,8 +147,8 @@ public class Dialog extends AppCompatDialogFragment implements treebolic.glue.if
 	public AppCompatDialog onCreateDialog(final Bundle savedInstanceState)
 	{
 		// use the Builder class for convenient dialog construction
-		@treebolic.annotations.NonNull final Activity activity = requireActivity();
-		@treebolic.annotations.NonNull final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		@NonNull final Activity activity = requireActivity();
+		@NonNull final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
 		// get the layout inflater
 		final LayoutInflater inflater = activity.getLayoutInflater();
@@ -166,7 +166,7 @@ public class Dialog extends AppCompatDialogFragment implements treebolic.glue.if
 
 			// content
 			final WebView webView = view.findViewById(R.id.content);
-			@treebolic.annotations.NonNull final StringBuilder html = new StringBuilder();
+			@NonNull final StringBuilder html = new StringBuilder();
 			html.append("<html><head>");
 			html.append("<style type='text/css'>");
 			html.append(getDefaultBaseStyle());
@@ -215,12 +215,12 @@ public class Dialog extends AppCompatDialogFragment implements treebolic.glue.if
 		;
 
 		// create the dialog object and return it
-		@treebolic.annotations.NonNull final AppCompatDialog dialog = builder.create();
+		@NonNull final AppCompatDialog dialog = builder.create();
 		dialog.setCanceledOnTouchOutside(true);
 		return dialog;
 	}
 
-	@treebolic.annotations.NonNull
+	@NonNull
 	private WebViewClient makeWebViewClient()
 	{
 		return new WebViewClient()

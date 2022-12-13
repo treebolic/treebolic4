@@ -273,15 +273,12 @@ public class Parser
 
 				case MENUITEM:
 				{
-					String action = attributes.getValue("action"); // action (goto|search|focus|GOTO|SEARCH|FOCUS) #REQUIRED
-					String match_target = attributes.getValue("match-target"); // match-target CDATA #IMPLIED
-					String match_scope = attributes.getValue("match-scope"); // match-scope (label|content|link|id|LABEL|CONTENT|LINK|ID) #IMPLIED
-					String match_mode = attributes.getValue("match-mode"); // match-mode (equals|startswith|includes|EQUALS|STARTSWITH|INCLUDES) #IMPLIED
 					MenuItem menuItem = new MenuItem();
-					menuItem.action = MenuItem.Action.valueOf(action);
-					menuItem.matchTarget = match_target;
-					menuItem.matchScope = Utils.stringToScope(match_scope);
-					menuItem.matchMode = Utils.stringToMode(match_mode);
+					setAttribute(attributes, "action", s -> MenuItem.Action.valueOf(s.toUpperCase()), (v) -> menuItem.action = v);
+					setAttribute(attributes, "match-target", (v) -> menuItem.matchTarget = v);
+					setAttribute(attributes, "match-scope", Utils::stringToScope, (v) -> menuItem.matchScope = v);
+					setAttribute(attributes, "match-mode", Utils::stringToMode, (v) -> menuItem.matchMode = v);
+
 					assert settings.menu != null;
 					settings.menu.add(menuItem);
 					// label

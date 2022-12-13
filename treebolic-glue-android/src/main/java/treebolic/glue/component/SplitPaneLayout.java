@@ -688,12 +688,12 @@ public class SplitPaneLayout extends ViewGroup
 		}
 	}
 
-	@treebolic.annotations.NonNull
+	@NonNull
 	@Override
 	public Parcelable onSaveInstanceState()
 	{
 		final Parcelable superState = super.onSaveInstanceState();
-		@treebolic.annotations.NonNull final SavedState savedState = new SavedState(superState);
+		@NonNull final SavedState savedState = new SavedState(superState);
 		savedState.splitterPositionPercent = this.splitterPositionPercent;
 		return savedState;
 	}
@@ -706,7 +706,7 @@ public class SplitPaneLayout extends ViewGroup
 			super.onRestoreInstanceState(state);
 			return;
 		}
-		@treebolic.annotations.NonNull final SavedState savedState = (SavedState) state;
+		@NonNull final SavedState savedState = (SavedState) state;
 		super.onRestoreInstanceState(savedState.getSuperState());
 		setSplitterPositionPercent(savedState.splitterPositionPercent);
 	}

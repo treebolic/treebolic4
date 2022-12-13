@@ -38,10 +38,10 @@ public class Utils
 	@NonNull
 	static public int[] fetchColors(@NonNull final Context context, @NonNull int... attrs)
 	{
-		@treebolic.annotations.NonNull final TypedValue typedValue = new TypedValue();
+		@NonNull final TypedValue typedValue = new TypedValue();
 		try (final TypedArray array = context.obtainStyledAttributes(typedValue.data, attrs))
 		{
-			@treebolic.annotations.NonNull final int[] colors = new int[attrs.length];
+			@NonNull final int[] colors = new int[attrs.length];
 			for (int i = 0; i < attrs.length; i++)
 			{
 				colors[i] = array.getColor(i, 0);
@@ -85,10 +85,10 @@ public class Utils
 	@NonNull
 	static public Integer[] fetchColorsNullable(@NonNull final Context context, @NonNull @SuppressWarnings("SameParameterValue") int... attrs)
 	{
-		@treebolic.annotations.NonNull final TypedValue typedValue = new TypedValue();
+		@NonNull final TypedValue typedValue = new TypedValue();
 		try (final TypedArray array = context.obtainStyledAttributes(typedValue.data, attrs))
 		{
-			@treebolic.annotations.NonNull final Integer[] colors = new Integer[attrs.length];
+			@NonNull final Integer[] colors = new Integer[attrs.length];
 			for (int i = 0; i < attrs.length; i++)
 			{
 				colors[i] = array.hasValue(i) ? array.getColor(i, 0) : null;
@@ -137,7 +137,7 @@ public class Utils
 	 * @param resId   drawable id
 	 * @return drawable
 	 */
-	@treebolic.annotations.Nullable
+	@Nullable
 	static public Drawable getDrawable(@NonNull final Context context, @DrawableRes int resId)
 	{
 		return ResourcesCompat.getDrawable(context.getResources(), resId, context.getTheme());
@@ -155,7 +155,7 @@ public class Utils
 	{
 		final Resources resources = context.getResources();
 		final Resources.Theme theme = context.getTheme();
-		@treebolic.annotations.NonNull Drawable[] drawables = new Drawable[resIds.length];
+		@NonNull Drawable[] drawables = new Drawable[resIds.length];
 		for (int i = 0; i < resIds.length; i++)
 		{
 			drawables[i] = ResourcesCompat.getDrawable(resources, resIds[i], theme);
@@ -198,7 +198,7 @@ public class Utils
 		else
 		{
 			@SuppressWarnings("deprecation") final Display display = wm.getDefaultDisplay();
-			@treebolic.annotations.NonNull final Point size = new Point();
+			@NonNull final Point size = new Point();
 			//noinspection deprecation
 			display.getSize(size);
 			// int height = size.y;
@@ -212,7 +212,7 @@ public class Utils
 	 * @param context context
 	 * @return a point whose x represents width and y represents height
 	 */
-	@treebolic.annotations.NonNull
+	@NonNull
 	static public Point screenSize(@NonNull final Context context)
 	{
 		final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -225,7 +225,7 @@ public class Utils
 		else
 		{
 			@SuppressWarnings("deprecation") final Display display = wm.getDefaultDisplay();
-			@treebolic.annotations.NonNull final Point size = new Point();
+			@NonNull final Point size = new Point();
 			//noinspection deprecation
 			display.getSize(size);
 			return size;
@@ -239,7 +239,7 @@ public class Utils
 	 * @param strs  input character sequences
 	 * @return string output
 	 */
-	@treebolic.annotations.NonNull
+	@NonNull
 	public static String join(@NonNull final CharSequence delim, @Nullable final CharSequence[] strs)
 	{
 		if (strs == null)
@@ -247,9 +247,9 @@ public class Utils
 			return "";
 		}
 
-		@treebolic.annotations.NonNull StringBuilder sb = new StringBuilder();
+		@NonNull StringBuilder sb = new StringBuilder();
 		boolean first = true;
-		for (@treebolic.annotations.Nullable CharSequence str : strs)
+		for (@Nullable CharSequence str : strs)
 		{
 			if (str == null || str.length() == 0)
 			{
