@@ -23,7 +23,7 @@ import treebolic.provider.IProvider;
  * @author Bernard Bou
  */
 @SuppressWarnings("WeakerAccess")
-public class DocumentAdapter extends BaseDocumentAdapter
+public class ModelFactory extends BaseModelFactory
 {
 	/**
 	 * Provider (used to generate mounted trees)
@@ -49,7 +49,7 @@ public class DocumentAdapter extends BaseDocumentAdapter
 	 * @param base       base
 	 * @param parameters parameters
 	 */
-	public DocumentAdapter(final IProvider provider, final URL base, final Properties parameters)
+	public ModelFactory(final IProvider provider, final URL base, final Properties parameters)
 	{
 		this.provider = provider;
 		this.base = base;
@@ -59,7 +59,7 @@ public class DocumentAdapter extends BaseDocumentAdapter
 	/**
 	 * Constructor
 	 */
-	public DocumentAdapter()
+	public ModelFactory()
 	{
 		this(null, null, null);
 	}

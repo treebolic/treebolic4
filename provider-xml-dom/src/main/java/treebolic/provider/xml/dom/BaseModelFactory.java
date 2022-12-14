@@ -21,7 +21,7 @@ import treebolic.model.*;
  * @author Bernard Bou
  */
 @SuppressWarnings("WeakerAccess")
-public class BaseDocumentAdapter
+public class BaseModelFactory
 {
 	// D A T A
 
@@ -72,7 +72,7 @@ public class BaseDocumentAdapter
 	 * Constructor
 	 *
 	 */
-	public BaseDocumentAdapter()
+	public BaseModelFactory()
 	{
 	}
 
@@ -105,7 +105,7 @@ public class BaseDocumentAdapter
 		{
 			return null;
 		}
-		@NonNull final Settings settings = BaseDocumentAdapter.toSettings(document);
+		@NonNull final Settings settings = BaseModelFactory.toSettings(document);
 		return new Model(tree, settings);
 	}
 
@@ -162,7 +162,7 @@ public class BaseDocumentAdapter
 	protected Tree toTree(@NonNull final Document document)
 	{
 		// nodes
-		@Nullable final Element rootElement = BaseDocumentAdapter.getFirstElementByTagName(document.getDocumentElement(), "node");
+		@Nullable final Element rootElement = BaseModelFactory.getFirstElementByTagName(document.getDocumentElement(), "node");
 		if (rootElement == null)
 		{
 			return null;
@@ -206,7 +206,7 @@ public class BaseDocumentAdapter
 		}
 
 		// label
-		@Nullable Element element = BaseDocumentAdapter.getFirstLevel1ElementByTagName(nodeElement, "label");
+		@Nullable Element element = BaseModelFactory.getFirstLevel1ElementByTagName(nodeElement, "label");
 		if (element != null)
 		{
 			final String label = element.getTextContent();
@@ -218,7 +218,7 @@ public class BaseDocumentAdapter
 
 		// image
 		@Nullable String imageSrc = null;
-		element = BaseDocumentAdapter.getFirstLevel1ElementByTagName(nodeElement, "img");
+		element = BaseModelFactory.getFirstLevel1ElementByTagName(nodeElement, "img");
 		if (element != null)
 		{
 			imageSrc = element.getAttribute("src");
@@ -229,7 +229,7 @@ public class BaseDocumentAdapter
 		}
 
 		// content
-		element = BaseDocumentAdapter.getFirstLevel1ElementByTagName(nodeElement, "content");
+		element = BaseModelFactory.getFirstLevel1ElementByTagName(nodeElement, "content");
 		if (element != null)
 		{
 			final String content = element.getTextContent();
@@ -240,11 +240,11 @@ public class BaseDocumentAdapter
 		}
 
 		// tree.edge
-		element = BaseDocumentAdapter.getFirstLevel1ElementByTagName(nodeElement, "treeedge");
+		element = BaseModelFactory.getFirstLevel1ElementByTagName(nodeElement, "treeedge");
 		if (element != null)
 		{
 			// label
-			@Nullable final Element labelElement = BaseDocumentAdapter.getFirstLevel1ElementByTagName(element, "label");
+			@Nullable final Element labelElement = BaseModelFactory.getFirstLevel1ElementByTagName(element, "label");
 			if (labelElement != null)
 			{
 				final String label = labelElement.getTextContent();
@@ -255,7 +255,7 @@ public class BaseDocumentAdapter
 			}
 
 			// image
-			@Nullable final Element imageElement = BaseDocumentAdapter.getFirstLevel1ElementByTagName(element, "img");
+			@Nullable final Element imageElement = BaseModelFactory.getFirstLevel1ElementByTagName(element, "img");
 			if (imageElement != null)
 			{
 				@NonNull final String edgeImageSrc = imageElement.getAttribute("src");
@@ -281,7 +281,7 @@ public class BaseDocumentAdapter
 		}
 
 		// link
-		element = BaseDocumentAdapter.getFirstLevel1ElementByTagName(nodeElement, "a");
+		element = BaseModelFactory.getFirstLevel1ElementByTagName(nodeElement, "a");
 		if (element != null)
 		{
 			@NonNull final String href = element.getAttribute("href");
@@ -292,10 +292,10 @@ public class BaseDocumentAdapter
 		}
 
 		// mount
-		element = BaseDocumentAdapter.getFirstLevel1ElementByTagName(nodeElement, "mountpoint");
+		element = BaseModelFactory.getFirstLevel1ElementByTagName(nodeElement, "mountpoint");
 		if (element != null)
 		{
-			@Nullable final Element aElement = BaseDocumentAdapter.getFirstElementByTagName(element, "a");
+			@Nullable final Element aElement = BaseModelFactory.getFirstElementByTagName(element, "a");
 			if (aElement != null)
 			{
 				@NonNull final String href = aElement.getAttribute("href");
@@ -323,7 +323,7 @@ public class BaseDocumentAdapter
 		}
 
 		// recurse to children
-		@NonNull final List<Element> childElements = BaseDocumentAdapter.getLevel1ChildElementsByTagName(nodeElement, "node");
+		@NonNull final List<Element> childElements = BaseModelFactory.getLevel1ChildElementsByTagName(nodeElement, "node");
 		for (@NonNull final Element childElement : childElements)
 		{
 			toNode(childElement, node);
@@ -348,7 +348,7 @@ public class BaseDocumentAdapter
 		@NonNull final MutableEdge edge = makeEdge(fromNode, toNode);
 
 		// label
-		@Nullable final Element labelElement = BaseDocumentAdapter.getFirstLevel1ElementByTagName(edgeElement, "label");
+		@Nullable final Element labelElement = BaseModelFactory.getFirstLevel1ElementByTagName(edgeElement, "label");
 		if (labelElement != null)
 		{
 			final String label = labelElement.getTextContent();
@@ -359,7 +359,7 @@ public class BaseDocumentAdapter
 		}
 
 		// image
-		@Nullable final Element imageElement = BaseDocumentAdapter.getFirstLevel1ElementByTagName(edgeElement, "img");
+		@Nullable final Element imageElement = BaseModelFactory.getFirstLevel1ElementByTagName(edgeElement, "img");
 		if (imageElement != null)
 		{
 			@NonNull final String imageSrc = imageElement.getAttribute("src");
@@ -483,11 +483,11 @@ public class BaseDocumentAdapter
 		}
 
 		// T R E E
-		element = BaseDocumentAdapter.getFirstElementByTagName(document.getDocumentElement(), "tree");
+		element = BaseModelFactory.getFirstElementByTagName(document.getDocumentElement(), "tree");
 		if (element != null)
 		{
 			// img
-			@Nullable final Element imageElement = BaseDocumentAdapter.getFirstLevel1ElementByTagName(element, "img");
+			@Nullable final Element imageElement = BaseModelFactory.getFirstLevel1ElementByTagName(element, "img");
 			if (imageElement != null)
 			{
 				@NonNull final String src = imageElement.getAttribute("src");
@@ -564,11 +564,11 @@ public class BaseDocumentAdapter
 		}
 
 		// N O D E S
-		element = BaseDocumentAdapter.getFirstElementByTagName(document.getDocumentElement(), "nodes");
+		element = BaseModelFactory.getFirstElementByTagName(document.getDocumentElement(), "nodes");
 		if (element != null)
 		{
 			// img
-			@Nullable final Element imageElement = BaseDocumentAdapter.getFirstLevel1ElementByTagName(element, "img");
+			@Nullable final Element imageElement = BaseModelFactory.getFirstLevel1ElementByTagName(element, "img");
 			if (imageElement != null)
 			{
 				@NonNull final String src = imageElement.getAttribute("src");
@@ -605,11 +605,11 @@ public class BaseDocumentAdapter
 		}
 
 		// E D G E S
-		element = BaseDocumentAdapter.getFirstElementByTagName(document.getDocumentElement(), "edges");
+		element = BaseModelFactory.getFirstElementByTagName(document.getDocumentElement(), "edges");
 		if (element != null)
 		{
 			// img
-			@Nullable final Element imageElement = BaseDocumentAdapter.getFirstLevel1ElementByTagName(element, "img");
+			@Nullable final Element imageElement = BaseModelFactory.getFirstLevel1ElementByTagName(element, "img");
 			if (imageElement != null)
 			{
 				@NonNull final String src = imageElement.getAttribute("src");
@@ -628,11 +628,11 @@ public class BaseDocumentAdapter
 		}
 
 		// D E F A U L T . T R E E . E D G E
-		element = BaseDocumentAdapter.getFirstElementByTagName(document.getDocumentElement(), "default.treeedge");
+		element = BaseModelFactory.getFirstElementByTagName(document.getDocumentElement(), "default.treeedge");
 		if (element != null)
 		{
 			// img
-			@Nullable final Element imageElement = BaseDocumentAdapter.getFirstElementByTagName(element, "img");
+			@Nullable final Element imageElement = BaseModelFactory.getFirstElementByTagName(element, "img");
 			if (imageElement != null)
 			{
 				@NonNull final String src = imageElement.getAttribute("src");
@@ -658,11 +658,11 @@ public class BaseDocumentAdapter
 		}
 
 		// D E F A U L T . E D G E
-		element = BaseDocumentAdapter.getFirstElementByTagName(document.getDocumentElement(), "default.edge");
+		element = BaseModelFactory.getFirstElementByTagName(document.getDocumentElement(), "default.edge");
 		if (element != null)
 		{
 			// img
-			@Nullable final Element imageElement = BaseDocumentAdapter.getFirstElementByTagName(element, "img");
+			@Nullable final Element imageElement = BaseModelFactory.getFirstElementByTagName(element, "img");
 			if (imageElement != null)
 			{
 				@NonNull final String src = imageElement.getAttribute("src");
@@ -694,7 +694,7 @@ public class BaseDocumentAdapter
 		{
 			final Node node = children.item(i);
 			element = (Element) node;
-			@NonNull final MenuItem menuItem = BaseDocumentAdapter.toMenuItem(element);
+			@NonNull final MenuItem menuItem = BaseModelFactory.toMenuItem(element);
 
 			if (menuItemList == null)
 			{
@@ -723,14 +723,14 @@ public class BaseDocumentAdapter
 		menuItem.matchTarget = element.getAttribute("match-target");
 
 		// label
-		@Nullable final Element labelElement = BaseDocumentAdapter.getFirstElementByTagName(element, "label");
+		@Nullable final Element labelElement = BaseModelFactory.getFirstElementByTagName(element, "label");
 		if (labelElement != null)
 		{
 			menuItem.label = labelElement.getTextContent();
 		}
 
 		// link
-		@Nullable final Element linkElement = BaseDocumentAdapter.getFirstElementByTagName(element, "a");
+		@Nullable final Element linkElement = BaseModelFactory.getFirstElementByTagName(element, "a");
 		if (linkElement != null)
 		{
 			menuItem.link = linkElement.getAttribute("href");
@@ -794,7 +794,7 @@ public class BaseDocumentAdapter
 	@Nullable
 	static private Element getFirstLevel1ElementByTagName(@NonNull final Element element, final String tagName)
 	{
-		@NonNull final List<Element> childElements = BaseDocumentAdapter.getLevel1ChildElementsByTagName(element, tagName);
+		@NonNull final List<Element> childElements = BaseModelFactory.getLevel1ChildElementsByTagName(element, tagName);
 		if (!childElements.isEmpty())
 		{
 			return childElements.get(0);

@@ -50,7 +50,7 @@ import treebolic.model.*;
 import treebolic.propertyview.SelectListener;
 import treebolic.provider.IProvider;
 import treebolic.provider.IProviderContext;
-import treebolic.provider.xml.dom.DocumentAdapter;
+import treebolic.provider.xml.dom.ModelFactory;
 import treebolic.provider.xml.dom.Parser;
 import treebolic.xml.transformer.DomTransformer;
 import treebolic.zip.ZipMaker;
@@ -345,7 +345,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		}
 
 		// document -> model
-		@NonNull final DocumentAdapter adapter = new DocumentAdapter()
+		@NonNull final ModelFactory factory = new ModelFactory()
 		{
 			@NonNull
 			@Override
@@ -361,8 +361,8 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 				return new TreeMutableEdge(fromNode, toNode);
 			}
 		};
-		this.model = adapter.makeModel(this.document);
-		this.idToNodeMap = adapter.getIdToNodeMap();
+		this.model = factory.makeModel(this.document);
+		this.idToNodeMap = factory.getIdToNodeMap();
 	}
 
 	// M O D E L

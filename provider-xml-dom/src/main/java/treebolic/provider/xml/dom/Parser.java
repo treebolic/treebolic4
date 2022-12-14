@@ -232,7 +232,7 @@ public class Parser
 		{
 			return null;
 		}
-		return new BaseDocumentAdapter().makeModel(document);
+		return new BaseModelFactory().makeModel(document);
 	}
 
 	/**
