@@ -177,6 +177,11 @@ public class OwlModelFactory implements ImageDecorator
 	protected static final Integer LOADBALANCING_EDGECOLOR = Colors.DARK_GRAY;
 
 	/**
+	 * LoadBalancer (classes) : image index
+	 */
+	protected static final int LOADBALANCING_IMAGEINDEX = ImageIndex.BRANCH.ordinal();
+
+	/**
 	 * LoadBalancer (classes) : image
 	 */
 	@Nullable
@@ -195,66 +200,76 @@ public class OwlModelFactory implements ImageDecorator
 	// instances
 
 	/**
-	 * LoadBalancer (instances and properties) : back color
+	 * LoadBalancer (instances) : back color
 	 */
 	protected static final Integer LOADBALANCING_INSTANCES_BACKCOLOR = defaultInstanceBackColor;
 
 	/**
-	 * LoadBalancer (instances and properties) : fore color
+	 * LoadBalancer (instances) : fore color
 	 */
 	protected static final Integer LOADBALANCING_INSTANCES_FORECOLOR = defaultInstanceForeColor;
 
 	/**
-	 * LoadBalancer (instances and properties) : edge color
+	 * LoadBalancer (instances) : edge color
 	 */
 	protected static final Integer LOADBALANCING_INSTANCES_EDGECOLOR = defaultInstanceForeColor;
 
 	/**
-	 * LoadBalancer (instances and properties) : image
+	 * LoadBalancer (instances) : image index
+	 */
+	protected static final int LOADBALANCING_INSTANCES_IMAGEINDEX = ImageIndex.BRANCH_INSTANCES.ordinal();
+
+	/**
+	 * LoadBalancer (instances) : image
 	 */
 	@Nullable
 	protected static final Image LOADBALANCING_INSTANCES_IMAGE = null;
 
 	/**
-	 * LoadBalancer (instances and properties) : image file
+	 * LoadBalancer (instances) : image file
 	 */
 	protected static final String LOADBALANCING_INSTANCES_IMAGEFILE = "branch_instances.png";
 
 	/**
-	 * LoadBalancer (instances and properties) : Edge style
+	 * LoadBalancer (instances) : Edge style
 	 */
 	protected static final int LOADBALANCING_INSTANCES_EDGE_STYLE = IEdge.DASH | /* IEdge.FROMDEF | IEdge.FROMCIRCLE | */IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.STROKEDEF | IEdge.TODEF;
 
 	// properties
 
 	/**
-	 * LoadBalancer (instances and properties) : back color
+	 * LoadBalancer (properties) : back color
 	 */
 	protected static final Integer LOADBALANCING_PROPERTIES_BACKCOLOR = defaultPropertyBackColor;
 
 	/**
-	 * LoadBalancer (instances and properties) : fore color
+	 * LoadBalancer (properties) : fore color
 	 */
 	protected static final Integer LOADBALANCING_PROPERTIES_FORECOLOR = defaultPropertyForeColor;
 
 	/**
-	 * LoadBalancer (instances and properties) : edge color
+	 * LoadBalancer (properties) : edge color
 	 */
 	protected static final Integer LOADBALANCING_PROPERTIES_EDGECOLOR = defaultPropertyForeColor;
 
 	/**
-	 * LoadBalancer (instances and properties) : image
+	 * LoadBalancer (properties) : image index
+	 */
+	protected static final int LOADBALANCING_PROPERTIES_IMAGEINDEX = ImageIndex.BRANCH_PROPERTIES.ordinal();
+
+	/**
+	 * LoadBalancer (properties) : image
 	 */
 	@Nullable
 	protected static final Image LOADBALANCING_PROPERTIES_IMAGE = null;
 
 	/**
-	 * LoadBalancer (instances and properties) : image file
+	 * LoadBalancer (properties) : image file
 	 */
 	protected static final String LOADBALANCING_PROPERTIES_IMAGEFILE = "branch_properties.png";
 
 	/**
-	 * LoadBalancer (instances and properties) : Edge style
+	 * LoadBalancer (properties) : Edge style
 	 */
 	protected static final int LOADBALANCING_PROPERTIES_EDGE_STYLE = IEdge.DASH | /* IEdge.FROMDEF | IEdge.FROMCIRCLE | */IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.STROKEDEF | IEdge.TODEF;
 

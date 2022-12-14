@@ -168,12 +168,10 @@ public class OwlModelFactory implements ImageDecorator
 	 */
 	protected static final Integer LOADBALANCING_EDGECOLOR = Colors.DARK_GRAY;
 
-	// --Commented out by Inspection START (12/6/22, 1:53 PM):
-	//	/**
-	//	 * LoadBalancer (classes) : image index
-	//	 */
-	//	protected static final int LOADBALANCING_IMAGEINDEX = ImageIndex.BRANCH.ordinal();
-	// --Commented out by Inspection STOP (12/6/22, 1:53 PM)
+	/**
+	 * LoadBalancer (classes) : image index
+	 */
+	protected static final int LOADBALANCING_IMAGEINDEX = ImageIndex.BRANCH.ordinal();
 
 	/**
 	 * LoadBalancer (classes) : image
@@ -208,12 +206,10 @@ public class OwlModelFactory implements ImageDecorator
 	 */
 	protected static final Integer LOADBALANCING_INSTANCES_EDGECOLOR = defaultInstanceForeColor;
 
-	// --Commented out by Inspection START (12/6/22, 1:53 PM):
-	//	/**
-	//	 * LoadBalancer (instances and properties) : image index
-	//	 */
-	//	protected static final int LOADBALANCING_INSTANCES_IMAGEINDEX = ImageIndex.BRANCH_INSTANCES.ordinal();
-	// --Commented out by Inspection STOP (12/6/22, 1:53 PM)
+	/**
+	 * LoadBalancer (instances and properties) : image index
+	 */
+	protected static final int LOADBALANCING_INSTANCES_IMAGEINDEX = ImageIndex.BRANCH_INSTANCES.ordinal();
 
 	/**
 	 * LoadBalancer (instances and properties) : image
@@ -248,12 +244,10 @@ public class OwlModelFactory implements ImageDecorator
 	 */
 	protected static final Integer LOADBALANCING_PROPERTIES_EDGECOLOR = defaultPropertyForeColor;
 
-	// --Commented out by Inspection START (12/6/22, 1:53 PM):
-	//	/**
-	//	 * LoadBalancer (instances and properties) : image index
-	//	 */
-	//	protected static final int LOADBALANCING_PROPERTIES_IMAGEINDEX = ImageIndex.BRANCH_PROPERTIES.ordinal(); // -1;
-	// --Commented out by Inspection STOP (12/6/22, 1:53 PM)
+	/**
+	 * LoadBalancer (instances and properties) : image index
+	 */
+	protected static final int LOADBALANCING_PROPERTIES_IMAGEINDEX = ImageIndex.BRANCH_PROPERTIES.ordinal(); // -1;
 
 	/**
 	 * LoadBalancer (instances and properties) : image
