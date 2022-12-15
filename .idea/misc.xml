@@ -109,6 +109,12 @@
       <entry_point TYPE="field" FQNAME="treebolic.provider.sql.SqlProperties SOURCE" />
       <entry_point TYPE="field" FQNAME="treebolic.provider.xml.stax.Parser TREE" />
       <entry_point TYPE="field" FQNAME="treebolic.provider.xml.stax.Parser TREEBOLIC" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.owl.jena.OwlModelFactory LOADBALANCING_IMAGEINDEX" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.owl.sax.OwlModelFactory LOADBALANCING_IMAGEINDEX" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.owl.jena.OwlModelFactory LOADBALANCING_INSTANCES_IMAGEINDEX" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.owl.sax.OwlModelFactory LOADBALANCING_INSTANCES_IMAGEINDEX" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.owl.jena.OwlModelFactory LOADBALANCING_PROPERTIES_IMAGEINDEX" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.owl.sax.OwlModelFactory LOADBALANCING_PROPERTIES_IMAGEINDEX" />
     </entry_points>
     <pattern value="treebolic.glue.Worker" method="doInBackground" />
     <pattern value="treebolic.glue.Worker" method="job" />
