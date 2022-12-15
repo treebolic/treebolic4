@@ -21,17 +21,17 @@ import treebolic.provider.IProvider;
 public class Mounter
 {
 	/**
-	 * Run protracted mount tasks (had to be protracted until edges become available)
+	 * Run protracted mount tasks (that had to be protracted until edges become available) before display is computed
 	 *
-	 * @param model      model
+	 * @param tree       tree
 	 * @param provider   provider
 	 * @param base       base
 	 * @param parameters parameters
 	 */
-	public static void execMounts(@NonNull final Model model, @NonNull final IProvider provider, @Nullable final URL base, @Nullable final Properties parameters)
+	public static void autoMount(@NonNull final Tree tree, @NonNull final IProvider provider, @Nullable final URL base, @Nullable final Properties parameters)
 	{
-		@Nullable final List<IEdge> edges = model.tree.getEdges();
-		@Nullable final List<MountTask> mountTasks = model.mountTasks;
+		@Nullable final List<IEdge> edges = tree.getEdges();
+		@Nullable final List<MountTask> mountTasks = tree.mountTasks;
 		if (mountTasks != null)
 		{
 			for (@NonNull final MountTask task : mountTasks)
@@ -61,6 +61,7 @@ public class Mounter
 		@Nullable final Tree tree = provider.makeTree(task.mountPoint.url, base, parameters, true);
 		if (tree != null)
 		{
+			autoMount(tree, provider, base, parameters);
 			graft(task.mountingNode, tree.getRoot(), edges, tree.getEdges());
 		}
 	}

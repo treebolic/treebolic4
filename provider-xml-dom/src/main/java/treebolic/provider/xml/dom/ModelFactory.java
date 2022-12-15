@@ -40,7 +40,6 @@ public class ModelFactory
 
 	/**
 	 * Constructor
-	 *
 	 */
 	public ModelFactory()
 	{
@@ -76,7 +75,7 @@ public class ModelFactory
 			return null;
 		}
 		@NonNull final Settings settings = ModelFactory.toSettings(document);
-		return new Model(tree, settings, null, mountTasks);
+		return new Model(tree, settings, null);
 	}
 
 	/**
@@ -125,7 +124,7 @@ public class ModelFactory
 	/**
 	 * Make graph
 	 *
-	 * @param document document
+	 * @param document   document
 	 * @return graph
 	 */
 	@Nullable
@@ -142,7 +141,7 @@ public class ModelFactory
 		// edges
 		@Nullable final List<IEdge> edges = toEdges(document);
 
-		return new Tree(root, edges);
+		return new Tree(root, edges, mountTasks);
 	}
 
 	/**

@@ -462,8 +462,8 @@ public class Widget extends Container implements IWidget, IProviderContext
 		}
 
 		// protracted mounts
-		assert provider != null;
-		Mounter.execMounts(model, this.provider, this.context.getBase(), this.context.getParameters());
+		assert this.provider != null;
+		Mounter.autoMount(model.tree, this.provider, this.context.getBase(), this.context.getParameters());
 
 		// model/view/controller
 		this.model = model;

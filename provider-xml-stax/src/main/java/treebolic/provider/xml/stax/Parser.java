@@ -381,7 +381,7 @@ public class Parser
 				throw new RuntimeException("[" + event.asCharacters().getData() + "] caught: setup filter");
 			}
 		}
-		return new Model(new Tree(root, edges), settings, null, mountTasks);
+		return new Model(new Tree(root, edges, mountTasks), settings, null);
 	}
 
 	/**
