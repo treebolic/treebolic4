@@ -4,11 +4,14 @@
 
 package treebolic.model;
 
+import java.net.URL;
 import java.util.Collection;
 import java.util.List;
+import java.util.Properties;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
+import treebolic.provider.IProvider;
 
 /**
  * Mounter
@@ -17,6 +20,51 @@ import treebolic.annotations.Nullable;
  */
 public class Mounter
 {
+	/**
+	 * Run protracted mount tasks (had to be protracted until edges become available)
+	 *
+	 * @param model      model
+	 * @param provider   provider
+	 * @param base       base
+	 * @param parameters parameters
+	 */
+	public static void execMounts(@NonNull final Model model, @NonNull final IProvider provider, @Nullable final URL base, @Nullable final Properties parameters)
+	{
+		@Nullable final List<IEdge> edges = model.tree.getEdges();
+		@Nullable final List<MountTask> mountTasks = model.mountTasks;
+		if (mountTasks != null)
+		{
+			for (@NonNull final MountTask task : mountTasks)
+			{
+				Mounter.graft(task, provider, base, parameters, edges);
+			}
+			mountTasks.clear();
+		}
+	}
+
+	/**
+	 * Graft mounted tree
+	 *
+	 * @param task       mount task to perform
+	 * @param provider   provider
+	 * @param base       document base
+	 * @param parameters parameters
+	 * @param edges      edges in grafting tree
+	 */
+	private static void graft(@NonNull final MountTask task, @Nullable final IProvider provider, @Nullable final URL base, @Nullable final Properties parameters, @Nullable final List<IEdge> edges)
+	{
+		if (provider == null)
+		{
+			System.err.println("Mount not performed: " + task.mountPoint + " @ " + task.mountingNode);
+			return;
+		}
+		@Nullable final Tree tree = provider.makeTree(task.mountPoint.url, base, parameters, true);
+		if (tree != null)
+		{
+			graft(task.mountingNode, tree.getRoot(), edges, tree.getEdges());
+		}
+	}
+
 	/**
 	 * Graft mounted node onto mounting node
 	 *
@@ -199,7 +247,7 @@ public class Mounter
 		return mountingNode;
 	}
 
-	static private void removeSubtreeEdges(@NonNull final List<IEdge> edges, @NonNull final INode mountedNode)
+	private static void removeSubtreeEdges(@NonNull final List<IEdge> edges, @NonNull final INode mountedNode)
 	{
 		@Nullable final List<INode> mountedNodeChildren = mountedNode.getChildren();
 		if (mountedNodeChildren != null)

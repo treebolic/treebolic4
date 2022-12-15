@@ -25,10 +25,10 @@ import treebolic.core.LayerOut;
 import treebolic.core.Weigher;
 import treebolic.core.location.Complex;
 import treebolic.glue.ActionListener;
-import treebolic.glue.iface.Image;
 import treebolic.glue.Worker;
 import treebolic.glue.component.Container;
 import treebolic.glue.component.Dialog;
+import treebolic.glue.iface.Image;
 import treebolic.model.*;
 import treebolic.model.Types.MatchMode;
 import treebolic.model.Types.MatchScope;
@@ -460,6 +460,10 @@ public class Widget extends Container implements IWidget, IProviderContext
 		{
 			return;
 		}
+
+		// protracted mounts
+		assert provider != null;
+		Mounter.execMounts(model, this.provider, this.context.getBase(), this.context.getParameters());
 
 		// model/view/controller
 		this.model = model;

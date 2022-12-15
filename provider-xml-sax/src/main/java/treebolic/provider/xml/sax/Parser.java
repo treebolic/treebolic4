@@ -51,11 +51,17 @@ public class Parser
 		private static final String MENU = "menu";
 		private static final String MENUITEM = "menuitem";
 
+		// stack
+
 		private final Stack<String> states = new Stack<>();
 
 		private Stack<MutableNode> stack;
 
+		// node map
+
 		private Map<String, MutableNode> nodes;
+
+		// result
 
 		private INode root;
 
@@ -63,11 +69,12 @@ public class Parser
 
 		private final Settings settings = new Settings();
 
-		@Nullable
-		private MutableEdge edge = null;
+		private List<MountTask> mountTasks = null;
+
+		// transient
 
 		@Nullable
-		private StringBuilder textSb = null;
+		private MutableEdge edge = null;
 
 		@Nullable
 		private String link;
@@ -76,7 +83,12 @@ public class Parser
 		private String linkTarget;
 
 		@Nullable
-		private MountPoint.Mounting mountpoint;
+		private MountPoint.Mounting mountPoint;
+
+		@Nullable
+		private StringBuilder textSb = null;
+
+		// C A L L B A C K S
 
 		@Override
 		public void startDocument()
@@ -260,8 +272,8 @@ public class Parser
 
 				case MOUNTPOINT:
 				{
-					mountpoint = new MountPoint.Mounting();
-					setAttribute(attributes, "now", Parser::parseBoolean, (v) -> mountpoint.now = v);
+					mountPoint = new MountPoint.Mounting();
+					setAttribute(attributes, "now", Parser::parseBoolean, (v) -> mountPoint.now = v);
 					break;
 				}
 
@@ -406,8 +418,8 @@ public class Parser
 
 						case MOUNTPOINT:
 						{
-							assert mountpoint != null;
-							mountpoint.url = link;
+							assert mountPoint != null;
+							mountPoint.url = link;
 							link = null;
 							linkTarget = null;
 							break;
@@ -418,8 +430,20 @@ public class Parser
 
 				case MOUNTPOINT:
 				{
-					stack.peek().setMountPoint(mountpoint);
-					mountpoint = null;
+					assert mountPoint != null;
+					INode node = stack.peek();
+					node.setMountPoint(mountPoint);
+					if (mountPoint.now != null && mountPoint.now)
+					{
+						MountTask task = new MountTask(mountPoint, node);
+						if (mountTasks == null)
+						{
+							mountTasks = new ArrayList<>();
+						}
+						mountTasks.add(task);
+					}
+					mountPoint = null;
+
 					break;
 				}
 
@@ -460,7 +484,7 @@ public class Parser
 		@NonNull
 		public Model getResult()
 		{
-			return new Model(new Tree(root, edges), settings);
+			return new Model(new Tree(root, edges), settings, null, mountTasks);
 		}
 	}
 

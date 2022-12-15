@@ -157,7 +157,7 @@ public class Provider implements IProvider
 		{
 			return null;
 		}
-		return new ModelFactory(this, base, parameters).makeModel(document);
+		return new ModelFactory().makeModel(document);
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class Provider implements IProvider
 		{
 			return null;
 		}
-		return new ModelFactory(this, base, parameters).makeTree(document);
+		return new ModelFactory().makeTree(document);
 	}
 
 	/**

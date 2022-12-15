@@ -57,15 +57,25 @@ public class Parser
 	@NonNull
 	public static Model parse(@NonNull XMLEventReader reader) throws XMLStreamException
 	{
+		// node stack
+
 		@Nullable Stack<MutableNode> stack = new Stack<>();
 
+		// nodes by ID
+
 		@Nullable Map<String, MutableNode> nodes = null;
+
+		// result
 
 		@Nullable INode root = null;
 
 		@Nullable List<IEdge> edges = null;
 
 		@NonNull Settings settings = new Settings();
+
+		@Nullable List<MountTask> mountTasks = null;
+
+		// drive event loop
 
 		while (reader.hasNext())
 		{
@@ -350,6 +360,18 @@ public class Parser
 				if (NODE.equals(endElement.getName().getLocalPart()))
 				{
 					assert !stack.empty();
+					INode node = stack.peek();
+					MountPoint.Mounting mountpoint2 = (MountPoint.Mounting) node.getMountPoint();
+					if (mountpoint2 != null && mountpoint2.now != null && mountpoint2.now)
+					{
+						MountTask task = new MountTask(mountpoint2, node);
+						if (mountTasks == null)
+						{
+							mountTasks = new ArrayList<>();
+						}
+						mountTasks.add(task);
+					}
+
 					stack.pop();
 				}
 			}
@@ -359,7 +381,7 @@ public class Parser
 				throw new RuntimeException("[" + event.asCharacters().getData() + "] caught: setup filter");
 			}
 		}
-		return new Model(new Tree(root, edges), settings);
+		return new Model(new Tree(root, edges), settings, null, mountTasks);
 	}
 
 	/**
@@ -458,19 +480,19 @@ public class Parser
 								setAttribute(startElement3, "src", node::setEdgeImageFile);
 							}
 						}
-
 						break;
 					}
 
 					case MOUNTPOINT:
 					{
-						MountPoint.Mounting mountpoint = new MountPoint.Mounting();
+						MountPoint.Mounting mountPoint = new MountPoint.Mounting();
 						StartElement mountpointElement = reader.nextEvent().asStartElement(); // consume
-						setAttribute(mountpointElement, "now", Parser::parseBoolean, (v) -> mountpoint.now = v);
+						setAttribute(mountpointElement, "now", Parser::parseBoolean, (v) -> mountPoint.now = v);
+
 						StartElement aElement = reader.nextEvent().asStartElement();
 						assert A.equals(aElement.getName().getLocalPart());
-						setAttribute(aElement, "href", (v) -> mountpoint.url = v);
-						node.setMountPoint(mountpoint);
+						setAttribute(aElement, "href", (v) -> mountPoint.url = v);
+						node.setMountPoint(mountPoint);
 						break;
 					}
 
