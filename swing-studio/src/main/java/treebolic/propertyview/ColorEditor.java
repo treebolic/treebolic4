@@ -21,8 +21,6 @@ import treebolic.glue.ColorKit;
  */
 class ColorEditor extends AbstractCellEditor implements TableCellEditor
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Color being edited
 	 */

@@ -20,7 +20,7 @@ import treebolic.annotations.Nullable;
  */
 public class Image implements treebolic.glue.iface.Image, Serializable
 {
-	private static final long serialVersionUID = -6088374866767037559L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * AWT image

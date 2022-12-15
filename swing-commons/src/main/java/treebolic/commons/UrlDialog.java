@@ -24,8 +24,6 @@ import treebolic.annotations.Nullable;
  */
 public class UrlDialog extends JDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	// V A L U E S
 
 	/**
@@ -290,11 +288,6 @@ public class UrlDialog extends JDialog
 	 */
 	private static class ParameterModel extends AbstractTableModel
 	{
-		/**
-		 * Serial version uid
-		 */
-		private static final long serialVersionUID = 1L;
-
 		/**
 		 * Properties
 		 */

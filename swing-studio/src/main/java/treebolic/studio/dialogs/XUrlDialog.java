@@ -18,8 +18,6 @@ import treebolic.commons.UrlDialog;
  */
 public class XUrlDialog extends UrlDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Constructor
 	 *

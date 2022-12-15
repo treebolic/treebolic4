@@ -13,7 +13,7 @@ import treebolic.glue.iface.Image;
  */
 public class MutableNode extends Node
 {
-	private static final long serialVersionUID = 114104713585352390L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * Constructor

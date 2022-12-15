@@ -15,7 +15,7 @@ import treebolic.annotations.NonNull;
  */
 public class EuclideanCircle implements Serializable
 {
-	private static final long serialVersionUID = 8973089409227338200L;
+	private static final long serialVersionUID = 4L;
 
 	// D A T A
 

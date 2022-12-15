@@ -21,8 +21,6 @@ import treebolic.propertyview.SelectListener;
  */
 public class PropertyView extends treebolic.propertyview.PropertyView implements SelectListener
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Id to node map
 	 */

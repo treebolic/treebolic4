@@ -14,7 +14,7 @@ import treebolic.core.location.Complex;
  */
 public class HyperTranslation extends Complex
 {
-	private static final long serialVersionUID = -6442241719154521565L;
+	private static final long serialVersionUID = 4L;
 
 	// logically inherits from HTransform (a specific case of transform where
 	// theta =(1,0)

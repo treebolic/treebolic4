@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Tree implements Serializable
 {
-	private static final long serialVersionUID = 6923143990877138332L;
+	private static final long serialVersionUID = 4L;
 
 	// D A T A
 

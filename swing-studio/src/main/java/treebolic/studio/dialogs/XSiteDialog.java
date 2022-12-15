@@ -18,8 +18,6 @@ import treebolic.commons.SiteDialog;
  */
 public class XSiteDialog extends SiteDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Constructor
 	 *

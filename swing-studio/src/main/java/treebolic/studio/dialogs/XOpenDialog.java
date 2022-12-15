@@ -15,8 +15,6 @@ import treebolic.commons.OpenDialog;
  */
 public class XOpenDialog extends OpenDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Constructor
 	 *

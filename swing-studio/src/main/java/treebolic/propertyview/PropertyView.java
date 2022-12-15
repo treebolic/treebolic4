@@ -29,8 +29,6 @@ import treebolic.annotations.Nullable;
  */
 public class PropertyView extends JPanel implements SelectListener
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * String for default value
 	 */
@@ -525,8 +523,6 @@ public class PropertyView extends JPanel implements SelectListener
 	 */
 	private class TableModel extends AbstractTableModel
 	{
-		private static final long serialVersionUID = 1L;
-
 		/**
 		 * The selected object
 		 */

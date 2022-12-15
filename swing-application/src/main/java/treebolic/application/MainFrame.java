@@ -23,8 +23,6 @@ import treebolic.annotations.Nullable;
  */
 public class MainFrame extends JFrame implements HyperlinkListener
 {
-	private static final long serialVersionUID = 1L;
-
 	@NonNull
 	protected final Widget widget;
 

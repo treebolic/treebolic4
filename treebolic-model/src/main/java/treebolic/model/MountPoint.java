@@ -18,14 +18,14 @@ import treebolic.annotations.Nullable;
 @SuppressWarnings("ClassReferencesSubclass")
 public class MountPoint implements Serializable
 {
-	private static final long serialVersionUID = 8846293010235597970L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * Mountpoint in the mounting side
 	 */
 	static public class Mounting extends MountPoint
 	{
-		private static final long serialVersionUID = 5222027905366742742L;
+		private static final long serialVersionUID = 4L;
 
 		/**
 		 * URL
@@ -74,7 +74,7 @@ public class MountPoint implements Serializable
 	 */
 	static public class Mounted extends MountPoint
 	{
-		private static final long serialVersionUID = 7749263337626673995L;
+		private static final long serialVersionUID = 4L;
 
 		/**
 		 * Mounting node reference

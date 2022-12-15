@@ -22,8 +22,6 @@ import treebolic.studio.Messages;
  */
 public class DomTreeView extends JTree
 {
-	private static final long serialVersionUID = 1L;
-
 	// C O N S T R U C T O R
 
 	/**

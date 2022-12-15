@@ -14,7 +14,7 @@ import treebolic.core.location.Complex;
  */
 public class HyperRotation extends Complex
 {
-	private static final long serialVersionUID = -7077490742779857511L;
+	private static final long serialVersionUID = 4L;
 
 	// C O N S T R U C T O R
 

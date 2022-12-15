@@ -18,8 +18,6 @@ import treebolic.annotations.Nullable;
  */
 public class SiteDialog extends JDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Mode types
 	 */

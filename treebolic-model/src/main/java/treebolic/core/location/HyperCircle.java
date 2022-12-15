@@ -15,7 +15,7 @@ import treebolic.annotations.NonNull;
  */
 public class HyperCircle implements Serializable
 {
-	private static final long serialVersionUID = 483668195607524702L;
+	private static final long serialVersionUID = 4L;
 
 	// C O N S T A N T S
 

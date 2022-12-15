@@ -16,7 +16,7 @@ import treebolic.annotations.NonNull;
  */
 public class Complex implements Serializable
 {
-	private static final long serialVersionUID = 2946336631339380397L;
+	private static final long serialVersionUID = 4L;
 
 	// C O N S T A N T S
 

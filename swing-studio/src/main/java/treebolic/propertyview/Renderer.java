@@ -17,8 +17,6 @@ import treebolic.propertyview.PropertyView.AttributeType;
 
 class Renderer extends DefaultTableCellRenderer
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * View
 	 */

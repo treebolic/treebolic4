@@ -11,7 +11,7 @@ package treebolic.model;
  */
 public class MutableEdge extends Edge
 {
-	private static final long serialVersionUID = -8288301829410629431L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * Construct node

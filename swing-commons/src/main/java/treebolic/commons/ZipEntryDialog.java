@@ -15,8 +15,6 @@ import treebolic.annotations.NonNull;
  */
 public class ZipEntryDialog extends ChoiceDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Constructor
 	 *

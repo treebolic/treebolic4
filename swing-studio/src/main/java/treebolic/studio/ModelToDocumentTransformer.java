@@ -51,11 +51,6 @@ public class ModelToDocumentTransformer
 			document.appendChild(document.createComment("created " + new Date()));
 			@NonNull final Map<String, Object> attributes = new HashMap<String, Object>()
 			{
-				/**
-				 *
-				 */
-				private static final long serialVersionUID = -2918948477463933969L;
-
 				/*
 				 * (non-Javadoc)
 				 * @see java.util.Hashtable#put(java.lang.String, java.lang.Object)

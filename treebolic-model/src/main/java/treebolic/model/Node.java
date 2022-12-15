@@ -19,7 +19,7 @@ import treebolic.glue.iface.Image;
  */
 class NodeData implements Serializable
 {
-	private static final long serialVersionUID = -5631809010026385842L;
+	private static final long serialVersionUID = 4L;
 
 	// D A T A
 
@@ -282,7 +282,7 @@ class NodeData implements Serializable
  */
 class XNodeData extends NodeData
 {
-	private static final long serialVersionUID = 8459156134568648138L;
+	private static final long serialVersionUID = 4L;
 
 	// D A T A
 
@@ -442,7 +442,7 @@ class XNodeData extends NodeData
 @SuppressWarnings("WeakerAccess")
 public class Node extends XNodeData implements INode
 {
-	private static final long serialVersionUID = 5742412970800366908L;
+	private static final long serialVersionUID = 4L;
 
 	// D A T A
 

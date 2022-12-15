@@ -18,8 +18,6 @@ import treebolic.annotations.NonNull;
  */
 public class RadioChoiceDialog extends JDialog implements ActionListener
 {
-	private static final long serialVersionUID = 1L;
-
 	// V A L U E S
 
 	/**

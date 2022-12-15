@@ -22,8 +22,6 @@ import treebolic.model.*;
  */
 public class Renderer extends DefaultTreeCellRenderer
 {
-	private static final long serialVersionUID = 1L;
-
 	// icons to use
 
 	/**

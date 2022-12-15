@@ -18,8 +18,6 @@ import treebolic.commons.SettingsDialog;
  */
 public class XSettingsDialog extends SettingsDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/*
 	 * Index and mask to insert in Settings dialog
 	 */

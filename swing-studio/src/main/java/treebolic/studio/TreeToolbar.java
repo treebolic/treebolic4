@@ -16,8 +16,6 @@ import treebolic.annotations.NonNull;
  */
 public class TreeToolbar extends JToolBar
 {
-	private static final long serialVersionUID = 1L;
-
 	// D A T A
 
 	/**

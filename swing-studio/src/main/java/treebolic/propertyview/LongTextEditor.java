@@ -20,8 +20,6 @@ import treebolic.annotations.Nullable;
  */
 class LongTextEditor extends AbstractCellEditor implements TableCellEditor
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Text
 	 */

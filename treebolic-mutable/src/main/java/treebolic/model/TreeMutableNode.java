@@ -16,7 +16,7 @@ import treebolic.annotations.Nullable;
  */
 public class TreeMutableNode extends MutableNode
 {
-	private static final long serialVersionUID = -1045091316448354198L;
+	private static final long serialVersionUID = 4L;
 
 	// C O N S T R U C T O R S
 

@@ -20,8 +20,6 @@ import treebolic.annotations.Nullable;
  */
 class ListEditor extends DefaultCellEditor
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * String to image map
 	 */
@@ -38,8 +36,6 @@ class ListEditor extends DefaultCellEditor
 		// renderer
 		@NonNull final DefaultListCellRenderer renderer = new DefaultListCellRenderer()
 		{
-			private static final long serialVersionUID = 1L;
-
 			@SuppressWarnings("synthetic-access")
 			@Override
 			public Component getListCellRendererComponent(@NonNull final JList<?> list, @Nullable final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)

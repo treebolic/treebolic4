@@ -34,8 +34,6 @@ import treebolic.model.ModelWriter;
  */
 public class MainFrame extends JFrame implements HyperlinkListener
 {
-	private static final long serialVersionUID = 1L;
-
 	// D A T A
 
 	/**

@@ -14,7 +14,7 @@ import treebolic.annotations.NonNull;
 @SuppressWarnings("WeakerAccess")
 public class TreeMutableEdge extends MutableEdge
 {
-	private static final long serialVersionUID = -1812958269993842207L;
+	private static final long serialVersionUID = 4L;
 
 	// C O N S T R U C T O R
 

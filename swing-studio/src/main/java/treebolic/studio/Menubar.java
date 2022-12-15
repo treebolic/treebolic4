@@ -18,8 +18,6 @@ import treebolic.annotations.Nullable;
  */
 public class Menubar extends JMenuBar
 {
-	private static final long serialVersionUID = 1L;
-
 	// D A T A
 
 	/**

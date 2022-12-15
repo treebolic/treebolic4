@@ -20,8 +20,6 @@ import treebolic.annotations.NonNull;
  */
 public class HtmlView extends JEditorPane implements HyperlinkListener
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Constructor
 	 */

@@ -18,7 +18,7 @@ import treebolic.core.location.HyperCircle;
  */
 public class Location implements Serializable
 {
-	private static final long serialVersionUID = 7642657695999901145L;
+	private static final long serialVersionUID = 4L;
 
 	// H Y P E R S P A C E
 

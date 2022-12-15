@@ -19,8 +19,6 @@ import treebolic.annotations.Nullable;
  */
 public class SettingsDialog extends JDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	// V A L U E S
 
 	/**
@@ -298,8 +296,6 @@ public class SettingsDialog extends JDialog
 			this.providerComboBox.setPreferredSize(new Dimension(300, 24));
 			this.providerComboBox.setRenderer(new DefaultListCellRenderer()
 			{
-				private static final long serialVersionUID = -2940683342675209960L;
-
 				/*
 				 * (non-Javadoc)
 				 * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)

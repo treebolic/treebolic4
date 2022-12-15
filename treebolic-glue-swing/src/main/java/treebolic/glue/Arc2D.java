@@ -15,7 +15,7 @@ import treebolic.annotations.NonNull;
  */
 public class Arc2D extends java.awt.geom.Arc2D.Double implements treebolic.glue.iface.Arc2D<Point2D>
 {
-	private static final long serialVersionUID = -8430455905667334344L;
+	private static final long serialVersionUID = 4L;
 
 	private boolean counterclockwise;
 

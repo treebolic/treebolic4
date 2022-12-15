@@ -16,11 +16,6 @@ import treebolic.annotations.Nullable;
 public class ButtonTabComponent extends JPanel
 {
 	/**
-	 *
-	 */
-	private static final long serialVersionUID = 6199221351815232505L;
-
-	/**
 	 * Default icon
 	 */
 	@SuppressWarnings("ConstantConditions")
@@ -65,11 +60,6 @@ public class ButtonTabComponent extends JPanel
 		// make label read titles from JTabbedPane
 		@NonNull final JLabel label = new JLabel()
 		{
-			/**
-			 *
-			 */
-			private static final long serialVersionUID = -393007019999118052L;
-
 			@Nullable
 			@Override
 			public String getText()

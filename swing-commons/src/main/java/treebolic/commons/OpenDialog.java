@@ -19,8 +19,6 @@ import treebolic.annotations.Nullable;
  */
 public class OpenDialog extends JDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	// V A L U E S
 
 	/**
@@ -105,11 +103,6 @@ public class OpenDialog extends JDialog
 		// text
 		@NonNull final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
 		{
-			/**
-			 *
-			 */
-			private static final long serialVersionUID = -2940683342675209960L;
-
 			/*
 			 * (non-Javadoc)
 			 * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)

@@ -28,8 +28,6 @@ import treebolic.model.TreeMutableNode;
  */
 public class TreeView extends JScrollPane
 {
-	private static final long serialVersionUID = 1L;
-
 	// D A T A
 
 	/**

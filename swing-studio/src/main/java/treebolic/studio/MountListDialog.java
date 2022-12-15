@@ -17,8 +17,6 @@ import treebolic.studio.model.ModelUtils;
  */
 public class MountListDialog extends ReferenceListDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Constructor
 	 *

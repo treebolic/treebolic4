@@ -15,8 +15,6 @@ import treebolic.annotations.NonNull;
  */
 public class AboutDialog extends treebolic.commons.AboutDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Constructor
 	 */

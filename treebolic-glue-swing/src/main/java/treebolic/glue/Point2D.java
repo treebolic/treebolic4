@@ -15,7 +15,7 @@ import treebolic.annotations.NonNull;
  */
 public class Point2D extends java.awt.geom.Point2D.Double implements treebolic.glue.iface.Point2D
 {
-	private static final long serialVersionUID = 2080063772680665125L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * Constructor

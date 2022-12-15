@@ -20,8 +20,6 @@ import treebolic.annotations.Nullable;
  */
 class FileEditor extends AbstractCellEditor implements TableCellEditor
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * File chooser
 	 */

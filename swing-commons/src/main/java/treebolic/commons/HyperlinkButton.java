@@ -18,8 +18,6 @@ import treebolic.annotations.NonNull;
  */
 public class HyperlinkButton extends JButton
 {
-	private static final long serialVersionUID = -7350707913667809059L;
-
 	private URI uri;
 
 	/**

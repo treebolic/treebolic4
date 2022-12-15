@@ -28,8 +28,6 @@ import treebolic.model.TreeMutableNode;
  */
 public class TreeTransferHandler extends TransferHandler
 {
-	private static final long serialVersionUID = 1L;
-
 	// F L A V O R
 
 	/**

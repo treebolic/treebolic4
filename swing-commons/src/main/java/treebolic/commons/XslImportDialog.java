@@ -20,8 +20,6 @@ import treebolic.annotations.Nullable;
  */
 public class XslImportDialog extends JDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	// V A L U E S
 
 	/**
@@ -94,11 +92,6 @@ public class XslImportDialog extends JDialog
 		// text
 		@NonNull final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
 		{
-			/**
-			 *
-			 */
-			private static final long serialVersionUID = -849100867886816999L;
-
 			/*
 			 * (non-Javadoc)
 			 * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)

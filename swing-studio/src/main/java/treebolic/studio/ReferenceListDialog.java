@@ -24,8 +24,6 @@ import treebolic.studio.ReferenceListDialog.ParameterModel.Entry;
  */
 public class ReferenceListDialog extends JDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Controller
 	 */
@@ -126,8 +124,6 @@ public class ReferenceListDialog extends JDialog
 		imageColumn.setWidth(150);
 		imageColumn.setCellRenderer(new DefaultTableCellRenderer()
 		{
-			private static final long serialVersionUID = 1L;
-
 			/*
 			 * (non-Javadoc)
 			 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
@@ -146,8 +142,6 @@ public class ReferenceListDialog extends JDialog
 		final TableColumn locationColumn = this.referenceTable.getColumnModel().getColumn(1);
 		locationColumn.setCellRenderer(new DefaultTableCellRenderer()
 		{
-			private static final long serialVersionUID = 1L;
-
 			/*
 			 * (non-Javadoc)
 			 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
@@ -212,11 +206,6 @@ public class ReferenceListDialog extends JDialog
 	 */
 	protected static class ParameterModel extends AbstractTableModel
 	{
-		/**
-		 * Serial version uid
-		 */
-		private static final long serialVersionUID = 1L;
-
 		/**
 		 * Properties
 		 */

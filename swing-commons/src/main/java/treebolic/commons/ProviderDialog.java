@@ -10,8 +10,6 @@ package treebolic.commons;
  */
 public class ProviderDialog extends ChoiceDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Constructor
 	 *

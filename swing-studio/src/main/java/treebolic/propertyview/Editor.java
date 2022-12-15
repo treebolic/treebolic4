@@ -86,8 +86,6 @@ public class Editor implements TableCellEditor, CellEditorListener
 
 	static class TextEditor extends DefaultCellEditor
 	{
-		private static final long serialVersionUID = 1042643320776522695L;
-
 		public TextEditor()
 		{
 			super(new JTextField());
@@ -100,8 +98,6 @@ public class Editor implements TableCellEditor, CellEditorListener
 			// new delegate
 			this.delegate = new EditorDelegate()
 			{
-				private static final long serialVersionUID = 8570059590275656633L;
-
 				@Override
 				public void setValue(@Nullable Object value)
 				{

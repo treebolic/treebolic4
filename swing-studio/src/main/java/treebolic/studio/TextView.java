@@ -14,8 +14,6 @@ import javax.swing.*;
  */
 public class TextView extends JTextArea
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Constructor
 	 */

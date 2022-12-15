@@ -17,7 +17,7 @@ import treebolic.model.Types.MatchScope;
  */
 public class MenuItem implements Serializable
 {
-	private static final long serialVersionUID = 6176932077061226910L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * Action types

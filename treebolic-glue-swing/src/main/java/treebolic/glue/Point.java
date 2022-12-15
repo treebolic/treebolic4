@@ -11,7 +11,7 @@ package treebolic.glue;
  */
 public class Point extends java.awt.Point implements treebolic.glue.iface.Point
 {
-	private static final long serialVersionUID = 1086461697280710461L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * Constructor

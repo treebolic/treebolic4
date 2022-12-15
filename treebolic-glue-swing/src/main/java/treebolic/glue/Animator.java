@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
  */
 public class Animator extends javax.swing.Timer implements java.awt.event.ActionListener, treebolic.glue.iface.Animator<ActionListener>
 {
-	private static final long serialVersionUID = -6793510103759256318L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * Timer time slice

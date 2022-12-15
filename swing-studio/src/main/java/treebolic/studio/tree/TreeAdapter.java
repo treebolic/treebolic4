@@ -21,8 +21,6 @@ import treebolic.model.*;
  */
 public class TreeAdapter extends DefaultTreeModel
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Constructor
 	 *

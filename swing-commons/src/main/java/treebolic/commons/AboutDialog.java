@@ -16,8 +16,6 @@ import treebolic.annotations.NonNull;
  */
 public class AboutDialog extends JDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Author
 	 */

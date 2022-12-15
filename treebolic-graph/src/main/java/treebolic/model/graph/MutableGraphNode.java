@@ -14,7 +14,7 @@ import treebolic.model.TreeMutableNode;
 @SuppressWarnings("WeakerAccess")
 public class MutableGraphNode extends TreeMutableNode implements GraphNode
 {
-	private static final long serialVersionUID = 8850315428753155363L;
+	private static final long serialVersionUID = 4L;
 
 	private final int index;
 

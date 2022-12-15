@@ -17,7 +17,7 @@ import treebolic.glue.iface.Image;
  */
 class EdgeData implements Serializable
 {
-	private static final long serialVersionUID = 2466948898564986160L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * Label
@@ -104,7 +104,7 @@ class EdgeData implements Serializable
  */
 class XEdgeData extends EdgeData
 {
-	private static final long serialVersionUID = -3852875983533695072L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * Edge image
@@ -138,7 +138,7 @@ class XEdgeData extends EdgeData
 @SuppressWarnings("WeakerAccess")
 public class Edge extends XEdgeData implements IEdge
 {
-	private static final long serialVersionUID = 4067969984015552298L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * From-node

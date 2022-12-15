@@ -19,7 +19,7 @@ import treebolic.annotations.Nullable;
  */
 public class Settings implements Serializable
 {
-	private static final long serialVersionUID = -4310347294902070347L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * Display toolbar property

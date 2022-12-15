@@ -19,8 +19,6 @@ import treebolic.commons.Utils;
  */
 public class TextDialog extends JDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Ok result
 	 */

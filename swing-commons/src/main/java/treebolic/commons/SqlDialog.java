@@ -23,8 +23,6 @@ import treebolic.annotations.Nullable;
  */
 public class SqlDialog extends JDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Attributes
 	 */

@@ -27,8 +27,6 @@ import treebolic.studio.Controller;
  */
 public class Tree extends JTree implements TreeSelectionListener // , DragGestureListener, DragSourceListener, DropTargetListener
 {
-	static private final long serialVersionUID = 1L;
-
 	/**
 	 * Whether newly-created node receives focus
 	 */

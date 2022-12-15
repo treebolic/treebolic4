@@ -26,8 +26,6 @@ import treebolic.studio.model.ModelUtils;
  */
 public class ImageListDialog extends ReferenceListDialog
 {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Image repository
 	 */
@@ -95,8 +93,6 @@ public class ImageListDialog extends ReferenceListDialog
 		imageColumn.setWidth(150);
 		imageColumn.setCellRenderer(new DefaultTableCellRenderer()
 		{
-			private static final long serialVersionUID = 1L;
-
 			/*
 			 * (non-Javadoc)
 			 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
@@ -117,8 +113,6 @@ public class ImageListDialog extends ReferenceListDialog
 		final TableColumn locationColumn = this.referenceTable.getColumnModel().getColumn(1);
 		locationColumn.setCellRenderer(new DefaultTableCellRenderer()
 		{
-			private static final long serialVersionUID = 1L;
-
 			/*
 			 * (non-Javadoc)
 			 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)

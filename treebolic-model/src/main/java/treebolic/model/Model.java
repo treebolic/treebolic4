@@ -16,7 +16,7 @@ import treebolic.glue.iface.Image;
  */
 public class Model implements Serializable
 {
-	private static final long serialVersionUID = -1032694309277028305L;
+	private static final long serialVersionUID = 4L;
 
 	/**
 	 * Tree
