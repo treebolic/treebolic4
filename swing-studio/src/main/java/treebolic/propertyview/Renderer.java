@@ -180,7 +180,7 @@ class Renderer extends DefaultTableCellRenderer
 				switch (type)
 				{
 					case COLOR:
-						this.colorPanel.setBackground(((Color) attributeValue));
+						this.colorPanel.setBackground(new Color((Integer) attributeValue));
 						return this.colorPanel;
 
 					case LABEL:
