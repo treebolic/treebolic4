@@ -425,7 +425,7 @@ public class Controller extends Commander
 								.append(String.format(Messages.getString("Controller.status_search_origin"), node.getLabel())); //
 					}
 					assert this.widget != null;
-					this.widget.putStatus(Statusbar.PutType.SEARCH, (s) -> makeHtml("searching", s), Messages.getString("Controller.status_searching"), message.toString());
+					this.widget.putStatus(Statusbar.PutType.SEARCH, (contents) -> makeHtml("searching", contents), Messages.getString("Controller.status_searching"), message.toString());
 
 					// search: scope, mode, target, [start]
 					@Nullable final INode result = search(SearchCommand.SEARCH, matchScope, matchMode, searchTarget, node);
@@ -439,7 +439,7 @@ public class Controller extends Commander
 								.append("ID") //
 								.append(' ') //
 								.append(result.getId());
-						this.widget.putStatus(Statusbar.PutType.SEARCH, (s) -> makeHtml("searching", s), Messages.getString("Controller.status_found"), message.toString());
+						this.widget.putStatus(Statusbar.PutType.SEARCH, (contents) -> makeHtml("searching", contents), Messages.getString("Controller.status_found"), message.toString());
 						putStatus(result);
 					}
 					else
@@ -505,6 +505,8 @@ public class Controller extends Commander
 
 	// D I S P L A Y
 
+	// put
+
 	/**
 	 * Display node in status
 	 *
@@ -513,7 +515,7 @@ public class Controller extends Commander
 	private void putStatus(@NonNull final INode node)
 	{
 		@NonNull final String label = Controller.getLabel(node);
-		@NonNull final String[] content = Controller.getContent(node);
+		@NonNull final String[] content = getContent(node);
 		assert this.widget != null;
 		this.widget.putStatus(Statusbar.PutType.INFO, (s) -> processContent(s, Commander.MESSAGES_HTML), label, content);
 	}
@@ -526,10 +528,108 @@ public class Controller extends Commander
 	private void putInfo(@NonNull final INode node)
 	{
 		@NonNull final String label = Controller.getLabel(node);
-		@NonNull final String[] content = Controller.getContent(node);
+		@NonNull final String[] content = getContent(node);
 		assert this.widget != null;
 		this.widget.putInfo(label, content);
 	}
+
+	/**
+	 * Display node in tooltip
+	 *
+	 * @param node node
+	 */
+	private void putTip(@NonNull final INode node)
+	{
+		if (!Commander.HAS_TOOLTIP)
+		{
+			return;
+		}
+
+		@Nullable String label = node.getLabel();
+		@Nullable String content = node.getContent();
+		if (label == null && (!Commander.TOOLTIP_DISPLAYS_CONTENT || content == null))
+		{
+			return;
+		}
+
+		@NonNull final StringBuilder sb = new StringBuilder();
+		if (Commander.TOOLTIP_HTML)
+		{
+			sb.append("<html>");
+		}
+
+		// label
+		if (label != null && !label.isEmpty())
+		{
+			if (Commander.TOOLTIP_HTML)
+			{
+				label = label.replaceAll("\n", "<br>");
+				sb.append("<strong>");
+			}
+			sb.append(label);
+			if (Commander.TOOLTIP_HTML)
+			{
+				sb.append("</strong><br/>");
+			}
+		}
+
+		// content
+		if (Commander.TOOLTIP_DISPLAYS_CONTENT)
+		{
+			if (content != null && !content.isEmpty())
+			{
+				if (!Commander.TOOLTIP_HTML)
+				{
+					@NonNull final String[] lines = content.split("\n");
+					for (@NonNull final String line : lines)
+					{
+						@NonNull final StringBuilder lineSb = new StringBuilder(line);
+
+						// force break after x characters
+						for (int offset = Commander.TOOLTIP_LINESPAN; offset < lineSb.length(); offset += Commander.TOOLTIP_LINESPAN)
+						{
+							lineSb.insert(offset, "\n");
+						}
+
+						// append processed line with break
+						sb.append(lineSb);
+						sb.append('\n');
+					}
+				}
+				else
+				{
+					content = prependImageToContent(content, node.getImageFile());
+					assert content != null;
+					if (ABSOLUTE_IMG_URLS)
+					{
+						content = absoluteImageSrcs(content);
+					}
+					content = content.replaceAll("\n", "<br>");
+					sb.append(content.length() <= Commander.TOOLTIP_LINESPAN ? "<div>" : "<div width='" + Commander.TOOLTIP_LINESPAN * 7 + "'>");
+					sb.append(content);
+					sb.append("</div>");
+				}
+			}
+		}
+		if (Commander.TOOLTIP_HTML)
+		{
+			sb.append("</html>");
+		}
+
+		@NonNull String tip = sb.toString();
+		assert this.view != null;
+		this.view.setToolTipText(tip);
+	}
+
+	@Override
+	public void setHasTooltip(final Boolean flag)
+	{
+		super.setHasTooltip(flag);
+		assert this.view != null;
+		this.view.setToolTipText(null);
+	}
+
+	// label
 
 	/**
 	 * Get label string
@@ -574,6 +674,8 @@ public class Controller extends Commander
 		return sb.toString();
 	}
 
+	// content
+
 	private static final int IDX_NODE_CONTENT = 0;
 
 	private static final int IDX_NODE_LINK = 1;
@@ -589,7 +691,7 @@ public class Controller extends Commander
 	 * @return content string
 	 */
 	@NonNull
-	static private String[] getContent(@NonNull final INode node)
+	private String[] getContent(@NonNull final INode node)
 	{
 		@NonNull final String[] contents = new String[4];
 
@@ -640,12 +742,19 @@ public class Controller extends Commander
 	 * @param imageSrc image
 	 * @return decorated string
 	 */
-	private static @Nullable String prependImageToContent(@Nullable final String content, @Nullable final String imageSrc)
+	private @Nullable String prependImageToContent(@Nullable final String content, @Nullable final String imageSrc)
 	{
 		if (content != null && !content.isEmpty() && imageSrc != null && !imageSrc.isEmpty())
 		{
-			return String.format("<p><img src='%s' style='float:left;margin-right:10px;width:32px;height:32px;'/></p><p>%s</p>", imageSrc, content);
-			//return String.format("<table><tr><td valign='top'><img src='%s' style='width:32px;'/></td><td>%s</td></tr></table>", imageSrc, content);
+			assert this.model != null;
+			String format = this.model.settings.contentFormat;
+			if (format == null)
+			{
+				format = "<table><tr><td valign='top'><img src='%s' width='64' height='64' style='width:64px;height:64px;'/></td><td>%s</td></tr></table>";
+				// "<p><img src='%s' width='64' height='64' style='float:left;margin-right:10px;width:64px;height:64px;'/></p><p>%s</p>" // within p
+				// "<table><tr><td valign='top'><img src='%s' width='64' height='64' style='width:64px;height:64px;'/></td><td>%s</td></tr></table>" // within table
+			}
+			return String.format(format, imageSrc, content);
 		}
 		return content;
 	}
@@ -697,24 +806,27 @@ public class Controller extends Commander
 	public String makeHtml(String divStyle, @NonNull final String... contents)
 	{
 		@NonNull final StringBuilder sb = new StringBuilder();
-		for (@Nullable String content : contents)
+		for (@Nullable CharSequence content : contents)
 		{
 			if (content != null && content.length() > 0)
 			{
+				String content2 = content.toString();
 				if (ABSOLUTE_IMG_URLS)
 				{
-					content = absoluteImageSrcs(content.toString());
+					content2 = absoluteImageSrcs(content2);
 				}
 
 				sb.append("<div class='");
 				sb.append(divStyle);
 				sb.append("'>");
-				sb.append(content.replaceAll("\n", "<br>"));
+				sb.append(content2);
 				sb.append("</div>");
 			}
 		}
-		return sb.toString();
+		return sb.toString().replaceAll("\n", "<br>");
 	}
+
+	// url tweak
 
 	private static final Pattern SCR_QUOTE1_PATTERN = Pattern.compile("(?<=<img[^>]{1,20})src='([^']+)'", Pattern.CASE_INSENSITIVE);
 
@@ -810,101 +922,6 @@ public class Controller extends Commander
 			//
 		}
 		return null;
-	}
-
-	@Override
-	public void setHasTooltip(final Boolean flag)
-	{
-		super.setHasTooltip(flag);
-		assert this.view != null;
-		this.view.setToolTipText(null);
-	}
-
-	/**
-	 * Display node in tooltip
-	 *
-	 * @param node node
-	 */
-	private void putTip(@NonNull final INode node)
-	{
-		if (!Commander.HAS_TOOLTIP)
-		{
-			return;
-		}
-
-		@Nullable String label = node.getLabel();
-		@Nullable String content = node.getContent();
-		if (label == null && (!Commander.TOOLTIP_DISPLAYS_CONTENT || content == null))
-		{
-			return;
-		}
-
-		@NonNull final StringBuilder sb = new StringBuilder();
-		if (Commander.TOOLTIP_HTML)
-		{
-			sb.append("<html>");
-		}
-
-		// label
-		if (label != null && !label.isEmpty())
-		{
-			if (Commander.TOOLTIP_HTML)
-			{
-				label = label.replaceAll("\n", "<br>");
-				sb.append("<strong>");
-			}
-			sb.append(label);
-			if (Commander.TOOLTIP_HTML)
-			{
-				sb.append("</strong><br/>");
-			}
-		}
-
-		// content
-		if (Commander.TOOLTIP_DISPLAYS_CONTENT)
-		{
-			if (content != null && !content.isEmpty())
-			{
-				if (!Commander.TOOLTIP_HTML)
-				{
-					@NonNull final String[] lines = content.split("\n");
-					for (@NonNull final String line : lines)
-					{
-						@NonNull final StringBuilder lineSb = new StringBuilder(line);
-
-						// force break after x characters
-						for (int offset = Commander.TOOLTIP_LINESPAN; offset < lineSb.length(); offset += Commander.TOOLTIP_LINESPAN)
-						{
-							lineSb.insert(offset, "\n");
-						}
-
-						// append processed line with break
-						sb.append(lineSb);
-						sb.append('\n');
-					}
-				}
-				else
-				{
-					content = prependImageToContent(content, node.getImageFile());
-					if (ABSOLUTE_IMG_URLS)
-					{
-						content = absoluteImageSrcs(content);
-					}
-					content = content.replaceAll("\n", "<br>");
-					sb.append(content.length() <= Commander.TOOLTIP_LINESPAN ? "<div>" : "<div width='" + Commander.TOOLTIP_LINESPAN * 7 + "'>");
-					sb.append(content);
-					sb.append("</div>");
-				}
-			}
-		}
-		if (Commander.TOOLTIP_HTML)
-		{
-			sb.append("</html>");
-		}
-
-		@NonNull String tip = sb.toString();
-		assert this.view != null;
-		this.view.setToolTipText(tip);
 	}
 
 	// P O P U P
@@ -1195,7 +1212,7 @@ public class Controller extends Commander
 
 		// status
 		assert this.widget != null;
-		this.widget.putStatus(Statusbar.PutType.LINK, (s) -> makeHtml("linking", s), Messages.getString("Controller.status_linkto"), decodedLink);
+		this.widget.putStatus(Statusbar.PutType.LINK, (contents) -> makeHtml("linking", contents), Messages.getString("Controller.status_linkto"), decodedLink);
 		this.widget.getIContext().status(Messages.getString("Controller.status_linkto") + ' ' + decodedLink);
 
 		// jump link: try system link first

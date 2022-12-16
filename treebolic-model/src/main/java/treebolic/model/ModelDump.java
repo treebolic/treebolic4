@@ -198,6 +198,7 @@ public class ModelDump
 				.append("PreserveOrientationFlag=").append(settings.preserveOrientationFlag).append('\n') //
 				.append("HasToolbarFlag=").append(settings.hasToolbarFlag).append('\n') //
 				.append("HasStatusbarFlag=").append(settings.hasStatusbarFlag).append('\n') //
+				.append("ContentFormat=").append(settings.contentFormat).append('\n') //
 				.append("HasPopUpMenuFlag=").append(settings.hasPopUpMenuFlag).append('\n') //
 				.append("HasToolTipFlag=").append(settings.hasToolTipFlag).append('\n') //
 				.append("ToolTipDisplaysContentFlag=").append(settings.toolTipDisplaysContentFlag).append('\n') //

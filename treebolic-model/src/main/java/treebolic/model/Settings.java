@@ -40,6 +40,12 @@ public class Settings implements Serializable
 	public static final String PROP_POPUPMENU = "popupmenu";
 
 	/**
+	 * Content HTML formatter
+	 */
+	@SuppressWarnings("WeakerAccess")
+	public static final String PROP_CONTENT_FORMAT = "content-format";
+
+	/**
 	 * Display tooltips property
 	 */
 	@SuppressWarnings("WeakerAccess")
@@ -436,6 +442,12 @@ public class Settings implements Serializable
 	public Boolean hasPopUpMenuFlag;
 
 	/**
+	 * Content HTML format (with 2 place-holders, image and content)
+	 */
+	@Nullable
+	public String contentFormat;
+
+	/**
 	 * Whether tooltips are enabled
 	 */
 	@Nullable
@@ -643,6 +655,11 @@ public class Settings implements Serializable
 		if (param != null)
 		{
 			this.hasPopUpMenuFlag = Boolean.valueOf(param);
+		}
+		param = properties.getProperty(Settings.PROP_CONTENT_FORMAT);
+		if (param != null)
+		{
+			this.contentFormat = param;
 		}
 		param = properties.getProperty(Settings.PROP_TOOLTIP);
 		if (param != null)

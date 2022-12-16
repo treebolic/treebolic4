@@ -291,7 +291,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	 * @param contents  contents
 	 */
 	@Override
-	public void put(final int image, @Nullable final Function<CharSequence[], String> converter, final String label, @Nullable final String... contents)
+	public void put(final int image, @Nullable final Function<String[], String> converter, final String label, @Nullable final String... contents)
 	{
 		@NonNull Runnable r = () -> {
 

@@ -780,8 +780,7 @@ public class Utils
 		}
 		try
 		{
-			@NonNull final int color = (int) Long.parseLong(str, 16);
-			return color;
+			return (int) Long.parseLong(str, 16);
 		}
 		catch (@NonNull final Exception ignored)
 		{

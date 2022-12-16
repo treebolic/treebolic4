@@ -618,7 +618,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 
 		if (this.provider == null)
 		{
-			@NonNull final Function<String[], String> toHtml = (s) -> this.controller.makeHtml("mount", s);
+			@NonNull final Function<String[], String> toHtml = (contents) -> this.controller.makeHtml("mount", contents);
 
 			putStatus(Statusbar.PutType.MOUNT, toHtml, Messages.getString("Widget.status_mount"), Messages.getString("Widget.status_mount_err_provider_null"));
 
@@ -707,7 +707,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 		@Nullable final INode mountingNode = Mounter.prune(mountedNode, this.model.tree.getEdges());
 		if (mountingNode == null)
 		{
-			putStatus(Statusbar.PutType.MOUNT, (s) -> this.controller.makeHtml("mount", s), Messages.getString("Widget.status_unmount"), Messages.getString("Widget.status_unmount_err"));
+			putStatus(Statusbar.PutType.MOUNT, (contents) -> this.controller.makeHtml("mount", contents), Messages.getString("Widget.status_unmount"), Messages.getString("Widget.status_unmount_err"));
 			return;
 		}
 

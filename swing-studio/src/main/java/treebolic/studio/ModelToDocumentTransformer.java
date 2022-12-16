@@ -92,6 +92,7 @@ public class ModelToDocumentTransformer
 			attributes.put("toolbar", model.settings.hasToolbarFlag);
 			attributes.put("statusbar", model.settings.hasStatusbarFlag);
 			attributes.put("popupmenu", model.settings.hasPopUpMenuFlag);
+			attributes.put("content-format", model.settings.contentFormat);
 			attributes.put("tooltip", model.settings.hasToolTipFlag);
 			attributes.put("tooltip-displays-content", model.settings.toolTipDisplaysContentFlag);
 			attributes.put("focus-on-hover", model.settings.focusOnHoverFlag);

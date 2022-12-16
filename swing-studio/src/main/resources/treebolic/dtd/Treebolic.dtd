@@ -9,6 +9,7 @@
 	toolbar (true|false) #IMPLIED
 	statusbar (true|false) #IMPLIED
 	popupmenu (true|false) #IMPLIED
+	content-format CDATA #IMPLIED
 	tooltip (true|false) #IMPLIED
 	tooltip-displays-content (true|false) #IMPLIED
 	focus-on-hover (true|false) #IMPLIED

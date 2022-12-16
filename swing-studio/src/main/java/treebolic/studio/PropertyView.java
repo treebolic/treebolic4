@@ -7,12 +7,12 @@ import java.util.*;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.studio.tree.*;
 import treebolic.model.*;
 import treebolic.model.Types.MatchMode;
 import treebolic.model.Types.MatchScope;
 import treebolic.propertyview.Floats;
 import treebolic.propertyview.SelectListener;
+import treebolic.studio.tree.*;
 
 /**
  * Property view for treebolic documents
@@ -485,6 +485,8 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 
 	static private final String LABEL_TOP_POPUP = Messages.getString("PropertyView.popup");
 
+	static private final String LABEL_TOP_CONTENTFORMAT = Messages.getString("PropertyView.contentformat");
+
 	static private final String LABEL_TOP_TOOLTIP = Messages.getString("PropertyView.tooltip");
 
 	static private final String LABEL_TOP_TOOLTIP_DISPLAYS_CONTENT = Messages.getString("PropertyView.tooltipcontent");
@@ -525,6 +527,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			else if (propertyName.equals(PropertyView.LABEL_TOP_POPUP))
 			{
 				return settings.hasPopUpMenuFlag;
+			}
+			else if (propertyName.equals(PropertyView.LABEL_TOP_CONTENTFORMAT))
+			{
+				return settings.contentFormat;
 			}
 			else if (propertyName.equals(PropertyView.LABEL_TOP_TOOLTIP))
 			{
@@ -591,6 +597,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			else if (propertyName.equals(PropertyView.LABEL_TOP_POPUP))
 			{
 				settings.hasPopUpMenuFlag = (Boolean) propertyValue;
+			}
+			else if (propertyName.equals(PropertyView.LABEL_TOP_CONTENTFORMAT))
+			{
+				settings.contentFormat = (String) propertyValue;
 			}
 			else if (propertyName.equals(PropertyView.LABEL_TOP_TOOLTIP))
 			{
@@ -1294,6 +1304,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 
 	/**
 	 * Node features
+	 * feature[0] id:String
+	 * feature[1] type:AttributeType
+	 * feature[2] isMandatory:Boolean
+	 * feature[3] possibleValues:String[]
 	 */
 	static final Object[][] nodeFeatures = { //
 			{PropertyView.LABEL_NODE_ID, PropertyView.AttributeType.ID, true, null}, //
@@ -1319,6 +1333,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 
 	/**
 	 * Edge features
+	 * feature[0] id:String
+	 * feature[1] type:AttributeType
+	 * feature[2] isMandatory:Boolean
+	 * feature[3] possibleValues:String[]
 	 */
 	static final Object[][] edgeFeatures = { //
 			{PropertyView.LABEL_EDGE_FROM, PropertyView.AttributeType.REFID, true, null}, //
@@ -1336,11 +1354,18 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 
 	/**
 	 * Top element features
+	 * feature[0] id:String
+	 * feature[1] type:AttributeType
+	 * feature[2] isMandatory:Boolean
+	 * feature[3] possibleValues:String[]
 	 */
 	static final Object[][] topFeatures = { //
 			{PropertyView.LABEL_TOP_TOOLBAR, PropertyView.AttributeType.BOOLEAN, false, null}, //
 			{PropertyView.LABEL_TOP_STATUSBAR, PropertyView.AttributeType.BOOLEAN, false, null}, //
 			{PropertyView.LABEL_TOP_POPUP, PropertyView.AttributeType.BOOLEAN, false, null}, //
+			{PropertyView.LABEL_TOP_CONTENTFORMAT, PropertyView.AttributeType.TEXT, false, new String[]{ //
+					"<table><tr><td valign='top'><img src='%s' style='width:32px;height:32px;'/></td><td>%s</td></tr></table>", //
+					"<p><img src='%s' style='float:left;margin-right:10px;width:32px;height:32px;'/></p><p>%s</p>"}}, //
 			{PropertyView.LABEL_TOP_TOOLTIP, PropertyView.AttributeType.BOOLEAN, false, null}, //
 			{PropertyView.LABEL_TOP_TOOLTIP_DISPLAYS_CONTENT, PropertyView.AttributeType.BOOLEAN, false, null}, //
 			{PropertyView.LABEL_TOP_FOCUS_ON_HOVER, PropertyView.AttributeType.BOOLEAN, false, null}, //
@@ -1353,6 +1378,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 
 	/**
 	 * Tree features
+	 * feature[0] id:String
+	 * feature[1] type:AttributeType
+	 * feature[2] isMandatory:Boolean
+	 * feature[3] possibleValues:String[]
 	 */
 	static final Object[][] treeFeatures = { //
 			{PropertyView.LABEL_TREE_BACKGROUND_IMAGE, PropertyView.AttributeType.IMAGE, false, null}, //
@@ -1372,6 +1401,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 
 	/**
 	 * Nodes features
+	 * feature[0] id:String
+	 * feature[1] type:AttributeType
+	 * feature[2] isMandatory:Boolean
+	 * feature[3] possibleValues:String[]
 	 */
 	static final Object[][] nodesFeatures = { //
 			{PropertyView.LABEL_NODES_BACKCOLOR, PropertyView.AttributeType.COLOR, false, null}, //
@@ -1393,6 +1426,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 
 	/**
 	 * Edges features
+	 * feature[0] id:String
+	 * feature[1] type:AttributeType
+	 * feature[2] isMandatory:Boolean
+	 * feature[3] possibleValues:String[]
 	 */
 	static final Object[][] edgesFeatures = { //
 			{PropertyView.LABEL_EDGES_AS_ARCS, PropertyView.AttributeType.BOOLEAN, false, null}, //
@@ -1408,6 +1445,10 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 
 	/**
 	 * Menu item features
+	 * feature[0] id:String
+	 * feature[1] type:AttributeType
+	 * feature[2] isMandatory:Boolean
+	 * feature[3] possibleValues:String[]
 	 */
 	static final Object[][] menuItemFeatures = { //
 			{PropertyView.LABEL_MENUITEM_LABEL, PropertyView.AttributeType.TEXT, true, null}, //

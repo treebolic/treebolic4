@@ -35,7 +35,7 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 
 	final private StyleSheet styleSheet;
 
-	private Function<CharSequence[], String> converter;
+	private Function<String[], String> converter;
 
 	static private final int MAXWIDTH = 300;
 
@@ -151,10 +151,6 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 		Utils.center(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.glue.iface.component.Dialog#display()
-	 */
 	@Override
 	public void display()
 	{
@@ -162,12 +158,8 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 		setVisible(true);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.glue.iface.component.Dialog#set(java.lang.CharSequence, java.lang.CharSequence[])
-	 */
 	@Override
-	public void set(@NonNull final CharSequence header, @Nullable final CharSequence... contents)
+	public void set(@NonNull final CharSequence header, @Nullable final String... contents)
 	{
 		this.headerLabel.setText(header.toString());
 		if (contents == null || contents.length == 0)
@@ -188,20 +180,12 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 		this.contentPane.setCaretPosition(0);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.glue.iface.component.Dialog#setConverter(treebolic.glue.iface.component.Converter)
-	 */
 	@Override
-	public void setConverter(final Function<CharSequence[], String> converter0)
+	public void setConverter(final Function<String[], String> converter0)
 	{
 		this.converter = converter0;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.glue.iface.component.Dialog#setStyle(java.lang.String)
-	 */
 	@Override
 	public void setStyle(@NonNull final String style)
 	{

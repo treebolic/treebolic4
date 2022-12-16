@@ -91,6 +91,7 @@ public class Parser
 						setAttribute(startElement, "toolbar", Parser::parseBoolean, (v) -> settings.hasToolbarFlag = v);
 						setAttribute(startElement, "statusbar", Parser::parseBoolean, (v) -> settings.hasStatusbarFlag = v);
 						setAttribute(startElement, "popupmenu", Parser::parseBoolean, (v) -> settings.hasPopUpMenuFlag = v);
+						setAttribute(startElement, "content-format", (v) -> settings.contentFormat = v);
 						setAttribute(startElement, "tooltip", Parser::parseBoolean, (v) -> settings.hasToolTipFlag = v);
 						setAttribute(startElement, "tooltip-displays-content", Parser::parseBoolean, (v) -> settings.toolTipDisplaysContentFlag = v);
 						setAttribute(startElement, "focus-on-hover", Parser::parseBoolean, (v) -> settings.focusOnHoverFlag = v);

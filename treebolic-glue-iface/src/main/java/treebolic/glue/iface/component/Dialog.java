@@ -28,7 +28,7 @@ public interface Dialog
 	 * @param header  header
 	 * @param content content
 	 */
-	void set(final CharSequence header, final CharSequence... content);
+	void set(final CharSequence header, final String... content);
 
 	/**
 	 * Set converter

@@ -581,6 +581,10 @@ public class ModelUtils
 		{
 			properties.setProperty(Settings.PROP_POPUPMENU, settings.hasPopUpMenuFlag.toString());
 		}
+		if (settings.contentFormat != null)
+		{
+			properties.setProperty(Settings.PROP_CONTENT_FORMAT, settings.contentFormat);
+		}
 		if (settings.hasToolTipFlag != null)
 		{
 			properties.setProperty(Settings.PROP_TOOLTIP, settings.hasToolTipFlag.toString());

@@ -186,7 +186,7 @@ public class ModelFactory
 		}
 
 		// image
-		@Nullable String imageSrc = null;
+		@Nullable String imageSrc;
 		element = ModelFactory.getFirstLevel1ElementByTagName(nodeElement, "img");
 		if (element != null)
 		{
@@ -408,6 +408,11 @@ public class ModelFactory
 			if (!attribute.isEmpty())
 			{
 				settings.hasPopUpMenuFlag = Boolean.valueOf(attribute);
+			}
+			attribute = element.getAttribute("content-format");
+			if (!attribute.isEmpty())
+			{
+				settings.contentFormat = attribute;
 			}
 			attribute = element.getAttribute("tooltip");
 			if (!attribute.isEmpty())

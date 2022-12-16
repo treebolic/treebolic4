@@ -45,7 +45,7 @@ public class Dialog implements treebolic.glue.iface.component.Dialog
 	}
 
 	@Override
-	public void set(@Nullable final CharSequence header, final CharSequence... contents)
+	public void set(@Nullable final CharSequence header, final String... contents)
 	{
 		throw new NotImplementedException();
 	}
