@@ -1323,7 +1323,8 @@ public abstract class AbstractProvider< //
 	/**
 	 * Macro pattern: ${macro}
 	 */
-	static final Pattern PATTERN = Pattern.compile("\\$\\{[^}]*}"); 
+	// static final Pattern PATTERN = Pattern.compile("\\$\\{[^}]*}"); // fails in android
+	static final Pattern PATTERN = Pattern.compile("\\$\\{[^}]*\\}");
 
 	/**
 	 * Build macro name-value pairs
