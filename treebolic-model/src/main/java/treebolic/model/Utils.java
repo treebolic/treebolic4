@@ -757,7 +757,7 @@ public class Utils
 	@NonNull
 	static public String colorToString(@Nullable final Integer color)
 	{
-		return color == null ? NONE : String.format("%08x",color);
+		return color == null ? NONE : String.format("%06x",color);
 	}
 
 	/**
@@ -767,7 +767,7 @@ public class Utils
 	 * @return color
 	 */
 	@Nullable
-	static public Integer stringToColor(final String str0)
+	static public Integer parseColor(@Nullable final String str0)
 	{
 		String str = str0;
 		if (str == null || str.isEmpty())
@@ -780,7 +780,7 @@ public class Utils
 		}
 		try
 		{
-			@NonNull final Integer color = Integer.parseInt(str, 16);
+			@NonNull final int color = (int) Long.parseLong(str, 16);
 			return color;
 		}
 		catch (@NonNull final Exception ignored)

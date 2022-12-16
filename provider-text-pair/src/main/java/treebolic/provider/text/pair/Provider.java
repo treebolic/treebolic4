@@ -305,11 +305,11 @@ public class Provider implements IProvider
 			}
 			if (fields.length >= 4 && !fields[3].isEmpty())
 			{
-				child.setBackColor(Utils.stringToColor(fields[3]));
+				child.setBackColor(Utils.parseColor(fields[3]));
 			}
 			if (fields.length >= 5 && !fields[4].isEmpty())
 			{
-				child.setForeColor(Utils.stringToColor(fields[4]));
+				child.setForeColor(Utils.parseColor(fields[4]));
 			}
 			if (fields.length >= 6 && !fields[5].isEmpty())
 			{

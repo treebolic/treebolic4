@@ -1006,8 +1006,8 @@ public abstract class AbstractProvider< //
 		assert this.properties != null;
 		@NonNull final TreeMutableNode rootNode = new TreeMutableNode(null, "root"); 
 		rootNode.setLabel(this.properties.getProperty("root_label")); 
-		rootNode.setBackColor(Utils.stringToColor(this.properties.getProperty("root_bcolor"))); 
-		rootNode.setForeColor(Utils.stringToColor(this.properties.getProperty("root_fcolor"))); 
+		rootNode.setBackColor(Utils.parseColor(this.properties.getProperty("root_bcolor")));
+		rootNode.setForeColor(Utils.parseColor(this.properties.getProperty("root_fcolor")));
 		rootNode.setImageFile(this.properties.getProperty("root_image")); 
 		return rootNode;
 	}
@@ -1186,7 +1186,7 @@ public abstract class AbstractProvider< //
 				final String value = cursor.getString(index);
 				if (value != null)
 				{
-					return Utils.stringToColor(value);
+					return Utils.parseColor(value);
 				}
 			}
 		}

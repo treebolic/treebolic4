@@ -58,7 +58,7 @@ public class Statusbar implements Component, treebolic.glue.iface.component.Stat
 	}
 
 	@Override
-	public void put(final int image, @Nullable final Function<CharSequence[], String> converter, @Nullable final String label, final String... contents)
+	public void put(final int image, @Nullable final Function<String[], String> converter, @Nullable final String label, final String... contents)
 	{
 		throw new NotImplementedException();
 	}

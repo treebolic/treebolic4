@@ -370,25 +370,6 @@ public class Parser
 					break;
 				}
 
-				case IMG:
-				{
-					if (NODE.equals(states.peek()))
-					{
-						// img comes after label
-						MutableNode node = stack.peek();
-						String img = node.getImageFile();
-						if (img != null && !img.isEmpty())
-						{
-							String content = node.getContent();
-							if (content != null && !content.isEmpty())
-							{
-								node.setContent(toContent(content, node.getImageFile()));
-							}
-						}
-					}
-					break;
-				}
-
 				case A:
 				{
 					// node
@@ -490,11 +471,7 @@ public class Parser
 
 	private static Integer parseColor(final String color)
 	{
-		if (color == null)
-		{
-			return null;
-		}
-		return Integer.parseInt(color, 16);
+		return Utils.parseColor(color);
 	}
 
 	private static Integer parseInt(final String val)
@@ -588,27 +565,6 @@ public class Parser
 		{
 			consumer.accept(sval);
 		}
-	}
-
-	private static @NonNull String toContent(@NonNull final String content, @Nullable final String imageSrc)
-	{
-		if (imageSrc != null && !imageSrc.isEmpty())
-		{
-			@NonNull String sb = "<p><img src='" + //
-					imageSrc + //
-					"' style='float:left;margin-right:10px;'/>" + //
-					content + //
-					"</p>";
-					/*
-					sb.append("<table><tr><td valign='top'><img src='");
-					sb.append(imageSrc);
-					sb.append("'/></td><td>");
-					sb.append(content);
-					sb.append("</td></tr></table>");
-					*/
-			return sb;
-		}
-		return content;
 	}
 
 	/**

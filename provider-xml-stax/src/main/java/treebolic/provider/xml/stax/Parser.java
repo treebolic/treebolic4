@@ -429,17 +429,6 @@ public class Parser
 					{
 						reader.nextEvent(); // consume
 						setAttribute(startElement2, "src", node::setImageFile);
-
-						// img comes after label
-						String img = node.getImageFile();
-						if (img != null && !img.isEmpty())
-						{
-							String content = node.getContent();
-							if (content != null && !content.isEmpty())
-							{
-								node.setContent(toContent(content, node.getImageFile()));
-							}
-						}
 						break;
 					}
 
@@ -532,11 +521,7 @@ public class Parser
 
 	private static Integer parseColor(final String color)
 	{
-		if (color == null)
-		{
-			return null;
-		}
-		return Integer.parseInt(color, 16);
+		return Utils.parseColor(color);
 	}
 
 	private static Integer parseInt(final String val)
@@ -644,27 +629,6 @@ public class Parser
 		{
 			consumer.accept(sval);
 		}
-	}
-
-	private static @NonNull String toContent(@NonNull final String content, @Nullable final String imageSrc)
-	{
-		if (imageSrc != null && !imageSrc.isEmpty())
-		{
-			@NonNull String sb = "<p><img src='" + //
-					imageSrc + //
-					"' style='float:left;margin-right:10px;'/>" + //
-					content + //
-					"</p>";
-					/*
-					sb.append("<table><tr><td valign='top'><img src='");
-					sb.append(imageSrc);
-					sb.append("'/></td><td>");
-					sb.append(content);
-					sb.append("</td></tr></table>");
-					*/
-			return sb;
-		}
-		return content;
 	}
 
 	private static XMLEventReader makeReader(@NonNull final Reader reader) throws IOException, XMLStreamException

@@ -124,7 +124,7 @@ public class ModelFactory
 	/**
 	 * Make graph
 	 *
-	 * @param document   document
+	 * @param document document
 	 * @return graph
 	 */
 	@Nullable
@@ -162,9 +162,9 @@ public class ModelFactory
 		this.idToNodeMap.put(id, node);
 
 		// colors
-		@Nullable final Integer backColor = Utils.stringToColor(nodeElement.getAttribute("backcolor"));
+		@Nullable final Integer backColor = Utils.parseColor(nodeElement.getAttribute("backcolor"));
 		node.setBackColor(backColor);
-		@Nullable final Integer foreColor = Utils.stringToColor(nodeElement.getAttribute("forecolor"));
+		@Nullable final Integer foreColor = Utils.parseColor(nodeElement.getAttribute("forecolor"));
 		node.setForeColor(foreColor);
 
 		// weight
@@ -204,7 +204,7 @@ public class ModelFactory
 			final String content = element.getTextContent();
 			if (content != null && !content.isEmpty())
 			{
-				node.setContent(toContent(content, imageSrc));
+				node.setContent(content);
 			}
 		}
 
@@ -235,7 +235,7 @@ public class ModelFactory
 			}
 
 			// color
-			@Nullable final Integer color = Utils.stringToColor(element.getAttribute("color"));
+			@Nullable final Integer color = Utils.parseColor(element.getAttribute("color"));
 			if (color != null)
 			{
 				node.setEdgeColor(color);
@@ -339,7 +339,7 @@ public class ModelFactory
 		}
 
 		// color
-		@Nullable final Integer color = Utils.stringToColor(edgeElement.getAttribute("color"));
+		@Nullable final Integer color = Utils.parseColor(edgeElement.getAttribute("color"));
 		if (color != null)
 		{
 			edge.setColor(color);
@@ -467,12 +467,12 @@ public class ModelFactory
 			}
 
 			// colors
-			@Nullable Integer color = Utils.stringToColor(element.getAttribute("backcolor"));
+			@Nullable Integer color = Utils.parseColor(element.getAttribute("backcolor"));
 			if (color != null)
 			{
 				settings.backColor = color;
 			}
-			color = Utils.stringToColor(element.getAttribute("forecolor"));
+			color = Utils.parseColor(element.getAttribute("forecolor"));
 			if (color != null)
 			{
 				settings.foreColor = color;
@@ -548,12 +548,12 @@ public class ModelFactory
 			}
 
 			// colors
-			@Nullable Integer color = Utils.stringToColor(element.getAttribute("backcolor"));
+			@Nullable Integer color = Utils.parseColor(element.getAttribute("backcolor"));
 			if (color != null)
 			{
 				settings.nodeBackColor = color;
 			}
-			color = Utils.stringToColor(element.getAttribute("forecolor"));
+			color = Utils.parseColor(element.getAttribute("forecolor"));
 			if (color != null)
 			{
 				settings.nodeForeColor = color;
@@ -612,7 +612,7 @@ public class ModelFactory
 			}
 
 			// color
-			@Nullable final Integer color = Utils.stringToColor(element.getAttribute("color"));
+			@Nullable final Integer color = Utils.parseColor(element.getAttribute("color"));
 			if (color != null)
 			{
 				settings.treeEdgeColor = color;
@@ -642,7 +642,7 @@ public class ModelFactory
 			}
 
 			// color
-			@Nullable final Integer color = Utils.stringToColor(element.getAttribute("color"));
+			@Nullable final Integer color = Utils.parseColor(element.getAttribute("color"));
 			if (color != null)
 			{
 				settings.edgeColor = color;
@@ -707,27 +707,6 @@ public class ModelFactory
 		}
 
 		return menuItem;
-	}
-
-	private static @NonNull String toContent(@NonNull final String content, @Nullable final String imageSrc)
-	{
-		if (imageSrc != null && !imageSrc.isEmpty())
-		{
-			@NonNull String sb = "<p><img src='" + //
-					imageSrc + //
-					"' style='float:left;margin-right:10px;'/>" + //
-					content + //
-					"</p>";
-					/*
-					sb.append("<table><tr><td valign='top'><img src='");
-					sb.append(imageSrc);
-					sb.append("'/></td><td>");
-					sb.append(content);
-					sb.append("</td></tr></table>");
-					*/
-			return sb;
-		}
-		return content;
 	}
 
 	// H E L P E R S

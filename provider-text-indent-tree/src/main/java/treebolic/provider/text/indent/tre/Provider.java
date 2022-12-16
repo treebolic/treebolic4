@@ -384,11 +384,11 @@ public class Provider implements IProvider
 		}
 		if (fields.length >= 3 && !fields[2].isEmpty() && fields[2].startsWith("#"))
 		{
-			node.setBackColor(Utils.stringToColor(fields[2].substring(1)));
+			node.setBackColor(Utils.parseColor(fields[2].substring(1)));
 		}
 		if (fields.length >= 4 && !fields[3].isEmpty() && fields[3].startsWith("#"))
 		{
-			node.setForeColor(Utils.stringToColor(fields[3].substring(1)));
+			node.setForeColor(Utils.parseColor(fields[3].substring(1)));
 		}
 		if (fields.length >= 5 && !fields[4].isEmpty())
 		{

@@ -122,7 +122,7 @@ public class Statusbar extends treebolic.glue.component.Statusbar implements Com
 	 * @param label     label
 	 * @param contents  contents
 	 */
-	public void put(@NonNull final PutType type, @Nullable final Function<CharSequence[], String> converter, final String label, final String[] contents)
+	public void put(@NonNull final PutType type, @Nullable final Function<String[], String> converter, final String label, final String[] contents)
 	{
 		setColors(type);
 		super.put(type.ordinal(), converter, label, contents);

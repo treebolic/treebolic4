@@ -35,7 +35,7 @@ public interface Dialog
 	 *
 	 * @param converter converter
 	 */
-	void setConverter(final Function<CharSequence[], String> converter);
+	void setConverter(final Function<String[], String> converter);
 
 	/**
 	 * Set hyperlink listener

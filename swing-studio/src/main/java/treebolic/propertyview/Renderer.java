@@ -235,7 +235,7 @@ class Renderer extends DefaultTableCellRenderer
 
 					case FONTSIZE:
 						setIcon(this.fontSizeIcon);
-						setText((String) attributeValue);
+						setText(attributeValue.toString());
 						return this;
 
 					case STROKE:

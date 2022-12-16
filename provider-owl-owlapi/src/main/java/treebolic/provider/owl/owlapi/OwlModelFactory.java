@@ -1440,7 +1440,7 @@ public class OwlModelFactory implements ImageDecorator
 	private Integer getColor(final String colorKey, final Integer colorValue)
 	{
 		final String colorString = properties == null ? null : properties.getProperty(colorKey);
-		return colorString == null ? colorValue : Utils.stringToColor(colorString);
+		return colorString == null ? colorValue : Utils.parseColor(colorString);
 	}
 
 	/**

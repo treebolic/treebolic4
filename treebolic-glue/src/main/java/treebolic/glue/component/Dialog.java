@@ -51,7 +51,7 @@ public class Dialog implements treebolic.glue.iface.component.Dialog
 	}
 
 	@Override
-	public void setConverter(@NonNull final Function<CharSequence[], String> converter)
+	public void setConverter(@NonNull final Function<String[], String> converter)
 	{
 		throw new NotImplementedException();
 	}

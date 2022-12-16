@@ -1085,8 +1085,6 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 			this.propertyView.setImageRepository(null);
 
 			@NonNull final Model model = new ModelReader(file.getCanonicalPath()).deserialize();
-			// TODO
-			System.out.println(ModelDump.toString(model));
 			setModel(model, ModelUtils.makeIdToNodeMap(model));
 			update(Mode.DESERIALIZE);
 		}

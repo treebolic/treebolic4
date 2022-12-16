@@ -24,102 +24,32 @@ public abstract class Commander
 	 */
 	public enum Command
 	{
-		/**
-		 * Refresh command
-		 */
-		REFRESH,
-		/**
-		 * Home command
-		 */
-		HOME,
-		/**
-		 * North layout command
-		 */
-		NORTH,
-		/**
-		 * South layout command
-		 */
-		SOUTH,
-		/**
-		 * East layout command
-		 */
-		EAST,
-		/**
-		 * West layout command
-		 */
-		WEST,
-		/**
-		 * Radial  layout command
-		 */
-		RADIAL,
-		/**
-		 * Zoom in command
-		 */
-		ZOOMIN,
-		/**
-		 * Zoom out command
-		 */
-		ZOOMOUT,
-		/**
-		 * Reset zoom command
-		 */
-		ZOOMONE,
-		/**
-		 * Scale up command
-		 */
-		SCALEUP,
-		/**
-		 * Scale down command
-		 */
-		SCALEDOWN,
-		/**
-		 * Reset scale command
-		 */
-		SCALEONE,
-		/**
-		 * Expand command
-		 */
-		EXPAND,
-		/**
-		 * Shrink command
-		 */
-		SHRINK,
-		/**
-		 * Reset expansion command
-		 */
-		EXPANSIONRESET,
-		/**
-		 * Widen sweep
-		 */
-		WIDEN,
-		/**
-		 * Narrow sweep
-		 */
-		NARROW,
-		/**
-		 * Reset sweep
-		 */
-		SWEEPRESET,
-		/**
-		 * Reset both sweep and expansion
-		 */
-		EXPANSIONSWEEPRESET,
-		/**
-		 * Draw edges as arcs
-		 */
-		ARCEDGE,
-		/**
-		 * Draw tooltips
-		 */
-		TOOLTIP,
-		/**
-		 * Include node content in tooltips
-		 */
-		TOOLTIPCONTENT,
-		/**
-		 * Focus node when hovered
-		 */
-		FOCUSHOVER
+		// @formatter:off
+		/** Refresh command */ REFRESH,
+		/** Home command */ HOME,
+		/** North layout command */ NORTH,
+		/** South layout command */ SOUTH,
+		/** East layout command */ EAST,
+		/** West layout command */ WEST,
+		/** Radial  layout command */ RADIAL,
+		/** Zoom in command */ ZOOMIN,
+		/**Zoom out command */ ZOOMOUT,
+		/** Reset zoom command */ ZOOMONE,
+		/** Scale up command */ SCALEUP,
+		/** Scale down command */ SCALEDOWN,
+		/** Reset scale command */ SCALEONE,
+		/**Expand command */ EXPAND,
+		/** Shrink command */ SHRINK,
+		/** Reset expansion command */ EXPANSIONRESET,
+		/** Widen sweep */ WIDEN,
+		/**Narrow sweep */ NARROW,
+		/** Reset sweep */ SWEEPRESET,
+		/** Reset both sweep and expansion */ EXPANSIONSWEEPRESET,
+		/**  Draw edges as arcs */ ARCEDGE,
+		/** Draw tooltips */ TOOLTIP,
+		/** Include node content in tooltips */ TOOLTIPCONTENT,
+		/** Focus node when hovered */ FOCUSHOVER
+		// @formatter:on
 	}
 
 	/**
@@ -166,25 +96,31 @@ public abstract class Commander
 	 * Whether it has tooltip
 	 */
 	@SuppressWarnings("WeakerAccess")
-	static protected boolean hasTooltip = true;
+	static protected boolean HAS_TOOLTIP = true;
 
 	/**
 	 * Whether tooltips display contents
 	 */
 	@SuppressWarnings("WeakerAccess")
-	static protected boolean tooltipDisplaysContent = true;
+	static protected boolean TOOLTIP_DISPLAYS_CONTENT = true;
 
 	/**
 	 * Whether tooltips are html
 	 */
 	@SuppressWarnings({"CanBeFinal", "WeakerAccess"})
-	static public boolean TOOLTIPHTML = true;
+	static public boolean TOOLTIP_HTML = true;
 
 	/**
 	 * Tooltip break
 	 */
 	@SuppressWarnings({"CanBeFinal", "WeakerAccess"})
-	static public int TOOLTIPLINESPAN = 50;
+	static public int TOOLTIP_LINESPAN = 50;
+
+	/**
+	 * Format messages as HTML
+	 */
+	@SuppressWarnings({"CanBeFinal", "WeakerAccess"})
+	static public boolean MESSAGES_HTML = true;
 
 	// A C C E S S
 
@@ -420,7 +356,7 @@ public abstract class Commander
 	@SuppressWarnings("WeakerAccess")
 	public void setHasTooltip(@Nullable final Boolean flag)
 	{
-		Commander.hasTooltip = flag != null ? flag : !Commander.hasTooltip;
+		Commander.HAS_TOOLTIP = flag != null ? flag : !Commander.HAS_TOOLTIP;
 	}
 
 	/**
@@ -431,7 +367,7 @@ public abstract class Commander
 	@SuppressWarnings({"WeakerAccess"})
 	static public void setTooltipDisplaysContent(@Nullable final Boolean flag)
 	{
-		Commander.tooltipDisplaysContent = flag != null ? flag : !Commander.tooltipDisplaysContent;
+		Commander.TOOLTIP_DISPLAYS_CONTENT = flag != null ? flag : !Commander.TOOLTIP_DISPLAYS_CONTENT;
 	}
 
 	// D O

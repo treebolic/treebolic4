@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import org.treebolic.glue.R;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import androidx.annotation.NonNull;
@@ -106,34 +107,16 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 	// P R O C E S S O R
 
 	/**
-	 * Process text for view
-	 * //TODO use BiFunction
-	 */
-	@SuppressWarnings("WeakerAccess")
-	public interface Processor
-	{
-		/**
-		 * Process text
-		 *
-		 * @param in   text
-		 * @param view view
-		 * @return out text
-		 */
-		@Nullable
-		String process(final String in, final View view);
-	}
-
-	/**
 	 * Label processor
 	 */
 	@Nullable
-	static private Processor labelProcessor = null;
+	static private BiFunction<String, View, String> labelProcessor = null;
 
 	/**
 	 * Content processor
 	 */
 	@Nullable
-	static private Processor contentProcessor = null;
+	static private BiFunction<String, View, String> contentProcessor = null;
 
 	// C O N S T R U C T O R
 
@@ -273,7 +256,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 	 *
 	 * @param processor processor
 	 */
-	static public void setLabelProcessor(@Nullable @SuppressWarnings("SameParameterValue") final Processor processor)
+	static public void setLabelProcessor(@Nullable @SuppressWarnings("SameParameterValue") final BiFunction<String, View, String> processor)
 	{
 		Statusbar.labelProcessor = processor;
 	}
@@ -283,7 +266,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 	 *
 	 * @param processor processor
 	 */
-	static public void setContentProcessor(@Nullable final Processor processor)
+	static public void setContentProcessor(@Nullable final BiFunction<String, View, String> processor)
 	{
 		Statusbar.contentProcessor = processor;
 	}
@@ -324,7 +307,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 		@Nullable String label = label0;
 		if (Statusbar.labelProcessor != null)
 		{
-			label = labelProcessor.process(label, this);
+			label = labelProcessor.apply(label, this);
 		}
 		this.statusView.setText(label == null ? "" : label);
 
@@ -334,7 +317,7 @@ public class Statusbar extends FrameLayout implements treebolic.glue.iface.compo
 			@Nullable String content = converter == null ? Utils.join("<br>", content0) : converter.apply(content0);
 			if (Statusbar.contentProcessor != null)
 			{
-				content = contentProcessor.process(content, this);
+				content = contentProcessor.apply(content, this);
 			}
 
 			if (content == null)

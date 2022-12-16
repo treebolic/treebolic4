@@ -741,12 +741,12 @@ public class Settings implements Serializable
 		{
 			this.imageDownscaler = Utils.stringToFloats(param);
 		}
-		color = Utils.stringToColor(properties.getProperty(Settings.PROP_BACKCOLOR));
+		color = Utils.parseColor(properties.getProperty(Settings.PROP_BACKCOLOR));
 		if (color != null)
 		{
 			this.backColor = color;
 		}
-		color = Utils.stringToColor(properties.getProperty(Settings.PROP_FORECOLOR));
+		color = Utils.parseColor(properties.getProperty(Settings.PROP_FORECOLOR));
 		if (color != null)
 		{
 			this.foreColor = color;
@@ -758,12 +758,12 @@ public class Settings implements Serializable
 		}
 
 		// nodes
-		color = Utils.stringToColor(properties.getProperty(Settings.PROP_NODE_BACKCOLOR));
+		color = Utils.parseColor(properties.getProperty(Settings.PROP_NODE_BACKCOLOR));
 		if (color != null)
 		{
 			this.nodeBackColor = color;
 		}
-		color = Utils.stringToColor(properties.getProperty(Settings.PROP_NODE_FORECOLOR));
+		color = Utils.parseColor(properties.getProperty(Settings.PROP_NODE_FORECOLOR));
 		if (color != null)
 		{
 			this.nodeForeColor = color;
@@ -810,12 +810,12 @@ public class Settings implements Serializable
 		{
 			this.defaultTreeEdgeImage = param;
 		}
-		color = Utils.stringToColor(properties.getProperty(Settings.PROP_EDGE_COLOR));
+		color = Utils.parseColor(properties.getProperty(Settings.PROP_EDGE_COLOR));
 		if (color != null)
 		{
 			this.edgeColor = color;
 		}
-		color = Utils.stringToColor(properties.getProperty(Settings.PROP_TREE_EDGE_COLOR));
+		color = Utils.parseColor(properties.getProperty(Settings.PROP_TREE_EDGE_COLOR));
 		if (color != null)
 		{
 			this.treeEdgeColor = color;

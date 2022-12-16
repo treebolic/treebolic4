@@ -462,8 +462,10 @@ public class Widget extends Container implements IWidget, IProviderContext
 		}
 
 		// protracted mounts
-		assert this.provider != null;
-		Mounter.autoMount(model.tree, this.provider, this.context.getBase(), this.context.getParameters());
+		if (this.provider != null)
+		{
+			Mounter.autoMount(model.tree, this.provider, this.context.getBase(), this.context.getParameters());
+		}
 
 		// model/view/controller
 		this.model = model;
@@ -612,11 +614,11 @@ public class Widget extends Container implements IWidget, IProviderContext
 	 */
 	public synchronized void mount(@NonNull final INode mountingNode, final String source)
 	{
-		putStatus(Statusbar.PutType.MOUNT, (Function<CharSequence[], String>) null, Messages.getString("Widget.status_mount"), source);
+		putStatus(Statusbar.PutType.MOUNT, (Function<String[], String>) null, Messages.getString("Widget.status_mount"), source);
 
 		if (this.provider == null)
 		{
-			@NonNull final Function<CharSequence[], String> toHtml = (s) -> this.controller.makeHtml("mount", s);
+			@NonNull final Function<String[], String> toHtml = (s) -> this.controller.makeHtml("mount", s);
 
 			putStatus(Statusbar.PutType.MOUNT, toHtml, Messages.getString("Widget.status_mount"), Messages.getString("Widget.status_mount_err_provider_null"));
 
@@ -1143,7 +1145,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 	 * @param header    header
 	 * @param message   message
 	 */
-	public void putStatus(@NonNull final Statusbar.PutType type, @Nullable final Function<CharSequence[], String> converter, final String header, final String... message)
+	public void putStatus(@NonNull final Statusbar.PutType type, @Nullable final Function<String[], String> converter, final String header, final String... message)
 	{
 		if (this.statusbar == null)
 		{
@@ -1155,19 +1157,19 @@ public class Widget extends Container implements IWidget, IProviderContext
 	// I N F O
 
 	/**
-	 * Put information
+	 * Put information as a popup dialog
 	 *
 	 * @param header  header
 	 * @param content content
 	 */
 	public void putInfo(final CharSequence header, final String[] content)
 	{
-		@NonNull @SuppressWarnings("TypeMayBeWeakened") final Dialog dialog = new Dialog();
+		@NonNull final Dialog dialog = new Dialog();
 		dialog.setHandle(this.handle);
 		dialog.setListener(this.linkActionListener);
 		@Nullable final String style = this.context.getStyle();
 		dialog.setStyle(style);
-		dialog.setConverter((s) -> this.controller.makeHtmlContent(s, Commander.TOOLTIPHTML));
+		dialog.setConverter((s) -> this.controller.processContent(s, Commander.MESSAGES_HTML));
 		dialog.set(header, content);
 		dialog.display();
 	}

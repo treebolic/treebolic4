@@ -241,7 +241,7 @@ public class GxlParser
 					@Nullable final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); 
 					if (element != null)
 					{
-						node.setBackColor(Utils.stringToColor(element.getTextContent()));
+						node.setBackColor(Utils.parseColor(element.getTextContent()));
 					}
 				}
 				else if (attributeName.equalsIgnoreCase("forecolor")) 
@@ -249,7 +249,7 @@ public class GxlParser
 					@Nullable final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); 
 					if (element != null)
 					{
-						node.setForeColor(Utils.stringToColor(element.getTextContent()));
+						node.setForeColor(Utils.parseColor(element.getTextContent()));
 					}
 				}
 			}
@@ -390,7 +390,7 @@ public class GxlParser
 								@Nullable final Element element = GxlParser.getFirstLevel1ElementByTagName(gxlAttrElement, "string"); 
 								if (element != null)
 								{
-									edge.setColor(Utils.stringToColor(element.getTextContent()));
+									edge.setColor(Utils.parseColor(element.getTextContent()));
 								}
 							}
 							else if (attributeName.equals("stroke")) 
@@ -500,10 +500,10 @@ public class GxlParser
 							settings.focusOnHoverFlag = Boolean.valueOf(value);
 							break;
 						case "tree-backcolor":
-							settings.backColor = Utils.stringToColor(value);
+							settings.backColor = Utils.parseColor(value);
 							break;
 						case "tree-forecolor":
-							settings.foreColor = Utils.stringToColor(value);
+							settings.foreColor = Utils.parseColor(value);
 							break;
 						case "tree-fontface":
 							settings.fontFace = value;
@@ -536,13 +536,13 @@ public class GxlParser
 							settings.preserveOrientationFlag = Boolean.valueOf(value);
 							break;
 						case "nodes-backcolor":
-							settings.nodeBackColor = Utils.stringToColor(value);
+							settings.nodeBackColor = Utils.parseColor(value);
 							break;
 						case "nodes-forecolor":
-							settings.nodeForeColor = Utils.stringToColor(value);
+							settings.nodeForeColor = Utils.parseColor(value);
 							break;
 						case "nodes-default-treeedge-color":
-							settings.treeEdgeColor = Utils.stringToColor(value);
+							settings.treeEdgeColor = Utils.parseColor(value);
 							break;
 						case "nodes-default-treeedge-stroke":
 							settings.treeEdgeStyle = Utils.modifyStyle(settings.treeEdgeStyle, value, Utils.StyleComponent.STROKE);
@@ -569,7 +569,7 @@ public class GxlParser
 							settings.edgesAsArcsFlag = Boolean.valueOf(value);
 							break;
 						case "edges-default-edge-color":
-							settings.edgeColor = Utils.stringToColor(value);
+							settings.edgeColor = Utils.parseColor(value);
 							break;
 						case "edges-default-edge-fromterminator":
 							settings.edgeStyle = Utils.modifyStyle(settings.edgeStyle, value, Utils.StyleComponent.FROMTERMINATOR);

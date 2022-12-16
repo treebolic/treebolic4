@@ -30,6 +30,27 @@ public class ModelToDocumentTransformer
 {
 	static private final boolean validate = true;
 
+	static class Color
+	{
+		@NonNull
+		public final Integer intValue;
+
+		private Color(@NonNull final Integer intValue)
+		{
+			this.intValue = intValue;
+		}
+
+		@Nullable
+		public static Color make(@Nullable final Integer intValue)
+		{
+			if (intValue == null)
+			{
+				return null;
+			}
+			return new Color(intValue);
+		}
+	}
+
 	/**
 	 * Transform model to document
 	 *
@@ -84,8 +105,8 @@ public class ModelToDocumentTransformer
 
 			// tree
 			final Element treeElement = document.createElement("tree");
-			attributes.put("backcolor", model.settings.backColor);
-			attributes.put("forecolor", model.settings.foreColor);
+			attributes.put("backcolor", Color.make(model.settings.backColor));
+			attributes.put("forecolor", Color.make(model.settings.foreColor));
 			attributes.put("orientation", model.settings.orientation);
 			attributes.put("expansion", model.settings.expansion);
 			attributes.put("sweep", model.settings.sweep);
@@ -106,8 +127,8 @@ public class ModelToDocumentTransformer
 
 			// nodes
 			final Element nodesElement = document.createElement("nodes");
-			attributes.put("backcolor", model.settings.nodeBackColor);
-			attributes.put("forecolor", model.settings.nodeForeColor);
+			attributes.put("backcolor", Color.make(model.settings.nodeBackColor));
+			attributes.put("forecolor", Color.make(model.settings.nodeForeColor));
 			attributes.put("border", model.settings.borderFlag);
 			attributes.put("ellipsize", model.settings.ellipsizeFlag);
 			attributes.put("max-lines", model.settings.labelMaxLines);
@@ -597,10 +618,10 @@ public class ModelToDocumentTransformer
 			if (value != null)
 			{
 				String string;
-				//TODO color
-				if (value instanceof Integer)
+				if (value instanceof Color)
 				{
-					string = Utils.colorToString((Integer) value);
+					Color color = (Color) value;
+					string = Utils.colorToString(color.intValue);
 				}
 				else if (value instanceof float[])
 				{

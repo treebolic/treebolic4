@@ -372,11 +372,11 @@ public class Provider implements IProvider
 		node.setLabel(fields[0]);
 		if (fields.length > 2)
 		{
-			node.setBackColor(Utils.stringToColor(fields[2]));
+			node.setBackColor(Utils.parseColor(fields[2]));
 		}
 		if (fields.length > 3)
 		{
-			node.setForeColor(Utils.stringToColor(fields[3]));
+			node.setForeColor(Utils.parseColor(fields[3]));
 		}
 		if (fields.length > 4)
 		{

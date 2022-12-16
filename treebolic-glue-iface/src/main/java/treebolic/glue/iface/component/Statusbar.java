@@ -82,7 +82,7 @@ public interface Statusbar
 	 * @param label     label
 	 * @param content   content
 	 */
-	void put(final int image, final Function<CharSequence[], String> converter, final String label, final String... content);
+	void put(final int image, final Function<String[], String> converter, final String label, final String... content);
 
 	/**
 	 * Put message

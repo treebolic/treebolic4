@@ -515,7 +515,7 @@ public class Controller extends Commander
 		@NonNull final String label = Controller.getLabel(node);
 		@NonNull final String[] content = Controller.getContent(node);
 		assert this.widget != null;
-		this.widget.putStatus(Statusbar.PutType.INFO, (s) -> makeHtmlContent(s, Commander.TOOLTIPHTML), label, content);
+		this.widget.putStatus(Statusbar.PutType.INFO, (s) -> processContent(s, Commander.MESSAGES_HTML), label, content);
 	}
 
 	/**
@@ -592,7 +592,9 @@ public class Controller extends Commander
 	static private String[] getContent(@NonNull final INode node)
 	{
 		@NonNull final String[] contents = new String[4];
-		contents[IDX_NODE_CONTENT] = node.getContent();
+
+		// content
+		contents[IDX_NODE_CONTENT] = prependImageToContent(node.getContent(), node.getImageFile());
 
 		// link
 		if (Controller.CONTENT_HAS_LINK)
@@ -632,37 +634,54 @@ public class Controller extends Commander
 	}
 
 	/**
-	 * Get content string
+	 * Prepend image to content
+	 *
+	 * @param content  content
+	 * @param imageSrc image
+	 * @return decorated string
+	 */
+	private static @Nullable String prependImageToContent(@Nullable final String content, @Nullable final String imageSrc)
+	{
+		if (content != null && !content.isEmpty() && imageSrc != null && !imageSrc.isEmpty())
+		{
+			return String.format("<p><img src='%s' style='float:left;margin-right:10px;width:32px;height:32px;'/></p><p>%s</p>", imageSrc, content);
+			//return String.format("<table><tr><td valign='top'><img src='%s' style='width:32px;'/></td><td>%s</td></tr></table>", imageSrc, content);
+		}
+		return content;
+	}
+
+	/**
+	 * Process content string
 	 *
 	 * @param contents strings
-	 * @param div      embed in a div tag
-	 * @return html content string
+	 * @param html     html (embed in a div tag)
+	 * @return content string
 	 */
 	@NonNull
-	public String makeHtmlContent(@NonNull final CharSequence[] contents, boolean div)
+	public String processContent(@NonNull final String[] contents, boolean html)
 	{
 		@NonNull final StringBuilder sb = new StringBuilder();
 		if (contents[IDX_NODE_CONTENT] != null)
 		{
-			sb.append(div ? makeHtml("content", contents[IDX_NODE_CONTENT]) : contents[IDX_NODE_CONTENT]);
+			sb.append(html ? makeHtml("content", contents[IDX_NODE_CONTENT]) : contents[IDX_NODE_CONTENT]);
 		}
 
 		// link
 		if (contents[IDX_NODE_LINK] != null)
 		{
-			sb.append(div ? makeHtml("link", contents[IDX_NODE_LINK]) : contents[IDX_NODE_LINK]);
+			sb.append(html ? makeHtml("link", contents[IDX_NODE_LINK]) : contents[IDX_NODE_LINK]);
 		}
 
 		// mountpoint
 		if (contents[IDX_NODE_MOUNTPOINT] != null)
 		{
-			sb.append(div ? makeHtml("mount", contents[IDX_NODE_MOUNTPOINT]) : contents[IDX_NODE_MOUNTPOINT]);
+			sb.append(html ? makeHtml("mount", contents[IDX_NODE_MOUNTPOINT]) : contents[IDX_NODE_MOUNTPOINT]);
 		}
 
 		// weight
 		if (contents[IDX_NODE_WEIGHT] != null)
 		{
-			sb.append(div ? makeHtml("weight", contents[IDX_NODE_WEIGHT]) : contents[IDX_NODE_WEIGHT]);
+			sb.append(html ? makeHtml("weight", contents[IDX_NODE_WEIGHT]) : contents[IDX_NODE_WEIGHT]);
 		}
 		return sb.toString();
 	}
@@ -675,10 +694,10 @@ public class Controller extends Commander
 	 * @return content as HTML
 	 */
 	@NonNull
-	public String makeHtml(String divStyle, @NonNull final CharSequence... contents)
+	public String makeHtml(String divStyle, @NonNull final String... contents)
 	{
 		@NonNull final StringBuilder sb = new StringBuilder();
-		for (@Nullable CharSequence content : contents)
+		for (@Nullable String content : contents)
 		{
 			if (content != null && content.length() > 0)
 			{
@@ -690,7 +709,7 @@ public class Controller extends Commander
 				sb.append("<div class='");
 				sb.append(divStyle);
 				sb.append("'>");
-				sb.append(content);
+				sb.append(content.replaceAll("\n", "<br>"));
 				sb.append("</div>");
 			}
 		}
@@ -738,7 +757,7 @@ public class Controller extends Commander
 			{
 				replacement = "src='" + url2 + "'";
 			}
-			m1.appendReplacement(sb,replacement);
+			m1.appendReplacement(sb, replacement);
 		}
 		m1.appendTail(sb);
 		content = sb.toString();
@@ -754,7 +773,7 @@ public class Controller extends Commander
 			{
 				replacement = "src=\"" + url2 + "\"";
 			}
-			m2.appendReplacement(sb,replacement);
+			m2.appendReplacement(sb, replacement);
 		}
 		m2.appendTail(sb);
 
@@ -808,20 +827,20 @@ public class Controller extends Commander
 	 */
 	private void putTip(@NonNull final INode node)
 	{
-		if (!Commander.hasTooltip)
+		if (!Commander.HAS_TOOLTIP)
 		{
 			return;
 		}
 
 		@Nullable String label = node.getLabel();
 		@Nullable String content = node.getContent();
-		if (label == null && (!Commander.tooltipDisplaysContent || content == null))
+		if (label == null && (!Commander.TOOLTIP_DISPLAYS_CONTENT || content == null))
 		{
 			return;
 		}
 
 		@NonNull final StringBuilder sb = new StringBuilder();
-		if (Commander.TOOLTIPHTML)
+		if (Commander.TOOLTIP_HTML)
 		{
 			sb.append("<html>");
 		}
@@ -829,24 +848,24 @@ public class Controller extends Commander
 		// label
 		if (label != null && !label.isEmpty())
 		{
-			if (Commander.TOOLTIPHTML)
+			if (Commander.TOOLTIP_HTML)
 			{
 				label = label.replaceAll("\n", "<br>");
 				sb.append("<strong>");
 			}
 			sb.append(label);
-			if (Commander.TOOLTIPHTML)
+			if (Commander.TOOLTIP_HTML)
 			{
 				sb.append("</strong><br/>");
 			}
 		}
 
 		// content
-		if (Commander.tooltipDisplaysContent)
+		if (Commander.TOOLTIP_DISPLAYS_CONTENT)
 		{
 			if (content != null && !content.isEmpty())
 			{
-				if (!Commander.TOOLTIPHTML)
+				if (!Commander.TOOLTIP_HTML)
 				{
 					@NonNull final String[] lines = content.split("\n");
 					for (@NonNull final String line : lines)
@@ -854,7 +873,7 @@ public class Controller extends Commander
 						@NonNull final StringBuilder lineSb = new StringBuilder(line);
 
 						// force break after x characters
-						for (int offset = Commander.TOOLTIPLINESPAN; offset < lineSb.length(); offset += Commander.TOOLTIPLINESPAN)
+						for (int offset = Commander.TOOLTIP_LINESPAN; offset < lineSb.length(); offset += Commander.TOOLTIP_LINESPAN)
 						{
 							lineSb.insert(offset, "\n");
 						}
@@ -866,18 +885,19 @@ public class Controller extends Commander
 				}
 				else
 				{
-					content = content.replaceAll("\n", "<br>");
+					content = prependImageToContent(content, node.getImageFile());
 					if (ABSOLUTE_IMG_URLS)
 					{
 						content = absoluteImageSrcs(content);
 					}
-					sb.append(content.length() <= Commander.TOOLTIPLINESPAN ? "<div>" : "<div width='" + Commander.TOOLTIPLINESPAN * 7 + "'>");
+					content = content.replaceAll("\n", "<br>");
+					sb.append(content.length() <= Commander.TOOLTIP_LINESPAN ? "<div>" : "<div width='" + Commander.TOOLTIP_LINESPAN * 7 + "'>");
 					sb.append(content);
 					sb.append("</div>");
 				}
 			}
 		}
-		if (Commander.TOOLTIPHTML)
+		if (Commander.TOOLTIP_HTML)
 		{
 			sb.append("</html>");
 		}
