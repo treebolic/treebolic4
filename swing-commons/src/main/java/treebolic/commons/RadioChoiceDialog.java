@@ -112,10 +112,6 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 		// System.err.println(this.value);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Component#setVisible(boolean)
-	 */
 	@Override
 	public void setVisible(final boolean flag)
 	{

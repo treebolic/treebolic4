@@ -95,10 +95,6 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		open();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Window#processWindowEvent(java.awt.event.WindowEvent)
-	 */
 	@Override
 	protected void processWindowEvent(@NonNull final WindowEvent event)
 	{
@@ -944,10 +940,6 @@ public class MainFrame extends JFrame implements HyperlinkListener
 			return new ContextData(provider, source, base, imageBase, entry, isZip, isSer);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see java.lang.Object#toString()
-		 */
 		@NonNull
 		@Override
 		public String toString()
@@ -994,10 +986,6 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		ExternalBrowser.browse(linkUrl);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.event.HyperlinkListener#hyperlinkUpdate(javax.swing.event.HyperlinkEvent)
-	 */
 	@Override
 	public void hyperlinkUpdate(@NonNull final HyperlinkEvent event)
 	{

@@ -153,10 +153,6 @@ public class Renderer extends DefaultTreeCellRenderer
 		setBorderSelectionColor(Color.LIGHT_GRAY);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.tree.TreeCellRenderer#getTreeCellRendererComponent(javax.swing.JTree, java.lang.Object, boolean, boolean, boolean, int, boolean)
-	 */
 	@Override
 	public Component getTreeCellRendererComponent(final JTree tree, final Object value, final boolean isSelected, final boolean expanded, final boolean leaf, final int row, final boolean hasFocus)
 	{

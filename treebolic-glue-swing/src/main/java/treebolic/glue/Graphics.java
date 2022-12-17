@@ -95,10 +95,6 @@ public class Graphics implements treebolic.glue.iface.Graphics
 
 	// D R A W
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.glue.iface.Graphics#drawBackgroundColor(java.lang.Object, int, int, int, int)
-	 */
 	@Override
 	public void drawBackgroundColor(@Nullable final Integer color, final int left, final int top, final int width, final int height)
 	{

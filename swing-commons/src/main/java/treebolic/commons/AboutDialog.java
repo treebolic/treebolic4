@@ -109,10 +109,6 @@ public class AboutDialog extends JDialog
 		return panel;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Dialog#setVisible(boolean)
-	 */
 	@Override
 	public void setVisible(final boolean flag)
 	{

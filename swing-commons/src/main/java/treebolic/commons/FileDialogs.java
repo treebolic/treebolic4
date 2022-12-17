@@ -51,10 +51,6 @@ public class FileDialogs
 			this.description = description;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.filechooser.FileFilter#getDescription()
-		 */
 		@Override
 		public String getDescription()
 		{
@@ -75,10 +71,6 @@ public class FileDialogs
 			super(filters, description);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.filechooser.FileFilter#accept(java.io.File)
-		 */
 		@Override
 		public boolean accept(@NonNull final File file)
 		{
@@ -107,10 +99,6 @@ public class FileDialogs
 			super(extensions, description);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.filechooser.FileFilter#accept(java.io.File)
-		 */
 		@Override
 		public boolean accept(@NonNull final File file)
 		{

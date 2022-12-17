@@ -146,10 +146,6 @@ public class MainFrame extends JFrame
 		this.controller.connect(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Window#processWindowEvent(java.awt.event.WindowEvent)
-	 */
 	@Override
 	protected void processWindowEvent(@NonNull final WindowEvent event)
 	{

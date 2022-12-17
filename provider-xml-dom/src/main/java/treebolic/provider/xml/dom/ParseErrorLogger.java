@@ -83,10 +83,6 @@ public class ParseErrorLogger extends ParseErrorHandler
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.provider.xml.dom.ParseErrorHandler#error(org.xml.sax.SAXParseException)
-	 */
 	@Override
 	public void error(@NonNull final SAXParseException e) throws SAXParseException
 	{
@@ -94,10 +90,6 @@ public class ParseErrorLogger extends ParseErrorHandler
 		log("Recoverable Error", e);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.provider.xml.dom.ParseErrorHandler#warning(org.xml.sax.SAXParseException)
-	 */
 	@Override
 	public void warning(@NonNull final SAXParseException e) throws SAXParseException
 	{
@@ -105,10 +97,6 @@ public class ParseErrorLogger extends ParseErrorHandler
 		log("Warning", e);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.provider.xml.dom.ParseErrorHandler#fatalError(org.xml.sax.SAXParseException)
-	 */
 	@Override
 	public void fatalError(@NonNull final SAXParseException e) throws SAXParseException
 	{

@@ -206,60 +206,36 @@ public class Laf
 
 			private final javax.swing.plaf.ColorUIResource secondary3 = new ColorUIResource(236, 233, 216);
 
-			/*
-			 * (non-Javadoc)
-			 * @see javax.swing.plaf.metal.MetalTheme#getPrimary1()
-			 */
 			@Override
 			public javax.swing.plaf.ColorUIResource getPrimary1()
 			{
 				return this.primary1;
 			}
 
-			/*
-			 * (non-Javadoc)
-			 * @see javax.swing.plaf.metal.MetalTheme#getPrimary2()
-			 */
 			@Override
 			public javax.swing.plaf.ColorUIResource getPrimary2()
 			{
 				return this.primary2;
 			}
 
-			/*
-			 * (non-Javadoc)
-			 * @see javax.swing.plaf.metal.MetalTheme#getPrimary3()
-			 */
 			@Override
 			public javax.swing.plaf.ColorUIResource getPrimary3()
 			{
 				return this.primary3;
 			}
 
-			/*
-			 * (non-Javadoc)
-			 * @see javax.swing.plaf.metal.MetalTheme#getSecondary1()
-			 */
 			@Override
 			public javax.swing.plaf.ColorUIResource getSecondary1()
 			{
 				return this.secondary1;
 			}
 
-			/*
-			 * (non-Javadoc)
-			 * @see javax.swing.plaf.metal.MetalTheme#getSecondary2()
-			 */
 			@Override
 			public javax.swing.plaf.ColorUIResource getSecondary2()
 			{
 				return this.secondary2;
 			}
 
-			/*
-			 * (non-Javadoc)
-			 * @see javax.swing.plaf.metal.MetalTheme#getSecondary3()
-			 */
 			@Override
 			public javax.swing.plaf.ColorUIResource getSecondary3()
 			{

@@ -33,20 +33,12 @@ public class XSettingsDialog extends SettingsDialog
 		super(properties, SettingsDialog.BASE | SettingsDialog.IMAGEBASE | SettingsDialog.HELP | SettingsDialog.BROWSER);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.commons.SettingsDialog#initialize()
-	 */
 	@Override
 	protected void initialize()
 	{
 		super.initialize();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Component#setVisible(boolean)
-	 */
 	@Override
 	public void setVisible(final boolean flag)
 	{

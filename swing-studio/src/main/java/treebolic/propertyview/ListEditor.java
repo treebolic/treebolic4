@@ -116,10 +116,6 @@ class ListEditor extends DefaultCellEditor
 
 	// I N T E R F A C E
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.DefaultCellEditor#getCellEditorValue()
-	 */
 	@Nullable
 	@Override
 	public Object getCellEditorValue()
@@ -133,10 +129,6 @@ class ListEditor extends DefaultCellEditor
 		return value;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.DefaultCellEditor#getTableCellEditorComponent(javax.swing.JTable, java.lang.Object, boolean, int, int)
-	 */
 	@Override
 	public Component getTableCellEditorComponent(JTable table, Object value0, boolean isSelected, int row, int column)
 	{

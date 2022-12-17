@@ -103,10 +103,6 @@ public class OpenDialog extends JDialog
 		// text
 		@NonNull final ListCellRenderer<Object> renderer = new DefaultListCellRenderer()
 		{
-			/*
-			 * (non-Javadoc)
-			 * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
-			 */
 			@Override
 			public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
 			{
@@ -194,10 +190,6 @@ public class OpenDialog extends JDialog
 		setContentPane(panel);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Component#setVisible(boolean)
-	 */
 	@Override
 	public void setVisible(final boolean flag)
 	{

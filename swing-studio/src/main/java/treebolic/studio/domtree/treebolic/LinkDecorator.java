@@ -32,10 +32,6 @@ public class LinkDecorator extends ElementDecorator
 
 	// S T R I N G S
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.studio.domtree.ElementDecorator#getName()
-	 */
 	@NonNull
 	@Override
 	public String getName()
@@ -43,10 +39,6 @@ public class LinkDecorator extends ElementDecorator
 		return " " + super.getName() + " ";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.studio.domtree.ElementDecorator#getValue()
-	 */
 	@Override
 	public String getValue()
 	{

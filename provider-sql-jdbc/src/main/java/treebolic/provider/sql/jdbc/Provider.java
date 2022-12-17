@@ -40,10 +40,6 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 			this.resultSet = resultSet;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#close()
-		 */
 		@Override
 		public void close()
 		{
@@ -67,30 +63,18 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 			}
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#moveToNext()
-		 */
 		@Override
 		public boolean moveToNext() throws SQLException
 		{
 			return this.resultSet.next();
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#getPosition()
-		 */
 		@Override
 		public int getPosition() throws SQLException
 		{
 			return this.resultSet.getRow();
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#getColumnIndex(java.lang.String)
-		 */
 		@Override
 		public int getColumnIndex(@NonNull final String columnName) throws SQLException
 		{
@@ -101,10 +85,6 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 			return this.resultSet.findColumn(columnName);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#isNull(int)
-		 */
 		@Override
 		public boolean isNull(int columnIndex) throws SQLException
 		{
@@ -112,20 +92,12 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 			return this.resultSet.wasNull();
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#getString(int)
-		 */
 		@Override
 		public String getString(int columnIndex) throws SQLException
 		{
 			return this.resultSet.getString(columnIndex);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#getInt(int)
-		 */
 		@NonNull
 		@Override
 		public Integer getInt(int columnIndex) throws SQLException
@@ -133,10 +105,6 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 			return this.resultSet.getInt(columnIndex);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#getFloat(int)
-		 */
 		@NonNull
 		@Override
 		public Float getFloat(int columnIndex) throws SQLException
@@ -144,10 +112,6 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 			return this.resultSet.getFloat(columnIndex);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.provider.sqlx.AbstractProvider.Cursor#getDouble(int)
-		 */
 		@NonNull
 		@Override
 		public Double getDouble(int columnIndex) throws SQLException
@@ -165,7 +129,7 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		{
 			// url/user/password
 			@NonNull final String url = makeUrl(properties);
-			System.out.println("Sqlx provider URL: " + url); 
+			System.out.println("Sql provider URL: " + url);
 			final String user = properties.getProperty("user"); 
 			final String passwd = properties.getProperty("passwd"); 
 
@@ -178,14 +142,10 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 			catch (final SQLException exception)
 			{
 				this.connection = null;
-				System.err.println("Sqlx exception : " + exception.getMessage()); 
+				System.err.println("Sql exception : " + exception.getMessage());
 			}
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.provider.sqlx.AbstractProvider.Database#close()
-		 */
 		@Override
 		public void close()
 		{
@@ -202,10 +162,6 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 			}
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.provider.sqlx.AbstractProvider.Database#query(java.lang.String)
-		 */
 		@NonNull
 		@Override
 		public JdbcCursor query(@NonNull final String nodesSql) throws SQLException
@@ -255,10 +211,6 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.provider.sqlx.AbstractProvider#openDatabase(java.util.Properties)
-	 */
 	@NonNull
 	@Override
 	protected JdbcDatabase openDatabase(@NonNull final Properties properties)

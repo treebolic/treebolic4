@@ -296,10 +296,6 @@ public class SettingsDialog extends JDialog
 			this.providerComboBox.setPreferredSize(new Dimension(300, 24));
 			this.providerComboBox.setRenderer(new DefaultListCellRenderer()
 			{
-				/*
-				 * (non-Javadoc)
-				 * @see javax.swing.DefaultListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
-				 */
 				@Override
 				public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
 				{
@@ -370,10 +366,6 @@ public class SettingsDialog extends JDialog
 		return JOptionPane.showInputDialog(null, lines);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Component#setVisible(boolean)
-	 */
 	@Override
 	public void setVisible(final boolean flag)
 	{

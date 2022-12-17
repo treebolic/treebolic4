@@ -87,8 +87,6 @@ public class Widget extends Container implements IWidget, IProviderContext
 
 	/**
 	 * Context for operations (provides some treebolic.glue to the context, application)
-	 *
-	 * @see IContext
 	 */
 	private final IContext context;
 

@@ -106,10 +106,6 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor
 
 	// I N T E R F A C E
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.table.TableCellEditor#getTableCellEditorComponent(javax.swing.JTable, java.lang.Object, boolean, int, int)
-	 */
 	@NonNull
 	@Override
 	public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected, final int row, final int column)
@@ -118,10 +114,6 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor
 		return this.button;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.CellEditor#getCellEditorValue()
-	 */
 	@Nullable
 	@Override
 	public Object getCellEditorValue()

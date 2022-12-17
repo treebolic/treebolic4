@@ -206,10 +206,6 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 		add(button);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.glue.iface.component.Toolbar#addButton(treebolic.glue.iface.component.Toolbar.Button, java.lang.Object)
-	 */
 	@Override
 	public void addButton(@NonNull treebolic.glue.iface.component.Toolbar.Button button, @NonNull treebolic.glue.iface.ActionListener listener)
 	{

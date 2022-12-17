@@ -89,25 +89,13 @@ public class UrlDialog extends JDialog
 
 		// buttons
 		@NonNull final JButton okButton = new JButton(Messages.getString("UrlDialog.ok"));
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		okButton.addActionListener(e -> {
 			UrlDialog.this.ok = true;
 			setVisible(false);
 		});
 		@NonNull final JButton cancelButton = new JButton(Messages.getString("UrlDialog.cancel"));
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		cancelButton.addActionListener(e -> setVisible(false));
 		@NonNull final JButton addParameter = new JButton(Messages.getString("UrlDialog.add"));
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		addParameter.addActionListener(e -> {
 			final ParameterModel model = (ParameterModel) UrlDialog.this.queryTable.getModel();
 			if (model != null)
@@ -116,10 +104,6 @@ public class UrlDialog extends JDialog
 			}
 		});
 		@NonNull final JButton removeParameter = new JButton(Messages.getString("UrlDialog.remove"));
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		removeParameter.addActionListener(e -> {
 			final int rowIdx = UrlDialog.this.queryTable.getSelectedRow();
 			final ParameterModel model = (ParameterModel) UrlDialog.this.queryTable.getModel();
@@ -403,40 +387,24 @@ public class UrlDialog extends JDialog
 			return properties;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#getRowCount()
-		 */
 		@Override
 		public int getRowCount()
 		{
 			return this.entries.size();
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#getColumnCount()
-		 */
 		@Override
 		public int getColumnCount()
 		{
 			return 2;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#isCellEditable(int, int)
-		 */
 		@Override
 		public boolean isCellEditable(final int y, final int x)
 		{
 			return true;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#setValueAt(java.lang.Object, int, int)
-		 */
 		@Override
 		public void setValueAt(final Object value, final int y, final int x)
 		{
@@ -454,10 +422,6 @@ public class UrlDialog extends JDialog
 			}
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#getValueAt(int, int)
-		 */
 		@Nullable
 		@Override
 		public Object getValueAt(final int y, final int x)
@@ -474,10 +438,6 @@ public class UrlDialog extends JDialog
 			}
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#getColumnName(int)
-		 */
 		@NonNull
 		@Override
 		public String getColumnName(final int x)
@@ -494,10 +454,6 @@ public class UrlDialog extends JDialog
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Dialog#setVisible(boolean)
-	 */
 	@Override
 	public void setVisible(final boolean flag)
 	{

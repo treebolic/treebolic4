@@ -189,10 +189,6 @@ class SearchDialog extends JDialog
 		Utils.center(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Component#setVisible(boolean)
-	 */
 	@Override
 	public void setVisible(final boolean flag)
 	{

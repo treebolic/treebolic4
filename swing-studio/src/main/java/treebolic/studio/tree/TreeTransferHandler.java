@@ -70,10 +70,6 @@ public class TreeTransferHandler extends TransferHandler
 		}
 
 		// flavor
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.datatransfer.Transferable#getTransferDataFlavors()
-		 */
 		@NonNull
 		@SuppressWarnings("synthetic-access")
 		@Override
@@ -82,10 +78,6 @@ public class TreeTransferHandler extends TransferHandler
 			return new DataFlavor[]{flavor};
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.datatransfer.Transferable#isDataFlavorSupported(java.awt.datatransfer.DataFlavor)
-		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public boolean isDataFlavorSupported(@NonNull final DataFlavor flavor)
@@ -94,10 +86,6 @@ public class TreeTransferHandler extends TransferHandler
 		}
 
 		// data
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.datatransfer.Transferable#getTransferData(java.awt.datatransfer.DataFlavor)
-		 */
 		@NonNull
 		@Override
 		public Object getTransferData(final DataFlavor flavor)
@@ -106,20 +94,12 @@ public class TreeTransferHandler extends TransferHandler
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.TransferHandler#getSourceActions(javax.swing.JComponent)
-	 */
 	@Override
 	public int getSourceActions(final JComponent c)
 	{
 		return TransferHandler.MOVE;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.TransferHandler#createTransferable(javax.swing.JComponent)
-	 */
 	@Override
 	protected Transferable createTransferable(final JComponent sourceComponent)
 	{
@@ -127,10 +107,6 @@ public class TreeTransferHandler extends TransferHandler
 		return new TransferableNode(sourceTree.getSelectionModel().getSelectionPath().getLastPathComponent());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.TransferHandler#canImport(javax.swing.TransferHandler.TransferSupport)
-	 */
 	@Override
 	public boolean canImport(@NonNull final TransferSupport support)
 	{
@@ -142,10 +118,6 @@ public class TreeTransferHandler extends TransferHandler
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.TransferHandler#importData(javax.swing.TransferHandler.TransferSupport)
-	 */
 	@Override
 	public boolean importData(@NonNull final TransferSupport support)
 	{
@@ -160,10 +132,6 @@ public class TreeTransferHandler extends TransferHandler
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.TransferHandler#exportDone(javax.swing.JComponent, java.awt.datatransfer.Transferable, int)
-	 */
 	@Override
 	protected void exportDone(final JComponent component, final Transferable data, final int action)
 	{

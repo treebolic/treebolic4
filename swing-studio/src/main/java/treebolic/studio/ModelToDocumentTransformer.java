@@ -72,10 +72,6 @@ public class ModelToDocumentTransformer
 			document.appendChild(document.createComment("created " + new Date()));
 			@NonNull final Map<String, Object> attributes = new HashMap<String, Object>()
 			{
-				/*
-				 * (non-Javadoc)
-				 * @see java.util.Hashtable#put(java.lang.String, java.lang.Object)
-				 */
 				@Override
 				public Object put(final String key, @Nullable final Object value)
 				{

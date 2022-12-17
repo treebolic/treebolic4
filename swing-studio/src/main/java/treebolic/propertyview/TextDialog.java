@@ -126,10 +126,6 @@ public class TextDialog extends JDialog
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Component#setVisible(boolean)
-	 */
 	@Override
 	public void setVisible(final boolean flag)
 	{

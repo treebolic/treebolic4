@@ -148,10 +148,6 @@ public class Editor implements TableCellEditor, CellEditorListener
 
 	// I N T E R F A C E
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.table.TableCellEditor#getTableCellEditorComponent(javax.swing.JTable, java.lang.Object, boolean, int, int)
-	 */
 	@Nullable
 	@Override
 	public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected, final int row, final int column)
@@ -251,10 +247,6 @@ public class Editor implements TableCellEditor, CellEditorListener
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.CellEditor#getCellEditorValue()
-	 */
 	@Nullable
 	@Override
 	public Object getCellEditorValue()
@@ -348,40 +340,24 @@ public class Editor implements TableCellEditor, CellEditorListener
 		return this.attribute;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.CellEditor#shouldSelectCell(java.util.EventObject)
-	 */
 	@Override
 	public boolean shouldSelectCell(final EventObject event)
 	{
 		return this.subEditor.shouldSelectCell(event);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.CellEditor#stopCellEditing()
-	 */
 	@Override
 	public boolean stopCellEditing()
 	{
 		return this.subEditor.stopCellEditing();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.DefaultCellEditor#cancelCellEditing()
-	 */
 	@Override
 	public void cancelCellEditing()
 	{
 		this.subEditor.cancelCellEditing();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.CellEditor#isCellEditable(java.util.EventObject)
-	 */
 	@Override
 	public boolean isCellEditable(final EventObject anEvent)
 	{
@@ -519,20 +495,12 @@ public class Editor implements TableCellEditor, CellEditorListener
 
 	// N O T I F I C A T I O N
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.event.CellEditorListener#editingCanceled(javax.swing.event.ChangeEvent)
-	 */
 	@Override
 	public void editingCanceled(final ChangeEvent e)
 	{
 		// System.out.println("Editor notification: Canceled"); 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.event.CellEditorListener#editingStopped(javax.swing.event.ChangeEvent)
-	 */
 	@Override
 	public void editingStopped(final ChangeEvent e)
 	{
@@ -541,10 +509,6 @@ public class Editor implements TableCellEditor, CellEditorListener
 
 	// L I S T E N E R S
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.CellEditor#addCellEditorListener(javax.swing.event.CellEditorListener)
-	 */
 	@Override
 	public void addCellEditorListener(final CellEditorListener listener)
 	{
@@ -554,10 +518,6 @@ public class Editor implements TableCellEditor, CellEditorListener
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.CellEditor#removeCellEditorListener(javax.swing.event.CellEditorListener)
-	 */
 	@Override
 	public void removeCellEditorListener(final CellEditorListener listener)
 	{

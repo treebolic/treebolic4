@@ -34,10 +34,6 @@ public abstract class Worker extends javax.swing.SwingWorker<Void, Void> impleme
 
 	// public void execute();
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.SwingWorker#doInBackground()
-	 */
 	@Nullable
 	@Override
 	public Void doInBackground()

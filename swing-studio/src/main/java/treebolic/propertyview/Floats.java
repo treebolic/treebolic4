@@ -28,10 +28,6 @@ public class Floats
 		this.floats = floats0;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@NonNull
 	@Override
 	public String toString()

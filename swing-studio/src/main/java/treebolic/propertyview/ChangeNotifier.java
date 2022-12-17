@@ -61,7 +61,6 @@ public class ChangeNotifier
 	 * Notifies all listeners that have registered interest for notification on this event type.
 	 *
 	 * @param changeEvent change event
-	 * @see EventListenerList
 	 */
 	public void fireStateChanged(final ChangeEvent changeEvent)
 	{

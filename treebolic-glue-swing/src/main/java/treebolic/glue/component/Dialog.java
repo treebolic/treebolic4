@@ -100,10 +100,6 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 		//
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Dialog#setVisible(boolean)
-	 */
 	@Override
 	public void setVisible(final boolean flag)
 	{
@@ -115,10 +111,6 @@ public class Dialog extends JDialog implements treebolic.glue.iface.component.Di
 		super.setVisible(flag);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.glue.iface.component.Dialog#setListener(treebolic.glue.iface.ActionListener)
-	 */
 	@Override
 	public void setListener(@NonNull final ActionListener actionListener)
 	{

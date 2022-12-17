@@ -349,10 +349,6 @@ public class Tree extends JTree implements TreeSelectionListener // , DragGestur
 
 	// T R E E . S E L E C T I O N . L I S T E N E R
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.event.TreeSelectionListener#valueChanged(javax.swing.event.TreeSelectionEvent)
-	 */
 	@Override
 	public void valueChanged(@NonNull final TreeSelectionEvent event)
 	{

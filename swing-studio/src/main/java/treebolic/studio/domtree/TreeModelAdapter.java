@@ -61,10 +61,6 @@ public class TreeModelAdapter implements TreeModel
 
 	// T R E E M O D E L
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.tree.TreeModel#getRoot()
-	 */
 	@Nullable
 	@Override
 	public Object getRoot()
@@ -80,30 +76,18 @@ public class TreeModelAdapter implements TreeModel
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.tree.TreeModel#isLeaf(java.lang.Object)
-	 */
 	@Override
 	public boolean isLeaf(final Object node)
 	{
 		return childCountOf((Node) node) == 0;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.tree.TreeModel#getChildCount(java.lang.Object)
-	 */
 	@Override
 	public int getChildCount(final Object node)
 	{
 		return childCountOf((Node) node);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.tree.TreeModel#getChild(java.lang.Object, int)
-	 */
 	@Nullable
 	@Override
 	public Object getChild(final Object node, final int index)
@@ -111,10 +95,6 @@ public class TreeModelAdapter implements TreeModel
 		return nthChildOf((Node) node, index);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.tree.TreeModel#getIndexOfChild(java.lang.Object, java.lang.Object)
-	 */
 	@Override
 	public int getIndexOfChild(final Object node, final Object child)
 	{
@@ -123,20 +103,12 @@ public class TreeModelAdapter implements TreeModel
 
 	// M O D I F I C A T I O N
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.tree.TreeModel#valueForPathChanged(javax.swing.tree.TreePath, java.lang.Object)
-	 */
 	@Override
 	public void valueForPathChanged(final TreePath path, final Object newValue)
 	{
 		// do nothing
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.tree.TreeModel#addTreeModelListener(javax.swing.event.TreeModelListener)
-	 */
 	@Override
 	public void addTreeModelListener(@Nullable final TreeModelListener listener)
 	{
@@ -146,10 +118,6 @@ public class TreeModelAdapter implements TreeModel
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.tree.TreeModel#removeTreeModelListener(javax.swing.event.TreeModelListener)
-	 */
 	@Override
 	public void removeTreeModelListener(@Nullable final TreeModelListener listener)
 	{

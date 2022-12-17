@@ -56,18 +56,12 @@ public class Provider implements IProvider
 
 	// M A K E
 
-	/* (non-Javadoc)
-	 * @see treebolic.provider.IProvider#setContext(treebolic.provider.IProviderContext)
-	 */
 	@Override
 	public void setContext(final IProviderContext context)
 	{
 		this.context = context;
 	}
 
-	/* (non-Javadoc)
-	 * @see treebolic.provider.IProvider#setLocator(treebolic.ILocator)
-	 */
 	@SuppressWarnings("EmptyMethod")
 	@Override
 	public void setLocator(final ILocator locator)
@@ -75,9 +69,6 @@ public class Provider implements IProvider
 		// do not need
 	}
 
-	/* (non-Javadoc)
-	 * @see treebolic.provider.IProvider#setHandle(java.lang.Object)
-	 */
 	@SuppressWarnings("EmptyMethod")
 	@Override
 	public void setHandle(final Object handle)
@@ -85,10 +76,6 @@ public class Provider implements IProvider
 		// do not need
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.provider.IProvider#makeTree(java.lang.String, java.net.URL, java.util.Properties, boolean)
-	 */
 	@Override
 	public Tree makeTree(final String source, final URL base, final Properties parameters, final boolean checkRecursion)
 	{
@@ -115,10 +102,6 @@ public class Provider implements IProvider
 		return tree;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.provider.IProvider#makeModel(java.lang.String, java.net.URL, java.util.Properties)
-	 */
 	@Override
 	public Model makeModel(final String source, final URL base, final Properties parameters)
 	{

@@ -30,10 +30,6 @@ public class MountListDialog extends ReferenceListDialog
 		this.scrollPane.setPreferredSize(new Dimension(300, 120));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.studio.ReferenceListDialog#update()
-	 */
 	@Override
 	protected void update()
 	{

@@ -82,10 +82,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	private static class NodeGetter implements Getter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
-		 */
 		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
@@ -181,10 +177,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	private class NodeSetter implements Setter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Setter#set(java.lang.Object, java.lang.String, java.lang.Object)
-		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public void set(final Object object, @NonNull final String propertyName, @Nullable final Object propertyValue)
@@ -337,10 +329,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	private static class EdgeGetter implements Getter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
-		 */
 		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
@@ -403,10 +391,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	private class EdgeSetter implements Setter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Setter#set(java.lang.Object, java.lang.String, java.lang.Object)
-		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public void set(final Object object, @NonNull final String propertyName, final Object propertyValue)
@@ -505,10 +489,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 
 	private static class TopGetter implements Getter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
-		 */
 		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
@@ -575,10 +555,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	private class TopSetter implements Setter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Setter#set(java.lang.Object, java.lang.String, java.lang.Object)
-		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public void set(final Object object, @NonNull final String propertyName, final Object propertyValue)
@@ -674,10 +650,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	private static class TreeGetter implements Getter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
-		 */
 		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
@@ -747,10 +719,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	private class TreeSetter implements Setter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Setter#set(java.lang.Object, java.lang.String, java.lang.Object)
-		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public void set(final Object object, @NonNull final String propertyName, final Object propertyValue)
@@ -856,10 +824,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	private static class NodesGetter implements Getter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
-		 */
 		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
@@ -937,10 +901,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	private class NodesSetter implements Setter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Setter#set(java.lang.Object, java.lang.String, java.lang.Object)
-		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public void set(final Object object, @NonNull final String propertyName, final Object propertyValue)
@@ -1040,10 +1000,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	private static class EdgesGetter implements Getter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
-		 */
 		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
@@ -1098,10 +1054,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 
 	private class EdgesSetter implements Setter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Setter#set(java.lang.Object, java.lang.String, java.lang.Object)
-		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public void set(final Object object, @NonNull final String propertyName, final Object propertyValue)
@@ -1171,10 +1123,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	private static class MenuItemGetter implements Getter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Getter#get(java.lang.Object, java.lang.String)
-		 */
 		@Nullable
 		@SuppressWarnings("synthetic-access")
 		@Override
@@ -1216,10 +1164,6 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	 */
 	private class MenuItemSetter implements Setter
 	{
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.Setter#set(java.lang.Object, java.lang.String, java.lang.Object)
-		 */
 		@SuppressWarnings("synthetic-access")
 		@Override
 		public void set(final Object object, @NonNull final String propertyName, final Object propertyValue)
@@ -1280,20 +1224,12 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 			this.idToNodeMap = idToNodeMap;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.IdGetter#get(java.lang.String)
-		 */
 		@Override
 		public Object get(final String id)
 		{
 			return this.idToNodeMap.get(id);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see treebolic.propertyview.PropertyView.IdGetter#ids()
-		 */
 		@NonNull
 		@Override
 		public Set<String> ids()

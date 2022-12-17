@@ -325,40 +325,24 @@ public abstract class AbstractProvider< //
 
 	// I N T E R F A C E
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.model.IProvider#set(treebolic.model.IProviderContext)
-	 */
 	@Override
 	public void setContext(@Nullable final IProviderContext context)
 	{
 		this.context = context;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.provider.IProvider#setLocator(treebolic.ILocator)
-	 */
 	@Override
 	public void setLocator(final ILocator locator)
 	{
 		// do not need
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.provider.IProvider#setHandle(java.lang.Object)
-	 */
 	@Override
 	public void setHandle(final Object handle)
 	{
 		// do not need
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.provider.IProvider#makeModel(java.lang.String, java.net.URL, java.util.Properties)
-	 */
 	@Nullable
 	@Override
 	public Model makeModel(final String source, final URL base, @NonNull final Properties parameters)
@@ -370,10 +354,6 @@ public abstract class AbstractProvider< //
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.provider.IProvider#makeTree(java.lang.String, java.net.URL, java.util.Properties, boolean)
-	 */
 	@Nullable
 	@Override
 	public Tree makeTree(final String source, final URL base, @NonNull final Properties parameters, final boolean checkRecursion)
@@ -1383,7 +1363,7 @@ public abstract class AbstractProvider< //
 			{
 				value = key;
 			}
-			result = result.replaceAll("\\$\\{" + key + "}", value);  
+			result = result.replaceAll("\\$\\{" + key + "\\}", value);
 		}
 		return result;
 	}

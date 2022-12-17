@@ -32,10 +32,6 @@ public class HtmlView extends JEditorPane implements HyperlinkListener
 		addHyperlinkListener(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.event.HyperlinkListener#hyperlinkUpdate(javax.swing.event.HyperlinkEvent)
-	 */
 	@Override
 	public void hyperlinkUpdate(@NonNull final HyperlinkEvent event)
 	{

@@ -38,10 +38,6 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 	@Override
 	abstract public boolean onDragged(int x, int y);
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
-	 */
 	@Override
 	public void mouseDragged(@NonNull final MouseEvent e)
 	{
@@ -51,10 +47,6 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
-	 */
 	@Override
 	public void mouseMoved(@NonNull final MouseEvent e)
 	{
@@ -65,10 +57,6 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
-	 */
 	@Override
 	public void mouseClicked(@NonNull final MouseEvent e)
 	{
@@ -95,10 +83,6 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
-	 */
 	@Override
 	public void mousePressed(@NonNull final MouseEvent e)
 	{
@@ -108,10 +92,6 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
-	 */
 	@Override
 	public void mouseReleased(@NonNull final MouseEvent e)
 	{
@@ -121,20 +101,12 @@ public abstract class EventListener implements MouseListener, MouseMotionListene
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
-	 */
 	@Override
 	public void mouseEntered(final MouseEvent e)
 	{
 		//
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
-	 */
 	@Override
 	public void mouseExited(final MouseEvent e)
 	{

@@ -31,10 +31,6 @@ public class ElementDecorator extends DefaultDecorator
 
 	// S T R I N G S
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.studio.domtree.DefaultDecorator#toName()
-	 */
 	@NonNull
 	@Override
 	public String getName()
@@ -42,10 +38,6 @@ public class ElementDecorator extends DefaultDecorator
 		return getElement().getNodeName();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.studio.domtree.DefaultDecorator#toData()
-	 */
 	@Override
 	public String getValue()
 	{

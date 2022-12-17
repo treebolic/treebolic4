@@ -197,10 +197,6 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 		this.typeToIconMap.put("a", Renderer.linkIcon);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.studio.domtree.Renderer#getIconStyle(org.w3c.dom.Node)
-	 */
 	@Override
 	protected Icon getIconStyle(@NonNull final Node node)
 	{
@@ -216,10 +212,6 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 		return super.getIconStyle(node);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.studio.domtree.Renderer#getNameStyle(org.w3c.dom.Node)
-	 */
 	@Override
 	protected SimpleAttributeSet getNameStyle(final Node node)
 	{
@@ -235,10 +227,6 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 		return super.getNameStyle(node);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.studio.domtree.Renderer#getValueStyle(org.w3c.dom.Node)
-	 */
 	@Override
 	protected SimpleAttributeSet getValueStyle(final Node node)
 	{
@@ -254,10 +242,6 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 		return super.getValueStyle(node);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.studio.domtree.Renderer#makeDecorator(org.w3c.dom.Node)
-	 */
 	@Override
 	protected DefaultDecorator makeDecorator(@NonNull final Node node)
 	{

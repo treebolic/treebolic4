@@ -97,10 +97,6 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		lookup0(args);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Window#processWindowEvent(java.awt.event.WindowEvent)
-	 */
 	@Override
 	protected void processWindowEvent(@NonNull final WindowEvent event)
 	{
@@ -775,10 +771,6 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		ExternalBrowser.browse(linkUrl);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.event.HyperlinkListener#hyperlinkUpdate(javax.swing.event.HyperlinkEvent)
-	 */
 	@Override
 	public void hyperlinkUpdate(@NonNull final HyperlinkEvent event)
 	{

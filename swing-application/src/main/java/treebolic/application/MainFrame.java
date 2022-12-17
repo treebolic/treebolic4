@@ -211,10 +211,6 @@ public class MainFrame extends JFrame implements HyperlinkListener
 		return this.parameters;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.event.HyperlinkListener#hyperlinkUpdate(javax.swing.event.HyperlinkEvent)
-	 */
 	@Override
 	public void hyperlinkUpdate(@NonNull HyperlinkEvent event)
 	{

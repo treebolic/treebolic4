@@ -163,10 +163,6 @@ public class Renderer implements TreeCellRenderer
 		this.patternToStyleMap.put(idPattern, Renderer.idStyle);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.tree.TreeCellRenderer#getTreeCellRendererComponent(javax.swing.JTree, java.lang.Object, boolean, boolean, boolean, int, boolean)
-	 */
 	@Override
 	public Component getTreeCellRendererComponent(final JTree tree, final Object nodeValue, final boolean sel, final boolean expanded, final boolean leaf, final int row, final boolean hasFocus)
 	{

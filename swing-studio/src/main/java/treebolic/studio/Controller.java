@@ -404,10 +404,6 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 
 	// from tree
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.propertyview.SelectListener#onSelected(java.lang.Object)
-	 */
 	@Override
 	public void onSelected(final Object object)
 	{
@@ -421,10 +417,6 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 
 	// from tab
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.event.ChangeListener#stateChanged(javax.swing.event.ChangeEvent)
-	 */
 	@Override
 	public void stateChanged(final ChangeEvent event)
 	{
@@ -440,30 +432,18 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 
 	// from property view
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.event.CellEditorListener#editingStopped(javax.swing.event.ChangeEvent)
-	 */
 	@Override
 	public void editingStopped(final ChangeEvent event)
 	{
 		this.treeView.onEditingStopped();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.event.CellEditorListener#editingCanceled(javax.swing.event.ChangeEvent)
-	 */
 	@Override
 	public void editingCanceled(final ChangeEvent event)
 	{
 		// do nothing
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.event.HyperlinkListener#hyperlinkUpdate(javax.swing.event.HyperlinkEvent)
-	 */
 	@Override
 	public void hyperlinkUpdate(@NonNull final HyperlinkEvent event)
 	{
@@ -1727,10 +1707,6 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 
 	// C O N T E X T
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.component.Context#getBase()
-	 */
 	@Override
 	public URL getBase()
 	{
@@ -1768,10 +1744,6 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.Context#getImagesBase()
-	 */
 	@Override
 	public URL getImagesBase()
 	{
@@ -1815,30 +1787,18 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		return parameters;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.IContext#getParameters()
-	 */
 	@Override
 	public Properties getParameters()
 	{
 		return this.parameters;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.IContext#getStyle()
-	 */
 	@Override
 	public String getStyle()
 	{
 		return ".content { }" + ".link {color: blue;font-size: small; }" + ".mount {color: red;}" + ".linking {color: #007D82; font-size: small; }" + ".mounting {color: #007D82; font-size: small; }" + ".searching {color: #007D82; font-size: small; }";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.component.Context#linkTo(java.lang.String)
-	 */
 	@Override
 	public boolean linkTo(@NonNull final String linkUrl, final String urlTarget)
 	{
@@ -1848,20 +1808,12 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.component.Context#showStatus(java.lang.String)
-	 */
 	@Override
 	public void status(final String string)
 	{
 		System.out.println(Messages.getString("Controller.status") + string);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.IContext#getInput()
-	 */
 	@Override
 	public String getInput()
 	{
@@ -1876,10 +1828,6 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.IContext#warn(java.lang.String)
-	 */
 	@Override
 	public void warn(@NonNull final String message)
 	{
@@ -1889,20 +1837,12 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 
 	// P R O V I D E R C O N T E X T
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.model.IProviderContext#putMessage(java.lang.String)
-	 */
 	@Override
 	public void message(final String string)
 	{
 		System.out.println(string);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.model.IProviderContext#putProgress(java.lang.String, boolean)
-	 */
 	@Override
 	public void progress(final String string, final boolean fail)
 	{

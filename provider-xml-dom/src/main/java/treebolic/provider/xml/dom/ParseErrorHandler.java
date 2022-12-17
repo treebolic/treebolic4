@@ -43,30 +43,18 @@ class ParseErrorHandler implements ErrorHandler
 		this.fatalErrors = 0;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
-	 */
 	@Override
 	public void error(final SAXParseException e) throws SAXParseException
 	{
 		this.fatalErrors++;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
-	 */
 	@Override
 	public void warning(final SAXParseException e) throws SAXParseException
 	{
 		this.warnings++;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.xml.sax.ErrorHandler#fatalError(org.xml.sax.SAXParseException)
-	 */
 	@Override
 	public void fatalError(final SAXParseException e) throws SAXParseException
 	{

@@ -87,16 +87,8 @@ public class ReferenceListDialog extends JDialog
 
 		// buttons
 		@NonNull final JButton updateButton = new JButton(Messages.getString("ReferenceListDialog.update"));
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		updateButton.addActionListener(e -> update());
 		@NonNull final JButton cancelButton = new JButton(Messages.getString("ReferenceListDialog.cancel"));
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		cancelButton.addActionListener(e -> setVisible(false));
 
 		// button panel
@@ -124,10 +116,6 @@ public class ReferenceListDialog extends JDialog
 		imageColumn.setWidth(150);
 		imageColumn.setCellRenderer(new DefaultTableCellRenderer()
 		{
-			/*
-			 * (non-Javadoc)
-			 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
-			 */
 			@NonNull
 			@Override
 			public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
@@ -142,10 +130,6 @@ public class ReferenceListDialog extends JDialog
 		final TableColumn locationColumn = this.referenceTable.getColumnModel().getColumn(1);
 		locationColumn.setCellRenderer(new DefaultTableCellRenderer()
 		{
-			/*
-			 * (non-Javadoc)
-			 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
-			 */
 			@NonNull
 			@Override
 			public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)
@@ -182,10 +166,6 @@ public class ReferenceListDialog extends JDialog
 		targetColumn.setWidth(150);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Dialog#setVisible(boolean)
-	 */
 	@Override
 	public void setVisible(final boolean flag)
 	{
@@ -282,50 +262,30 @@ public class ReferenceListDialog extends JDialog
 			return rowIdx;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#getRowCount()
-		 */
 		@Override
 		public int getRowCount()
 		{
 			return this.entries.size();
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#getColumnCount()
-		 */
 		@Override
 		public int getColumnCount()
 		{
 			return 2;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#isCellEditable(int, int)
-		 */
 		@Override
 		public boolean isCellEditable(final int y, final int x)
 		{
 			return false;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#getValueAt(int, int)
-		 */
 		@Override
 		public Object getValueAt(final int y, final int x)
 		{
 			return this.entries.get(y);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#getColumnName(int)
-		 */
 		@Nullable
 		@Override
 		public String getColumnName(final int x)

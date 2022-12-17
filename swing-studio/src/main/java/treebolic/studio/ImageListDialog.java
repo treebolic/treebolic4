@@ -48,16 +48,8 @@ public class ImageListDialog extends ReferenceListDialog
 		this.scrollPane.setPreferredSize(new Dimension(300, 320));
 
 		@NonNull final JButton checkMissingButton = new JButton(Messages.getString("ImageListDialog.missing"));
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		checkMissingButton.addActionListener(e -> checkMissing());
 		@NonNull final JButton checkUnusedButton = new JButton(Messages.getString("ImageListDialog.unused"));
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		checkUnusedButton.addActionListener(e -> checkUnused());
 		this.buttonPanel.add(checkMissingButton, null);
 		this.buttonPanel.add(checkUnusedButton, null);
@@ -65,10 +57,6 @@ public class ImageListDialog extends ReferenceListDialog
 
 	// O V E R R I D E S
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.studio.ReferenceListDialog#update()
-	 */
 	@Override
 	protected void update()
 	{
@@ -79,10 +67,6 @@ public class ImageListDialog extends ReferenceListDialog
 		setModel(imageToLocationMap);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.studio.ReferenceListDialog#setModel(java.util.Map)
-	 */
 	@Override
 	protected void setModel(final Map<String, SortedSet<String>> targetToLocationMap)
 	{
@@ -93,10 +77,6 @@ public class ImageListDialog extends ReferenceListDialog
 		imageColumn.setWidth(150);
 		imageColumn.setCellRenderer(new DefaultTableCellRenderer()
 		{
-			/*
-			 * (non-Javadoc)
-			 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
-			 */
 			@NonNull
 			@SuppressWarnings("synthetic-access")
 			@Override
@@ -113,10 +93,6 @@ public class ImageListDialog extends ReferenceListDialog
 		final TableColumn locationColumn = this.referenceTable.getColumnModel().getColumn(1);
 		locationColumn.setCellRenderer(new DefaultTableCellRenderer()
 		{
-			/*
-			 * (non-Javadoc)
-			 * @see javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
-			 */
 			@NonNull
 			@Override
 			public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column)

@@ -194,10 +194,6 @@ public class SqlDialog extends JDialog
 
 		@NonNull final JButton okButton = new JButton();
 		okButton.setText(Messages.getString("SqlDialog.ok"));
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		okButton.addActionListener(e -> {
 			SqlDialog.this.ok = true;
 			setVisible(false);
@@ -205,36 +201,20 @@ public class SqlDialog extends JDialog
 
 		@NonNull final JButton cancelButton = new JButton();
 		cancelButton.setText(Messages.getString("SqlDialog.cancel"));
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		cancelButton.addActionListener(e -> setVisible(false));
 
 		@NonNull final JButton loadButton = new JButton();
 		loadButton.setText(Messages.getString("SqlDialog.load"));
-		/*
-		 * (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		loadButton.addActionListener(e -> {
 			@NonNull final JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter()
 			{
-				/*
-				 * (non-Javadoc)
-				 * @see javax.swing.filechooser.FileFilter#accept(java.io.File)
-				 */
 				@Override
 				public boolean accept(@NonNull final File file)
 				{
 					return file.getName().toLowerCase().endsWith(".properties") || file.isDirectory();
 				}
 
-				/*
-				 * (non-Javadoc)
-				 * @see javax.swing.filechooser.FileFilter#getDescription()
-				 */
 				@NonNull
 				@Override
 				public String getDescription()
@@ -387,10 +367,6 @@ public class SqlDialog extends JDialog
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Dialog#setVisible(boolean)
-	 */
 	@Override
 	public void setVisible(final boolean flag)
 	{

@@ -77,10 +77,6 @@ class ColorEditor extends AbstractCellEditor implements TableCellEditor
 	}
 
 	// implement the one method defined by TableCellEditor.
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.table.TableCellEditor#getTableCellEditorComponent(javax.swing.JTable, java.lang.Object, boolean, int, int)
-	 */
 	@NonNull
 	@Override
 	public Component getTableCellEditorComponent(final JTable table, final Object value, final boolean isSelected, final int row, final int column)
@@ -91,10 +87,6 @@ class ColorEditor extends AbstractCellEditor implements TableCellEditor
 	}
 
 	// implement the one CellEditor method that AbstractCellEditor doesn't.
-	/*
-	 * (non-Javadoc)
-	 * @see javax.swing.CellEditor#getCellEditorValue()
-	 */
 	@Nullable
 	@Override
 	public Object getCellEditorValue()

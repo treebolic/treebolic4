@@ -210,10 +210,6 @@ public class SiteDialog extends JDialog
 		setContentPane(panel);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.Dialog#setVisible(boolean)
-	 */
 	@Override
 	public void setVisible(final boolean flag)
 	{

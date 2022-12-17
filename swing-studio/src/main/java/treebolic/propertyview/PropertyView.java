@@ -453,10 +453,6 @@ public class PropertyView extends JPanel implements SelectListener
 		return this.imageRepository;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.propertyview.SelectListener#onSelected(java.lang.Object)
-	 */
 	@Override
 	public void onSelected(final Object object)
 	{
@@ -600,10 +596,6 @@ public class PropertyView extends JPanel implements SelectListener
 			}
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#getRowCount()
-		 */
 		@Override
 		public int getRowCount()
 		{
@@ -614,20 +606,12 @@ public class PropertyView extends JPanel implements SelectListener
 			return this.attributes.size();
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#getColumnCount()
-		 */
 		@Override
 		public int getColumnCount()
 		{
 			return PropertyView.COLUMNNUMBER;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.AbstractTableModel#isCellEditable(int, int)
-		 */
 		@Override
 		public boolean isCellEditable(final int y, final int x)
 		{
@@ -640,10 +624,6 @@ public class PropertyView extends JPanel implements SelectListener
 			return false;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.TableModel#getValueAt(int, int)
-		 */
 		@Nullable
 		@Override
 		public Object getValueAt(final int y, final int x)
@@ -665,10 +645,6 @@ public class PropertyView extends JPanel implements SelectListener
 			}
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object, int, int)
-		 */
 		@Override
 		public void setValueAt(final Object value, final int y, final int x)
 		{
@@ -684,10 +660,6 @@ public class PropertyView extends JPanel implements SelectListener
 			}
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * @see javax.swing.table.AbstractTableModel#getColumnName(int)
-		 */
 		@NonNull
 		@Override
 		public String getColumnName(final int x)

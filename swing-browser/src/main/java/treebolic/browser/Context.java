@@ -77,10 +77,6 @@ public class Context implements IContext
 		this.widget = widget;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.IContext#getBase()
-	 */
 	@Override
 	public URL getBase()
 	{
@@ -136,10 +132,6 @@ public class Context implements IContext
 		return defaultBase;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.IContext#getImagesBase()
-	 */
 	@Override
 	public URL getImagesBase()
 	{
@@ -232,30 +224,18 @@ public class Context implements IContext
 		return defaultUrl;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.IContext#getParameters()
-	 */
 	@Override
 	public Properties getParameters()
 	{
 		return this.browser.getParameters();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.IContext#getStyle()
-	 */
 	@Override
 	public String getStyle()
 	{
 		return ".content { }" + ".link {color: blue;font-size: small; }" + ".mount {color: red;}" + ".linking {color: #007D82; font-size: small; }" + ".mounting {color: #007D82; font-size: small; }" + ".searching {color: #007D82; font-size: small; }";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.component.Context#linkTo(java.lang.String)
-	 */
 	@Override
 	public boolean linkTo(@NonNull final String linkUrl, final String linkTarget)
 	{
@@ -263,20 +243,12 @@ public class Context implements IContext
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.IContext#status(java.lang.String)
-	 */
 	@Override
 	public void status(final String str)
 	{
 		System.out.println(Messages.getString("Context.status") + str);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.IContext#warn(java.lang.String)
-	 */
 	@Override
 	public void warn(@NonNull final String message)
 	{
@@ -284,10 +256,6 @@ public class Context implements IContext
 		JOptionPane.showMessageDialog(null, lines, Messages.getString("Context.app"), JOptionPane.WARNING_MESSAGE);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see treebolic.IContext#getInput()
-	 */
 	@Override
 	public String getInput()
 	{

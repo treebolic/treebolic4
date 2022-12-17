@@ -54,10 +54,6 @@ public class Animator extends javax.swing.Timer implements java.awt.event.Action
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
 	@Override
 	public void actionPerformed(final ActionEvent e)
 	{
