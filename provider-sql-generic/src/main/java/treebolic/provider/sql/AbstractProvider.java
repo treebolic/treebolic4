@@ -12,6 +12,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -155,42 +156,42 @@ public abstract class AbstractProvider< //
 	/**
 	 * Property files
 	 */
-	static private final String DEFAULT_PROPERTY_FILE = "query.properties"; 
+	static private final String DEFAULT_PROPERTY_FILE = "query.properties";
 
 	/**
 	 * Get nodes SQL statement
 	 */
-	static private final String DEFAULT_NODES_SQL = "SELECT * FROM %nodes%;"; 
+	static private final String DEFAULT_NODES_SQL = "SELECT * FROM %nodes%;";
 
 	/**
 	 * Get tree edges SQL statement
 	 */
-	static private final String DEFAULT_TREEEDGES_SQL = "SELECT * FROM %edges% WHERE %istree% = 1;"; 
+	static private final String DEFAULT_TREEEDGES_SQL = "SELECT * FROM %edges% WHERE %istree% = 1;";
 
 	/**
 	 * Get edges SQL statement
 	 */
-	static private final String DEFAULT_EDGES_SQL = "SELECT * FROM %edges% WHERE %istree% = 0;"; 
+	static private final String DEFAULT_EDGES_SQL = "SELECT * FROM %edges% WHERE %istree% = 0;";
 
 	/**
 	 * Get settings SQL statement
 	 */
-	static private final String DEFAULT_SETTINGS_SQL = "SELECT * FROM %settings%;"; 
+	static private final String DEFAULT_SETTINGS_SQL = "SELECT * FROM %settings%;";
 
 	/**
 	 * Get menu item SQL statement
 	 */
-	static private final String DEFAULT_MENU_SQL = "SELECT * FROM %menu% WHERE %menuid% = 0;"; 
+	static private final String DEFAULT_MENU_SQL = "SELECT * FROM %menu% WHERE %menuid% = 0;";
 
 	/**
 	 * Goto url scheme
 	 */
-	private static final String GOTO_SCHEME = "goto:"; 
+	private static final String GOTO_SCHEME = "goto:";
 
 	/**
 	 * Mount url scheme
 	 */
-	private static final String MOUNT_SCHEME = "mount:"; 
+	private static final String MOUNT_SCHEME = "mount:";
 
 	/**
 	 * LoadBalancer : Edge style
@@ -242,19 +243,19 @@ public abstract class AbstractProvider< //
 	 */
 	private boolean initialize(final String source0, final URL base, @NonNull final Properties parameters)
 	{
-		System.out.println("Sqlx provider source: " + source0); 
+		System.out.println("Sql provider source: " + source0);
 		String source = source0;
 		boolean isGoto = false;
 		if (source.startsWith(GOTO_SCHEME))
 		{
-			System.out.println("Sqlx GOTO"); 
+			System.out.println("Sql GOTO");
 			source = source.substring(GOTO_SCHEME.length());
 			isGoto = true;
 		}
 		boolean isMount = false;
 		if (source.startsWith(MOUNT_SCHEME))
 		{
-			System.out.println("Sqlx MOUNT"); 
+			System.out.println("Sql MOUNT");
 			source = source.substring(MOUNT_SCHEME.length());
 			isMount = true;
 		}
@@ -263,7 +264,7 @@ public abstract class AbstractProvider< //
 		this.base = base;
 
 		// source=query-file,path(,)
-		@NonNull final String[] fields = source.split(","); 
+		@NonNull final String[] fields = source.split(",");
 		String queryFile = fields[0];
 
 		// ensure query file if no properties
@@ -271,7 +272,7 @@ public abstract class AbstractProvider< //
 		{
 			if (queryFile == null)
 			{
-				queryFile = parameters.getProperty("query"); 
+				queryFile = parameters.getProperty("query");
 			}
 			if (queryFile == null)
 			{
@@ -305,7 +306,7 @@ public abstract class AbstractProvider< //
 		if (fields.length > 1)
 		{
 			String path = fields[1];
-			if (path.startsWith("where:")) 
+			if (path.startsWith("where:"))
 			{
 				// where-clause is truncate clause
 				@NonNull String where = path.substring(6);
@@ -315,7 +316,7 @@ public abstract class AbstractProvider< //
 		}
 
 		// 3rd (empty) part of source stops pruning
-		boolean hasTrailingComma = source.endsWith(","); 
+		boolean hasTrailingComma = source.endsWith(",");
 
 		// apply pruning
 		this.properties.put(SqlProperties.PRUNE, isMount || isGoto || hasTrailingComma);
@@ -376,11 +377,11 @@ public abstract class AbstractProvider< //
 	@Nullable
 	protected String makeDatabasePath(@NonNull final Properties properties)
 	{
-		String databaseName = properties.getProperty("database"); 
+		String databaseName = properties.getProperty("database");
 		if (databaseName != null && databaseName.length() > 0)
 		{
-			System.out.println("Base: " + this.base); 
-			System.out.println("Name: " + databaseName); 
+			System.out.println("Base: " + this.base);
+			System.out.println("Name: " + databaseName);
 			@NonNull File dbFile = new File(databaseName);
 			if (dbFile.exists())
 			{
@@ -394,9 +395,9 @@ public abstract class AbstractProvider< //
 				// File f = new File(base, databaseName);
 
 				@NonNull URL url = new URL(this.base, databaseName);
-				System.out.println("Url: " + url); 
+				System.out.println("Url: " + url);
 				dbFile = new File(url.toURI());
-				System.out.println("File: " + dbFile); 
+				System.out.println("File: " + dbFile);
 				return dbFile.getAbsolutePath();
 			}
 			catch (MalformedURLException | URISyntaxException e)
@@ -419,7 +420,7 @@ public abstract class AbstractProvider< //
 	private Model queryModel()
 	{
 		assert this.properties != null;
-		this.properties.put("database", makeDatabasePath(this.properties)); 
+		this.properties.put("database", makeDatabasePath(this.properties));
 		try
 		{
 			// connect
@@ -436,7 +437,7 @@ public abstract class AbstractProvider< //
 				@Nullable final List<INode> children = root.getChildren();
 				if (children != null && children.size() == 1)
 				{
-					settings.orientation = "south"; 
+					settings.orientation = "south";
 					settings.yMoveTo = -0.4F;
 				}
 			}
@@ -449,7 +450,7 @@ public abstract class AbstractProvider< //
 		}
 		catch (final Exception e)
 		{
-			System.err.println("Sqlx queryModel: " + e.getMessage()); 
+			System.err.println("Sql queryModel: " + e.getMessage());
 			e.printStackTrace();
 		}
 		return null;
@@ -479,7 +480,7 @@ public abstract class AbstractProvider< //
 		}
 		catch (final Exception e)
 		{
-			System.err.println("Sqlx queryTree: " + e.getMessage()); 
+			System.err.println("Sql queryTree: " + e.getMessage());
 			e.printStackTrace();
 		}
 		return null;
@@ -518,38 +519,38 @@ public abstract class AbstractProvider< //
 		boolean balanceLoad = !this.properties.containsKey(SqlProperties.BALANCE_LOAD) || "true".equals(this.properties.get(SqlProperties.BALANCE_LOAD));
 
 		// sql
-		String nodesSql = this.properties.getProperty("nodesSql", AbstractProvider.DEFAULT_NODES_SQL); 
+		String nodesSql = this.properties.getProperty("nodesSql", AbstractProvider.DEFAULT_NODES_SQL);
 		nodesSql = narrowNodeSql(nodesSql, prune);
 		nodesSql = macroExpand(nodesSql);
 		System.out.println(nodesSql);
 
-		String treeEdgesSql = this.properties.getProperty("treeEdgesSql", AbstractProvider.DEFAULT_TREEEDGES_SQL); 
+		String treeEdgesSql = this.properties.getProperty("treeEdgesSql", AbstractProvider.DEFAULT_TREEEDGES_SQL);
 		treeEdgesSql = narrowTreeEdgeSql(treeEdgesSql, prune);
 		treeEdgesSql = macroExpand(treeEdgesSql);
 		System.out.println(treeEdgesSql);
 
 		// field names
-		@NonNull final String idName = getName("nodes.id"); 
-		@NonNull final String labelName = getName("nodes.label"); 
-		@NonNull final String contentName = getName("nodes.content"); 
-		@NonNull final String backcolorName = getName("nodes.backcolor"); 
-		@NonNull final String forecolorName = getName("nodes.forecolor"); 
-		@NonNull final String imageName = getName("nodes.image"); 
-		@NonNull final String linkName = getName("nodes.link"); 
-		@NonNull final String targetName = getName("nodes.target"); 
-		@NonNull final String weightName = getName("nodes.weight"); 
-		@NonNull final String mountpointName = getName("nodes.mountpoint"); 
+		@NonNull final String idName = getName("nodes.id");
+		@NonNull final String labelName = getName("nodes.label");
+		@NonNull final String contentName = getName("nodes.content");
+		@NonNull final String backcolorName = getName("nodes.backcolor");
+		@NonNull final String forecolorName = getName("nodes.forecolor");
+		@NonNull final String imageName = getName("nodes.image");
+		@NonNull final String linkName = getName("nodes.link");
+		@NonNull final String targetName = getName("nodes.target");
+		@NonNull final String weightName = getName("nodes.weight");
+		@NonNull final String mountpointName = getName("nodes.mountpoint");
 
-		@NonNull final String fromName = getName("edges.from"); 
-		@NonNull final String toName = getName("edges.to"); 
-		@NonNull final String edgeLabelName = getName("edges.label"); 
-		@NonNull final String edgeImageName = getName("edges.image"); 
-		@NonNull final String edgeColorName = getName("edges.color"); 
-		@NonNull final String edgeLineName = getName("edges.line"); 
-		@NonNull final String edgeHiddenName = getName("edges.hidden"); 
-		@NonNull final String edgeStrokeName = getName("edges.stroke"); 
-		@NonNull final String edgeFromTerminatorName = getName("edges.fromterminator"); 
-		@NonNull final String edgeToTerminatorName = getName("edges.toterminator"); 
+		@NonNull final String fromName = getName("edges.from");
+		@NonNull final String toName = getName("edges.to");
+		@NonNull final String edgeLabelName = getName("edges.label");
+		@NonNull final String edgeImageName = getName("edges.image");
+		@NonNull final String edgeColorName = getName("edges.color");
+		@NonNull final String edgeLineName = getName("edges.line");
+		@NonNull final String edgeHiddenName = getName("edges.hidden");
+		@NonNull final String edgeStrokeName = getName("edges.stroke");
+		@NonNull final String edgeFromTerminatorName = getName("edges.fromterminator");
+		@NonNull final String edgeToTerminatorName = getName("edges.toterminator");
 
 		// id to node map
 		this.nodesById.clear();
@@ -563,7 +564,7 @@ public abstract class AbstractProvider< //
 			final String id = nodesCursor.getString(idIndex);
 			if (id == null)
 			{
-				System.err.println("Sqlx queryNodes: " + nodesCursor.getPosition() + "th edge record with null id");  
+				System.err.println("Sql queryNodes: " + nodesCursor.getPosition() + "th edge record with null id");
 				continue;
 			}
 
@@ -592,10 +593,10 @@ public abstract class AbstractProvider< //
 				@NonNull final MountPoint.Mounting mountPoint = new MountPoint.Mounting();
 				mountPoint.url = value;
 				node.setMountPoint(mountPoint);
-				@Nullable final Boolean now = readBoolean(nodesCursor, "now"); 
+				@Nullable final Boolean now = readBoolean(nodesCursor, "now");
 				if (now != null && now)
 				{
-					System.err.println("Sqlx queryNodes: Recursive mounting not implemented"); 
+					System.err.println("Sql queryNodes: Recursive mounting not implemented");
 				}
 			}
 		}
@@ -613,7 +614,7 @@ public abstract class AbstractProvider< //
 			final String toId = treeEdgesCursor.getString(toIndex);
 			if ((fromId == null || fromId.length() == 0) && (toId == null || toId.length() == 0))
 			{
-				System.err.println("Sqlx queryNodes: " + treeEdgesCursor.getPosition() + "th tree edge record with null ids : from-id = <" + fromId + "> and to-id=<" + toId + ">");    
+				System.err.println("Sql queryNodes: " + treeEdgesCursor.getPosition() + "th tree edge record with null ids : from-id = <" + fromId + "> and to-id=<" + toId + ">");
 				continue;
 			}
 
@@ -626,7 +627,7 @@ public abstract class AbstractProvider< //
 			// ill-formed nodes
 			if (fromNode == null && toNode == null)
 			{
-				System.err.println("Sqlx queryNodes: " + treeEdgesCursor.getPosition() + "th tree edge record with not found end nodes : from-id = <" + fromId + "> and to-id=<" + toId + ">");    
+				System.err.println("Sql queryNodes: " + treeEdgesCursor.getPosition() + "th tree edge record with not found end nodes : from-id = <" + fromId + "> and to-id=<" + toId + ">");
 				continue;
 			}
 
@@ -730,22 +731,22 @@ public abstract class AbstractProvider< //
 		boolean prune = (Boolean) this.properties.get(SqlProperties.PRUNE);
 
 		// sql
-		String edgesSql = this.properties.getProperty("edgesSql", AbstractProvider.DEFAULT_EDGES_SQL); 
+		String edgesSql = this.properties.getProperty("edgesSql", AbstractProvider.DEFAULT_EDGES_SQL);
 		edgesSql = narrowEdgeSql(edgesSql, prune);
 		edgesSql = macroExpand(edgesSql);
 		System.out.println(edgesSql);
 
 		// field names
-		@NonNull final String fromIdName = getName("edges.from"); 
-		@NonNull final String toIdName = getName("edges.to"); 
-		@NonNull final String edgeLabelName = getName("edges.label"); 
-		@NonNull final String edgeImageName = getName("edges.image"); 
-		@NonNull final String edgeColorName = getName("edges.color"); 
-		@NonNull final String edgeLineName = getName("edges.line"); 
-		@NonNull final String edgeHiddenName = getName("edges.hidden"); 
-		@NonNull final String edgeStrokeName = getName("edges.stroke"); 
-		@NonNull final String edgeFromTerminatorName = getName("edges.fromterminator"); 
-		@NonNull final String edgeToTerminatorName = getName("edges.toterminator"); 
+		@NonNull final String fromIdName = getName("edges.from");
+		@NonNull final String toIdName = getName("edges.to");
+		@NonNull final String edgeLabelName = getName("edges.label");
+		@NonNull final String edgeImageName = getName("edges.image");
+		@NonNull final String edgeColorName = getName("edges.color");
+		@NonNull final String edgeLineName = getName("edges.line");
+		@NonNull final String edgeHiddenName = getName("edges.hidden");
+		@NonNull final String edgeStrokeName = getName("edges.stroke");
+		@NonNull final String edgeFromTerminatorName = getName("edges.fromterminator");
+		@NonNull final String edgeToTerminatorName = getName("edges.toterminator");
 
 		@Nullable List<IEdge> edgeList = null;
 
@@ -763,7 +764,7 @@ public abstract class AbstractProvider< //
 			final String toId = edgesCursor.getString(toIdIndex);
 			if (fromId == null || toId == null)
 			{
-				System.err.println("Sqlx queryEdges: " + edgesCursor.getPosition() + "th edge record with null from/to id");  
+				System.err.println("Sql queryEdges: " + edgesCursor.getPosition() + "th edge record with null from/to id");
 				continue;
 			}
 
@@ -772,13 +773,13 @@ public abstract class AbstractProvider< //
 			final MutableNode toNode = this.nodesById.get(toId);
 			if (fromNode == null || toNode == null)
 			{
-				System.err.println("Sqlx queryEdges: " + edgesCursor.getPosition() + "th edge record with null from/to node");  
+				System.err.println("Sql queryEdges: " + edgesCursor.getPosition() + "th edge record with null from/to node");
 				continue;
 			}
 
 			// make edge
 			@NonNull final MutableEdge edge = new MutableEdge(fromNode, toNode);
-			edge.setColor(readColor(edgesCursor, "color")); 
+			edge.setColor(readColor(edgesCursor, "color"));
 			if (edgeList == null)
 			{
 				edgeList = new ArrayList<>();
@@ -811,65 +812,65 @@ public abstract class AbstractProvider< //
 		assert this.properties != null;
 
 		// sql
-		String settingsSql = this.properties.getProperty("settingsSql", AbstractProvider.DEFAULT_SETTINGS_SQL); 
+		String settingsSql = this.properties.getProperty("settingsSql", AbstractProvider.DEFAULT_SETTINGS_SQL);
 		settingsSql = macroExpand(settingsSql);
-		String menuSql = this.properties.getProperty("menuSql", AbstractProvider.DEFAULT_MENU_SQL); 
+		String menuSql = this.properties.getProperty("menuSql", AbstractProvider.DEFAULT_MENU_SQL);
 		menuSql = macroExpand(menuSql);
 
 		// field names
-		@NonNull final String backImageName = getName("settings.backimage"); 
-		@NonNull final String backcolorName = getName("settings.backcolor"); 
-		@NonNull final String forecolorName = getName("settings.forecolor"); 
-		@NonNull final String fontFaceName = getName("settings.fontface"); 
-		@NonNull final String fontSizeName = getName("settings.fontsize"); 
-		@NonNull final String scaleFontsName = getName("settings.scalefonts"); 
-		@NonNull final String fontScalerName = getName("settings.fontscaler"); 
-		@NonNull final String scaleImagesName = getName("settings.scaleimages"); 
-		@NonNull final String imageScalerName = getName("settings.imagescaler"); 
-		@NonNull final String orientationName = getName("settings.orientation"); 
-		@NonNull final String expansionName = getName("settings.expansion"); 
-		@NonNull final String sweepName = getName("settings.sweep"); 
-		@NonNull final String preserveOrientationName = getName("settings.preserveorientation"); 
-		@NonNull final String hasToolbarName = getName("settings.hastoolbar"); 
-		@NonNull final String hasStatusbarName = getName("settings.hasstatusbar"); 
-		@NonNull final String hasPopupMenuName = getName("settings.haspopupmenu"); 
-		@NonNull final String hasTooltipName = getName("settings.hastooltip"); 
-		@NonNull final String tooltipDisplaysContentName = getName("settings.tooltipdisplayscontent"); 
-		@NonNull final String focusOnHoverName = getName("settings.focusonhover"); 
-		@NonNull final String focusName = getName("settings.focus"); 
-		@NonNull final String xMoveToName = getName("settings.xmoveto"); 
-		@NonNull final String yMoveToName = getName("settings.ymoveto"); 
-		@NonNull final String xShiftName = getName("settings.xshift"); 
-		@NonNull final String yShiftName = getName("settings.yshift"); 
-		@NonNull final String nodeBackcolorName = getName("settings.nodebackcolor"); 
-		@NonNull final String nodeForecolorName = getName("settings.nodeforecolor"); 
-		@NonNull final String nodeImageName = getName("settings.nodeimage"); 
-		@NonNull final String nodeBorderName = getName("settings.nodeborder"); 
-		@NonNull final String nodeEllipsizeName = getName("settings.nodeellipsize"); 
-		@NonNull final String nodeLabelMaxLinesName = getName("settings.nodelabelmaxlines"); 
-		@NonNull final String nodeLabelExtraLineFactorName = getName("settings.nodelabelextralinefactor"); 
-		@NonNull final String treeEdgeColorName = getName("settings.treeedgecolor"); 
-		@NonNull final String treeEdgeLineName = getName("settings.treeedgeline"); 
-		@NonNull final String treeEdgeHiddenName = getName("settings.treeedgehidden"); 
-		@NonNull final String treeEdgeStrokeName = getName("settings.treeedgestroke"); 
-		@NonNull final String treeEdgeFromTerminatorName = getName("settings.treeedgefromterminator"); 
-		@NonNull final String treeEdgeToTerminatorName = getName("settings.treeedgetoterminator"); 
-		@NonNull final String treeEdgeImageName = getName("settings.treeedgeimage"); 
-		@NonNull final String edgesAsArcsName = getName("settings.edgearc"); 
-		@NonNull final String edgeColorName = getName("settings.edgecolor"); 
-		@NonNull final String edgeLineName = getName("settings.edgeline"); 
-		@NonNull final String edgeHiddenName = getName("settings.edgehidden"); 
-		@NonNull final String edgeStrokeName = getName("settings.edgestroke"); 
-		@NonNull final String edgeFromTerminatorName = getName("settings.edgefromterminator"); 
-		@NonNull final String edgeToTerminatorName = getName("settings.edgetoterminator"); 
-		@NonNull final String edgeImageName = getName("settings.edgeimage"); 
+		@NonNull final String backImageName = getName("settings.backimage");
+		@NonNull final String backcolorName = getName("settings.backcolor");
+		@NonNull final String forecolorName = getName("settings.forecolor");
+		@NonNull final String fontFaceName = getName("settings.fontface");
+		@NonNull final String fontSizeName = getName("settings.fontsize");
+		@NonNull final String scaleFontsName = getName("settings.scalefonts");
+		@NonNull final String fontScalerName = getName("settings.fontscaler");
+		@NonNull final String scaleImagesName = getName("settings.scaleimages");
+		@NonNull final String imageScalerName = getName("settings.imagescaler");
+		@NonNull final String orientationName = getName("settings.orientation");
+		@NonNull final String expansionName = getName("settings.expansion");
+		@NonNull final String sweepName = getName("settings.sweep");
+		@NonNull final String preserveOrientationName = getName("settings.preserveorientation");
+		@NonNull final String hasToolbarName = getName("settings.hastoolbar");
+		@NonNull final String hasStatusbarName = getName("settings.hasstatusbar");
+		@NonNull final String hasPopupMenuName = getName("settings.haspopupmenu");
+		@NonNull final String hasTooltipName = getName("settings.hastooltip");
+		@NonNull final String tooltipDisplaysContentName = getName("settings.tooltipdisplayscontent");
+		@NonNull final String focusOnHoverName = getName("settings.focusonhover");
+		@NonNull final String focusName = getName("settings.focus");
+		@NonNull final String xMoveToName = getName("settings.xmoveto");
+		@NonNull final String yMoveToName = getName("settings.ymoveto");
+		@NonNull final String xShiftName = getName("settings.xshift");
+		@NonNull final String yShiftName = getName("settings.yshift");
+		@NonNull final String nodeBackcolorName = getName("settings.nodebackcolor");
+		@NonNull final String nodeForecolorName = getName("settings.nodeforecolor");
+		@NonNull final String nodeImageName = getName("settings.nodeimage");
+		@NonNull final String nodeBorderName = getName("settings.nodeborder");
+		@NonNull final String nodeEllipsizeName = getName("settings.nodeellipsize");
+		@NonNull final String nodeLabelMaxLinesName = getName("settings.nodelabelmaxlines");
+		@NonNull final String nodeLabelExtraLineFactorName = getName("settings.nodelabelextralinefactor");
+		@NonNull final String treeEdgeColorName = getName("settings.treeedgecolor");
+		@NonNull final String treeEdgeLineName = getName("settings.treeedgeline");
+		@NonNull final String treeEdgeHiddenName = getName("settings.treeedgehidden");
+		@NonNull final String treeEdgeStrokeName = getName("settings.treeedgestroke");
+		@NonNull final String treeEdgeFromTerminatorName = getName("settings.treeedgefromterminator");
+		@NonNull final String treeEdgeToTerminatorName = getName("settings.treeedgetoterminator");
+		@NonNull final String treeEdgeImageName = getName("settings.treeedgeimage");
+		@NonNull final String edgesAsArcsName = getName("settings.edgearc");
+		@NonNull final String edgeColorName = getName("settings.edgecolor");
+		@NonNull final String edgeLineName = getName("settings.edgeline");
+		@NonNull final String edgeHiddenName = getName("settings.edgehidden");
+		@NonNull final String edgeStrokeName = getName("settings.edgestroke");
+		@NonNull final String edgeFromTerminatorName = getName("settings.edgefromterminator");
+		@NonNull final String edgeToTerminatorName = getName("settings.edgetoterminator");
+		@NonNull final String edgeImageName = getName("settings.edgeimage");
 
-		@NonNull final String menuActionName = getName("menu.action"); 
-		@NonNull final String menuLabelName = getName("menu.label"); 
-		@NonNull final String menuTargetName = getName("menu.target"); 
-		@NonNull final String menuScopeName = getName("menu.scope"); 
-		@NonNull final String menuModeName = getName("menu.mode"); 
-		@NonNull final String menuLinkName = getName("menu.link"); 
+		@NonNull final String menuActionName = getName("menu.action");
+		@NonNull final String menuLabelName = getName("menu.label");
+		@NonNull final String menuTargetName = getName("menu.target");
+		@NonNull final String menuScopeName = getName("menu.scope");
+		@NonNull final String menuModeName = getName("menu.mode");
+		@NonNull final String menuLinkName = getName("menu.link");
 
 		try
 		{
@@ -969,7 +970,7 @@ public abstract class AbstractProvider< //
 		}
 		catch (final Exception e)
 		{
-			System.err.println("Sqlx querySettings: Cannot read Settings." + e.getMessage()); 
+			System.err.println("Sql querySettings: Cannot read Settings." + e.getMessage());
 		}
 		// return default
 		return new Settings();
@@ -984,11 +985,11 @@ public abstract class AbstractProvider< //
 	private TreeMutableNode makeRootNode()
 	{
 		assert this.properties != null;
-		@NonNull final TreeMutableNode rootNode = new TreeMutableNode(null, "root"); 
-		rootNode.setLabel(this.properties.getProperty("root_label")); 
+		@NonNull final TreeMutableNode rootNode = new TreeMutableNode(null, "root");
+		rootNode.setLabel(this.properties.getProperty("root_label"));
 		rootNode.setBackColor(Utils.parseColor(this.properties.getProperty("root_bcolor")));
 		rootNode.setForeColor(Utils.parseColor(this.properties.getProperty("root_fcolor")));
-		rootNode.setImageFile(this.properties.getProperty("root_image")); 
+		rootNode.setImageFile(this.properties.getProperty("root_image"));
 		return rootNode;
 	}
 
@@ -1217,16 +1218,16 @@ public abstract class AbstractProvider< //
 					start = false;
 
 					// detect where-clause
-					int wherePos = sb.indexOf("WHERE"); 
+					int wherePos = sb.indexOf("WHERE");
 
 					// add WHERE keyword or AND if already there
-					sb.append(wherePos == -1 ? "WHERE" : "AND");  
+					sb.append(wherePos == -1 ? "WHERE" : "AND");
 					sb.append(' ');
 				}
 				else
 				{
 					sb.append(' ');
-					sb.append("AND"); 
+					sb.append("AND");
 					sb.append(' ');
 				}
 
@@ -1333,7 +1334,7 @@ public abstract class AbstractProvider< //
 					}
 					else
 					{
-						System.err.println(match + " has no value"); 
+						System.err.println(match + " has no value");
 					}
 				}
 				macroMap.put(key, value);
