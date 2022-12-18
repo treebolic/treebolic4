@@ -25,6 +25,11 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 	 */
 	public String value;
 
+	/**
+	 * Ok result
+	 */
+	public boolean ok;
+
 	// C O M P O N E N T S
 
 	/**
@@ -91,7 +96,7 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 		commandPanel.add(cancelButton);
 		commandPanel.add(oKButton);
 
-		oKButton.addActionListener(event -> setVisible(false));
+		oKButton.addActionListener(event -> {ok =true; setVisible(false);});
 		cancelButton.addActionListener(event -> setVisible(false));
 
 		// assemble
@@ -109,7 +114,6 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 	public void actionPerformed(@NonNull ActionEvent e)
 	{
 		this.value = e.getActionCommand();
-		// System.err.println(this.value);
 	}
 
 	@Override
@@ -117,6 +121,7 @@ public class RadioChoiceDialog extends JDialog implements ActionListener
 	{
 		if (flag)
 		{
+			this.ok = false;
 
 			pack();
 			Utils.center(this);
