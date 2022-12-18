@@ -35,7 +35,7 @@ public class Context implements IContext
 	/**
 	 * Source
 	 */
-	protected final String source;
+	protected String source;
 
 	/**
 	 * Base

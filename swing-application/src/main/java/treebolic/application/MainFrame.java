@@ -24,13 +24,13 @@ import treebolic.annotations.Nullable;
 public class MainFrame extends JFrame implements HyperlinkListener
 {
 	@NonNull
-	protected final Widget widget;
+	protected Widget widget;
 
 	/**
 	 * Parameters
 	 */
 	@Nullable
-	protected final Properties parameters;
+	protected Properties parameters;
 
 	/**
 	 * Constructor
