@@ -10,6 +10,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Properties;
 
+import treebolic.annotations.NonNull;
 import treebolic.fungi.Browser;
 
 /**
@@ -144,7 +145,7 @@ public class Context extends treebolic.application.Context
 	}
 
 	@Override
-	public boolean linkTo(String linkUrl, String linkTarget)
+	public boolean linkTo(@NonNull String linkUrl, String linkTarget)
 	{
 		System.out.println(Messages.getString("Context.linkto") + linkUrl);
 
