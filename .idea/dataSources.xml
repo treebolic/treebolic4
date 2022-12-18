@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="fungi" uuid="b2bd00fd-c435-4ae5-a3ff-6e27d3cfe175">
+    <data-source source="LOCAL" name="fungi" uuid="9f7af802-3a80-4ef8-bd89-a6c568f4ae7d">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/provider-sql-jdbc/data/fungi.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/swing-fungi/database/fungi.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>

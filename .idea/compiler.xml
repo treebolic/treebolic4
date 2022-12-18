@@ -14,8 +14,11 @@
         <module name="treebolic-mutable" />
         <module name="swing-application-owl-jena" />
         <module name="treebolic-model" />
+        <module name="swing-wordnet" />
+        <module name="provider-wordnet-jwi" />
         <module name="provider-gxl" />
         <module name="provider-sql-jdbc" />
+        <module name="provider-wordnet-jwi2" />
         <module name="swing-studio" />
         <module name="treebolic-glue-swing" />
         <module name="swing-application-xml-stax" />
@@ -26,6 +29,7 @@
         <module name="swing-application-xml-sax" />
         <module name="treebolic-annotations" />
         <module name="provider-xml-sax" />
+        <module name="swing-fungi" />
         <module name="swing-application-owl2" />
         <module name="treebolic-glue-iface" />
         <module name="provider-text-pair" />

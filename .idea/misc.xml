@@ -637,6 +637,8 @@
     <pattern value="treebolic.provider.xml.sax.Provider" method="setHandle" />
     <pattern value="treebolic.provider.xml.dom.Provider" method="setLocator" />
     <pattern value="treebolic.provider.xml.sax.Provider" method="setLocator" />
+    <pattern value="treebolic.fungi.browser.Deployer" method="cleanup" />
+    <pattern value="treebolic.fungi.browser.Context" method="getSource" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
@@ -669,6 +671,10 @@
         <option value="$PROJECT_DIR$/provider-xml-dom/pom.xml" />
         <option value="$PROJECT_DIR$/provider-xml-sax/pom.xml" />
         <option value="$PROJECT_DIR$/swing-application-xml-sax/pom.xml" />
+        <option value="$PROJECT_DIR$/swing-fungi/pom.xml" />
+        <option value="$PROJECT_DIR$/provider-wordnet-jwi/pom.xml" />
+        <option value="$PROJECT_DIR$/provider-wordnet-jwi2/pom.xml" />
+        <option value="$PROJECT_DIR$/swing-wordnet/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
