@@ -78,10 +78,6 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
 		@Override
 		public int getColumnIndex(@NonNull final String columnName) throws SQLException
 		{
-			if (this.resultSet.isAfterLast())
-			{
-				return -1;
-			}
 			return this.resultSet.findColumn(columnName);
 		}
 
