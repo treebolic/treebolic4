@@ -1,0 +1,73 @@
+/*
+ * Copyright (c) 2022. Bernard Bou
+ */
+
+/* Fungi */
+
+* {
+    color: black;
+    font-family: sans-serif;
+}
+
+html {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #DAE3E6;
+    background-image: url("images/splash.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-size: medium;
+    padding: 0;
+}
+
+h1 {
+    font-size: x-large;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/******* hyperlink and anchor tag styles *******/
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/********* custom *********/
+.intro {
+    color: gray;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.header {
+    background-color: gray;
+    color: orange;
+}
+
+.title {
+    font-size: xx-large;
+    font-weight: bold;
+    letter-spacing: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: orange;
+}
+
