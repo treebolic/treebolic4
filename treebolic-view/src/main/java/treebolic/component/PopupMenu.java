@@ -114,6 +114,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 		{
 			for (@NonNull final MenuItem menuItem : settings.menu)
 			{
+				int menuLabelIndex = -1;
 				@Nullable String menuLabel = null;
 				boolean prepend = menuItem.label != null && (menuItem.label.length() == 0 || Character.isLowerCase(menuItem.label.charAt(0)));
 				assert menuItem.action != null;
@@ -126,7 +127,11 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 							// illegal combination
 							continue;
 						}
-						menuLabel = prepend ? LabelIndices.LABEL_GOTO.ordinal() + ' ' + menuItem.label : menuItem.label;
+						if (prepend)
+						{
+							menuLabelIndex = LabelIndices.LABEL_GOTO.ordinal();
+						}
+						menuLabel = menuItem.label;
 						break;
 
 					case SEARCH:
@@ -135,7 +140,11 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 							// illegal combination
 							continue;
 						}
-						menuLabel = prepend ? LabelIndices.LABEL_SEARCH.ordinal() + ' ' + menuItem.label : menuItem.label;
+						if (prepend)
+						{
+							menuLabelIndex = LabelIndices.LABEL_SEARCH.ordinal();
+						}
+						menuLabel = menuItem.label;
 						break;
 
 					default:
@@ -147,13 +156,13 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
 					menuLabel = PopupMenu.expandMacro(menuLabel, value, node);
 
 					// no item without label
-					if (menuLabel == null)
-					{
-						continue;
-					}
+					// if (menuLabel == null)
+					// {
+					// 	continue;
+					// }
 
 					// assume ImageIndices.ordinal() = control.Action.ordinal()
-					popupMenu.addItem(menuLabel, menuItem.action.ordinal(), new ActionListener()
+					popupMenu.addItem(menuLabelIndex, menuLabel, menuItem.action.ordinal(), new ActionListener()
 					{
 						@SuppressWarnings("SameReturnValue")
 						@Override

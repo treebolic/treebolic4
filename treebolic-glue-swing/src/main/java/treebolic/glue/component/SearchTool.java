@@ -22,7 +22,7 @@ import treebolic.glue.iface.Colors;
  *
  * @author Bernard Bou
  */
-class SearchTool extends Box
+public class SearchTool extends Box
 {
 	static private final String CMD_SEARCH = "SEARCH";
 

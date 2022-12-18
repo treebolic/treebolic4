@@ -479,7 +479,7 @@ public class Controller extends Commander
 			assert this.widget != null;
 			@Nullable final String edit = this.widget.getTarget();
 			expandedLink = PopupMenu.expandMacro(link, edit, node);
-			expandedLink = Controller.decode(expandedLink);
+			// TODO expandedLink = Controller.decode(expandedLink);
 		}
 		return expandedLink;
 	}
@@ -1159,7 +1159,7 @@ public class Controller extends Commander
 	/**
 	 * Decode encoded URL (for display)
 	 *
-	 * @param str encode URL string
+	 * @param str encoded URL string
 	 * @return decoded URL string
 	 */
 	@Nullable

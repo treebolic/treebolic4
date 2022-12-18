@@ -31,7 +31,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	/**
 	 * Whether this component contains search component
 	 */
-	static public final boolean HAS_SEARCH = true;
+	static public boolean hasSearch = true;
 
 	/*
 	 * Icon array
@@ -215,7 +215,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 		add(this.operationIconLabel, new GridBagConstraints(0, 0, 1, 2, 0.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.NONE, new Insets(5, 16, 0, 10), 0, 0));
 		add(this.labelAndInputBox, new GridBagConstraints(1, 0, 1, 1, 1.0, 0.0, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL, new Insets(5, 0, 5, 0), 0, 0));
 		add(this.contentPane, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 0), 0, 0));
-		if (HAS_SEARCH)
+		if (hasSearch)
 		{
 			add(this.searchToggleButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		}

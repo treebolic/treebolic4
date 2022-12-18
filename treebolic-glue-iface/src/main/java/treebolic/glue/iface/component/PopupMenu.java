@@ -98,11 +98,12 @@ public interface PopupMenu<C, L>
 	/**
 	 * Add item
 	 *
-	 * @param label      label String
+	 * @param labelIndex label index (as per LabelIndices ordinals)
+	 * @param label      label string complement
 	 * @param imageIndex image index (as per ImageIndices ordinals)
 	 * @param listener   listener
 	 */
-	void addItem(final String label, final int imageIndex, final L listener);
+	void addItem(final int labelIndex, final String label, final int imageIndex, final L listener);
 
 	/**
 	 * Add item
