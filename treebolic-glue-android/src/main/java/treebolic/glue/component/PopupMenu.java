@@ -93,12 +93,18 @@ public class PopupMenu implements treebolic.glue.iface.component.PopupMenu<Compo
 	}
 
 	@Override
-	public void addItem(final String label, final int resource, final ActionListener listener)
+	public void addItem(final int labelIdx, final String label2, final int resource, final ActionListener listener)
 	{
 		// just click outside dialog
 		if (resource == ImageIndices.IMAGE_CANCEL.ordinal())
 		{
 			return;
+		}
+
+		String label = labelIdx == -1 ? "" : labels[labelIdx];
+		if (label2 != null)
+		{
+			label += ' ' + label2;
 		}
 
 		@NonNull final ActionItem item = new ActionItem(label, getDrawable(resource), false, listener);
@@ -110,7 +116,7 @@ public class PopupMenu implements treebolic.glue.iface.component.PopupMenu<Compo
 	{
 		assert labels != null;
 		final String label = labels[labelIdx];
-		addItem(label, resource, listener);
+		addItem(-1, label, resource, listener);
 	}
 
 	@Override
