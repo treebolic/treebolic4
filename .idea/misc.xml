@@ -115,6 +115,9 @@
       <entry_point TYPE="field" FQNAME="treebolic.provider.owl.sax.OwlModelFactory LOADBALANCING_INSTANCES_IMAGEINDEX" />
       <entry_point TYPE="field" FQNAME="treebolic.provider.owl.jena.OwlModelFactory LOADBALANCING_PROPERTIES_IMAGEINDEX" />
       <entry_point TYPE="field" FQNAME="treebolic.provider.owl.sax.OwlModelFactory LOADBALANCING_PROPERTIES_IMAGEINDEX" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.wordnet.jwi.Parameters KEY_PROVIDER" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.wordnet.jwi.Parameters KEY_SOURCE" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.wordnet.jwi.BaseProvider.ImageIndex CATEGORY" />
     </entry_points>
     <pattern value="treebolic.glue.Worker" method="doInBackground" />
     <pattern value="treebolic.glue.Worker" method="job" />
@@ -639,6 +642,21 @@
     <pattern value="treebolic.provider.xml.sax.Provider" method="setLocator" />
     <pattern value="treebolic.fungi.browser.Deployer" method="cleanup" />
     <pattern value="treebolic.fungi.browser.Context" method="getSource" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="isLoadBalanceMembers" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="isLoadBalanceSemLinks" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="membersOf" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="membersToString" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="setLoadBalanceMembers" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="setLoadBalanceSemLinks" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="setNodeEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="setNodeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="walkLexLinks" />
+    <pattern value="treebolic.provider.wordnet.jwi.full.Provider" method="makeSettings" />
+    <pattern value="treebolic.provider.wordnet.jwi.packed.Provider" method="makeSettings" />
+    <pattern value="treebolic.provider.wordnet.jwi.full.Provider" method="Provider" />
+    <pattern value="treebolic.provider.wordnet.jwi.packed.Provider" method="Provider" />
+    <pattern value="treebolic.provider.wordnet.jwi.packed.Provider" method="walkSynset" />
+    <pattern value="treebolic.provider.wordnet.jwi.concise.Provider" method="Provider" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
