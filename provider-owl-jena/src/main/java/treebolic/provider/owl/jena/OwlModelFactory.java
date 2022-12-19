@@ -1178,7 +1178,7 @@ public class OwlModelFactory implements ImageDecorator
 		}
 	}
 
-	protected void setNodeEdgeImage(@NonNull final MutableNode node, @Nullable final String edgeImageFile, @SuppressWarnings("SameParameterValue") @Nullable final ImageIndex index)
+	protected void setTreeEdgeImage(@NonNull final MutableNode node, @Nullable final String edgeImageFile, @SuppressWarnings("SameParameterValue") @Nullable final ImageIndex index)
 	{
 		if (edgeImageFile != null)
 		{
@@ -1187,6 +1187,18 @@ public class OwlModelFactory implements ImageDecorator
 		else if (index != null)
 		{
 			setTreeEdgeImage(node, index.ordinal());
+		}
+	}
+
+	protected void setEdgeImage(@NonNull final MutableEdge edge, @Nullable final String edgeImageFile, @SuppressWarnings("SameParameterValue") @Nullable final ImageIndex index)
+	{
+		if (edgeImageFile != null)
+		{
+			edge.setImageFile(edgeImageFile);
+		}
+		else if (index != null)
+		{
+			setEdgeImage(edge, index.ordinal());
 		}
 	}
 
@@ -1322,7 +1334,7 @@ public class OwlModelFactory implements ImageDecorator
 		node.setEdgeStyle(instanceEdgeStyle);
 		node.setEdgeColor(instanceEdgeColor);
 		setNodeImage(node, instanceImageFile, ImageIndex.INSTANCE);
-		setNodeEdgeImage(node, instanceEdgeImageFile, null);
+		setTreeEdgeImage(node, instanceEdgeImageFile, null);
 		return node;
 	}
 
@@ -1335,7 +1347,7 @@ public class OwlModelFactory implements ImageDecorator
 		node.setEdgeStyle(relationEdgeStyle);
 		node.setEdgeColor(relationEdgeColor);
 		setNodeImage(node, relationImageFile, ImageIndex.RELATION);
-		setNodeEdgeImage(node, relationEdgeImageFile, null);
+		setTreeEdgeImage(node, relationEdgeImageFile, null);
 		return node;
 	}
 
@@ -1348,7 +1360,7 @@ public class OwlModelFactory implements ImageDecorator
 		node.setEdgeStyle(propertyEdgeStyle);
 		node.setEdgeColor(propertyEdgeColor);
 		setNodeImage(node, propertyImageFile, ImageIndex.PROPERTY);
-		setNodeEdgeImage(node, propertyEdgeImageFile, null);
+		setTreeEdgeImage(node, propertyEdgeImageFile, null);
 		return node;
 	}
 

@@ -1732,7 +1732,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			// synset node
 			final TreeMutableNode synsetNode = makeSynsetNode(null, synset);
 			synsetNode.setLabel(BaseProvider.mangleString(BaseProvider.members(synset, ", ")));
-			synsetNode.setImageIndex(ImageIndex.ROOT.ordinal());
+			setNodeImage(synsetNode, null, ImageIndex.ROOT);
 
 			// synset node (ignore links)
 			walkSynset(synsetNode, synset, 0, 0);
@@ -1922,7 +1922,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 					parentNode.setLink(BaseProvider.URLSCHEME + lemma);
 
 					decorateAsWord(parentNode, level);
-					parentNode.setImageIndex(ImageIndex.WORD.ordinal());
+					setNodeImage(parentNode, null, ImageIndex.WORD);
 					parentNode.setEdgeStyle(EDGE_STYLE_SYNSET);
 					parentNode.setEdgeColor(this.synsetEdgeColor);
 					return;
@@ -2353,7 +2353,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 					linkedSynsetNode = buildSingleMemberNode(null, linkedSynset, level);
 					linkedSynsetNode.setEdgeLabel(null);
 					linkedSynsetNode.setEdgeColor(this.linkBackgroundColor);
-					linkedSynsetNode.setEdgeImageIndex(link.imageIndex);
+					setTreeEdgeImage(linkedSynsetNode, null, ImageIndex.values()[link.imageIndex]);
 				}
 				else
 				{
@@ -2362,7 +2362,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 					linkedSynsetNode = makeSynsetNode(null, linkedSynset);
 					linkedSynsetNode.setEdgeLabel(null);
 					linkedSynsetNode.setEdgeColor(this.linkBackgroundColor);
-					linkedSynsetNode.setEdgeImageIndex(link.imageIndex);
+					setTreeEdgeImage(linkedSynsetNode, null, ImageIndex.values()[link.imageIndex]);
 
 					// members
 					walkSynset(linkedSynsetNode, linkedSynset, i, level);
@@ -2537,7 +2537,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		}
 		node.setEdgeColor(this.posEdgeColor);
 		node.setEdgeStyle(EDGE_STYLE_POS);
-		node.setEdgeImageIndex(ImageIndex.POS.ordinal());
+		setTreeEdgeImage(node, null, ImageIndex.POS);
 		return node;
 	}
 
@@ -2556,7 +2556,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		node.setEdgeLabel(LABEL_CATEGORY);
 		node.setEdgeStyle(EDGE_STYLE_CATEGORY);
 		node.setEdgeColor(this.categoryEdgeColor);
-		// node.setEdgeImageIndex(ImageIndex.CATEGORY.ordinal());
+		// setTreeEdgeImage(node, null, ImageIndex.CATEGORY);
 		return node;
 	}
 
@@ -2596,7 +2596,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	{
 		final TreeMutableNode node = makeSenseBaseNode(parent, sense, tagCountTotal);
 		node.setEdgeLabel(LABEL_SENSE);
-		node.setEdgeImageIndex(ImageIndex.SENSE.ordinal());
+		setTreeEdgeImage(node, null, ImageIndex.SENSE);
 		return node;
 	}
 
@@ -3134,7 +3134,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		}
 	}
 
-	protected void setNodeEdgeImage(@NonNull final MutableNode node, @Nullable final String edgeImageFile, @SuppressWarnings("SameParameterValue") @Nullable final ImageIndex index)
+	protected void setTreeEdgeImage(@NonNull final MutableNode node, @Nullable final String edgeImageFile, @SuppressWarnings("SameParameterValue") @Nullable final ImageIndex index)
 	{
 		if (edgeImageFile != null)
 		{
@@ -3143,6 +3143,18 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		else if (index != null)
 		{
 			setTreeEdgeImage(node, index.ordinal());
+		}
+	}
+
+	protected void setEdgeImage(@NonNull final MutableEdge edge, @Nullable final String edgeImageFile, @SuppressWarnings("SameParameterValue") @Nullable final ImageIndex index)
+	{
+		if (edgeImageFile != null)
+		{
+			edge.setImageFile(edgeImageFile);
+		}
+		else if (index != null)
+		{
+			setEdgeImage(edge, index.ordinal());
 		}
 	}
 

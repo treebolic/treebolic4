@@ -12,6 +12,8 @@ import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
 import treebolic.glue.Image;
 import treebolic.model.Model;
+import treebolic.model.MutableEdge;
+import treebolic.model.MutableNode;
 
 /**
  * Base provider for WordNet
@@ -101,5 +103,37 @@ public abstract class BaseProvider2 extends BaseProvider
 
 		// result
 		return new Model(model.tree, model.settings, BaseProvider2.images);
+	}
+
+	// I M A G E
+
+	@Override
+	public void setNodeImage(@NonNull final MutableNode node, final int index)
+	{
+		if (index != -1)
+		{
+			assert images != null;
+			node.setImage(images[index]);
+		}
+	}
+
+	@Override
+	public void setTreeEdgeImage(@NonNull final MutableNode node, final int index)
+	{
+		if (index != -1)
+		{
+			assert images != null;
+			node.setEdgeImage(images[index]);
+		}
+	}
+
+	@Override
+	public void setEdgeImage(@NonNull final MutableEdge edge, final int index)
+	{
+		if (index != -1)
+		{
+			assert images != null;
+			edge.setImage(images[index]);
+		}
 	}
 }

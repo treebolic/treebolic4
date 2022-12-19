@@ -74,7 +74,7 @@ public class Provider extends treebolic.provider.wordnet.jwi.condensed.Provider
 		parentNode.setLink(BaseProvider.URLSCHEME + BaseProvider.URLSCHEME_AT + synset.synset.getID().toString());
 
 		decorateAsWord(parentNode, level);
-		parentNode.setImageIndex(-1); // ImageIndices.WORD.ordinal()
+		setNodeImage(parentNode, null, null);
 		// do not assume anything about tree edge
 	}
 
@@ -108,10 +108,10 @@ public class Provider extends treebolic.provider.wordnet.jwi.condensed.Provider
 			linkedSynsetNode.setLabel(/* tag + '\n' + */ membersAsLines(linkedSynset));
 
 			decorateAsWord(linkedSynsetNode, level);
-			linkedSynsetNode.setImageIndex(-1); // ImageIndices.WORD.ordinal()
+			setNodeImage(linkedSynsetNode, null, null);
 			linkedSynsetNode.setEdgeLabel(null);
 			linkedSynsetNode.setEdgeColor(this.linkBackgroundColor);
-			linkedSynsetNode.setEdgeImageIndex(link.imageIndex);
+			setTreeEdgeImage(linkedSynsetNode, null, ImageIndex.values()[link.imageIndex]);
 
 			linkedSynsetNode.setTarget(tag);
 			childNodes.add(linkedSynsetNode);

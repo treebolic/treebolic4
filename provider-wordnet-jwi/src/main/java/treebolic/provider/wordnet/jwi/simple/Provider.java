@@ -138,7 +138,7 @@ public class Provider extends BaseProvider implements IProvider
 						label += " [" + posFilter.getTag() + ',' + senseFilter + ']';
 					}
 					senseNode.setLabel(label);
-					senseNode.setImageIndex(ImageIndex.ROOT.ordinal());
+					setNodeImage(senseNode, null , ImageIndex.ROOT);
 					senseNode.setParent(null);
 					return senseNode;
 				}
@@ -149,7 +149,7 @@ public class Provider extends BaseProvider implements IProvider
 			if (posFilter != null)
 			{
 				posNode.setLabel(lemma + " [" + posFilter.getTag() + ']');
-				posNode.setImageIndex(ImageIndex.ROOT.ordinal());
+				setNodeImage(posNode, null, ImageIndex.ROOT);
 				posNode.setParent(null);
 				return posNode;
 			}

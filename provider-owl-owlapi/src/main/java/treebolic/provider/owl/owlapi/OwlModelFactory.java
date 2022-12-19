@@ -1254,6 +1254,18 @@ public class OwlModelFactory implements ImageDecorator
 		}
 	}
 
+	private void setEdgeImage(@NonNull final MutableEdge edge, @Nullable final String edgeImageFile, @SuppressWarnings("SameParameterValue") @Nullable final ImageIndex index)
+	{
+		if (edgeImageFile != null)
+		{
+			edge.setImageFile(edgeImageFile);
+		}
+		else if (index != null)
+		{
+			setEdgeImage(edge, index.ordinal());
+		}
+	}
+
 	@Override
 	public void setNodeImage(@NonNull final MutableNode node, final int index)
 	{
