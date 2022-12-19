@@ -657,6 +657,44 @@
     <pattern value="treebolic.provider.wordnet.jwi.packed.Provider" method="Provider" />
     <pattern value="treebolic.provider.wordnet.jwi.packed.Provider" method="walkSynset" />
     <pattern value="treebolic.provider.wordnet.jwi.concise.Provider" method="Provider" />
+    <pattern value="treebolic.wordnet.browser.LinkReference" method="all" />
+    <pattern value="treebolic.wordnet.browser.Context" method="Context" />
+    <pattern value="treebolic.wordnet.browser.LinkReference" method="getLabels" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="makeModel" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="setEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider2" method="BaseProvider2" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider2" method="makeModel" />
+    <pattern value="treebolic.provider.wordnet.jwi.condensed.Provider2" method="makeModel" />
+    <pattern value="treebolic.provider.wordnet.jwi.full.Provider2" method="makeModel" />
+    <pattern value="treebolic.provider.wordnet.jwi.concise.Provider2" method="makeModel" />
+    <pattern value="treebolic.provider.wordnet.jwi.compact.Provider2" method="makeModel" />
+    <pattern value="treebolic.provider.wordnet.jwi.simple.Provider2" method="makeModel" />
+    <pattern value="treebolic.provider.wordnet.jwi.packed.Provider2" method="makeModel" />
+    <pattern value="treebolic.provider.wordnet.jwi.condensed.Provider2" method="Provider2" />
+    <pattern value="treebolic.provider.wordnet.jwi.full.Provider2" method="Provider2" />
+    <pattern value="treebolic.provider.wordnet.jwi.concise.Provider2" method="Provider2" />
+    <pattern value="treebolic.provider.wordnet.jwi.simple.Provider2" method="Provider2" />
+    <pattern value="treebolic.provider.wordnet.jwi.packed.Provider2" method="Provider2" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider2" method="setEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.condensed.Provider2" method="setEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.full.Provider2" method="setEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.concise.Provider2" method="setEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.compact.Provider2" method="setEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.simple.Provider2" method="setEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.packed.Provider2" method="setEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider2" method="setNodeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.condensed.Provider2" method="setNodeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.full.Provider2" method="setNodeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.concise.Provider2" method="setNodeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.compact.Provider2" method="setNodeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.simple.Provider2" method="setNodeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.packed.Provider2" method="setNodeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider2" method="setTreeEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.condensed.Provider2" method="setTreeEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.full.Provider2" method="setTreeEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.concise.Provider2" method="setTreeEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.simple.Provider2" method="setTreeEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.packed.Provider2" method="setTreeEdgeImage" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
@@ -693,6 +731,7 @@
         <option value="$PROJECT_DIR$/provider-wordnet-jwi/pom.xml" />
         <option value="$PROJECT_DIR$/provider-wordnet-jwi2/pom.xml" />
         <option value="$PROJECT_DIR$/swing-wordnet/pom.xml" />
+        <option value="$PROJECT_DIR$/swing-wordnet2/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

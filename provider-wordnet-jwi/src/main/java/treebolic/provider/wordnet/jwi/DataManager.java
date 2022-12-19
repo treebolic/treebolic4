@@ -91,6 +91,7 @@ public class DataManager
 	 * @return cached dictionary data
 	 * @throws IOException io exception
 	 */
+	@SuppressWarnings("UnusedReturnValue")
 	public File deploy(final String data, final File cacheHome) throws IOException
 	{
 		URL zipUrl = getSourceZipURL(data);

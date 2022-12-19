@@ -1,8 +1,6 @@
 package treebolic.wordnet.browser;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Properties;
 
 import javax.swing.*;
@@ -97,14 +95,9 @@ public class SettingsDialog extends JDialog
 	{
 		final JButton okButton = new JButton();
 		okButton.setText(Messages.getString("SettingsDialog.ok"));
-		okButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final ActionEvent e)
-			{
-				SettingsDialog.this.ok = true;
-				setVisible(false);
-			}
+		okButton.addActionListener(e -> {
+			SettingsDialog.this.ok = true;
+			setVisible(false);
 		});
 		return okButton;
 	}
@@ -118,14 +111,7 @@ public class SettingsDialog extends JDialog
 	{
 		final JButton cancelButton = new JButton();
 		cancelButton.setText(Messages.getString("SettingsDialog.cancel"));
-		cancelButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final ActionEvent e)
-			{
-				setVisible(false);
-			}
-		});
+		cancelButton.addActionListener(e -> setVisible(false));
 		return cancelButton;
 	}
 
@@ -138,15 +124,7 @@ public class SettingsDialog extends JDialog
 	{
 		final JButton applyButton = new JButton();
 		applyButton.setText(Messages.getString("SettingsDialog.save"));
-		applyButton.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent e)
-			{
-				save();
-			}
-		});
+		applyButton.addActionListener(e -> save());
 		return applyButton;
 	}
 

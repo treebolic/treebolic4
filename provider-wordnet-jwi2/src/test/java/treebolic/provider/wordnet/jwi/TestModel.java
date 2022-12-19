@@ -18,7 +18,7 @@ import treebolic.annotations.Nullable;
 import treebolic.model.Model;
 import treebolic.model.ModelDump;
 import treebolic.provider.IProviderContext;
-import treebolic.provider.wordnet.jwi.compact.Provider;
+import treebolic.provider.wordnet.jwi.compact.Provider2;
 
 /**
  * Test treebolic model
@@ -35,7 +35,7 @@ public class TestModel
 	{
 		final String source = System.getProperty("SOURCE");
 		final URL base = new File(System.getProperty("BASE")).toURI().toURL();
-		Provider p = new Provider();
+		Provider2 p = new Provider2();
 		p.setContext(new IProviderContext()
 		{
 			@Override

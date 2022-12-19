@@ -33,7 +33,7 @@ public class ColorPad extends JComponent
 	{
 		super();
 		setPreferredSize(new Dimension(12, 12));
-		this.listeners = new Vector<ActionListener>();
+		this.listeners = new Vector<>();
 		addMouseListener(new MouseAdapter()
 		{
 			@SuppressWarnings("synthetic-access")
@@ -72,7 +72,7 @@ public class ColorPad extends JComponent
 		else
 		{
 			g.drawLine(0, 0, d.width, d.height);
-			g.drawLine(0, 0 + d.height, d.width, 0);
+			g.drawLine(0, /* 0 + */ d.height, d.width, 0);
 			g.draw3DRect(0, 0, d.width, d.height, true);
 		}
 	}

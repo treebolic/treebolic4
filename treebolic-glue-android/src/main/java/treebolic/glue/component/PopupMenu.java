@@ -101,7 +101,16 @@ public class PopupMenu implements treebolic.glue.iface.component.PopupMenu<Compo
 			return;
 		}
 
-		String label = labelIdx == -1 ? "" : labels[labelIdx];
+		String label;
+		if (labelIdx == -1)
+		{
+			label = "";
+		}
+		else
+		{
+			assert labels != null;
+			label = labels[labelIdx];
+		}
 		if (label2 != null)
 		{
 			label += ' ' + label2;

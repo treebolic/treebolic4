@@ -9,7 +9,6 @@
 package treebolic.wordnet.browser;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +16,7 @@ import java.io.IOException;
 import javax.swing.*;
 
 import treebolic.IWidget;
+import treebolic.annotations.NonNull;
 import treebolic.commons.Persist;
 import treebolic.commons.SettingsDialog;
 import treebolic.glue.component.SearchTool;
@@ -43,6 +43,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		setTitle(Messages.getString("MainFrame.app"));
 	}
 
+	@NonNull
 	@Override
 	protected String getPersistName()
 	{
@@ -54,6 +55,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	 *
 	 * @return persist name
 	 */
+	@SuppressWarnings("SameReturnValue")
 	public static String getStaticPersistName()
 	{
 		return "treebolic-wordnet-browser";
@@ -74,6 +76,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 
 	// M E N U
 
+	@NonNull
 	@Override
 	protected JPopupMenu makeMenu()
 	{
@@ -83,6 +86,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		// help
 		final JMenu referenceMenu = new JMenu();
 		referenceMenu.setText(Messages.getString("MainFrame.reference"));
+		//noinspection ConstantConditions
 		referenceMenu.setIcon(new ImageIcon(treebolic.browser2.MainFrame.class.getResource("images/help.png")));
 		for (final LinkReference reference : LinkReference.values())
 		{
@@ -95,15 +99,9 @@ public class MainFrame extends treebolic.browser2.MainFrame
 			final String label = reference.getLabel();
 			final JMenuItem item = new JMenuItem();
 			item.setText(label);
+			//noinspection ConstantConditions
 			item.setIcon(new ImageIcon(treebolic.browser2.MainFrame.class.getResource("images/help.png")));
-			item.addActionListener(new java.awt.event.ActionListener()
-			{
-				@Override
-				public void actionPerformed(final ActionEvent e)
-				{
-					help(key);
-				}
-			});
+			item.addActionListener(e -> help(key));
 			referenceMenu.add(item);
 		}
 		menu.add(referenceMenu);
@@ -113,15 +111,9 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		final JMenuItem dataSettingsItem = new JMenuItem();
 		dataSettingsItem.setAccelerator(KeyStroke.getKeyStroke('D', InputEvent.ALT_DOWN_MASK));
 		dataSettingsItem.setText(Messages.getString("MainFrame.data"));
+		//noinspection ConstantConditions
 		dataSettingsItem.setIcon(new ImageIcon(MainFrame.class.getResource("images/data.png")));
-		dataSettingsItem.addActionListener(new java.awt.event.ActionListener()
-		{
-			@Override
-			public void actionPerformed(final ActionEvent e)
-			{
-				dataSettings();
-			}
-		});
+		dataSettingsItem.addActionListener(e -> dataSettings());
 		menu.add(dataSettingsItem);
 		menu.addSeparator();
 
@@ -129,31 +121,18 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		final JMenuItem colorSettingsItem = new JMenuItem();
 		colorSettingsItem.setAccelerator(KeyStroke.getKeyStroke('C', InputEvent.ALT_DOWN_MASK));
 		colorSettingsItem.setText(Messages.getString("MainFrame.colors"));
+		//noinspection ConstantConditions
 		colorSettingsItem.setIcon(new ImageIcon(MainFrame.class.getResource("images/palette.png")));
-		colorSettingsItem.addActionListener(new java.awt.event.ActionListener()
-		{
-			@Override
-			public void actionPerformed(final ActionEvent e)
-			{
-				colorSettings();
-			}
-		});
+		colorSettingsItem.addActionListener(e -> colorSettings());
 		menu.add(colorSettingsItem);
 
 		// filter
 		final JMenuItem filterSettingsItem = new JMenuItem();
 		filterSettingsItem.setAccelerator(KeyStroke.getKeyStroke('L', InputEvent.ALT_DOWN_MASK));
 		filterSettingsItem.setText(Messages.getString("MainFrame.links"));
+		//noinspection ConstantConditions
 		filterSettingsItem.setIcon(new ImageIcon(MainFrame.class.getResource("images/filter.png")));
-		filterSettingsItem.addActionListener(new java.awt.event.ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent e)
-			{
-				filterSettings();
-			}
-		});
+		filterSettingsItem.addActionListener(e -> filterSettings());
 		menu.add(filterSettingsItem);
 		menu.addSeparator();
 
@@ -161,46 +140,36 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		final JMenuItem maxLinksItem = new JMenuItem();
 		maxLinksItem.setAccelerator(KeyStroke.getKeyStroke('M', InputEvent.ALT_DOWN_MASK));
 		maxLinksItem.setText(Messages.getString("MainFrame.maxlinks"));
+		//noinspection ConstantConditions
 		maxLinksItem.setIcon(new ImageIcon(MainFrame.class.getResource("images/max.png")));
-		maxLinksItem.addActionListener(new java.awt.event.ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent e)
+		maxLinksItem.addActionListener(e -> {
+			final String string = ask(Messages.getString("MainFrame.maxlinks"), MainFrame.this.settings.getProperty("link_maxlinks"));//$NON-NLS-2$
+			try
 			{
-				final String string = ask(Messages.getString("MainFrame.maxlinks"), MainFrame.this.settings.getProperty("link_maxlinks"));//$NON-NLS-2$
-				try
-				{
-					Integer.parseInt(string);
-					MainFrame.this.settings.setProperty("link_maxlinks", string);
-				}
-				catch (final NumberFormatException e2)
-				{
-					//
-				}
+				Integer.parseInt(string);
+				MainFrame.this.settings.setProperty("link_maxlinks", string);
+			}
+			catch (final NumberFormatException e2)
+			{
+				//
 			}
 		});
 		menu.add(maxLinksItem);
 		final JMenuItem maxRecurseItem = new JMenuItem();
 		maxRecurseItem.setAccelerator(KeyStroke.getKeyStroke('R', InputEvent.ALT_DOWN_MASK));
 		maxRecurseItem.setText(Messages.getString("MainFrame.maxrecurse"));
+		//noinspection ConstantConditions
 		maxRecurseItem.setIcon(new ImageIcon(MainFrame.class.getResource("images/max.png")));
-		maxRecurseItem.addActionListener(new java.awt.event.ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent e)
+		maxRecurseItem.addActionListener(e -> {
+			final String string = ask(Messages.getString("MainFrame.maxrecurse"), MainFrame.this.settings.getProperty("link_maxrecurse"));//$NON-NLS-2$
+			try
 			{
-				final String string = ask(Messages.getString("MainFrame.maxrecurse"), MainFrame.this.settings.getProperty("link_maxrecurse"));//$NON-NLS-2$
-				try
-				{
-					Integer.parseInt(string);
-					MainFrame.this.settings.setProperty("link_maxrecurse", string);
-				}
-				catch (final NumberFormatException e2)
-				{
-					//
-				}
+				Integer.parseInt(string);
+				MainFrame.this.settings.setProperty("link_maxrecurse", string);
+			}
+			catch (final NumberFormatException e2)
+			{
+				//
 			}
 		});
 		menu.add(maxRecurseItem);
@@ -210,18 +179,13 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		final JMenuItem maxLinesItem = new JMenuItem();
 		maxLinesItem.setAccelerator(KeyStroke.getKeyStroke('K', InputEvent.ALT_DOWN_MASK));
 		maxLinesItem.setText(Messages.getString("MainFrame.labelmaxlines"));
+		//noinspection ConstantConditions
 		maxLinesItem.setIcon(new ImageIcon(MainFrame.class.getResource("images/maxlines.png")));
-		maxLinesItem.addActionListener(new java.awt.event.ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent e)
+		maxLinesItem.addActionListener(e -> {
+			final Integer value = askRange(Messages.getString("MainFrame.labelmaxlinesprompt"), MainFrame.this.settings.getProperty("label_max_lines"), 0, 20);//$NON-NLS-2$
+			if (value != null)
 			{
-				final Integer value = askRange(Messages.getString("MainFrame.labelmaxlinesprompt"), MainFrame.this.settings.getProperty("label_max_lines"), 0, 20);//$NON-NLS-2$
-				if (value != null)
-				{
-					MainFrame.this.settings.setProperty("label_max_lines", value.toString());
-				}
+				MainFrame.this.settings.setProperty("label_max_lines", value.toString());
 			}
 		});
 		menu.add(maxLinesItem);
@@ -230,18 +194,13 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		final JMenuItem fontSizeItem = new JMenuItem();
 		fontSizeItem.setAccelerator(KeyStroke.getKeyStroke('F', InputEvent.ALT_DOWN_MASK));
 		fontSizeItem.setText(Messages.getString("MainFrame.fontsize"));
+		//noinspection ConstantConditions
 		fontSizeItem.setIcon(new ImageIcon(MainFrame.class.getResource("images/fontsize.png")));
-		fontSizeItem.addActionListener(new java.awt.event.ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final ActionEvent e)
+		fontSizeItem.addActionListener(e -> {
+			final Integer fontSize = askRange(Messages.getString("MainFrame.fontsizeprompt"), MainFrame.this.settings.getProperty("fontsize"), 12, 64);//$NON-NLS-2$
+			if (fontSize != null)
 			{
-				final Integer fontSize = askRange(Messages.getString("MainFrame.fontsizeprompt"), MainFrame.this.settings.getProperty("fontsize"), 12, 64);//$NON-NLS-2$
-				if (fontSize != null)
-				{
-					MainFrame.this.settings.setProperty("fontsize", fontSize.toString());
-				}
+				MainFrame.this.settings.setProperty("fontsize", fontSize.toString());
 			}
 		});
 		menu.add(fontSizeItem);

@@ -160,7 +160,7 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	}
 
 	/**
-	 * Get persisted souce
+	 * Get persisted source
 	 *
 	 * @return persisted source
 	 */

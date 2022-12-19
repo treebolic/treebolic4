@@ -1,8 +1,6 @@
 package treebolic.wordnet.browser;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Properties;
 
 import javax.swing.*;
@@ -88,29 +86,17 @@ public class LinkFilterSettingsPane extends JPanel
 			i++;
 		}
 		final JButton setButton = new JButton(Messages.getString("LinkFilterSettingsPane.set"));
-		setButton.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(ActionEvent e)
+		setButton.addActionListener(e -> {
+			for (int i12 = 0; i12 < LinkReference.values().length; i12++)
 			{
-				for (int i = 0; i < LinkReference.values().length; i++)
-				{
-					LinkFilterSettingsPane.this.checkBoxes[i].setSelected(true);
-				}
+				LinkFilterSettingsPane.this.checkBoxes[i12].setSelected(true);
 			}
 		});
 		final JButton resetButton = new JButton(Messages.getString("LinkFilterSettingsPane.reset"));
-		resetButton.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(ActionEvent e)
+		resetButton.addActionListener(e -> {
+			for (int i1 = 0; i1 < LinkReference.values().length; i1++)
 			{
-				for (int i = 0; i < LinkReference.values().length; i++)
-				{
-					LinkFilterSettingsPane.this.checkBoxes[i].setSelected(false);
-				}
+				LinkFilterSettingsPane.this.checkBoxes[i1].setSelected(false);
 			}
 		});
 
@@ -131,8 +117,7 @@ public class LinkFilterSettingsPane extends JPanel
 	 */
 	private static JCheckBox makeCheckBox()
 	{
-		final JCheckBox checkBox = new JCheckBox();
-		return checkBox;
+		return new JCheckBox();
 	}
 
 	/**
@@ -173,11 +158,17 @@ public class LinkFilterSettingsPane extends JPanel
 		return l;
 	}
 
+	/**
+	 * Set filter values to pane
+	 */
 	public void set()
 	{
 		toCheckBoxes();
 	}
 
+	/**
+	 * Get filter values from pane
+	 */
 	public void get()
 	{
 		fromCheckBoxes();

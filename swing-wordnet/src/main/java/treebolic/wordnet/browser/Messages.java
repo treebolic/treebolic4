@@ -30,6 +30,12 @@ public class Messages
 		// do nothing
 	}
 
+	/**
+	 * Get message
+	 *
+	 * @param key message key
+	 * @return message
+	 */
 	public static String getString(final String key)
 	{
 		try

@@ -15,45 +15,47 @@ package treebolic.wordnet.browser;
  */
 public enum LinkReference
 {
-	HYPERNYM("hypernym"), //
-	HYPERNYM_INSTANCE(null), //
-	HYPONYM("hyponym"), //
-	HYPONYM_INSTANCE(null), //
+	// @formatter:off
+	/** Hypernym */ HYPERNYM("hypernym"), //
+	/** Hypernym instance */ HYPERNYM_INSTANCE(null), //
+	/** Hyponym */ HYPONYM("hyponym"), //
+	/** Hyponym instance */ HYPONYM_INSTANCE(null), //
 
-	HOLONYM_MEMBER("holonym"), //
-	HOLONYM_SUBSTANCE("holonym"), //
-	HOLONYM_PART("holonym"), //
+	/** Member holonym */ HOLONYM_MEMBER("holonym"), //
+	/** Substance holonym */ HOLONYM_SUBSTANCE("holonym"), //
+	/** Part holonym */ HOLONYM_PART("holonym"), //
 
-	MERONYM_MEMBER("meronym"), //
-	MERONYM_SUBSTANCE("meronym"), //
-	MERONYM_PART("meronym"), //
+	/** Member meronym */ MERONYM_MEMBER("meronym"), //
+	/** Substance meronym */ MERONYM_SUBSTANCE("meronym"), //
+	/** Part meronym */ MERONYM_PART("meronym"), //
 
-	ANTONYM("antonym"), //
+	/** Antonym */ ANTONYM("antonym"), //
 
-	ENTAILS("entail"), //
-	IS_ENTAILED_BY("entailed"), //
-	CAUSES("cause"), //
-	IS_CAUSED_BY("caused"), //
+	/** Entails */ ENTAILS("entail"), //
+	/** Is entailed by */ IS_ENTAILED_BY("entailed"), //
+	/** Causes */ CAUSES("cause"), //
+	/** Is caused by */ IS_CAUSED_BY("caused"), //
 
-	SIMILAR_TO("similar"), //
-	ALSO_SEE("alsosee"), //
-	ATTRIBUTE("attribute"), //
-	PERTAINYM("pertainym"), //
-	DERIVATIONALLY_RELATED("derivation"), //
-	DERIVED_FROM_ADJ("adjderived"), //
+	/** Similar to */ SIMILAR_TO("similar"), //
+	/** Also see */ ALSO_SEE("alsosee"), //
+	/** Attribute */ ATTRIBUTE("attribute"), //
+	/** Pertainym */ PERTAINYM("pertainym"), //
+	/** Derivationally related */ DERIVATIONALLY_RELATED("derivation"), //
+	/** Derived from adjective */ DERIVED_FROM_ADJ("adjderived"), //
 
-	VERB_GROUP("verbgroup"), //
-	PARTICIPLE("participle"), //
+	/** Verb group */ VERB_GROUP("verbgroup"), //
+	/** Participle */ PARTICIPLE("participle"), //
 
-	DOMAIN("domain"), //
-	TOPIC(null), //
-	USAGE(null), //
-	REGION(null), //
+	/** Domain */ DOMAIN("domain"), //
+	/** Topic */ TOPIC(null), //
+	/** Usage */ USAGE(null), //
+	/** Region */ REGION(null), //
 
-	MEMBER("member"), //
-	TOPIC_MEMBER(null), //
-	USAGE_MEMBER(null), //
-	REGION_MEMBER(null); //
+	/** Member */ MEMBER("member"), //
+	/** Topic member */ TOPIC_MEMBER(null), //
+	/** Usage member */ USAGE_MEMBER(null), //
+	/** Region member */ REGION_MEMBER(null); //
+	// @formatter:off
 
 	private final String helpKey;
 
@@ -62,16 +64,31 @@ public enum LinkReference
 		this.helpKey = helpKey;
 	}
 
+	/**
+	 * Get label
+	 * @return label
+	 */
 	public String getLabel()
 	{
 		return Messages.getString("LinkReference." + this.name().toLowerCase());
 	}
 
+	/**
+	 * Get key to help
+	 *
+	 * @return help key
+	 */
 	public String getHelpKey()
 	{
 		return this.helpKey;
 	}
 
+	/**
+	 * Get labels
+	 *
+	 * @param refs link references
+	 * @return array of labels
+	 */
 	public static String[] getLabels(final LinkReference... refs)
 	{
 		String[] strings = new String[refs.length];
@@ -84,16 +101,31 @@ public enum LinkReference
 		return strings;
 	}
 
+	/**
+	 * Mask
+	 *
+	 * @return mask value
+	 */
 	public long mask()
 	{
 		return 1 << ordinal();
 	}
 
+	/**
+	 * Test if bits are set
+	 *
+	 * @param bitmap bits
+	 * @return true if relevant bits are set
+	 */
 	public boolean test(final long bitmap)
 	{
 		return (bitmap & (1 << ordinal())) != 0;
 	}
 
+	/**
+	 * All filter
+	 * @return All filter
+	 */
 	static public long all()
 	{
 		long m = 0;
@@ -104,6 +136,10 @@ public enum LinkReference
 		return m;
 	}
 
+	/**
+	 * Base-line filter
+	 * @return base-line filter
+	 */
 	static public long baseline()
 	{
 		return HYPERNYM.mask() | //
@@ -122,5 +158,8 @@ public enum LinkReference
 				SIMILAR_TO.mask();
 	}
 
+	/**
+	 * Key to relation filter
+	 */
 	static public final String KEYRELATIONFILTER = "relation_filter";
 }

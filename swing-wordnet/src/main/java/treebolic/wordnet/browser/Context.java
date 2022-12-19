@@ -18,6 +18,7 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
 import treebolic.wordnet.Browser;
 
 /**
@@ -43,10 +44,10 @@ public class Context extends treebolic.browser2.Context
 	 * Constructor
 	 *
 	 * @param application application mainframe
-	 * @param source source
-	 * @param base base
-	 * @param imageBase image base
-	 * @param userHome user home as base
+	 * @param source      source
+	 * @param base        base
+	 * @param imageBase   image base
+	 * @param userHome    user home as base
 	 */
 	public Context(final MainFrame application, final String source, final String base, final String imageBase, final boolean userHome)
 	{
@@ -66,6 +67,13 @@ public class Context extends treebolic.browser2.Context
 		}
 	}
 
+	/**
+	 * Make data dir
+	 *
+	 * @param base     base
+	 * @param userHome use user home
+	 * @return data dir
+	 */
 	public static File makeDataDir(final String base, final boolean userHome)
 	{
 		if (base == null || base.isEmpty())
@@ -99,8 +107,7 @@ public class Context extends treebolic.browser2.Context
 	@Override
 	public Properties getParameters()
 	{
-		final Properties properties = this.browser.getParameters();
-		return properties;
+		return this.browser.getParameters();
 	}
 
 	@Override
@@ -122,7 +129,7 @@ public class Context extends treebolic.browser2.Context
 	}
 
 	@Override
-	public boolean linkTo(final String linkUrl, final String linkTarget)
+	public boolean linkTo(@NonNull final String linkUrl, final String linkTarget)
 	{
 		// help
 		if (linkUrl.startsWith("internal:help:"))

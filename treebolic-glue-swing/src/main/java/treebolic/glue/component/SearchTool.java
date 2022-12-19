@@ -79,6 +79,9 @@ public class SearchTool extends Box
 		}
 	}
 
+	/**
+	 * Reset search
+	 */
 	public void resetSearch()
 	{
 		this.searchPending = false;

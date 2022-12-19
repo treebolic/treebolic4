@@ -1,8 +1,6 @@
 package treebolic.wordnet.browser;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Properties;
 
 import javax.swing.*;
@@ -83,17 +81,11 @@ public class ColorSettingsPane extends JPanel
 		}
 
 		final JButton clearButton = new JButton(Messages.getString("ColorSettingsPane.clear"));
-		clearButton.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(ActionEvent e)
+		clearButton.addActionListener(e -> {
+			for (int i1 = 0; i1 < ColorReference.values().length; i1++)
 			{
-				for (int i = 0; i < ColorReference.values().length; i++)
-				{
-					ColorSettingsPane.this.colorPads[i].setBackground(null);
-					ColorSettingsPane.this.colorPads[i].repaint();
-				}
+				ColorSettingsPane.this.colorPads[i1].setBackground(null);
+				ColorSettingsPane.this.colorPads[i1].repaint();
 			}
 		});
 
@@ -114,22 +106,10 @@ public class ColorSettingsPane extends JPanel
 	private static ColorPad makeColorPad()
 	{
 		final ColorPad colorPad = new ColorPad();
-		colorPad.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final ActionEvent event)
-			{
-				final Color color = JColorChooser.showDialog(colorPad, Messages.getString("ColorSettingsPane.title"), colorPad.getBackground());
-				if (color != null)
-				{
-					colorPad.setBackground(color);
-				}
-				else
-				{
-					colorPad.setBackground(null);
-				}
-				colorPad.repaint();
-			}
+		colorPad.addActionListener(event -> {
+			final Color color = JColorChooser.showDialog(colorPad, Messages.getString("ColorSettingsPane.title"), colorPad.getBackground());
+			colorPad.setBackground(color);
+			colorPad.repaint();
 		});
 		return colorPad;
 	}
@@ -171,6 +151,9 @@ public class ColorSettingsPane extends JPanel
 		this.settings.setProperty(key, Integer.toHexString(color.getRGB()).substring(2));
 	}
 
+	/**
+	 * Set color reference to panel
+	 */
 	public void set()
 	{
 		int i = 0;
@@ -181,6 +164,9 @@ public class ColorSettingsPane extends JPanel
 		}
 	}
 
+	/**
+	 * Get color reference from panel
+	 */
 	public void get()
 	{
 		int i = 0;

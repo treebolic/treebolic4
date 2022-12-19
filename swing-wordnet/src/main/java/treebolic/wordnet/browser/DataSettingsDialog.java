@@ -9,7 +9,6 @@
 package treebolic.wordnet.browser;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -33,7 +32,7 @@ public class DataSettingsDialog extends JDialog
 	/**
 	 * Properties (input/output)
 	 */
-	protected Properties settings;
+	protected final Properties settings;
 
 	/**
 	 * Ok result
@@ -71,8 +70,6 @@ public class DataSettingsDialog extends JDialog
 
 	/**
 	 * Initialize
-	 *
-	 * @throws Exception
 	 */
 	protected void initialize()
 	{
@@ -80,7 +77,7 @@ public class DataSettingsDialog extends JDialog
 		setResizable(true);
 
 		// images
-		final Icon icon = new ImageIcon(DataSettingsDialog.class.getResource("images/datasettings.png"));
+		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(DataSettingsDialog.class.getResource("images/datasettings.png"));
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
@@ -91,24 +88,12 @@ public class DataSettingsDialog extends JDialog
 
 		// buttons
 		final JButton oKButton = new JButton(Messages.getString("DataSettingsDialog.ok"));
-		oKButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				DataSettingsDialog.this.ok = true;
-				setVisible(false);
-			}
+		oKButton.addActionListener(event -> {
+			DataSettingsDialog.this.ok = true;
+			setVisible(false);
 		});
 		final JButton cancelButton = new JButton(Messages.getString("DataSettingsDialog.cancel"));
-		cancelButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
-			{
-				setVisible(false);
-			}
-		});
+		cancelButton.addActionListener(event -> setVisible(false));
 
 		// panels
 		this.dataPanel = new JPanel();
@@ -128,7 +113,7 @@ public class DataSettingsDialog extends JDialog
 		this.dataComboBox.setRenderer(new DefaultListCellRenderer()
 		{
 			@Override
-			public Component getListCellRendererComponent(final JList<? extends Object> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
+			public Component getListCellRendererComponent(final JList<?> list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus)
 			{
 				String str = (String) value;
 
@@ -165,21 +150,15 @@ public class DataSettingsDialog extends JDialog
 
 		// button
 		final JButton providerAddButton = new JButton(Messages.getString("DataSettingsDialog.other"));
-		providerAddButton.addActionListener(new ActionListener()
-		{
-			@SuppressWarnings("synthetic-access")
-			@Override
-			public void actionPerformed(final java.awt.event.ActionEvent event)
+		providerAddButton.addActionListener(event -> {
+			final String other = ask(Messages.getString("DataSettingsDialog.prompt_other"), "https://x-englishwordnet.github.io/wndb/oewn_2022.zip");
+			if (other != null && !other.isEmpty())
 			{
-				final String other = ask(Messages.getString("DataSettingsDialog.prompt_other"), "https://x-englishwordnet.github.io/wndb/oewn_2022.zip");
-				if (other != null && !other.isEmpty())
+				if (!isInModel(other, DataSettingsDialog.this.dataComboBox))
 				{
-					if (!isInModel(other, DataSettingsDialog.this.dataComboBox))
-					{
-						DataSettingsDialog.this.dataComboBox.addItem(other);
-					}
-					DataSettingsDialog.this.dataComboBox.setSelectedItem(other);
+					DataSettingsDialog.this.dataComboBox.addItem(other);
 				}
+				DataSettingsDialog.this.dataComboBox.setSelectedItem(other);
 			}
 		});
 
@@ -203,11 +182,11 @@ public class DataSettingsDialog extends JDialog
 	/**
 	 * Ask
 	 *
-	 * @param message message
+	 * @param message      message
 	 * @param initialValue initial value
 	 * @return input
 	 */
-	protected String ask(final String message, final String initialValue)
+	protected String ask(final String message, @SuppressWarnings("SameParameterValue") final String initialValue)
 	{
 		final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines, initialValue);
@@ -248,6 +227,7 @@ public class DataSettingsDialog extends JDialog
 		super.setVisible(flag);
 	}
 
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	private boolean isInModel(final String value, final JComboBox<String> comboBox)
 	{
 		final ComboBoxModel<String> model = comboBox.getModel();
@@ -263,6 +243,11 @@ public class DataSettingsDialog extends JDialog
 		return false;
 	}
 
+	/**
+	 * Main entry point
+	 *
+	 * @param args arguments
+	 */
 	static public void main(final String[] args)
 	{
 		UIManager.put("swing.boldMetal", false);

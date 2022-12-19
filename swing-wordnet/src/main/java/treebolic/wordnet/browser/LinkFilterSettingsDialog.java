@@ -37,10 +37,6 @@ public class LinkFilterSettingsDialog extends SettingsDialog
 		{
 			settings.load(new FileReader(path));
 		}
-		catch (FileNotFoundException exception)
-		{
-			exception.printStackTrace();
-		}
 		catch (IOException exception)
 		{
 			exception.printStackTrace();

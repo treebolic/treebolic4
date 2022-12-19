@@ -7,8 +7,8 @@
 
 body {
     background-color: #F5F5DC;
-    font-size: normal;
-    padding: 0px;
+    font-size: medium;
+    padding: 0;
 }
 
 h1 {
@@ -35,12 +35,6 @@ a:hover {
 }
 
 /********* custom *********/
-
-.intro {
-    color: gray;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
 
 .header {
     background-color: gray;
@@ -133,27 +127,27 @@ a:hover {
 }
 
 .from {
-    font-size: normal;
+    font-size: medium;
     font-family: serif;
     border-style: solid;
-    border-width: 1;
-    padding-right: 10;
+    border-width: 1px;
+    padding-right: 10px;
     text-align: right;
 }
 
 .to {
     background-color: #37484A;
     color: #FFFFFF;
-    font-size: normal;
+    font-size: medium;
     font-family: serif;
     border-style: solid;
-    border-width: 1;
-    padding-left: 10;
+    border-width: 1px;
+    padding-left: 10px;
 }
 
 .gloss {
     color: gray;
-    font-size: normal;
+    font-size: medium;
     font-style: italic;
 }
 

@@ -24,6 +24,7 @@
         <module name="swing-application-xml-stax" />
         <module name="swing-browser-search" />
         <module name="provider-owl-owlapi" />
+        <module name="swing-wordnet2" />
         <module name="swing-commons" />
         <module name="provider-sql-generic" />
         <module name="swing-application-xml-sax" />

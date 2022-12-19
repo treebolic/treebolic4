@@ -1,4 +1,4 @@
-<HTML>
+<HTML lang="en-US">
 <HEAD>
 	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<TITLE>Links</TITLE>
@@ -8,17 +8,16 @@
             var maindoc = document;
             var all = maindoc.getElementsByName('link');
             for (i = 0; i < all.length; i++) {
-                var e = all[i];
-                e.style.visibility = 'collapse';
+                var e2 = all[i];
+                e2.style.visibility = 'collapse';
             }
             var e = maindoc.getElementById(tag);
             e.style.visibility = 'visible';
         }
 
         function menu() {
-            var maindoc = document;
-            var toc = maindoc.getElementById('toc');
-            if ((toc.style.display != 'inline'))
+            var toc = document.getElementById('toc');
+            if ((toc.style.display !== 'inline'))
                 toc.style.display = 'inline';
             else
                 toc.style.display = 'none';
@@ -35,101 +34,82 @@
 		<TD style="vertical-align: top;">
 			<DIV id="toc" class="toc">
 				<TABLE>
-					<tr class="selector" onclick="javascript:select('hypernym');">
+					<tr class="selector" onclick="select('hypernym');">
 						<td><img src="images/hypernym.png" alt="Hypernym"></td>
 						<td>Hypernym</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('hyponym');">
+					<tr class="selector" onclick="select('hyponym');">
 						<td><img src="images/hyponym.png" alt="Hyponym/Troponym"></td>
 						<td>Hyponym/Troponym</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('holonym');">
+					<tr class="selector" onclick="select('holonym');">
 						<td><img src="images/holonym.png" alt="Holonym"></td>
 						<td>Holonym</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('meronym');">
+					<tr class="selector" onclick="select('meronym');">
 						<td><img src="images/meronym.png" alt="Meronym"></td>
 						<td>Meronym</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('antonym');">
+					<tr class="selector" onclick="select('antonym');">
 						<td><img src="images/antonym.png" alt="Direct antonym"></td>
 						<td>Direct antonym</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('similar');">
+					<tr class="selector" onclick="select('similar');">
 						<td><img src="images/similar.png" alt="Similar"></td>
 						<td>Similar</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('cause');">
+					<tr class="selector" onclick="select('cause');">
 						<td><img src="images/cause.png" alt="Cause"></td>
 						<td>Cause</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('caused');">
+					<tr class="selector" onclick="select('caused');">
 						<td><img src="images/caused.png" alt="Caused"></td>
 						<td>Caused</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('entail');">
+					<tr class="selector" onclick="select('entail');">
 						<td><img src="images/entail.png" alt="Entail"></td>
 						<td>Entail</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('entailed');">
+					<tr class="selector" onclick="select('entailed');">
 						<td><img src="images/entailed.png" alt="Entailed"></td>
 						<td>Entailed</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('attribute');">
+					<tr class="selector" onclick="select('attribute');">
 						<td><img src="images/attribute.png" alt="Attribute"></td>
 						<td>Attribute</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('pertainym');">
+					<tr class="selector" onclick="select('pertainym');">
 						<td><img src="images/pertainym.png" alt="Pertainym"></td>
 						<td>Pertainym</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('derivation');">
+					<tr class="selector" onclick="select('derivation');">
 						<td><img src="images/derivation.png" alt="Derivation"></td>
 						<td>Derivation</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('adjderived');">
+					<tr class="selector" onclick="select('adjderived');">
 						<td><img src="images/adjderived.png" alt="Derived from adjective"></td>
 						<td>Derived from adjective</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('participle');">
+					<tr class="selector" onclick="select('participle');">
 						<td><img src="images/participle.png" alt="Participle"></td>
 						<td>Participle</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('alsosee');">
+					<tr class="selector" onclick="select('alsosee');">
 						<td><img src="images/alsosee.png" alt="Also See"></td>
 						<td>Also See</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('verbgroup');">
+					<tr class="selector" onclick="select('verbgroup');">
 						<td><img src="images/verb.group.png" alt="Verb Group"></td>
 						<td>Verb Group</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('domain');">
+					<tr class="selector" onclick="select('domain');">
 						<td><img src="images/domain.png" alt="Domain"></td>
 						<td>Domain</td>
 					</tr>
-					<p></p>
-					<tr class="selector" onclick="javascript:select('member');">
+					<tr class="selector" onclick="select('member');">
 						<td><img src="images/domain.member.png" alt="Domain Member"></td>
 						<td>Domain Member</td>
 					</tr>
-					<p></p>
 				</TABLE>
 			</DIV>
 		</TD>
@@ -202,8 +182,8 @@
 									<TR>
 										<TD class="from">disappointment</TD>
 										<TD class="rel"><IMG src="images/hypernym.png" alt="Hypernym"></TD>
-										<TD class="to">disatisfaction</TD>
-										<TD class="gloss">disappointment is a kind of disatisfaction</TD>
+										<TD class="to">dissatisfaction</TD>
+										<TD class="gloss">disappointment is a kind of dissatisfaction</TD>
 									</TR>
 									<TR>
 										<TD class="from">amble</TD>
@@ -359,10 +339,10 @@
 										<TD class="gloss">a house is a kind of dwelling</TD>
 									</TR>
 									<TR>
-										<TD class="from">disatisfaction</TD>
+										<TD class="from">dissatisfaction</TD>
 										<TD class="rel"><IMG src="images/hyponym.png" alt="Hyponym/Troponym"></TD>
 										<TD class="to">disappointment</TD>
-										<TD class="gloss">disappointment is a kind of disatisfaction</TD>
+										<TD class="gloss">disappointment is a kind of dissatisfaction</TD>
 									</TR>
 									<TR>
 										<TD class="from">group</TD>
@@ -1326,7 +1306,7 @@
 									<TR>
 										<TD class="from">have</TD>
 										<TD class="rel"><IMG src="images/entailed.png" alt="Entailed"></TD>
-										<TD class="to">giveve</TD>
+										<TD class="to">give</TD>
 										<TD class="gloss">no temporal inclusion - cause</TD>
 									</TR>
 									<TR>
