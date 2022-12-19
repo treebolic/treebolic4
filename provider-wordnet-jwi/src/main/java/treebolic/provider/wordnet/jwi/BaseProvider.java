@@ -144,58 +144,87 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
 	// L I N K S
 
+	/**
+	 * WordNet link/relation
+	 */
 	public enum Link
 	{
-		HYPERNYM(Pointer.HYPERNYM, "+ generic", "hypernym", ImageIndex.HYPERNYM.ordinal(), true), //
-		HYPERNYM_INSTANCE(Pointer.HYPERNYM_INSTANCE, "hypernym instance", "hypernym", ImageIndex.HYPERNYM_INSTANCE.ordinal(), false), //
-		HYPONYM(Pointer.HYPONYM, "+ specific", "hyponym", ImageIndex.HYPONYM.ordinal(), true), //
-		HYPONYM_INSTANCE(Pointer.HYPONYM_INSTANCE, "hyponym instance", "hyponym", ImageIndex.HYPONYM_INSTANCE.ordinal(), false), //
+		// @formatter:off
+		/** Hypernym */ HYPERNYM(Pointer.HYPERNYM, "+ generic", "hypernym", ImageIndex.HYPERNYM.ordinal(), true), //
+		/** Hypernym instance */ HYPERNYM_INSTANCE(Pointer.HYPERNYM_INSTANCE, "hypernym instance", "hypernym", ImageIndex.HYPERNYM_INSTANCE.ordinal(), false), //
+		/** Hyponym */ HYPONYM(Pointer.HYPONYM, "+ specific", "hyponym", ImageIndex.HYPONYM.ordinal(), true), //
+		/** Hyponym instance */ HYPONYM_INSTANCE(Pointer.HYPONYM_INSTANCE, "hyponym instance", "hyponym", ImageIndex.HYPONYM_INSTANCE.ordinal(), false), //
 
-		HOLONYM_MEMBER(Pointer.HOLONYM_MEMBER, "is member of", "holonym", ImageIndex.HOLONYM_MEMBER.ordinal(), true), //
-		HOLONYM_SUBSTANCE(Pointer.HOLONYM_SUBSTANCE, "is substance of", "holonym", ImageIndex.HOLONYM_SUBSTANCE.ordinal(), true), //
-		HOLONYM_PART(Pointer.HOLONYM_PART, "is part of", "holonym", ImageIndex.HOLONYM_PART.ordinal(), true), //
+		/** Member holonym */ HOLONYM_MEMBER(Pointer.HOLONYM_MEMBER, "is member of", "holonym", ImageIndex.HOLONYM_MEMBER.ordinal(), true), //
+		/** Substance holonym */ HOLONYM_SUBSTANCE(Pointer.HOLONYM_SUBSTANCE, "is substance of", "holonym", ImageIndex.HOLONYM_SUBSTANCE.ordinal(), true), //
+		/** Part holonym */ HOLONYM_PART(Pointer.HOLONYM_PART, "is part of", "holonym", ImageIndex.HOLONYM_PART.ordinal(), true), //
 
-		MERONYM_MEMBER(Pointer.MERONYM_MEMBER, "member", "meronym", ImageIndex.MERONYM_MEMBER.ordinal(), true), //
-		MERONYM_SUBSTANCE(Pointer.MERONYM_SUBSTANCE, "substance", "meronym", ImageIndex.MERONYM_SUBSTANCE.ordinal(), true), //
-		MERONYM_PART(Pointer.MERONYM_PART, "part", "meronym", ImageIndex.MERONYM_PART.ordinal(), true), //
+		/** Member meronym */ MERONYM_MEMBER(Pointer.MERONYM_MEMBER, "member", "meronym", ImageIndex.MERONYM_MEMBER.ordinal(), true), //
+		/** Substance meronym */ MERONYM_SUBSTANCE(Pointer.MERONYM_SUBSTANCE, "substance", "meronym", ImageIndex.MERONYM_SUBSTANCE.ordinal(), true), //
+		/** Part meronym */ MERONYM_PART(Pointer.MERONYM_PART, "part", "meronym", ImageIndex.MERONYM_PART.ordinal(), true), //
 
-		ANTONYM(Pointer.ANTONYM, "opposite", "antonym", ImageIndex.ANTONYM.ordinal(), false), //
+		/** Antonym */ ANTONYM(Pointer.ANTONYM, "opposite", "antonym", ImageIndex.ANTONYM.ordinal(), false), //
 
-		ENTAILS(Pointer.ENTAILMENT, "entails", "entail", ImageIndex.ENTAILMENT.ordinal(), true), //
-		IS_ENTAILED_BY(Pointer.IS_ENTAILED, "is entailed by", "entailed", ImageIndex.IS_ENTAILED_BY.ordinal(), true), //
-		CAUSES(Pointer.CAUSE, "causes", "cause", ImageIndex.CAUSE.ordinal(), true), //
-		IS_CAUSED_BY(Pointer.IS_CAUSED, "is caused by", "caused", ImageIndex.IS_CAUSED_BY.ordinal(), true), //
+		/** Entails */ ENTAILS(Pointer.ENTAILMENT, "entails", "entail", ImageIndex.ENTAILMENT.ordinal(), true), //
+		/** Is entailed by */ IS_ENTAILED_BY(Pointer.IS_ENTAILED, "is entailed by", "entailed", ImageIndex.IS_ENTAILED_BY.ordinal(), true), //
+		/** Causes */ CAUSES(Pointer.CAUSE, "causes", "cause", ImageIndex.CAUSE.ordinal(), true), //
+		/** Is caused by */ IS_CAUSED_BY(Pointer.IS_CAUSED, "is caused by", "caused", ImageIndex.IS_CAUSED_BY.ordinal(), true), //
 
-		SIMILAR_TO(Pointer.SIMILAR_TO, "similar to", "similar", ImageIndex.SIMILAR_TO.ordinal(), false), //
-		ALSO_SEE(Pointer.ALSO_SEE, "also see", "alsosee", ImageIndex.ALSO_SEE.ordinal(), false), //
-		ATTRIBUTE(Pointer.ATTRIBUTE, "attribute", "attribute", ImageIndex.ATTRIBUTE.ordinal(), false), //
-		PERTAINYM(Pointer.PERTAINYM, "pertains to", "pertainym", ImageIndex.PERTAINYM.ordinal(), false), //
-		DERIVATIONALLY_RELATED(Pointer.DERIVATIONALLY_RELATED, "derivation", "derivation", ImageIndex.DERIVATIONALLY_RELATED.ordinal(), false), //
-		DERIVED_FROM_ADJ(Pointer.DERIVED_FROM_ADJ, "derived from", "adjderived", ImageIndex.DERIVED_FROM_ADJ.ordinal(), false), //
+		/** Similar to */ SIMILAR_TO(Pointer.SIMILAR_TO, "similar to", "similar", ImageIndex.SIMILAR_TO.ordinal(), false), //
+		/** Also see */ ALSO_SEE(Pointer.ALSO_SEE, "also see", "alsosee", ImageIndex.ALSO_SEE.ordinal(), false), //
+		/** Attribute */ ATTRIBUTE(Pointer.ATTRIBUTE, "attribute", "attribute", ImageIndex.ATTRIBUTE.ordinal(), false), //
+		/** Pertainym */ PERTAINYM(Pointer.PERTAINYM, "pertains to", "pertainym", ImageIndex.PERTAINYM.ordinal(), false), //
+		/** Derivationally related */ DERIVATIONALLY_RELATED(Pointer.DERIVATIONALLY_RELATED, "derivation", "derivation", ImageIndex.DERIVATIONALLY_RELATED.ordinal(), false), //
+		/** Derived from adjective */ DERIVED_FROM_ADJ(Pointer.DERIVED_FROM_ADJ, "derived from", "adjderived", ImageIndex.DERIVED_FROM_ADJ.ordinal(), false), //
 
-		VERB_GROUP(Pointer.VERB_GROUP, "verb group", "verbgroup", ImageIndex.VERB_GROUP.ordinal(), false), //
-		PARTICIPLE(Pointer.PARTICIPLE, "participle", "participle", ImageIndex.PARTICIPLE.ordinal(), false), //
+		/** Verb group */ VERB_GROUP(Pointer.VERB_GROUP, "verb group", "verbgroup", ImageIndex.VERB_GROUP.ordinal(), false), //
+		/** Participle */ PARTICIPLE(Pointer.PARTICIPLE, "participle", "participle", ImageIndex.PARTICIPLE.ordinal(), false), //
 
-		DOMAIN(Pointer.DOMAIN, "domain", "domain", ImageIndex.DOMAIN.ordinal(), false), //
-		TOPIC(Pointer.TOPIC, "domain-topic", "domain", ImageIndex.TOPIC.ordinal(), false), //
-		USAGE(Pointer.USAGE, "domain-usage", "domain", ImageIndex.USAGE.ordinal(), false), //
-		REGION(Pointer.REGION, "domain-region", "domain", ImageIndex.REGION.ordinal(), false), //
+		/** Domain */ DOMAIN(Pointer.DOMAIN, "domain", "domain", ImageIndex.DOMAIN.ordinal(), false), //
+		/** Topic */ TOPIC(Pointer.TOPIC, "domain-topic", "domain", ImageIndex.TOPIC.ordinal(), false), //
+		/** Usage */ USAGE(Pointer.USAGE, "domain-usage", "domain", ImageIndex.USAGE.ordinal(), false), //
+		/** Region */ REGION(Pointer.REGION, "domain-region", "domain", ImageIndex.REGION.ordinal(), false), //
 
-		MEMBER(Pointer.MEMBER, "domain member", "member", ImageIndex.MEMBER.ordinal(), false), //
-		TOPIC_MEMBER(Pointer.TOPIC_MEMBER, "member-topic", "member", ImageIndex.TOPIC_MEMBER.ordinal(), false), //
-		USAGE_MEMBER(Pointer.USAGE_MEMBER, "member-usage", "member", ImageIndex.USAGE_MEMBER.ordinal(), false), //
-		REGION_MEMBER(Pointer.REGION_MEMBER, "member-region", "member", ImageIndex.REGION_MEMBER.ordinal(), false); //
+		/** Member */ MEMBER(Pointer.MEMBER, "domain member", "member", ImageIndex.MEMBER.ordinal(), false), //
+		/** Topic member */ TOPIC_MEMBER(Pointer.TOPIC_MEMBER, "member-topic", "member", ImageIndex.TOPIC_MEMBER.ordinal(), false), //
+		/** Usage member */ USAGE_MEMBER(Pointer.USAGE_MEMBER, "member-usage", "member", ImageIndex.USAGE_MEMBER.ordinal(), false), //
+		/** Region member */ REGION_MEMBER(Pointer.REGION_MEMBER, "member-region", "member", ImageIndex.REGION_MEMBER.ordinal(), false); //
+		// @formatter:on
 
+		/**
+		 * Pointer
+		 */
 		public final Pointer pointer;
 
+		/**
+		 * Label
+		 */
 		public final String label;
 
+		/**
+		 * Tag
+		 */
 		public final String tag;
 
+		/**
+		 * Image index
+		 */
 		public final int imageIndex;
 
+		/**
+		 * Recurses flag
+		 */
 		public final boolean recurses;
 
+		/**
+		 * Constructor
+		 *
+		 * @param pointer    pointer
+		 * @param label      label
+		 * @param tag        tag
+		 * @param imageIndex image index
+		 * @param recurses   recurses flag
+		 */
 		Link(final Pointer pointer, final String label, final String tag, final int imageIndex, final boolean recurses)
 		{
 			this.pointer = pointer;
@@ -205,17 +234,34 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			this.recurses = recurses;
 		}
 
+		/**
+		 * Mask
+		 *
+		 * @return link mask
+		 */
 		public long mask()
 		{
 			return 1 << ordinal();
 		}
 
+		/**
+		 * Test
+		 *
+		 * @param bitmap bits
+		 * @return true if the link's bit is set
+		 */
 		@SuppressWarnings({"BooleanMethodIsAlwaysInverted", "WeakerAccess"})
 		public boolean test(final long bitmap)
 		{
 			return (bitmap & (1 << ordinal())) != 0;
 		}
 
+		/**
+		 * Parse pointer for link
+		 *
+		 * @param pointer pointer
+		 * @return link
+		 */
 		@NonNull
 		static public Link valueOf(@NonNull final IPointer pointer)
 		{
@@ -352,48 +398,53 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
 	// I M A G E S
 
+	/**
+	 * Image index
+	 */
 	public enum ImageIndex
 	{
-		ROOT, POS, CATEGORY, SENSE, SYNSET, MEMBERS, LINKS, WORD,
+		// @formatter:off
+		/** Root */ ROOT, /** POS */ POS, /** Category */ CATEGORY, /** Sense */ SENSE, /** Synset */ SYNSET,/** Members */  MEMBERS, /** Links */ LINKS, /** Word */ WORD,
 
-		HYPERNYM, //
-		HYPERNYM_INSTANCE, //
-		HYPONYM, //
-		HYPONYM_INSTANCE, //
+		/** Hypernym */ HYPERNYM, //
+		/** Hypernym instance */ HYPERNYM_INSTANCE, //
+		/** Hyponym */ HYPONYM, //
+		/** Hyponym instance */ HYPONYM_INSTANCE, //
 
-		HOLONYM_MEMBER, //
-		HOLONYM_SUBSTANCE, //
-		HOLONYM_PART, //
+		/** Member holonym */ HOLONYM_MEMBER, //
+		/** Substance holonym */ HOLONYM_SUBSTANCE, //
+		/** Part holonym */ HOLONYM_PART, //
 
-		MERONYM_MEMBER, //
-		MERONYM_SUBSTANCE, //
-		MERONYM_PART, //
+		/** Member meronym */ MERONYM_MEMBER, //
+		/** Substance meronym */ MERONYM_SUBSTANCE, //
+		/** Part meronym */ MERONYM_PART, //
 
-		ANTONYM, //
+		/** Antonym */ ANTONYM, //
 
-		ENTAILMENT, //
-		IS_ENTAILED_BY, //
-		CAUSE, //
-		IS_CAUSED_BY, //
-		VERB_GROUP, //
-		PARTICIPLE, //
+		/** Entails */ ENTAILMENT, //
+		/** Is entailed by */ IS_ENTAILED_BY, //
+		/** Causes */ CAUSE, //
+		/** Is caused by */ IS_CAUSED_BY, //
+		/** Verb group */ VERB_GROUP, //
+		/** Participle */ PARTICIPLE, //
 
-		SIMILAR_TO, //
-		ALSO_SEE, //
-		ATTRIBUTE, //
-		PERTAINYM, //
-		DERIVATIONALLY_RELATED, //
-		DERIVED_FROM_ADJ, //
+		/** Similar to */ SIMILAR_TO, //
+		/** Also see */ ALSO_SEE, //
+		/** Attribute */ ATTRIBUTE, //
+		/** Pertainym */ PERTAINYM, //
+		/** Derivationally related */ DERIVATIONALLY_RELATED, //
+		/** Derived from adjective */ DERIVED_FROM_ADJ, //
 
-		DOMAIN, //
-		TOPIC, //
-		USAGE, //
-		REGION, //
+		/** Domain */ DOMAIN, //
+		/** Topic */ TOPIC, //
+		/** Usage */ USAGE, //
+		/** Region */ REGION, //
 
-		MEMBER, //
-		TOPIC_MEMBER, //
-		USAGE_MEMBER, //
-		REGION_MEMBER, //
+		/** Member */ MEMBER, //
+		/** Topic member */ TOPIC_MEMBER, //
+		/** Usage member */ USAGE_MEMBER, //
+		/** Region member */ REGION_MEMBER, //
+		// @formatter:on
 	}
 
 	@Nullable
@@ -694,6 +745,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 */
 	static public final int COLORS0_COUNT = 43;
 
+	/**
+	 * Initial colors
+	 */
 	static public final Integer[] COLORS0 = new Integer[COLORS0_COUNT];
 
 	static
