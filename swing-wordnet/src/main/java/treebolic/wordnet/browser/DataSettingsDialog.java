@@ -151,7 +151,7 @@ public class DataSettingsDialog extends JDialog
 		});
 
 		// providers
-		final String[] providers = new String[]{"WN31", "EWN"};
+		final String[] providers = new String[]{"WN31", "OEWN"};
 		for (final String item : providers)
 		{
 			this.dataComboBox.addItem(item);
@@ -171,7 +171,7 @@ public class DataSettingsDialog extends JDialog
 			@Override
 			public void actionPerformed(final java.awt.event.ActionEvent event)
 			{
-				final String other = ask(Messages.getString("DataSettingsDialog.prompt_other"), "https://x-englishwordnet.github.io/wndb/xewn.zip");
+				final String other = ask(Messages.getString("DataSettingsDialog.prompt_other"), "https://x-englishwordnet.github.io/wndb/oewn_2022.zip");
 				if (other != null && !other.isEmpty())
 				{
 					if (!isInModel(other, DataSettingsDialog.this.dataComboBox))

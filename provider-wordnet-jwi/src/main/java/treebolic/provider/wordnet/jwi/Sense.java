@@ -11,29 +11,58 @@ import edu.mit.jwi.item.POS;
 import treebolic.annotations.NonNull;
 
 /**
+ * Sense wrapper
+ *
  * @author Bernard Bou
  */
 public class Sense
 {
+	/**
+	 * Part of speech
+	 */
 	final public POS pos;
 
+	/**
+	 * Sensekey
+	 */
 	final public ISenseKey sensekey;
 
+	/**
+	 * Word
+	 */
 	final public IWord sense;
 
+	/**
+	 * Synset
+	 */
 	@NonNull
 	final public Synset synset;
 
+	/**
+	 * POS index
+	 */
 	@SuppressWarnings({"WeakerAccess", "unused"})
 	final public int posIdx;
 
+	/**
+	 * Global index
+	 */
 	@SuppressWarnings({"WeakerAccess", "unused"})
 	final public int globalIdx;
 
+	/**
+	 * Sense num
+	 */
 	final public int senseNum;
 
+	/**
+	 * Tag count
+	 */
 	final public int tagCount;
 
+	/**
+	 * Lexid
+	 */
 	final public int lexId;
 
 	/**

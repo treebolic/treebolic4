@@ -25,27 +25,38 @@ import treebolic.annotations.NonNull;
  */
 public class DataManager
 {
+	/**
+	 * WordNet 3.1
+	 */
 	static public final String WN31_TAG = "WN31";
 
-	static public final String EWN_TAG = "EWN";
+	/**
+	 * Open English WordNet
+	 */
+	static public final String OEWN_TAG = "OEWN";
 
-	static private String WN31_ARCHIVE = "/wordnet31.zip";
+	static private final String WN31_ARCHIVE = "/wordnet31.zip";
 
-	static private String EWN_ARCHIVE = "/xewn.zip";
+	static private final String OEWN_ARCHIVE = "/oewn2022.zip";
 
-	static private String CACHESUBDIR = "wordnet";
+	static private final String CACHESUBDIR = "wordnet";
 
 	static private final String[] WORDNET_FILES = { //
 			"data.noun", "data.verb", "data.adj", "data.adv", //
 			"index.noun", "index.verb", "index.adj", "index.adv", "index.sense", //
 			"noun.exc", "verb.exc", "adj.exc", "adv.exc", "cousin.exc", //
 			"sentidx.vrb", "sents.vrb", "verb.Framestext", //
-			"cntlist", "cntlist.rev", };
+			"cntlist", "cntlist.rev",};
 
 	static private final Set<String> WORDNET_FILESET = new HashSet<>(Arrays.asList(WORDNET_FILES));
 
-	static private DataManager INSTANCE = new DataManager();
+	static private final DataManager INSTANCE = new DataManager();
 
+	/**
+	 * Get instance of singleton data manager
+	 *
+	 * @return instance of singleton data manager
+	 */
 	static public DataManager getInstance()
 	{
 		return INSTANCE;
@@ -61,10 +72,10 @@ public class DataManager
 	/**
 	 * Get data dir
 	 *
-	 * @param data data (tag or url)
+	 * @param data      data (tag or url)
 	 * @param cacheHome cache home directory (parent to cache)
 	 * @return cached dictionary data
-	 * @throws IOException
+	 * @throws IOException io exception
 	 */
 	public File getDataDir(final String data, final File cacheHome) throws IOException
 	{
@@ -75,10 +86,10 @@ public class DataManager
 	/**
 	 * Deploy zip to cache
 	 *
-	 * @param data data (tag or url)
+	 * @param data      data (tag or url)
 	 * @param cacheHome cache home directory (parent to cache)
 	 * @return cached dictionary data
-	 * @throws IOException
+	 * @throws IOException io exception
 	 */
 	public File deploy(final String data, final File cacheHome) throws IOException
 	{
@@ -89,11 +100,10 @@ public class DataManager
 	/**
 	 * Setup
 	 *
-	 * @param zipUrl source zip url
+	 * @param zipUrl    source zip url
 	 * @param cacheHome cache home directory (parent to cache)
 	 * @param doCleanup whether to clean up
 	 * @return cached dictionary data
-	 * @return true if cache is valid
 	 */
 	@NonNull
 	private File setup(@NonNull final URL zipUrl, @NonNull final File cacheHome, final boolean doCleanup) throws IOException
@@ -105,11 +115,15 @@ public class DataManager
 		if (cache.exists())
 		{
 			if (doCleanup)
-				// force clean up, doUnzip remains true
+			// force clean up, doUnzip remains true
+			{
 				cleanup(cache);
+			}
 			else
-				// doUnzip may toggle if check says so
+			// doUnzip may toggle if check says so
+			{
 				doUnzip = !DataManager.check(cache);
+			}
 		}
 		else
 		{
@@ -138,15 +152,24 @@ public class DataManager
 		System.out.println("Clean up " + dir);
 		// clean up
 		String[] entries = dir.list();
-		for (String entry : entries)
+		if (entries != null)
 		{
-			final File file = new File(dir.getPath(), entry);
-			if (WORDNET_FILESET.contains(file.getName()))
-				file.delete();
+			for (String entry : entries)
+			{
+				final File file = new File(dir.getPath(), entry);
+				if (WORDNET_FILESET.contains(file.getName()))
+				{
+					//noinspection ResultOfMethodCallIgnored
+					file.delete();
+				}
+			}
 		}
 		final File file = new File(dir.getPath(), "build");
 		if (file.exists())
+		{
+			//noinspection ResultOfMethodCallIgnored
 			file.delete();
+		}
 	}
 
 	/**
@@ -172,14 +195,14 @@ public class DataManager
 	/**
 	 * Expand zip to dir
 	 *
-	 * @param zipUrl zip file url
+	 * @param zipUrl           zip file url
 	 * @param pathPrefixFilter path prefix filter on entries
-	 * @param destDir destination dir
+	 * @param destDir          destination dir
 	 * @return dest dir
 	 */
 	@NonNull
-	@SuppressWarnings({ "WeakerAccess", "UnusedReturnValue" })
-	static private File expand(@NonNull final URL zipUrl, final String pathPrefixFilter, @NonNull final File destDir) throws IOException
+	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
+	static private File expand(@NonNull final URL zipUrl, @SuppressWarnings("SameParameterValue") final String pathPrefixFilter, @NonNull final File destDir) throws IOException
 	{
 		System.out.println("Expand " + zipUrl);
 		return DataManager.expand(zipUrl.openStream(), pathPrefixFilter, destDir);
@@ -188,9 +211,9 @@ public class DataManager
 	/**
 	 * Expand zip stream to dir
 	 *
-	 * @param inputStream zip file input stream
+	 * @param inputStream       zip file input stream
 	 * @param pathPrefixFilter0 path prefix filter on entries
-	 * @param destDir destination dir
+	 * @param destDir           destination dir
 	 * @return dest dir
 	 */
 	@NonNull
@@ -252,26 +275,28 @@ public class DataManager
 	 *
 	 * @param data0 data
 	 * @return source zip url
-	 * @throws MalformedURLException
+	 * @throws MalformedURLException malformed url exception
 	 */
 	private URL getSourceZipURL(String data0) throws MalformedURLException
 	{
 		String data = data0;
 		if (data == null)
+		{
 			data = WN31_TAG;
+		}
 
 		switch (data)
 		{
-		case WN31_TAG:
-			// source archive in class path
-			return DataManager.class.getResource(WN31_ARCHIVE);
-		case EWN_TAG:
-			// source archive in class path
-			return DataManager.class.getResource(EWN_ARCHIVE);
-		default:
-			// source archive at URL
-			System.out.println(data);
-			return new URL(data);
+			case WN31_TAG:
+				// source archive in class path
+				return DataManager.class.getResource(WN31_ARCHIVE);
+			case OEWN_TAG:
+				// source archive in class path
+				return DataManager.class.getResource(OEWN_ARCHIVE);
+			default:
+				// source archive at URL
+				System.out.println(data);
+				return new URL(data);
 		}
 	}
 }

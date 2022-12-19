@@ -8,13 +8,21 @@ import edu.mit.jwi.item.ISynset;
 import treebolic.annotations.NonNull;
 
 /**
+ * Synset wrapper
+ *
  * @author Bernard Bou
  */
 public class Synset
 {
+	/**
+	 * Embedded synset
+	 */
 	@NonNull
 	final public ISynset synset;
 
+	/**
+	 * Synset gloss
+	 */
 	@NonNull
 	final public Gloss gloss;
 

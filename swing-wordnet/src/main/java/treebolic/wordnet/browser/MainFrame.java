@@ -313,9 +313,10 @@ public class MainFrame extends treebolic.browser2.MainFrame
 			if (dialog.changed)
 			{
 				final String which = this.settings.getProperty("data");
+				final String base = this.settings.getProperty("base");
 				final String userHomeStr = this.settings.getProperty("userhome", null);
-				final boolean userHome = userHomeStr == null ? true : Boolean.parseBoolean(userHomeStr);
-				final File cacheHome = Context.makeDataDir(null, userHome);
+				final boolean userHome = userHomeStr == null || Boolean.parseBoolean(userHomeStr);
+				final File cacheHome = Context.makeDataDir(base, userHome);
 
 				try
 				{

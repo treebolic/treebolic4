@@ -5,158 +5,254 @@
 package treebolic.provider.wordnet.jwi;
 
 /**
- * Data manager
+ * Parameter keys
  *
  * @author Bernard Bou
  */
 public class Parameters
 {
-	// P A R A M E T E R    K E Y S
-
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Provider
+	 */
 	static public final String KEY_PROVIDER = "provider";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Source
+	 */
 	static public final String KEY_SOURCE = "source";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Data
+	 */
 	static public final String KEY_DATA = "data";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Relation filter
+	 */
 	static public final String KEY_RELATION_FILTER = "relation_filter";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Related max
+	 */
 	static public final String KEY_RELATED_MAX = "related_max";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Recurse max
+	 */
 	static public final String KEY_RECURSE_MAX = "recurse_max";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Load balance members
+	 */
 	public static final String KEY_LOADBALANCE_MEMBERS = "loadbalance_members";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Load balance semlinks
+	 */
 	public static final String KEY_LOADBALANCE_SEMLINKS = "loadbalance_semlinks";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Back color
+	 */
 	static public final String KEY_BACKCOLOR = "backcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Font size factor
+	 */
 	static public final String KEY_FONTSIZE_FACTOR = "fontsize_factor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Label max lines
+	 */
 	static public final String KEY_LABEL_MAX_LINES = "label_max_lines";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Expansion
+	 */
 	static public final String KEY_EXPANSION = "expansion";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Sweep
+	 */
 	static public final String KEY_SWEEP = "sweep";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Tree edge color
+	 */
 	static public final String KEY_TREE_ECOLOR = "tree_ecolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Root background color
+	 */
 	static public final String KEY_ROOT_BCOLOR = "root_bcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Root foreground color
+	 */
 	static public final String KEY_ROOT_FCOLOR = "root_fcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Category foreground color
+	 */
 	static public final String KEY_CATEGORY_BCOLOR = "category_bcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Category foreground color
+	 */
 	static public final String KEY_CATEGORY_FCOLOR = "category_fcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Category edge color
+	 */
 	static public final String KEY_CATEGORY_ECOLOR = "category_ecolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * POS foreground color
+	 */
 	static public final String KEY_POS_BCOLOR = "pos_bcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * POS background
+	 */
 	static public final String KEY_POS_FCOLOR = "pos_fcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * POS edge color
+	 */
 	static public final String KEY_POS_ECOLOR = "pos_ecolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Sense background color
+	 */
 	static public final String KEY_SENSE_BCOLOR = "sense_bcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Sense foreground color
+	 */
 	static public final String KEY_SENSE_FCOLOR = "sense_fcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Sense edge color
+	 */
 	static public final String KEY_SENSE_ECOLOR = "sense_ecolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Synset background foreground color
+	 */
 	static public final String KEY_SYNSET_BCOLOR = "synset_bcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Synset foreground color
+	 */
 	static public final String KEY_SYNSET_FCOLOR = "synset_fcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Synset edge color
+	 */
 	static public final String KEY_SYNSET_ECOLOR = "synset_ecolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Links background color
+	 */
 	static public final String KEY_LINKS_BCOLOR = "links_bcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Links forecolor
+	 */
 	static public final String KEY_LINKS_FCOLOR = "links_fcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Links edge color
+	 */
 	static public final String KEY_LINKS_ECOLOR = "links_ecolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Link background color
+	 */
 	static public final String KEY_LINK_BCOLOR = "link_bcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Link foreground color
+	 */
 	static public final String KEY_LINK_FCOLOR = "link_fcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Link edge color
+	 */
 	static public final String KEY_LINK_ECOLOR = "link_ecolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Member background color
+	 */
 	static public final String KEY_MEMBERS_BCOLOR = "members_bcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Member foreground color
+	 */
 	static public final String KEY_MEMBERS_FCOLOR = "members_fcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Member edge color
+	 */
 	static public final String KEY_MEMBERS_ECOLOR = "members_ecolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word background color
+	 */
 	static public final String KEY_WORD_BCOLOR = "word_bcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word foreground color
+	 */
 	static public final String KEY_WORD_FCOLOR = "word_fcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word edge color
+	 */
 	static public final String KEY_WORD_ECOLOR = "word_ecolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Linked word background color
+	 */
 	static public final String KEY_LINKEDWORD_BCOLOR = "linkedword_bcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Linked word foreground color
+	 */
 	static public final String KEY_LINKEDWORD_FCOLOR = "linkedword_fcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Stem background color
+	 */
 	static public final String KEY_STEM_BCOLOR = "stem_bcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Stem foreground color
+	 */
 	static public final String KEY_STEM_FCOLOR = "stem_fcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Stem edge color
+	 */
 	static public final String KEY_STEM_ECOLOR = "stem_ecolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Etc background color
+	 */
 	static public final String KEY_ETC_BCOLOR = "etc_bcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Etc foreground color
+	 */
 	static public final String KEY_ETC_FCOLOR = "etc_fcolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Etc edge color
+	 */
 	static public final String KEY_ETC_ECOLOR = "etc_ecolor";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Edge color
+	 */
 	static public final String KEY_ECOLOR = "ecolor";
 }

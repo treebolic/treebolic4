@@ -8,34 +8,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.IDictionary;
-import edu.mit.jwi.item.IIndexWord;
-import edu.mit.jwi.item.ILexFile;
-import edu.mit.jwi.item.IPointer;
-import edu.mit.jwi.item.ISenseEntry;
-import edu.mit.jwi.item.ISenseKey;
-import edu.mit.jwi.item.ISynset;
-import edu.mit.jwi.item.ISynsetID;
-import edu.mit.jwi.item.IWord;
-import edu.mit.jwi.item.IWordID;
-import edu.mit.jwi.item.POS;
-import edu.mit.jwi.item.Pointer;
-import edu.mit.jwi.item.SynsetID;
+import edu.mit.jwi.item.*;
 import edu.mit.jwi.morph.IStemmer;
 import edu.mit.jwi.morph.WordnetStemmer;
 import treebolic.ILocator;
@@ -55,7 +32,7 @@ import treebolic.provider.LoadBalancer;
  *
  * @author Bernard Bou
  */
-@SuppressWarnings({ "SameParameterValue" })
+@SuppressWarnings({"SameParameterValue"})
 public abstract class BaseProvider implements IProvider, ImageDecorator
 {
 	// F E A T U R E S
@@ -86,25 +63,39 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
 	// L A B E L S
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Label category
+	 */
 	static public final String LABEL_CATEGORY = "category";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Label sense
+	 */
 	static public final String LABEL_SENSE = "sense";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Label synset
+	 */
 	static public final String LABEL_SYNSET = "synset";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Label links
+	 */
 	static public final String LABEL_LINKS = "links";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Label words
+	 */
 	static public final String LABEL_MEMBERS = "words";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Label word
+	 */
 	static public final String LABEL_MEMBER = "word";
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Label stem
+	 */
 	static public final String LABEL_STEM = "stem";
 
 	// E D G E S T Y L E
@@ -112,43 +103,43 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Edge style
 	 */
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_TREE = IEdge.SOLID | IEdge.FROMTRIANGLE | IEdge.FROMFILL;
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_MEMBER = IEdge.DASH | IEdge.STROKEDEF | IEdge.TOCIRCLE | IEdge.TOFILL | IEdge.TODEF;
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_MEMBERS = IEdge.SOLID | IEdge.STROKEDEF | IEdge.TOCIRCLE | IEdge.TOFILL | IEdge.TODEF;
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_SYNSET = IEdge.SOLID | IEdge.STROKEDEF | IEdge.TOCIRCLE | IEdge.TOFILL | IEdge.TODEF;
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_LINK = IEdge.SOLID | IEdge.STROKEDEF | IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.TODEF | IEdge.FROMDEF;
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_LEX = IEdge.SOLID | IEdge.STROKEDEF;
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_LINKS = IEdge.SOLID | IEdge.STROKEDEF | IEdge.FROMCIRCLE | IEdge.FROMFILL | IEdge.FROMDEF;
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_ETC = IEdge.DOT | IEdge.STROKEDEF | IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.TODEF;
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_SENSE = IEdge.SOLID | IEdge.STROKEDEF | IEdge.FROMTRIANGLE | IEdge.FROMFILL | IEdge.FROMDEF;
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_POS = IEdge.SOLID | IEdge.STROKEDEF | IEdge.FROMTRIANGLE | IEdge.FROMFILL | IEdge.FROMDEF;
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_CATEGORY = IEdge.SOLID | IEdge.STROKEDEF | IEdge.FROMTRIANGLE | IEdge.FROMFILL | IEdge.FROMDEF;
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_STEM = IEdge.DOT | IEdge.STROKEDEF | IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.TODEF;
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static protected final int EDGE_STYLE_EDGE = IEdge.DOT | IEdge.STROKEDEF | IEdge.TODEF | IEdge.TOTRIANGLE | IEdge.TOFILL;
 
 	// L I N K S
@@ -197,15 +188,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
 		public final Pointer pointer;
 
-		@SuppressWarnings("WeakerAccess")
 		public final String label;
 
-		@SuppressWarnings("WeakerAccess")
 		public final String tag;
 
 		public final int imageIndex;
 
-		@SuppressWarnings("WeakerAccess")
 		public final boolean recurses;
 
 		Link(final Pointer pointer, final String label, final String tag, final int imageIndex, final boolean recurses)
@@ -217,148 +205,146 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			this.recurses = recurses;
 		}
 
-		@SuppressWarnings("WeakerAccess")
 		public long mask()
 		{
 			return 1 << ordinal();
 		}
 
-		@SuppressWarnings({ "BooleanMethodIsAlwaysInverted", "WeakerAccess" })
+		@SuppressWarnings({"BooleanMethodIsAlwaysInverted", "WeakerAccess"})
 		public boolean test(final long bitmap)
 		{
 			return (bitmap & (1 << ordinal())) != 0;
 		}
 
-		@SuppressWarnings("WeakerAccess")
 		@NonNull
 		static public Link valueOf(@NonNull final IPointer pointer)
 		{
 			final String symbol = pointer.getSymbol();
 			switch (symbol.charAt(0))
 			{
-			case '@':
-				if (symbol.length() > 1 && symbol.charAt(1) == 'i')
-				{
-					return Link.HYPERNYM_INSTANCE;
-				}
-				return Link.HYPERNYM;
-
-			case '~':
-				if (symbol.length() > 1 && symbol.charAt(1) == 'i')
-				{
-					return Link.HYPONYM_INSTANCE;
-				}
-				return Link.HYPONYM;
-
-			case '#':
-				if (symbol.length() > 1)
-				{
-					switch (symbol.charAt(1))
+				case '@':
+					if (symbol.length() > 1 && symbol.charAt(1) == 'i')
 					{
-					case 'm':
-						return Link.HOLONYM_MEMBER;
-					case 's':
-						return Link.HOLONYM_SUBSTANCE;
-					case 'p':
-						return Link.HOLONYM_PART;
+						return Link.HYPERNYM_INSTANCE;
 					}
-				}
-				break;
+					return Link.HYPERNYM;
 
-			case '%':
-				if (symbol.length() > 1)
-				{
-					switch (symbol.charAt(1))
+				case '~':
+					if (symbol.length() > 1 && symbol.charAt(1) == 'i')
 					{
-					case 'm':
-						return Link.MERONYM_MEMBER;
-					case 's':
-						return Link.MERONYM_SUBSTANCE;
-					case 'p':
-						return Link.MERONYM_PART;
+						return Link.HYPONYM_INSTANCE;
 					}
-				}
-				break;
+					return Link.HYPONYM;
 
-			case '^':
-				return Link.ALSO_SEE;
-
-			case '!':
-				return Link.ANTONYM;
-
-			case '>':
-				if (symbol.length() > 1 && symbol.charAt(1) == '^')
-				{
-					return Link.IS_CAUSED_BY;
-				}
-				return Link.CAUSES;
-
-			case '*':
-				if (symbol.length() > 1 && symbol.charAt(1) == '^')
-				{
-					return Link.IS_ENTAILED_BY;
-				}
-				return Link.ENTAILS;
-
-			case '<':
-				return Link.PARTICIPLE;
-
-			case '$':
-				return Link.VERB_GROUP;
-
-			case '&':
-				return Link.SIMILAR_TO;
-
-			case '=':
-				return Link.ATTRIBUTE;
-
-			case '+':
-				return Link.DERIVATIONALLY_RELATED;
-
-			case '\\':
-				if (pointer.getName().startsWith("Pertainym"))
-				{
-					return Link.PERTAINYM;
-				}
-				else if (pointer.getName().startsWith("Derived from adjective"))
-				{
-					return Link.DERIVED_FROM_ADJ;
-				}
-				break;
-
-			case ';':
-				if (symbol.length() > 1)
-				{
-					switch (symbol.charAt(1))
+				case '#':
+					if (symbol.length() > 1)
 					{
-					case 'r':
-						return Link.REGION;
-					case 'c':
-						return Link.TOPIC;
-					case 'u':
-						return Link.USAGE;
+						switch (symbol.charAt(1))
+						{
+							case 'm':
+								return Link.HOLONYM_MEMBER;
+							case 's':
+								return Link.HOLONYM_SUBSTANCE;
+							case 'p':
+								return Link.HOLONYM_PART;
+						}
 					}
-				}
-				return Link.DOMAIN;
+					break;
 
-			case '-':
-				if (symbol.length() > 1)
-				{
-					switch (symbol.charAt(1))
+				case '%':
+					if (symbol.length() > 1)
 					{
-					case 'r':
-						return Link.REGION_MEMBER;
-
-					case 'c':
-						return Link.TOPIC_MEMBER;
-
-					case 'u':
-						return Link.USAGE_MEMBER;
+						switch (symbol.charAt(1))
+						{
+							case 'm':
+								return Link.MERONYM_MEMBER;
+							case 's':
+								return Link.MERONYM_SUBSTANCE;
+							case 'p':
+								return Link.MERONYM_PART;
+						}
 					}
-				}
-				return Link.MEMBER;
+					break;
 
-			default:
+				case '^':
+					return Link.ALSO_SEE;
+
+				case '!':
+					return Link.ANTONYM;
+
+				case '>':
+					if (symbol.length() > 1 && symbol.charAt(1) == '^')
+					{
+						return Link.IS_CAUSED_BY;
+					}
+					return Link.CAUSES;
+
+				case '*':
+					if (symbol.length() > 1 && symbol.charAt(1) == '^')
+					{
+						return Link.IS_ENTAILED_BY;
+					}
+					return Link.ENTAILS;
+
+				case '<':
+					return Link.PARTICIPLE;
+
+				case '$':
+					return Link.VERB_GROUP;
+
+				case '&':
+					return Link.SIMILAR_TO;
+
+				case '=':
+					return Link.ATTRIBUTE;
+
+				case '+':
+					return Link.DERIVATIONALLY_RELATED;
+
+				case '\\':
+					if (pointer.getName().startsWith("Pertainym"))
+					{
+						return Link.PERTAINYM;
+					}
+					else if (pointer.getName().startsWith("Derived from adjective"))
+					{
+						return Link.DERIVED_FROM_ADJ;
+					}
+					break;
+
+				case ';':
+					if (symbol.length() > 1)
+					{
+						switch (symbol.charAt(1))
+						{
+							case 'r':
+								return Link.REGION;
+							case 'c':
+								return Link.TOPIC;
+							case 'u':
+								return Link.USAGE;
+						}
+					}
+					return Link.DOMAIN;
+
+				case '-':
+					if (symbol.length() > 1)
+					{
+						switch (symbol.charAt(1))
+						{
+							case 'r':
+								return Link.REGION_MEMBER;
+
+							case 'c':
+								return Link.TOPIC_MEMBER;
+
+							case 'u':
+								return Link.USAGE_MEMBER;
+						}
+					}
+					return Link.MEMBER;
+
+				default:
 			}
 			throw new IllegalArgumentException(pointer.toString());
 		}
@@ -411,8 +397,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	}
 
 	@Nullable
-	@SuppressWarnings("WeakerAccess")
-	static protected final String[] images = new String[] { //
+	static protected final String[] images = new String[]{ //
 			"focus.png", // FOCUS
 
 			"pos.png", // POS
@@ -466,24 +451,21 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Image scaling
 	 */
-	@SuppressWarnings("WeakerAccess")
-	static protected final float[] IMAGESCALER = new float[] { 1.F, .95F, .90F, .85F, .80F, .75F, .70F, .65F, .60F, .55F, .50F, .40F, .30F, .20F };
+	static protected final float[] IMAGESCALER = new float[]{1.F, .95F, .90F, .85F, .80F, .75F, .70F, .65F, .60F, .55F, .50F, .40F, .30F, .20F};
 
 	// F O N T
 
 	/**
 	 * Font face
 	 */
-	@SuppressWarnings("WeakerAccess")
 	static protected final String FONTFACE = "Serif";
 
 	/**
 	 * Font scaling
 	 */
-	@SuppressWarnings("WeakerAccess")
-	static protected final float[] FONTSCALER = new float[] { 1.F, .90F, .80F, .70F, .60F, .55F, .525F, .50F };
+	static protected final float[] FONTSCALER = new float[]{1.F, .90F, .80F, .70F, .60F, .55F, .525F, .50F};
 
-	static protected final float[] FONTSCALER_FAST = new float[] { 1.F, .85F, .70F, .60F, .50F, .45F, .40F, .35F };
+	static protected final float[] FONTSCALER_FAST = new float[]{1.F, .85F, .70F, .60F, .50F, .45F, .40F, .35F};
 
 	/**
 	 * Max char when synset members
@@ -492,136 +474,224 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
 	// C O L O R S
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Background index
+	 */
 	static public final int BACK_IDX = 0;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Tree edge index
+	 */
 	static public final int TREEEDGE_IDX = 1;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Root background index
+	 */
 	static public final int ROOTBACKGROUND_IDX = 2;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Root foreground index
+	 */
 	static public final int ROOTFOREGROUND_IDX = 3;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Category background index
+	 */
 	static public final int CATEGORYBACKGROUND_IDX = 4;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Category foreground index
+	 */
 	static public final int CATEGORYFOREGROUND_IDX = 5;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Category edge index
+	 */
 	static public final int CATEGORYEDGE_IDX = 6;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * POS background index
+	 */
 	static public final int POSBACKGROUND_IDX = 7;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * POS foreground index
+	 */
 	static public final int POSFOREGROUND_IDX = 8;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * POS edge index
+	 */
 	static public final int POSEDGE_IDX = 9;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Sense background index
+	 */
 	static public final int SENSEBACKGROUND_IDX = 10;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Sense foreground index
+	 */
 	static public final int SENSEFOREGROUND_IDX = 11;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Sense edge index
+	 */
 	static public final int SENSEEDGE_IDX = 12;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Synset background index
+	 */
 	static public final int SYNSETBACKGROUND_IDX = 13;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Synset foreground index
+	 */
 	static public final int SYNSETFOREGROUND_IDX = 14;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Synset edge index
+	 */
 	static public final int SYNSETEDGE_IDX = 15;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Links background index
+	 */
 	static public final int LINKSBACKGROUND_IDX = 16;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Links foreground index
+	 */
 	static public final int LINKSFOREGROUND_IDX = 17;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Links edge index
+	 */
 	static public final int LINKSEDGE_IDX = 18;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Link background index
+	 */
 	static public final int LINKBACKGROUND_IDX = 19;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Link foreground index
+	 */
 	static public final int LINKFOREGROUND_IDX = 20;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Link edge index
+	 */
 	static public final int LINKEDGE_IDX = 21;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Etc background index
+	 */
 	static public final int ETCBACKGROUND_IDX = 22;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Etc foreground index
+	 */
 	static public final int ETCFOREGROUND_IDX = 23;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Etc edge index
+	 */
 	static public final int ETCEDGE_IDX = 24;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Stem background index
+	 */
 	static public final int STEMBACKGROUND_IDX = 25;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Stem foreground index
+	 */
 	static public final int STEMFOREGROUND_IDX = 26;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Stem edge index
+	 */
 	static public final int STEMEDGE_IDX = 27;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Words background index
+	 */
 	static public final int WORDSBACKGROUND_IDX = 28;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Words foreground index
+	 */
 	static public final int WORDSFOREGROUND_IDX = 29;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Words edge index
+	 */
 	static public final int WORDSEDGE_IDX = 30;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word background index
+	 */
 	static public final int WORDBACKGROUND_IDX = 31;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word background1 index
+	 */
 	static public final int WORDBACKGROUND1_IDX = 32;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word background2 index
+	 */
 	static public final int WORDBACKGROUND2_IDX = 33;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word background3 index
+	 */
 	static public final int WORDBACKGROUND3_IDX = 34;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word background4 index
+	 */
 	static public final int WORDBACKGROUND4_IDX = 35;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word foreground index
+	 */
 	static public final int WORDFOREGROUND_IDX = 36;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word foreground1 index
+	 */
 	static public final int WORDFOREGROUND1_IDX = 37;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word foreground2 index
+	 */
 	static public final int WORDFOREGROUND2_IDX = 38;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word foreground3 index
+	 */
 	static public final int WORDFOREGROUND3_IDX = 39;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word foreground4 index
+	 */
 	static public final int WORDFOREGROUND4_IDX = 40;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Word edge index
+	 */
 	static public final int WORDEDGE_IDX = 41;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Edge index
+	 */
 	static public final int EDGE_IDX = 42;
 
-	@SuppressWarnings("WeakerAccess")
+	/**
+	 * Count
+	 */
 	static public final int COLORS0_COUNT = 43;
 
 	static public final Integer[] COLORS0 = new Integer[COLORS0_COUNT];
@@ -682,23 +752,20 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Scheme prefix
 	 */
-	@SuppressWarnings("WeakerAccess")
 	static public final String INTERNAL_URLSCHEME = "internal:";
 
 	/**
 	 * Scheme prefix
 	 */
-	@SuppressWarnings("WeakerAccess")
 	static public final String URLSCHEME = "wordnet:";
 
 	/**
 	 * Scheme separator
 	 */
-	@SuppressWarnings("WeakerAccess")
 	static public final char URLSCHEME_AT = '@';
 
 	/**
-	 * Data (WN31/EWN/url)
+	 * Data (WN31/OEWN/url)
 	 */
 	static private final String DATA_DEFAULT = "WN31";
 
@@ -715,46 +782,40 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Expansion
 	 */
-	@SuppressWarnings("WeakerAccess")
 	static protected final float EXPANSION = .8F;
 
 	/**
 	 * Sweep
 	 */
-	@SuppressWarnings("WeakerAccess")
 	static protected final float SWEEP = 1.3F;
 
 	/**
 	 * Label ellipsize
 	 */
 	@Nullable
-	@SuppressWarnings("WeakerAccess")
 	static protected final Boolean ELLIPSIZE = null;
 
 	/**
 	 * Label max lines
 	 */
-	@SuppressWarnings("WeakerAccess")
 	static protected final int LABEL_MAX_LINES = 0;
 
 	/**
 	 * Label extra line factor
 	 */
 	@Nullable
-	@SuppressWarnings("WeakerAccess")
 	static protected final Float LABEL_EXTRA_LINE_FACTOR = null;
 
 	/**
 	 * Label borders
 	 */
 	@Nullable
-	@SuppressWarnings("WeakerAccess")
 	static protected final Boolean BORDER = null;
 
 	/**
 	 * Relation filter default value
 	 */
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings({"WeakerAccess"})
 	static public final long FILTER_DEFAULT = Link.HYPERNYM.mask() | Link.HYPONYM.mask() | //
 			Link.HOLONYM_MEMBER.mask() | Link.HOLONYM_SUBSTANCE.mask() | Link.HOLONYM_PART.mask() | //
 			Link.MERONYM_MEMBER.mask() | Link.MERONYM_MEMBER.mask() | Link.MERONYM_MEMBER.mask() | //
@@ -768,7 +829,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * LoadBalancer : Members : Max children nodes at level 0, 1 .. n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for
 	 * level i to n.
 	 */
-	static private final int[] MAX_MEMBERS_AT_LEVEL = { 6, 3 };
+	static private final int[] MAX_MEMBERS_AT_LEVEL = {6, 3};
 
 	/**
 	 * LoadBalancer : Members : Truncation threshold
@@ -779,7 +840,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * LoadBalancer : Synsets : Max children nodes at level 0, 1 .. n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for
 	 * level i to n.
 	 */
-	static private final int[] MAX_SEMLINKS_AT_LEVEL = { 6, 3 };
+	static private final int[] MAX_SEMLINKS_AT_LEVEL = {6, 3};
 
 	/**
 	 * LoadBalancer : Synsets : Truncation threshold
@@ -809,7 +870,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @return node id
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	static protected String makeNodeId()
 	{
 		return "@" + Long.toHexString(BaseProvider.randomizer.nextLong());
@@ -821,7 +881,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * INode comparator
 	 */
 	@Nullable
-	@SuppressWarnings("WeakerAccess")
 	static protected final Comparator<INode> iNodeComparator = (n1, n2) -> {
 		final String label1 = n1.getLabel();
 		final String label2 = n2.getLabel();
@@ -842,8 +901,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Lexical file comparator
 	 */
 
-	@SuppressWarnings("WeakerAccess")
-	static protected final Comparator<ILexFile> lexFileComparator = (lexFile1, lexFile2) -> lexFile1.getName().compareTo(lexFile2.getName());
+	static protected final Comparator<ILexFile> lexFileComparator = Comparator.comparing(ILexFile::getName);
 
 	// M E M B E R S
 
@@ -857,7 +915,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Stemmer
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected IStemmer stemmer;
 
 	// provider
@@ -865,15 +922,13 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Provider client
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected IProviderContext context;
 
 	// data
 
 	/**
-	 * Data (WN/EWN)
+	 * Data (WN31/OEWN)
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected String data;
 
 	// cache
@@ -881,7 +936,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Cache
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected File cache;
 
 	// behaviour
@@ -894,7 +948,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Load balancing flag for members
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected boolean loadBalanceMembers = true;
 
 	/**
@@ -905,7 +958,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Members load balancer
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected LoadBalancer membersLoadBalancer;
 
 	/**
@@ -917,41 +969,35 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Font face
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected String fontFace = BaseProvider.FONTFACE;
 
 	/**
 	 * Font size factor
 	 */
 	@Nullable
-	@SuppressWarnings("WeakerAccess")
 	protected Float fontSizeFactor = null;
 
 	/**
 	 * Label max lines
 	 */
 	@Nullable
-	@SuppressWarnings("WeakerAccess")
 	protected Integer labelMaxLines = null;
 
 	/**
 	 * Sweep
 	 */
 	@Nullable
-	@SuppressWarnings("WeakerAccess")
 	protected Float expansion = null;
 
 	/**
 	 * Sweep
 	 */
 	@Nullable
-	@SuppressWarnings("WeakerAccess")
 	protected Float sweep = null;
 
 	/**
 	 * Relation filter
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected long filter;
 
 	/**
@@ -966,104 +1012,71 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
 	// colors
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer backColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer treeEdgeColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer rootBackgroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer rootForegroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer categoryBackgroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer categoryForegroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer categoryEdgeColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer posBackgroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer posForegroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer posEdgeColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer senseBackgroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer senseForegroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer senseEdgeColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer synsetBackgroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer synsetForegroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer synsetEdgeColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer linksBackgroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer linksForegroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer linksEdgeColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer linkBackgroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer linkForegroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer linkEdgeColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer etcBackgroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer etcForegroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer etcEdgeColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer wordsBackgroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer wordsForegroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer wordsEdgeColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer wordEdgeColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer stemBackgroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer stemForegroundColor;
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer stemEdgeColor;
 
-	@SuppressWarnings("WeakerAccess")
-	protected final Integer[] wordForegroundColors = new Integer[] { //
+	protected final Integer[] wordForegroundColors = new Integer[]{ //
 			BaseProvider.COLORS0[BaseProvider.WORDFOREGROUND_IDX], //
 			BaseProvider.COLORS0[BaseProvider.WORDFOREGROUND1_IDX], //
 			BaseProvider.COLORS0[BaseProvider.WORDFOREGROUND2_IDX], //
@@ -1071,8 +1084,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			BaseProvider.COLORS0[BaseProvider.WORDFOREGROUND4_IDX], //
 	};
 
-	@SuppressWarnings("WeakerAccess")
-	protected final Integer[] wordBackgroundColors = new Integer[] { //
+	protected final Integer[] wordBackgroundColors = new Integer[]{ //
 			BaseProvider.COLORS0[BaseProvider.WORDBACKGROUND_IDX], //
 			BaseProvider.COLORS0[BaseProvider.WORDBACKGROUND1_IDX], //
 			BaseProvider.COLORS0[BaseProvider.WORDBACKGROUND2_IDX], //
@@ -1080,7 +1092,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			BaseProvider.COLORS0[BaseProvider.WORDBACKGROUND4_IDX], //
 	};
 
-	@SuppressWarnings("WeakerAccess")
 	protected Integer edgeColor;
 
 	// C O N S T R U C T O R
@@ -1096,23 +1107,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		this.features = 0;
 		this.filter = BaseProvider.FILTER_DEFAULT;
 		this.membersLoadBalancer = new LoadBalancer(MAX_MEMBERS_AT_LEVEL, MEMBERS_LABEL_TRUNCATE_AT);
-		this.membersLoadBalancer.setGroupNode(null,
-				this.wordsBackgroundColor,
-				this.wordsForegroundColor,
-				this.wordsEdgeColor,
-				LOADBALANCING_EDGE_STYLE,
-				ImageIndex.MEMBERS.ordinal(),
-				null,
-				null);
+		this.membersLoadBalancer.setGroupNode(null, this.wordsBackgroundColor, this.wordsForegroundColor, this.wordsEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.MEMBERS.ordinal(), null, null);
 		this.semLinksLoadBalancer = new LoadBalancer(MAX_SEMLINKS_AT_LEVEL, SEMLINKS_LABEL_TRUNCATE_AT);
-		this.semLinksLoadBalancer.setGroupNode(null,
-				this.linksBackgroundColor,
-				this.linksForegroundColor,
-				this.linksEdgeColor,
-				LOADBALANCING_EDGE_STYLE,
-				ImageIndex.SYNSET.ordinal(),
-				null,
-				null);
+		this.semLinksLoadBalancer.setGroupNode(null, this.linksBackgroundColor, this.linksForegroundColor, this.linksEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.SYNSET.ordinal(), null, null);
 	}
 
 	// P R O V I D E R
@@ -1156,7 +1153,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 *
 	 * @param parameters parameters
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected void setup(@NonNull final Properties parameters)
 	{
 		// data
@@ -1274,22 +1270,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		this.edgeColor = getColor(parameters, Parameters.KEY_ECOLOR, BaseProvider.COLORS0[BaseProvider.EDGE_IDX]);
 
 		// propagate to members load balancer
-		this.membersLoadBalancer.setGroupNode(null,
-				this.wordsBackgroundColor,
-				this.wordsForegroundColor,
-				this.wordsEdgeColor,
-				LOADBALANCING_EDGE_STYLE,
-				ImageIndex.MEMBERS.ordinal(),
-				null,
-				null);
-		this.semLinksLoadBalancer.setGroupNode(null,
-				this.linksBackgroundColor,
-				this.linksForegroundColor,
-				this.linksEdgeColor,
-				LOADBALANCING_EDGE_STYLE,
-				ImageIndex.SYNSET.ordinal(),
-				null,
-				null);
+		this.membersLoadBalancer.setGroupNode(null, this.wordsBackgroundColor, this.wordsForegroundColor, this.wordsEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.MEMBERS.ordinal(), null, null);
+		this.semLinksLoadBalancer.setGroupNode(null, this.linksBackgroundColor, this.linksForegroundColor, this.linksEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.SYNSET.ordinal(), null, null);
 	}
 
 	/**
@@ -1335,8 +1317,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Parameter to color
 	 *
-	 * @param parameters parameters
-	 * @param key parameter key
+	 * @param parameters   parameters
+	 * @param key          parameter key
 	 * @param defaultColor default value
 	 * @return color value
 	 */
@@ -1353,8 +1335,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Parameter to long
 	 *
-	 * @param parameters parameters
-	 * @param key parameter key
+	 * @param parameters   parameters
+	 * @param key          parameter key
 	 * @param defaultValue default value
 	 * @return long value
 	 */
@@ -1378,7 +1360,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			{
 				try
 				{
-					return Long.valueOf(valueString);
+					return Long.parseLong(valueString);
 				}
 				catch (@NonNull final NumberFormatException ignored)
 				{
@@ -1392,8 +1374,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Parameter to int
 	 *
-	 * @param parameters parameters
-	 * @param key parameter key
+	 * @param parameters   parameters
+	 * @param key          parameter key
 	 * @param defaultValue default value
 	 * @return int value
 	 */
@@ -1425,8 +1407,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Parameter to boolean
 	 *
-	 * @param parameters parameters
-	 * @param key parameter key
+	 * @param parameters   parameters
+	 * @param key          parameter key
 	 * @param defaultValue default value
 	 * @return boolean value
 	 */
@@ -1451,8 +1433,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Parameter to float
 	 *
-	 * @param parameters parameters
-	 * @param key parameter key
+	 * @param parameters   parameters
+	 * @param key          parameter key
 	 * @param defaultValue default value
 	 * @return float value
 	 */
@@ -1540,7 +1522,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		return new Model(tree, settings);
 	}
 
-	@SuppressWarnings("WeakerAccess")
 	@Nullable
 	@Override
 	public Tree makeTree(@Nullable final String source, final URL base, @NonNull final Properties parameters, final boolean checkRecursion)
@@ -1592,7 +1573,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Make settings
 	 *
-	 * @param childrenCount root children count
+	 * @param childrenCount      root children count
 	 * @param thresholdForRadial threshold for radial orientation
 	 * @return settings
 	 */
@@ -1672,13 +1653,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Walk data
 	 *
-	 * @param query target word
+	 * @param query   target word
 	 * @param recurse whether to recurse
-	 * @param edges edges
+	 * @param edges   edges
 	 * @return result node
 	 */
 	@Nullable
-	@SuppressWarnings("WeakerAccess")
 	protected INode walk(@NonNull final String query, @SuppressWarnings("SameParameterValue") final boolean recurse, @NonNull final List<IEdge> edges)
 	{
 		// synset id hook
@@ -1751,15 +1731,14 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Walk data
 	 *
-	 * @param lemma target word
-	 * @param posFilter pos filter
+	 * @param lemma       target word
+	 * @param posFilter   pos filter
 	 * @param senseFilter sense filter
-	 * @param recurse whether to recurse
-	 * @param edges edges
+	 * @param recurse     whether to recurse
+	 * @param edges       edges
 	 * @return result node
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected INode walk(@NonNull final String lemma, @Nullable final POS posFilter, @Nullable final Integer senseFilter, final boolean recurse, @NonNull final List<IEdge> edges)
 	{
 		int globalSenseIdx = 0;
@@ -1817,12 +1796,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
 						// add to list
 						final Sense senseData = new Sense(pos, senseKey, sense, synset, lexId, posSenseIdx, globalSenseIdx, senseNum, tagCount);
-						List<Sense> senseDatas = senseDataMap.get(lexFile);
-						if (senseDatas == null)
-						{
-							senseDatas = new ArrayList<>();
-							senseDataMap.put(lexFile, senseDatas);
-						}
+						List<Sense> senseDatas = senseDataMap.computeIfAbsent(lexFile, k -> new ArrayList<>());
 						senseDatas.add(senseData);
 					}
 				}
@@ -1872,9 +1846,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Walk synset content (excluding links)
 	 *
 	 * @param parentNode parent node
-	 * @param synset synset
-	 * @param index index of synset
-	 * @param level recursion level
+	 * @param synset     synset
+	 * @param index      index of synset
+	 * @param level      recursion level
 	 */
 	protected void walkSynset(@NonNull final TreeMutableNode parentNode, @NonNull final Synset synset, @SuppressWarnings("unused") final int index, final int level)
 	{
@@ -1928,7 +1902,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Set word decorator
 	 *
-	 * @param node node
+	 * @param node  node
 	 * @param level recursion level
 	 */
 	protected void decorateAsWord(@NonNull final MutableNode node, final int level)
@@ -1942,10 +1916,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Walk synset members
 	 *
 	 * @param parentNode parent node
-	 * @param synset synset
-	 * @param level recursion level
+	 * @param synset     synset
+	 * @param level      recursion level
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected void walkMembers(@NonNull final TreeMutableNode parentNode, @NonNull final Synset synset, final int level)
 	{
 		if (this.loadBalanceMembers)
@@ -1960,8 +1933,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Walk synset members (no load balancing)
 	 *
 	 * @param parentNode parent node
-	 * @param synset synset
-	 * @param level recursion level
+	 * @param synset     synset
+	 * @param level      recursion level
 	 */
 	private void walkMembersNoLoadBalancing(final TreeMutableNode parentNode, @NonNull final Synset synset, final int level)
 	{
@@ -1978,8 +1951,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Walk synset members (load balancing)
 	 *
 	 * @param parentNode parent node
-	 * @param synset synset
-	 * @param level recursion level
+	 * @param synset     synset
+	 * @param level      recursion level
 	 */
 	private void walkMembersLoadBalancing(@NonNull final TreeMutableNode parentNode, @NonNull final Synset synset, final int level)
 	{
@@ -1997,7 +1970,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		}
 
 		// sort list
-		Collections.sort(memberNodes, iNodeComparator);
+		memberNodes.sort(iNodeComparator);
 
 		// balance load
 		memberNodes = this.membersLoadBalancer.buildHierarchy(memberNodes, 0);
@@ -2008,15 +1981,14 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Walk semantic and lexical links
 	 *
 	 * @param parentNode parent node
-	 * @param semLinks sem links
-	 * @param lexLinks lex links
-	 * @param index synset index
-	 * @param level level
-	 * @param recurse recurse
-	 * @param edges edges
+	 * @param semLinks   sem links
+	 * @param lexLinks   lex links
+	 * @param index      synset index
+	 * @param level      level
+	 * @param recurse    recurse
+	 * @param edges      edges
 	 */
-	protected void walkLinks(final TreeMutableNode parentNode, @NonNull final Map<IPointer, List<ISynsetID>> semLinks, @NonNull final Map<IPointer, List<IWordID>> lexLinks, final int index, @SuppressWarnings("SameParameterValue") final int level,
-			final boolean recurse, @NonNull final List<IEdge> edges)
+	protected void walkLinks(final TreeMutableNode parentNode, @NonNull final Map<IPointer, List<ISynsetID>> semLinks, @NonNull final Map<IPointer, List<IWordID>> lexLinks, final int index, @SuppressWarnings("SameParameterValue") final int level, final boolean recurse, @NonNull final List<IEdge> edges)
 	{
 		if (semLinks.isEmpty() && lexLinks.isEmpty())
 		{
@@ -2047,12 +2019,11 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Walk semantic links of the same type
 	 *
 	 * @param parentNode parent node
-	 * @param synset synset
-	 * @param level recursion level
-	 * @param recurse whether to recurse
-	 * @param edges edges
+	 * @param synset     synset
+	 * @param level      recursion level
+	 * @param recurse    whether to recurse
+	 * @param edges      edges
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected void walkSemLinks(final TreeMutableNode parentNode, @NonNull final Synset synset, @SuppressWarnings("SameParameterValue") final int index, final int level, final boolean recurse, @NonNull final List<IEdge> edges)
 	{
 		final Map<IPointer, List<ISynsetID>> semLinks = synset.synset.getRelatedMap();
@@ -2067,12 +2038,11 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Walk semantic links
 	 *
 	 * @param parentNode parent node
-	 * @param semLinks linked synset ids classified by pointer
-	 * @param level recursion level
-	 * @param recurse whether to recurse
-	 * @param edges edges
+	 * @param semLinks   linked synset ids classified by pointer
+	 * @param level      recursion level
+	 * @param recurse    whether to recurse
+	 * @param edges      edges
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected void walkSemLinks(final TreeMutableNode parentNode, @NonNull final Map<IPointer, List<ISynsetID>> semLinks, final int index, final int level, final boolean recurse, @NonNull final List<IEdge> edges)
 	{
 		// P=links node L
@@ -2182,15 +2152,14 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Walk linked synset called from walkSemLinks
 	 *
-	 * @param parentNode parent node
+	 * @param parentNode   parent node
 	 * @param linkedSynset synset
-	 * @param link link
-	 * @param index synset index
-	 * @param level recursion level
-	 * @param recurse recurse
-	 * @param edges edges
+	 * @param link         link
+	 * @param index        synset index
+	 * @param level        recursion level
+	 * @param recurse      recurse
+	 * @param edges        edges
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected void walkLinkedSynset1(@NonNull final TreeMutableNode parentNode, @NonNull final Synset linkedSynset, @NonNull final Link link, final int index, final int level, final boolean recurse, @NonNull final List<IEdge> edges)
 	{
 		// synset : members
@@ -2227,8 +2196,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Walk lexical links
 	 *
 	 * @param parentNode parent node
-	 * @param sense sense
-	 * @param level recursion level
+	 * @param sense      sense
+	 * @param level      recursion level
 	 */
 	protected void walkLexLinks(final TreeMutableNode parentNode, @NonNull final IWord sense, final int level)
 	{
@@ -2244,10 +2213,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Walk lexical links
 	 *
 	 * @param parentNode parent node
-	 * @param lexLinks linked sense ids classified by pointer
-	 * @param level current recursion level
+	 * @param lexLinks   linked sense ids classified by pointer
+	 * @param level      current recursion level
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected void walkLexLinks(final TreeMutableNode parentNode, @NonNull final Map<IPointer, List<IWordID>> lexLinks, final int level)
 	{
 		// iterate pointers
@@ -2288,13 +2256,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Walk links following only one type
 	 *
-	 * @param parentNode parent node
+	 * @param parentNode      parent node
 	 * @param linkedSynsetIds linked synset ids
-	 * @param link link
-	 * @param level recursion level
-	 * @param edges edges
+	 * @param link            link
+	 * @param level           recursion level
+	 * @param edges           edges
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected void walkTypedLink(@NonNull final TreeMutableNode parentNode, @NonNull final List<ISynsetID> linkedSynsetIds, @NonNull final Link link, final int level, @NonNull final List<IEdge> edges)
 	{
 		// iterate linked synsets
@@ -2414,10 +2381,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Walk antonym from adjective head synset
 	 *
 	 * @param parentNode parent node
-	 * @param synset adj head synset
-	 * @param level recursion level
+	 * @param synset     adj head synset
+	 * @param level      recursion level
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected void walkAntonymFromHeadAdjective(final TreeMutableNode parentNode, @NonNull final Synset synset, final int level)
 	{
 		final boolean isHead = synset.synset.isAdjectiveHead();
@@ -2445,11 +2411,10 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Build member nodes under members super-node
 	 *
 	 * @param synset synset
-	 * @param level recursion level
+	 * @param level  recursion level
 	 * @return members super-node
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected TreeMutableNode buildMembersNode(@NonNull final Synset synset, final int level)
 	{
 		final TreeMutableNode membersNode = makeSynsetNode(null, synset);
@@ -2469,11 +2434,10 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 *
 	 * @param parent parent to the node
 	 * @param synset synset
-	 * @param level recursion level
+	 * @param level  recursion level
 	 * @return member node
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected TreeMutableNode buildSingleMemberNode(final INode parent, @NonNull final Synset synset, final int level)
 	{
 		final IWord word = synset.synset.getWords().get(0);
@@ -2505,8 +2469,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Make pos node
 	 *
 	 * @param parent parent node
-	 * @param pos pos
-	 * @param word word
+	 * @param pos    pos
+	 * @param word   word
 	 * @return node
 	 */
 	@NonNull
@@ -2526,12 +2490,11 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Make category node
 	 *
-	 * @param parent parent node
+	 * @param parent  parent node
 	 * @param lexFile lexfile
 	 * @return node
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected MutableNode makeCategoryNode(final INode parent, @NonNull final ILexFile lexFile)
 	{
 		final MutableNode node = new MutableNode(parent, BaseProvider.makeNodeId(), BaseProvider.category(lexFile), -1, this.categoryBackgroundColor, this.categoryForegroundColor);
@@ -2546,8 +2509,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Make sense base node
 	 *
-	 * @param parent parent node
-	 * @param sense sense
+	 * @param parent        parent node
+	 * @param sense         sense
 	 * @param tagCountTotal tag count total
 	 * @return node
 	 */
@@ -2569,13 +2532,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Make sense node
 	 *
-	 * @param parent parent node
-	 * @param sense sense
+	 * @param parent        parent node
+	 * @param sense         sense
 	 * @param tagCountTotal tag count total
 	 * @return node
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected TreeMutableNode makeSenseNode(final INode parent, @NonNull final Sense sense, final int tagCountTotal)
 	{
 		final TreeMutableNode node = makeSenseBaseNode(parent, sense, tagCountTotal);
@@ -2611,7 +2573,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @return node
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected TreeMutableNode makeSynsetMembersNode(final INode parent, @NonNull final Synset synset)
 	{
 		final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), null, ImageIndex.MEMBERS.ordinal(), this.wordsBackgroundColor, this.wordsForegroundColor);
@@ -2627,13 +2588,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Make word node
 	 *
 	 * @param parent parent node
-	 * @param word word
-	 * @param gloss gloss
-	 * @param level recursion level
+	 * @param word   word
+	 * @param gloss  gloss
+	 * @param level  recursion level
 	 * @return node
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected TreeMutableNode makeWordNode(final INode parent, @NonNull final IWord word, @NonNull final Gloss gloss, final int level)
 	{
 		final String lemma = word.getLemma();
@@ -2648,12 +2608,11 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Make links group node
 	 *
-	 * @param parent parent node
+	 * @param parent   parent node
 	 * @param pointers pointers
 	 * @return node
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected TreeMutableNode makeSynsetLinksNode(final INode parent, final String pointers)
 	{
 		final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), null, ImageIndex.LINKS.ordinal(), this.linksBackgroundColor, this.linksForegroundColor);
@@ -2668,11 +2627,10 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Make link node
 	 *
 	 * @param parent parent node
-	 * @param link link
+	 * @param link   link
 	 * @return node
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected TreeMutableNode makeLinkNode(final INode parent, @NonNull final Link link)
 	{
 		final int imageIndex = link.imageIndex;
@@ -2689,9 +2647,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Make lex node
 	 *
-	 * @param parent parent node
+	 * @param parent  parent node
 	 * @param senseId sense id
-	 * @param level recursion level
+	 * @param level   recursion level
 	 */
 	@NonNull
 	@SuppressWarnings("UnusedReturnValue")
@@ -2714,11 +2672,11 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Make stem node
 	 *
 	 * @param parent parent node
-	 * @param stem stem
-	 * @param pos pos
+	 * @param stem   stem
+	 * @param pos    pos
 	 */
 	@NonNull
-	@SuppressWarnings({ "WeakerAccess", "UnusedReturnValue" })
+	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	protected TreeMutableNode makeStemNode(final INode parent, final String stem, @NonNull final POS pos)
 	{
 		final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), stem, -1, this.stemBackgroundColor, this.stemForegroundColor);
@@ -2733,9 +2691,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * Make etcetera link node
 	 *
 	 * @param parent parent node
-	 * @param link link
-	 * @param count count of links
-	 * @param it current iterator
+	 * @param link   link
+	 * @param count  count of links
+	 * @param it     current iterator
 	 * @return node
 	 */
 	@NonNull
@@ -2756,13 +2714,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Make etc content
 	 *
-	 * @param link link
+	 * @param link  link
 	 * @param count linked synset count
-	 * @param it current iterator of linked synset
+	 * @param it    current iterator of linked synset
 	 * @return content
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected String makeEtcContent(@NonNull final Link link, final int count, @NonNull final Iterator<ISynsetID> it)
 	{
 		final StringBuilder sb = new StringBuilder();
@@ -2802,7 +2759,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @return map
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected Map<ILexFile, Collection<IWord>> hierarchize(@NonNull final List<IWordID> senseIds)
 	{
 		final Map<ILexFile, Collection<IWord>> map = new TreeMap<>(lexFileComparator);
@@ -2815,12 +2771,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			final ILexFile category = sense.getSenseKey().getLexicalFile();
 
 			// map entry
-			Collection<IWord> senses = map.get(category);
-			if (senses == null)
-			{
-				senses = new ArrayList<>();
-				map.put(category, senses);
-			}
+			Collection<IWord> senses = map.computeIfAbsent(category, k -> new ArrayList<>());
 			senses.add(sense);
 		}
 		return map;
@@ -2847,7 +2798,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @return links
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	static protected String links(@NonNull final Set<IPointer> pointers)
 	{
 		final StringBuilder sb = new StringBuilder();
@@ -2873,7 +2823,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @param synset synset
 	 * @return true if synset has single member, false otherwise
 	 */
-	@SuppressWarnings("WeakerAccess")
 	static protected boolean hasSingleMember(@NonNull final Synset synset)
 	{
 		final List<IWord> words = synset.synset.getWords();
@@ -2884,12 +2833,11 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Get synset members
 	 *
-	 * @param synset synset
+	 * @param synset    synset
 	 * @param separator separator
 	 * @return synset members
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	static protected String members(@NonNull final Synset synset, @SuppressWarnings("SameParameterValue") final String separator)
 	{
 		return BaseProvider.members(synset.synset, separator);
@@ -2898,12 +2846,11 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Get synset members
 	 *
-	 * @param synset synset
+	 * @param synset    synset
 	 * @param separator separator
 	 * @return synset members
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	static protected String members(@NonNull final ISynset synset, final String separator)
 	{
 		final StringBuilder sb = new StringBuilder();
@@ -2930,7 +2877,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @return lemma
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	protected String lemma(@NonNull final IWordID senseId)
 	{
 		// sense
@@ -2950,7 +2896,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @return printable lemma
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	static protected String printable(@NonNull final String lemma)
 	{
 		return lemma.replace('_', ' ');
@@ -2963,7 +2908,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @return normalized lemma
 	 */
 	@NonNull
-	@SuppressWarnings("WeakerAccess")
 	static protected String normalize(@NonNull final String lemma)
 	{
 		return lemma.replace(' ', '_');
@@ -3050,7 +2994,6 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @param share share
 	 * @return content
 	 */
-	@SuppressWarnings("WeakerAccess")
 	@NonNull
 	protected String senseContent(@NonNull final Sense sense, final String share)
 	{
@@ -3081,7 +3024,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		sb.append("</div>");
 
 		final String[] samples = gloss.getSamples();
-		if (samples != null && samples.length > 0)
+		if (samples.length > 0)
 		{
 			for (final String sample : gloss.getSamples())
 			{

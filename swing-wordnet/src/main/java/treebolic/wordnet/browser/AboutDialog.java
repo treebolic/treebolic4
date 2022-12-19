@@ -45,9 +45,9 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 
 		// WordNet
 		final JLabel image = new JLabel(new ImageIcon(AboutDialog.class.getResource("images/wordnet.png")));
-		final HyperlinkButton wordNetButton = "ewn".equals(this.dataVersion) ?
+		final HyperlinkButton wordNetButton = "oewn".equals(this.dataVersion) ?
 				new HyperlinkButton(HyperlinkButton.makeURILabel("WordNet® 3.1"), "http://wordnet.princeton.edu") :
-				new HyperlinkButton(HyperlinkButton.makeURILabel("English WordNet®"), "https://github.com/globalwordnet/english-wordnet");
+				new HyperlinkButton(HyperlinkButton.makeURILabel("Open English WordNet®"), "https://github.com/globalwordnet/english-wordnet");
 		final JLabel wordNetLabel = new JLabel("WordNet lexical database for English");
 
 		// JWI
