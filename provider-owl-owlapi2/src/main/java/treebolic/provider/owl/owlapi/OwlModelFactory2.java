@@ -7,7 +7,6 @@ import java.util.Properties;
 
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;
-import treebolic.glue.iface.Image;
 import treebolic.model.Model;
 import treebolic.model.MutableEdge;
 import treebolic.model.MutableNode;
@@ -19,27 +18,6 @@ import treebolic.model.MutableNode;
  */
 public class OwlModelFactory2 extends OwlModelFactory
 {
-	/**
-	 * ImageFactory
-	 *
-	 * @param imageUrls image urls
-	 * @return images
-	 */
-	@NonNull
-	public Image[] makeImages(@NonNull final String[] imageUrls)
-	{
-		@NonNull Image[] images = new Image[imageUrls.length];
-		for (int i = 0; i < imageUrls.length; i++)
-		{
-			images[i] = new treebolic.glue.Image(Provider2.class.getResource("images/" + imageUrls[i]));
-		}
-		return images;
-	}
-
-	// D E C O R A T I O N   M E M B E R S
-
-	static Image[] images2;
-
 	// C O N S T R U C T O R
 
 	/**
@@ -50,7 +28,6 @@ public class OwlModelFactory2 extends OwlModelFactory
 	public OwlModelFactory2(final Properties properties)
 	{
 		super(properties);
-		images2 = makeImages(images);
 		loadBalancer.setGroupNode(null, LOADBALANCING_BACKCOLOR, LOADBALANCING_FORECOLOR, LOADBALANCING_EDGECOLOR, LOADBALANCING_EDGE_STYLE, LOADBALANCING_IMAGEINDEX, LOADBALANCING_IMAGE, null);
 		instancesLoadBalancer.setGroupNode(null, LOADBALANCING_INSTANCES_BACKCOLOR, LOADBALANCING_INSTANCES_FORECOLOR, LOADBALANCING_INSTANCES_EDGECOLOR, LOADBALANCING_INSTANCES_EDGE_STYLE, LOADBALANCING_INSTANCES_IMAGEINDEX, LOADBALANCING_INSTANCES_IMAGE, null);
 		propertiesLoadBalancer.setGroupNode(null, LOADBALANCING_PROPERTIES_BACKCOLOR, LOADBALANCING_PROPERTIES_FORECOLOR, LOADBALANCING_PROPERTIES_EDGECOLOR, LOADBALANCING_PROPERTIES_EDGE_STYLE, LOADBALANCING_PROPERTIES_IMAGEINDEX, LOADBALANCING_PROPERTIES_IMAGE, null);
@@ -73,7 +50,7 @@ public class OwlModelFactory2 extends OwlModelFactory
 		{
 			return null;
 		}
-		return new Model(model.tree, model.settings, images2);
+		return new Model(model.tree, model.settings, ImageFactory.images);
 	}
 
 	// D E C O R A T E

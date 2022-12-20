@@ -909,7 +909,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * LoadBalancer : Edge style
 	 */
-	static private final int LOADBALANCING_EDGE_STYLE = IEdge.DOT | /* IEdge.FROMDEF | IEdge.FROMCIRCLE | */IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.STROKEDEF | IEdge.TODEF;
+	static protected final int LOADBALANCING_EDGE_STYLE = IEdge.DOT | /* IEdge.FROMDEF | IEdge.FROMCIRCLE | */IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.STROKEDEF | IEdge.TODEF;
 
 	// N O D E I D
 
@@ -1161,9 +1161,10 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		this.features = 0;
 		this.filter = BaseProvider.FILTER_DEFAULT;
 		this.membersLoadBalancer = new LoadBalancer(MAX_MEMBERS_AT_LEVEL, MEMBERS_LABEL_TRUNCATE_AT);
-		this.membersLoadBalancer.setGroupNode(null, this.wordsBackgroundColor, this.wordsForegroundColor, this.wordsEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.MEMBERS.ordinal(), null, null);
 		this.semLinksLoadBalancer = new LoadBalancer(MAX_SEMLINKS_AT_LEVEL, SEMLINKS_LABEL_TRUNCATE_AT);
-		this.semLinksLoadBalancer.setGroupNode(null, this.linksBackgroundColor, this.linksForegroundColor, this.linksEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.SYNSET.ordinal(), null, null);
+		assert images != null;
+		this.membersLoadBalancer.setGroupNode(null, this.wordsBackgroundColor, this.wordsForegroundColor, this.wordsEdgeColor, LOADBALANCING_EDGE_STYLE, -1, null, images[ImageIndex.MEMBERS.ordinal()]);
+		this.semLinksLoadBalancer.setGroupNode(null, this.linksBackgroundColor, this.linksForegroundColor, this.linksEdgeColor, LOADBALANCING_EDGE_STYLE, -1, null, images[ImageIndex.SYNSET.ordinal()]);
 	}
 
 	// P R O V I D E R
