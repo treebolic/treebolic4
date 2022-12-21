@@ -1548,8 +1548,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 				this.dictionary.open();
 			}
 		}
-		catch (@NonNull final Exception ignored)
+		catch (@NonNull final Exception e)
 		{
+			e.printStackTrace();
 			return null;
 		}
 

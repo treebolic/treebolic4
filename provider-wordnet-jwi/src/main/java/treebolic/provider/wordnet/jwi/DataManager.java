@@ -80,6 +80,8 @@ public class DataManager
 	public File getDataDir(final String data, final File cacheHome) throws IOException
 	{
 		URL zipUrl = getSourceZipURL(data);
+		if (zipUrl == null)
+			throw new IOException("No resource for " + data);
 		return setup(zipUrl, cacheHome, false);
 	}
 
