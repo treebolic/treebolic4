@@ -1526,6 +1526,18 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	//}
 	//@formatter:on
 
+	// D A T A M A N A G E R
+
+	/**
+	 * Get data manager
+	 *
+	 * @return data manager
+	 */
+	protected BaseDataManager getDataManager()
+	{
+		return DataManager.getInstance();
+	}
+
 	// I N T E R F A C E
 
 	@Nullable
@@ -1541,7 +1553,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			if (this.dictionary == null)
 			{
 				// construct the dictionary object and open it
-				this.dictionary = new Dictionary(DataManager.getInstance().getDataDir(this.data, this.cache));
+				this.dictionary = new Dictionary(getDataManager().getDataDir(this.data, this.cache));
 			}
 			if (!this.dictionary.isOpen())
 			{
@@ -2076,6 +2088,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 *
 	 * @param parentNode parent node
 	 * @param synset     synset
+	 * @param index      index
 	 * @param level      recursion level
 	 * @param recurse    whether to recurse
 	 * @param edges      edges
@@ -2095,6 +2108,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 *
 	 * @param parentNode parent node
 	 * @param semLinks   linked synset ids classified by pointer
+	 * @param index      index
 	 * @param level      recursion level
 	 * @param recurse    whether to recurse
 	 * @param edges      edges
@@ -2730,6 +2744,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @param parent parent node
 	 * @param stem   stem
 	 * @param pos    pos
+	 * @return node
 	 */
 	@NonNull
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
