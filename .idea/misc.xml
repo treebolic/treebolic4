@@ -695,6 +695,7 @@
     <pattern value="treebolic.provider.wordnet.jwi.concise.Provider2" method="setTreeEdgeImage" />
     <pattern value="treebolic.provider.wordnet.jwi.simple.Provider2" method="setTreeEdgeImage" />
     <pattern value="treebolic.provider.wordnet.jwi.packed.Provider2" method="setTreeEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.jwi.DataManager" method="deploy" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">

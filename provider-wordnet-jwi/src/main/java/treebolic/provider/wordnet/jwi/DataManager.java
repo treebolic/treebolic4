@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * Data manager
@@ -56,36 +57,30 @@ public class DataManager extends BaseDataManager
 	/**
 	 * Get data dir
 	 *
-	 * @param data      data (tag or url)
+	 * @param sourceData source data url
 	 * @param cacheHome cache home directory (parent to cache)
 	 * @return cached dictionary data
 	 * @throws IOException io exception
 	 */
 	@Override
-	public File getDataDir(final String data, final File cacheHome) throws IOException
+	public File getDataDir(final URL sourceData, final File cacheHome) throws IOException
 	{
-		URL zipUrl = getSourceZipURL(data);
-		if (zipUrl == null)
-		{
-			throw new IOException("No resource for " + data);
-		}
-		return setup(zipUrl, cacheHome, false);
+		return setup(sourceData, cacheHome, false);
 	}
 
 	/**
 	 * Deploy zip to cache
 	 *
-	 * @param data      data (tag or url)
+	 * @param sourceData source data url
 	 * @param cacheHome cache home directory (parent to cache)
 	 * @return cached dictionary data
 	 * @throws IOException io exception
 	 */
 	@SuppressWarnings("UnusedReturnValue")
 	@Override
-	public File deploy(final String data, final File cacheHome) throws IOException
+	public File deploy(final URL sourceData, final File cacheHome) throws IOException
 	{
-		URL zipUrl = getSourceZipURL(data);
-		return setup(zipUrl, cacheHome, true);
+		return setup(sourceData, cacheHome, true);
 	}
 
 	/**
@@ -140,7 +135,7 @@ public class DataManager extends BaseDataManager
 	 * @return source zip url
 	 * @throws MalformedURLException malformed url exception
 	 */
-	private URL getSourceZipURL(String data0) throws MalformedURLException
+	public static URL getSourceZipURL(@Nullable String data0) throws MalformedURLException
 	{
 		String data = data0;
 		if (data == null)

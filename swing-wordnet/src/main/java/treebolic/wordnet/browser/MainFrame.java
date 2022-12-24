@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.InputEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.swing.*;
 
@@ -279,7 +280,13 @@ public class MainFrame extends treebolic.browser2.MainFrame
 
 				try
 				{
-					DataManager.getInstance().deploy(which, cacheHome);
+					DataManager dm = DataManager.getInstance();
+					URL zipUrl = dm.getSourceZipURL(which);
+					if (zipUrl == null)
+					{
+						throw new IOException("No resource for " + which);
+					}
+					dm.deploy(zipUrl, cacheHome);
 				}
 				catch (IOException e)
 				{
@@ -345,7 +352,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	 * Ask
 	 *
 	 * @param message message
-	 * @param value initial value
+	 * @param value   initial value
 	 * @return input
 	 */
 	protected String ask(final String message, final String value)
@@ -358,9 +365,9 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	 * Ask int value in range
 	 *
 	 * @param message0 message
-	 * @param value initial value
-	 * @param min min
-	 * @param max max
+	 * @param value    initial value
+	 * @param min      min
+	 * @param max      max
 	 * @return value
 	 */
 	protected Integer askRange(final String message0, final String value, final int min, final int max)

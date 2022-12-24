@@ -821,7 +821,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	/**
 	 * Data (WN31/OEWN/url)
 	 */
-	static private final String DATA_DEFAULT = "WN31";
+	static private final String DATA_DEFAULT = "OEWN";
 
 	/**
 	 * Max sibling links
@@ -981,9 +981,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	// data
 
 	/**
-	 * Data (WN31/OEWN)
+	 * Source URL
 	 */
-	protected String data;
+	protected URL sourceUrl;
 
 	// cache
 
@@ -1211,7 +1211,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	protected void setup(@NonNull final Properties parameters)
 	{
 		// data
-		this.data = parameters.getProperty(Parameters.KEY_DATA, BaseProvider.DATA_DEFAULT);
+		this.sourceUrl = getURL(parameters, Parameters.KEY_DATA);
 
 		// filter
 		this.filter = getLong(parameters, Parameters.KEY_RELATION_FILTER, BaseProvider.FILTER_DEFAULT);
@@ -1367,6 +1367,31 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	public void setLoadBalanceSemLinks(boolean flag)
 	{
 		this.loadBalanceSemLinks = flag;
+	}
+
+	/**
+	 * Parameter to source data set
+	 *
+	 * @param dataKey data key, values are 'OEWN' or 'WN31' or URL string
+	 * @return url
+	 */
+	private URL getURL(@NonNull final Properties parameters, final String dataKey)
+	{
+		@NonNull final String dataValue = parameters.getProperty(dataKey, DATA_DEFAULT);
+		try
+		{
+			URL zipUrl = DataManager.getSourceZipURL(dataValue);
+			if (zipUrl == null)
+			{
+				throw new IOException("No resource for " + dataValue);
+			}
+
+			return zipUrl;
+		}
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**
@@ -1553,7 +1578,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			if (this.dictionary == null)
 			{
 				// construct the dictionary object and open it
-				this.dictionary = new Dictionary(getDataManager().getDataDir(this.data, this.cache));
+				this.dictionary = new Dictionary(getDataManager().getDataDir(this.sourceUrl, this.cache));
 			}
 			if (!this.dictionary.isOpen())
 			{

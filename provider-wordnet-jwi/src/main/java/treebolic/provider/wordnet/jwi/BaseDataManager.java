@@ -36,30 +36,30 @@ public abstract class BaseDataManager
 	/**
 	 * Get data dir
 	 *
-	 * @param data      data (tag or url)
-	 * @param cacheHome cache home directory (parent to cache)
+	 * @param sourceData source data url
+	 * @param cacheHome  cache home directory (parent to cache)
 	 * @return cached dictionary data
 	 * @throws IOException io exception
 	 */
-	abstract public File getDataDir(final String data, final File cacheHome) throws IOException;
+	abstract public File getDataDir(final URL sourceData, final File cacheHome) throws IOException;
 
 	/**
 	 * Deploy zip to cache
 	 *
-	 * @param data      data (tag or url)
-	 * @param cacheHome cache home directory (parent to cache)
+	 * @param sourceData source data url
+	 * @param cacheHome  cache home directory (parent to cache)
 	 * @return cached dictionary data
 	 * @throws IOException io exception
 	 */
 	@SuppressWarnings("UnusedReturnValue")
-	abstract public File deploy(final String data, final File cacheHome) throws IOException;
+	abstract public File deploy(final URL sourceData, final File cacheHome) throws IOException;
 
 	/**
 	 * Empty dir
 	 *
 	 * @param dir dir
 	 */
-	protected static void cleanup(final File dir)
+	public static void cleanup(final File dir)
 	{
 		System.out.println("Clean up " + dir);
 		// clean up
@@ -90,7 +90,7 @@ public abstract class BaseDataManager
 	 * @param dir dir
 	 * @return true if cache is valid
 	 */
-	protected static boolean check(final File dir)
+	public static boolean check(final File dir)
 	{
 		// check if each file exists
 		for (final String entry : BaseDataManager.WORDNET_FILES)
@@ -115,7 +115,7 @@ public abstract class BaseDataManager
 	 */
 	@NonNull
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
-	protected static File expand(@NonNull final URL zipUrl, @SuppressWarnings("SameParameterValue") final String pathPrefixFilter, @NonNull final File destDir) throws IOException
+	public static File expand(@NonNull final URL zipUrl, @SuppressWarnings("SameParameterValue") final String pathPrefixFilter, @NonNull final File destDir) throws IOException
 	{
 		System.out.println("Expand " + zipUrl);
 		return BaseDataManager.expand(zipUrl.openStream(), pathPrefixFilter, destDir);
@@ -131,7 +131,7 @@ public abstract class BaseDataManager
 	 * @throws IOException io exception
 	 */
 	@NonNull
-	protected static  File expand(@NonNull final InputStream inputStream, final String pathPrefixFilter0, @NonNull final File destDir) throws IOException
+	public static File expand(@NonNull final InputStream inputStream, final String pathPrefixFilter0, @NonNull final File destDir) throws IOException
 	{
 		// prefix
 		String pathPrefixFilter = pathPrefixFilter0;

@@ -22,7 +22,7 @@ public class Parameters
 	static public final String KEY_SOURCE = "source";
 
 	/**
-	 * Data
+	 * Data: OEWN or WN31
 	 */
 	static public final String KEY_DATA = "data";
 

@@ -31,6 +31,8 @@ public class Provider2 extends treebolic.provider.wordnet.jwi.concise.Provider
 	public Provider2() throws IOException
 	{
 		super();
+		this.membersLoadBalancer.setGroupNode(null, this.wordsBackgroundColor, this.wordsForegroundColor, this.wordsEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.MEMBERS.ordinal(), null, null);
+		this.semLinksLoadBalancer.setGroupNode(null, this.linksBackgroundColor, this.linksForegroundColor, this.linksEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.SYNSET.ordinal(), null, null);
 	}
 
 	// I N T E R F A C E
