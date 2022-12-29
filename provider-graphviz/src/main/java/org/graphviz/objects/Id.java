@@ -39,7 +39,7 @@ public class Id
 	private String label = "";
 
 	/**
-	 * Returns the Id of the object Empty string means, that this object has no Id.
+	 * Returns the ID of the object Empty string means, that this object has no ID.
 	 *
 	 * @return the object id
 	 */
@@ -49,7 +49,7 @@ public class Id
 	}
 
 	/**
-	 * Sets the object id. An empty string deletes the Id.
+	 * Sets the object id. An empty string deletes the ID.
 	 *
 	 * @param id id
 	 */
@@ -97,7 +97,7 @@ public class Id
 		}
 		else
 		{
-			// Id and label are the same
+			// ID and label are the same
 			if (eid.getId().equals(this.id) && eid.getLabel().equals(this.label))
 			{
 				return true;
@@ -117,7 +117,7 @@ public class Id
 	}
 
 	/**
-	 * Returns the String representation of this Id
+	 * Returns the String representation of this ID
 	 *
 	 * @return the string representation
 	 */

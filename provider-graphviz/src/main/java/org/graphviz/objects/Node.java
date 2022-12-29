@@ -48,7 +48,7 @@ public class Node
 	/**
 	 * Returns the id object for the node
 	 *
-	 * @return the Id object
+	 * @return the ID object
 	 */
 	public Id getId()
 	{
@@ -56,7 +56,7 @@ public class Node
 	}
 
 	/**
-	 * Sets the Id object for this node
+	 * Sets the ID object for this node
 	 *
 	 * @param id id
 	 */

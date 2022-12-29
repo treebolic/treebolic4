@@ -100,22 +100,11 @@ public class TokenMgrError extends Error
 	 * number when the error occurred errorAfter : prefix that was seen before this error occurred curchar : the offending character Note: You can customize the
 	 * lexical error message by modifying this method.
 	 */
-	protected static String LexicalError(final boolean EOFSeen, final int lexState, final int errorLine, final int errorColumn, final String errorAfter, final char curChar)
+	protected static String LexicalError(final boolean EOFSeen, @SuppressWarnings("unused") final int lexState, final int errorLine, final int errorColumn, final String errorAfter, final char curChar)
 	{
 		return "Lexical error at line " + errorLine + ", column " + errorColumn + ".  Encountered: " + (EOFSeen ?
 				"<EOF> " :
 				"\"" + TokenMgrError.addEscapes(String.valueOf(curChar)) + "\"" + " (" + (int) curChar + "), ") + "after : \"" + TokenMgrError.addEscapes(errorAfter) + "\"";
-	}
-
-	/**
-	 * You can also modify the body of this method to customize your error messages. For example, cases like LOOP_DETECTED and INVALID_LEXICAL_STATE are not of
-	 * end-users concern, so you can return something like : "Internal Error : Please file a bug report .... " from this method for such cases in the release
-	 * Version : 3.x
-	 */
-	@Override
-	public String getMessage()
-	{
-		return super.getMessage();
 	}
 
 	/*

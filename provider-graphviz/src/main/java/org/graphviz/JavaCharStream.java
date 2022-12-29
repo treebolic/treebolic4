@@ -78,9 +78,9 @@ public class JavaCharStream
 
 	protected int[] bufcolumn;
 
-	protected int column = 0;
+	protected int column;
 
-	protected int line = 1;
+	protected int line;
 
 	protected boolean prevCharIsCR = false;
 
@@ -362,7 +362,7 @@ public class JavaCharStream
 				}
 				catch (final java.io.IOException e)
 				{
-					// We are returning one backslash so we should only backup (count-1)
+					// We are returning one backslash, so we should only back up (count-1)
 					if (backSlashCnt > 1)
 					{
 						backup(backSlashCnt - 1);
@@ -805,8 +805,8 @@ public class JavaCharStream
 			len = this.bufsize - this.tokenBegin + this.bufpos + 1 + this.inBuf;
 		}
 
-		int i = 0, j = 0, k = 0;
-		int nextColDiff = 0, columnDiff = 0;
+		int i = 0, j = 0, k;
+		int nextColDiff, columnDiff = 0;
 
 		while (i < len && this.bufline[j = start % this.bufsize] == this.bufline[k = ++start % this.bufsize])
 		{

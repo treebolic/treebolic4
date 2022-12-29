@@ -34,17 +34,17 @@ public class Edge
 	/**
 	 * The source node object
 	 */
-	private PortNode source = null;
+	private PortNode source;
 
 	/**
 	 * The target node object
 	 */
-	private PortNode target = null;
+	private PortNode target;
 
 	/**
 	 * The type of the edge (directed or undirected)
 	 */
-	private int type = 0;
+	private int type;
 
 	/**
 	 * The hasttable having the attributes of this edge

@@ -34,7 +34,7 @@ public class GraphvizTokenMgrError
 	public static final int DIRECTED_EDGE_NOT_ALLOWED = 1;
 
 	/**
-	 * Error code, if a undirected edge operator was detected in a digraph.
+	 * Error code, if an undirected edge operator was detected in a digraph.
 	 */
 	public static final int UNDIRECTED_EDGE_NOT_ALLOWED = 2;
 
@@ -44,10 +44,10 @@ public class GraphvizTokenMgrError
 	 * @param code
 	 *        The error code
 	 * @param line
-	 *        The line where the error occured
+	 *        The line where the error occurred
 	 * @param col
-	 *        The column of the line where the error occured
-	 * @return an new TokenMgrError
+	 *        The column of the line where the error occurred
+	 * @return a new TokenMgrError
 	 */
 	public static TokenMgrError create(final int code, final int line, final int col)
 	{

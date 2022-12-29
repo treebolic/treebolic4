@@ -558,7 +558,7 @@ public class ParserTokenManager implements ParserConstants
 		return jjStartNfa_0(6, active0);
 	}
 
-	private int jjStartNfaWithStates_0(final int pos, final int kind, final int state)
+	private int jjStartNfaWithStates_0(final int pos, final int kind, @SuppressWarnings("SameParameterValue") final int state)
 	{
 		this.jjmatchedKind = kind;
 		this.jjmatchedPos = pos;
@@ -882,7 +882,7 @@ public class ParserTokenManager implements ParserConstants
 		return 1;
 	}
 
-	private int jjMoveStringLiteralDfa1_1(final long active0)
+	private int jjMoveStringLiteralDfa1_1(@SuppressWarnings("SameParameterValue") final long active0)
 	{
 		try
 		{
@@ -1220,7 +1220,7 @@ public class ParserTokenManager implements ParserConstants
 		{
 			case 9:
 				this.image.append(ParserTokenManager.jjstrLiteralImages[9]);
-				int lengthOfMatch = ParserTokenManager.jjstrLiteralImages[9].length();
+				// int lengthOfMatch = ParserTokenManager.jjstrLiteralImages[9].length();
 				if (!isDigraph())
 				{
 					throw GraphvizTokenMgrError.create(GraphvizTokenMgrError.DIRECTED_EDGE_NOT_ALLOWED, matchedToken.beginLine, matchedToken.beginColumn);
@@ -1228,14 +1228,14 @@ public class ParserTokenManager implements ParserConstants
 				break;
 			case 10:
 				this.image.append(ParserTokenManager.jjstrLiteralImages[10]);
-				lengthOfMatch = ParserTokenManager.jjstrLiteralImages[10].length();
+				// lengthOfMatch = ParserTokenManager.jjstrLiteralImages[10].length();
 				if (isDigraph())
 				{
 					throw GraphvizTokenMgrError.create(GraphvizTokenMgrError.UNDIRECTED_EDGE_NOT_ALLOWED, matchedToken.beginLine, matchedToken.beginColumn);
 				}
 				break;
 			case 24:
-				this.image.append(this.input_stream.GetSuffix(this.jjimageLen + (lengthOfMatch = this.jjmatchedPos + 1)));
+				this.image.append(this.input_stream.GetSuffix(this.jjimageLen + (/* lengthOfMatch = */ this.jjmatchedPos + 1)));
 				this.isDigraph = true;
 				break;
 			default:

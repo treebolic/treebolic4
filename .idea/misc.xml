@@ -118,6 +118,23 @@
       <entry_point TYPE="field" FQNAME="treebolic.provider.wordnet.jwi.Parameters KEY_PROVIDER" />
       <entry_point TYPE="field" FQNAME="treebolic.provider.wordnet.jwi.Parameters KEY_SOURCE" />
       <entry_point TYPE="field" FQNAME="treebolic.provider.wordnet.jwi.BaseProvider.ImageIndex CATEGORY" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.ParserConstants DEFAULT" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.ParserConstants EOF" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.ParserConstants IN_COMMENT" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.ParserConstants IN_COMMENT_OL" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.ParseException currentToken" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.ParseException eol" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.ParseException expectedTokenSequences" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.ParseException tokenImage" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.Token endColumn" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.Token endLine" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.Token specialToken" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.ParserTokenManager debugStream" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.ParserTokenManager jjtoMore" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.ParserTokenManager lexStateNames" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.TokenMgrError errorCode" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.TokenMgrError LOOP_DETECTED" />
+      <entry_point TYPE="field" FQNAME="org.graphviz.TokenMgrError STATIC_LEXER_ERROR" />
     </entry_points>
     <pattern value="treebolic.glue.Worker" method="doInBackground" />
     <pattern value="treebolic.glue.Worker" method="job" />
@@ -696,6 +713,40 @@
     <pattern value="treebolic.provider.wordnet.jwi.simple.Provider2" method="setTreeEdgeImage" />
     <pattern value="treebolic.provider.wordnet.jwi.packed.Provider2" method="setTreeEdgeImage" />
     <pattern value="treebolic.provider.wordnet.jwi.DataManager" method="deploy" />
+    <pattern value="treebolic.provider.graphviz.Provider" method="Provider" />
+    <pattern value="org.graphviz.objects.Edge" method="Edge" />
+    <pattern value="org.graphviz.objects.Graph" method="findNode" />
+    <pattern value="org.graphviz.objects.Graph" method="getAttribute" />
+    <pattern value="org.graphviz.objects.Edge" method="getAttributes" />
+    <pattern value="org.graphviz.objects.Graph" method="getAttributes" />
+    <pattern value="org.graphviz.objects.Node" method="getAttributes" />
+    <pattern value="org.graphviz.objects.GraphAttributes" method="getNames" />
+    <pattern value="org.graphviz.objects.Graph" method="getSubgraphs" />
+    <pattern value="org.graphviz.objects.GraphAttributes" />
+    <pattern value="org.graphviz.objects.PortNode" method="PortNode" />
+    <pattern value="org.graphviz.objects.Edge" method="setSource" />
+    <pattern value="org.graphviz.objects.Edge" method="setTarget" />
+    <pattern value="org.graphviz.objects.Edge" method="setType" />
+    <pattern value="org.graphviz.JavaCharStream" method="adjustBeginLineColumn" />
+    <pattern value="org.graphviz.JavaCharStream" method="Done" />
+    <pattern value="org.graphviz.JavaCharStream" method="getTabSize" />
+    <pattern value="org.graphviz.JavaCharStream" method="JavaCharStream" />
+    <pattern value="org.graphviz.JavaCharStream" method="ReInit" />
+    <pattern value="org.graphviz.JavaCharStream" method="setTabSize" />
+    <pattern value="org.graphviz.Token" method="getValue" />
+    <pattern value="org.graphviz.Token" method="newToken" />
+    <pattern value="org.graphviz.ParserTokenManager" method="ParserTokenManager" />
+    <pattern value="org.graphviz.ParserTokenManager" method="ReInit" />
+    <pattern value="org.graphviz.ParserTokenManager" method="setDebugStream" />
+    <pattern value="org.graphviz.Token" method="Token" />
+    <pattern value="org.graphviz.ParserTokenManager" method="TokenLexicalActions" />
+    <pattern value="org.graphviz.ParseException" method="ParseException" />
+    <pattern value="org.graphviz.Parser" method="addAttributes" />
+    <pattern value="org.graphviz.Parser" method="getNextToken" />
+    <pattern value="org.graphviz.Parser" method="getToken" />
+    <pattern value="org.graphviz.Parser" method="Parser" />
+    <pattern value="org.graphviz.Parser" method="ReInit" />
+    <pattern value="org.graphviz.TokenMgrError" method="TokenMgrError" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">

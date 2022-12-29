@@ -39,7 +39,7 @@ public class Graph
 	public static final int UNDIRECTED = 1;
 
 	/**
-	 * Constant for an directed graph
+	 * Constant for a directed graph
 	 */
 	public static final int DIRECTED = 2;
 
@@ -94,7 +94,7 @@ public class Graph
 	private final Hashtable<String, String> genericGraphAttributes = new Hashtable<>();
 
 	/**
-	 * Sets a generic attribute for all edges of this graph. This attributes are NOT additionally stored in the Edge objects.
+	 * Sets a generic attribute for all edges of this graph. This attribute is NOT additionally stored in the Edge objects.
 	 *
 	 * @param key   the attribute name
 	 * @param value the attribute value
@@ -116,7 +116,7 @@ public class Graph
 	}
 
 	/**
-	 * Sets a generic attribute for clusters of this graph. This attributes are NOT additionally stored in the Edge objects.
+	 * Sets a generic attribute for clusters of this graph. This attribute is NOT additionally stored in the Edge objects.
 	 *
 	 * @param key   the attribute name
 	 * @param value the attribute value
@@ -138,7 +138,7 @@ public class Graph
 	}
 
 	/**
-	 * Sets a generic attribute for all nodes of this graph This attributes are NOT additionally stored in the Node objects.
+	 * Sets a generic attribute for all nodes of this graph This attribute is NOT additionally stored in the Node objects.
 	 *
 	 * @param key   the attribute name
 	 * @param value the attribute value
@@ -160,7 +160,7 @@ public class Graph
 	}
 
 	/**
-	 * Adds a graph attribute. This attributes are NOT inherited to the attributes of sub graphs.
+	 * Adds a graph attribute. This attribute is NOT inherited to the attributes of sub graphs.
 	 *
 	 * @param key   the name of the attribute
 	 * @param value the value of the attribute
@@ -202,9 +202,9 @@ public class Graph
 	}
 
 	/**
-	 * Returns the Id object to the Graph
+	 * Returns the ID object to the Graph
 	 *
-	 * @return the Id object
+	 * @return the ID object
 	 */
 	public Id getId()
 	{
@@ -212,7 +212,7 @@ public class Graph
 	}
 
 	/**
-	 * Sets the Id object for this graph
+	 * Sets the ID object for this graph
 	 *
 	 * @param id id
 	 */
@@ -466,15 +466,15 @@ public class Graph
 	}
 
 	/**
-	 * Tries to find a node of a Graph depending on the given Id object.
+	 * Tries to find a node of a Graph depending on the given ID object.
 	 *
 	 * @param id the id object to identify the node
 	 * @return the node or nulll if not found
 	 */
 	public Node findNode(final Id id)
 	{
-		Node n = null;
-		Id nid = null;
+		Node n;
+		Id nid;
 
 		for (Node node : this.nodes)
 		{
@@ -514,7 +514,7 @@ public class Graph
 		else
 		{
 			final ArrayList<Node> n = new ArrayList<>(this.nodes);
-			Graph g = null;
+			Graph g;
 			for (Graph graph : this.graphs)
 			{
 				g = graph;

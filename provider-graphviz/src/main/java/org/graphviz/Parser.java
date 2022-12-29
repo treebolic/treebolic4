@@ -25,7 +25,7 @@ public class Parser implements ParserConstants
 
 	private final ArrayList<Node> nodeList = new ArrayList<>();
 
-	private final ArrayList<Graph> graphList = new ArrayList<>();
+	// private final ArrayList<Graph> graphList = new ArrayList<>();
 
 	/**
 	 * Constructor
@@ -81,6 +81,7 @@ public class Parser implements ParserConstants
 	 * @return normally true should be returned, if false then something in the JDK is broken...
 	 * @throws ParseException parse exception
 	 */
+	@SuppressWarnings("SameReturnValue")
 	public boolean parse(final StringBuffer sb) throws ParseException
 	{
 		final String is = sb.toString().trim();
@@ -95,7 +96,7 @@ public class Parser implements ParserConstants
 	 * Creates a node, if the node wasn't used before if a node with the given id/label already exists, the existing node object is returned instead.
 	 *
 	 * @param g     the Graph
-	 * @param id    the Id of the node
+	 * @param id    the ID of the node
 	 * @param label the Label of the node
 	 * @return a Node object
 	 */
@@ -104,8 +105,8 @@ public class Parser implements ParserConstants
 		final Id nid = new Id();
 		nid.setId(id);
 		nid.setLabel(label);
-		Node n = null;
-		Id tid = null;
+		Node n;
+		Id tid;
 		for (Node node : this.nodeList)
 		{
 			n = node;
@@ -127,9 +128,11 @@ public class Parser implements ParserConstants
 	 *
 	 * @param n the node to check
 	 */
-	protected void checkIfNodeIsSubgraph(final Node n)
+	@SuppressWarnings("EmptyMethod")
+	protected void checkIfNodeIsSubgraph(@SuppressWarnings("unused") final Node n)
 	{
 		// check if node represents a cluster/subgraph
+		/*
 		for (Graph graph : this.graphList)
 		{
 			if (graph.getId().isEqual(n.getId()))
@@ -138,6 +141,7 @@ public class Parser implements ParserConstants
 				break;
 			}
 		}
+		 */
 	}
 
 	/**
@@ -236,6 +240,7 @@ public class Parser implements ParserConstants
 
 	/**
 	 * Production for a single graph
+	 *
 	 * @param gglist list
 	 * @throws ParseException parse exception
 	 */
@@ -243,7 +248,7 @@ public class Parser implements ParserConstants
 	{
 		final Graph g = new Graph();
 		Token st = null;
-		Id id = null;
+		Id id;
 		this.graphs.push(g);
 		switch (this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk)
 		{
@@ -282,14 +287,13 @@ public class Parser implements ParserConstants
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == STRICT)
 		{
 			st = jj_consume_token(ParserConstants.STRICT);
-			label_3:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[5] = this.jj_gen;
-					break label_3;
+					break;
 				}
 			}
 		}
@@ -301,14 +305,13 @@ public class Parser implements ParserConstants
 		{
 			case GRAPH:
 				jj_consume_token(ParserConstants.GRAPH);
-				label_4:
 				while (true)
 				{
 					jj_consume_token(ParserConstants.SPACE);
 					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[7] = this.jj_gen;
-						break label_4;
+						break;
 					}
 				}
 				// graph or digraph keyword
@@ -316,14 +319,13 @@ public class Parser implements ParserConstants
 				break;
 			case DIGRAPH:
 				jj_consume_token(ParserConstants.DIGRAPH);
-				label_5:
 				while (true)
 				{
 					jj_consume_token(ParserConstants.SPACE);
 					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[8] = this.jj_gen;
-						break label_5;
+						break;
 					}
 				}
 				g.setType(Graph.DIRECTED);
@@ -339,13 +341,12 @@ public class Parser implements ParserConstants
 			case ID:
 				id = id();
 				g.setId(id);
-				label_6:
 				while (true)
 				{
 					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[10] = this.jj_gen;
-						break label_6;
+						break;
 					}
 					jj_consume_token(ParserConstants.SPACE);
 				}
@@ -388,14 +389,13 @@ public class Parser implements ParserConstants
 				case NUMBER:
 					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 					{
-						label_7:
 						while (true)
 						{
 							jj_consume_token(ParserConstants.SPACE);
 							if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 							{
 								this.jj_la1[12] = this.jj_gen;
-								break label_7;
+								break;
 							}
 						}
 					}
@@ -415,7 +415,7 @@ public class Parser implements ParserConstants
 	}
 
 	/**
-	 * Production for more then one statement in a graph
+	 * Production for more than one statement in a graph
 	 *
 	 * @throws ParseException parse exception
 	 */
@@ -426,14 +426,13 @@ public class Parser implements ParserConstants
 		{
 			if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 			{
-				label_9:
 				while (true)
 				{
 					jj_consume_token(ParserConstants.SPACE);
 					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[15] = this.jj_gen;
-						break label_9;
+						break;
 					}
 				}
 			}
@@ -530,7 +529,7 @@ public class Parser implements ParserConstants
 	}
 
 	/**
-	 * Production for the statement ending yes lb is misleading..
+	 * Production for the statement ending yes lb is misleading.
 	 *
 	 * @throws ParseException parse exception
 	 */
@@ -561,9 +560,9 @@ public class Parser implements ParserConstants
 	{
 		ArrayList<PortNode> sources = new ArrayList<>();
 		ArrayList<PortNode> targets = new ArrayList<>();
-		Node n = null;
-		PortNode pn = null;
-		ArrayList<Node> nl = null;
+		Node n;
+		PortNode pn;
+		ArrayList<Node> nl;
 		Hashtable<String, String> ht = null;
 		final ArrayList<Edge> el = new ArrayList<>();
 		final Graph g = this.graphs.peek();
@@ -577,14 +576,13 @@ public class Parser implements ParserConstants
 			nl = matrix();
 			if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 			{
-				label_10:
 				while (true)
 				{
 					jj_consume_token(ParserConstants.SPACE);
 					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[21] = this.jj_gen;
-						break label_10;
+						break;
 					}
 				}
 			}
@@ -607,14 +605,13 @@ public class Parser implements ParserConstants
 					pn = node_port();
 					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 					{
-						label_11:
 						while (true)
 						{
 							jj_consume_token(ParserConstants.SPACE);
 							if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 							{
 								this.jj_la1[23] = this.jj_gen;
-								break label_11;
+								break;
 							}
 						}
 					}
@@ -636,14 +633,13 @@ public class Parser implements ParserConstants
 			edge_op();
 			if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 			{
-				label_13:
 				while (true)
 				{
 					jj_consume_token(ParserConstants.SPACE);
 					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[26] = this.jj_gen;
-						break label_13;
+						break;
 					}
 				}
 			}
@@ -661,14 +657,13 @@ public class Parser implements ParserConstants
 				nl = matrix();
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 				{
-					label_14:
 					while (true)
 					{
 						jj_consume_token(ParserConstants.SPACE);
 						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 						{
 							this.jj_la1[28] = this.jj_gen;
-							break label_14;
+							break;
 						}
 					}
 				}
@@ -691,14 +686,13 @@ public class Parser implements ParserConstants
 						pn = node_port();
 						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 						{
-							label_15:
 							while (true)
 							{
 								jj_consume_token(ParserConstants.SPACE);
 								if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 								{
 									this.jj_la1[30] = this.jj_gen;
-									break label_15;
+									break;
 								}
 							}
 						}
@@ -787,18 +781,17 @@ public class Parser implements ParserConstants
 	final public ArrayList<Node> matrix() throws ParseException
 	{
 		final ArrayList<Node> nl = new ArrayList<>();
-		Node n = null;
+		Node n;
 		jj_consume_token(ParserConstants.LBRACE);
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 		{
-			label_16:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[36] = this.jj_gen;
-					break label_16;
+					break;
 				}
 			}
 		}
@@ -813,14 +806,13 @@ public class Parser implements ParserConstants
 			nl.add(n);
 			if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 			{
-				label_18:
 				while (true)
 				{
 					jj_consume_token(ParserConstants.SPACE);
 					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[38] = this.jj_gen;
-						break label_18;
+						break;
 					}
 				}
 			}
@@ -840,13 +832,7 @@ public class Parser implements ParserConstants
 			}
 		}
 		jj_consume_token(ParserConstants.RBRACE);
-		{
-			if (true)
-			{
-				return nl;
-			}
-		}
-		throw new Error("Missing return statement in function");
+		return nl;
 	}
 
 	/**
@@ -858,7 +844,7 @@ public class Parser implements ParserConstants
 	{
 		final Graph g = this.graphs.peek();
 		Hashtable<String, String> ht = null;
-		Enumeration<String> e = null;
+		Enumeration<String> e;
 		String key;
 		switch (this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk)
 		{
@@ -866,14 +852,13 @@ public class Parser implements ParserConstants
 				jj_consume_token(ParserConstants.GRAPH);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 				{
-					label_19:
 					while (true)
 					{
 						jj_consume_token(ParserConstants.SPACE);
 						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 						{
 							this.jj_la1[41] = this.jj_gen;
-							break label_19;
+							break;
 						}
 					}
 				}
@@ -889,6 +874,7 @@ public class Parser implements ParserConstants
 				{
 					this.jj_la1[43] = this.jj_gen;
 				}
+				assert ht != null;
 				e = ht.keys();
 				while (e.hasMoreElements())
 				{
@@ -900,14 +886,13 @@ public class Parser implements ParserConstants
 				jj_consume_token(ParserConstants.EDGE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 				{
-					label_20:
 					while (true)
 					{
 						jj_consume_token(ParserConstants.SPACE);
 						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 						{
 							this.jj_la1[44] = this.jj_gen;
-							break label_20;
+							break;
 						}
 					}
 				}
@@ -923,6 +908,7 @@ public class Parser implements ParserConstants
 				{
 					this.jj_la1[46] = this.jj_gen;
 				}
+				assert ht != null;
 				e = ht.keys();
 				while (e.hasMoreElements())
 				{
@@ -934,14 +920,13 @@ public class Parser implements ParserConstants
 				jj_consume_token(ParserConstants.NODE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 				{
-					label_21:
 					while (true)
 					{
 						jj_consume_token(ParserConstants.SPACE);
 						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 						{
 							this.jj_la1[47] = this.jj_gen;
-							break label_21;
+							break;
 						}
 					}
 				}
@@ -957,6 +942,7 @@ public class Parser implements ParserConstants
 				{
 					this.jj_la1[49] = this.jj_gen;
 				}
+				assert ht != null;
 				e = ht.keys();
 				while (e.hasMoreElements())
 				{
@@ -988,14 +974,13 @@ public class Parser implements ParserConstants
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SUBGRAPH)
 		{
 			jj_consume_token(ParserConstants.SUBGRAPH);
-			label_22:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[51] = this.jj_gen;
-					break label_22;
+					break;
 				}
 			}
 		}
@@ -1008,13 +993,12 @@ public class Parser implements ParserConstants
 			case STRING:
 			case ID:
 				id = id();
-				label_23:
 				while (true)
 				{
 					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[53] = this.jj_gen;
-						break label_23;
+						break;
 					}
 					jj_consume_token(ParserConstants.SPACE);
 				}
@@ -1026,14 +1010,13 @@ public class Parser implements ParserConstants
 		jj_consume_token(ParserConstants.LBRACE);
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == LF)
 		{
-			label_24:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.LF);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != LF)
 				{
 					this.jj_la1[55] = this.jj_gen;
-					break label_24;
+					break;
 				}
 			}
 		}
@@ -1041,24 +1024,20 @@ public class Parser implements ParserConstants
 		{
 			this.jj_la1[56] = this.jj_gen;
 		}
-		while (true)
+		do
 		{
 			sg_stmt_list();
-			if (!jj_2_11(2147483647))
-			{
-				break;
-			}
 		}
+		while (jj_2_11(2147483647));
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 		{
-			label_26:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[57] = this.jj_gen;
-					break label_26;
+					break;
 				}
 			}
 		}
@@ -1084,14 +1063,13 @@ public class Parser implements ParserConstants
 		jj_consume_token(ParserConstants.RBRACE);
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 		{
-			label_27:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[60] = this.jj_gen;
-					break label_27;
+					break;
 				}
 			}
 		}
@@ -1107,13 +1085,7 @@ public class Parser implements ParserConstants
 		parent.addSubgraph(g);
 		final Node n = createNode(parent, g.getId().getId(), g.getId().getLabel());
 		n.representsSubgraph(true);
-		{
-			if (true)
-			{
-				return n;
-			}
-		}
-		throw new Error("Missing return statement in function");
+		return n;
 	}
 
 	/**
@@ -1125,14 +1097,13 @@ public class Parser implements ParserConstants
 	{
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 		{
-			label_28:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[62] = this.jj_gen;
-					break label_28;
+					break;
 				}
 			}
 		}
@@ -1176,19 +1147,18 @@ public class Parser implements ParserConstants
 	 */
 	final public void graph_attrib_assign() throws ParseException
 	{
-		Token id = null;
-		String value = null;
+		Token id;
+		String value;
 		id = jj_consume_token(ParserConstants.ID);
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 		{
-			label_30:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[66] = this.jj_gen;
-					break label_30;
+					break;
 				}
 			}
 		}
@@ -1199,14 +1169,13 @@ public class Parser implements ParserConstants
 		jj_consume_token(ParserConstants.EQUAL);
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 		{
-			label_31:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[68] = this.jj_gen;
-					break label_31;
+					break;
 				}
 			}
 		}
@@ -1217,14 +1186,13 @@ public class Parser implements ParserConstants
 		value = value();
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 		{
-			label_32:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[70] = this.jj_gen;
-					break label_32;
+					break;
 				}
 			}
 		}
@@ -1243,7 +1211,7 @@ public class Parser implements ParserConstants
 	 */
 	final public PortNode node_port() throws ParseException
 	{
-		Node n = null;
+		Node n;
 		Id port = null;
 		n = node();
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == DOUBLE)
@@ -1278,22 +1246,20 @@ public class Parser implements ParserConstants
 	 */
 	final public void node_listing() throws ParseException
 	{
-		Node n = null;
+		Node n;
 		final ArrayList<Node> nl = new ArrayList<>();
-		Hashtable<String, String> ht = null;
+		Hashtable<String, String> ht;
 		n = node();
 		nl.add(n);
-		label_33:
 		while (true)
 		{
-			label_34:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[73] = this.jj_gen;
-					break label_34;
+					break;
 				}
 			}
 			n = node();
@@ -1301,7 +1267,7 @@ public class Parser implements ParserConstants
 			if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 			{
 				this.jj_la1[74] = this.jj_gen;
-				break label_33;
+				break;
 			}
 		}
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == LBRACKET)
@@ -1326,19 +1292,18 @@ public class Parser implements ParserConstants
 	 */
 	final public void single_node() throws ParseException
 	{
-		Node n = null;
-		Hashtable<String, String> ht = null;
+		Node n;
+		Hashtable<String, String> ht;
 		n = node();
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 		{
-			label_35:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[76] = this.jj_gen;
-					break label_35;
+					break;
 				}
 			}
 		}
@@ -1396,7 +1361,6 @@ public class Parser implements ParserConstants
 		}
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == ID)
 		{
-			label_37:
 			while (true)
 			{
 				kv = attribute();
@@ -1404,7 +1368,7 @@ public class Parser implements ParserConstants
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != ID)
 				{
 					this.jj_la1[81] = this.jj_gen;
-					break label_37;
+					break;
 				}
 			}
 		}
@@ -1415,14 +1379,13 @@ public class Parser implements ParserConstants
 		jj_consume_token(ParserConstants.RBRACKET);
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 		{
-			label_38:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[83] = this.jj_gen;
-					break label_38;
+					break;
 				}
 			}
 		}
@@ -1443,7 +1406,7 @@ public class Parser implements ParserConstants
 	 */
 	final public String[] attribute() throws ParseException
 	{
-		Token id = null;
+		Token id;
 		final String[] kv = new String[2];
 		kv[0] = "";
 		kv[1] = "";
@@ -1497,17 +1460,16 @@ public class Parser implements ParserConstants
 	 */
 	final public String attrib_value() throws ParseException
 	{
-		String v = "";
+		String v;
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 		{
-			label_40:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[87] = this.jj_gen;
-					break label_40;
+					break;
 				}
 			}
 		}
@@ -1518,14 +1480,13 @@ public class Parser implements ParserConstants
 		jj_consume_token(ParserConstants.EQUAL);
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
 		{
-			label_41:
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
 				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[89] = this.jj_gen;
-					break label_41;
+					break;
 				}
 			}
 		}
@@ -1547,14 +1508,14 @@ public class Parser implements ParserConstants
 	 */
 	final public Node node() throws ParseException
 	{
-		Token t = null;
-		final Id i = new Id();
-		Node n = null;
+		Token t;
+		Node n;
 		final Graph c = this.graphs.peek();
 		switch (this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk)
 		{
 			case ID:
 			case NUMBER:
+			{
 				switch (this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk)
 				{
 					case ID:
@@ -1568,34 +1529,24 @@ public class Parser implements ParserConstants
 						jj_consume_token(-1);
 						throw new ParseException();
 				}
-				i.setId(t.image);
 				n = createNode(c, t.image, "");
 				checkIfNodeIsSubgraph(n);
-			{
-				if (true)
-				{
-					return n;
-				}
+				return n;
 			}
-			break;
+
 			case STRING:
+			{
 				t = jj_consume_token(ParserConstants.STRING);
-				i.setLabel(t.image);
 				n = createNode(c, "", t.image.substring(1, t.image.length() - 1));
 				checkIfNodeIsSubgraph(n);
-			{
-				if (true)
-				{
-					return n;
-				}
+				return n;
 			}
-			break;
+
 			default:
 				this.jj_la1[92] = this.jj_gen;
 				jj_consume_token(-1);
 				throw new ParseException();
 		}
-		throw new Error("Missing return statement in function");
 	}
 
 	/**
@@ -1606,8 +1557,8 @@ public class Parser implements ParserConstants
 	 */
 	final public Id id() throws ParseException
 	{
-		Token id = null;
-		Token text = null;
+		Token id;
+		Token text;
 		final Id i = new Id();
 		switch (this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk)
 		{
@@ -1641,7 +1592,7 @@ public class Parser implements ParserConstants
 	 */
 	final public String value() throws ParseException
 	{
-		Token text = null;
+		Token text;
 		switch (this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk)
 		{
 			case ID:
@@ -1666,7 +1617,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
-	private boolean jj_2_1(final int xla)
+	private boolean jj_2_1(@SuppressWarnings("SameParameterValue") final int xla)
 	{
 		this.jj_la = xla;
 		this.jj_lastpos = this.jj_scanpos = this.token;
@@ -1684,7 +1635,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
-	private boolean jj_2_2(final int xla)
+	private boolean jj_2_2(@SuppressWarnings("SameParameterValue") final int xla)
 	{
 		this.jj_la = xla;
 		this.jj_lastpos = this.jj_scanpos = this.token;
@@ -1702,7 +1653,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
-	private boolean jj_2_3(final int xla)
+	private boolean jj_2_3(@SuppressWarnings("SameParameterValue") final int xla)
 	{
 		this.jj_la = xla;
 		this.jj_lastpos = this.jj_scanpos = this.token;
@@ -1720,7 +1671,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
-	private boolean jj_2_4(final int xla)
+	private boolean jj_2_4(@SuppressWarnings("SameParameterValue") final int xla)
 	{
 		this.jj_la = xla;
 		this.jj_lastpos = this.jj_scanpos = this.token;
@@ -1738,7 +1689,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
-	private boolean jj_2_5(final int xla)
+	private boolean jj_2_5(@SuppressWarnings("SameParameterValue") final int xla)
 	{
 		this.jj_la = xla;
 		this.jj_lastpos = this.jj_scanpos = this.token;
@@ -1756,7 +1707,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
-	private boolean jj_2_6(final int xla)
+	private boolean jj_2_6(@SuppressWarnings("SameParameterValue") final int xla)
 	{
 		this.jj_la = xla;
 		this.jj_lastpos = this.jj_scanpos = this.token;
@@ -1774,7 +1725,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
-	private boolean jj_2_7(final int xla)
+	private boolean jj_2_7(@SuppressWarnings("SameParameterValue") final int xla)
 	{
 		this.jj_la = xla;
 		this.jj_lastpos = this.jj_scanpos = this.token;
@@ -1792,7 +1743,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
-	private boolean jj_2_8(final int xla)
+	private boolean jj_2_8(@SuppressWarnings("SameParameterValue") final int xla)
 	{
 		this.jj_la = xla;
 		this.jj_lastpos = this.jj_scanpos = this.token;
@@ -1810,7 +1761,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
-	private boolean jj_2_9(final int xla)
+	private boolean jj_2_9(@SuppressWarnings("SameParameterValue") final int xla)
 	{
 		this.jj_la = xla;
 		this.jj_lastpos = this.jj_scanpos = this.token;
@@ -1828,7 +1779,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
-	private boolean jj_2_10(final int xla)
+	private boolean jj_2_10(@SuppressWarnings("SameParameterValue") final int xla)
 	{
 		this.jj_la = xla;
 		this.jj_lastpos = this.jj_scanpos = this.token;
@@ -1846,7 +1797,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
-	private boolean jj_2_11(final int xla)
+	private boolean jj_2_11(@SuppressWarnings("SameParameterValue") final int xla)
 	{
 		this.jj_la = xla;
 		this.jj_lastpos = this.jj_scanpos = this.token;
@@ -1864,7 +1815,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
-	private boolean jj_2_12(final int xla)
+	private boolean jj_2_12(@SuppressWarnings("SameParameterValue") final int xla)
 	{
 		this.jj_la = xla;
 		this.jj_lastpos = this.jj_scanpos = this.token;
@@ -3717,20 +3668,6 @@ public class Parser implements ParserConstants
 			exptokseq[i] = this.jj_expentries.get(i);
 		}
 		return new ParseException(this.token, exptokseq, ParserConstants.tokenImage);
-	}
-
-	/**
-	 * Enable tracing.
-	 */
-	final public void enable_tracing()
-	{
-	}
-
-	/**
-	 * Disable tracing.
-	 */
-	final public void disable_tracing()
-	{
 	}
 
 	private void jj_rescan_token()

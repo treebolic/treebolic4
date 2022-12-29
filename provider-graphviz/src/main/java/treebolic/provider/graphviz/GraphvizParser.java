@@ -665,7 +665,7 @@ public class GraphvizParser
 	static public void main(final String[] args)
 	{
 		final File file = new File(args[0]);
-		FileReader reader = null;
+		FileReader reader;
 		try
 		{
 			reader = new FileReader(file);

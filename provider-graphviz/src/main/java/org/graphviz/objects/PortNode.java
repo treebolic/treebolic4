@@ -20,7 +20,7 @@
 package org.graphviz.objects;
 
 /**
- * This class is an extended Node object containing Port information of a node in an edge. A PortNode does not hold an Id object, because it is only a wrapper
+ * This class is an extended Node object containing Port information of a node in an edge. A PortNode does not hold an ID object, because it is only a wrapper
  * for a node as a part of an edge.
  *
  * @author Alexander Merz
@@ -31,12 +31,12 @@ public class PortNode
 	/**
 	 * holds the port information
 	 */
-	private String port = "";
+	private String port;
 
 	/**
 	 * holds the port
 	 */
-	private Node node = null;
+	private Node node;
 
 	/**
 	 * Creates an empty PortNode object
