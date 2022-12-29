@@ -74,7 +74,7 @@ public class Provider implements IProvider, ImageDecorator
 		BRANCH
 	}
 
-	static String[] images = new String[]{ //
+	static final String[] images = new String[]{ //
 			"root.png", // ROOT 
 			"folder.png", // FOLDER 
 			"file.png", // FILE 
@@ -189,7 +189,7 @@ public class Provider implements IProvider, ImageDecorator
 	 * Load balancer
 	 */
 	@SuppressWarnings("WeakerAccess")
-	protected LoadBalancer loadBalancer;
+	protected final LoadBalancer loadBalancer;
 
 	/**
 	 * Constructor
@@ -236,7 +236,7 @@ public class Provider implements IProvider, ImageDecorator
 		settings.nodeForeColor = Provider.FILE_FORECOLOR;
 		settings.orientation = asTree ? "south" : "radial";  
 		settings.yMoveTo = asTree ? -0.25F : 0F;
-		settings.hasToolbarFlag = true;
+		// settings.hasToolbarFlag = true;
 		settings.fontFace = "SansSerif";
 		settings.expansion = .8F;
 		settings.sweep = 1.3F;

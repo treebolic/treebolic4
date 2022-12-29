@@ -44,6 +44,9 @@ public class TokenMgrError extends Error
 
 	/**
 	 * Replaces unprintable characters by their escaped (or unicode escaped) equivalents in the given string
+	 *
+	 * @param str input string
+	 * @return string with escaped unprintable characters
 	 */
 	protected static String addEscapes(final String str)
 	{
@@ -99,6 +102,14 @@ public class TokenMgrError extends Error
 	 * caused the lexical error curLexState : lexical state in which this error occurred errorLine : line number when the error occurred errorColumn : column
 	 * number when the error occurred errorAfter : prefix that was seen before this error occurred curchar : the offending character Note: You can customize the
 	 * lexical error message by modifying this method.
+	 *
+	 * @param EOFSeen     eof seen
+	 * @param lexState    lex state
+	 * @param errorLine   error line
+	 * @param errorColumn error column
+	 * @param errorAfter  error after
+	 * @param curChar     current character
+	 * @return message
 	 */
 	protected static String LexicalError(final boolean EOFSeen, @SuppressWarnings("unused") final int lexState, final int errorLine, final int errorColumn, final String errorAfter, final char curChar)
 	{

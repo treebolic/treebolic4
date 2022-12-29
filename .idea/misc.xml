@@ -747,6 +747,10 @@
     <pattern value="org.graphviz.Parser" method="Parser" />
     <pattern value="org.graphviz.Parser" method="ReInit" />
     <pattern value="org.graphviz.TokenMgrError" method="TokenMgrError" />
+    <pattern value="treebolic.provider.files.Provider" method="Provider" />
+    <pattern value="treebolic.provider.files.Provider" method="setEdgeImage" />
+    <pattern value="treebolic.provider.files.Provider" method="setNodeImage" />
+    <pattern value="treebolic.provider.files.Provider" method="setTreeEdgeImage" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
