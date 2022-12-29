@@ -286,10 +286,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[5] = this.jj_gen;
 					break label_3;
@@ -308,10 +305,7 @@ public class Parser implements ParserConstants
 				while (true)
 				{
 					jj_consume_token(ParserConstants.SPACE);
-					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-					{
-					}
-					else
+					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[7] = this.jj_gen;
 						break label_4;
@@ -326,10 +320,7 @@ public class Parser implements ParserConstants
 				while (true)
 				{
 					jj_consume_token(ParserConstants.SPACE);
-					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-					{
-					}
-					else
+					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[8] = this.jj_gen;
 						break label_5;
@@ -351,10 +342,7 @@ public class Parser implements ParserConstants
 				label_6:
 				while (true)
 				{
-					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-					{
-					}
-					else
+					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[10] = this.jj_gen;
 						break label_6;
@@ -404,10 +392,7 @@ public class Parser implements ParserConstants
 						while (true)
 						{
 							jj_consume_token(ParserConstants.SPACE);
-							if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-							{
-							}
-							else
+							if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 							{
 								this.jj_la1[12] = this.jj_gen;
 								break label_7;
@@ -445,10 +430,7 @@ public class Parser implements ParserConstants
 				while (true)
 				{
 					jj_consume_token(ParserConstants.SPACE);
-					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-					{
-					}
-					else
+					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[15] = this.jj_gen;
 						break label_9;
@@ -599,10 +581,7 @@ public class Parser implements ParserConstants
 				while (true)
 				{
 					jj_consume_token(ParserConstants.SPACE);
-					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-					{
-					}
-					else
+					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[21] = this.jj_gen;
 						break label_10;
@@ -632,10 +611,7 @@ public class Parser implements ParserConstants
 						while (true)
 						{
 							jj_consume_token(ParserConstants.SPACE);
-							if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-							{
-							}
-							else
+							if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 							{
 								this.jj_la1[23] = this.jj_gen;
 								break label_11;
@@ -664,10 +640,7 @@ public class Parser implements ParserConstants
 				while (true)
 				{
 					jj_consume_token(ParserConstants.SPACE);
-					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-					{
-					}
-					else
+					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[26] = this.jj_gen;
 						break label_13;
@@ -692,10 +665,7 @@ public class Parser implements ParserConstants
 					while (true)
 					{
 						jj_consume_token(ParserConstants.SPACE);
-						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-						{
-						}
-						else
+						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 						{
 							this.jj_la1[28] = this.jj_gen;
 							break label_14;
@@ -725,10 +695,7 @@ public class Parser implements ParserConstants
 							while (true)
 							{
 								jj_consume_token(ParserConstants.SPACE);
-								if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-								{
-								}
-								else
+								if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 								{
 									this.jj_la1[30] = this.jj_gen;
 									break label_15;
@@ -828,10 +795,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[36] = this.jj_gen;
 					break label_16;
@@ -853,10 +817,7 @@ public class Parser implements ParserConstants
 				while (true)
 				{
 					jj_consume_token(ParserConstants.SPACE);
-					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-					{
-					}
-					else
+					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[38] = this.jj_gen;
 						break label_18;
@@ -909,10 +870,7 @@ public class Parser implements ParserConstants
 					while (true)
 					{
 						jj_consume_token(ParserConstants.SPACE);
-						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-						{
-						}
-						else
+						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 						{
 							this.jj_la1[41] = this.jj_gen;
 							break label_19;
@@ -946,10 +904,7 @@ public class Parser implements ParserConstants
 					while (true)
 					{
 						jj_consume_token(ParserConstants.SPACE);
-						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-						{
-						}
-						else
+						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 						{
 							this.jj_la1[44] = this.jj_gen;
 							break label_20;
@@ -983,10 +938,7 @@ public class Parser implements ParserConstants
 					while (true)
 					{
 						jj_consume_token(ParserConstants.SPACE);
-						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-						{
-						}
-						else
+						if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 						{
 							this.jj_la1[47] = this.jj_gen;
 							break label_21;
@@ -1040,10 +992,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[51] = this.jj_gen;
 					break label_22;
@@ -1062,10 +1011,7 @@ public class Parser implements ParserConstants
 				label_23:
 				while (true)
 				{
-					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-					{
-					}
-					else
+					if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 					{
 						this.jj_la1[53] = this.jj_gen;
 						break label_23;
@@ -1084,10 +1030,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.LF);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == LF)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != LF)
 				{
 					this.jj_la1[55] = this.jj_gen;
 					break label_24;
@@ -1101,10 +1044,7 @@ public class Parser implements ParserConstants
 		while (true)
 		{
 			sg_stmt_list();
-			if (jj_2_11(2147483647))
-			{
-			}
-			else
+			if (!jj_2_11(2147483647))
 			{
 				break;
 			}
@@ -1115,10 +1055,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[57] = this.jj_gen;
 					break label_26;
@@ -1151,10 +1088,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[60] = this.jj_gen;
 					break label_27;
@@ -1195,10 +1129,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[62] = this.jj_gen;
 					break label_28;
@@ -1254,10 +1185,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[66] = this.jj_gen;
 					break label_30;
@@ -1275,10 +1203,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[68] = this.jj_gen;
 					break label_31;
@@ -1296,10 +1221,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[70] = this.jj_gen;
 					break label_32;
@@ -1368,10 +1290,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[73] = this.jj_gen;
 					break label_34;
@@ -1379,10 +1298,7 @@ public class Parser implements ParserConstants
 			}
 			n = node();
 			nl.add(n);
-			if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-			{
-			}
-			else
+			if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 			{
 				this.jj_la1[74] = this.jj_gen;
 				break label_33;
@@ -1419,10 +1335,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[76] = this.jj_gen;
 					break label_35;
@@ -1488,10 +1401,7 @@ public class Parser implements ParserConstants
 			{
 				kv = attribute();
 				ht.put(kv[0], kv[1]);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == ID)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != ID)
 				{
 					this.jj_la1[81] = this.jj_gen;
 					break label_37;
@@ -1509,10 +1419,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[83] = this.jj_gen;
 					break label_38;
@@ -1545,9 +1452,7 @@ public class Parser implements ParserConstants
 		{
 			kv[1] = attrib_value();
 		}
-		else
-		{
-		}
+
 		label_39:
 		while (true)
 		{
@@ -1599,10 +1504,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[87] = this.jj_gen;
 					break label_40;
@@ -1620,10 +1522,7 @@ public class Parser implements ParserConstants
 			while (true)
 			{
 				jj_consume_token(ParserConstants.SPACE);
-				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
-				{
-				}
-				else
+				if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) != SPACE)
 				{
 					this.jj_la1[89] = this.jj_gen;
 					break label_41;
