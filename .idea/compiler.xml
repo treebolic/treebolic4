@@ -11,8 +11,10 @@
         <outputRelativeToContentRoot value="true" />
         <module name="provider-text-indent" />
         <module name="treebolic-loadbalancer" />
+        <module name="swing-files" />
         <module name="treebolic-mutable" />
         <module name="swing-application-owl-jena" />
+        <module name="provider-graphviz" />
         <module name="treebolic-model" />
         <module name="swing-wordnet" />
         <module name="provider-wordnet-jwi" />
@@ -45,6 +47,7 @@
         <module name="treebolic-graph" />
         <module name="treebolic-view" />
         <module name="provider-owl-sax" />
+        <module name="provider-files" />
         <module name="transformer-xml" />
         <module name="swing-application" />
         <module name="treebolic-glue" />

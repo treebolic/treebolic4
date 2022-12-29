@@ -57,6 +57,8 @@
 		<module>swing-commons</module>
 		<module>swing-browser</module>
 		<module>swing-browser-search</module>
+		<module>provider-files</module>
+		<module>provider-graphviz</module>
 
 	</modules>
 

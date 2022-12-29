@@ -733,6 +733,7 @@
         <option value="$PROJECT_DIR$/provider-wordnet-jwi2/pom.xml" />
         <option value="$PROJECT_DIR$/swing-wordnet/pom.xml" />
         <option value="$PROJECT_DIR$/swing-wordnet2/pom.xml" />
+        <option value="$PROJECT_DIR$/swing-files/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
