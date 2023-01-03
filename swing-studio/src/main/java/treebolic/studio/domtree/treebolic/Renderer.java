@@ -7,6 +7,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import java.awt.*;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -159,12 +160,15 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 		StyleConstants.setForeground(Renderer.srcStyle, Color.MAGENTA);
 
 		// images
-		//noinspection ConstantConditions
-		Renderer.nodeIcon = new ImageIcon(Renderer.class.getResource("images/treenode.gif"));
-		//noinspection ConstantConditions
-		Renderer.edgeIcon = new ImageIcon(Renderer.class.getResource("images/treeedge.gif"));
-		//noinspection ConstantConditions
-		Renderer.linkIcon = new ImageIcon(Renderer.class.getResource("images/treelink.gif"));
+		final URL nodeIconUrl = Renderer.class.getResource("images/treenode.gif");
+		final URL edgeIconUrl = Renderer.class.getResource("images/treeedge.gif");
+		final URL linkIconUrl = Renderer.class.getResource("images/treelink.gif");
+		assert nodeIconUrl != null;
+		Renderer.nodeIcon = new ImageIcon(nodeIconUrl);
+		assert edgeIconUrl != null;
+		Renderer.edgeIcon = new ImageIcon(edgeIconUrl);
+		assert linkIconUrl != null;
+		Renderer.linkIcon = new ImageIcon(linkIconUrl);
 	}
 
 	/**

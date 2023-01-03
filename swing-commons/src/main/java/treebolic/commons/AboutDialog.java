@@ -4,6 +4,7 @@
 package treebolic.commons;
 
 import java.awt.*;
+import java.net.URL;
 
 import javax.swing.*;
 
@@ -77,8 +78,9 @@ public class AboutDialog extends JDialog
 		@NonNull final JLabel versionLabel = new JLabel(version);
 
 		@NonNull final JLabel image = new JLabel();
-		//noinspection ConstantConditions
-		image.setIcon(new ImageIcon(AboutDialog.class.getResource("images/logo.png")));
+		URL iconUrl = AboutDialog.class.getResource("images/logo.png");
+		assert iconUrl != null;
+		image.setIcon(new ImageIcon(iconUrl));
 
 		@NonNull final JButton oKButton = new JButton(Messages.getString("AboutDialog.ok"));
 		oKButton.addActionListener(e -> setVisible(false));

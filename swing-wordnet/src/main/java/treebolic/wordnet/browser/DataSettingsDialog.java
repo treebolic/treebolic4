@@ -77,7 +77,9 @@ public class DataSettingsDialog extends JDialog
 		setResizable(true);
 
 		// images
-		@SuppressWarnings("ConstantConditions") final Icon icon = new ImageIcon(DataSettingsDialog.class.getResource("images/datasettings.png"));
+		final URL dataSettingsIconUrl = DataSettingsDialog.class.getResource("images/datasettings.png");
+		assert dataSettingsIconUrl != null;
+		final Icon icon = new ImageIcon(dataSettingsIconUrl);
 		final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);

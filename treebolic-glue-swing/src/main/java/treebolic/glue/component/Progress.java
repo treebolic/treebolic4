@@ -20,13 +20,13 @@ public class Progress extends JPanel implements Component, treebolic.glue.iface.
 	/**
 	 * Stop icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	static private final Icon stopIcon = new ImageIcon(Progress.class.getResource("images/progress_stop.png"));
 
 	/**
 	 * Working icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	static private final Icon workingIcon = new ImageIcon(Progress.class.getResource("images/progress_wait.gif"));
 
 	/**

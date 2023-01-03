@@ -7,6 +7,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -113,12 +114,15 @@ public class Renderer implements TreeCellRenderer
 		StyleConstants.setForeground(Renderer.idStyle, Color.BLUE);
 
 		// icons
-		//noinspection ConstantConditions
-		Renderer.elementIcon = new ImageIcon(Renderer.class.getResource("images/treeelement.gif"));
-		//noinspection ConstantConditions
-		Renderer.textIcon = new ImageIcon(Renderer.class.getResource("images/treetext.gif"));
-		//noinspection ConstantConditions
-		Renderer.defaultIcon = new ImageIcon(Renderer.class.getResource("images/treedefault.gif"));
+		final URL elementIconUrl = Renderer.class.getResource("images/treeelement.gif");
+		final URL textIcon = Renderer.class.getResource("images/treetext.gif");
+		final URL defaultIconUrl = Renderer.class.getResource("images/treedefault.gif");
+		assert elementIconUrl != null;
+		Renderer.elementIcon = new ImageIcon(elementIconUrl);
+		assert textIcon != null;
+		Renderer.textIcon = new ImageIcon(textIcon);
+		assert defaultIconUrl != null;
+		Renderer.defaultIcon = new ImageIcon(defaultIconUrl);
 	}
 
 	// components

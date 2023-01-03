@@ -6,6 +6,7 @@ package treebolic.glue.component;
 
 import java.awt.Container;
 import java.awt.*;
+import java.net.URL;
 import java.util.function.Function;
 
 import javax.swing.*;
@@ -36,7 +37,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	/*
 	 * Icon array
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	static final ImageIcon[] icons = new ImageIcon[]{ //
 			new ImageIcon(Statusbar.class.getResource("images/status_info.png")), //
 			new ImageIcon(Statusbar.class.getResource("images/status_linking.png")), //
@@ -135,8 +136,9 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	{
 		// enlarge/shrink buttons
 		@NonNull final JButton moreButton = new JButton();
-		//noinspection ConstantConditions
-		moreButton.setIcon(new ImageIcon(Statusbar.class.getResource("images/status_plus.png")));
+		final URL statusPlusIconUrl = Statusbar.class.getResource("images/status_plus.png");
+		assert statusPlusIconUrl != null;
+		moreButton.setIcon(new ImageIcon(statusPlusIconUrl));
 		moreButton.setContentAreaFilled(false);
 		moreButton.setFocusable(false);
 		moreButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -152,8 +154,9 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 			}
 		});
 		@NonNull final JButton lessButton = new JButton();
-		//noinspection ConstantConditions
-		lessButton.setIcon(new ImageIcon(Statusbar.class.getResource("images/status_minus.png")));
+		final URL statusMinusIconUrl = Statusbar.class.getResource("images/status_minus.png");
+		assert statusMinusIconUrl != null;
+		lessButton.setIcon(new ImageIcon(statusMinusIconUrl));
 		lessButton.setContentAreaFilled(false);
 		lessButton.setFocusable(false);
 		lessButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));

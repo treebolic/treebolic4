@@ -21,7 +21,7 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 	/**
 	 * (Ordered) toolbar
 	 *
-	 * @return list of buttons
+	 * @return array of buttons
 	 */
 	@Override
 	@NonNull
@@ -100,7 +100,7 @@ public class Toolbar extends JToolBar implements Component, treebolic.glue.iface
 	/**
 	 * Icon array
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	static final ImageIcon[] icons = new ImageIcon[]{new ImageIcon(PopupMenu.class.getResource("images/toolbar_home.png")), //
 
 			new ImageIcon(Toolbar.class.getResource("images/toolbar_radial.png")), //

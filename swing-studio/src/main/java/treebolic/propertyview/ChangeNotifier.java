@@ -50,7 +50,7 @@ public class ChangeNotifier
 	/**
 	 * Get change listeners
 	 *
-	 * @return list of listeners
+	 * @return array of listeners
 	 */
 	public ChangeListener[] getChangeListeners()
 	{

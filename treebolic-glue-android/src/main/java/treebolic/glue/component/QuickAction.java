@@ -29,7 +29,7 @@ import androidx.annotation.Nullable;
 import treebolic.glue.ActionListener;
 
 /**
- * QuickAction dialog, shows action list as icon and text like the one in Gallery3D app. Currently supports vertical and horizontal layout.
+ * QuickAction dialog, shows action list as icon and text like the one in Gallery3D app. Currently, supports vertical and horizontal layout.
  *
  * @author Lorensius W. L. T <lorenz@londatiga.net> Contributors: - Kevin Peck <kevinwpeck@gmail.com>
  */

@@ -35,5 +35,5 @@ public class ImageFactory
 	/**
 	 * Images
 	 */
-	static Image[] images = makeImages(OwlModelFactory.images);
+	static final Image[] images = makeImages(OwlModelFactory.images);
 }

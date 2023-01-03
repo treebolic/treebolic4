@@ -1398,7 +1398,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	/**
 	 * Attribute comparator (rank)
 	 */
-	private final Comparator<AttributeDescriptor> comparator = (descriptor1, descriptor2) -> descriptor1.rank > descriptor2.rank ? 1 : 0;
+	private final Comparator<AttributeDescriptor> comparator = Comparator.comparing(d -> d.rank);
 
 	// C O N S T R U C T O R
 

@@ -1163,6 +1163,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		this.membersLoadBalancer = new LoadBalancer(MAX_MEMBERS_AT_LEVEL, MEMBERS_LABEL_TRUNCATE_AT);
 		this.semLinksLoadBalancer = new LoadBalancer(MAX_SEMLINKS_AT_LEVEL, SEMLINKS_LABEL_TRUNCATE_AT);
 		assert images != null;
+		//noinspection ConstantValue
 		this.membersLoadBalancer.setGroupNode(null, this.wordsBackgroundColor, this.wordsForegroundColor, this.wordsEdgeColor, LOADBALANCING_EDGE_STYLE, -1, null, images[ImageIndex.MEMBERS.ordinal()]);
 		this.semLinksLoadBalancer.setGroupNode(null, this.linksBackgroundColor, this.linksForegroundColor, this.linksEdgeColor, LOADBALANCING_EDGE_STYLE, -1, null, images[ImageIndex.SYNSET.ordinal()]);
 	}

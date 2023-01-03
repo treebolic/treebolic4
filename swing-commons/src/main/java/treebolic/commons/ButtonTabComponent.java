@@ -18,19 +18,19 @@ public class ButtonTabComponent extends JPanel
 	/**
 	 * Default icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	static private final Icon defaultIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_default.png"));
 
 	/**
 	 * Rollover icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	static private final Icon rolloverIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_rollover.png"));
 
 	/**
 	 * Pressed icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	static private final Icon pressedIcon = new ImageIcon(ButtonTabComponent.class.getResource("images/close_pressed.png"));
 
 	/**

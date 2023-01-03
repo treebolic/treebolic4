@@ -4,6 +4,7 @@
 package treebolic.fungi.browser;
 
 import java.awt.*;
+import java.net.URL;
 
 import javax.swing.*;
 
@@ -34,7 +35,9 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 		final JPanel panel = super.initialize(product, version, sysInfo);
 
 		// Fungi
-		@SuppressWarnings("ConstantConditions") final JLabel image = new JLabel(new ImageIcon(AboutDialog.class.getResource("images/fungi.png")));
+		final URL iconUrl1 = AboutDialog.class.getResource("images/fungi.png");
+		assert iconUrl1 != null;
+		final JLabel image = new JLabel(new ImageIcon(iconUrl1));
 		final HyperlinkButton dBButton = new HyperlinkButton(HyperlinkButton.makeURILabel("MycoDB®"), "http://mycodb.fr");
 		final JLabel dBLabel = new JLabel("MycoDB");
 
@@ -42,13 +45,17 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 		final HyperlinkButton tWButton = new HyperlinkButton(HyperlinkButton.makeURILabel(Messages.getString("AboutDialog.app")), "http://treebolicfungi.sourceforge.net");
 
 		// Android
-		@SuppressWarnings("ConstantConditions") final JLabel androidImage = new JLabel("<HTML><FONT color=\"#808080\">" + Messages.getString("AboutDialog.also") + ' ' + "</FONT><B>Android</B></FONT></HTML>", new ImageIcon(AboutDialog.class.getResource("images/android.png")), SwingConstants.CENTER);
+		final URL iconUrl2 = AboutDialog.class.getResource("images/android.png");
+		assert iconUrl2 != null;
+		final JLabel androidImage = new JLabel("<HTML><FONT color=\"#808080\">" + Messages.getString("AboutDialog.also") + ' ' + "</FONT><B>Android</B></FONT></HTML>", new ImageIcon(iconUrl2), SwingConstants.CENTER);
 		androidImage.setHorizontalTextPosition(SwingConstants.CENTER);
 		androidImage.setVerticalTextPosition(SwingConstants.BOTTOM);
 
 		// Google Play
 		final String googlePlayUri = "https://play.google.com/store/apps/details?id=org.treebolic.fungi.browser";
-		@SuppressWarnings("ConstantConditions") final Icon googlePlayIcon = new ImageIcon(AboutDialog.class.getResource("images/google-play.png"));
+		final URL googlePlayIconURl = AboutDialog.class.getResource("images/google-play.png");
+		assert googlePlayIconURl != null;
+		final Icon googlePlayIcon = new ImageIcon(googlePlayIconURl);
 		final HyperlinkButton googlePlayButton = new HyperlinkButton(googlePlayIcon, googlePlayUri);
 
 		panel.add(image, new GridBagConstraints(0, 30, 1, 1, 0., 0., GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 10, 10, 10), 0, 0));

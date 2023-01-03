@@ -5,6 +5,7 @@
 package treebolic.glue.component;
 
 import java.awt.event.ItemEvent;
+import java.net.URL;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -95,8 +96,9 @@ public class SearchTool extends Box
 	{
 		// input button
 		@NonNull final JButton inputButton = new JButton();
-		//noinspection ConstantConditions
-		inputButton.setIcon(new ImageIcon(SearchTool.class.getResource("images/search_run.png")));
+		final URL searchRunIconUrl = SearchTool.class.getResource("images/search_run.png");
+		assert searchRunIconUrl != null;
+		inputButton.setIcon(new ImageIcon(searchRunIconUrl));
 		inputButton.setToolTipText(Messages.getString("SearchTool.tooltip_run"));
 		inputButton.setContentAreaFilled(false);
 		inputButton.setFocusable(false);
@@ -104,8 +106,9 @@ public class SearchTool extends Box
 
 		// input clear
 		@NonNull final JButton inputClearButton = new JButton();
-		//noinspection ConstantConditions
-		inputClearButton.setIcon(new ImageIcon(SearchTool.class.getResource("images/search_reset.png")));
+		final URL searchResetIconUrl = SearchTool.class.getResource("images/search_reset.png");
+		assert searchResetIconUrl != null;
+		inputClearButton.setIcon(new ImageIcon(searchResetIconUrl));
 		inputClearButton.setToolTipText(Messages.getString("SearchTool.tooltip_reset"));
 		inputClearButton.setContentAreaFilled(false);
 		inputClearButton.setFocusable(false);
@@ -192,8 +195,12 @@ public class SearchTool extends Box
 	public JToggleButton makeControlToggle(@NonNull final java.awt.Container container)
 	{
 		// toggle icons
-		@NonNull @SuppressWarnings("ConstantConditions") final Icon openIcon = new ImageIcon(SearchTool.class.getResource("images/search_open.png"));
-		@NonNull @SuppressWarnings("ConstantConditions") final Icon closeIcon = new ImageIcon(SearchTool.class.getResource("images/search_close.png"));
+		final URL searchOpenIconUrl = SearchTool.class.getResource("images/search_open.png");
+		assert searchOpenIconUrl != null;
+		@NonNull final Icon openIcon = new ImageIcon(searchOpenIconUrl);
+		final URL searchCloseIconUrl = SearchTool.class.getResource("images/search_close.png");
+		assert searchCloseIconUrl != null;
+		@NonNull final Icon closeIcon = new ImageIcon(searchCloseIconUrl);
 
 		// toggle button
 		@NonNull final JToggleButton toggleButton = new JToggleButton();
@@ -227,7 +234,9 @@ public class SearchTool extends Box
 	public JButton makeSettingsButton()
 	{
 		// toggle icons
-		@NonNull @SuppressWarnings("ConstantConditions") final Icon settingsIcon = new ImageIcon(SearchDialog.class.getResource("images/search_settings.png"));
+		final URL searchSettingsIconUrl = SearchDialog.class.getResource("images/search_settings.png");
+		assert searchSettingsIconUrl != null;
+		@NonNull final Icon settingsIcon = new ImageIcon(searchSettingsIconUrl);
 
 		// toggle button
 		@NonNull final JButton settingsButton = new JButton();

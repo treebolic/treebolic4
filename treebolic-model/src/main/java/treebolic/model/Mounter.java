@@ -73,7 +73,7 @@ public class Mounter
 	 * @param mountedNode  grafted node
 	 * @param edges        edge list from mounting model
 	 * @param mountedEdges edge list from mounted model
-	 * @return true if successful, null otherwise
+	 * @return true if successful, false otherwise
 	 */
 	public static synchronized boolean graft(@NonNull final INode mountingNode, @NonNull final INode mountedNode, @Nullable final Collection<IEdge> edges, @Nullable final List<IEdge> mountedEdges)
 	{

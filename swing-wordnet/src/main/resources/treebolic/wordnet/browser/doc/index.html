@@ -5,18 +5,18 @@
 	<LINK rel="stylesheet" type="text/css" href="style.css">
 	<SCRIPT type="text/javascript">
         function select(tag) {
-            var maindoc = document;
-            var all = maindoc.getElementsByName('link');
-            for (i = 0; i < all.length; i++) {
-                var e2 = all[i];
+            const maindoc = document;
+            const all = maindoc.getElementsByName('link');
+            for (let i = 0; i < all.length; i++) {
+                const e2 = all[i];
                 e2.style.visibility = 'collapse';
             }
-            var e = maindoc.getElementById(tag);
+            const e = maindoc.getElementById(tag);
             e.style.visibility = 'visible';
         }
 
         function menu() {
-            var toc = document.getElementById('toc');
+            const toc = document.getElementById('toc');
             if ((toc.style.display !== 'inline'))
                 toc.style.display = 'inline';
             else

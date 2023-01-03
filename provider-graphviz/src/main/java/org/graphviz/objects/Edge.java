@@ -47,7 +47,7 @@ public class Edge
 	private int type;
 
 	/**
-	 * The hasttable having the attributes of this edge
+	 * The hashtable having the attributes of this edge
 	 */
 	private final Hashtable<String, String> attributes = new Hashtable<>();
 

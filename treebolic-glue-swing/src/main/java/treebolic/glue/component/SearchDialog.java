@@ -28,7 +28,7 @@ class SearchDialog extends JDialog
 	/**
 	 * Icon array
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	static final ImageIcon[] scopeIcons = new ImageIcon[]{new ImageIcon(SearchDialog.class.getResource("images/search_label.png")), new ImageIcon(SearchDialog.class.getResource("images/search_content.png")), new ImageIcon(SearchDialog.class.getResource("images/search_link.png")), new ImageIcon(SearchDialog.class.getResource("images/search_id.png")),};
 
 	// MODE
@@ -41,7 +41,7 @@ class SearchDialog extends JDialog
 	/**
 	 * Icon array
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	static final ImageIcon[] modeIcons = new ImageIcon[]{new ImageIcon(SearchDialog.class.getResource("images/search_startswith.png")), new ImageIcon(SearchDialog.class.getResource("images/search_equals.png")), new ImageIcon(SearchDialog.class.getResource("images/search_includes.png")),};
 
 	// V A L U E S

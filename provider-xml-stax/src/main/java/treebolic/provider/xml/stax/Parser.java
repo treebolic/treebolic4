@@ -632,7 +632,7 @@ public class Parser
 		}
 	}
 
-	private static XMLEventReader makeReader(@NonNull final Reader reader) throws IOException, XMLStreamException
+	private static XMLEventReader makeReader(@NonNull final Reader reader) throws XMLStreamException
 	{
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 		return factory.createFilteredReader(factory.createXMLEventReader(reader), event -> event.isEndElement() || event.isStartElement());

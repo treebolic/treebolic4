@@ -775,7 +775,7 @@ public class Parser implements ParserConstants
 	/**
 	 * Production for a list of nodes
 	 *
-	 * @return array of nodes
+	 * @return list of nodes
 	 * @throws ParseException parse exception
 	 */
 	final public ArrayList<Node> matrix() throws ParseException

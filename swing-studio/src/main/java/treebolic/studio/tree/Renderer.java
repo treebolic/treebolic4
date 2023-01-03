@@ -4,6 +4,7 @@
 package treebolic.studio.tree;
 
 import java.awt.*;
+import java.net.URL;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -113,28 +114,40 @@ public class Renderer extends DefaultTreeCellRenderer
 	static
 	{
 		// icons
-		//noinspection ConstantConditions
-		treebolicIcon = new ImageIcon(Renderer.class.getResource("images/treehome.png"));
-		//noinspection ConstantConditions
-		treeIcon = new ImageIcon(Renderer.class.getResource("images/treetree.png"));
-		//noinspection ConstantConditions
-		nodesIcon = new ImageIcon(Renderer.class.getResource("images/treenodes.png"));
-		//noinspection ConstantConditions
-		rootIcon = new ImageIcon(Renderer.class.getResource("images/treeroot.png"));
-		//noinspection ConstantConditions
-		nodeIcon = new ImageIcon(Renderer.class.getResource("images/treenode.png"));
-		//noinspection ConstantConditions
-		nodeSpecialIcon = new ImageIcon(Renderer.class.getResource("images/treenodespecial.png"));
-		//noinspection ConstantConditions
-		edgesIcon = new ImageIcon(Renderer.class.getResource("images/treeedges.png"));
-		//noinspection ConstantConditions
-		edgeIcon = new ImageIcon(Renderer.class.getResource("images/treeedge.png"));
-		//noinspection ConstantConditions
-		toolsIcon = new ImageIcon(Renderer.class.getResource("images/treetools.png"));
-		//noinspection ConstantConditions
-		menuIcon = new ImageIcon(Renderer.class.getResource("images/treemenuitem.png"));
-		//noinspection ConstantConditions
-		defaultIcon = new ImageIcon(Renderer.class.getResource("images/treedefault.png"));
+		final URL treebolicIconUrl = Renderer.class.getResource("images/treehome.png");
+		final URL treeIconUrl = Renderer.class.getResource("images/treetree.png");
+		final URL nodesIconUrl = Renderer.class.getResource("images/treenodes.png");
+		final URL rootIconUrl = Renderer.class.getResource("images/treeroot.png");
+		final URL nodeIconUrl =Renderer.class.getResource("images/treenode.png");
+		final URL nodeSpecialIconUrl = Renderer.class.getResource("images/treenodespecial.png");
+		final URL edgesIconUrl = Renderer.class.getResource("images/treeedges.png");
+		final URL edgeIconUrl = Renderer.class.getResource("images/treeedge.png");
+		final URL toolsIconUrl = Renderer.class.getResource("images/treetools.png");
+		final URL menuIconUrl = Renderer.class.getResource("images/treemenuitem.png");
+		final URL defaultIconUrl = Renderer.class.getResource("images/treedefault.png");
+
+		assert treebolicIconUrl != null;
+		treebolicIcon = new ImageIcon(treebolicIconUrl);
+		assert treeIconUrl != null;
+		treeIcon = new ImageIcon(treeIconUrl);
+		assert nodesIconUrl != null;
+		nodesIcon = new ImageIcon(nodesIconUrl);
+		assert rootIconUrl != null;
+		rootIcon = new ImageIcon(rootIconUrl);
+		assert nodeIconUrl != null;
+		nodeIcon = new ImageIcon(nodeIconUrl);
+		assert nodeSpecialIconUrl != null;
+		nodeSpecialIcon = new ImageIcon(nodeSpecialIconUrl);
+		assert edgesIconUrl != null;
+		edgesIcon = new ImageIcon(edgesIconUrl);
+		assert edgeIconUrl != null;
+		edgeIcon = new ImageIcon(edgeIconUrl);
+		assert toolsIconUrl != null;
+		toolsIcon = new ImageIcon(toolsIconUrl);
+		assert menuIconUrl != null;
+		menuIcon = new ImageIcon(menuIconUrl);
+		assert defaultIconUrl != null;
+		defaultIcon = new ImageIcon(defaultIconUrl);
 
 		// fonts
 		defaultFont = new Font(Font.DIALOG, Font.PLAIN, 12);

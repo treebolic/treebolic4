@@ -69,7 +69,7 @@ public class Graph
 	private int type = 0;
 
 	/**
-	 * Wether the graph is strict or not
+	 * Whether the graph is strict or not
 	 */
 	private boolean strictgraph = false;
 
@@ -253,7 +253,7 @@ public class Graph
 	}
 
 	/**
-	 * Returns wether the graph is strict or not
+	 * Returns whether the graph is strict or not
 	 *
 	 * @return the static state
 	 */
@@ -469,7 +469,7 @@ public class Graph
 	 * Tries to find a node of a Graph depending on the given ID object.
 	 *
 	 * @param id the id object to identify the node
-	 * @return the node or nulll if not found
+	 * @return the node or null if not found
 	 */
 	public Node findNode(final Id id)
 	{

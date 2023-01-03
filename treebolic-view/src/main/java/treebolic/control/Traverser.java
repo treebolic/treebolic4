@@ -271,7 +271,7 @@ public class Traverser extends Generator<INode>
 			this.yield(node);
 		}
 
-		// try to match match this node's children
+		// try to match this node's children
 		@Nullable final List<INode> children = node.getChildren();
 		if (children != null)
 		{

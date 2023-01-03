@@ -289,7 +289,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	/**
 	 * Make extra components to be added to toolbar
 	 *
-	 * @return list of components
+	 * @return array of components
 	 */
 	@Nullable
 	@SuppressWarnings("SameReturnValue")

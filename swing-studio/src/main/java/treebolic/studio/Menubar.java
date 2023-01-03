@@ -5,6 +5,7 @@ package treebolic.studio;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 
 import javax.swing.*;
 
@@ -157,8 +158,9 @@ public class Menubar extends JMenuBar
 		item.setText(text);
 		if (image != null)
 		{
-			//noinspection ConstantConditions
-			item.setIcon(new ImageIcon(Menubar.class.getResource("images/" + image)));
+			final URL imageUrl = Menubar.class.getResource("images/" + image);
+			assert imageUrl != null;
+			item.setIcon(new ImageIcon(imageUrl));
 		}
 		if (acceleratorKey != null)
 		{
@@ -185,8 +187,9 @@ public class Menubar extends JMenuBar
 		item.setSelected(state);
 		if (image != null)
 		{
-			//noinspection ConstantConditions
-			item.setIcon(new ImageIcon(Menubar.class.getResource("images/" + image)));
+			final URL imageUrl = Menubar.class.getResource("images/" + image);
+			assert imageUrl != null;
+			item.setIcon(new ImageIcon(imageUrl));
 		}
 		if (acceleratorKey != null)
 		{

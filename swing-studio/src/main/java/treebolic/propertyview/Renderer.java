@@ -48,97 +48,97 @@ class Renderer extends DefaultTableCellRenderer
 	/**
 	 * Mandatory attribute icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon mandatoryIcon = new ImageIcon(Renderer.class.getResource("images/mandatory.png"));
 
 	/**
 	 * Optional attribute icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon optionalIcon = new ImageIcon(Renderer.class.getResource("images/optional.png"));
 
 	/**
 	 * Attribute icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon attributeIcon = new ImageIcon(Renderer.class.getResource("images/attribute.png"));
 
 	/**
 	 * Id icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon idIcon = new ImageIcon(Renderer.class.getResource("images/id.png"));
 
 	/**
 	 * Id reference icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon refIdIcon = new ImageIcon(Renderer.class.getResource("images/node.png"));
 
 	/**
 	 * Text icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon textIcon = new ImageIcon(Renderer.class.getResource("images/text.png"));
 
 	/**
 	 * Long text icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon longTextIcon = new ImageIcon(Renderer.class.getResource("images/longtext.png"));
 
 	/**
 	 * Image icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon imageIcon = new ImageIcon(Renderer.class.getResource("images/image.png"));
 
 	/**
 	 * Link icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon linkIcon = new ImageIcon(Renderer.class.getResource("images/link.png"));
 
 	/**
 	 * Color icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon colorIcon = new ImageIcon(Renderer.class.getResource("images/color.png"));
 
 	/**
 	 * Stroke icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon strokeIcon = new ImageIcon(Renderer.class.getResource("images/stroke.png"));
 
 	/**
 	 * Terminator icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon terminatorIcon = new ImageIcon(Renderer.class.getResource("images/terminator.png"));
 
 	/**
 	 * Font icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon fontIcon = new ImageIcon(Renderer.class.getResource("images/font.png"));
 
 	/**
 	 * Font size icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon fontSizeIcon = new ImageIcon(Renderer.class.getResource("images/fontsize.png"));
 
 	/**
 	 * Boolean icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon booleanIcon = new ImageIcon(Renderer.class.getResource("images/boolean.png"));
 
 	/**
 	 * Floats icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	private final ImageIcon floatsIcon = new ImageIcon(Renderer.class.getResource("images/floats.png"));
 
 	/**

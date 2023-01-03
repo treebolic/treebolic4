@@ -6,6 +6,7 @@ package treebolic.fungi.browser;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.net.URL;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -94,7 +95,7 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	protected AbstractAction resetTruncateAction;
 
 	/**
-	 * Set set prune action
+	 * Set prune action
 	 */
 	protected AbstractAction setPruneAction;
 
@@ -149,6 +150,7 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	{
 		return "treebolic.provider.sqlx.Provider";
 	}
+
 	@Override
 	protected String getSource()
 	{
@@ -259,7 +261,7 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	/**
 	 * Make menu bar
 	 *
-	 * @return tool bar
+	 * @return toolbar
 	 */
 	@Override
 	protected JToolBar makeToolBar()
@@ -315,8 +317,9 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 		// menu
 		final JButton menuButton = new JButton();
 		menuButton.setToolTipText(Messages.getString("MainFrame.menutooltip"));
-		//noinspection ConstantConditions
-		menuButton.setIcon(new ImageIcon(MainFrame.class.getResource("images/menu.png")));
+		final URL menuIconUrl = MainFrame.class.getResource("images/menu.png");
+		assert menuIconUrl != null;
+		menuButton.setIcon(new ImageIcon(menuIconUrl));
 		menuButton.setComponentPopupMenu(makePopupMenu());
 		menuButton.addMouseListener(new MouseAdapter()
 		{
@@ -442,8 +445,9 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 		final JButton button = new JButton(action); // new JButton(text);
 		button.setText(text);
 		button.setToolTipText(tooltip);
-		//noinspection ConstantConditions
-		button.setIcon(new ImageIcon(MainFrame.class.getResource(image)));
+		URL iconUrl = MainFrame.class.getResource(image);
+		assert iconUrl != null;
+		button.setIcon(new ImageIcon(iconUrl));
 
 		// manually register the accelerator in the button's component input map
 		final Object key = action.getValue(Action.NAME);
@@ -467,17 +471,19 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 		menu.setToolTipText(Messages.getString("MainFrame.menutooltip"));
 
 		// restart
-		final JMenuItem restartMenuItem = new JMenuItem(this.restartAction);
-		restartMenuItem.setText(Messages.getString("MainFrame.update"));
-		//noinspection ConstantConditions
-		restartMenuItem.setIcon(new ImageIcon(treebolic.fungi.browser.MainFrame.class.getResource("images/update.png")));
-		menu.add(restartMenuItem);
+		final JMenuItem updateMenuItem = new JMenuItem(this.restartAction);
+		updateMenuItem.setText(Messages.getString("MainFrame.update"));
+		final URL updateIcon = treebolic.fungi.browser.MainFrame.class.getResource("images/update.png");
+		assert updateIcon != null;
+		updateMenuItem.setIcon(new ImageIcon(updateIcon));
+		menu.add(updateMenuItem);
 
 		// source
 		final JMenuItem setSourceMenuItem = new JMenuItem(this.setSourceAction);
 		setSourceMenuItem.setText(Messages.getString("MainFrame.setsource"));
-		//noinspection ConstantConditions
-		setSourceMenuItem.setIcon(new ImageIcon(treebolic.fungi.browser.MainFrame.class.getResource("images/settings.png")));
+		final URL setSourceIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/settings.png");
+		assert setSourceIconUrl != null;
+		setSourceMenuItem.setIcon(new ImageIcon(setSourceIconUrl));
 		menu.add(setSourceMenuItem);
 
 		final JMenuItem sourceMenuItem = new JMenuItem(this.sourceAction);
@@ -487,15 +493,17 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 		// truncate
 		final JMenuItem setTruncateMenuItem = new JMenuItem(this.setTruncateAction);
 		setTruncateMenuItem.setText(Messages.getString("MainFrame.settruncate"));
-		//noinspection ConstantConditions
-		setTruncateMenuItem.setIcon(new ImageIcon(treebolic.fungi.browser.MainFrame.class.getResource("images/truncate.png")));
+		final URL setTruncateIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/truncate.png");
+		assert setTruncateIconUrl != null;
+		setTruncateMenuItem.setIcon(new ImageIcon(setTruncateIconUrl));
 		menu.add(setTruncateMenuItem);
 
 		final JMenuItem resetTruncateMenuItem = new JMenuItem(this.resetTruncateAction);
 		resetTruncateMenuItem.setAccelerator(KeyStroke.getKeyStroke('H', InputEvent.ALT_DOWN_MASK));
 		resetTruncateMenuItem.setText(Messages.getString("MainFrame.resettruncate"));
-		//noinspection ConstantConditions
-		resetTruncateMenuItem.setIcon(new ImageIcon(treebolic.fungi.browser.MainFrame.class.getResource("images/tree.png")));
+		final URL resetTruncateIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/tree.png");
+		assert resetTruncateIconUrl != null;
+		resetTruncateMenuItem.setIcon(new ImageIcon(resetTruncateIconUrl));
 		menu.add(resetTruncateMenuItem);
 
 		final JMenuItem truncateMenuItem = new JMenuItem(this.truncateAction);
@@ -506,8 +514,9 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 		final JMenuItem setPruneMenuItem = new JMenuItem(this.setPruneAction);
 		setPruneMenuItem.setText(Messages.getString("MainFrame.setprune"));
 		setPruneMenuItem.setAccelerator(KeyStroke.getKeyStroke('P', InputEvent.ALT_DOWN_MASK));
-		//noinspection ConstantConditions
-		setPruneMenuItem.setIcon(new ImageIcon(treebolic.fungi.browser.MainFrame.class.getResource("images/prune.png")));
+		final URL pruneIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/prune.png");
+		assert pruneIconUrl != null;
+		setPruneMenuItem.setIcon(new ImageIcon(pruneIconUrl));
 		menu.add(setPruneMenuItem);
 
 		final JMenuItem pruneMenuItem = new JMenuItem(this.pruneAction);
@@ -515,28 +524,31 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 		menu.add(pruneMenuItem);
 
 		// settings
-		final JMenuItem settingsMenuItem = new JMenuItem();
-		settingsMenuItem.setAccelerator(KeyStroke.getKeyStroke('C', InputEvent.ALT_DOWN_MASK));
-		settingsMenuItem.setText(Messages.getString("MainFrame.colors"));
-		//noinspection ConstantConditions
-		settingsMenuItem.setIcon(new ImageIcon(treebolic.fungi.browser.MainFrame.class.getResource("images/palette.png")));
-		settingsMenuItem.addActionListener(e -> colors());
-		menu.add(settingsMenuItem);
+		final JMenuItem colorsMenuItem = new JMenuItem();
+		colorsMenuItem.setAccelerator(KeyStroke.getKeyStroke('C', InputEvent.ALT_DOWN_MASK));
+		colorsMenuItem.setText(Messages.getString("MainFrame.colors"));
+		final URL colorsIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/palette.png");
+		assert colorsIconUrl != null;
+		colorsMenuItem.setIcon(new ImageIcon(colorsIconUrl));
+		colorsMenuItem.addActionListener(e -> colors());
+		menu.add(colorsMenuItem);
 
 		// font
 		final JMenuItem fontSizeItem = new JMenuItem();
 		fontSizeItem.setAccelerator(KeyStroke.getKeyStroke('F', InputEvent.ALT_DOWN_MASK));
 		fontSizeItem.setText(Messages.getString("MainFrame.fontsize"));
-		//noinspection ConstantConditions
-		fontSizeItem.setIcon(new ImageIcon(treebolic.fungi.browser.MainFrame.class.getResource("images/fontsize.png")));
+		final URL fontSizeIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/fontsize.png");
+		assert fontSizeIconUrl != null;
+		fontSizeItem.setIcon(new ImageIcon(fontSizeIconUrl));
 		fontSizeItem.addActionListener(e -> fontsize());
 		menu.add(fontSizeItem);
 
 		// about
 		final JMenuItem aboutItem = new JMenuItem();
 		aboutItem.setText(Messages.getString("MainFrame.about"));
-		//noinspection ConstantConditions
-		aboutItem.setIcon(new ImageIcon(treebolic.fungi.browser.MainFrame.class.getResource("images/about.png")));
+		final URL aboutIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/about.png");
+		assert aboutIconUrl != null;
+		aboutItem.setIcon(new ImageIcon(aboutIconUrl));
 		aboutItem.addActionListener(e -> about());
 		menu.add(aboutItem);
 
@@ -558,14 +570,14 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 		this.parameters = makeParameters(this.args);
 
 		// remove
-		//noinspection ConstantConditions
+		//noinspection DataFlowIssue
 		getContentPane().remove((Component) this.widget);
 
 		// widget
 		this.widget = makeWidget();
 
 		// assemble
-		//noinspection ConstantConditions
+		//noinspection DataFlowIssue
 		getContentPane().add((Component) this.widget);
 	}
 

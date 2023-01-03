@@ -10,7 +10,7 @@ import treebolic.glue.ActionListener;
 import treebolic.glue.component.Component;
 
 /**
- * Tool bar
+ * Toolbar
  *
  * @author Bernard Bou
  */
@@ -32,7 +32,7 @@ public class Toolbar extends treebolic.glue.component.Toolbar implements Compone
 	 * @param tooltipDisplaysContent whether tooltip displays content
 	 * @param arcEdges               whether toolbar has display as arcs/lines for edges
 	 * @param focusOnHover           whether toolbar has enable/disable focus-on-hover option
-	 * @param handle                 handle Handle required for component creation
+	 * @param handle                 handle required for component creation
 	 */
 	public Toolbar(final Controller controller, @SuppressWarnings("unused") final boolean hasTooltip, @SuppressWarnings("unused") final boolean tooltipDisplaysContent, @SuppressWarnings("unused") final boolean arcEdges, @SuppressWarnings("unused") final boolean focusOnHover, final Object handle)
 	{

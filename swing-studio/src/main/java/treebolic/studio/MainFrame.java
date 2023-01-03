@@ -5,6 +5,7 @@ package treebolic.studio;
 
 import java.awt.*;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.swing.*;
@@ -28,13 +29,13 @@ public class MainFrame extends JFrame
 	/**
 	 * Tree icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	static final Icon treeIcon = new ImageIcon(MainFrame.class.getResource("images/treetab.png"));
 
 	/**
 	 * Tree icon
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	static final Icon treebolicIcon = new ImageIcon(MainFrame.class.getResource("images/treebolictab.png"));
 
 	/**
@@ -387,8 +388,9 @@ public class MainFrame extends JFrame
 	private JButton makeGlobalsButton(@NonNull final Controller controller, final String label, final String image, @NonNull final Controller.Code code)
 	{
 		@NonNull final JButton button = new JButton();
-		//noinspection ConstantConditions
-		button.setIcon(new ImageIcon(getClass().getResource("images/" + image)));
+		final URL imageUrl = getClass().getResource("images/" + image);
+		assert imageUrl != null;
+		button.setIcon(new ImageIcon(imageUrl));
 		button.setToolTipText(label);
 		button.setBorder(null);
 		button.setAlignmentX(Component.CENTER_ALIGNMENT);

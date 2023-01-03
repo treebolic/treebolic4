@@ -23,7 +23,7 @@ import treebolic.glue.EventListener;
 import treebolic.glue.Graphics;
 
 /**
- * Surface treebolic.glue to serve as base for view
+ * Surface treebolic glue to serve as base for view
  * API class
  *
  * @author Bernard Bou

@@ -4,6 +4,7 @@
 package treebolic.studio;
 
 import java.awt.*;
+import java.net.URL;
 
 import javax.swing.*;
 
@@ -78,8 +79,9 @@ public class TreeToolbar extends JToolBar
 	{
 		@NonNull final JButton button = new JButton();
 		button.setToolTipText(tooltip);
-		//noinspection ConstantConditions
-		button.setIcon(new ImageIcon(TreeToolbar.class.getResource("images/" + image)));
+		final URL imageUrl = TreeToolbar.class.getResource("images/" + image);
+		assert imageUrl != null;
+		button.setIcon(new ImageIcon(imageUrl));
 		return button;
 	}
 

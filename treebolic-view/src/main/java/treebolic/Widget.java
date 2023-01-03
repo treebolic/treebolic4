@@ -86,7 +86,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 	// C O N T E X T
 
 	/**
-	 * Context for operations (provides some treebolic.glue to the context, application)
+	 * Context for operations (provides some treebolic glue to the context, application)
 	 */
 	private final IContext context;
 
@@ -908,7 +908,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 			}
 		}
 
-		// recurse on mounting node obfuscated by mounted node)
+		// recurse on mounting node obfuscated by mounted node
 		@Nullable final MountPoint mountPoint = node.getMountPoint();
 		if (mountPoint instanceof MountPoint.Mounted)
 		{

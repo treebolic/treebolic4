@@ -21,7 +21,7 @@ public class PopupMenu extends JPopupMenu implements treebolic.glue.iface.compon
 	 * Icon array as per ImageIndices ordinals:
 	 * IMAGE_CANCEL, IMAGE_INFO, IMAGE_FOCUS, IMAGE_LINK, IMAGE_MOUNT, IMAGE_GOTO, IMAGE_SEARCH
 	 */
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings("DataFlowIssue")
 	static final ImageIcon[] icons = new ImageIcon[]{ //
 			new ImageIcon(PopupMenu.class.getResource("images/menu_cancel.png")), //
 			new ImageIcon(PopupMenu.class.getResource("images/menu_info.png")), //

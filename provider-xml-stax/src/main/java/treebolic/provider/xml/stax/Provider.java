@@ -1,7 +1,5 @@
 package treebolic.provider.xml.stax;
 
-import org.xml.sax.SAXException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -9,7 +7,6 @@ import java.io.Reader;
 import java.net.URL;
 import java.util.Properties;
 
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -103,7 +100,7 @@ public class Provider implements IProvider
 			}
 			return tree;
 		}
-		catch (ParserConfigurationException | SAXException | IOException | XMLStreamException e)
+		catch (IOException | XMLStreamException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -130,7 +127,7 @@ public class Provider implements IProvider
 			}
 			return model;
 		}
-		catch (ParserConfigurationException | SAXException | IOException | XMLStreamException e)
+		catch (IOException | XMLStreamException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -143,14 +140,12 @@ public class Provider implements IProvider
 	 *
 	 * @param url url
 	 * @return model
-	 * @throws ParserConfigurationException parser configuration exception
-	 * @throws SAXException                 sax exception
 	 * @throws IOException                  io exception
 	 * @throws XMLStreamException           xml stream exception
 	 */
 	@Nullable
 	@SuppressWarnings("WeakerAccess")
-	protected Model makeModel(@NonNull final URL url) throws ParserConfigurationException, SAXException, IOException, XMLStreamException
+	protected Model makeModel(@NonNull final URL url) throws IOException, XMLStreamException
 	{
 		try (@NonNull InputStream is = url.openStream(); @NonNull Reader fr = new InputStreamReader(is))
 		{
@@ -165,14 +160,12 @@ public class Provider implements IProvider
 	 *
 	 * @param url url
 	 * @return tree
-	 * @throws ParserConfigurationException parser configuration exception
-	 * @throws SAXException                 sax exception
 	 * @throws IOException                  io exception
 	 * @throws XMLStreamException           xml stream exception
 	 */
 	@Nullable
 	@SuppressWarnings("WeakerAccess")
-	protected Tree makeTree(@NonNull final URL url) throws ParserConfigurationException, SAXException, IOException, XMLStreamException
+	protected Tree makeTree(@NonNull final URL url) throws IOException, XMLStreamException
 	{
 		try (@NonNull InputStream is = url.openStream(); @NonNull Reader fr = new InputStreamReader(is))
 		{

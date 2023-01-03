@@ -28,18 +28,30 @@ class Ontology
 		this.properties = properties;
 
 		// resolve
-		//noinspection ConstantConditions
-		this.classes.values().forEach(c -> c.superclasses = c._superclasses.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
-		//noinspection ConstantConditions
-		this.things.values().forEach(c -> c.types = c._types.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
-		//noinspection ConstantConditions
-		this.properties.values().forEach(p -> p.domains = p._domains.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
-		//noinspection ConstantConditions
-		this.properties.values().forEach(p -> p.ranges = p._ranges.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
-		//noinspection ConstantConditions
-		this.properties.values().forEach(p -> p.inverses = p._inverses.stream().map(properties::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
-		//noinspection ConstantConditions
-		this.properties.values().forEach(p -> p.subproperties = p._subproperties.stream().map(properties::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet()));
+		this.classes.values().forEach(c -> {
+			assert c._superclasses != null;
+			c.superclasses = c._superclasses.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet());
+		});
+		this.things.values().forEach(c -> {
+			assert c._types != null;
+			c.types = c._types.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet());
+		});
+		this.properties.values().forEach(p -> {
+			assert p._domains != null;
+			p.domains = p._domains.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet());
+		});
+		this.properties.values().forEach(p -> {
+			assert p._ranges != null;
+			p.ranges = p._ranges.stream().map(classes::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet());
+		});
+		this.properties.values().forEach(p -> {
+			assert p._inverses != null;
+			p.inverses = p._inverses.stream().map(properties::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet());
+		});
+		this.properties.values().forEach(p -> {
+			assert p._subproperties != null;
+			p.subproperties = p._subproperties.stream().map(properties::get).peek(warnIfNull).filter(Objects::nonNull).collect(Collectors.toSet());
+		});
 
 		// reverse tree link (class-to-subclasses) from class-to-superclass
 		this.classes.values().forEach(c -> c.superclasses.forEach(sc -> {

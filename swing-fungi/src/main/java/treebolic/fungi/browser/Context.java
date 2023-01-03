@@ -133,14 +133,18 @@ public class Context extends treebolic.application.Context
 	{
 		final Properties properties = super.getParameters();
 		assert properties != null;
-		//noinspection ConstantConditions
-		properties.put("edible", MainFrame.class.getResource("/database/edible.png").toString());
-		//noinspection ConstantConditions
-		properties.put("good", MainFrame.class.getResource("/database/good.png").toString());
-		//noinspection ConstantConditions
-		properties.put("poisonous", MainFrame.class.getResource("/database/poisonous.png").toString());
-		//noinspection ConstantConditions
-		properties.put("deadly", MainFrame.class.getResource("/database/deadly.png").toString());
+		URL edibleUrl = MainFrame.class.getResource("/database/edible.png");
+		URL goodUrl = MainFrame.class.getResource("/database/good.png");
+		URL poisonousUrl = MainFrame.class.getResource("/database/poisonous.png");
+		URL deadlyUrl = MainFrame.class.getResource("/database/deadly.png");
+		assert edibleUrl != null;
+		assert goodUrl != null;
+		assert poisonousUrl != null;
+		assert deadlyUrl != null;
+		properties.put("edible", edibleUrl);
+		properties.put("good", goodUrl);
+		properties.put("poisonous", poisonousUrl);
+		properties.put("deadly", deadlyUrl);
 		return properties;
 	}
 

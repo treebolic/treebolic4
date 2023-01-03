@@ -36,7 +36,7 @@ public class Toolbar implements Component, treebolic.glue.iface.component.Toolba
 	/**
 	 * (Ordered) List of toolbar buttons
 	 *
-	 * @return list of buttons
+	 * @return array of buttons
 	 */
 	@Override
 	public Button[] getButtons()

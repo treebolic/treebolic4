@@ -9,6 +9,7 @@
 package treebolic.wordnet.browser;
 
 import java.awt.*;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.swing.*;
@@ -46,7 +47,9 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 		final JPanel panel = super.initialize(product, version, sysInfo);
 
 		// WordNet
-		@SuppressWarnings("ConstantConditions") final JLabel image = new JLabel(new ImageIcon(AboutDialog.class.getResource("images/wordnet.png")));
+		final URL imageUrl = AboutDialog.class.getResource("images/wordnet.png");
+		assert imageUrl != null;
+		final JLabel image = new JLabel(new ImageIcon(imageUrl));
 		final HyperlinkButton wordNetButton = "oewn".equals(this.dataVersion) ?
 				new HyperlinkButton(HyperlinkButton.makeURILabel("WordNet® 3.1"), "http://wordnet.princeton.edu") :
 				new HyperlinkButton(HyperlinkButton.makeURILabel("Open English WordNet®"), "https://github.com/globalwordnet/english-wordnet");
@@ -60,13 +63,17 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 		final HyperlinkButton tWButton = new HyperlinkButton(HyperlinkButton.makeURILabel("Treebolic WordNet"), "http://treebolicwordnet.sourceforge.net");//$NON-NLS-2$
 
 		// Android
-		@SuppressWarnings("ConstantConditions") final JLabel androidImage = new JLabel("<HTML><FONT color=\"#808080\">" + Messages.getString("AboutDialog.also") + "</FONT><B>Android</B></FONT></HTML>", new ImageIcon(AboutDialog.class.getResource("images/android.png")), SwingConstants.CENTER);
+		final URL androidImageUrl = AboutDialog.class.getResource("images/android.png");
+		assert androidImageUrl != null;
+		final JLabel androidImage = new JLabel("<HTML><FONT color=\"#808080\">" + Messages.getString("AboutDialog.also") + "</FONT><B>Android</B></FONT></HTML>", new ImageIcon(androidImageUrl), SwingConstants.CENTER);
 		androidImage.setHorizontalTextPosition(SwingConstants.CENTER);
 		androidImage.setVerticalTextPosition(SwingConstants.BOTTOM);
 
 		// Google Play
 		final String googlePlayUri = "https://play.google.com/store/apps/details?id=org.treebolic.wordnet.browser";
-		@SuppressWarnings("ConstantConditions") final Icon googlePlayIcon = new ImageIcon(AboutDialog.class.getResource("images/google-play.png"));
+		final URL googlePlayIconUrl = AboutDialog.class.getResource("images/google-play.png");
+		assert googlePlayIconUrl != null;
+		final Icon googlePlayIcon = new ImageIcon(googlePlayIconUrl);
 		final HyperlinkButton googlePlayButton = new HyperlinkButton(googlePlayIcon, googlePlayUri);
 
 		panel.add(image, new GridBagConstraints(0, 30, 1, 1, 0., 0., GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 10, 10, 10), 0, 0));

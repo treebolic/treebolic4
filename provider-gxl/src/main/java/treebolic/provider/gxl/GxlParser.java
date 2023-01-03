@@ -714,7 +714,7 @@ public class GxlParser
 	 *
 	 * @param element starting DOM element
 	 * @param tagName tag
-	 * @return DOM element if found, null if none
+	 * @return DOM element if found, empty list if none
 	 */
 	@NonNull
 	static private List<Element> getLevel1ChildElementsByTagName(@NonNull final Element element, final String tagName)

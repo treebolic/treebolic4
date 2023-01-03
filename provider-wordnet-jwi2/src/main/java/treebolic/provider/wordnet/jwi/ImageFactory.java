@@ -36,5 +36,5 @@ public abstract class ImageFactory
 	/**
 	 * Images
 	 */
-	public static treebolic.glue.iface.Image[] images = makeImages(BaseProvider.images);
+	public static final treebolic.glue.iface.Image[] images = makeImages(BaseProvider.images);
 }

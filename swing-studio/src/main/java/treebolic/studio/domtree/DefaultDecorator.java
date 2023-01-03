@@ -66,7 +66,7 @@ public class DefaultDecorator
 			value = value.trim();
 			if ("\n".compareTo(value) == 0)
 			{
-				buffer.append('\u00B6');
+				buffer.append('¶');
 			}
 			else
 			{
