@@ -22,6 +22,9 @@ package org.graphviz.objects;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * This class represents a node in a graph.
  *
@@ -33,6 +36,7 @@ public class Node
 	/**
 	 * The id object
 	 */
+	@Nullable
 	private Id id = null;
 
 	/**
@@ -92,6 +96,7 @@ public class Node
 	 *
 	 * @return the edge attributes.
 	 */
+	@NonNull
 	public Hashtable<String, String> getAttributes()
 	{
 		return this.attr;
@@ -122,6 +127,7 @@ public class Node
 	 *
 	 * @return the string representation
 	 */
+	@NonNull
 	@Override
 	public String toString()
 	{
@@ -129,7 +135,7 @@ public class Node
 		{
 			return "";
 		}
-		final StringBuilder r = new StringBuilder();
+		@NonNull final StringBuilder r = new StringBuilder();
 		if (!this.id.getId().equals(""))
 		{
 			r.append(this.id.getId());

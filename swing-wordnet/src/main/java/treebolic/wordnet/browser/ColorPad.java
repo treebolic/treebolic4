@@ -9,6 +9,8 @@ import java.util.Vector;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Color pad
  *
@@ -24,6 +26,7 @@ public class ColorPad extends JComponent
 	/**
 	 * Action listeners
 	 */
+	@NonNull
 	private final Vector<ActionListener> listeners;
 
 	/**
@@ -40,7 +43,7 @@ public class ColorPad extends JComponent
 			@Override
 			public void mousePressed(final MouseEvent e)
 			{
-				for (final ActionListener listener : ColorPad.this.listeners)
+				for (@NonNull final ActionListener listener : ColorPad.this.listeners)
 				{
 					listener.actionPerformed(new ActionEvent(ColorPad.this, 0, "pressed"));
 				}
@@ -61,7 +64,7 @@ public class ColorPad extends JComponent
 	}
 
 	@Override
-	public void paintComponent(final Graphics g)
+	public void paintComponent(@NonNull final Graphics g)
 	{
 		final Dimension d = this.getSize();
 		if (this.color != null)

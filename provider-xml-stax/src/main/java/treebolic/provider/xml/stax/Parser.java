@@ -210,7 +210,7 @@ public class Parser
 						assert nodes != null;
 						INode fromNode = nodes.get(from);
 						INode toNode = nodes.get(to);
-						MutableEdge edge = new MutableEdge(fromNode, toNode);
+						@NonNull MutableEdge edge = new MutableEdge(fromNode, toNode);
 						assert edges != null;
 						edges.add(edge);
 
@@ -317,7 +317,7 @@ public class Parser
 
 					case MENUITEM:
 					{
-						MenuItem menuItem = new MenuItem();
+						@NonNull MenuItem menuItem = new MenuItem();
 						setAttribute(startElement, "action", s -> MenuItem.Action.valueOf(s.toUpperCase()), (v) -> menuItem.action = v);
 						setAttribute(startElement, "match-target", (v) -> menuItem.matchTarget = v);
 						setAttribute(startElement, "match-scope", Utils::stringToScope, (v) -> menuItem.matchScope = v);
@@ -362,10 +362,10 @@ public class Parser
 				{
 					assert !stack.empty();
 					INode node = stack.peek();
-					MountPoint.Mounting mountpoint2 = (MountPoint.Mounting) node.getMountPoint();
+					@Nullable MountPoint.Mounting mountpoint2 = (MountPoint.Mounting) node.getMountPoint();
 					if (mountpoint2 != null && mountpoint2.now != null && mountpoint2.now)
 					{
-						MountTask task = new MountTask(mountpoint2, node);
+						@NonNull MountTask task = new MountTask(mountpoint2, node);
 						if (mountTasks == null)
 						{
 							mountTasks = new ArrayList<>();
@@ -475,7 +475,7 @@ public class Parser
 
 					case MOUNTPOINT:
 					{
-						MountPoint.Mounting mountPoint = new MountPoint.Mounting();
+						@NonNull MountPoint.Mounting mountPoint = new MountPoint.Mounting();
 						StartElement mountpointElement = reader.nextEvent().asStartElement(); // consume
 						setAttribute(mountpointElement, "now", Parser::parseBoolean, (v) -> mountPoint.now = v);
 
@@ -520,12 +520,13 @@ public class Parser
 		}
 	}
 
+	@Nullable
 	private static Integer parseColor(final String color)
 	{
 		return Utils.parseColor(color);
 	}
 
-	private static Integer parseInt(final String val)
+	private static Integer parseInt(@Nullable final String val)
 	{
 		if (val == null)
 		{
@@ -534,7 +535,7 @@ public class Parser
 		return Integer.parseInt(val);
 	}
 
-	private static Float parseFloat(final String val)
+	private static Float parseFloat(@Nullable final String val)
 	{
 		if (val == null)
 		{
@@ -543,7 +544,7 @@ public class Parser
 		return Float.parseFloat(val);
 	}
 
-	private static float[] parseFloats(final String val)
+	private static float[] parseFloats(@Nullable final String val)
 	{
 		if (val == null)
 		{
@@ -552,7 +553,7 @@ public class Parser
 		return Utils.stringToFloats(val);
 	}
 
-	private static Double parseDouble(final String val)
+	private static Double parseDouble(@Nullable final String val)
 	{
 		if (val == null)
 		{
@@ -561,7 +562,7 @@ public class Parser
 		return Double.parseDouble(val);
 	}
 
-	private static Boolean parseBoolean(final String val)
+	private static Boolean parseBoolean(@Nullable final String val)
 	{
 		if (val == null)
 		{
@@ -570,7 +571,7 @@ public class Parser
 		return Boolean.parseBoolean(val);
 	}
 
-	private static void setAttribute(final StartElement element, final String qName, final Consumer<String> consumer)
+	private static void setAttribute(@NonNull final StartElement element, @NonNull final String qName, @NonNull final Consumer<String> consumer)
 	{
 		Attribute attribute = element.getAttributeByName(new QName(qName));
 		if (attribute != null)
@@ -583,7 +584,7 @@ public class Parser
 		}
 	}
 
-	private static <T> void setAttribute(final StartElement element, final String qName, final Function<String, T> transformer, final Consumer<T> consumer)
+	private static <T> void setAttribute(@NonNull final StartElement element, @NonNull final String qName, @NonNull final Function<String, T> transformer, @NonNull final Consumer<T> consumer)
 	{
 		Attribute attribute = element.getAttributeByName(new QName(qName));
 		if (attribute != null)
@@ -611,7 +612,7 @@ public class Parser
 	 * @param hiddenQName         hidden qname
 	 * @param consumer            consumer of produced value
 	 */
-	private static void setStyleAttribute(final StartElement element, @SuppressWarnings("SameParameterValue") final String strokeQName, @SuppressWarnings("SameParameterValue") final String fromTerminatorQName, @SuppressWarnings("SameParameterValue") final String toTerminatorQName, @SuppressWarnings("SameParameterValue") final String lineQName, @SuppressWarnings("SameParameterValue") final String hiddenQName, final Consumer<Integer> consumer)
+	private static void setStyleAttribute(@NonNull final StartElement element, @NonNull @SuppressWarnings("SameParameterValue") final String strokeQName, @NonNull @SuppressWarnings("SameParameterValue") final String fromTerminatorQName, @NonNull @SuppressWarnings("SameParameterValue") final String toTerminatorQName, @NonNull @SuppressWarnings("SameParameterValue") final String lineQName, @NonNull @SuppressWarnings("SameParameterValue") final String hiddenQName, @NonNull final Consumer<Integer> consumer)
 	{
 		Attribute strokeAttribute = element.getAttributeByName(new QName(strokeQName));
 		Attribute fromTerminatorAttribute = element.getAttributeByName(new QName(fromTerminatorQName));
@@ -625,7 +626,7 @@ public class Parser
 		String line = lineAttribute == null ? null : lineAttribute.getValue();
 		String hidden = hiddenAttribute == null ? null : hiddenAttribute.getValue();
 
-		Integer sval = Utils.parseStyle(stroke, fromTerminator, toTerminator, line, hidden);
+		@Nullable Integer sval = Utils.parseStyle(stroke, fromTerminator, toTerminator, line, hidden);
 		if (sval != null)
 		{
 			consumer.accept(sval);
@@ -646,6 +647,7 @@ public class Parser
 	 * @throws IOException        io exception
 	 * @throws XMLStreamException xml stream exception
 	 */
+	@NonNull
 	public static Model makeModel(@NonNull final String filePath) throws IOException, XMLStreamException
 	{
 		try (@NonNull Reader reader = new FileReader(filePath))

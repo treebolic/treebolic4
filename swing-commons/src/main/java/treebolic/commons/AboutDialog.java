@@ -9,6 +9,7 @@ import java.net.URL;
 import javax.swing.*;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * About dialog
@@ -78,7 +79,7 @@ public class AboutDialog extends JDialog
 		@NonNull final JLabel versionLabel = new JLabel(version);
 
 		@NonNull final JLabel image = new JLabel();
-		URL iconUrl = AboutDialog.class.getResource("images/logo.png");
+		@Nullable URL iconUrl = AboutDialog.class.getResource("images/logo.png");
 		assert iconUrl != null;
 		image.setIcon(new ImageIcon(iconUrl));
 

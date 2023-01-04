@@ -41,7 +41,7 @@ public final class Gloss
 	@Override
 	public String toString()
 	{
-		final StringBuilder sb = new StringBuilder();
+		@NonNull final StringBuilder sb = new StringBuilder();
 		sb.append(getDefinition());
 		sb.append(" {");
 		for (int i = 1; i < this.gloss.length; i++)
@@ -80,7 +80,7 @@ public final class Gloss
 			System.err.println("UNEVEN QUOTES IN " + gloss);
 		}
 
-		final Matcher matcher = pattern.matcher(gloss); // get a matcher object
+		@NonNull final Matcher matcher = pattern.matcher(gloss); // get a matcher object
 		int count = 0;
 		int split = -1;
 		while (matcher.find())
@@ -92,10 +92,10 @@ public final class Gloss
 			count++;
 		}
 
-		final String[] result = new String[count + 1];
+		@NonNull final String[] result = new String[count + 1];
 
 		// [0] definition
-		String definition = split == -1 ? gloss : gloss.substring(0, split);
+		@NonNull String definition = split == -1 ? gloss : gloss.substring(0, split);
 		definition = definition.replaceFirst("[;\\s]*$", "");
 		result[0] = definition;
 
@@ -128,6 +128,7 @@ public final class Gloss
 	 *
 	 * @return samples
 	 */
+	@NonNull
 	public String[] getSamples()
 	{
 		return Arrays.copyOfRange(this.gloss, 1, this.gloss.length);

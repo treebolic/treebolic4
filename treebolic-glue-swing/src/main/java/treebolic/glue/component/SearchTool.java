@@ -14,6 +14,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.glue.ActionListener;
 import treebolic.glue.ColorKit;
 import treebolic.glue.iface.Colors;
@@ -96,7 +97,7 @@ public class SearchTool extends Box
 	{
 		// input button
 		@NonNull final JButton inputButton = new JButton();
-		final URL searchRunIconUrl = SearchTool.class.getResource("images/search_run.png");
+		@Nullable final URL searchRunIconUrl = SearchTool.class.getResource("images/search_run.png");
 		assert searchRunIconUrl != null;
 		inputButton.setIcon(new ImageIcon(searchRunIconUrl));
 		inputButton.setToolTipText(Messages.getString("SearchTool.tooltip_run"));
@@ -106,7 +107,7 @@ public class SearchTool extends Box
 
 		// input clear
 		@NonNull final JButton inputClearButton = new JButton();
-		final URL searchResetIconUrl = SearchTool.class.getResource("images/search_reset.png");
+		@Nullable final URL searchResetIconUrl = SearchTool.class.getResource("images/search_reset.png");
 		assert searchResetIconUrl != null;
 		inputClearButton.setIcon(new ImageIcon(searchResetIconUrl));
 		inputClearButton.setToolTipText(Messages.getString("SearchTool.tooltip_reset"));
@@ -195,10 +196,10 @@ public class SearchTool extends Box
 	public JToggleButton makeControlToggle(@NonNull final java.awt.Container container)
 	{
 		// toggle icons
-		final URL searchOpenIconUrl = SearchTool.class.getResource("images/search_open.png");
+		@Nullable final URL searchOpenIconUrl = SearchTool.class.getResource("images/search_open.png");
 		assert searchOpenIconUrl != null;
 		@NonNull final Icon openIcon = new ImageIcon(searchOpenIconUrl);
-		final URL searchCloseIconUrl = SearchTool.class.getResource("images/search_close.png");
+		@Nullable final URL searchCloseIconUrl = SearchTool.class.getResource("images/search_close.png");
 		assert searchCloseIconUrl != null;
 		@NonNull final Icon closeIcon = new ImageIcon(searchCloseIconUrl);
 
@@ -234,7 +235,7 @@ public class SearchTool extends Box
 	public JButton makeSettingsButton()
 	{
 		// toggle icons
-		final URL searchSettingsIconUrl = SearchDialog.class.getResource("images/search_settings.png");
+		@Nullable final URL searchSettingsIconUrl = SearchDialog.class.getResource("images/search_settings.png");
 		assert searchSettingsIconUrl != null;
 		@NonNull final Icon settingsIcon = new ImageIcon(searchSettingsIconUrl);
 

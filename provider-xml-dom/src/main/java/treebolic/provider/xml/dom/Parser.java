@@ -131,7 +131,7 @@ public class Parser
 	public Document makeDocument(@NonNull final String filePath, @Nullable final EntityResolver resolver) throws ParserConfigurationException, SAXException, IOException
 	{
 		@NonNull final ParseErrorLogger handler = new ParseErrorLogger();
-		try (InputStream is = Files.newInputStream(Paths.get(filePath)))
+		try (@NonNull InputStream is = Files.newInputStream(Paths.get(filePath)))
 		{
 			final DocumentBuilder builder = makeDocumentBuilder();
 			builder.setErrorHandler(handler);
@@ -225,6 +225,7 @@ public class Parser
 	 * @throws SAXException                 sax exception
 	 * @throws IOException                  io exception
 	 */
+	@Nullable
 	public static Model makeModel(@NonNull final String filePath) throws ParserConfigurationException, SAXException, IOException
 	{
 		@Nullable final Document document = makeDocument(filePath);
@@ -243,7 +244,7 @@ public class Parser
 	 * @throws SAXException                 sax exception
 	 * @throws IOException                  io exception
 	 */
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException
+	public static void main(@NonNull String[] args) throws ParserConfigurationException, SAXException, IOException
 	{
 		@Nullable Model model = makeModel(args[0]);
 		System.out.println(ModelDump.toString(model));

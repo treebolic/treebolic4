@@ -4,6 +4,8 @@
 
 package treebolic.fungi.browser;
 
+import treebolic.annotations.NonNull;
+
 /**
  * @author Bernard Bou
  */
@@ -41,6 +43,7 @@ public enum ColorReference
 	 *
 	 * @return label
 	 */
+	@NonNull
 	public final String getLabel()
 	{
 		return Messages.getString("ColorReference." + this.key);

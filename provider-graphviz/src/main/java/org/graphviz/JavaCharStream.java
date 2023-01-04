@@ -4,6 +4,9 @@ package org.graphviz;
 
 import java.io.IOException;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * An implementation of interface CharStream, where the stream is assumed to contain only ASCII characters (with java-like unicode escape processing).
  */
@@ -74,8 +77,10 @@ public class JavaCharStream
 
 	int tokenBegin;
 
+	@Nullable
 	protected int[] bufline;
 
+	@Nullable
 	protected int[] bufcolumn;
 
 	protected int column;
@@ -88,8 +93,10 @@ public class JavaCharStream
 
 	protected java.io.Reader inputStream;
 
+	@Nullable
 	protected char[] nextCharBuf;
 
+	@Nullable
 	protected char[] buffer;
 
 	protected int maxNextCharInd = 0;
@@ -112,9 +119,9 @@ public class JavaCharStream
 
 	protected void ExpandBuff(final boolean wrapAround)
 	{
-		final char[] newbuffer = new char[this.bufsize + 2048];
-		final int[] newbufline = new int[this.bufsize + 2048];
-		final int[] newbufcolumn = new int[this.bufsize + 2048];
+		@NonNull final char[] newbuffer = new char[this.bufsize + 2048];
+		@NonNull final int[] newbufline = new int[this.bufsize + 2048];
+		@NonNull final int[] newbufcolumn = new int[this.bufsize + 2048];
 
 		try
 		{
@@ -592,7 +599,7 @@ public class JavaCharStream
 	 * @param buffersize  buffer size
 	 * @throws java.io.UnsupportedEncodingException unsupported coding
 	 */
-	public JavaCharStream(final java.io.InputStream dstream, final String encoding, final int startline, final int startcolumn, final int buffersize) throws java.io.UnsupportedEncodingException
+	public JavaCharStream(@NonNull final java.io.InputStream dstream, @Nullable final String encoding, final int startline, final int startcolumn, final int buffersize) throws java.io.UnsupportedEncodingException
 	{
 		this(encoding == null ? new java.io.InputStreamReader(dstream) : new java.io.InputStreamReader(dstream, encoding), startline, startcolumn, buffersize);
 	}
@@ -605,7 +612,7 @@ public class JavaCharStream
 	 * @param startcolumn startcolumn
 	 * @param buffersize  buffer size
 	 */
-	public JavaCharStream(final java.io.InputStream dstream, final int startline, final int startcolumn, final int buffersize)
+	public JavaCharStream(@NonNull final java.io.InputStream dstream, final int startline, final int startcolumn, final int buffersize)
 	{
 		this(new java.io.InputStreamReader(dstream), startline, startcolumn, 4096);
 	}
@@ -619,7 +626,7 @@ public class JavaCharStream
 	 * @param startcolumn startcolumn
 	 * @throws java.io.UnsupportedEncodingException unsupported coding
 	 */
-	public JavaCharStream(final java.io.InputStream dstream, final String encoding, final int startline, final int startcolumn) throws java.io.UnsupportedEncodingException
+	public JavaCharStream(@NonNull final java.io.InputStream dstream, final String encoding, final int startline, final int startcolumn) throws java.io.UnsupportedEncodingException
 	{
 		this(dstream, encoding, startline, startcolumn, 4096);
 	}
@@ -631,7 +638,7 @@ public class JavaCharStream
 	 * @param startline   start line
 	 * @param startcolumn startcolumn
 	 */
-	public JavaCharStream(final java.io.InputStream dstream, final int startline, final int startcolumn)
+	public JavaCharStream(@NonNull final java.io.InputStream dstream, final int startline, final int startcolumn)
 	{
 		this(dstream, startline, startcolumn, 4096);
 	}
@@ -643,7 +650,7 @@ public class JavaCharStream
 	 * @param encoding encoding
 	 * @throws java.io.UnsupportedEncodingException unsupported coding
 	 */
-	public JavaCharStream(final java.io.InputStream dstream, final String encoding) throws java.io.UnsupportedEncodingException
+	public JavaCharStream(@NonNull final java.io.InputStream dstream, final String encoding) throws java.io.UnsupportedEncodingException
 	{
 		this(dstream, encoding, 1, 1, 4096);
 	}
@@ -653,7 +660,7 @@ public class JavaCharStream
 	 *
 	 * @param dstream stream
 	 */
-	public JavaCharStream(final java.io.InputStream dstream)
+	public JavaCharStream(@NonNull final java.io.InputStream dstream)
 	{
 		this(dstream, 1, 1, 4096);
 	}
@@ -668,7 +675,7 @@ public class JavaCharStream
 	 * @param buffersize  buffer size
 	 * @throws java.io.UnsupportedEncodingException unsupported coding
 	 */
-	public void ReInit(final java.io.InputStream dstream, final String encoding, final int startline, final int startcolumn, final int buffersize) throws java.io.UnsupportedEncodingException
+	public void ReInit(@NonNull final java.io.InputStream dstream, @Nullable final String encoding, final int startline, final int startcolumn, final int buffersize) throws java.io.UnsupportedEncodingException
 	{
 		ReInit(encoding == null ? new java.io.InputStreamReader(dstream) : new java.io.InputStreamReader(dstream, encoding), startline, startcolumn, buffersize);
 	}
@@ -681,7 +688,7 @@ public class JavaCharStream
 	 * @param startcolumn startcolumn
 	 * @param buffersize  buffer size
 	 */
-	public void ReInit(final java.io.InputStream dstream, final int startline, final int startcolumn, final int buffersize)
+	public void ReInit(@NonNull final java.io.InputStream dstream, final int startline, final int startcolumn, final int buffersize)
 	{
 		ReInit(new java.io.InputStreamReader(dstream), startline, startcolumn, buffersize);
 	}
@@ -695,7 +702,7 @@ public class JavaCharStream
 	 * @param startcolumn startcolumn
 	 * @throws java.io.UnsupportedEncodingException unsupported coding
 	 */
-	public void ReInit(final java.io.InputStream dstream, final String encoding, final int startline, final int startcolumn) throws java.io.UnsupportedEncodingException
+	public void ReInit(@NonNull final java.io.InputStream dstream, final String encoding, final int startline, final int startcolumn) throws java.io.UnsupportedEncodingException
 	{
 		ReInit(dstream, encoding, startline, startcolumn, 4096);
 	}
@@ -707,7 +714,7 @@ public class JavaCharStream
 	 * @param startline   start line
 	 * @param startcolumn startcolumn
 	 */
-	public void ReInit(final java.io.InputStream dstream, final int startline, final int startcolumn)
+	public void ReInit(@NonNull final java.io.InputStream dstream, final int startline, final int startcolumn)
 	{
 		ReInit(dstream, startline, startcolumn, 4096);
 	}
@@ -719,7 +726,7 @@ public class JavaCharStream
 	 * @param encoding encoding
 	 * @throws java.io.UnsupportedEncodingException unsupported coding
 	 */
-	public void ReInit(final java.io.InputStream dstream, final String encoding) throws java.io.UnsupportedEncodingException
+	public void ReInit(@NonNull final java.io.InputStream dstream, final String encoding) throws java.io.UnsupportedEncodingException
 	{
 		ReInit(dstream, encoding, 1, 1, 4096);
 	}
@@ -729,7 +736,7 @@ public class JavaCharStream
 	 *
 	 * @param dstream stream
 	 */
-	public void ReInit(final java.io.InputStream dstream)
+	public void ReInit(@NonNull final java.io.InputStream dstream)
 	{
 		ReInit(dstream, 1, 1, 4096);
 	}
@@ -739,6 +746,7 @@ public class JavaCharStream
 	 *
 	 * @return token image as String
 	 */
+	@NonNull
 	public String GetImage()
 	{
 		if (this.bufpos >= this.tokenBegin)
@@ -759,7 +767,7 @@ public class JavaCharStream
 	 */
 	public char[] GetSuffix(final int len)
 	{
-		final char[] ret = new char[len];
+		@NonNull final char[] ret = new char[len];
 
 		if (this.bufpos + 1 >= len)
 		{

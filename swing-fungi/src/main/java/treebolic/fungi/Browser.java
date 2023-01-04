@@ -3,6 +3,7 @@
  */
 package treebolic.fungi;
 
+import treebolic.annotations.NonNull;
 import treebolic.commons.Laf;
 import treebolic.fungi.browser.MainFrame;
 
@@ -25,6 +26,7 @@ public class Browser
 	 *
 	 * @return version
 	 */
+	@NonNull
 	static public String getVersion()
 	{
 		return Browser.VERSION;
@@ -38,7 +40,7 @@ public class Browser
 	 * @param args
 	 *        arguments
 	 */
-	public static void main(final String[] args)
+	public static void main(@NonNull final String[] args)
 	{
 		Laf.lookAndFeel(args);
 		new MainFrame(args);

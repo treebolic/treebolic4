@@ -18,6 +18,7 @@ import javax.swing.*;
 
 import treebolic.IWidget;
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.commons.Persist;
 import treebolic.commons.SettingsDialog;
 import treebolic.glue.component.SearchTool;
@@ -38,7 +39,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	 *
 	 * @param args command-line arguments
 	 */
-	public MainFrame(final String[] args)
+	public MainFrame(@NonNull final String[] args)
 	{
 		super(args);
 		setTitle(Messages.getString("MainFrame.app"));
@@ -56,6 +57,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	 *
 	 * @return persist name
 	 */
+	@NonNull
 	@SuppressWarnings("SameReturnValue")
 	public static String getStaticPersistName()
 	{
@@ -65,7 +67,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	@Override
 	protected String getProvider()
 	{
-		String provider = super.getProvider();
+		@Nullable String provider = super.getProvider();
 		if (provider != null && !provider.isEmpty())
 		{
 			return provider;
@@ -81,16 +83,16 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	@Override
 	protected JPopupMenu makeMenu()
 	{
-		final JPopupMenu menu = super.makeMenu();
+		@NonNull final JPopupMenu menu = super.makeMenu();
 		menu.addSeparator();
 
 		// help
-		final JMenu referenceMenu = new JMenu();
+		@NonNull final JMenu referenceMenu = new JMenu();
 		referenceMenu.setText(Messages.getString("MainFrame.reference"));
-		final URL referenceIconUrl = treebolic.browser2.MainFrame.class.getResource("images/help.png");
+		@Nullable final URL referenceIconUrl = treebolic.browser2.MainFrame.class.getResource("images/help.png");
 		assert referenceIconUrl != null;
 		referenceMenu.setIcon(new ImageIcon(referenceIconUrl));
-		for (final LinkReference reference : LinkReference.values())
+		for (@NonNull final LinkReference reference : LinkReference.values())
 		{
 			final String key = reference.getHelpKey();
 			if (key == null)
@@ -98,10 +100,10 @@ public class MainFrame extends treebolic.browser2.MainFrame
 				continue;
 			}
 
-			final String label = reference.getLabel();
-			final JMenuItem item = new JMenuItem();
+			@NonNull final String label = reference.getLabel();
+			@NonNull final JMenuItem item = new JMenuItem();
 			item.setText(label);
-			final URL itemIconUrl = treebolic.browser2.MainFrame.class.getResource("images/help.png");
+			@Nullable final URL itemIconUrl = treebolic.browser2.MainFrame.class.getResource("images/help.png");
 			assert itemIconUrl != null;
 			item.setIcon(new ImageIcon(itemIconUrl));
 			item.addActionListener(e -> help(key));
@@ -111,10 +113,10 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		menu.addSeparator();
 
 		// data
-		final JMenuItem dataSettingsItem = new JMenuItem();
+		@NonNull final JMenuItem dataSettingsItem = new JMenuItem();
 		dataSettingsItem.setAccelerator(KeyStroke.getKeyStroke('D', InputEvent.ALT_DOWN_MASK));
 		dataSettingsItem.setText(Messages.getString("MainFrame.data"));
-		final URL dataSettingsIconUrl = MainFrame.class.getResource("images/data.png");
+		@Nullable final URL dataSettingsIconUrl = MainFrame.class.getResource("images/data.png");
 		assert dataSettingsIconUrl != null;
 		dataSettingsItem.setIcon(new ImageIcon(dataSettingsIconUrl));
 		dataSettingsItem.addActionListener(e -> dataSettings());
@@ -122,20 +124,20 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		menu.addSeparator();
 
 		// colors
-		final JMenuItem colorSettingsItem = new JMenuItem();
+		@NonNull final JMenuItem colorSettingsItem = new JMenuItem();
 		colorSettingsItem.setAccelerator(KeyStroke.getKeyStroke('C', InputEvent.ALT_DOWN_MASK));
 		colorSettingsItem.setText(Messages.getString("MainFrame.colors"));
-		final URL colorSettingsIconUrl = MainFrame.class.getResource("images/palette.png");
+		@Nullable final URL colorSettingsIconUrl = MainFrame.class.getResource("images/palette.png");
 		assert colorSettingsIconUrl != null;
 		colorSettingsItem.setIcon(new ImageIcon(colorSettingsIconUrl));
 		colorSettingsItem.addActionListener(e -> colorSettings());
 		menu.add(colorSettingsItem);
 
 		// filter
-		final JMenuItem filterSettingsItem = new JMenuItem();
+		@NonNull final JMenuItem filterSettingsItem = new JMenuItem();
 		filterSettingsItem.setAccelerator(KeyStroke.getKeyStroke('L', InputEvent.ALT_DOWN_MASK));
 		filterSettingsItem.setText(Messages.getString("MainFrame.links"));
-		final URL filterSettingsIconUrl = MainFrame.class.getResource("images/filter.png");
+		@Nullable final URL filterSettingsIconUrl = MainFrame.class.getResource("images/filter.png");
 		assert filterSettingsIconUrl != null;
 		filterSettingsItem.setIcon(new ImageIcon(filterSettingsIconUrl));
 		filterSettingsItem.addActionListener(e -> filterSettings());
@@ -143,10 +145,10 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		menu.addSeparator();
 
 		// max
-		final JMenuItem maxLinksItem = new JMenuItem();
+		@NonNull final JMenuItem maxLinksItem = new JMenuItem();
 		maxLinksItem.setAccelerator(KeyStroke.getKeyStroke('M', InputEvent.ALT_DOWN_MASK));
 		maxLinksItem.setText(Messages.getString("MainFrame.maxlinks"));
-		final URL maxLinksIconUrl = MainFrame.class.getResource("images/max.png");
+		@Nullable final URL maxLinksIconUrl = MainFrame.class.getResource("images/max.png");
 		assert maxLinksIconUrl != null;
 		maxLinksItem.setIcon(new ImageIcon(maxLinksIconUrl));
 		maxLinksItem.addActionListener(e -> {
@@ -162,10 +164,10 @@ public class MainFrame extends treebolic.browser2.MainFrame
 			}
 		});
 		menu.add(maxLinksItem);
-		final JMenuItem maxRecurseItem = new JMenuItem();
+		@NonNull final JMenuItem maxRecurseItem = new JMenuItem();
 		maxRecurseItem.setAccelerator(KeyStroke.getKeyStroke('R', InputEvent.ALT_DOWN_MASK));
 		maxRecurseItem.setText(Messages.getString("MainFrame.maxrecurse"));
-		final URL maxRecurseIconUrl = MainFrame.class.getResource("images/max.png");
+		@Nullable final URL maxRecurseIconUrl = MainFrame.class.getResource("images/max.png");
 		assert maxRecurseIconUrl != null;
 		maxRecurseItem.setIcon(new ImageIcon(maxRecurseIconUrl));
 		maxRecurseItem.addActionListener(e -> {
@@ -184,14 +186,14 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		menu.addSeparator();
 
 		// max lines
-		final JMenuItem maxLinesItem = new JMenuItem();
+		@NonNull final JMenuItem maxLinesItem = new JMenuItem();
 		maxLinesItem.setAccelerator(KeyStroke.getKeyStroke('K', InputEvent.ALT_DOWN_MASK));
 		maxLinesItem.setText(Messages.getString("MainFrame.labelmaxlines"));
-		final URL maxLinesIconUrl = MainFrame.class.getResource("images/maxlines.png");
+		@Nullable final URL maxLinesIconUrl = MainFrame.class.getResource("images/maxlines.png");
 		assert maxLinesIconUrl != null;
 		maxLinesItem.setIcon(new ImageIcon(maxLinesIconUrl));
 		maxLinesItem.addActionListener(e -> {
-			final Integer value = askRange(Messages.getString("MainFrame.labelmaxlinesprompt"), MainFrame.this.settings.getProperty("label_max_lines"), 0, 20);//$NON-NLS-2$
+			@Nullable final Integer value = askRange(Messages.getString("MainFrame.labelmaxlinesprompt"), MainFrame.this.settings.getProperty("label_max_lines"), 0, 20);//$NON-NLS-2$
 			if (value != null)
 			{
 				MainFrame.this.settings.setProperty("label_max_lines", value.toString());
@@ -200,14 +202,14 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		menu.add(maxLinesItem);
 
 		// font
-		final JMenuItem fontSizeItem = new JMenuItem();
+		@NonNull final JMenuItem fontSizeItem = new JMenuItem();
 		fontSizeItem.setAccelerator(KeyStroke.getKeyStroke('F', InputEvent.ALT_DOWN_MASK));
 		fontSizeItem.setText(Messages.getString("MainFrame.fontsize"));
-		final URL fontSizeIconUr = MainFrame.class.getResource("images/fontsize.png");
+		@Nullable final URL fontSizeIconUr = MainFrame.class.getResource("images/fontsize.png");
 		assert fontSizeIconUr != null;
 		fontSizeItem.setIcon(new ImageIcon(fontSizeIconUr));
 		fontSizeItem.addActionListener(e -> {
-			final Integer fontSize = askRange(Messages.getString("MainFrame.fontsizeprompt"), MainFrame.this.settings.getProperty("fontsize"), 12, 64);//$NON-NLS-2$
+			@Nullable final Integer fontSize = askRange(Messages.getString("MainFrame.fontsizeprompt"), MainFrame.this.settings.getProperty("fontsize"), 12, 64);//$NON-NLS-2$
 			if (fontSize != null)
 			{
 				MainFrame.this.settings.setProperty("fontsize", fontSize.toString());
@@ -224,7 +226,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	{
 		// search tool
 		Statusbar.hasSearch = false;
-		final SearchTool searchTool = new SearchTool();
+		@NonNull final SearchTool searchTool = new SearchTool();
 		searchTool.addListener(new treebolic.glue.ActionListener()
 		{
 			@SuppressWarnings("synthetic-access")
@@ -232,10 +234,10 @@ public class MainFrame extends treebolic.browser2.MainFrame
 			public boolean onAction(Object... params)
 			{
 				// for (Object param : params) { System.out.print(param + " "); } System.out.println();
-				final Component component = getSelected();
+				@Nullable final Component component = getSelected();
 				if (component instanceof IWidget)
 				{
-					final IWidget widget = (IWidget) component;
+					@NonNull final IWidget widget = (IWidget) component;
 					String command = (String) params[0];
 					if (IWidget.SEARCH.equals(command))
 					{
@@ -258,7 +260,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	@Override
 	protected void settings()
 	{
-		final SettingsDialog dialog = new SettingsDialog(this.settings, SettingsDialog.PROVIDER);
+		@NonNull final SettingsDialog dialog = new SettingsDialog(this.settings, SettingsDialog.PROVIDER);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -273,7 +275,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	 */
 	protected void dataSettings()
 	{
-		final DataSettingsDialog dialog = new DataSettingsDialog(this.settings);
+		@NonNull final DataSettingsDialog dialog = new DataSettingsDialog(this.settings);
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
@@ -285,7 +287,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 				final String base = this.settings.getProperty("base");
 				final String userHomeStr = this.settings.getProperty("userhome", null);
 				final boolean userHome = userHomeStr == null || Boolean.parseBoolean(userHomeStr);
-				final File cacheHome = Context.makeDataDir(base, userHome);
+				@NonNull final File cacheHome = Context.makeDataDir(base, userHome);
 
 				try
 				{
@@ -310,7 +312,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	 */
 	protected void colorSettings()
 	{
-		final ColorSettingsDialog dialog = new ColorSettingsDialog(this.settings, null);
+		@NonNull final ColorSettingsDialog dialog = new ColorSettingsDialog(this.settings, null);
 		dialog.setModal(false);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
@@ -321,7 +323,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	 */
 	private void filterSettings()
 	{
-		final LinkFilterSettingsDialog dialog = new LinkFilterSettingsDialog(this.settings, null);
+		@NonNull final LinkFilterSettingsDialog dialog = new LinkFilterSettingsDialog(this.settings, null);
 		dialog.setModal(false);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
@@ -331,7 +333,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	protected void about()
 	{
 		final String data = this.settings.getProperty("data", null);
-		final JDialog dialog = new AboutDialog(data);
+		@NonNull final JDialog dialog = new AboutDialog(data);
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
@@ -340,7 +342,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	@Override
 	protected void help()
 	{
-		final JComponent pane = makeBrowserPane(this.getClass().getResource("doc/index.html"), true);
+		@NonNull final JComponent pane = makeBrowserPane(this.getClass().getResource("doc/index.html"), true);
 		addTab(pane, Messages.getString("MainFrame.help"), Messages.getString("MainFrame.helplinks"));//$NON-NLS-2$
 	}
 
@@ -351,7 +353,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	 */
 	protected void help(final String key)
 	{
-		final JComponent pane = makeBrowserPane(this.getClass().getResource("doc/" + key + ".html"), true);
+		@NonNull final JComponent pane = makeBrowserPane(this.getClass().getResource("doc/" + key + ".html"), true);
 		addTab(pane, key, key);
 	}
 
@@ -364,9 +366,9 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	 * @param value   initial value
 	 * @return input
 	 */
-	protected String ask(final String message, final String value)
+	protected String ask(@NonNull final String message, final String value)
 	{
-		final String[] lines = message.split("\n");
+		@NonNull final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines, value);
 	}
 
@@ -379,10 +381,11 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	 * @param max      max
 	 * @return value
 	 */
-	protected Integer askRange(final String message0, final String value, final int min, final int max)
+	@Nullable
+	protected Integer askRange(@NonNull final String message0, final String value, final int min, final int max)
 	{
 		final String message = String.format(message0, min, max);
-		final String[] lines = message.split("\n");
+		@NonNull final String[] lines = message.split("\n");
 		final String string = JOptionPane.showInputDialog(null, lines, value);
 		try
 		{

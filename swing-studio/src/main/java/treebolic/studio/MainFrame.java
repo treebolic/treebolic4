@@ -388,7 +388,7 @@ public class MainFrame extends JFrame
 	private JButton makeGlobalsButton(@NonNull final Controller controller, final String label, final String image, @NonNull final Controller.Code code)
 	{
 		@NonNull final JButton button = new JButton();
-		final URL imageUrl = getClass().getResource("images/" + image);
+		@Nullable final URL imageUrl = getClass().getResource("images/" + image);
 		assert imageUrl != null;
 		button.setIcon(new ImageIcon(imageUrl));
 		button.setToolTipText(label);

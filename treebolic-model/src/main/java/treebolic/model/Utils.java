@@ -769,7 +769,7 @@ public class Utils
 	@Nullable
 	static public Integer parseColor(@Nullable final String str0)
 	{
-		String str = str0;
+		@Nullable String str = str0;
 		if (str == null || str.isEmpty())
 		{
 			return null;

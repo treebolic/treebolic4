@@ -12,6 +12,7 @@ import java.util.List;
 import edu.mit.jwi.item.ISynset;
 import edu.mit.jwi.item.ISynsetID;
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.model.IEdge;
 import treebolic.model.INode;
 import treebolic.model.Settings;
@@ -45,7 +46,7 @@ public class Provider extends treebolic.provider.wordnet.jwi.condensed.Provider
 	@Override
 	protected Settings makeSettings(int childrenCount)
 	{
-		final Settings settings = super.makeSettings(childrenCount, 2);
+		@NonNull final Settings settings = super.makeSettings(childrenCount, 2);
 		// settings.orientation = "radial";
 		settings.expansion = 1.2F;
 		settings.sweep = 1.2F;
@@ -68,7 +69,7 @@ public class Provider extends treebolic.provider.wordnet.jwi.condensed.Provider
 			parentNode.setEdgeLabel(parentNode.getLabel() + " - " + parentNode.getEdgeLabel());
 		}
 
-		final String lemmas = membersAsLines(synset);
+		@NonNull final String lemmas = membersAsLines(synset);
 		parentNode.setLabel(/* Integer.toString(index) + '\n' + */ lemmas);
 		parentNode.setContent(glossContent(synset.gloss));
 		parentNode.setLink(BaseProvider.URLSCHEME + BaseProvider.URLSCHEME_AT + synset.synset.getID().toString());
@@ -83,12 +84,12 @@ public class Provider extends treebolic.provider.wordnet.jwi.condensed.Provider
 	protected void walkTypedLink(@NonNull final TreeMutableNode parentNode, @NonNull final List<ISynsetID> linkedSynsetIds, @NonNull final Link link, final int level, @NonNull final List<IEdge> edges)
 	{
 		// iterate linked synsets
-		INode etcNode = null;
+		@Nullable INode etcNode = null;
 
 		int i = 0;
 		final int n = linkedSynsetIds.size();
-		List<INode> childNodes = new ArrayList<>();
-		final Iterator<ISynsetID> it = linkedSynsetIds.iterator();
+		@Nullable List<INode> childNodes = new ArrayList<>();
+		@NonNull final Iterator<ISynsetID> it = linkedSynsetIds.iterator();
 		while (it.hasNext())
 		{
 			final ISynsetID linkedSynsetId = it.next();
@@ -98,13 +99,13 @@ public class Provider extends treebolic.provider.wordnet.jwi.condensed.Provider
 				continue;
 			}
 
-			final Synset linkedSynset = new Synset(linkedSynset0);
+			@NonNull final Synset linkedSynset = new Synset(linkedSynset0);
 			// System.out.println(level + " " + new String(new char[level]).replace('\0', '\t') + membersToString(linkedSynset));
 
 			// synset node
-			final String tag = Integer.toString(i + 1);
+			@NonNull final String tag = Integer.toString(i + 1);
 
-			final TreeMutableNode linkedSynsetNode = makeSynsetNode(null, linkedSynset);
+			@NonNull final TreeMutableNode linkedSynsetNode = makeSynsetNode(null, linkedSynset);
 			linkedSynsetNode.setLabel(/* tag + '\n' + */ membersAsLines(linkedSynset));
 
 			decorateAsWord(linkedSynsetNode, level);

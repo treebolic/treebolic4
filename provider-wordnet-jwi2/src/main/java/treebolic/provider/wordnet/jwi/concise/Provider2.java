@@ -41,7 +41,7 @@ public class Provider2 extends treebolic.provider.wordnet.jwi.concise.Provider
 	@Override
 	public Model makeModel(final String source, final URL base, @NonNull final Properties parameters)
 	{
-		Model model = super.makeModel(source, base, parameters);
+		@Nullable Model model = super.makeModel(source, base, parameters);
 		if (model == null)
 		{
 			return null;

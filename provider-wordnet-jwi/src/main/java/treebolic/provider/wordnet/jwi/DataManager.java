@@ -62,8 +62,9 @@ public class DataManager extends BaseDataManager
 	 * @return cached dictionary data
 	 * @throws IOException io exception
 	 */
+	@NonNull
 	@Override
-	public File getDataDir(final URL sourceData, final File cacheHome) throws IOException
+	public File getDataDir(@NonNull final URL sourceData, @NonNull final File cacheHome) throws IOException
 	{
 		return setup(sourceData, cacheHome, false);
 	}
@@ -76,9 +77,10 @@ public class DataManager extends BaseDataManager
 	 * @return cached dictionary data
 	 * @throws IOException io exception
 	 */
+	@NonNull
 	@SuppressWarnings("UnusedReturnValue")
 	@Override
-	public File deploy(final URL sourceData, final File cacheHome) throws IOException
+	public File deploy(@NonNull final URL sourceData, @NonNull final File cacheHome) throws IOException
 	{
 		return setup(sourceData, cacheHome, true);
 	}
@@ -94,7 +96,7 @@ public class DataManager extends BaseDataManager
 	@NonNull
 	private File setup(@NonNull final URL zipUrl, @NonNull final File cacheHome, final boolean doCleanup) throws IOException
 	{
-		final File cache = new File(cacheHome, DataManager.CACHESUBDIR);
+		@NonNull final File cache = new File(cacheHome, DataManager.CACHESUBDIR);
 
 		// directory
 		boolean doUnzip = true;
@@ -135,9 +137,10 @@ public class DataManager extends BaseDataManager
 	 * @return source zip url
 	 * @throws MalformedURLException malformed url exception
 	 */
+	@Nullable
 	public static URL getSourceZipURL(@Nullable String data0) throws MalformedURLException
 	{
-		String data = data0;
+		@Nullable String data = data0;
 		if (data == null)
 		{
 			data = WN31_TAG;

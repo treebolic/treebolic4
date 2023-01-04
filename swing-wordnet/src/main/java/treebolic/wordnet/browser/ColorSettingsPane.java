@@ -5,6 +5,8 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Settings dialog
  *
@@ -64,23 +66,23 @@ public class ColorSettingsPane extends JPanel
 	{
 		setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
 
-		final JPanel colorPanel = new JPanel();
+		@NonNull final JPanel colorPanel = new JPanel();
 		colorPanel.setLayout(new GridBagLayout());
 
 		final int n = ColorReference.values().length;
 		this.colorPads = new ColorPad[n];
 
 		int i = 0;
-		for (final ColorReference color : ColorReference.values())
+		for (@NonNull final ColorReference color : ColorReference.values())
 		{
-			final JLabel label = new JLabel(color.getLabel());
+			@NonNull final JLabel label = new JLabel(color.getLabel());
 			this.colorPads[i] = ColorSettingsPane.makeColorPad();
 			colorPanel.add(label, new GridBagConstraints(0, i, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, i == 0 ? ColorSettingsPane.IL_1 : i == n - 1 ? ColorSettingsPane.IL_n : ColorSettingsPane.IL, 0, 0));
 			colorPanel.add(this.colorPads[i], new GridBagConstraints(1, i, 1, 1, 0., 0., GridBagConstraints.WEST, GridBagConstraints.NONE, i == 0 ? ColorSettingsPane.IT_1 : i == n - 1 ? ColorSettingsPane.IT_n : ColorSettingsPane.IT, 0, 0));
 			i++;
 		}
 
-		final JButton clearButton = new JButton(Messages.getString("ColorSettingsPane.clear"));
+		@NonNull final JButton clearButton = new JButton(Messages.getString("ColorSettingsPane.clear"));
 		clearButton.addActionListener(e -> {
 			for (int i1 = 0; i1 < ColorReference.values().length; i1++)
 			{
@@ -89,7 +91,7 @@ public class ColorSettingsPane extends JPanel
 			}
 		});
 
-		final JPanel buttonPanel = new JPanel();
+		@NonNull final JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridBagLayout());
 		buttonPanel.add(clearButton, new GridBagConstraints(0, 0, 1, 1, 0., 0., GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -103,9 +105,10 @@ public class ColorSettingsPane extends JPanel
 	 *
 	 * @return color pad
 	 */
+	@NonNull
 	private static ColorPad makeColorPad()
 	{
-		final ColorPad colorPad = new ColorPad();
+		@NonNull final ColorPad colorPad = new ColorPad();
 		colorPad.addActionListener(event -> {
 			final Color color = JColorChooser.showDialog(colorPad, Messages.getString("ColorSettingsPane.title"), colorPad.getBackground());
 			colorPad.setBackground(color);
@@ -114,7 +117,7 @@ public class ColorSettingsPane extends JPanel
 		return colorPad;
 	}
 
-	private void settingsToColorPad(final ColorPad pad, final String key)
+	private void settingsToColorPad(@NonNull final ColorPad pad, final String key)
 	{
 		final String value = this.settings.getProperty(key, null);
 		if (value != null)
@@ -140,7 +143,7 @@ public class ColorSettingsPane extends JPanel
 		}
 	}
 
-	private void colorPadToSettings(final ColorPad pad, final String key)
+	private void colorPadToSettings(@NonNull final ColorPad pad, final String key)
 	{
 		final Color color = pad.getBackground();
 		if (color == null)
@@ -157,7 +160,7 @@ public class ColorSettingsPane extends JPanel
 	public void set()
 	{
 		int i = 0;
-		for (final ColorReference color : ColorReference.values())
+		for (@NonNull final ColorReference color : ColorReference.values())
 		{
 			settingsToColorPad(this.colorPads[i], color.key);
 			i++;
@@ -170,7 +173,7 @@ public class ColorSettingsPane extends JPanel
 	public void get()
 	{
 		int i = 0;
-		for (final ColorReference color : ColorReference.values())
+		for (@NonNull final ColorReference color : ColorReference.values())
 		{
 			colorPadToSettings(this.colorPads[i], color.key);
 			i++;

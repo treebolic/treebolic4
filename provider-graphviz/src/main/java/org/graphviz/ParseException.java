@@ -2,6 +2,8 @@
 /* JavaCCOptions:KEEP_LINE_COL=null */
 package org.graphviz;
 
+import treebolic.annotations.NonNull;
+
 /**
  * This exception is thrown when parse errors are encountered. You can explicitly create objects of this exception type by calling the method
  * generateParseException in the generated parser. You can modify this class to customize your error reporting mechanisms so long as you retain the public
@@ -23,7 +25,7 @@ public class ParseException extends Exception
 	 * @param expectedTokenSequencesVal expected token sequence values
 	 * @param tokenImageVal             token image values
 	 */
-	public ParseException(final Token currentTokenVal, final int[][] expectedTokenSequencesVal, final String[] tokenImageVal)
+	public ParseException(@NonNull final Token currentTokenVal, @NonNull final int[][] expectedTokenSequencesVal, final String[] tokenImageVal)
 	{
 		super(ParseException.initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal));
 		this.currentToken = currentTokenVal;
@@ -74,12 +76,13 @@ public class ParseException extends Exception
 	 * It uses "currentToken" and "expectedTokenSequences" to generate a parse error message and returns it. If this object has been created due to a parse
 	 * error, and you do not catch it (it gets thrown from the parser) the correct error message gets displayed.
 	 */
-	private static String initialise(final Token currentToken, final int[][] expectedTokenSequences, final String[] tokenImage)
+	@NonNull
+	private static String initialise(@NonNull final Token currentToken, @NonNull final int[][] expectedTokenSequences, final String[] tokenImage)
 	{
 		final String eol = System.getProperty("line.separator", "\n");
-		final StringBuilder expected = new StringBuilder();
+		@NonNull final StringBuilder expected = new StringBuilder();
 		int maxSize = 0;
-		for (final int[] expectedTokenSequence : expectedTokenSequences)
+		for (@NonNull final int[] expectedTokenSequence : expectedTokenSequences)
 		{
 			if (maxSize < expectedTokenSequence.length)
 			{
@@ -95,7 +98,7 @@ public class ParseException extends Exception
 			}
 			expected.append(eol).append("    ");
 		}
-		StringBuilder retval = new StringBuilder("Encountered \"");
+		@NonNull StringBuilder retval = new StringBuilder("Encountered \"");
 		Token tok = currentToken.next;
 		for (int i = 0; i < maxSize; i++)
 		{
@@ -136,9 +139,10 @@ public class ParseException extends Exception
 	/**
 	 * Used to convert raw characters to their escaped version when these raw version cannot be used as part of an ASCII string literal.
 	 */
-	static String add_escapes(final String str)
+	@NonNull
+	static String add_escapes(@NonNull final String str)
 	{
-		final StringBuilder retval = new StringBuilder();
+		@NonNull final StringBuilder retval = new StringBuilder();
 		char ch;
 		for (int i = 0; i < str.length(); i++)
 		{
@@ -173,7 +177,7 @@ public class ParseException extends Exception
 				default:
 					if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e)
 					{
-						final String s = "0000" + Integer.toString(ch, 16);
+						@NonNull final String s = "0000" + Integer.toString(ch, 16);
 						retval.append("\\u").append(s.substring(s.length() - 4));
 					}
 					else

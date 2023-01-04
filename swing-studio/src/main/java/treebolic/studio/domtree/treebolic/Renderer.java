@@ -17,6 +17,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.studio.domtree.DefaultDecorator;
 
 /**
@@ -160,9 +161,9 @@ public class Renderer extends treebolic.studio.domtree.Renderer
 		StyleConstants.setForeground(Renderer.srcStyle, Color.MAGENTA);
 
 		// images
-		final URL nodeIconUrl = Renderer.class.getResource("images/treenode.gif");
-		final URL edgeIconUrl = Renderer.class.getResource("images/treeedge.gif");
-		final URL linkIconUrl = Renderer.class.getResource("images/treelink.gif");
+		@Nullable final URL nodeIconUrl = Renderer.class.getResource("images/treenode.gif");
+		@Nullable final URL edgeIconUrl = Renderer.class.getResource("images/treeedge.gif");
+		@Nullable final URL linkIconUrl = Renderer.class.getResource("images/treelink.gif");
 		assert nodeIconUrl != null;
 		Renderer.nodeIcon = new ImageIcon(nodeIconUrl);
 		assert edgeIconUrl != null;

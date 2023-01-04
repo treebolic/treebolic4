@@ -363,7 +363,7 @@ public class ModelToDocumentTransformer
 		@Nullable List<INode> children = node.getChildren();
 		if (children != null)
 		{
-			for (final INode child : children)
+			for (@NonNull final INode child : children)
 			{
 				nodeElement.appendChild(ModelToDocumentTransformer.makeNode(document, child));
 			}
@@ -617,7 +617,7 @@ public class ModelToDocumentTransformer
 				String string;
 				if (value instanceof Color)
 				{
-					Color color = (Color) value;
+					@NonNull Color color = (Color) value;
 					string = Utils.colorToString(color.intValue);
 				}
 				else if (value instanceof float[])

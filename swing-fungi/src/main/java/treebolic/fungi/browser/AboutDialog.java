@@ -9,6 +9,7 @@ import java.net.URL;
 import javax.swing.*;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.commons.HyperlinkButton;
 import treebolic.commons.Laf;
 import treebolic.fungi.Browser;
@@ -32,31 +33,31 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 	@Override
 	protected JPanel initialize(final String product, final String version, final boolean sysInfo)
 	{
-		final JPanel panel = super.initialize(product, version, sysInfo);
+		@NonNull final JPanel panel = super.initialize(product, version, sysInfo);
 
 		// Fungi
-		final URL iconUrl1 = AboutDialog.class.getResource("images/fungi.png");
+		@Nullable final URL iconUrl1 = AboutDialog.class.getResource("images/fungi.png");
 		assert iconUrl1 != null;
-		final JLabel image = new JLabel(new ImageIcon(iconUrl1));
-		final HyperlinkButton dBButton = new HyperlinkButton(HyperlinkButton.makeURILabel("MycoDB®"), "http://mycodb.fr");
-		final JLabel dBLabel = new JLabel("MycoDB");
+		@NonNull final JLabel image = new JLabel(new ImageIcon(iconUrl1));
+		@NonNull final HyperlinkButton dBButton = new HyperlinkButton(HyperlinkButton.makeURILabel("MycoDB®"), "http://mycodb.fr");
+		@NonNull final JLabel dBLabel = new JLabel("MycoDB");
 
 		// Project
-		final HyperlinkButton tWButton = new HyperlinkButton(HyperlinkButton.makeURILabel(Messages.getString("AboutDialog.app")), "http://treebolicfungi.sourceforge.net");
+		@NonNull final HyperlinkButton tWButton = new HyperlinkButton(HyperlinkButton.makeURILabel(Messages.getString("AboutDialog.app")), "http://treebolicfungi.sourceforge.net");
 
 		// Android
-		final URL iconUrl2 = AboutDialog.class.getResource("images/android.png");
+		@Nullable final URL iconUrl2 = AboutDialog.class.getResource("images/android.png");
 		assert iconUrl2 != null;
-		final JLabel androidImage = new JLabel("<HTML><FONT color=\"#808080\">" + Messages.getString("AboutDialog.also") + ' ' + "</FONT><B>Android</B></FONT></HTML>", new ImageIcon(iconUrl2), SwingConstants.CENTER);
+		@NonNull final JLabel androidImage = new JLabel("<HTML><FONT color=\"#808080\">" + Messages.getString("AboutDialog.also") + ' ' + "</FONT><B>Android</B></FONT></HTML>", new ImageIcon(iconUrl2), SwingConstants.CENTER);
 		androidImage.setHorizontalTextPosition(SwingConstants.CENTER);
 		androidImage.setVerticalTextPosition(SwingConstants.BOTTOM);
 
 		// Google Play
-		final String googlePlayUri = "https://play.google.com/store/apps/details?id=org.treebolic.fungi.browser";
-		final URL googlePlayIconURl = AboutDialog.class.getResource("images/google-play.png");
+		@NonNull final String googlePlayUri = "https://play.google.com/store/apps/details?id=org.treebolic.fungi.browser";
+		@Nullable final URL googlePlayIconURl = AboutDialog.class.getResource("images/google-play.png");
 		assert googlePlayIconURl != null;
-		final Icon googlePlayIcon = new ImageIcon(googlePlayIconURl);
-		final HyperlinkButton googlePlayButton = new HyperlinkButton(googlePlayIcon, googlePlayUri);
+		@NonNull final Icon googlePlayIcon = new ImageIcon(googlePlayIconURl);
+		@NonNull final HyperlinkButton googlePlayButton = new HyperlinkButton(googlePlayIcon, googlePlayUri);
 
 		panel.add(image, new GridBagConstraints(0, 30, 1, 1, 0., 0., GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 10, 10, 10), 0, 0));
 		panel.add(dBButton, new GridBagConstraints(0, 31, 1, 1, 0., 0., GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 10, 0, 10), 0, 0));
@@ -73,10 +74,10 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 	 *
 	 * @param args program arguments
 	 */
-	static public void main(final String[] args)
+	static public void main(@NonNull final String[] args)
 	{
 		Laf.lookAndFeel(args);
-		final AboutDialog dialog = new AboutDialog();
+		@NonNull final AboutDialog dialog = new AboutDialog();
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

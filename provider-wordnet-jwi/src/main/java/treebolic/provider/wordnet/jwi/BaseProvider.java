@@ -936,8 +936,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 */
 	@Nullable
 	static protected final Comparator<INode> iNodeComparator = (n1, n2) -> {
-		final String label1 = n1.getLabel();
-		final String label2 = n2.getLabel();
+		@Nullable final String label1 = n1.getLabel();
+		@Nullable final String label2 = n2.getLabel();
 		if (label1 != null && label2 != null)
 		{
 			return label1.compareTo(label2);
@@ -1066,68 +1066,100 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
 	// colors
 
+	@Nullable
 	protected Integer backColor;
 
+	@Nullable
 	protected Integer treeEdgeColor;
 
+	@Nullable
 	protected Integer rootBackgroundColor;
 
+	@Nullable
 	protected Integer rootForegroundColor;
 
+	@Nullable
 	protected Integer categoryBackgroundColor;
 
+	@Nullable
 	protected Integer categoryForegroundColor;
 
+	@Nullable
 	protected Integer categoryEdgeColor;
 
+	@Nullable
 	protected Integer posBackgroundColor;
 
+	@Nullable
 	protected Integer posForegroundColor;
 
+	@Nullable
 	protected Integer posEdgeColor;
 
+	@Nullable
 	protected Integer senseBackgroundColor;
 
+	@Nullable
 	protected Integer senseForegroundColor;
 
+	@Nullable
 	protected Integer senseEdgeColor;
 
+	@Nullable
 	protected Integer synsetBackgroundColor;
 
+	@Nullable
 	protected Integer synsetForegroundColor;
 
+	@Nullable
 	protected Integer synsetEdgeColor;
 
+	@Nullable
 	protected Integer linksBackgroundColor;
 
+	@Nullable
 	protected Integer linksForegroundColor;
 
+	@Nullable
 	protected Integer linksEdgeColor;
 
+	@Nullable
 	protected Integer linkBackgroundColor;
 
+	@Nullable
 	protected Integer linkForegroundColor;
 
+	@Nullable
 	protected Integer linkEdgeColor;
 
+	@Nullable
 	protected Integer etcBackgroundColor;
 
+	@Nullable
 	protected Integer etcForegroundColor;
 
+	@Nullable
 	protected Integer etcEdgeColor;
 
+	@Nullable
 	protected Integer wordsBackgroundColor;
 
+	@Nullable
 	protected Integer wordsForegroundColor;
 
+	@Nullable
 	protected Integer wordsEdgeColor;
 
+	@Nullable
 	protected Integer wordEdgeColor;
 
+	@Nullable
 	protected Integer stemBackgroundColor;
 
+	@Nullable
 	protected Integer stemForegroundColor;
 
+	@Nullable
 	protected Integer stemEdgeColor;
 
 	protected final Integer[] wordForegroundColors = new Integer[]{ //
@@ -1146,6 +1178,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			BaseProvider.COLORS0[BaseProvider.WORDBACKGROUND4_IDX], //
 	};
 
+	@Nullable
 	protected Integer edgeColor;
 
 	// C O N S T R U C T O R
@@ -1177,7 +1210,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		{
 			return;
 		}
-		final URL base = locator.getBase();
+		@Nullable final URL base = locator.getBase();
 		assert base != null;
 		try
 		{
@@ -1280,12 +1313,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		this.wordsEdgeColor = getColor(parameters, Parameters.KEY_MEMBERS_ECOLOR, BaseProvider.COLORS0[BaseProvider.WORDSEDGE_IDX]);
 
 		// word colors
-		final Integer wordBackgroundColor0 = getColor(parameters, Parameters.KEY_WORD_BCOLOR, null);
+		@Nullable final Integer wordBackgroundColor0 = getColor(parameters, Parameters.KEY_WORD_BCOLOR, null);
 		if (wordBackgroundColor0 != null)
 		{
 			this.wordBackgroundColors[0] = wordBackgroundColor0;
 		}
-		final Integer wordForegroundColor0 = getColor(parameters, Parameters.KEY_WORD_FCOLOR, null);
+		@Nullable final Integer wordForegroundColor0 = getColor(parameters, Parameters.KEY_WORD_FCOLOR, null);
 		if (wordForegroundColor0 != null)
 		{
 			this.wordForegroundColors[0] = wordForegroundColor0;
@@ -1294,14 +1327,14 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		// remote word colors
 		if (this.wordBackgroundColors.length > 1)
 		{
-			final Integer remoteWordBackgroundColor = getColor(parameters, Parameters.KEY_LINKEDWORD_BCOLOR, null);
+			@Nullable final Integer remoteWordBackgroundColor = getColor(parameters, Parameters.KEY_LINKEDWORD_BCOLOR, null);
 			// System.out.printf("new Color(0x%X),", remoteWordBackgroundColor.getRGB() & 0xFFFFFF);
 			if (remoteWordBackgroundColor != null)
 			{
 				this.wordBackgroundColors[1] = remoteWordBackgroundColor;
 				for (int i = 2; i < this.wordBackgroundColors.length; i++)
 				{
-					final Integer color = Colors.makeBrighter(this.wordBackgroundColors[i - 1]);
+					@Nullable final Integer color = Colors.makeBrighter(this.wordBackgroundColors[i - 1]);
 					// System.out.printf("new Color(0x%X), ", color.getRGB() & 0xFFFFFF);
 					this.wordBackgroundColors[i] = color;
 				}
@@ -1309,7 +1342,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		}
 		if (this.wordForegroundColors.length > 1)
 		{
-			final Integer remoteWordForegroundColor = getColor(parameters, Parameters.KEY_LINKEDWORD_FCOLOR, null);
+			@Nullable final Integer remoteWordForegroundColor = getColor(parameters, Parameters.KEY_LINKEDWORD_FCOLOR, null);
 			if (remoteWordForegroundColor != null)
 			{
 				this.wordForegroundColors[1] = remoteWordForegroundColor;
@@ -1376,12 +1409,13 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @param dataKey data key, values are 'OEWN' or 'WN31' or URL string
 	 * @return url
 	 */
+	@NonNull
 	private URL getURL(@NonNull final Properties parameters, final String dataKey)
 	{
 		@NonNull final String dataValue = parameters.getProperty(dataKey, DATA_DEFAULT);
 		try
 		{
-			URL zipUrl = DataManager.getSourceZipURL(dataValue);
+			@Nullable URL zipUrl = DataManager.getSourceZipURL(dataValue);
 			if (zipUrl == null)
 			{
 				throw new IOException("No resource for " + dataValue);
@@ -1403,6 +1437,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @param defaultColor default value
 	 * @return color value
 	 */
+	@Nullable
 	private Integer getColor(@NonNull final Properties parameters, final String key, final Integer defaultColor)
 	{
 		final String colorString = parameters.getProperty(key, null);
@@ -1599,16 +1634,16 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		}
 
 		// tree
-		final Tree tree = makeTree(source, base, parameters, false);
+		@Nullable final Tree tree = makeTree(source, base, parameters, false);
 		if (tree == null)
 		{
 			return null;
 		}
 
 		// settings
-		final List<INode> children = tree.getRoot().getChildren();
+		@Nullable final List<INode> children = tree.getRoot().getChildren();
 		final int size = children == null ? 0 : children.size();
-		final Settings settings = makeSettings(size);
+		@NonNull final Settings settings = makeSettings(size);
 
 		this.dictionary.close();
 
@@ -1648,8 +1683,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		this.context.progress(query, false);
 
 		// walk
-		final List<IEdge> edges = new ArrayList<>();
-		final INode rootNode = walk(query, true, edges);
+		@NonNull final List<IEdge> edges = new ArrayList<>();
+		@Nullable final INode rootNode = walk(query, true, edges);
 
 		// result
 		return new Tree(rootNode, edges);
@@ -1674,7 +1709,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	protected Settings makeSettings(final int childrenCount, final int thresholdForRadial)
 	{
-		final Settings settings = new Settings();
+		@NonNull final Settings settings = new Settings();
 		settings.hasToolbarFlag = true;
 		settings.hasStatusbarFlag = true;
 		settings.focusOnHoverFlag = false;
@@ -1709,7 +1744,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		// menu
 		settings.menu = new ArrayList<>();
 
-		final MenuItem searchEqualMenuItem = new MenuItem();
+		@NonNull final MenuItem searchEqualMenuItem = new MenuItem();
 		searchEqualMenuItem.action = Action.SEARCH;
 		searchEqualMenuItem.label = "Search for item that matches '$e'";
 		searchEqualMenuItem.matchMode = MatchMode.EQUALS;
@@ -1717,7 +1752,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		searchEqualMenuItem.link = "$e";
 		settings.menu.add(searchEqualMenuItem);
 
-		final MenuItem searchLabelIncludesMenuItem = new MenuItem();
+		@NonNull final MenuItem searchLabelIncludesMenuItem = new MenuItem();
 		searchLabelIncludesMenuItem.action = Action.SEARCH;
 		searchLabelIncludesMenuItem.label = "Search for item that includes '$e'";
 		searchLabelIncludesMenuItem.matchMode = MatchMode.INCLUDES;
@@ -1725,7 +1760,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		searchLabelIncludesMenuItem.link = "$e";
 		settings.menu.add(searchLabelIncludesMenuItem);
 
-		final MenuItem searchContentIncludesMenuItem = new MenuItem();
+		@NonNull final MenuItem searchContentIncludesMenuItem = new MenuItem();
 		searchContentIncludesMenuItem.action = Action.SEARCH;
 		searchContentIncludesMenuItem.label = "Search for content that includes '$e'";
 		searchContentIncludesMenuItem.matchMode = MatchMode.INCLUDES;
@@ -1733,7 +1768,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		searchContentIncludesMenuItem.link = "$e";
 		settings.menu.add(searchContentIncludesMenuItem);
 
-		final MenuItem gotoMenuItem = new MenuItem();
+		@NonNull final MenuItem gotoMenuItem = new MenuItem();
 		gotoMenuItem.action = Action.GOTO;
 		gotoMenuItem.label = "$u";
 		gotoMenuItem.link = INTERNAL_URLSCHEME + "$u";
@@ -1759,7 +1794,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		if (query.startsWith("@"))
 		{
 			// id
-			final String id = query.substring(1);
+			@NonNull final String id = query.substring(1);
 
 			// synset
 			final ISynset synset0 = this.dictionary.getSynset(SynsetID.parseSynsetID(id));
@@ -1767,10 +1802,10 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			{
 				return null;
 			}
-			final Synset synset = new Synset(synset0);
+			@NonNull final Synset synset = new Synset(synset0);
 
 			// synset node
-			final TreeMutableNode synsetNode = makeSynsetNode(null, synset);
+			@NonNull final TreeMutableNode synsetNode = makeSynsetNode(null, synset);
 			synsetNode.setLabel(BaseProvider.mangleString(BaseProvider.members(synset, ", ")));
 			setNodeImage(synsetNode, null, ImageIndex.ROOT);
 
@@ -1784,18 +1819,18 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		}
 
 		// break query into components: lemma, pos filter, sensefilter
-		final String[] queryPath = query.split(",");
+		@NonNull final String[] queryPath = query.split(",");
 		final POS posFilter = queryPath.length > 1 ? POS.getPartOfSpeech(queryPath[1].trim().charAt(0)) : null;
-		final Integer senseFilter = queryPath.length > 2 ? Integer.valueOf(queryPath[2].trim()) : null;
+		@Nullable final Integer senseFilter = queryPath.length > 2 ? Integer.valueOf(queryPath[2].trim()) : null;
 
 		// query
-		final INode root = walk(BaseProvider.normalize(queryPath[0].trim()), posFilter, senseFilter, recurse, edges);
+		@NonNull final INode root = walk(BaseProvider.normalize(queryPath[0].trim()), posFilter, senseFilter, recurse, edges);
 
 		// stems if no results
-		final List<INode> children = root.getChildren();
+		@Nullable final List<INode> children = root.getChildren();
 		if (children == null || children.isEmpty())
 		{
-			for (final POS pos : POS.values())
+			for (@NonNull final POS pos : POS.values())
 			{
 				final List<String> stems = this.stemmer.findStems(BaseProvider.normalize(queryPath[0].trim()), pos);
 				if (stems.isEmpty())
@@ -1803,7 +1838,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 					continue;
 				}
 
-				MutableNode posNode = null;
+				@Nullable MutableNode posNode = null;
 				for (final String stem : stems)
 				{
 					final IIndexWord idx = this.dictionary.getIndexWord(stem, pos); // a line in an index file
@@ -1836,10 +1871,10 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	protected INode walk(@NonNull final String lemma, @Nullable final POS posFilter, @Nullable final Integer senseFilter, final boolean recurse, @NonNull final List<IEdge> edges)
 	{
 		int globalSenseIdx = 0;
-		final INode rootNode = makeRootNode(lemma);
+		@NonNull final INode rootNode = makeRootNode(lemma);
 
 		// iterate on parts of speech
-		for (final POS pos : POS.values())
+		for (@NonNull final POS pos : POS.values())
 		{
 			if (posFilter != null && !pos.equals(posFilter))
 			{
@@ -1855,18 +1890,18 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			int tagCountTotal = 0;
 
 			// pos node
-			final INode posNode = makePosNode(rootNode, pos, lemma);
+			@NonNull final INode posNode = makePosNode(rootNode, pos, lemma);
 
 			// sense map per lexfile/category
-			final Map<ILexFile, List<Sense>> senseDataMap = new HashMap<>();
-			final Map<ILexFile, Collection<IWord>> senseDataMap2 = hierarchize(idx.getWordIDs());
+			@NonNull final Map<ILexFile, List<Sense>> senseDataMap = new HashMap<>();
+			@NonNull final Map<ILexFile, Collection<IWord>> senseDataMap2 = hierarchize(idx.getWordIDs());
 			for (final ILexFile lexFile : senseDataMap2.keySet())
 			{
 				final Collection<IWord> senses = senseDataMap2.get(lexFile);
 				if (senses != null)
 				{
 					// sense
-					for (final IWord sense : senses)
+					for (@NonNull final IWord sense : senses)
 					{
 						++globalSenseIdx;
 						++posSenseIdx;
@@ -1889,25 +1924,25 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 						tagCountTotal += tagCount;
 
 						// add to list
-						final Sense senseData = new Sense(pos, senseKey, sense, synset, lexId, posSenseIdx, globalSenseIdx, senseNum, tagCount);
-						List<Sense> senseDatas = senseDataMap.computeIfAbsent(lexFile, k -> new ArrayList<>());
+						@NonNull final Sense senseData = new Sense(pos, senseKey, sense, synset, lexId, posSenseIdx, globalSenseIdx, senseNum, tagCount);
+						@NonNull List<Sense> senseDatas = senseDataMap.computeIfAbsent(lexFile, k -> new ArrayList<>());
 						senseDatas.add(senseData);
 					}
 				}
 			}
 
 			// sense map
-			for (final ILexFile lexFile : senseDataMap.keySet())
+			for (@NonNull final ILexFile lexFile : senseDataMap.keySet())
 			{
 				final Collection<Sense> senseDatas = senseDataMap.get(lexFile);
 				if (senseDatas != null)
 				{
 					// category
-					final INode categoryNode = makeCategoryNode(posNode, lexFile);
+					@NonNull final INode categoryNode = makeCategoryNode(posNode, lexFile);
 
 					// scan list
 					int i = 0;
-					for (final Sense senseData : senseDatas)
+					for (@NonNull final Sense senseData : senseDatas)
 					{
 						if (senseFilter != null && senseData.senseNum != senseFilter)
 						{
@@ -1915,7 +1950,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 						}
 
 						// sense node
-						final TreeMutableNode senseNode = makeSenseNode(categoryNode, senseData, tagCountTotal);
+						@NonNull final TreeMutableNode senseNode = makeSenseNode(categoryNode, senseData, tagCountTotal);
 
 						// synset node (ignore links)
 						walkSynset(senseNode, senseData.synset, i, 0);
@@ -1980,7 +2015,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		if ((this.features & FEATURE_SYNSET_FORGET_MEMBERS_NODE_IF_SINGLE_MEMBER) != 0 && hasSingleMember(synset))
 		{
 			// P < m1
-			final MutableNode node = buildSingleMemberNode(parentNode, synset, level);
+			@NonNull final MutableNode node = buildSingleMemberNode(parentNode, synset, level);
 
 			node.setEdgeLabel(LABEL_MEMBER);
 			node.setEdgeStyle(EDGE_STYLE_MEMBER);
@@ -1989,7 +2024,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		}
 
 		// P < M < m1 m2 m3
-		final TreeMutableNode membersNode = makeSynsetMembersNode(parentNode, synset);
+		@NonNull final TreeMutableNode membersNode = makeSynsetMembersNode(parentNode, synset);
 		walkMembers(membersNode, synset, level);
 	}
 
@@ -2032,9 +2067,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 */
 	private void walkMembersNoLoadBalancing(final TreeMutableNode parentNode, @NonNull final Synset synset, final int level)
 	{
-		for (final IWord word : synset.synset.getWords())
+		for (@NonNull final IWord word : synset.synset.getWords())
 		{
-			final INode node = makeWordNode(parentNode, word, synset.gloss, level);
+			@NonNull final INode node = makeWordNode(parentNode, word, synset.gloss, level);
 			node.setEdgeLabel(LABEL_MEMBER);
 			node.setEdgeStyle(EDGE_STYLE_MEMBER);
 			node.setEdgeColor(this.wordEdgeColor);
@@ -2051,10 +2086,10 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	private void walkMembersLoadBalancing(@NonNull final TreeMutableNode parentNode, @NonNull final Synset synset, final int level)
 	{
 		// make list
-		List<INode> memberNodes = new ArrayList<>();
-		for (final IWord word : synset.synset.getWords())
+		@Nullable List<INode> memberNodes = new ArrayList<>();
+		for (@NonNull final IWord word : synset.synset.getWords())
 		{
-			final TreeMutableNode node = makeWordNode(null, word, synset.gloss, level);
+			@NonNull final TreeMutableNode node = makeWordNode(null, word, synset.gloss, level);
 			node.setEdgeLabel(LABEL_MEMBER);
 			node.setEdgeStyle(EDGE_STYLE_MEMBER);
 			node.setEdgeColor(this.wordEdgeColor);
@@ -2095,9 +2130,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		{
 			// create links node
 			// P < L < 11 l2 l3
-			final String semLabel = links(semLinks.keySet());
-			final String lexLabel = links(lexLinks.keySet());
-			final String label = (semLabel.isEmpty() ? "-" : semLabel) + "<br/>/<br/>" + (lexLabel.isEmpty() ? "-" : lexLabel);
+			@NonNull final String semLabel = links(semLinks.keySet());
+			@NonNull final String lexLabel = links(lexLinks.keySet());
+			@NonNull final String label = (semLabel.isEmpty() ? "-" : semLabel) + "<br/>/<br/>" + (lexLabel.isEmpty() ? "-" : lexLabel);
 			anchorNode = makeSynsetLinksNode(parentNode, label);
 		}
 
@@ -2124,7 +2159,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		final Map<IPointer, List<ISynsetID>> semLinks = synset.synset.getRelatedMap();
 		if (!semLinks.isEmpty())
 		{
-			final TreeMutableNode linksNode = makeSynsetLinksNode(parentNode, links(semLinks.keySet()));
+			@NonNull final TreeMutableNode linksNode = makeSynsetLinksNode(parentNode, links(semLinks.keySet()));
 			walkSemLinks(linksNode, semLinks, index, level, recurse, edges);
 		}
 	}
@@ -2144,9 +2179,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		// P=links node L
 
 		// iterate pointers
-		for (final IPointer pointer : semLinks.keySet())
+		for (@NonNull final IPointer pointer : semLinks.keySet())
 		{
-			final Link link = Link.valueOf(pointer);
+			@NonNull final Link link = Link.valueOf(pointer);
 			if (!link.test(this.filter))
 			{
 				continue;
@@ -2164,7 +2199,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 					if (singleSynset)
 					{
 						// single synset (no load balancing)
-						final Iterator<ISynsetID> it = linkedSynsetIds.iterator();
+						@NonNull final Iterator<ISynsetID> it = linkedSynsetIds.iterator();
 						if (it.hasNext())
 						{
 							// linked synset node
@@ -2172,10 +2207,10 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 							final ISynset linkedSynset0 = this.dictionary.getSynset(linkedSynsetId);
 							if (linkedSynset0 != null)
 							{
-								final Synset linkedSynset = new Synset(linkedSynset0);
+								@NonNull final Synset linkedSynset = new Synset(linkedSynset0);
 
 								// link node l
-								final TreeMutableNode linkNode = makeLinkNode(parentNode, link);
+								@NonNull final TreeMutableNode linkNode = makeLinkNode(parentNode, link);
 
 								// populate linked synset node
 								walkLinkedSynset1(linkNode, linkedSynset, link, index, level + 1, recurse && link.recurses, edges);
@@ -2187,13 +2222,13 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
 				// multiple synsets
 				// P < l < s1 s2 s3
-				INode etcNode = null;
+				@Nullable INode etcNode = null;
 
 				final int n = linkedSynsetIds.size();
 				int i = 0;
 
-				List<INode> childNodes = new ArrayList<>();
-				final Iterator<ISynsetID> it = linkedSynsetIds.iterator();
+				@Nullable List<INode> childNodes = new ArrayList<>();
+				@NonNull final Iterator<ISynsetID> it = linkedSynsetIds.iterator();
 				while (it.hasNext())
 				{
 					// linked synset node
@@ -2203,12 +2238,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 					{
 						continue;
 					}
-					final Synset linkedSynset = new Synset(linkedSynset0);
-					final TreeMutableNode linkedSynsetNode = makeSynsetNode(null, linkedSynset);
+					@NonNull final Synset linkedSynset = new Synset(linkedSynset0);
+					@NonNull final TreeMutableNode linkedSynsetNode = makeSynsetNode(null, linkedSynset);
 
 					// populate linked synset node
 					walkLinkedSynset1(linkedSynsetNode, linkedSynset, link, index, level + 1, recurse && link.recurses, edges);
-					final String tag = Integer.toString(i + 1);
+					@NonNull final String tag = Integer.toString(i + 1);
 					linkedSynsetNode.setTarget(tag);
 					// linkedSynsetNode.setLabel(tag);
 
@@ -2230,7 +2265,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 				}
 
 				// link node l
-				final TreeMutableNode linkNode = makeLinkNode(parentNode, link);
+				@NonNull final TreeMutableNode linkNode = makeLinkNode(parentNode, link);
 				if (childNodes != null)
 				{
 					linkNode.addChildren(childNodes);
@@ -2274,7 +2309,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			final List<ISynsetID> linkedSynsetIds = linkedSynset.synset.getRelatedSynsets(link.pointer);
 			if (!linkedSynsetIds.isEmpty())
 			{
-				TreeMutableNode anchorNode = parentNode;
+				@NonNull TreeMutableNode anchorNode = parentNode;
 				if ((this.features & FEATURE_LINKEDSYNSET1_FORGET_LINK_NODE) == 0)
 				{
 					// P < l < s
@@ -2300,7 +2335,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		final Map<IPointer, List<IWordID>> lexLinks = sense.getRelatedMap();
 		if (!lexLinks.isEmpty())
 		{
-			final TreeMutableNode linksNode = makeSynsetLinksNode(parentNode, links(lexLinks.keySet()));
+			@NonNull final TreeMutableNode linksNode = makeSynsetLinksNode(parentNode, links(lexLinks.keySet()));
 			walkLexLinks(linksNode, lexLinks, level);
 		}
 	}
@@ -2315,21 +2350,21 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	protected void walkLexLinks(final TreeMutableNode parentNode, @NonNull final Map<IPointer, List<IWordID>> lexLinks, final int level)
 	{
 		// iterate pointers
-		for (final IPointer pointer : lexLinks.keySet())
+		for (@NonNull final IPointer pointer : lexLinks.keySet())
 		{
-			final Link link = Link.valueOf(pointer);
+			@NonNull final Link link = Link.valueOf(pointer);
 			if (!link.test(this.filter))
 			{
 				continue;
 			}
 
-			final INode linkNode = makeLinkNode(parentNode, link);
+			@NonNull final INode linkNode = makeLinkNode(parentNode, link);
 
 			// iterate linked senses
 			final List<IWordID> linkedSenseIds = lexLinks.get(link.pointer);
 			if (linkedSenseIds != null)
 			{
-				for (final IWordID linkedSenseId : linkedSenseIds)
+				for (@Nullable final IWordID linkedSenseId : linkedSenseIds)
 				{
 					if (linkedSenseId == null)
 					{
@@ -2361,12 +2396,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	protected void walkTypedLink(@NonNull final TreeMutableNode parentNode, @NonNull final List<ISynsetID> linkedSynsetIds, @NonNull final Link link, final int level, @NonNull final List<IEdge> edges)
 	{
 		// iterate linked synsets
-		INode etcNode = null;
+		@Nullable INode etcNode = null;
 
 		int i = 0;
 		final int n = linkedSynsetIds.size();
-		List<INode> childNodes = new ArrayList<>();
-		final Iterator<ISynsetID> it = linkedSynsetIds.iterator();
+		@Nullable List<INode> childNodes = new ArrayList<>();
+		@NonNull final Iterator<ISynsetID> it = linkedSynsetIds.iterator();
 		while (it.hasNext())
 		{
 			final ISynsetID linkedSynsetId = it.next();
@@ -2377,8 +2412,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			}
 
 			// synset
-			final Synset linkedSynset = new Synset(linkedSynset0);
-			final String tag = Integer.toString(i + 1);
+			@NonNull final Synset linkedSynset = new Synset(linkedSynset0);
+			@NonNull final String tag = Integer.toString(i + 1);
 
 			// node for synset
 			TreeMutableNode linkedSynsetNode;
@@ -2424,13 +2459,13 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 				{
 					if ((this.features & FEATURE_TYPEDLINK_RAISE_RECURSE_AS_SIBLING) != 0)
 					{
-						final TreeMutableNode linkNode = makeLinkNode(null, link);
+						@NonNull final TreeMutableNode linkNode = makeLinkNode(null, link);
 						walkTypedLink(linkNode, childLinkedSynsetIds, link, level + 1, edges);
 						linkNode.setLabel(tag);
 						linkNode.setTarget(tag);
 						childNodes.add(linkNode);
 
-						final MutableEdge edge = new MutableEdge(linkedSynsetNode, linkNode);
+						@NonNull final MutableEdge edge = new MutableEdge(linkedSynsetNode, linkNode);
 						edge.setLabel(link.label);
 						edge.setColor(this.edgeColor);
 						edge.setStyle(EDGE_STYLE_EDGE);
@@ -2438,7 +2473,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 					}
 					else
 					{
-						TreeMutableNode anchorNode = linkedSynsetNode;
+						@NonNull TreeMutableNode anchorNode = linkedSynsetNode;
 						if ((this.features & FEATURE_TYPEDLINK_FORGET_LINK_NODE) == 0)
 						{
 							anchorNode = makeLinkNode(linkedSynsetNode, link);
@@ -2487,10 +2522,10 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		{
 			final IWord head = synset.synset.getWord(1);
 			final List<IWordID> antonymSenseIds = head.getRelatedWords(Pointer.ANTONYM);
-			INode antonymLinkNode = null;
+			@Nullable INode antonymLinkNode = null;
 
 			// follow up antonyms
-			for (final IWordID antonymSenseId : antonymSenseIds)
+			for (@NonNull final IWordID antonymSenseId : antonymSenseIds)
 			{
 				if (antonymLinkNode == null)
 				{
@@ -2513,10 +2548,10 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	protected TreeMutableNode buildMembersNode(@NonNull final Synset synset, final int level)
 	{
-		final TreeMutableNode membersNode = makeSynsetNode(null, synset);
-		for (final IWord word : synset.synset.getWords())
+		@NonNull final TreeMutableNode membersNode = makeSynsetNode(null, synset);
+		for (@NonNull final IWord word : synset.synset.getWords())
 		{
-			final INode node = makeWordNode(membersNode, word, synset.gloss, level);
+			@NonNull final INode node = makeWordNode(membersNode, word, synset.gloss, level);
 
 			node.setEdgeLabel(LABEL_MEMBER);
 			node.setEdgeStyle(EDGE_STYLE_MEMBER);
@@ -2537,7 +2572,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	protected TreeMutableNode buildSingleMemberNode(final INode parent, @NonNull final Synset synset, final int level)
 	{
 		final IWord word = synset.synset.getWords().get(0);
-		final TreeMutableNode node = makeWordNode(parent, word, synset.gloss, level);
+		@NonNull final TreeMutableNode node = makeWordNode(parent, word, synset.gloss, level);
 
 		// node.setEdgeLabel(LABEL_MEMBER);
 		// node.setEdgeStyle(EDGE_STYLE_MEMBER);
@@ -2572,7 +2607,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	protected MutableNode makePosNode(final INode parent, @NonNull final POS pos, @Nullable final String word)
 	{
-		final MutableNode node = new MutableNode(parent, BaseProvider.makeNodeId(), pos.name().toLowerCase(Locale.ENGLISH), -1, this.posBackgroundColor, this.posForegroundColor);
+		@NonNull final MutableNode node = new MutableNode(parent, BaseProvider.makeNodeId(), pos.name().toLowerCase(Locale.ENGLISH), -1, this.posBackgroundColor, this.posForegroundColor);
 		if (word != null)
 		{
 			node.setLink(BaseProvider.URLSCHEME + word + ',' + pos.getTag());
@@ -2593,7 +2628,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	protected MutableNode makeCategoryNode(final INode parent, @NonNull final ILexFile lexFile)
 	{
-		final MutableNode node = new MutableNode(parent, BaseProvider.makeNodeId(), BaseProvider.category(lexFile), -1, this.categoryBackgroundColor, this.categoryForegroundColor);
+		@NonNull final MutableNode node = new MutableNode(parent, BaseProvider.makeNodeId(), BaseProvider.category(lexFile), -1, this.categoryBackgroundColor, this.categoryForegroundColor);
 		node.setContent(lexFile.getDescription());
 		node.setEdgeLabel(LABEL_CATEGORY);
 		node.setEdgeStyle(EDGE_STYLE_CATEGORY);
@@ -2614,10 +2649,10 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	protected TreeMutableNode makeSenseBaseNode(final INode parent, @NonNull final Sense sense, final int tagCountTotal)
 	{
 		final float share = tagCountTotal == 0 ? 0F : sense.tagCount / (float) tagCountTotal * 100F;
-		final String shareString = String.format(Locale.ENGLISH, "%.0f%%", share);
-		final String shareString2 = String.format(Locale.ENGLISH, "%.2f%%", share);
-		final String label = share != 0F ? shareString : String.format(Locale.ENGLISH, "#%d", sense.senseNum);
-		final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), label, -1, this.senseBackgroundColor, this.senseForegroundColor);
+		@NonNull final String shareString = String.format(Locale.ENGLISH, "%.0f%%", share);
+		@NonNull final String shareString2 = String.format(Locale.ENGLISH, "%.2f%%", share);
+		@NonNull final String label = share != 0F ? shareString : String.format(Locale.ENGLISH, "#%d", sense.senseNum);
+		@NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), label, -1, this.senseBackgroundColor, this.senseForegroundColor);
 		node.setContent(senseContent(sense, shareString2));
 		node.setLink(BaseProvider.URLSCHEME + sense.sensekey.getLemma() + ',' + sense.pos.getTag() + ',' + sense.senseNum);
 		node.setEdgeStyle(EDGE_STYLE_SENSE);
@@ -2636,7 +2671,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	protected TreeMutableNode makeSenseNode(final INode parent, @NonNull final Sense sense, final int tagCountTotal)
 	{
-		final TreeMutableNode node = makeSenseBaseNode(parent, sense, tagCountTotal);
+		@NonNull final TreeMutableNode node = makeSenseBaseNode(parent, sense, tagCountTotal);
 		node.setEdgeLabel(LABEL_SENSE);
 		setTreeEdgeImage(node, null, ImageIndex.SENSE);
 		return node;
@@ -2652,7 +2687,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	protected TreeMutableNode makeSynsetNode(final INode parent, @NonNull final Synset synset)
 	{
-		final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), null, ImageIndex.SYNSET.ordinal(), this.synsetBackgroundColor, this.synsetForegroundColor);
+		@NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), null, ImageIndex.SYNSET.ordinal(), this.synsetBackgroundColor, this.synsetForegroundColor);
 		node.setContent(glossContent(synset.gloss));
 		node.setLink(BaseProvider.URLSCHEME + BaseProvider.URLSCHEME_AT + synset.synset.getID().toString());
 		node.setEdgeLabel(LABEL_SYNSET);
@@ -2671,7 +2706,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	protected TreeMutableNode makeSynsetMembersNode(final INode parent, @NonNull final Synset synset)
 	{
-		final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), null, ImageIndex.MEMBERS.ordinal(), this.wordsBackgroundColor, this.wordsForegroundColor);
+		@NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), null, ImageIndex.MEMBERS.ordinal(), this.wordsBackgroundColor, this.wordsForegroundColor);
 		node.setContent("<div class='members'>" + BaseProvider.members(synset, ", ") + "</div>");
 		node.setLink(BaseProvider.URLSCHEME + BaseProvider.URLSCHEME_AT + synset.synset.getID().toString());
 		node.setEdgeLabel(LABEL_MEMBERS);
@@ -2694,7 +2729,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	{
 		final String lemma = word.getLemma();
 		final int colorIndex = level % this.wordBackgroundColors.length;
-		final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), BaseProvider.printable(lemma), ImageIndex.WORD.ordinal(), this.wordBackgroundColors[colorIndex], this.wordForegroundColors[colorIndex]);
+		@NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), BaseProvider.printable(lemma), ImageIndex.WORD.ordinal(), this.wordBackgroundColors[colorIndex], this.wordForegroundColors[colorIndex]);
 		node.setContent(glossContent(gloss));
 		node.setLink(BaseProvider.URLSCHEME + lemma);
 		// do not assume anything about link
@@ -2711,7 +2746,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	protected TreeMutableNode makeSynsetLinksNode(final INode parent, final String pointers)
 	{
-		final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), null, ImageIndex.LINKS.ordinal(), this.linksBackgroundColor, this.linksForegroundColor);
+		@NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), null, ImageIndex.LINKS.ordinal(), this.linksBackgroundColor, this.linksForegroundColor);
 		node.setContent(pointers);
 		node.setEdgeLabel(LABEL_LINKS);
 		node.setEdgeStyle(EDGE_STYLE_LINKS);
@@ -2731,7 +2766,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	{
 		final int imageIndex = link.imageIndex;
 		final String label = link.label;
-		final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), imageIndex != -1 ? null : label, imageIndex, this.linkBackgroundColor, this.linkForegroundColor);
+		@NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), imageIndex != -1 ? null : label, imageIndex, this.linkBackgroundColor, this.linkForegroundColor);
 		node.setContent("<div class='reference'>" + link.label + "</div>");
 		node.setLink("help:" + link.tag);
 		node.setEdgeLabel(label);
@@ -2751,12 +2786,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@SuppressWarnings("UnusedReturnValue")
 	private TreeMutableNode makeLexNode(final INode parent, @NonNull final IWordID senseId, final int level)
 	{
-		final String lemma = lemma(senseId);
+		@NonNull final String lemma = lemma(senseId);
 		final int colorIndex = level % this.wordBackgroundColors.length;
-		final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), lemma, ImageIndex.WORD.ordinal(), this.wordBackgroundColors[colorIndex], this.wordForegroundColors[colorIndex]);
+		@NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), lemma, ImageIndex.WORD.ordinal(), this.wordBackgroundColors[colorIndex], this.wordForegroundColors[colorIndex]);
 		final ISynsetID synsetId = senseId.getSynsetID();
 		final ISynset synset = this.dictionary.getSynset(synsetId);
-		final Gloss gloss = new Gloss(synset.getGloss());
+		@NonNull final Gloss gloss = new Gloss(synset.getGloss());
 		node.setContent(glossContent(gloss));
 		node.setLink(BaseProvider.URLSCHEME + BaseProvider.URLSCHEME_AT + synsetId.toString());
 		node.setEdgeStyle(EDGE_STYLE_LEX);
@@ -2776,7 +2811,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	protected TreeMutableNode makeStemNode(final INode parent, final String stem, @NonNull final POS pos)
 	{
-		final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), stem, -1, this.stemBackgroundColor, this.stemForegroundColor);
+		@NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), stem, -1, this.stemBackgroundColor, this.stemForegroundColor);
 		node.setLink(BaseProvider.URLSCHEME + stem + ',' + pos.getTag());
 		node.setEdgeLabel(LABEL_STEM);
 		node.setEdgeStyle(EDGE_STYLE_STEM);
@@ -2799,8 +2834,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	{
 		final int imageIndex = link.imageIndex;
 		final String label = link.label;
-		final String content = makeEtcContent(link, count, it);
-		final MutableNode node = new MutableNode(parent, BaseProvider.makeNodeId(), "+ " + (count - this.maxLinks), imageIndex, this.etcBackgroundColor, this.etcForegroundColor);
+		@NonNull final String content = makeEtcContent(link, count, it);
+		@NonNull final MutableNode node = new MutableNode(parent, BaseProvider.makeNodeId(), "+ " + (count - this.maxLinks), imageIndex, this.etcBackgroundColor, this.etcForegroundColor);
 		node.setContent(content);
 		node.setEdgeLabel(label);
 		node.setEdgeStyle(EDGE_STYLE_ETC);
@@ -2819,7 +2854,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	protected String makeEtcContent(@NonNull final Link link, final int count, @NonNull final Iterator<ISynsetID> it)
 	{
-		final StringBuilder sb = new StringBuilder();
+		@NonNull final StringBuilder sb = new StringBuilder();
 		sb.append("<div class='more'>") //
 				.append(link.label) //
 				.append(" links: ") //
@@ -2858,7 +2893,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	protected Map<ILexFile, Collection<IWord>> hierarchize(@NonNull final List<IWordID> senseIds)
 	{
-		final Map<ILexFile, Collection<IWord>> map = new TreeMap<>(lexFileComparator);
+		@NonNull final Map<ILexFile, Collection<IWord>> map = new TreeMap<>(lexFileComparator);
 		for (final IWordID senseId : senseIds)
 		{
 			// sense
@@ -2868,7 +2903,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			final ILexFile category = sense.getSenseKey().getLexicalFile();
 
 			// map entry
-			Collection<IWord> senses = map.computeIfAbsent(category, k -> new ArrayList<>());
+			@NonNull Collection<IWord> senses = map.computeIfAbsent(category, k -> new ArrayList<>());
 			senses.add(sense);
 		}
 		return map;
@@ -2897,9 +2932,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	static protected String links(@NonNull final Set<IPointer> pointers)
 	{
-		final StringBuilder sb = new StringBuilder();
+		@NonNull final StringBuilder sb = new StringBuilder();
 		boolean first = true;
-		for (final IPointer pointer : pointers)
+		for (@NonNull final IPointer pointer : pointers)
 		{
 			if (first)
 			{
@@ -2950,9 +2985,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	static protected String members(@NonNull final ISynset synset, final String separator)
 	{
-		final StringBuilder sb = new StringBuilder();
+		@NonNull final StringBuilder sb = new StringBuilder();
 		boolean first = true;
-		for (final IWord word : synset.getWords())
+		for (@NonNull final IWord word : synset.getWords())
 		{
 			if (first)
 			{
@@ -3019,9 +3054,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	static protected String membersToString(@NonNull final Synset synset)
 	{
-		final StringBuilder sb = new StringBuilder("{");
+		@NonNull final StringBuilder sb = new StringBuilder("{");
 		boolean first = true;
-		for (final IWord word : synset.synset.getWords())
+		for (@NonNull final IWord word : synset.synset.getWords())
 		{
 			if (first)
 			{
@@ -3046,9 +3081,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	static protected String membersAsLines(@NonNull final Synset synset)
 	{
-		final StringBuilder sb = new StringBuilder();
+		@NonNull final StringBuilder sb = new StringBuilder();
 		boolean first = true;
-		for (final IWord word : synset.synset.getWords())
+		for (@NonNull final IWord word : synset.synset.getWords())
 		{
 			if (first)
 			{
@@ -3074,7 +3109,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	{
 		final List<IWord> words = synset.synset.getWords();
 		final int n = words.size();
-		final String[] members = new String[n];
+		@NonNull final String[] members = new String[n];
 
 		for (int i = 0; i < n; i++)
 		{
@@ -3115,12 +3150,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	@NonNull
 	static protected String glossContent(@NonNull final Gloss gloss)
 	{
-		final StringBuilder sb = new StringBuilder();
+		@NonNull final StringBuilder sb = new StringBuilder();
 		sb.append("<div class='definition'>");
 		sb.append(gloss.getDefinition());
 		sb.append("</div>");
 
-		final String[] samples = gloss.getSamples();
+		@NonNull final String[] samples = gloss.getSamples();
 		if (samples.length > 0)
 		{
 			for (final String sample : gloss.getSamples())
@@ -3153,7 +3188,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			return str0;
 		}
 
-		final StringBuilder sb = new StringBuilder(str0);
+		@NonNull final StringBuilder sb = new StringBuilder(str0);
 		sb.setLength(BaseProvider.MAXCHARS);
 		final int lastComma = sb.lastIndexOf(",");
 		if (lastComma != -1)

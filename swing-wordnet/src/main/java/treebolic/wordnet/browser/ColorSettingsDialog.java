@@ -5,6 +5,8 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Settings dialog
  *
@@ -30,9 +32,9 @@ public class ColorSettingsDialog extends SettingsDialog
 	 */
 	static public void main(final String[] args)
 	{
-		final Properties settings = new Properties();
+		@NonNull final Properties settings = new Properties();
 
-		final ColorSettingsDialog dialog = new ColorSettingsDialog(settings, null);
+		@NonNull final ColorSettingsDialog dialog = new ColorSettingsDialog(settings, null);
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);

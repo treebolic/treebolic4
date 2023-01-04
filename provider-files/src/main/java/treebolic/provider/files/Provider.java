@@ -44,6 +44,7 @@ public class Provider implements IProvider, ImageDecorator
 	 *
 	 * @return node id
 	 */
+	@NonNull
 	static public String makeNodeId()
 	{
 		return "X" + Long.toHexString(Provider.RANDOMIZER.nextLong());
@@ -158,11 +159,13 @@ public class Provider implements IProvider, ImageDecorator
 	/**
 	 * LoadBalancer : back color
 	 */
+	@Nullable
 	static private final Integer LOADBALANCING_BACKCOLOR = null;
 
 	/**
 	 * LoadBalancer : fore color
 	 */
+	@Nullable
 	static private final Integer LOADBALANCING_FORECOLOR = null;
 
 	/**
@@ -188,6 +191,7 @@ public class Provider implements IProvider, ImageDecorator
 	/**
 	 * Load balancer
 	 */
+	@NonNull
 	@SuppressWarnings("WeakerAccess")
 	protected final LoadBalancer loadBalancer;
 
@@ -221,16 +225,16 @@ public class Provider implements IProvider, ImageDecorator
 	@Override
 	public Model makeModel(final String source, final URL base, final Properties parameters)
 	{
-		final Tree tree = makeTree(source, base, parameters, false);
+		@Nullable final Tree tree = makeTree(source, base, parameters, false);
 		if (tree == null)
 		{
 			return null;
 		}
 
 		// settings
-		final List<INode> children = tree.getRoot().getChildren();
+		@Nullable final List<INode> children = tree.getRoot().getChildren();
 		final boolean asTree = children == null || children.size() < 6;
-		final Settings settings = new Settings();
+		@NonNull final Settings settings = new Settings();
 		settings.backColor = Provider.BACK_COLOR;
 		settings.nodeBackColor = Provider.FILE_BACKCOLOR;
 		settings.nodeForeColor = Provider.FILE_FORECOLOR;
@@ -256,7 +260,7 @@ public class Provider implements IProvider, ImageDecorator
 	 * @see treebolic.provider.IProvider#makeTree(java.lang.String, java.net.URL, java.util.Properties, boolean)
 	 */
 	@Override
-	public Tree makeTree(final String source0, final URL base, final Properties parameters, final boolean checkRecursion)
+	public Tree makeTree(final String source0, final URL base, @Nullable final Properties parameters, final boolean checkRecursion)
 	{
 		String source = source0;
 		if (source == null)
@@ -271,7 +275,7 @@ public class Provider implements IProvider, ImageDecorator
 		// try url syntax
 		try
 		{
-			final URL url = new URL(source);
+			@NonNull final URL url = new URL(source);
 			final String protocol = url.getProtocol();
 			if ("file".equals(protocol))
 			{
@@ -286,7 +290,7 @@ public class Provider implements IProvider, ImageDecorator
 		// try uri syntax
 		try
 		{
-			final URI uri = new URI(source);
+			@NonNull final URI uri = new URI(source);
 			final String scheme = uri.getScheme();
 			if ("directory".equals(scheme))
 			{
@@ -299,7 +303,7 @@ public class Provider implements IProvider, ImageDecorator
 		}
 
 		// root
-		final File dir = new File(source);
+		@NonNull final File dir = new File(source);
 		if (!dir.exists())
 		{
 			this.context.warn("Can't get root : " + dir.getName() + " does not exist.");  
@@ -312,7 +316,7 @@ public class Provider implements IProvider, ImageDecorator
 		}
 
 		// graph
-		final INode rootNode = makeNode(dir, true);
+		@NonNull final INode rootNode = makeNode(dir, true);
 		return new Tree(rootNode, null);
 	}
 
@@ -325,14 +329,15 @@ public class Provider implements IProvider, ImageDecorator
 	 * @param isRoot whether this file is root
 	 * @return node
 	 */
-	public INode makeNode(final File file, boolean isRoot)
+	@NonNull
+	public INode makeNode(@NonNull final File file, boolean isRoot)
 	{
-		final TreeMutableNode node = new TreeMutableNode(null, Provider.makeNodeId());
+		@NonNull final TreeMutableNode node = new TreeMutableNode(null, Provider.makeNodeId());
 
-		final String name = file.getName();
+		@NonNull final String name = file.getName();
 		node.setLabel(name);
 		node.setTarget(name);
-		final StringBuilder sb = new StringBuilder();
+		@NonNull final StringBuilder sb = new StringBuilder();
 
 		if (file.isDirectory())
 		{
@@ -344,14 +349,14 @@ public class Provider implements IProvider, ImageDecorator
 			setNodeImage(node, isRoot ? ImageIndex.ROOT.ordinal() : ImageIndex.FOLDER.ordinal());
 
 			// recurse
-			final String[] subFiles = file.list();
+			@Nullable final String[] subFiles = file.list();
 			if (subFiles != null)
 			{
-				final List<INode> childNodes = makeChildNodes(file, subFiles);
+				@NonNull final List<INode> childNodes = makeChildNodes(file, subFiles);
 				sb.append(subFiles.length).append(" elements<br>"); // 
 
 				// balance load
-				final List<INode> balancedNodes = this.loadBalancer.buildHierarchy(childNodes, 0);
+				@Nullable final List<INode> balancedNodes = this.loadBalancer.buildHierarchy(childNodes, 0);
 				node.addChildren(balancedNodes);
 			}
 
@@ -384,13 +389,14 @@ public class Provider implements IProvider, ImageDecorator
 	 * @param subFiles subfiles
 	 * @return nodes
 	 */
-	public List<INode> makeChildNodes(final File dir, final String[] subFiles)
+	@NonNull
+	public List<INode> makeChildNodes(@NonNull final File dir, @NonNull final String[] subFiles)
 	{
-		final List<INode> childNodes = new ArrayList<>();
+		@NonNull final List<INode> childNodes = new ArrayList<>();
 		for (final String subFile : subFiles)
 		{
-			final File child = new File(dir.getPath() + File.separator + subFile);
-			final INode childNode = makeNode(child, false);
+			@NonNull final File child = new File(dir.getPath() + File.separator + subFile);
+			@NonNull final INode childNode = makeNode(child, false);
 			childNodes.add(childNode);
 		}
 		return childNodes;

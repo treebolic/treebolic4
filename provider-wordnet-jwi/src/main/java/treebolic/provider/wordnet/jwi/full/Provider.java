@@ -32,7 +32,7 @@ public class Provider extends BaseProvider implements IProvider
 	@Override
 	protected Settings makeSettings(int childrenCount)
 	{
-		final Settings settings = super.makeSettings(childrenCount, 3);
+		@NonNull final Settings settings = super.makeSettings(childrenCount, 3);
 		settings.sweep = 1.F;
 		settings.expansion = 1.F;
 		return settings;

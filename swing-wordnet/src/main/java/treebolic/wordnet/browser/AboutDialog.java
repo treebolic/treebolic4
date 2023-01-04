@@ -15,6 +15,7 @@ import java.util.Properties;
 import javax.swing.*;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.commons.HyperlinkButton;
 import treebolic.commons.Laf;
 import treebolic.commons.Persist;
@@ -44,37 +45,37 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 	@Override
 	protected JPanel initialize(final String product, final String version, final boolean sysInfo)
 	{
-		final JPanel panel = super.initialize(product, version, sysInfo);
+		@NonNull final JPanel panel = super.initialize(product, version, sysInfo);
 
 		// WordNet
-		final URL imageUrl = AboutDialog.class.getResource("images/wordnet.png");
+		@Nullable final URL imageUrl = AboutDialog.class.getResource("images/wordnet.png");
 		assert imageUrl != null;
-		final JLabel image = new JLabel(new ImageIcon(imageUrl));
-		final HyperlinkButton wordNetButton = "oewn".equals(this.dataVersion) ?
+		@NonNull final JLabel image = new JLabel(new ImageIcon(imageUrl));
+		@NonNull final HyperlinkButton wordNetButton = "oewn".equals(this.dataVersion) ?
 				new HyperlinkButton(HyperlinkButton.makeURILabel("WordNet® 3.1"), "http://wordnet.princeton.edu") :
 				new HyperlinkButton(HyperlinkButton.makeURILabel("Open English WordNet®"), "https://github.com/globalwordnet/english-wordnet");
-		final JLabel wordNetLabel = new JLabel("WordNet lexical database for English");
+		@NonNull final JLabel wordNetLabel = new JLabel("WordNet lexical database for English");
 
 		// JWI
-		final HyperlinkButton jWIButton = new HyperlinkButton(HyperlinkButton.makeURILabel("JWI"), "http://projects.csail.mit.edu/jwi");//$NON-NLS-2$
-		final JLabel jWILabel = new JLabel("Java WordNet Interface");
+		@NonNull final HyperlinkButton jWIButton = new HyperlinkButton(HyperlinkButton.makeURILabel("JWI"), "http://projects.csail.mit.edu/jwi");//$NON-NLS-2$
+		@NonNull final JLabel jWILabel = new JLabel("Java WordNet Interface");
 
 		// TWN
-		final HyperlinkButton tWButton = new HyperlinkButton(HyperlinkButton.makeURILabel("Treebolic WordNet"), "http://treebolicwordnet.sourceforge.net");//$NON-NLS-2$
+		@NonNull final HyperlinkButton tWButton = new HyperlinkButton(HyperlinkButton.makeURILabel("Treebolic WordNet"), "http://treebolicwordnet.sourceforge.net");//$NON-NLS-2$
 
 		// Android
-		final URL androidImageUrl = AboutDialog.class.getResource("images/android.png");
+		@Nullable final URL androidImageUrl = AboutDialog.class.getResource("images/android.png");
 		assert androidImageUrl != null;
-		final JLabel androidImage = new JLabel("<HTML><FONT color=\"#808080\">" + Messages.getString("AboutDialog.also") + "</FONT><B>Android</B></FONT></HTML>", new ImageIcon(androidImageUrl), SwingConstants.CENTER);
+		@NonNull final JLabel androidImage = new JLabel("<HTML><FONT color=\"#808080\">" + Messages.getString("AboutDialog.also") + "</FONT><B>Android</B></FONT></HTML>", new ImageIcon(androidImageUrl), SwingConstants.CENTER);
 		androidImage.setHorizontalTextPosition(SwingConstants.CENTER);
 		androidImage.setVerticalTextPosition(SwingConstants.BOTTOM);
 
 		// Google Play
-		final String googlePlayUri = "https://play.google.com/store/apps/details?id=org.treebolic.wordnet.browser";
-		final URL googlePlayIconUrl = AboutDialog.class.getResource("images/google-play.png");
+		@NonNull final String googlePlayUri = "https://play.google.com/store/apps/details?id=org.treebolic.wordnet.browser";
+		@Nullable final URL googlePlayIconUrl = AboutDialog.class.getResource("images/google-play.png");
 		assert googlePlayIconUrl != null;
-		final Icon googlePlayIcon = new ImageIcon(googlePlayIconUrl);
-		final HyperlinkButton googlePlayButton = new HyperlinkButton(googlePlayIcon, googlePlayUri);
+		@NonNull final Icon googlePlayIcon = new ImageIcon(googlePlayIconUrl);
+		@NonNull final HyperlinkButton googlePlayButton = new HyperlinkButton(googlePlayIcon, googlePlayUri);
 
 		panel.add(image, new GridBagConstraints(0, 30, 1, 1, 0., 0., GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(10, 10, 10, 10), 0, 0));
 		panel.add(wordNetButton, new GridBagConstraints(0, 31, 1, 1, 0., 0., GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 10, 0, 10), 0, 0));
@@ -94,11 +95,11 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 	 *
 	 * @param args program arguments
 	 */
-	static public void main(final String[] args)
+	static public void main(@NonNull final String[] args)
 	{
 		Laf.lookAndFeel(args);
-		final Properties settings = treebolic.browser2.MainFrame.makeSettings(Persist.loadSettings(MainFrame.getStaticPersistName()), args);
-		final AboutDialog dialog = new AboutDialog(settings.getProperty("data", null));
+		@NonNull final Properties settings = treebolic.browser2.MainFrame.makeSettings(Persist.loadSettings(MainFrame.getStaticPersistName()), args);
+		@NonNull final AboutDialog dialog = new AboutDialog(settings.getProperty("data", null));
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

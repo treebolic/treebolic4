@@ -19,6 +19,8 @@
 
 package org.graphviz;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Error helper class to create nicer lexer/parser messages
  *
@@ -49,6 +51,7 @@ public class GraphvizTokenMgrError
 	 *        The column of the line where the error occurred
 	 * @return a new TokenMgrError
 	 */
+	@NonNull
 	public static TokenMgrError create(final int code, final int line, final int col)
 	{
 		switch (code)
@@ -62,21 +65,24 @@ public class GraphvizTokenMgrError
 		}
 	}
 
+	@NonNull
 	private static TokenMgrError createDirectedEdgeError(final int line, final int col)
 	{
-		final String msg = "A directed edge is not allowed in an undirected graph. Use an \"--\" instead \"->\".";
+		@NonNull final String msg = "A directed edge is not allowed in an undirected graph. Use an \"--\" instead \"->\".";
 		return GraphvizTokenMgrError.createError(msg, line, col);
 	}
 
+	@NonNull
 	private static TokenMgrError createUndirectedEdgeError(final int line, final int col)
 	{
-		final String msg = "A undirected edge is not allowed in a directed graph. Use an \"->\" instead \"--\".";
+		@NonNull final String msg = "A undirected edge is not allowed in a directed graph. Use an \"->\" instead \"--\".";
 		return GraphvizTokenMgrError.createError(msg, line, col);
 	}
 
+	@NonNull
 	private static TokenMgrError createError(final String msg, final int line, final int col)
 	{
-		String sb = msg + " Error at Line " + line + ", Column " + col;
+		@NonNull String sb = msg + " Error at Line " + line + ", Column " + col;
 		return new TokenMgrError(sb, TokenMgrError.LEXICAL_ERROR);
 	}
 

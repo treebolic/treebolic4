@@ -84,6 +84,7 @@ public class Context implements IContext
 		this.widget = widget;
 	}
 
+	@Nullable
 	@Override
 	public URL getBase()
 	{
@@ -139,6 +140,7 @@ public class Context implements IContext
 		return defaultBase;
 	}
 
+	@Nullable
 	@Override
 	public URL getImagesBase()
 	{
@@ -231,12 +233,14 @@ public class Context implements IContext
 		return defaultUrl;
 	}
 
+	@Nullable
 	@Override
 	public Properties getParameters()
 	{
 		return this.browser.getParameters();
 	}
 
+	@Nullable
 	@Override
 	public String getStyle()
 	{

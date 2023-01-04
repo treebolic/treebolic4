@@ -11,6 +11,9 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Stack;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * The parser creates a list of Graph objects found in a Reader object.
  *
@@ -39,6 +42,7 @@ public class Parser implements ParserConstants
 	 *
 	 * @return the list of main Graphs
 	 */
+	@NonNull
 	public ArrayList<Graph> getGraphs()
 	{
 		return this.graphGeneralList;
@@ -51,12 +55,12 @@ public class Parser implements ParserConstants
 	 * @return normally true should be returned, if false then something in the JDK is broken...
 	 * @throws ParseException parse exception
 	 */
-	public boolean parse(final Reader in) throws ParseException
+	public boolean parse(@NonNull final Reader in) throws ParseException
 	{
 		// The Art of Unix Programming: If in doubt, use brute force!
 		// Throw away line endings and spaces at the end of the file
 		// that could be more effective the extending the grammar
-		final StringBuffer sb = new StringBuffer();
+		@NonNull final StringBuffer sb = new StringBuffer();
 		int i;
 		try
 		{
@@ -82,12 +86,12 @@ public class Parser implements ParserConstants
 	 * @throws ParseException parse exception
 	 */
 	@SuppressWarnings("SameReturnValue")
-	public boolean parse(final StringBuffer sb) throws ParseException
+	public boolean parse(@NonNull final StringBuffer sb) throws ParseException
 	{
-		final String is = sb.toString().trim();
-		final StringReader ins = new StringReader(is);
+		@NonNull final String is = sb.toString().trim();
+		@NonNull final StringReader ins = new StringReader(is);
 
-		final Parser p = new Parser(ins);
+		@NonNull final Parser p = new Parser(ins);
 		p.graphs(this.graphGeneralList);
 		return true;
 	}
@@ -100,9 +104,10 @@ public class Parser implements ParserConstants
 	 * @param label the Label of the node
 	 * @return a Node object
 	 */
-	protected Node createNode(final Graph g, final String id, final String label)
+	@NonNull
+	protected Node createNode(@NonNull final Graph g, final String id, final String label)
 	{
-		final Id nid = new Id();
+		@NonNull final Id nid = new Id();
 		nid.setId(id);
 		nid.setLabel(label);
 		Node n;
@@ -150,7 +155,7 @@ public class Parser implements ParserConstants
 	 * @param g  the graph
 	 * @param ht the Hashtable containing the attributes
 	 */
-	protected void addAttributes(final Graph g, final Hashtable<String, String> ht)
+	protected void addAttributes(@NonNull final Graph g, @NonNull final Hashtable<String, String> ht)
 	{
 		final Enumeration<String> e = ht.keys();
 		String key;
@@ -167,7 +172,7 @@ public class Parser implements ParserConstants
 	 * @param edge the edge object
 	 * @param ht   the Hashtable containing the attributes
 	 */
-	protected void addAttributes(final Edge edge, final Hashtable<String, String> ht)
+	protected void addAttributes(@NonNull final Edge edge, @NonNull final Hashtable<String, String> ht)
 	{
 		final Enumeration<String> e = ht.keys();
 		String key;
@@ -184,7 +189,7 @@ public class Parser implements ParserConstants
 	 * @param n  the Node object
 	 * @param ht the Hashtable containing the attributes
 	 */
-	protected void addAttributes(final Node n, final Hashtable<String, String> ht)
+	protected void addAttributes(@NonNull final Node n, @NonNull final Hashtable<String, String> ht)
 	{
 		final Enumeration<String> e = ht.keys();
 		String key;
@@ -201,7 +206,7 @@ public class Parser implements ParserConstants
 	 * @param gglist list
 	 * @throws ParseException parse exception
 	 */
-	final public void graphs(final ArrayList<Graph> gglist) throws ParseException
+	final public void graphs(@NonNull final ArrayList<Graph> gglist) throws ParseException
 	{
 		switch (this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk)
 		{
@@ -244,10 +249,10 @@ public class Parser implements ParserConstants
 	 * @param gglist list
 	 * @throws ParseException parse exception
 	 */
-	final public void graph(final ArrayList<Graph> gglist) throws ParseException
+	final public void graph(@NonNull final ArrayList<Graph> gglist) throws ParseException
 	{
-		final Graph g = new Graph();
-		Token st = null;
+		@NonNull final Graph g = new Graph();
+		@Nullable Token st = null;
 		Id id;
 		this.graphs.push(g);
 		switch (this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk)
@@ -558,13 +563,13 @@ public class Parser implements ParserConstants
 	 */
 	final public void edge() throws ParseException
 	{
-		ArrayList<PortNode> sources = new ArrayList<>();
-		ArrayList<PortNode> targets = new ArrayList<>();
+		@NonNull ArrayList<PortNode> sources = new ArrayList<>();
+		@NonNull ArrayList<PortNode> targets = new ArrayList<>();
 		Node n;
 		PortNode pn;
 		ArrayList<Node> nl;
-		Hashtable<String, String> ht = null;
-		final ArrayList<Edge> el = new ArrayList<>();
+		@Nullable Hashtable<String, String> ht = null;
+		@NonNull final ArrayList<Edge> el = new ArrayList<>();
 		final Graph g = this.graphs.peek();
 		if (jj_2_7(2147483647))
 		{
@@ -735,7 +740,7 @@ public class Parser implements ParserConstants
 		{
 			this.jj_la1[34] = this.jj_gen;
 		}
-		for (final Edge e : el)
+		for (@NonNull final Edge e : el)
 		{
 			if (ht != null)
 			{
@@ -778,9 +783,10 @@ public class Parser implements ParserConstants
 	 * @return list of nodes
 	 * @throws ParseException parse exception
 	 */
+	@NonNull
 	final public ArrayList<Node> matrix() throws ParseException
 	{
-		final ArrayList<Node> nl = new ArrayList<>();
+		@NonNull final ArrayList<Node> nl = new ArrayList<>();
 		Node n;
 		jj_consume_token(ParserConstants.LBRACE);
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == SPACE)
@@ -843,7 +849,7 @@ public class Parser implements ParserConstants
 	final public void generic_attributes() throws ParseException
 	{
 		final Graph g = this.graphs.peek();
-		Hashtable<String, String> ht = null;
+		@Nullable Hashtable<String, String> ht = null;
 		Enumeration<String> e;
 		String key;
 		switch (this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk)
@@ -963,10 +969,11 @@ public class Parser implements ParserConstants
 	 * @return node
 	 * @throws ParseException parse exception
 	 */
+	@NonNull
 	final public Node subgraph() throws ParseException
 	{
-		Id id = null;
-		final Graph g = new Graph();
+		@Nullable Id id = null;
+		@NonNull final Graph g = new Graph();
 		final Graph parent = this.graphs.peek();
 		this.graphs.push(g);
 		g.setType(parent.getType());
@@ -1083,7 +1090,7 @@ public class Parser implements ParserConstants
 		}
 		this.graphs.pop();
 		parent.addSubgraph(g);
-		final Node n = createNode(parent, g.getId().getId(), g.getId().getLabel());
+		@NonNull final Node n = createNode(parent, g.getId().getId(), g.getId().getLabel());
 		n.representsSubgraph(true);
 		return n;
 	}
@@ -1209,10 +1216,11 @@ public class Parser implements ParserConstants
 	 * @return node port
 	 * @throws ParseException parse exception
 	 */
+	@NonNull
 	final public PortNode node_port() throws ParseException
 	{
 		Node n;
-		Id port = null;
+		@Nullable Id port = null;
 		n = node();
 		if ((this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk) == DOUBLE)
 		{
@@ -1223,7 +1231,7 @@ public class Parser implements ParserConstants
 		{
 			this.jj_la1[72] = this.jj_gen;
 		}
-		final PortNode pn = new PortNode();
+		@NonNull final PortNode pn = new PortNode();
 		pn.setNode(n);
 		if (port != null)
 		{
@@ -1247,7 +1255,7 @@ public class Parser implements ParserConstants
 	final public void node_listing() throws ParseException
 	{
 		Node n;
-		final ArrayList<Node> nl = new ArrayList<>();
+		@NonNull final ArrayList<Node> nl = new ArrayList<>();
 		Hashtable<String, String> ht;
 		n = node();
 		nl.add(n);
@@ -1328,9 +1336,10 @@ public class Parser implements ParserConstants
 	 * @return attribute hash table
 	 * @throws ParseException parse exception
 	 */
+	@NonNull
 	final public Hashtable<String, String> attribute_list() throws ParseException
 	{
-		final Hashtable<String, String> ht = new Hashtable<>();
+		@NonNull final Hashtable<String, String> ht = new Hashtable<>();
 		String[] kv;
 		jj_consume_token(ParserConstants.LBRACKET);
 		label_36:
@@ -1404,10 +1413,11 @@ public class Parser implements ParserConstants
 	 * @return attribute array
 	 * @throws ParseException parse exception
 	 */
+	@NonNull
 	final public String[] attribute() throws ParseException
 	{
 		Token id;
-		final String[] kv = new String[2];
+		@NonNull final String[] kv = new String[2];
 		kv[0] = "";
 		kv[1] = "";
 		id = jj_consume_token(ParserConstants.ID);
@@ -1555,11 +1565,12 @@ public class Parser implements ParserConstants
 	 * @return id
 	 * @throws ParseException parse exception
 	 */
+	@NonNull
 	final public Id id() throws ParseException
 	{
 		Token id;
 		Token text;
-		final Id i = new Id();
+		@NonNull final Id i = new Id();
 		switch (this.jj_ntk == -1 ? jj_ntk() : this.jj_ntk)
 		{
 			case ID:
@@ -3420,6 +3431,7 @@ public class Parser implements ParserConstants
 		}
 	}
 
+	@NonNull
 	private Token jj_consume_token(final int kind) throws ParseException
 	{
 		Token oldToken;
@@ -3628,10 +3640,11 @@ public class Parser implements ParserConstants
 	 *
 	 * @return parse exception
 	 */
+	@NonNull
 	public ParseException generateParseException()
 	{
 		this.jj_expentries.clear();
-		final boolean[] la1tokens = new boolean[30];
+		@NonNull final boolean[] la1tokens = new boolean[30];
 		if (this.jj_kind >= 0)
 		{
 			la1tokens[this.jj_kind] = true;
@@ -3662,7 +3675,7 @@ public class Parser implements ParserConstants
 		this.jj_endpos = 0;
 		jj_rescan_token();
 		jj_add_error_token(0, 0);
-		final int[][] exptokseq = new int[this.jj_expentries.size()][];
+		@NonNull final int[][] exptokseq = new int[this.jj_expentries.size()][];
 		for (int i = 0; i < this.jj_expentries.size(); i++)
 		{
 			exptokseq[i] = this.jj_expentries.get(i);
@@ -3756,6 +3769,7 @@ public class Parser implements ParserConstants
 	{
 		int gen;
 
+		@Nullable
 		Token first;
 
 		int arg;

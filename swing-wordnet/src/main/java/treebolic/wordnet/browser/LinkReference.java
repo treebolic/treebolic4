@@ -10,6 +10,8 @@
 
 package treebolic.wordnet.browser;
 
+import treebolic.annotations.NonNull;
+
 /**
  * @author Bernard Bou
  */
@@ -68,7 +70,7 @@ public enum LinkReference
 	 * Get label
 	 * @return label
 	 */
-	public String getLabel()
+	@NonNull public String getLabel()
 	{
 		return Messages.getString("LinkReference." + this.name().toLowerCase());
 	}
@@ -89,11 +91,11 @@ public enum LinkReference
 	 * @param refs link references
 	 * @return array of labels
 	 */
-	public static String[] getLabels(final LinkReference... refs)
+	@NonNull public static String[] getLabels(@NonNull final LinkReference... refs)
 	{
-		String[] strings = new String[refs.length];
+		@NonNull String[] strings = new String[refs.length];
 		int i = 0;
-		for (LinkReference ref : refs)
+		for (@NonNull LinkReference ref : refs)
 		{
 			strings[i] = ref.getLabel();
 			i++;
@@ -129,7 +131,7 @@ public enum LinkReference
 	static public long all()
 	{
 		long m = 0;
-		for (final LinkReference r : LinkReference.values())
+		for (@NonNull final LinkReference r : LinkReference.values())
 		{
 			m |= r.mask();
 		}

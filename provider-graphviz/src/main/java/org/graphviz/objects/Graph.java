@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * This class represents a graph. A Graph contains Nodes, Edges and Subgraphs
  *
@@ -46,6 +49,7 @@ public class Graph
 	/**
 	 * Identifier object for the graph
 	 */
+	@Nullable
 	private Id id = null;
 
 	/**
@@ -244,7 +248,7 @@ public class Graph
 	{
 		if (this.graphs.size() != 0)
 		{
-			for (Graph graph : this.graphs)
+			for (@NonNull Graph graph : this.graphs)
 			{
 				graph.setType(type);
 			}
@@ -277,10 +281,11 @@ public class Graph
 	 *
 	 * @return the string representation
 	 */
+	@NonNull
 	@Override
 	public String toString()
 	{
-		final StringBuilder r = new StringBuilder();
+		@NonNull final StringBuilder r = new StringBuilder();
 		if (isStrict())
 		{
 			r.append("strict ");
@@ -417,21 +422,21 @@ public class Graph
 		}
 		if (this.nodes.size() > 0)
 		{
-			for (Node node : this.nodes)
+			for (@NonNull Node node : this.nodes)
 			{
 				r.append(node.toString());
 			}
 		}
 		if (this.edges.size() > 0)
 		{
-			for (Edge edge : this.edges)
+			for (@NonNull Edge edge : this.edges)
 			{
 				r.append(edge.toString());
 			}
 		}
 		if (this.graphs.size() > 0)
 		{
-			for (Graph graph : this.graphs)
+			for (@NonNull Graph graph : this.graphs)
 			{
 				r.append(graph.toString());
 				r.append("\n");
@@ -450,6 +455,7 @@ public class Graph
 	 *
 	 * @return the subgraphs
 	 */
+	@NonNull
 	public ArrayList<Graph> getSubgraphs()
 	{
 		return this.graphs;
@@ -471,9 +477,10 @@ public class Graph
 	 * @param id the id object to identify the node
 	 * @return the node or null if not found
 	 */
-	public Node findNode(final Id id)
+	@Nullable
+	public Node findNode(@NonNull final Id id)
 	{
-		Node n;
+		@Nullable Node n;
 		Id nid;
 
 		for (Node node : this.nodes)
@@ -505,6 +512,7 @@ public class Graph
 	 * @param onlyGraph if true, also include nodes in subgraphs also, else exclude them
 	 * @return the nodes of the graph
 	 */
+	@NonNull
 	public ArrayList<Node> getNodes(final boolean onlyGraph)
 	{
 		if (onlyGraph)
@@ -513,7 +521,7 @@ public class Graph
 		}
 		else
 		{
-			final ArrayList<Node> n = new ArrayList<>(this.nodes);
+			@NonNull final ArrayList<Node> n = new ArrayList<>(this.nodes);
 			Graph g;
 			for (Graph graph : this.graphs)
 			{
@@ -529,6 +537,7 @@ public class Graph
 	 *
 	 * @return the attributes
 	 */
+	@NonNull
 	public Hashtable<String, String> getAttributes()
 	{
 		return this.attributes;
@@ -539,6 +548,7 @@ public class Graph
 	 *
 	 * @return a list of Edge objects
 	 */
+	@NonNull
 	public ArrayList<Edge> getEdges()
 	{
 		return this.edges;

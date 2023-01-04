@@ -747,7 +747,7 @@ public class Controller extends Commander
 		if (content != null && !content.isEmpty() && imageSrc != null && !imageSrc.isEmpty())
 		{
 			assert this.model != null;
-			String format = this.model.settings.contentFormat;
+			@Nullable String format = this.model.settings.contentFormat;
 			if (format == null)
 			{
 				format = "<table><tr><td valign='top'><img src='%s' width='64' height='64' style='width:64px;height:64px;'/></td><td>%s</td></tr></table>";
@@ -810,7 +810,7 @@ public class Controller extends Commander
 		{
 			if (content != null && content.length() > 0)
 			{
-				String content2 = content.toString();
+				@NonNull String content2 = content.toString();
 				if (ABSOLUTE_IMG_URLS)
 				{
 					content2 = absoluteImageSrcs(content2);

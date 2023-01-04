@@ -11,6 +11,7 @@ import java.net.URLDecoder;
 import java.util.Properties;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.fungi.Browser;
 
 /**
@@ -43,6 +44,7 @@ public class Context extends treebolic.application.Context
 	/**
 	 * Data directory url
 	 */
+	@Nullable
 	private URL dataDirUrl;
 
 	/**
@@ -54,7 +56,7 @@ public class Context extends treebolic.application.Context
 	 * @param imageBase   image base
 	 * @param listener    source modification listener
 	 */
-	public Context(final MainFrame application, final String source, final String base, final String imageBase, final SourceListener listener)
+	public Context(final MainFrame application, final String source, @NonNull final String base, final String imageBase, final SourceListener listener)
 	{
 		super(application, source, base, imageBase);
 		this.listener = listener;
@@ -82,6 +84,7 @@ public class Context extends treebolic.application.Context
 	 *
 	 * @return directory
 	 */
+	@NonNull
 	static public File makeDataLocation()
 	{
 		// base=parent(classes)/database
@@ -97,7 +100,7 @@ public class Context extends treebolic.application.Context
 		location = new File(location).getParent();
 
 		// dir
-		final File dir = new File(location, "database/");
+		@NonNull final File dir = new File(location, "database/");
 
 		// make
 		//noinspection ResultOfMethodCallIgnored
@@ -131,12 +134,12 @@ public class Context extends treebolic.application.Context
 	@Override
 	public Properties getParameters()
 	{
-		final Properties properties = super.getParameters();
+		@Nullable final Properties properties = super.getParameters();
 		assert properties != null;
-		URL edibleUrl = MainFrame.class.getResource("/database/edible.png");
-		URL goodUrl = MainFrame.class.getResource("/database/good.png");
-		URL poisonousUrl = MainFrame.class.getResource("/database/poisonous.png");
-		URL deadlyUrl = MainFrame.class.getResource("/database/deadly.png");
+		@Nullable URL edibleUrl = MainFrame.class.getResource("/database/edible.png");
+		@Nullable URL goodUrl = MainFrame.class.getResource("/database/good.png");
+		@Nullable URL poisonousUrl = MainFrame.class.getResource("/database/poisonous.png");
+		@Nullable URL deadlyUrl = MainFrame.class.getResource("/database/deadly.png");
 		assert edibleUrl != null;
 		assert goodUrl != null;
 		assert poisonousUrl != null;
@@ -156,7 +159,7 @@ public class Context extends treebolic.application.Context
 		// if url is handled by client, return query to client, which will handle it by initiating another query
 		if (linkUrl.startsWith(URL_SCHEME))
 		{
-			final String source2 = linkUrl.substring(URL_SCHEME.length());
+			@NonNull final String source2 = linkUrl.substring(URL_SCHEME.length());
 			requery(source2);
 			return true;
 		}
@@ -168,10 +171,10 @@ public class Context extends treebolic.application.Context
 	 *
 	 * @param source0 new source
 	 */
-	protected void requery(String source0)
+	protected void requery(@NonNull String source0)
 	{
-		final String[] fields0 = source0.split(",");
-		final String[] fields = this.source.split(",");
+		@NonNull final String[] fields0 = source0.split(",");
+		@NonNull final String[] fields = this.source.split(",");
 		this.source = fields[0] + ',' + (fields0.length > 1 ? fields0[1] : source0);
 		if (this.listener != null)
 		{

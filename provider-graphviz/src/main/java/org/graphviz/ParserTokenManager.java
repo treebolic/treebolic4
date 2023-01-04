@@ -4,6 +4,9 @@ package org.graphviz;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Token Manager.
  */
@@ -946,6 +949,7 @@ public class ParserTokenManager implements ParserConstants
 
 	private final StringBuilder jjimage = new StringBuilder();
 
+	@NonNull
 	private StringBuilder image = this.jjimage;
 
 	private int jjimageLen;
@@ -1030,9 +1034,10 @@ public class ParserTokenManager implements ParserConstants
 		}
 	}
 
+	@NonNull
 	protected Token jjFillToken()
 	{
-		final Token t;
+		@NonNull final Token t;
 		final String curTokenImage;
 		final int beginLine;
 		final int endLine;
@@ -1183,7 +1188,7 @@ public class ParserTokenManager implements ParserConstants
 				}
 				int error_line = this.input_stream.getEndLine();
 				int error_column = this.input_stream.getEndColumn();
-				String error_after = null;
+				@Nullable String error_after = null;
 				boolean EOFSeen = false;
 				try
 				{
@@ -1214,7 +1219,7 @@ public class ParserTokenManager implements ParserConstants
 		}
 	}
 
-	void TokenLexicalActions(final Token matchedToken)
+	void TokenLexicalActions(@NonNull final Token matchedToken)
 	{
 		switch (this.jjmatchedKind)
 		{

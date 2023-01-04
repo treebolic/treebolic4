@@ -19,6 +19,8 @@
 
 package org.graphviz.objects;
 
+import treebolic.annotations.NonNull;
+
 /**
  * This object is used to identify graphs and nodes Note, that an object may contain an id or a label.
  *
@@ -89,7 +91,7 @@ public class Id
 	 * @param eid id
 	 * @return true if both Ids are equal
 	 */
-	public boolean isEqual(final Id eid)
+	public boolean isEqual(@NonNull final Id eid)
 	{
 		if (eid == this)
 		{
@@ -121,6 +123,7 @@ public class Id
 	 *
 	 * @return the string representation
 	 */
+	@NonNull
 	@Override
 	public String toString()
 	{

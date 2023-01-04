@@ -14,6 +14,7 @@ import javax.swing.*;
 
 import treebolic.IWidget;
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.commons.Persist;
 import treebolic.control.Commander;
 import treebolic.fungi.browser.Context.SourceListener;
@@ -55,6 +56,7 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	/**
 	 * Current source
 	 */
+	@Nullable
 	private String source;
 
 	/**
@@ -176,6 +178,7 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	 *
 	 * @return default source
 	 */
+	@NonNull
 	protected String getDefaultSource()
 	{
 		if ("fr".equals(Locale.getDefault().getLanguage()))
@@ -195,6 +198,7 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 		return this.persistProperties;
 	}
 
+	@NonNull
 	@SuppressWarnings("SameReturnValue")
 	protected String getPersistName()
 	{
@@ -214,15 +218,15 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 
 	@NonNull
 	@Override
-	protected Context makeContext(final String source, final String base, final String imageBase)
+	protected Context makeContext(final String source, @Nullable final String base, final String imageBase)
 	{
-		File dir = base == null ? null : new File(base);
+		@Nullable File dir = base == null ? null : new File(base);
 		if (dir == null || !dir.exists())
 		{
 			dir = Context.makeDataLocation();
 		}
 
-		final Deployer deployer = new Deployer(dir);
+		@NonNull final Deployer deployer = new Deployer(dir);
 		if (!deployer.check())
 		{
 			deployer.expand();
@@ -241,7 +245,7 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	@Override
 	protected Properties makeParameters(String[] args)
 	{
-		Properties properties = super.makeParameters(args);
+		@Nullable Properties properties = super.makeParameters(args);
 		if (properties == null)
 		{
 			properties = new Properties();
@@ -268,26 +272,26 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	{
 		makeActions();
 
-		final JToolBar toolbar = new JToolBar();
+		@NonNull final JToolBar toolbar = new JToolBar();
 		toolbar.setFloatable(true);
 		toolbar.setPreferredSize(Constants.DIM_TOOLBAR);
 		toolbar.setLayout(new BoxLayout(toolbar, BoxLayout.X_AXIS));
 		toolbar.add(Box.createHorizontalStrut(16));
 
 		// set truncate
-		final JButton restartButton = makeButton(Messages.getString("MainFrame.update"), Messages.getString("MainFrame.update"), "images/update.png", this.restartAction);
+		@NonNull final JButton restartButton = makeButton(Messages.getString("MainFrame.update"), Messages.getString("MainFrame.update"), "images/update.png", this.restartAction);
 		toolbar.add(restartButton);
 
 		// set truncate
-		final JButton setTruncateButton = makeButton(Messages.getString("MainFrame.settruncate"), Messages.getString("MainFrame.settruncate"), "images/truncate.png", this.setTruncateAction);
+		@NonNull final JButton setTruncateButton = makeButton(Messages.getString("MainFrame.settruncate"), Messages.getString("MainFrame.settruncate"), "images/truncate.png", this.setTruncateAction);
 		toolbar.add(setTruncateButton);
 
 		// reset truncate
-		final JButton resetTruncateButton = makeButton(Messages.getString("MainFrame.resettruncate"), Messages.getString("MainFrame.resettruncate"), "images/tree.png", this.resetTruncateAction);
+		@NonNull final JButton resetTruncateButton = makeButton(Messages.getString("MainFrame.resettruncate"), Messages.getString("MainFrame.resettruncate"), "images/tree.png", this.resetTruncateAction);
 		toolbar.add(resetTruncateButton);
 
 		// set prune
-		final JButton pruneButton = makeButton(Messages.getString("MainFrame.setprune"), Messages.getString("MainFrame.setprune"), "images/prune.png", this.setPruneAction);
+		@NonNull final JButton pruneButton = makeButton(Messages.getString("MainFrame.setprune"), Messages.getString("MainFrame.setprune"), "images/prune.png", this.setPruneAction);
 		toolbar.add(pruneButton);
 
 		// search tool
@@ -315,18 +319,18 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 		toolbar.add(this.searchTool);
 
 		// menu
-		final JButton menuButton = new JButton();
+		@NonNull final JButton menuButton = new JButton();
 		menuButton.setToolTipText(Messages.getString("MainFrame.menutooltip"));
-		final URL menuIconUrl = MainFrame.class.getResource("images/menu.png");
+		@Nullable final URL menuIconUrl = MainFrame.class.getResource("images/menu.png");
 		assert menuIconUrl != null;
 		menuButton.setIcon(new ImageIcon(menuIconUrl));
 		menuButton.setComponentPopupMenu(makePopupMenu());
 		menuButton.addMouseListener(new MouseAdapter()
 		{
 			@Override
-			public void mousePressed(final MouseEvent e)
+			public void mousePressed(@NonNull final MouseEvent e)
 			{
-				final JPopupMenu popup = makePopupMenu();
+				@NonNull final JPopupMenu popup = makePopupMenu();
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
@@ -416,9 +420,10 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	 * @param listener  action listener
 	 * @return button
 	 */
-	private AbstractAction makeAction(final String tag, final KeyStroke keyStroke, final ActionListener listener)
+	@NonNull
+	private AbstractAction makeAction(final String tag, final KeyStroke keyStroke, @NonNull final ActionListener listener)
 	{
-		final AbstractAction action = new AbstractAction(tag)
+		@NonNull final AbstractAction action = new AbstractAction(tag)
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -440,12 +445,13 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	 * @param action  action
 	 * @return button
 	 */
-	private JButton makeButton(final String text, final String tooltip, final String image, final AbstractAction action)
+	@NonNull
+	private JButton makeButton(final String text, final String tooltip, @NonNull final String image, @NonNull final AbstractAction action)
 	{
-		final JButton button = new JButton(action); // new JButton(text);
+		@NonNull final JButton button = new JButton(action); // new JButton(text);
 		button.setText(text);
 		button.setToolTipText(tooltip);
-		URL iconUrl = MainFrame.class.getResource(image);
+		@Nullable URL iconUrl = MainFrame.class.getResource(image);
 		assert iconUrl != null;
 		button.setIcon(new ImageIcon(iconUrl));
 
@@ -462,91 +468,92 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	 *
 	 * @return popup
 	 */
+	@NonNull
 	protected JPopupMenu makePopupMenu()
 	{
 		makeActions();
 
 		// menu
-		final JPopupMenu menu = new JPopupMenu();
+		@NonNull final JPopupMenu menu = new JPopupMenu();
 		menu.setToolTipText(Messages.getString("MainFrame.menutooltip"));
 
 		// restart
-		final JMenuItem updateMenuItem = new JMenuItem(this.restartAction);
+		@NonNull final JMenuItem updateMenuItem = new JMenuItem(this.restartAction);
 		updateMenuItem.setText(Messages.getString("MainFrame.update"));
-		final URL updateIcon = treebolic.fungi.browser.MainFrame.class.getResource("images/update.png");
+		@Nullable final URL updateIcon = treebolic.fungi.browser.MainFrame.class.getResource("images/update.png");
 		assert updateIcon != null;
 		updateMenuItem.setIcon(new ImageIcon(updateIcon));
 		menu.add(updateMenuItem);
 
 		// source
-		final JMenuItem setSourceMenuItem = new JMenuItem(this.setSourceAction);
+		@NonNull final JMenuItem setSourceMenuItem = new JMenuItem(this.setSourceAction);
 		setSourceMenuItem.setText(Messages.getString("MainFrame.setsource"));
-		final URL setSourceIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/settings.png");
+		@Nullable final URL setSourceIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/settings.png");
 		assert setSourceIconUrl != null;
 		setSourceMenuItem.setIcon(new ImageIcon(setSourceIconUrl));
 		menu.add(setSourceMenuItem);
 
-		final JMenuItem sourceMenuItem = new JMenuItem(this.sourceAction);
+		@NonNull final JMenuItem sourceMenuItem = new JMenuItem(this.sourceAction);
 		sourceMenuItem.setText(Messages.getString("MainFrame.source"));
 		menu.add(sourceMenuItem);
 
 		// truncate
-		final JMenuItem setTruncateMenuItem = new JMenuItem(this.setTruncateAction);
+		@NonNull final JMenuItem setTruncateMenuItem = new JMenuItem(this.setTruncateAction);
 		setTruncateMenuItem.setText(Messages.getString("MainFrame.settruncate"));
-		final URL setTruncateIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/truncate.png");
+		@Nullable final URL setTruncateIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/truncate.png");
 		assert setTruncateIconUrl != null;
 		setTruncateMenuItem.setIcon(new ImageIcon(setTruncateIconUrl));
 		menu.add(setTruncateMenuItem);
 
-		final JMenuItem resetTruncateMenuItem = new JMenuItem(this.resetTruncateAction);
+		@NonNull final JMenuItem resetTruncateMenuItem = new JMenuItem(this.resetTruncateAction);
 		resetTruncateMenuItem.setAccelerator(KeyStroke.getKeyStroke('H', InputEvent.ALT_DOWN_MASK));
 		resetTruncateMenuItem.setText(Messages.getString("MainFrame.resettruncate"));
-		final URL resetTruncateIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/tree.png");
+		@Nullable final URL resetTruncateIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/tree.png");
 		assert resetTruncateIconUrl != null;
 		resetTruncateMenuItem.setIcon(new ImageIcon(resetTruncateIconUrl));
 		menu.add(resetTruncateMenuItem);
 
-		final JMenuItem truncateMenuItem = new JMenuItem(this.truncateAction);
+		@NonNull final JMenuItem truncateMenuItem = new JMenuItem(this.truncateAction);
 		truncateMenuItem.setText(Messages.getString("MainFrame.truncate"));
 		menu.add(truncateMenuItem);
 
 		// prune
-		final JMenuItem setPruneMenuItem = new JMenuItem(this.setPruneAction);
+		@NonNull final JMenuItem setPruneMenuItem = new JMenuItem(this.setPruneAction);
 		setPruneMenuItem.setText(Messages.getString("MainFrame.setprune"));
 		setPruneMenuItem.setAccelerator(KeyStroke.getKeyStroke('P', InputEvent.ALT_DOWN_MASK));
-		final URL pruneIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/prune.png");
+		@Nullable final URL pruneIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/prune.png");
 		assert pruneIconUrl != null;
 		setPruneMenuItem.setIcon(new ImageIcon(pruneIconUrl));
 		menu.add(setPruneMenuItem);
 
-		final JMenuItem pruneMenuItem = new JMenuItem(this.pruneAction);
+		@NonNull final JMenuItem pruneMenuItem = new JMenuItem(this.pruneAction);
 		pruneMenuItem.setText(Messages.getString("MainFrame.prune"));
 		menu.add(pruneMenuItem);
 
 		// settings
-		final JMenuItem colorsMenuItem = new JMenuItem();
+		@NonNull final JMenuItem colorsMenuItem = new JMenuItem();
 		colorsMenuItem.setAccelerator(KeyStroke.getKeyStroke('C', InputEvent.ALT_DOWN_MASK));
 		colorsMenuItem.setText(Messages.getString("MainFrame.colors"));
-		final URL colorsIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/palette.png");
+		@Nullable final URL colorsIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/palette.png");
 		assert colorsIconUrl != null;
 		colorsMenuItem.setIcon(new ImageIcon(colorsIconUrl));
 		colorsMenuItem.addActionListener(e -> colors());
 		menu.add(colorsMenuItem);
 
 		// font
-		final JMenuItem fontSizeItem = new JMenuItem();
+		@NonNull final JMenuItem fontSizeItem = new JMenuItem();
 		fontSizeItem.setAccelerator(KeyStroke.getKeyStroke('F', InputEvent.ALT_DOWN_MASK));
 		fontSizeItem.setText(Messages.getString("MainFrame.fontsize"));
-		final URL fontSizeIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/fontsize.png");
+		@Nullable final URL fontSizeIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/fontsize.png");
 		assert fontSizeIconUrl != null;
 		fontSizeItem.setIcon(new ImageIcon(fontSizeIconUrl));
 		fontSizeItem.addActionListener(e -> fontsize());
 		menu.add(fontSizeItem);
 
 		// about
-		final JMenuItem aboutItem = new JMenuItem();
+		@NonNull final JMenuItem aboutItem = new JMenuItem();
 		aboutItem.setText(Messages.getString("MainFrame.about"));
-		final URL aboutIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/about.png");
+		@Nullable final URL aboutIconUrl = treebolic.fungi.browser.MainFrame.class.getResource("images/about.png");
 		assert aboutIconUrl != null;
 		aboutItem.setIcon(new ImageIcon(aboutIconUrl));
 		aboutItem.addActionListener(e -> about());
@@ -586,8 +593,8 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	 */
 	protected void setSource()
 	{
-		final String value = getSource();
-		final SourceDialog dialog = new SourceDialog(value);
+		@Nullable final String value = getSource();
+		@NonNull final SourceDialog dialog = new SourceDialog(value);
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
@@ -657,12 +664,12 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	{
 		if (this.source != null)
 		{
-			final String[] fields = this.source.split(",");
+			@NonNull final String[] fields = this.source.split(",");
 			if (fields.length > 1)
 			{
 				if (fields[1].startsWith("where:"))
 				{
-					final String whereClause = fields[1].substring(6);
+					@NonNull final String whereClause = fields[1].substring(6);
 					MainFrame.this.getPersistParameters().setProperty(SqlProperties.TRUNCATE_NODES, whereClause);
 					MainFrame.this.getPersistParameters().setProperty(SqlProperties.TRUNCATE_TREEEDGES, whereClause);
 					Persist.saveSettings(MainFrame.this.getPersistName(), MainFrame.this.getPersistParameters());
@@ -688,7 +695,7 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	protected void setPrune()
 	{
 		final String value = getPrune();
-		final PruneDialog dialog = new PruneDialog(value);
+		@NonNull final PruneDialog dialog = new PruneDialog(value);
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
@@ -706,7 +713,7 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	 */
 	protected void fontsize()
 	{
-		final Integer fontSize = askRange(Messages.getString("MainFrame.fontsizeprompt"), MainFrame.this.getPersistParameters().getProperty("fontsize"), 12, 64);
+		@Nullable final Integer fontSize = askRange(Messages.getString("MainFrame.fontsizeprompt"), MainFrame.this.getPersistParameters().getProperty("fontsize"), 12, 64);
 		if (fontSize != null)
 		{
 			MainFrame.this.getPersistParameters().setProperty("fontsize", fontSize.toString());
@@ -719,7 +726,7 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	 */
 	protected void colors()
 	{
-		final ColorSettingsDialog dialog = new ColorSettingsDialog(getPersistParameters(), this);
+		@NonNull final ColorSettingsDialog dialog = new ColorSettingsDialog(getPersistParameters(), this);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -734,7 +741,7 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	 */
 	protected void about()
 	{
-		final JDialog dialog = new AboutDialog();
+		@NonNull final JDialog dialog = new AboutDialog();
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
@@ -749,9 +756,9 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	 * @param value   initial value
 	 * @return input
 	 */
-	protected String ask(final String message, final String value)
+	protected String ask(@NonNull final String message, final String value)
 	{
-		final String[] lines = message.split("\n");
+		@NonNull final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines, value);
 	}
 
@@ -764,10 +771,11 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	 * @param max      max
 	 * @return value
 	 */
-	protected Integer askRange(final String message0, final String value, @SuppressWarnings("SameParameterValue") final int min, @SuppressWarnings("SameParameterValue") final int max)
+	@Nullable
+	protected Integer askRange(@NonNull final String message0, final String value, @SuppressWarnings("SameParameterValue") final int min, @SuppressWarnings("SameParameterValue") final int max)
 	{
 		final String message = String.format(message0, min, max);
-		final String[] lines = message.split("\n");
+		@NonNull final String[] lines = message.split("\n");
 		final String string = JOptionPane.showInputDialog(null, lines, value);
 		try
 		{

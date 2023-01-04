@@ -15,6 +15,8 @@ import java.net.URL;
 import java.util.Hashtable;
 import java.util.List;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.model.Tree;
 import treebolic.model.*;
 import treebolic.model.graph.*;
@@ -32,11 +34,12 @@ public class GraphvizParser
 	 * @param url graphviz file url
 	 * @return model
 	 */
-	public static Model parseModel(final URL url)
+	@Nullable
+	public static Model parseModel(@NonNull final URL url)
 	{
-		try (InputStream is = url.openStream(); InputStreamReader reader = new InputStreamReader(is))
+		try (InputStream is = url.openStream(); @NonNull InputStreamReader reader = new InputStreamReader(is))
 		{
-			final Parser parser = new Parser();
+			@NonNull final Parser parser = new Parser();
 			if (parser.parse(reader))
 			{
 				final org.graphviz.objects.Graph graphvizGraph = parser.getGraphs().get(0);
@@ -57,11 +60,12 @@ public class GraphvizParser
 	 * @param location graphviz file location
 	 * @return model
 	 */
-	public static Model parseModel(final String location)
+	@Nullable
+	public static Model parseModel(@NonNull final String location)
 	{
-		try (InputStream is = new FileInputStream(location); InputStreamReader reader = new InputStreamReader(is))
+		try (@NonNull InputStream is = new FileInputStream(location); @NonNull InputStreamReader reader = new InputStreamReader(is))
 		{
-			final Parser parser = new Parser();
+			@NonNull final Parser parser = new Parser();
 			if (parser.parse(reader))
 			{
 				final org.graphviz.objects.Graph graphvizGraph = parser.getGraphs().get(0);
@@ -82,11 +86,12 @@ public class GraphvizParser
 	 * @param url graphviz file url
 	 * @return tree
 	 */
-	public static Tree parseTree(final URL url)
+	@Nullable
+	public static Tree parseTree(@NonNull final URL url)
 	{
-		try (InputStream is = url.openStream(); InputStreamReader reader = new InputStreamReader(is))
+		try (InputStream is = url.openStream(); @NonNull InputStreamReader reader = new InputStreamReader(is))
 		{
-			final Parser parser = new Parser();
+			@NonNull final Parser parser = new Parser();
 			parser.parse(reader);
 			if (parser.parse(reader))
 			{
@@ -108,11 +113,12 @@ public class GraphvizParser
 	 * @param location graphviz file location
 	 * @return tree
 	 */
-	public static Tree parseTree(final String location)
+	@Nullable
+	public static Tree parseTree(@NonNull final String location)
 	{
-		try (InputStream is = new FileInputStream(location); InputStreamReader reader = new InputStreamReader(is))
+		try (@NonNull InputStream is = new FileInputStream(location); @NonNull InputStreamReader reader = new InputStreamReader(is))
 		{
-			final Parser parser = new Parser();
+			@NonNull final Parser parser = new Parser();
 			parser.parse(reader);
 			if (parser.parse(reader))
 			{
@@ -134,10 +140,11 @@ public class GraphvizParser
 	 * @param graphvizGraph graph
 	 * @return model
 	 */
-	private static Model makeModel(final org.graphviz.objects.Graph graphvizGraph)
+	@NonNull
+	private static Model makeModel(@NonNull final org.graphviz.objects.Graph graphvizGraph)
 	{
-		final Tree tree = GraphvizParser.makeTree(graphvizGraph);
-		final Settings settings = GraphvizParser.makeSettings(graphvizGraph);
+		@NonNull final Tree tree = GraphvizParser.makeTree(graphvizGraph);
+		@NonNull final Settings settings = GraphvizParser.makeSettings(graphvizGraph);
 		return new Model(tree, settings);
 	}
 
@@ -147,14 +154,15 @@ public class GraphvizParser
 	 * @param graphvizGraph graphviz graph graph
 	 * @return tree
 	 */
-	private static Tree makeTree(final org.graphviz.objects.Graph graphvizGraph)
+	@NonNull
+	private static Tree makeTree(@NonNull final org.graphviz.objects.Graph graphvizGraph)
 	{
-		final Graph graph = GraphvizParser.parseGraph(graphvizGraph);
+		@NonNull final Graph graph = GraphvizParser.parseGraph(graphvizGraph);
 		// System.out.println(graph.toString());
 
 		// determine root node
-		GraphNode rootNode = null;
-		final List<GraphNode> graphRootNodes = graph.getNodesWithZeroDegree();
+		@Nullable GraphNode rootNode = null;
+		@Nullable final List<GraphNode> graphRootNodes = graph.getNodesWithZeroDegree();
 		if (graphRootNodes != null)
 		{
 			if (graphRootNodes.size() == 1)
@@ -196,26 +204,27 @@ public class GraphvizParser
 	 * @param graphvizGraph graphviz graph
 	 * @return graph
 	 */
-	private static Graph parseGraph(final org.graphviz.objects.Graph graphvizGraph)
+	@NonNull
+	private static Graph parseGraph(@NonNull final org.graphviz.objects.Graph graphvizGraph)
 	{
 		// treebolic graph
-		final MutableGraph graph = new MutableGraph();
+		@NonNull final MutableGraph graph = new MutableGraph();
 
 		// nodes
-		final Hashtable<String, MutableGraphNode> nodesById = new Hashtable<>();
-		for (final Node graphvizNode : graphvizGraph.getNodes(false))
+		@NonNull final Hashtable<String, MutableGraphNode> nodesById = new Hashtable<>();
+		for (@NonNull final Node graphvizNode : graphvizGraph.getNodes(false))
 		{
-			final String id = GraphvizParser.nodeId(graphvizNode);
+			@NonNull final String id = GraphvizParser.nodeId(graphvizNode);
 
 			// node
-			final MutableGraphNode node = new MutableGraphNode(id);
+			@NonNull final MutableGraphNode node = new MutableGraphNode(id);
 			nodesById.put(id, node);
 			graph.add(node);
 
 			// node attributes
 
 			// label
-			String attribute;
+			@Nullable String attribute;
 			attribute = GraphvizParser.nodeLabel(graphvizNode);
 			if (attribute != null && !attribute.isEmpty())
 			{
@@ -247,7 +256,7 @@ public class GraphvizParser
 			attribute = graphvizNode.getAttribute("mountpoint_href");
 			if (attribute != null)
 			{
-				final MountPoint.Mounting mountPoint = new MountPoint.Mounting();
+				@NonNull final MountPoint.Mounting mountPoint = new MountPoint.Mounting();
 				mountPoint.url = attribute;
 				node.setMountPoint(mountPoint);
 			}
@@ -266,15 +275,15 @@ public class GraphvizParser
 		}
 
 		// edges
-		for (final Edge graphvizEdge : graphvizGraph.getEdges())
+		for (@NonNull final Edge graphvizEdge : graphvizGraph.getEdges())
 		{
 			// get ends
 			final PortNode from = graphvizEdge.getSource();
 			final PortNode to = graphvizEdge.getTarget();
 
 			// get end ids
-			final String fromId = GraphvizParser.nodeId(from.getNode());
-			final String toId = GraphvizParser.nodeId(to.getNode());
+			@NonNull final String fromId = GraphvizParser.nodeId(from.getNode());
+			@NonNull final String toId = GraphvizParser.nodeId(to.getNode());
 
 			// get end nodes
 			final MutableGraphNode fromNode = nodesById.get(fromId);
@@ -293,7 +302,7 @@ public class GraphvizParser
 			String attribute;
 
 			// whether this edge is tree edge
-			Boolean isTreeEdge = null;
+			@Nullable Boolean isTreeEdge = null;
 			attribute = graphvizEdge.getAttribute("type");
 			if (attribute != null)
 			{
@@ -308,8 +317,8 @@ public class GraphvizParser
 			}
 
 			// create edge
-			final MutableEdge edge = new MutableEdge(fromNode, toNode);
-			final GraphEdge graphEdge = new GraphEdge(fromNode, toNode, isTreeEdge);
+			@NonNull final MutableEdge edge = new MutableEdge(fromNode, toNode);
+			@NonNull final GraphEdge graphEdge = new GraphEdge(fromNode, toNode, isTreeEdge);
 			graphEdge.setUserData(edge);
 			graph.add(graphEdge);
 
@@ -340,7 +349,8 @@ public class GraphvizParser
 	 * @param graphvizNode node
 	 * @return node id
 	 */
-	private static String nodeId(final Node graphvizNode)
+	@NonNull
+	private static String nodeId(@NonNull final Node graphvizNode)
 	{
 		final Id graphvizId = graphvizNode.getId();
 		String id = graphvizId.getId();
@@ -362,7 +372,8 @@ public class GraphvizParser
 	 * @param graphvizNode node
 	 * @return node id
 	 */
-	private static String nodeLabel(final Node graphvizNode)
+	@Nullable
+	private static String nodeLabel(@NonNull final Node graphvizNode)
 	{
 		String label = graphvizNode.getAttribute("label");
 		if (label != null && !label.isEmpty())
@@ -391,9 +402,10 @@ public class GraphvizParser
 	 * @param graphvizGraph graph
 	 * @return settings
 	 */
-	private static Settings makeSettings(final org.graphviz.objects.Graph graphvizGraph)
+	@NonNull
+	private static Settings makeSettings(@NonNull final org.graphviz.objects.Graph graphvizGraph)
 	{
-		final Settings settings = new Settings();
+		@NonNull final Settings settings = new Settings();
 		settings.focus = graphvizGraph.getGenericGraphAttribute("");
 		settings.backColor = Utils.parseColor(graphvizGraph.getGenericGraphAttribute(""));
 		settings.defaultNodeImage = graphvizGraph.getGenericNodeAttribute("");
@@ -636,16 +648,16 @@ public class GraphvizParser
 	 *
 	 * @param reader reader
 	 */
-	private static void dump(final FileReader reader)
+	private static void dump(@NonNull final FileReader reader)
 	{
 		try
 		{
 			// parser
-			final Parser parser = new Parser();
+			@NonNull final Parser parser = new Parser();
 			parser.parse(reader);
 
 			// graph
-			for (final org.graphviz.objects.Graph graph : parser.getGraphs())
+			for (@NonNull final org.graphviz.objects.Graph graph : parser.getGraphs())
 			{
 				System.out.println(graph.toString());
 				System.out.print("%%\n");
@@ -662,9 +674,9 @@ public class GraphvizParser
 	 *
 	 * @param args file to parse
 	 */
-	static public void main(final String[] args)
+	static public void main(@NonNull final String[] args)
 	{
-		final File file = new File(args[0]);
+		@NonNull final File file = new File(args[0]);
 		FileReader reader;
 		try
 		{

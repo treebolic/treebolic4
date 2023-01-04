@@ -19,6 +19,7 @@ import java.util.Properties;
 import javax.swing.*;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.wordnet.Browser;
 
 /**
@@ -38,6 +39,7 @@ public class Context extends treebolic.browser2.Context
 	/**
 	 * Data directory
 	 */
+	@Nullable
 	private URL dataDirUrl;
 
 	/**
@@ -74,7 +76,8 @@ public class Context extends treebolic.browser2.Context
 	 * @param userHome use user home
 	 * @return data dir
 	 */
-	public static File makeDataDir(final String base, final boolean userHome)
+	@NonNull
+	public static File makeDataDir(@Nullable final String base, final boolean userHome)
 	{
 		if (base == null || base.isEmpty())
 		{
@@ -129,13 +132,13 @@ public class Context extends treebolic.browser2.Context
 	}
 
 	@Override
-	public boolean linkTo(@NonNull final String linkUrl, final String linkTarget)
+	public boolean linkTo(@NonNull final String linkUrl, @Nullable final String linkTarget)
 	{
 		// help
 		if (linkUrl.startsWith("internal:help:"))
 		{
-			final String link = linkUrl.substring(14);
-			final JComponent pane = this.browser.makeBrowserPane(this.getClass().getResource("doc/" + link + ".html"), true);
+			@NonNull final String link = linkUrl.substring(14);
+			@NonNull final JComponent pane = this.browser.makeBrowserPane(this.getClass().getResource("doc/" + link + ".html"), true);
 			this.browser.addTab(pane, link, linkUrl);
 			return true;
 		}
@@ -147,8 +150,8 @@ public class Context extends treebolic.browser2.Context
 			{
 				final String link = URLEncoder.encode(linkUrl.substring(8).replace('_', ' '), "UTF-8");
 				final String urlString = String.format(URL_TEMPLATE_WIKTIONARY, link);
-				final URL uRL = new URL(urlString);
-				final JComponent pane = this.browser.makeBrowserPane(uRL, true);
+				@NonNull final URL uRL = new URL(urlString);
+				@NonNull final JComponent pane = this.browser.makeBrowserPane(uRL, true);
 				this.browser.addTab(pane, link, linkUrl);
 			}
 			catch (MalformedURLException | UnsupportedEncodingException exception)

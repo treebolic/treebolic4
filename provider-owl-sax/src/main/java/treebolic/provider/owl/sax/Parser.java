@@ -71,7 +71,7 @@ public class Parser
 		private StringBuilder textSb = null;
 
 		@Override
-		public void characters(char[] ch, int start, int length)
+		public void characters(@NonNull char[] ch, int start, int length)
 		{
 			if (textSb == null)
 			{

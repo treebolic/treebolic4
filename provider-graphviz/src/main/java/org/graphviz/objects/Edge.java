@@ -22,6 +22,9 @@ package org.graphviz.objects;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * This class represents an Edge in a Graph. Each Edge has a source Node and a target Node. Both nodes may contain port information. The type attribute is
  * currently a nice-to-have because only directed edges are only allowed in 'Digraphs', and undirected in 'Graphs'.
@@ -34,11 +37,13 @@ public class Edge
 	/**
 	 * The source node object
 	 */
+	@Nullable
 	private PortNode source;
 
 	/**
 	 * The target node object
 	 */
+	@Nullable
 	private PortNode target;
 
 	/**
@@ -175,6 +180,7 @@ public class Edge
 	 *
 	 * @return the attributes
 	 */
+	@NonNull
 	public Hashtable<String, String> getAttributes()
 	{
 		return this.attributes;
@@ -185,10 +191,11 @@ public class Edge
 	 *
 	 * @return the string representation
 	 */
+	@NonNull
 	@Override
 	public String toString()
 	{
-		final StringBuilder r = new StringBuilder();
+		@NonNull final StringBuilder r = new StringBuilder();
 		if (!this.source.getNode().getId().getId().equals(""))
 		{
 			r.append(this.source.getNode().getId().getId());

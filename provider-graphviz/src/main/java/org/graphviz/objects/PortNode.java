@@ -19,6 +19,9 @@
 
 package org.graphviz.objects;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * This class is an extended Node object containing Port information of a node in an edge. A PortNode does not hold an ID object, because it is only a wrapper
  * for a node as a part of an edge.
@@ -36,6 +39,7 @@ public class PortNode
 	/**
 	 * holds the port
 	 */
+	@Nullable
 	private Node node;
 
 	/**
@@ -115,6 +119,7 @@ public class PortNode
 	 *
 	 * @return the string representation
 	 */
+	@NonNull
 	@Override
 	public String toString()
 	{

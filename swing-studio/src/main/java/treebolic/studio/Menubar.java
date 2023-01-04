@@ -158,7 +158,7 @@ public class Menubar extends JMenuBar
 		item.setText(text);
 		if (image != null)
 		{
-			final URL imageUrl = Menubar.class.getResource("images/" + image);
+			@Nullable final URL imageUrl = Menubar.class.getResource("images/" + image);
 			assert imageUrl != null;
 			item.setIcon(new ImageIcon(imageUrl));
 		}
@@ -187,7 +187,7 @@ public class Menubar extends JMenuBar
 		item.setSelected(state);
 		if (image != null)
 		{
-			final URL imageUrl = Menubar.class.getResource("images/" + image);
+			@Nullable final URL imageUrl = Menubar.class.getResource("images/" + image);
 			assert imageUrl != null;
 			item.setIcon(new ImageIcon(imageUrl));
 		}

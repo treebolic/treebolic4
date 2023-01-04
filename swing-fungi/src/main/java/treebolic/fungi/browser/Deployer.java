@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Source data deployer
  *
@@ -51,10 +54,10 @@ public class Deployer
 	 */
 	public void cleanup()
 	{
-		File[] files = this.dir.listFiles();
+		@Nullable File[] files = this.dir.listFiles();
 		if (files != null)
 		{
-			for (final File file : files)
+			for (@NonNull final File file : files)
 			{
 				//noinspection ResultOfMethodCallIgnored
 				file.delete();
@@ -71,9 +74,9 @@ public class Deployer
 	static public boolean check(final File dir)
 	{
 		// check if each file exists
-		for (final String entry : DATA_FILES)
+		for (@NonNull final String entry : DATA_FILES)
 		{
-			final File file = new File(dir, entry);
+			@NonNull final File file = new File(dir, entry);
 			if (!file.exists())
 			{
 				return false;
@@ -92,7 +95,7 @@ public class Deployer
 	{
 		try
 		{
-			final URL zipUrl = Deployer.class.getResource("/data.zip");
+			@Nullable final URL zipUrl = Deployer.class.getResource("/data.zip");
 			assert zipUrl != null;
 			expand(zipUrl, null, this.dir);
 			return true;
@@ -113,8 +116,9 @@ public class Deployer
 	 * @return dest dir
 	 * @throws IOException io exception
 	 */
+	@NonNull
 	@SuppressWarnings("UnusedReturnValue")
-	static public File expand(final URL zipUrl, final String pathPrefixFilter, final File destDir) throws IOException
+	static public File expand(@NonNull final URL zipUrl, final String pathPrefixFilter, @NonNull final File destDir) throws IOException
 	{
 		return expand(zipUrl.openStream(), pathPrefixFilter, destDir);
 	}
@@ -128,7 +132,8 @@ public class Deployer
 	 * @return dest dir
 	 * @throws IOException io exception
 	 */
-	static public File expand(final InputStream inputStream, final String pathPrefixFilter0, final File destDir) throws IOException
+	@NonNull
+	static public File expand(@NonNull final InputStream inputStream, final String pathPrefixFilter0, @NonNull final File destDir) throws IOException
 	{
 		// prefix
 		String pathPrefixFilter = pathPrefixFilter0;
@@ -142,20 +147,20 @@ public class Deployer
 		destDir.mkdir();
 
 		// read and expand entries
-		try (ZipInputStream zipInputStream = new ZipInputStream(inputStream))
+		try (@NonNull ZipInputStream zipInputStream = new ZipInputStream(inputStream))
 		{
 			// get the zipped file list entry
-			final byte[] buffer = new byte[1024];
-			ZipEntry entry = zipInputStream.getNextEntry();
+			@NonNull final byte[] buffer = new byte[1024];
+			@Nullable ZipEntry entry = zipInputStream.getNextEntry();
 			while (entry != null)
 			{
 				if (!entry.isDirectory())
 				{
-					final String entryName = entry.getName();
+					@NonNull final String entryName = entry.getName();
 					if (pathPrefixFilter == null || pathPrefixFilter.isEmpty() || entryName.startsWith(pathPrefixFilter))
 					{
 						// flatten zip hierarchy
-						final File file = new File(destDir + File.separator + new File(entryName).getName());
+						@NonNull final File file = new File(destDir + File.separator + new File(entryName).getName());
 
 						// create all non exists folders else you will hit FileNotFoundException for compressed folder
 						//noinspection ResultOfMethodCallIgnored
@@ -164,7 +169,7 @@ public class Deployer
 						// output
 
 						// copy
-						try (FileOutputStream outputStream = new FileOutputStream(file))
+						try (@NonNull FileOutputStream outputStream = new FileOutputStream(file))
 						{
 							int len;
 							while ((len = zipInputStream.read(buffer)) > 0)
@@ -187,15 +192,16 @@ public class Deployer
 	 *
 	 * @return query files
 	 */
+	@NonNull
 	public String[] getQueryFiles()
 	{
-		final List<String> result = new ArrayList<>();
-		File[] files = this.dir.listFiles();
+		@NonNull final List<String> result = new ArrayList<>();
+		@Nullable File[] files = this.dir.listFiles();
 		if (files != null)
 		{
-			for (final File file : files)
+			for (@NonNull final File file : files)
 			{
-				final String name = file.getName();
+				@NonNull final String name = file.getName();
 				if (name.matches("query.*.properties"))
 				{
 					result.add(name);
@@ -211,16 +217,17 @@ public class Deployer
 	 * @param queryFiles query files
 	 * @return descriptions
 	 */
-	public String[] getQueryDescriptions(final String[] queryFiles)
+	@NonNull
+	public String[] getQueryDescriptions(@NonNull final String[] queryFiles)
 	{
-		final String[] descriptions = new String[queryFiles.length];
+		@NonNull final String[] descriptions = new String[queryFiles.length];
 		for (int i = 0; i < queryFiles.length; i++)
 		{
-			File file = new File(this.dir, queryFiles[i]);
-			try (FileInputStream inputStream = new FileInputStream(file); BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream)))
+			@NonNull File file = new File(this.dir, queryFiles[i]);
+			try (@NonNull FileInputStream inputStream = new FileInputStream(file); @NonNull BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream)))
 			{
 				// Read first line
-				String line = reader.readLine().trim();
+				@NonNull String line = reader.readLine().trim();
 				descriptions[i] = line.startsWith("#") ? line.substring(1) : line;
 			}
 			catch (Exception e)

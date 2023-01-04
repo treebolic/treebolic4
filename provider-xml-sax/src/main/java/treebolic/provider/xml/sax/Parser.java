@@ -69,6 +69,7 @@ public class Parser
 
 		private final Settings settings = new Settings();
 
+		@Nullable
 		private List<MountTask> mountTasks = null;
 
 		// transient
@@ -286,7 +287,7 @@ public class Parser
 
 				case MENUITEM:
 				{
-					MenuItem menuItem = new MenuItem();
+					@NonNull MenuItem menuItem = new MenuItem();
 					setAttribute(attributes, "action", s -> MenuItem.Action.valueOf(s.toUpperCase()), (v) -> menuItem.action = v);
 					setAttribute(attributes, "match-target", (v) -> menuItem.matchTarget = v);
 					setAttribute(attributes, "match-scope", Utils::stringToScope, (v) -> menuItem.matchScope = v);
@@ -333,7 +334,7 @@ public class Parser
 					// treeedge
 					// edge
 					// menuitem
-					String text = getText();
+					@NonNull String text = getText();
 					String state = states.peek();
 					switch (state)
 					{
@@ -366,7 +367,7 @@ public class Parser
 				case CONTENT:
 				{
 					// node
-					String text = getText();
+					@NonNull String text = getText();
 					stack.peek().setContent(text);
 					break;
 				}
@@ -417,7 +418,7 @@ public class Parser
 					node.setMountPoint(mountPoint);
 					if (mountPoint.now != null && mountPoint.now)
 					{
-						MountTask task = new MountTask(mountPoint, node);
+						@NonNull MountTask task = new MountTask(mountPoint, node);
 						if (mountTasks == null)
 						{
 							mountTasks = new ArrayList<>();
@@ -437,7 +438,7 @@ public class Parser
 		}
 
 		@Override
-		public void characters(char[] ch, int start, int length)
+		public void characters(@NonNull char[] ch, int start, int length)
 		{
 			if (textSb == null)
 			{
@@ -453,7 +454,7 @@ public class Parser
 		private String getText()
 		{
 			assert textSb != null;
-			String text = textSb.toString().trim();
+			@NonNull String text = textSb.toString().trim();
 			textSb.setLength(0);
 			return text;
 		}
@@ -470,12 +471,13 @@ public class Parser
 		}
 	}
 
+	@Nullable
 	private static Integer parseColor(final String color)
 	{
 		return Utils.parseColor(color);
 	}
 
-	private static Integer parseInt(final String val)
+	private static Integer parseInt(@Nullable final String val)
 	{
 		if (val == null)
 		{
@@ -484,7 +486,7 @@ public class Parser
 		return Integer.parseInt(val);
 	}
 
-	private static Float parseFloat(final String val)
+	private static Float parseFloat(@Nullable final String val)
 	{
 		if (val == null)
 		{
@@ -493,7 +495,7 @@ public class Parser
 		return Float.parseFloat(val);
 	}
 
-	private static float[] parseFloats(final String val)
+	private static float[] parseFloats(@Nullable final String val)
 	{
 		if (val == null)
 		{
@@ -502,7 +504,7 @@ public class Parser
 		return Utils.stringToFloats(val);
 	}
 
-	private static Double parseDouble(final String val)
+	private static Double parseDouble(@Nullable final String val)
 	{
 		if (val == null)
 		{
@@ -511,7 +513,7 @@ public class Parser
 		return Double.parseDouble(val);
 	}
 
-	private static Boolean parseBoolean(final String val)
+	private static Boolean parseBoolean(@Nullable final String val)
 	{
 		if (val == null)
 		{
@@ -520,7 +522,7 @@ public class Parser
 		return Boolean.parseBoolean(val);
 	}
 
-	private static void setAttribute(final Attributes attributes, final String qName, final Consumer<String> consumer)
+	private static void setAttribute(@NonNull final Attributes attributes, final String qName, @NonNull final Consumer<String> consumer)
 	{
 		String val = attributes.getValue(qName);
 		if (val != null)
@@ -529,7 +531,7 @@ public class Parser
 		}
 	}
 
-	private static <T> void setAttribute(final Attributes attributes, final String qName, final Function<String, T> transformer, final Consumer<T> consumer)
+	private static <T> void setAttribute(@NonNull final Attributes attributes, final String qName, @NonNull final Function<String, T> transformer, @NonNull final Consumer<T> consumer)
 	{
 		String val = attributes.getValue(qName);
 		if (val != null)
@@ -553,7 +555,7 @@ public class Parser
 	 * @param hiddenQName         hidden qname
 	 * @param consumer            consumer of produced value
 	 */
-	private static void setStyleAttribute(final Attributes attributes, @SuppressWarnings("SameParameterValue") final String strokeQName, @SuppressWarnings("SameParameterValue") final String fromTerminatorQName, @SuppressWarnings("SameParameterValue") final String toTerminatorQName, @SuppressWarnings("SameParameterValue") final String lineQName, @SuppressWarnings("SameParameterValue") final String hiddenQName, final Consumer<Integer> consumer)
+	private static void setStyleAttribute(@NonNull final Attributes attributes, @SuppressWarnings("SameParameterValue") final String strokeQName, @SuppressWarnings("SameParameterValue") final String fromTerminatorQName, @SuppressWarnings("SameParameterValue") final String toTerminatorQName, @SuppressWarnings("SameParameterValue") final String lineQName, @SuppressWarnings("SameParameterValue") final String hiddenQName, @NonNull final Consumer<Integer> consumer)
 	{
 		String stroke = attributes.getValue(strokeQName);
 		String fromTerminator = attributes.getValue(fromTerminatorQName);
@@ -561,7 +563,7 @@ public class Parser
 		String line = attributes.getValue(lineQName);
 		String hidden = attributes.getValue(hiddenQName);
 
-		Integer sval = Utils.parseStyle(stroke, fromTerminator, toTerminator, line, hidden);
+		@Nullable Integer sval = Utils.parseStyle(stroke, fromTerminator, toTerminator, line, hidden);
 		if (sval != null)
 		{
 			consumer.accept(sval);
@@ -596,6 +598,7 @@ public class Parser
 	 * @throws SAXException                 sax exception
 	 * @throws IOException                  io exception
 	 */
+	@NonNull
 	public static Model makeModel(@NonNull final String filePath) throws ParserConfigurationException, SAXException, IOException
 	{
 		@NonNull SAXParser saxParser = makeParser();
@@ -612,7 +615,7 @@ public class Parser
 	 * @throws SAXException                 sax exception
 	 * @throws IOException                  io exception
 	 */
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException
+	public static void main(@NonNull String[] args) throws ParserConfigurationException, SAXException, IOException
 	{
 		@NonNull Model model = makeModel(args[0]);
 		System.out.println(ModelDump.toString(model));

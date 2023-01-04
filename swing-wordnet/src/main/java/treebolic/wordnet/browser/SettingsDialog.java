@@ -5,6 +5,9 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Settings dialog
  *
@@ -15,11 +18,13 @@ public class SettingsDialog extends JDialog
 	/**
 	 * Link panel
 	 */
+	@Nullable
 	private final LinkFilterSettingsPane linkFilterSettingsPane;
 
 	/**
 	 * Color settings pane
 	 */
+	@Nullable
 	private final ColorSettingsPane colorsSettingsPane;
 
 	/**
@@ -55,7 +60,7 @@ public class SettingsDialog extends JDialog
 		setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
 		setTitle(Messages.getString("SettingsDialog.title"));
 
-		final JTabbedPane tabbedPane = new JTabbedPane();
+		@NonNull final JTabbedPane tabbedPane = new JTabbedPane();
 		if (hasLinkFilter)
 		{
 			tabbedPane.add(Messages.getString("SettingsDialog.links"), this.linkFilterSettingsPane);
@@ -76,9 +81,10 @@ public class SettingsDialog extends JDialog
 	 *
 	 * @return command panel
 	 */
+	@NonNull
 	private JPanel makeCommandPanel()
 	{
-		final JPanel commandPanel = new JPanel();
+		@NonNull final JPanel commandPanel = new JPanel();
 		commandPanel.setLayout(new FlowLayout());
 		commandPanel.add(makeOkButton(), null);
 		commandPanel.add(makeCancelButton(), null);
@@ -91,9 +97,10 @@ public class SettingsDialog extends JDialog
 	 *
 	 * @return ok button
 	 */
+	@NonNull
 	private JButton makeOkButton()
 	{
-		final JButton okButton = new JButton();
+		@NonNull final JButton okButton = new JButton();
 		okButton.setText(Messages.getString("SettingsDialog.ok"));
 		okButton.addActionListener(e -> {
 			SettingsDialog.this.ok = true;
@@ -107,9 +114,10 @@ public class SettingsDialog extends JDialog
 	 *
 	 * @return cancel button
 	 */
+	@NonNull
 	private JButton makeCancelButton()
 	{
-		final JButton cancelButton = new JButton();
+		@NonNull final JButton cancelButton = new JButton();
 		cancelButton.setText(Messages.getString("SettingsDialog.cancel"));
 		cancelButton.addActionListener(e -> setVisible(false));
 		return cancelButton;
@@ -120,9 +128,10 @@ public class SettingsDialog extends JDialog
 	 *
 	 * @return apply button
 	 */
+	@NonNull
 	private JButton makeApplyButton()
 	{
-		final JButton applyButton = new JButton();
+		@NonNull final JButton applyButton = new JButton();
 		applyButton.setText(Messages.getString("SettingsDialog.save"));
 		applyButton.addActionListener(e -> save());
 		return applyButton;
@@ -189,9 +198,9 @@ public class SettingsDialog extends JDialog
 	 */
 	static public void main(final String[] args)
 	{
-		final Properties settings = new Properties();
+		@NonNull final Properties settings = new Properties();
 
-		final SettingsDialog dialog = new SettingsDialog(settings, null);
+		@NonNull final SettingsDialog dialog = new SettingsDialog(settings, null);
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);

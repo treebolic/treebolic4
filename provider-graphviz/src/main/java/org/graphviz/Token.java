@@ -2,6 +2,9 @@
 /* JavaCCOptions:TOKEN_EXTENDS=,KEEP_LINE_COL=null,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package org.graphviz;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
+
 /**
  * Describes the input token stream.
  */
@@ -68,6 +71,7 @@ public class Token implements java.io.Serializable
 	 *
 	 * @return value
 	 */
+	@Nullable
 	@SuppressWarnings("SameReturnValue")
 	public Object getValue()
 	{
@@ -122,6 +126,7 @@ public class Token implements java.io.Serializable
 	 * @param ofKind of kind
 	 * @return token
 	 */
+	@NonNull
 	public static Token newToken(final int ofKind, final String image)
 	{
 		return new Token(ofKind, image);
@@ -133,6 +138,7 @@ public class Token implements java.io.Serializable
 	 * @param ofKind kind
 	 * @return token
 	 */
+	@NonNull
 	public static Token newToken(final int ofKind)
 	{
 		return Token.newToken(ofKind, null);

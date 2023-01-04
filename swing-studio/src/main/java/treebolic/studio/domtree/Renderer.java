@@ -114,9 +114,9 @@ public class Renderer implements TreeCellRenderer
 		StyleConstants.setForeground(Renderer.idStyle, Color.BLUE);
 
 		// icons
-		final URL elementIconUrl = Renderer.class.getResource("images/treeelement.gif");
-		final URL textIcon = Renderer.class.getResource("images/treetext.gif");
-		final URL defaultIconUrl = Renderer.class.getResource("images/treedefault.gif");
+		@Nullable final URL elementIconUrl = Renderer.class.getResource("images/treeelement.gif");
+		@Nullable final URL textIcon = Renderer.class.getResource("images/treetext.gif");
+		@Nullable final URL defaultIconUrl = Renderer.class.getResource("images/treedefault.gif");
 		assert elementIconUrl != null;
 		Renderer.elementIcon = new ImageIcon(elementIconUrl);
 		assert textIcon != null;

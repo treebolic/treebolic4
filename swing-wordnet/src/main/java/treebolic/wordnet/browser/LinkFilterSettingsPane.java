@@ -5,6 +5,8 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Settings dialog
  *
@@ -70,29 +72,29 @@ public class LinkFilterSettingsPane extends JPanel
 	{
 		setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
 
-		final JPanel linkPanel = new JPanel();
+		@NonNull final JPanel linkPanel = new JPanel();
 		linkPanel.setLayout(new GridBagLayout());
 
 		final int n = LinkReference.values().length;
 		this.checkBoxes = new JCheckBox[n];
 
 		int i = 0;
-		for (final LinkReference link : LinkReference.values())
+		for (@NonNull final LinkReference link : LinkReference.values())
 		{
-			final JLabel label = new JLabel(link.getLabel());
+			@NonNull final JLabel label = new JLabel(link.getLabel());
 			this.checkBoxes[i] = LinkFilterSettingsPane.makeCheckBox();
 			linkPanel.add(label, new GridBagConstraints(0, i, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, i == 0 ? LinkFilterSettingsPane.IL_1 : i == n - 1 ? LinkFilterSettingsPane.IL_n : LinkFilterSettingsPane.IL, 0, 0));
 			linkPanel.add(this.checkBoxes[i], new GridBagConstraints(1, i, 1, 1, 0., 0., GridBagConstraints.WEST, GridBagConstraints.NONE, i == 0 ? LinkFilterSettingsPane.IT_1 : i == n - 1 ? LinkFilterSettingsPane.IT_n : LinkFilterSettingsPane.IT, 0, 0));
 			i++;
 		}
-		final JButton setButton = new JButton(Messages.getString("LinkFilterSettingsPane.set"));
+		@NonNull final JButton setButton = new JButton(Messages.getString("LinkFilterSettingsPane.set"));
 		setButton.addActionListener(e -> {
 			for (int i12 = 0; i12 < LinkReference.values().length; i12++)
 			{
 				LinkFilterSettingsPane.this.checkBoxes[i12].setSelected(true);
 			}
 		});
-		final JButton resetButton = new JButton(Messages.getString("LinkFilterSettingsPane.reset"));
+		@NonNull final JButton resetButton = new JButton(Messages.getString("LinkFilterSettingsPane.reset"));
 		resetButton.addActionListener(e -> {
 			for (int i1 = 0; i1 < LinkReference.values().length; i1++)
 			{
@@ -100,7 +102,7 @@ public class LinkFilterSettingsPane extends JPanel
 			}
 		});
 
-		final JPanel buttonPanel = new JPanel();
+		@NonNull final JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridBagLayout());
 		buttonPanel.add(setButton, new GridBagConstraints(0, 0, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		buttonPanel.add(resetButton, new GridBagConstraints(1, 0, 1, 1, 0., 0., GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
@@ -115,6 +117,7 @@ public class LinkFilterSettingsPane extends JPanel
 	 *
 	 * @return checkbox
 	 */
+	@NonNull
 	private static JCheckBox makeCheckBox()
 	{
 		return new JCheckBox();
@@ -172,14 +175,14 @@ public class LinkFilterSettingsPane extends JPanel
 	public void get()
 	{
 		fromCheckBoxes();
-		final String value = "0x" + Long.toHexString(this.filter);
+		@NonNull final String value = "0x" + Long.toHexString(this.filter);
 		this.settings.setProperty(LinkReference.KEYRELATIONFILTER, value);
 	}
 
 	private void toCheckBoxes()
 	{
 		int i = 0;
-		for (final LinkReference link : LinkReference.values())
+		for (@NonNull final LinkReference link : LinkReference.values())
 		{
 			this.checkBoxes[i].setSelected(link.test(this.filter));
 			i++;
@@ -189,7 +192,7 @@ public class LinkFilterSettingsPane extends JPanel
 	private void fromCheckBoxes()
 	{
 		int i = 0;
-		for (final LinkReference link : LinkReference.values())
+		for (@NonNull final LinkReference link : LinkReference.values())
 		{
 			if (this.checkBoxes[i].isSelected())
 			{

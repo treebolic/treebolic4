@@ -136,7 +136,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 	{
 		// enlarge/shrink buttons
 		@NonNull final JButton moreButton = new JButton();
-		final URL statusPlusIconUrl = Statusbar.class.getResource("images/status_plus.png");
+		@Nullable final URL statusPlusIconUrl = Statusbar.class.getResource("images/status_plus.png");
 		assert statusPlusIconUrl != null;
 		moreButton.setIcon(new ImageIcon(statusPlusIconUrl));
 		moreButton.setContentAreaFilled(false);
@@ -154,7 +154,7 @@ public class Statusbar extends JToolBar implements Component, treebolic.glue.ifa
 			}
 		});
 		@NonNull final JButton lessButton = new JButton();
-		final URL statusMinusIconUrl = Statusbar.class.getResource("images/status_minus.png");
+		@Nullable final URL statusMinusIconUrl = Statusbar.class.getResource("images/status_minus.png");
 		assert statusMinusIconUrl != null;
 		lessButton.setIcon(new ImageIcon(statusMinusIconUrl));
 		lessButton.setContentAreaFilled(false);

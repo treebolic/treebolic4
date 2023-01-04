@@ -77,6 +77,7 @@ public class Context implements IContext
 		return this.application == null ? null : this.application.getWidget();
 	}
 
+	@Nullable
 	@Override
 	public URL getBase()
 	{
@@ -132,6 +133,7 @@ public class Context implements IContext
 		return defaultBase;
 	}
 
+	@Nullable
 	@Override
 	public URL getImagesBase()
 	{
@@ -229,12 +231,14 @@ public class Context implements IContext
 		return defaultUrl;
 	}
 
+	@Nullable
 	@Override
 	public Properties getParameters()
 	{
 		return this.application.getParameters();
 	}
 
+	@Nullable
 	@Override
 	public String getStyle()
 	{

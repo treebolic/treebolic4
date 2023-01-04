@@ -55,10 +55,10 @@ public class Provider extends BaseProvider implements IProvider
 	protected INode walk(@NonNull final String lemma, @Nullable final POS posFilter, @Nullable final Integer senseFilter, final boolean recurse, @NonNull final List<IEdge> edges)
 	{
 		int globalSenseIdx = 0;
-		final MutableNode rootNode = makeRootNode(lemma);
+		@NonNull final MutableNode rootNode = makeRootNode(lemma);
 
 		// iterate on parts of speech
-		for (final POS pos : POS.values())
+		for (@NonNull final POS pos : POS.values())
 		{
 			if (posFilter != null && !pos.equals(posFilter))
 			{
@@ -74,10 +74,10 @@ public class Provider extends BaseProvider implements IProvider
 			int tagCountTotal = 0;
 
 			// pos node
-			final MutableNode posNode = posFilter != null ? rootNode : makePosNode(rootNode, pos, lemma);
+			@NonNull final MutableNode posNode = posFilter != null ? rootNode : makePosNode(rootNode, pos, lemma);
 
 			// sense
-			final List<Sense> senseDatas = new ArrayList<>();
+			@NonNull final List<Sense> senseDatas = new ArrayList<>();
 			for (final IWordID senseId : idx.getWordIDs())
 			{
 				++globalSenseIdx;
@@ -105,13 +105,13 @@ public class Provider extends BaseProvider implements IProvider
 				tagCountTotal += tagCount;
 
 				// add to list
-				final Sense senseData = new Sense(pos, sensekey, sense, synset, lexId, posSenseIdx, globalSenseIdx, senseNum, tagCount);
+				@NonNull final Sense senseData = new Sense(pos, sensekey, sense, synset, lexId, posSenseIdx, globalSenseIdx, senseNum, tagCount);
 				senseDatas.add(senseData);
 			}
 
 			// scan list
 			int i = 0;
-			for (final Sense senseData : senseDatas)
+			for (@NonNull final Sense senseData : senseDatas)
 			{
 				if (senseFilter != null && senseData.senseNum != senseFilter)
 				{
@@ -119,7 +119,7 @@ public class Provider extends BaseProvider implements IProvider
 				}
 
 				// sense node
-				final TreeMutableNode senseNode = makeSenseNode(posNode, senseData, tagCountTotal);
+				@NonNull final TreeMutableNode senseNode = makeSenseNode(posNode, senseData, tagCountTotal);
 
 				// synset node (ignore links)
 				walkSynset(senseNode, senseData.synset, i, 0);
@@ -132,7 +132,7 @@ public class Provider extends BaseProvider implements IProvider
 				// sense filter
 				if (senseFilter != null)
 				{
-					String label = lemma;
+					@NonNull String label = lemma;
 					if (posFilter != null)
 					{
 						label += " [" + posFilter.getTag() + ',' + senseFilter + ']';
@@ -164,7 +164,7 @@ public class Provider extends BaseProvider implements IProvider
 	@Override
 	protected TreeMutableNode makeSenseNode(final INode parent, @NonNull final Sense sense, final int tagCountTotal)
 	{
-		final TreeMutableNode node = makeSenseBaseNode(parent, sense, tagCountTotal);
+		@NonNull final TreeMutableNode node = makeSenseBaseNode(parent, sense, tagCountTotal);
 		node.setEdgeLabel(BaseProvider.category(sense.synset.synset.getLexicalFile()));
 		return node;
 	}

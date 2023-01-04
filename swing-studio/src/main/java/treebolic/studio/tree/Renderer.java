@@ -114,17 +114,17 @@ public class Renderer extends DefaultTreeCellRenderer
 	static
 	{
 		// icons
-		final URL treebolicIconUrl = Renderer.class.getResource("images/treehome.png");
-		final URL treeIconUrl = Renderer.class.getResource("images/treetree.png");
-		final URL nodesIconUrl = Renderer.class.getResource("images/treenodes.png");
-		final URL rootIconUrl = Renderer.class.getResource("images/treeroot.png");
-		final URL nodeIconUrl =Renderer.class.getResource("images/treenode.png");
-		final URL nodeSpecialIconUrl = Renderer.class.getResource("images/treenodespecial.png");
-		final URL edgesIconUrl = Renderer.class.getResource("images/treeedges.png");
-		final URL edgeIconUrl = Renderer.class.getResource("images/treeedge.png");
-		final URL toolsIconUrl = Renderer.class.getResource("images/treetools.png");
-		final URL menuIconUrl = Renderer.class.getResource("images/treemenuitem.png");
-		final URL defaultIconUrl = Renderer.class.getResource("images/treedefault.png");
+		@Nullable final URL treebolicIconUrl = Renderer.class.getResource("images/treehome.png");
+		@Nullable final URL treeIconUrl = Renderer.class.getResource("images/treetree.png");
+		@Nullable final URL nodesIconUrl = Renderer.class.getResource("images/treenodes.png");
+		@Nullable final URL rootIconUrl = Renderer.class.getResource("images/treeroot.png");
+		@Nullable final URL nodeIconUrl =Renderer.class.getResource("images/treenode.png");
+		@Nullable final URL nodeSpecialIconUrl = Renderer.class.getResource("images/treenodespecial.png");
+		@Nullable final URL edgesIconUrl = Renderer.class.getResource("images/treeedges.png");
+		@Nullable final URL edgeIconUrl = Renderer.class.getResource("images/treeedge.png");
+		@Nullable final URL toolsIconUrl = Renderer.class.getResource("images/treetools.png");
+		@Nullable final URL menuIconUrl = Renderer.class.getResource("images/treemenuitem.png");
+		@Nullable final URL defaultIconUrl = Renderer.class.getResource("images/treedefault.png");
 
 		assert treebolicIconUrl != null;
 		treebolicIcon = new ImageIcon(treebolicIconUrl);

@@ -17,6 +17,8 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 import treebolic.commons.Persist;
 import treebolic.commons.Utils;
 
@@ -77,10 +79,10 @@ public class DataSettingsDialog extends JDialog
 		setResizable(true);
 
 		// images
-		final URL dataSettingsIconUrl = DataSettingsDialog.class.getResource("images/datasettings.png");
+		@Nullable final URL dataSettingsIconUrl = DataSettingsDialog.class.getResource("images/datasettings.png");
 		assert dataSettingsIconUrl != null;
-		final Icon icon = new ImageIcon(dataSettingsIconUrl);
-		final JLabel headerLabel = new JLabel();
+		@NonNull final Icon icon = new ImageIcon(dataSettingsIconUrl);
+		@NonNull final JLabel headerLabel = new JLabel();
 		headerLabel.setIcon(icon);
 		headerLabel.setVerticalTextPosition(SwingConstants.TOP);
 		headerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -89,12 +91,12 @@ public class DataSettingsDialog extends JDialog
 		headerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// buttons
-		final JButton oKButton = new JButton(Messages.getString("DataSettingsDialog.ok"));
+		@NonNull final JButton oKButton = new JButton(Messages.getString("DataSettingsDialog.ok"));
 		oKButton.addActionListener(event -> {
 			DataSettingsDialog.this.ok = true;
 			setVisible(false);
 		});
-		final JButton cancelButton = new JButton(Messages.getString("DataSettingsDialog.cancel"));
+		@NonNull final JButton cancelButton = new JButton(Messages.getString("DataSettingsDialog.cancel"));
 		cancelButton.addActionListener(event -> setVisible(false));
 
 		// panels
@@ -102,7 +104,7 @@ public class DataSettingsDialog extends JDialog
 		this.dataPanel.setLayout(new GridBagLayout());
 
 		// buttons
-		final JPanel buttonPanel = new JPanel();
+		@NonNull final JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
 		buttonPanel.add(cancelButton);
 		buttonPanel.add(oKButton);
@@ -123,9 +125,9 @@ public class DataSettingsDialog extends JDialog
 				{
 					try
 					{
-						URL url = new URL(str);
+						@NonNull URL url = new URL(str);
 						String urlFile = url.getFile();
-						Path path = Paths.get(urlFile);
+						@NonNull Path path = Paths.get(urlFile);
 						str = path.getFileName() + " (" + url.getHost() + ')';
 					}
 					catch (MalformedURLException e)
@@ -138,7 +140,7 @@ public class DataSettingsDialog extends JDialog
 		});
 
 		// providers
-		final String[] providers = new String[]{"WN31", "OEWN"};
+		@NonNull final String[] providers = new String[]{"WN31", "OEWN"};
 		for (final String item : providers)
 		{
 			this.dataComboBox.addItem(item);
@@ -148,10 +150,10 @@ public class DataSettingsDialog extends JDialog
 		this.dataComboBox.setToolTipText(Messages.getString("DataSettingsDialog.tooltip_data"));
 
 		// label
-		final JLabel providerLabel = new JLabel(Messages.getString("DataSettingsDialog.data"));
+		@NonNull final JLabel providerLabel = new JLabel(Messages.getString("DataSettingsDialog.data"));
 
 		// button
-		final JButton providerAddButton = new JButton(Messages.getString("DataSettingsDialog.other"));
+		@NonNull final JButton providerAddButton = new JButton(Messages.getString("DataSettingsDialog.other"));
 		providerAddButton.addActionListener(event -> {
 			final String other = ask(Messages.getString("DataSettingsDialog.prompt_other"), "https://x-englishwordnet.github.io/wndb/oewn_2022.zip");
 			if (other != null && !other.isEmpty())
@@ -170,7 +172,7 @@ public class DataSettingsDialog extends JDialog
 		this.dataPanel.add(providerAddButton, new GridBagConstraints(2, 0, 1, 1, 0., 0., GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 20), 0, 0));
 
 		// assemble
-		final JPanel panel = new JPanel();
+		@NonNull final JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(Box.createRigidArea(new Dimension(0, 10)));
 		panel.add(headerLabel);
@@ -188,9 +190,9 @@ public class DataSettingsDialog extends JDialog
 	 * @param initialValue initial value
 	 * @return input
 	 */
-	protected String ask(final String message, @SuppressWarnings("SameParameterValue") final String initialValue)
+	protected String ask(@NonNull final String message, @SuppressWarnings("SameParameterValue") final String initialValue)
 	{
-		final String[] lines = message.split("\n");
+		@NonNull final String[] lines = message.split("\n");
 		return JOptionPane.showInputDialog(null, lines, initialValue);
 	}
 
@@ -221,7 +223,7 @@ public class DataSettingsDialog extends JDialog
 			if (this.ok)
 			{
 				// update properties from components
-				String newValue = (String) this.dataComboBox.getSelectedItem();
+				@Nullable String newValue = (String) this.dataComboBox.getSelectedItem();
 				Object previousValue = this.settings.setProperty("data", newValue);
 				this.changed = newValue == null || !newValue.equals(previousValue);
 			}
@@ -230,7 +232,7 @@ public class DataSettingsDialog extends JDialog
 	}
 
 	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
-	private boolean isInModel(final String value, final JComboBox<String> comboBox)
+	private boolean isInModel(final String value, @NonNull final JComboBox<String> comboBox)
 	{
 		final ComboBoxModel<String> model = comboBox.getModel();
 		int size = model.getSize();
@@ -253,8 +255,8 @@ public class DataSettingsDialog extends JDialog
 	static public void main(final String[] args)
 	{
 		UIManager.put("swing.boldMetal", false);
-		final Properties settings = Persist.getSettings(MainFrame.getStaticPersistName());
-		final DataSettingsDialog dialog = new DataSettingsDialog(settings);
+		@NonNull final Properties settings = Persist.getSettings(MainFrame.getStaticPersistName());
+		@NonNull final DataSettingsDialog dialog = new DataSettingsDialog(settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

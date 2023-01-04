@@ -2,6 +2,8 @@
 /* JavaCCOptions: */
 package org.graphviz;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Token Manager Error.
  */
@@ -48,9 +50,10 @@ public class TokenMgrError extends Error
 	 * @param str input string
 	 * @return string with escaped unprintable characters
 	 */
-	protected static String addEscapes(final String str)
+	@NonNull
+	protected static String addEscapes(@NonNull final String str)
 	{
-		final StringBuilder retval = new StringBuilder();
+		@NonNull final StringBuilder retval = new StringBuilder();
 		char ch;
 		for (int i = 0; i < str.length(); i++)
 		{
@@ -85,7 +88,7 @@ public class TokenMgrError extends Error
 				default:
 					if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e)
 					{
-						final String s = "0000" + Integer.toString(ch, 16);
+						@NonNull final String s = "0000" + Integer.toString(ch, 16);
 						retval.append("\\u").append(s.substring(s.length() - 4));
 					}
 					else
@@ -111,7 +114,8 @@ public class TokenMgrError extends Error
 	 * @param curChar     current character
 	 * @return message
 	 */
-	protected static String LexicalError(final boolean EOFSeen, @SuppressWarnings("unused") final int lexState, final int errorLine, final int errorColumn, final String errorAfter, final char curChar)
+	@NonNull
+	protected static String LexicalError(final boolean EOFSeen, @SuppressWarnings("unused") final int lexState, final int errorLine, final int errorColumn, @NonNull final String errorAfter, final char curChar)
 	{
 		return "Lexical error at line " + errorLine + ", column " + errorColumn + ".  Encountered: " + (EOFSeen ?
 				"<EOF> " :
@@ -152,7 +156,7 @@ public class TokenMgrError extends Error
 	 * @param curChar     current character
 	 * @param reason      reason
 	 */
-	public TokenMgrError(final boolean EOFSeen, final int lexState, final int errorLine, final int errorColumn, final String errorAfter, final char curChar, final int reason)
+	public TokenMgrError(final boolean EOFSeen, final int lexState, final int errorLine, final int errorColumn, @NonNull final String errorAfter, final char curChar, final int reason)
 	{
 		this(TokenMgrError.LexicalError(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
 	}

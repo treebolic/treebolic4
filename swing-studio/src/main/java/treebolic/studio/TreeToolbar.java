@@ -9,6 +9,7 @@ import java.net.URL;
 import javax.swing.*;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * Toolbar for tree view
@@ -79,7 +80,7 @@ public class TreeToolbar extends JToolBar
 	{
 		@NonNull final JButton button = new JButton();
 		button.setToolTipText(tooltip);
-		final URL imageUrl = TreeToolbar.class.getResource("images/" + image);
+		@Nullable final URL imageUrl = TreeToolbar.class.getResource("images/" + image);
 		assert imageUrl != null;
 		button.setIcon(new ImageIcon(imageUrl));
 		return button;

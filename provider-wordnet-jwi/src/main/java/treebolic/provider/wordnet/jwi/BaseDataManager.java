@@ -16,6 +16,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 /**
  * Data manager
@@ -59,16 +60,16 @@ public abstract class BaseDataManager
 	 *
 	 * @param dir dir
 	 */
-	public static void cleanup(final File dir)
+	public static void cleanup(@NonNull final File dir)
 	{
 		System.out.println("Clean up " + dir);
 		// clean up
-		String[] entries = dir.list();
+		@Nullable String[] entries = dir.list();
 		if (entries != null)
 		{
-			for (String entry : entries)
+			for (@NonNull String entry : entries)
 			{
-				final File file = new File(dir.getPath(), entry);
+				@NonNull final File file = new File(dir.getPath(), entry);
 				if (WORDNET_FILESET.contains(file.getName()))
 				{
 					//noinspection ResultOfMethodCallIgnored
@@ -76,7 +77,7 @@ public abstract class BaseDataManager
 				}
 			}
 		}
-		final File file = new File(dir.getPath(), "build");
+		@NonNull final File file = new File(dir.getPath(), "build");
 		if (file.exists())
 		{
 			//noinspection ResultOfMethodCallIgnored
@@ -93,9 +94,9 @@ public abstract class BaseDataManager
 	public static boolean check(final File dir)
 	{
 		// check if each file exists
-		for (final String entry : BaseDataManager.WORDNET_FILES)
+		for (@NonNull final String entry : BaseDataManager.WORDNET_FILES)
 		{
-			final File file = new File(dir, entry);
+			@NonNull final File file = new File(dir, entry);
 			if (!file.exists())
 			{
 				return false;
@@ -145,20 +146,20 @@ public abstract class BaseDataManager
 		destDir.mkdir();
 
 		// read and expand entries
-		try (ZipInputStream zipInputStream = new ZipInputStream(inputStream))
+		try (@NonNull ZipInputStream zipInputStream = new ZipInputStream(inputStream))
 		{
 			// get the zipped file list entry
-			final byte[] buffer = new byte[1024];
-			ZipEntry entry = zipInputStream.getNextEntry();
+			@NonNull final byte[] buffer = new byte[1024];
+			@Nullable ZipEntry entry = zipInputStream.getNextEntry();
 			while (entry != null)
 			{
 				if (!entry.isDirectory())
 				{
-					final String entryName = entry.getName();
+					@NonNull final String entryName = entry.getName();
 					if (pathPrefixFilter == null || pathPrefixFilter.isEmpty() || entryName.startsWith(pathPrefixFilter))
 					{
 						// flatten zip hierarchy
-						final File file = new File(destDir + File.separator + new File(entryName).getName());
+						@NonNull final File file = new File(destDir + File.separator + new File(entryName).getName());
 
 						// create all non exists folders else you will hit FileNotFoundException for compressed folder
 						// noinspection ResultOfMethodCallIgnored
@@ -167,7 +168,7 @@ public abstract class BaseDataManager
 						// output
 
 						// copy
-						try (FileOutputStream outputStream = new FileOutputStream(file))
+						try (@NonNull FileOutputStream outputStream = new FileOutputStream(file))
 						{
 							int len;
 							while ((len = zipInputStream.read(buffer)) > 0)

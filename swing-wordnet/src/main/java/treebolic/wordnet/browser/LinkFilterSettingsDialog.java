@@ -6,6 +6,8 @@ import java.util.Properties;
 
 import javax.swing.*;
 
+import treebolic.annotations.NonNull;
+
 /**
  * Settings dialog
  *
@@ -31,8 +33,8 @@ public class LinkFilterSettingsDialog extends SettingsDialog
 	 */
 	static public void main(final String[] args)
 	{
-		final String path = System.getProperty("user.home") + File.separatorChar + ".treebolic-wordnet-browser";
-		final Properties settings = new Properties();
+		@NonNull final String path = System.getProperty("user.home") + File.separatorChar + ".treebolic-wordnet-browser";
+		@NonNull final Properties settings = new Properties();
 		try
 		{
 			settings.load(new FileReader(path));
@@ -42,7 +44,7 @@ public class LinkFilterSettingsDialog extends SettingsDialog
 			exception.printStackTrace();
 		}
 
-		final LinkFilterSettingsDialog dialog = new LinkFilterSettingsDialog(settings, null);
+		@NonNull final LinkFilterSettingsDialog dialog = new LinkFilterSettingsDialog(settings, null);
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);

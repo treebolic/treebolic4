@@ -3,6 +3,7 @@
  */
 package treebolic.fungi.browser;
 
+import treebolic.annotations.Nullable;
 import treebolic.commons.RadioChoiceDialog;
 
 /**
@@ -12,8 +13,10 @@ import treebolic.commons.RadioChoiceDialog;
  */
 public class SourceDialog extends RadioChoiceDialog
 {
+	@Nullable
 	static String[] labels = null;
 
+	@Nullable
 	static String[] values = null;
 
 	/**
