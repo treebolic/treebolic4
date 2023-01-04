@@ -1847,7 +1847,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_55()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -1871,7 +1871,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_77()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_106())
 		{
@@ -1903,7 +1903,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_52())
 		{
@@ -1932,7 +1932,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_78()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_scan_token(11))
 		{
@@ -1944,7 +1944,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_42()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_3R_51())
 		{
 			return true;
@@ -1963,7 +1963,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_76()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -1982,7 +1982,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_49()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_76())
 		{
@@ -2025,7 +2025,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_67()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2044,7 +2044,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_65()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2068,7 +2068,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_63()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(20))
 		{
 			return true;
@@ -2091,7 +2091,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		while (true)
 		{
 			xsp = this.jj_scanpos;
@@ -2115,7 +2115,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2139,7 +2139,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_45()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_61())
 		{
@@ -2200,7 +2200,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_54()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_84())
 		{
@@ -2226,7 +2226,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_101()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2260,7 +2260,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_96()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_119())
 		{
@@ -2272,7 +2272,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_99()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2295,7 +2295,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_101())
 		{
@@ -2311,7 +2311,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_105()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2330,7 +2330,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_97()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2353,7 +2353,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_99())
 		{
@@ -2374,7 +2374,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_80()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2393,7 +2393,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_46()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_68())
 		{
@@ -2413,7 +2413,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_97())
 		{
@@ -2429,7 +2429,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_103()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_scan_token(28))
 		{
@@ -2441,7 +2441,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_71()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_103())
 		{
@@ -2457,7 +2457,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_105())
 		{
@@ -2468,7 +2468,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_74()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2487,7 +2487,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_79()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2506,7 +2506,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_50()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_79())
 		{
@@ -2530,7 +2530,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_74())
 		{
@@ -2559,7 +2559,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_127()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_scan_token(15))
 		{
@@ -2575,7 +2575,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_114()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2599,7 +2599,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_90()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_scan_token(9))
 		{
@@ -2615,7 +2615,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_126())
 		{
@@ -2635,7 +2635,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_115()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2654,7 +2654,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_87()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2673,7 +2673,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_118()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2697,7 +2697,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_117()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_3R_122())
 		{
 			return true;
@@ -2716,7 +2716,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_116()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_scan_token(15))
 		{
@@ -2737,7 +2737,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		while (true)
 		{
 			xsp = this.jj_scanpos;
@@ -2770,7 +2770,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_89()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2789,7 +2789,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_123()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2813,7 +2813,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_91()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2836,7 +2836,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_115())
 		{
@@ -2847,7 +2847,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_72()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -2875,7 +2875,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_114())
 		{
@@ -2890,7 +2890,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_123())
 		{
@@ -2920,7 +2920,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_91())
 		{
@@ -2945,7 +2945,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_89())
 		{
@@ -2970,7 +2970,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_87())
 		{
@@ -2990,7 +2990,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_3R_72())
 		{
 			return true;
@@ -3013,7 +3013,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_44()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_56())
 		{
@@ -3049,7 +3049,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_53()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -3087,7 +3087,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_112()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_scan_token(11))
 		{
@@ -3113,7 +3113,7 @@ public class Parser implements ParserConstants
 		{
 			return true;
 		}
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_113())
 		{
@@ -3129,7 +3129,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_52()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -3187,7 +3187,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_81()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		if (jj_scan_token(15))
 		{
 			return true;
@@ -3206,7 +3206,7 @@ public class Parser implements ParserConstants
 
 	private boolean jj_3R_51()
 	{
-		Token xsp;
+		@Nullable Token xsp;
 		xsp = this.jj_scanpos;
 		if (jj_3R_81())
 		{
@@ -3531,6 +3531,7 @@ public class Parser implements ParserConstants
 	 *
 	 * @return next token
 	 */
+	@NonNull
 	final public Token getNextToken()
 	{
 		if (this.token.next != null)
