@@ -199,9 +199,9 @@ public class Edge
 	{
 		@NonNull final StringBuilder r = new StringBuilder();
 		assert this.source != null;
-		Node sourceNode = this.source.getNode();
+		@Nullable Node sourceNode = this.source.getNode();
 		assert sourceNode != null;
-		Id sourceId = sourceNode.getId();
+		@Nullable Id sourceId = sourceNode.getId();
 		assert sourceId != null;
 		if (!"".equals(sourceId.getId()))
 		{
@@ -229,9 +229,9 @@ public class Edge
 		}
 
 		assert this.target != null;
-		Node targetNode = this.target.getNode();
+		@Nullable Node targetNode = this.target.getNode();
 		assert targetNode != null;
-		Id targetId = targetNode.getId();
+		@Nullable Id targetId = targetNode.getId();
 		assert targetId != null;
 		if (!targetId.getId().equals(""))
 		{
