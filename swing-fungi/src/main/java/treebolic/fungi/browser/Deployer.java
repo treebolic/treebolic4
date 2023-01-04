@@ -228,7 +228,11 @@ public class Deployer
 			{
 				// Read first line
 				@NonNull String line = reader.readLine().trim();
-				descriptions[i] = line.startsWith("#") ? line.substring(1) : line;
+				descriptions[i] = line.startsWith("#") ? line.substring(1).trim() : "";
+				if (descriptions[i].isEmpty())
+				{
+					descriptions[i] = file.getName();
+				}
 			}
 			catch (Exception e)
 			{
