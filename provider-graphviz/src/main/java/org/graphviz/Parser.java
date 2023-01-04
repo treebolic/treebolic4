@@ -116,7 +116,7 @@ public class Parser implements ParserConstants
 		{
 			n = node;
 			tid = n.getId();
-			if (tid.isEqual(nid))
+			if (tid != null && tid.isEqual(nid))
 			{
 				return n;
 			}
@@ -1090,6 +1090,7 @@ public class Parser implements ParserConstants
 		}
 		this.graphs.pop();
 		parent.addSubgraph(g);
+		assert g.getId() != null;
 		@NonNull final Node n = createNode(parent, g.getId().getId(), g.getId().getLabel());
 		n.representsSubgraph(true);
 		return n;
@@ -1583,10 +1584,7 @@ public class Parser implements ParserConstants
 			case STRING:
 			{
 				text = jj_consume_token(ParserConstants.STRING);
-				if (text != null)
-				{
-					i.setLabel(text.image.substring(1, text.image.length() - 1));
-				}
+				i.setLabel(text.image.substring(1, text.image.length() - 1));
 				return i;
 			}
 			default:
@@ -3488,6 +3486,7 @@ public class Parser implements ParserConstants
 		if (this.jj_scanpos == this.jj_lastpos)
 		{
 			this.jj_la--;
+			assert this.jj_scanpos != null;
 			if (this.jj_scanpos.next == null)
 			{
 				this.jj_lastpos = this.jj_scanpos = this.jj_scanpos.next = this.token_source.getNextToken();
@@ -3499,6 +3498,7 @@ public class Parser implements ParserConstants
 		}
 		else
 		{
+			assert this.jj_scanpos != null;
 			this.jj_scanpos = this.jj_scanpos.next;
 		}
 		if (this.jj_rescan)

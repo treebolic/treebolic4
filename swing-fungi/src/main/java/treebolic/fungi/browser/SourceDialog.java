@@ -3,7 +3,7 @@
  */
 package treebolic.fungi.browser;
 
-import treebolic.annotations.Nullable;
+import treebolic.annotations.NonNull;
 import treebolic.commons.RadioChoiceDialog;
 
 /**
@@ -13,18 +13,14 @@ import treebolic.commons.RadioChoiceDialog;
  */
 public class SourceDialog extends RadioChoiceDialog
 {
-	@Nullable
-	static String[] labels = null;
-
-	@Nullable
-	static String[] values = null;
-
 	/**
 	 * Constructor
 	 *
-	 * @param value value
+	 * @param value  value
+	 * @param values values
+	 * @param labels labels
 	 */
-	public SourceDialog(final String value)
+	public SourceDialog(@NonNull final String value, @NonNull final String[] values, @NonNull final String[] labels)
 	{
 		super(value, values, labels, Messages.getString("SourceDialog.title"), Messages.getString("SourceDialog.prompt"));
 	}

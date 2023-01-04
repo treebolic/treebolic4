@@ -221,7 +221,7 @@ public class Graph
 	 *
 	 * @param id id
 	 */
-	public void setId(final Id id)
+	public void setId(@Nullable final Id id)
 	{
 		this.id = id;
 	}
@@ -299,6 +299,7 @@ public class Graph
 		{
 			r.append("graph ");
 		}
+		assert this.id != null;
 		if (!this.id.getId().equals(""))
 		{
 			r.append(this.id.getId());
@@ -425,21 +426,21 @@ public class Graph
 		{
 			for (@NonNull Node node : this.nodes)
 			{
-				r.append(node.toString());
+				r.append(node);
 			}
 		}
 		if (this.edges.size() > 0)
 		{
 			for (@NonNull Edge edge : this.edges)
 			{
-				r.append(edge.toString());
+				r.append(edge);
 			}
 		}
 		if (this.graphs.size() > 0)
 		{
 			for (@NonNull Graph graph : this.graphs)
 			{
-				r.append(graph.toString());
+				r.append(graph);
 				r.append("\n");
 			}
 		}
@@ -488,7 +489,7 @@ public class Graph
 		{
 			n = node;
 			nid = n.getId();
-			if (nid.isEqual(id))
+			if (nid != null && nid.isEqual(id))
 			{
 				return n;
 			}

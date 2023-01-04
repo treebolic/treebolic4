@@ -62,7 +62,7 @@ public class Context extends treebolic.application.Context
 		this.listener = listener;
 
 		// base is defined
-		if (base == null || base.isEmpty())
+		if (base.isEmpty())
 		{
 			throw new RuntimeException("Null base");
 		}

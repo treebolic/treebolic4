@@ -46,6 +46,14 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	 */
 	public static final String DEFAULTPRUNE = "substr(id,1,1) NOT IN ('e')";
 
+	// S O U R C E S
+
+	@Nullable
+	private static String[] labels = null;
+
+	@Nullable
+	private static String[] values = null;
+
 	// M E M B E R S
 
 	/**
@@ -232,9 +240,9 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 			deployer.expand();
 		}
 
-		SourceDialog.values = deployer.getQueryFiles();
-		SourceDialog.labels = deployer.getQueryDescriptions(SourceDialog.values);
-		//		for (String queryDescription : SourceDialog.labels)
+		values = deployer.getQueryFiles();
+		labels = deployer.getQueryDescriptions(values);
+		//		for (String queryDescription : labels)
 		//		{
 		//			System.out.println("QUERY " + queryDescription);
 		//		}
@@ -594,7 +602,10 @@ public class MainFrame extends treebolic.application.MainFrame implements Source
 	protected void setSource()
 	{
 		@Nullable final String value = getSource();
-		@NonNull final SourceDialog dialog = new SourceDialog(value);
+		assert value != null;
+		assert values != null;
+		assert labels != null;
+		@NonNull final SourceDialog dialog = new SourceDialog(value, values, labels);
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);

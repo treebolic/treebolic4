@@ -125,6 +125,9 @@ public class JavaCharStream
 
 		try
 		{
+			assert this.buffer != null;
+			assert this.bufline != null;
+			assert this.bufcolumn != null;
 			if (wrapAround)
 			{
 				System.arraycopy(this.buffer, this.tokenBegin, newbuffer, 0, this.bufsize - this.tokenBegin);
@@ -174,6 +177,7 @@ public class JavaCharStream
 
 		try
 		{
+			assert this.nextCharBuf != null;
 			if ((i = this.inputStream.read(this.nextCharBuf, this.maxNextCharInd, 4096 - this.maxNextCharInd)) == -1)
 			{
 				this.inputStream.close();
@@ -193,6 +197,8 @@ public class JavaCharStream
 			}
 			else
 			{
+				assert this.bufline != null;
+				assert this.bufcolumn != null;
 				this.bufline[this.bufpos] = this.line;
 				this.bufcolumn[this.bufpos] = this.column;
 			}
@@ -207,6 +213,7 @@ public class JavaCharStream
 			FillBuff();
 		}
 
+		assert this.nextCharBuf != null;
 		return this.nextCharBuf[this.nextCharInd];
 	}
 
@@ -218,6 +225,8 @@ public class JavaCharStream
 	 */
 	public char BeginToken() throws java.io.IOException
 	{
+		assert this.buffer != null;
+
 		if (this.inBuf > 0)
 		{
 			--this.inBuf;
@@ -303,6 +312,8 @@ public class JavaCharStream
 				break;
 		}
 
+		assert this.bufline != null;
+		assert this.bufcolumn != null;
 		this.bufline[this.bufpos] = this.line;
 		this.bufcolumn[this.bufpos] = this.column;
 	}
@@ -315,6 +326,7 @@ public class JavaCharStream
 	 */
 	public char readChar() throws java.io.IOException
 	{
+		assert this.buffer != null;
 		if (this.inBuf > 0)
 		{
 			--this.inBuf;
@@ -426,6 +438,7 @@ public class JavaCharStream
 	@Deprecated
 	public int getColumn()
 	{
+		assert this.bufcolumn != null;
 		return this.bufcolumn[this.bufpos];
 	}
 
@@ -439,6 +452,7 @@ public class JavaCharStream
 	@Deprecated
 	public int getLine()
 	{
+		assert this.bufline != null;
 		return this.bufline[this.bufpos];
 	}
 
@@ -449,6 +463,7 @@ public class JavaCharStream
 	 */
 	public int getEndColumn()
 	{
+		assert this.bufcolumn != null;
 		return this.bufcolumn[this.bufpos];
 	}
 
@@ -459,6 +474,7 @@ public class JavaCharStream
 	 */
 	public int getEndLine()
 	{
+		assert this.bufline != null;
 		return this.bufline[this.bufpos];
 	}
 
@@ -469,6 +485,7 @@ public class JavaCharStream
 	 */
 	public int getBeginColumn()
 	{
+		assert this.bufcolumn != null;
 		return this.bufcolumn[this.tokenBegin];
 	}
 
@@ -479,6 +496,7 @@ public class JavaCharStream
 	 */
 	public int getBeginLine()
 	{
+		assert this.bufline != null;
 		return this.bufline[this.tokenBegin];
 	}
 
@@ -749,6 +767,7 @@ public class JavaCharStream
 	@NonNull
 	public String GetImage()
 	{
+		assert this.buffer != null;
 		if (this.bufpos >= this.tokenBegin)
 		{
 			return new String(this.buffer, this.tokenBegin, this.bufpos - this.tokenBegin + 1);
@@ -769,6 +788,7 @@ public class JavaCharStream
 	{
 		@NonNull final char[] ret = new char[len];
 
+		assert this.buffer != null;
 		if (this.bufpos + 1 >= len)
 		{
 			System.arraycopy(this.buffer, this.bufpos - len + 1, ret, 0, len);
@@ -801,6 +821,9 @@ public class JavaCharStream
 	 */
 	public void adjustBeginLineColumn(int newLine, final int newCol)
 	{
+		assert this.bufcolumn != null;
+		assert this.bufline != null;
+
 		int start = this.tokenBegin;
 		int len;
 
@@ -816,8 +839,10 @@ public class JavaCharStream
 		int i = 0, j = 0, k;
 		int nextColDiff, columnDiff = 0;
 
-		while (i < len && this.bufline[j = start % this.bufsize] == this.bufline[k = ++start % this.bufsize])
+		while (i < len)
 		{
+			if (!(this.bufline[j = start % this.bufsize] == this.bufline[k = ++start % this.bufsize]))
+				break;
 			this.bufline[j] = newLine;
 			nextColDiff = columnDiff + this.bufcolumn[k] - this.bufcolumn[j];
 			this.bufcolumn[j] = newCol + columnDiff;

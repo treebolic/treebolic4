@@ -279,11 +279,18 @@ public class GraphvizParser
 		{
 			// get ends
 			@Nullable final PortNode from = graphvizEdge.getSource();
+			assert from != null;
 			@Nullable final PortNode to = graphvizEdge.getTarget();
+			assert to != null;
 
 			// get end ids
-			@NonNull final String fromId = GraphvizParser.nodeId(from.getNode());
-			@NonNull final String toId = GraphvizParser.nodeId(to.getNode());
+			@Nullable Node from2 = from.getNode();
+			assert from2 != null;
+			@NonNull final String fromId = GraphvizParser.nodeId(from2);
+
+			@Nullable Node to2 = to.getNode();
+			assert to2 != null;
+			@NonNull final String toId = GraphvizParser.nodeId(to2);
 
 			// get end nodes
 			final MutableGraphNode fromNode = nodesById.get(fromId);
@@ -353,12 +360,12 @@ public class GraphvizParser
 	private static String nodeId(@NonNull final Node graphvizNode)
 	{
 		@Nullable final Id graphvizId = graphvizNode.getId();
-		String id = graphvizId.getId();
+		String id = graphvizId == null ? null : graphvizId.getId();
 		if (id != null && !id.isEmpty())
 		{
 			return id;
 		}
-		id = graphvizId.getLabel();
+		id = graphvizId == null ? null : graphvizId.getLabel();
 		if (id != null && !id.isEmpty())
 		{
 			return id;
@@ -382,8 +389,7 @@ public class GraphvizParser
 		}
 
 		@Nullable final Id graphvizId = graphvizNode.getId();
-
-		label = graphvizId.getLabel();
+		label = graphvizId == null ? null : graphvizId.getLabel();
 		if (label != null && !label.isEmpty())
 		{
 			return label;
@@ -659,7 +665,7 @@ public class GraphvizParser
 			// graph
 			for (@NonNull final org.graphviz.objects.Graph graph : parser.getGraphs())
 			{
-				System.out.println(graph.toString());
+				System.out.println(graph);
 				System.out.print("%%\n");
 			}
 		}

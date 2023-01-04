@@ -156,7 +156,7 @@ public abstract class BaseDataManager
 				if (!entry.isDirectory())
 				{
 					@NonNull final String entryName = entry.getName();
-					if (pathPrefixFilter == null || pathPrefixFilter.isEmpty() || entryName.startsWith(pathPrefixFilter))
+					if (pathPrefixFilter == null || entryName.startsWith(pathPrefixFilter))
 					{
 						// flatten zip hierarchy
 						@NonNull final File file = new File(destDir + File.separator + new File(entryName).getName());

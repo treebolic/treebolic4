@@ -65,7 +65,7 @@ public class Node
 	 *
 	 * @param id id
 	 */
-	public void setId(final Id id)
+	public void setId(@Nullable final Id id)
 	{
 		this.id = id;
 	}
@@ -137,11 +137,12 @@ public class Node
 			return "";
 		}
 		@NonNull final StringBuilder r = new StringBuilder();
-		if (!this.id.getId().equals(""))
+		assert this.id != null;
+		if (!"".equals(this.id.getId()))
 		{
 			r.append(this.id.getId());
 		}
-		else if (!this.id.getLabel().equals(""))
+		else if (!"".equals(this.id.getLabel()))
 		{
 			r.append("\"");
 			r.append(this.id.getLabel());

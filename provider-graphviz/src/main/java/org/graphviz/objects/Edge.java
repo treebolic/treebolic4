@@ -76,7 +76,7 @@ public class Edge
 	 * @param type
 	 *        the edge type
 	 */
-	public Edge(final PortNode source, final PortNode target, final int type)
+	public Edge(@Nullable final PortNode source, @Nullable final PortNode target, final int type)
 	{
 		this.source = source;
 		this.target = target;
@@ -100,7 +100,7 @@ public class Edge
 	 * @param source
 	 *        the source node
 	 */
-	public void setSource(final PortNode source)
+	public void setSource(@Nullable final PortNode source)
 	{
 		this.source = source;
 	}
@@ -122,7 +122,7 @@ public class Edge
 	 * @param target
 	 *        the target Node
 	 */
-	public void setTarget(final PortNode target)
+	public void setTarget(@Nullable final PortNode target)
 	{
 		this.target = target;
 	}
@@ -198,14 +198,19 @@ public class Edge
 	public String toString()
 	{
 		@NonNull final StringBuilder r = new StringBuilder();
-		if (!this.source.getNode().getId().getId().equals(""))
+		assert this.source != null;
+		Node sourceNode = this.source.getNode();
+		assert sourceNode != null;
+		Id sourceId = sourceNode.getId();
+		assert sourceId != null;
+		if (!"".equals(sourceId.getId()))
 		{
-			r.append(this.source.getNode().getId().getId());
+			r.append(sourceId.getId());
 		}
-		else if (!this.source.getNode().getId().getLabel().equals(""))
+		else if (!"".equals(sourceId.getLabel()))
 		{
 			r.append("\"");
-			r.append(this.source.getNode().getId().getLabel());
+			r.append(sourceId.getLabel());
 			r.append("\"");
 		}
 		if (!this.source.getPort().equals(""))
@@ -222,14 +227,20 @@ public class Edge
 		{
 			r.append(" -- ");
 		}
-		if (!this.target.getNode().getId().getId().equals(""))
+
+		assert this.target != null;
+		Node targetNode = this.target.getNode();
+		assert targetNode != null;
+		Id targetId = targetNode.getId();
+		assert targetId != null;
+		if (!targetId.getId().equals(""))
 		{
-			r.append(this.target.getNode().getId().getId());
+			r.append(targetId.getId());
 		}
-		else if (!this.target.getNode().getId().getLabel().equals(""))
+		else if (!targetId.getLabel().equals(""))
 		{
 			r.append("\"");
-			r.append(this.target.getNode().getId().getLabel());
+			r.append(targetId.getLabel());
 			r.append("\"");
 		}
 		if (!this.target.getPort().equals(""))

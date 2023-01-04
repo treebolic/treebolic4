@@ -56,7 +56,7 @@ public class PortNode
 	 *
 	 * @param n the node object
 	 */
-	public PortNode(final Node n)
+	public PortNode(@Nullable final Node n)
 	{
 		this.node = n;
 		this.port = "";
@@ -68,7 +68,7 @@ public class PortNode
 	 * @param n    the node object
 	 * @param port the port
 	 */
-	public PortNode(final Node n, final String port)
+	public PortNode(@Nullable final Node n, final String port)
 	{
 		this.node = n;
 		this.port = port;
@@ -110,7 +110,7 @@ public class PortNode
 	 *
 	 * @param node node
 	 */
-	public void setNode(final Node node)
+	public void setNode(@Nullable final Node node)
 	{
 		this.node = node;
 	}
@@ -124,7 +124,8 @@ public class PortNode
 	@Override
 	public String toString()
 	{
-		return this.node.toString() + ":" + this.port;
+		assert this.node != null;
+		return this.node + ":" + this.port;
 	}
 
 }
