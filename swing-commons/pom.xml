@@ -9,7 +9,7 @@
 	<parent>
 		<artifactId>treebolic</artifactId>
 		<groupId>io.github.treebolic</groupId>
-		<version>4.0-0</version>
+		<version>4.0-1</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
