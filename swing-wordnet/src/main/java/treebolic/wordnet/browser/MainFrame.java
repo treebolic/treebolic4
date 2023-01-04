@@ -292,7 +292,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 				try
 				{
 					DataManager dm = DataManager.getInstance();
-					URL zipUrl = DataManager.getSourceZipURL(which);
+					@Nullable URL zipUrl = DataManager.getSourceZipURL(which);
 					if (zipUrl == null)
 					{
 						throw new IOException("No resource for " + which);

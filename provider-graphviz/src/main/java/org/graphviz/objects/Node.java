@@ -54,6 +54,7 @@ public class Node
 	 *
 	 * @return the ID object
 	 */
+	@Nullable
 	public Id getId()
 	{
 		return this.id;

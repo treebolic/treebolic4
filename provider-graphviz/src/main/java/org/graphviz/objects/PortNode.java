@@ -99,6 +99,7 @@ public class PortNode
 	 *
 	 * @return the node object
 	 */
+	@Nullable
 	public Node getNode()
 	{
 		return this.node;

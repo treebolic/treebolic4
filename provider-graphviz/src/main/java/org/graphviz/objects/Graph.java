@@ -210,6 +210,7 @@ public class Graph
 	 *
 	 * @return the ID object
 	 */
+	@Nullable
 	public Id getId()
 	{
 		return this.id;
@@ -481,7 +482,7 @@ public class Graph
 	public Node findNode(@NonNull final Id id)
 	{
 		@Nullable Node n;
-		Id nid;
+		@Nullable Id nid;
 
 		for (Node node : this.nodes)
 		{

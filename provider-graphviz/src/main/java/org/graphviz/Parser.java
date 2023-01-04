@@ -111,7 +111,7 @@ public class Parser implements ParserConstants
 		nid.setId(id);
 		nid.setLabel(label);
 		Node n;
-		Id tid;
+		@Nullable Id tid;
 		for (Node node : this.nodeList)
 		{
 			n = node;
@@ -1516,6 +1516,7 @@ public class Parser implements ParserConstants
 	 * @return node
 	 * @throws ParseException parse exception
 	 */
+	@NonNull
 	final public Node node() throws ParseException
 	{
 		Token t;
@@ -3239,6 +3240,7 @@ public class Parser implements ParserConstants
 
 	private int jj_ntk;
 
+	@Nullable
 	private Token jj_scanpos, jj_lastpos;
 
 	private int jj_la;
@@ -3270,7 +3272,7 @@ public class Parser implements ParserConstants
 	 *
 	 * @param stream stream
 	 */
-	public Parser(final java.io.InputStream stream)
+	public Parser(@NonNull final java.io.InputStream stream)
 	{
 		this(stream, null);
 	}
@@ -3281,7 +3283,7 @@ public class Parser implements ParserConstants
 	 * @param stream   stream
 	 * @param encoding encoding
 	 */
-	public Parser(final java.io.InputStream stream, final String encoding)
+	public Parser(@NonNull final java.io.InputStream stream, final String encoding)
 	{
 		try
 		{
@@ -3310,7 +3312,7 @@ public class Parser implements ParserConstants
 	 *
 	 * @param stream stream
 	 */
-	public void ReInit(final java.io.InputStream stream)
+	public void ReInit(@NonNull final java.io.InputStream stream)
 	{
 		ReInit(stream, null);
 	}
@@ -3321,7 +3323,7 @@ public class Parser implements ParserConstants
 	 * @param stream   stream
 	 * @param encoding encoding
 	 */
-	public void ReInit(final java.io.InputStream stream, final String encoding)
+	public void ReInit(@NonNull final java.io.InputStream stream, final String encoding)
 	{
 		try
 		{

@@ -88,6 +88,7 @@ public class Edge
 	 *
 	 * @return the source node
 	 */
+	@Nullable
 	public PortNode getSource()
 	{
 		return this.source;
@@ -109,6 +110,7 @@ public class Edge
 	 *
 	 * @return the target node
 	 */
+	@Nullable
 	public PortNode getTarget()
 	{
 		return this.target;

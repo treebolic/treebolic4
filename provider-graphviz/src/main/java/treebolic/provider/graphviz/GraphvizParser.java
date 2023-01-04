@@ -278,8 +278,8 @@ public class GraphvizParser
 		for (@NonNull final Edge graphvizEdge : graphvizGraph.getEdges())
 		{
 			// get ends
-			final PortNode from = graphvizEdge.getSource();
-			final PortNode to = graphvizEdge.getTarget();
+			@Nullable final PortNode from = graphvizEdge.getSource();
+			@Nullable final PortNode to = graphvizEdge.getTarget();
 
 			// get end ids
 			@NonNull final String fromId = GraphvizParser.nodeId(from.getNode());
@@ -352,7 +352,7 @@ public class GraphvizParser
 	@NonNull
 	private static String nodeId(@NonNull final Node graphvizNode)
 	{
-		final Id graphvizId = graphvizNode.getId();
+		@Nullable final Id graphvizId = graphvizNode.getId();
 		String id = graphvizId.getId();
 		if (id != null && !id.isEmpty())
 		{
@@ -381,7 +381,7 @@ public class GraphvizParser
 			return label;
 		}
 
-		final Id graphvizId = graphvizNode.getId();
+		@Nullable final Id graphvizId = graphvizNode.getId();
 
 		label = graphvizId.getLabel();
 		if (label != null && !label.isEmpty())

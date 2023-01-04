@@ -1038,7 +1038,7 @@ public class ParserTokenManager implements ParserConstants
 	protected Token jjFillToken()
 	{
 		@NonNull final Token t;
-		final String curTokenImage;
+		@NonNull final String curTokenImage;
 		final int beginLine;
 		final int endLine;
 		final int beginColumn;
@@ -1076,6 +1076,7 @@ public class ParserTokenManager implements ParserConstants
 	 *
 	 * @return next token
 	 */
+	@NonNull
 	public Token getNextToken()
 	{
 		Token matchedToken;
