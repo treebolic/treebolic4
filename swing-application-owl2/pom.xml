@@ -30,7 +30,7 @@
 		</dependency>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
-			<artifactId>provider-owl2</artifactId>
+			<artifactId>provider-owl-owlapi2</artifactId>
 			<version>${revision}</version>
 		</dependency>
 	</dependencies>
