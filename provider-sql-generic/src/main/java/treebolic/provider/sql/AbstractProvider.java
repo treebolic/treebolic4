@@ -237,10 +237,12 @@ public abstract class AbstractProvider< //
 	/**
 	 * Initialize
 	 *
-	 * @param source0 source
+	 * @param source0    source
+	 * @param base       base url
+	 * @param parameters parameters
 	 * @return true if successful
 	 */
-	private boolean initialize(final String source0, final URL base, @NonNull final Properties parameters)
+	private boolean initialize(final String source0, final URL base, @Nullable final Properties parameters)
 	{
 		System.out.println("Sql provider source: " + source0);
 		String source = source0;
@@ -269,7 +271,7 @@ public abstract class AbstractProvider< //
 		// ensure query file if no properties
 		if (this.properties == null)
 		{
-			if (queryFile == null)
+			if (queryFile == null && parameters != null)
 			{
 				queryFile = parameters.getProperty("query");
 			}
@@ -289,7 +291,7 @@ public abstract class AbstractProvider< //
 			this.properties = url != null ? SqlProperties.load(url) : SqlProperties.load(queryFile);
 
 			// add parameters
-			if (this.properties != null)
+			if (this.properties != null && parameters != null)
 			{
 				this.properties.putAll(parameters);
 			}
@@ -345,7 +347,7 @@ public abstract class AbstractProvider< //
 
 	@Nullable
 	@Override
-	public Model makeModel(final String source, final URL base, @NonNull final Properties parameters)
+	public Model makeModel(final String source, final URL base, @Nullable final Properties parameters)
 	{
 		if (initialize(source, base, parameters))
 		{
@@ -356,7 +358,7 @@ public abstract class AbstractProvider< //
 
 	@Nullable
 	@Override
-	public Tree makeTree(final String source, final URL base, @NonNull final Properties parameters, final boolean checkRecursion)
+	public Tree makeTree(final String source, final URL base, @Nullable final Properties parameters, final boolean checkRecursion)
 	{
 		if (initialize(source, base, parameters))
 		{
