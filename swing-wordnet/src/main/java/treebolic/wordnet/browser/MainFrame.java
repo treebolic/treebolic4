@@ -77,6 +77,13 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		return provider;
 	}
 
+	@Override
+	@NonNull
+	protected treebolic.browser2.Context makeContext(final String source, final String base, final String imageBase, final String urlScheme)
+	{
+		return new Context(this, source, base, imageBase, true);
+	}
+
 	// M E N U
 
 	@NonNull
