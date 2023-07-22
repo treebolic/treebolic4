@@ -15,7 +15,11 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 
-import androidx.annotation.*;
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -38,16 +42,25 @@ public class Utils
 	@NonNull
 	static public int[] fetchColors(@NonNull final Context context, @NonNull int... attrs)
 	{
-		@NonNull final TypedValue typedValue = new TypedValue();
-		try (final TypedArray array = context.obtainStyledAttributes(typedValue.data, attrs))
+		final TypedValue typedValue = new TypedValue();
+		// try (final TypedArray array = context.obtainStyledAttributes(typedValue.data, attrs))
+		TypedArray array = null;
+		try
 		{
-			@NonNull final int[] colors = new int[attrs.length];
+			array = context.obtainStyledAttributes(typedValue.data, attrs);
+			final int[] colors = new int[attrs.length];
 			for (int i = 0; i < attrs.length; i++)
 			{
 				colors[i] = array.getColor(i, 0);
 			}
-			array.recycle();
 			return colors;
+		}
+		finally
+		{
+			if (array != null)
+			{
+				array.recycle();
+			}
 		}
 	}
 
@@ -62,16 +75,27 @@ public class Utils
 	/*
 	@SuppressWarnings("WeakerAccess")
 	@NonNull
-	static public int[] fetchColorsFromStyle(@NonNull final Context context,  @NonNull int styleId,  @NonNull int... colorAttrIds)
+	static public int[] fetchColorsFromStyle(@NonNull final Context context, @NonNull int styleId, @NonNull int... colorAttrIds)
 	{
-		final TypedArray array = context.obtainStyledAttributes(styleId, colorAttrIds);
-		final int[] colors = new int[colorAttrIds.length];
-		for (int i = 0; i < colorAttrIds.length; i++)
+		// try (final TypedArray array = context.obtainStyledAttributes(styleId, colorAttrIds))
+		TypedArray array = null;
+		try
 		{
-			colors[i] = array.getColor(i, 0);
+			array = context.obtainStyledAttributes(styleId, colorAttrIds);
+			final int[] colors = new int[colorAttrIds.length];
+			for (int i = 0; i < colorAttrIds.length; i++)
+			{
+				colors[i] = array.getColor(i, 0);
+			}
+			return colors;
 		}
-		array.recycle();
-		return colors;
+		finally
+		{
+			if (array != null)
+			{
+				array.recycle();
+			}
+		}
 	}
 	*/
 
@@ -85,16 +109,25 @@ public class Utils
 	@NonNull
 	static public Integer[] fetchColorsNullable(@NonNull final Context context, @NonNull @SuppressWarnings("SameParameterValue") int... attrs)
 	{
-		@NonNull final TypedValue typedValue = new TypedValue();
-		try (final TypedArray array = context.obtainStyledAttributes(typedValue.data, attrs))
+		final TypedValue typedValue = new TypedValue();
+		// try (final TypedArray array = context.obtainStyledAttributes(typedValue.data, attrs))
+		TypedArray array = null;
+		try
 		{
-			@NonNull final Integer[] colors = new Integer[attrs.length];
+			array = context.obtainStyledAttributes(typedValue.data, attrs);
+			final Integer[] colors = new Integer[attrs.length];
 			for (int i = 0; i < attrs.length; i++)
 			{
 				colors[i] = array.hasValue(i) ? array.getColor(i, 0) : null;
 			}
-			array.recycle();
 			return colors;
+		}
+		finally
+		{
+			if (array != null)
+			{
+				array.recycle();
+			}
 		}
 	}
 
@@ -165,8 +198,9 @@ public class Utils
 
 	/**
 	 * Tint drawable
+	 *
 	 * @param drawable drawable
-	 * @param tint tint
+	 * @param tint     tint
 	 */
 	static public void tint(@NonNull final Drawable drawable, @ColorInt int tint)
 	{
