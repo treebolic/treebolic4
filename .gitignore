@@ -1,5 +1,6 @@
 /target/
 /archive/
+/resources/
 **/target/
 **/data
 **/dependency-reduced-pom.xml
