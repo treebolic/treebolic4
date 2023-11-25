@@ -31,7 +31,7 @@ public class DataManager extends BaseDataManager
 
 	static private final String WN31_ARCHIVE = "/wordnet31.zip";
 
-	static private final String OEWN_ARCHIVE = "/oewn2022.zip";
+	static private final String OEWN_ARCHIVE = "/oewn2023.zip";
 
 	static private final String CACHESUBDIR = "wordnet";
 
