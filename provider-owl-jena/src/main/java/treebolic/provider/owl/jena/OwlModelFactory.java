@@ -664,7 +664,7 @@ public class OwlModelFactory implements ImageDecorator
 	{
 		OwlModelFactory.images = new String[ImageIndex.COUNT.ordinal()];
 		images[ImageIndex.ROOT.ordinal()] = "root.png";
-		images[ImageIndex.CLASS.ordinal()] = "class.png";
+		images[ImageIndex.CLASS.ordinal()] = "clazz.png";
 		images[ImageIndex.CLASSWITHINSTANCES.ordinal()] = "classwithinstances.png";
 		images[ImageIndex.INSTANCES.ordinal()] = "instances.png";
 		images[ImageIndex.INSTANCE.ordinal()] = "instance.png";
