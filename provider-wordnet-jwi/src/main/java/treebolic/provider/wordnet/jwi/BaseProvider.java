@@ -1687,6 +1687,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         @Nullable final INode rootNode = walk(query, true, edges);
 
         // result
+        if (rootNode == null)
+            return null;
         return new Tree(rootNode, edges);
     }
 
