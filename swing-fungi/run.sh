@@ -6,5 +6,5 @@
 
 here=`readlink -f $0`
 here=`dirname "${here}"`
-version=3.9.0
+version=4.1-1
 java -jar "${here}/treebolic-fungi-${version}.jar"
