@@ -159,7 +159,7 @@ public class Provider implements IProvider
 		SAXParser saxParser = factory.newSAXParser();
 
 		@NonNull Parser.SaxHandler handler = new Parser.SaxHandler();
-		try (InputStream is = url.openStream())
+		try (@NonNull InputStream is = url.openStream())
 		{
 			saxParser.parse(is, handler);
 			return handler.getResult();
@@ -189,7 +189,7 @@ public class Provider implements IProvider
 		SAXParser saxParser = factory.newSAXParser();
 
 		@NonNull Parser.SaxHandler handler = new Parser.SaxHandler();
-		try (InputStream is = url.openStream())
+		try (@NonNull InputStream is = url.openStream())
 		{
 			saxParser.parse(is, handler);
 			return handler.getResult().tree;

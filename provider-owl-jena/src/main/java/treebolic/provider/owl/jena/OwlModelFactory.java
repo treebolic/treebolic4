@@ -755,7 +755,7 @@ public class OwlModelFactory implements ImageDecorator
 		// load document
 		if (!argUrl.equals(url) || model == null || engine == null)
 		{
-			try (InputStream is = new URL(argUrl).openStream())
+			try (@NonNull InputStream is = new URL(argUrl).openStream())
 			{
 				model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
 				model.read(is, argUrl);

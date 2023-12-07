@@ -98,7 +98,7 @@ public class SqlProperties
 	@Nullable
 	static public Properties load(@NonNull final URL url)
 	{
-		try (InputStream is = url.openStream())
+		try (@NonNull InputStream is = url.openStream())
 		{
 			@NonNull final Properties properties = new Properties();
 			properties.load(is);

@@ -177,7 +177,7 @@ public class Provider implements IProvider
 	{
 		@NonNull final MutableGraph graph = new MutableGraph();
 		@NonNull final Map<String, MutableGraphNode> map = new HashMap<>();
-		try (InputStream is = url.openStream(); @NonNull BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
+		try (@NonNull InputStream is = url.openStream(); @NonNull BufferedReader reader = new BufferedReader(new InputStreamReader(is)))
 		{
 			// parse lines
 			String line;

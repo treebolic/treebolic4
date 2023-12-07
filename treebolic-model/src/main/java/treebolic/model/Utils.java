@@ -851,9 +851,9 @@ public class Utils
 	@NonNull
 	static public Properties load(@NonNull final URL url) throws IOException
 	{
-		@NonNull final Properties properties = new Properties();
-		try (InputStream is = url.openStream())
+		try (@NonNull InputStream is = url.openStream())
 		{
+			@NonNull final Properties properties = new Properties();
 			properties.load(is);
 			return properties;
 		}

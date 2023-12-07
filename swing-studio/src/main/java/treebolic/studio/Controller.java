@@ -699,7 +699,7 @@ public class Controller implements IContext, IProviderContext, SelectListener, C
 	{
 		@Nullable final URL dtdUrl = Dtd.class.getResource("Treebolic.dtd");
 		assert dtdUrl != null;
-		try (InputStream dtdIs = dtdUrl.openStream())
+		try (@NonNull InputStream dtdIs = dtdUrl.openStream())
 		{
 			@NonNull InputSource dtdSource = new InputSource(dtdIs);
 			@NonNull EntityResolver entityResolver = (publicId, systemId) -> dtdSource;

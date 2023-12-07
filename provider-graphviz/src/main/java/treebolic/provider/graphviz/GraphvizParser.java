@@ -37,7 +37,7 @@ public class GraphvizParser
 	@Nullable
 	public static Model parseModel(@NonNull final URL url)
 	{
-		try (InputStream is = url.openStream(); @NonNull InputStreamReader reader = new InputStreamReader(is))
+		try (@NonNull InputStream is = url.openStream(); @NonNull InputStreamReader reader = new InputStreamReader(is))
 		{
 			@NonNull final Parser parser = new Parser();
 			if (parser.parse(reader))
@@ -89,7 +89,7 @@ public class GraphvizParser
 	@Nullable
 	public static Tree parseTree(@NonNull final URL url)
 	{
-		try (InputStream is = url.openStream(); @NonNull InputStreamReader reader = new InputStreamReader(is))
+		try (@NonNull InputStream is = url.openStream(); @NonNull InputStreamReader reader = new InputStreamReader(is))
 		{
 			@NonNull final Parser parser = new Parser();
 			parser.parse(reader);
