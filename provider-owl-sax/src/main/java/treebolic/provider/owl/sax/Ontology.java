@@ -150,6 +150,8 @@ class Ontology
 
 		public String comment;
 
+		public String label;
+
 		public final Set<String> annotations = new HashSet<>();
 
 		public Resource(@NonNull final String iri)
