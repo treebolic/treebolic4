@@ -17,6 +17,8 @@
     <file url="file://$PROJECT_DIR$/provider-owl-owlapi2/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider-owl-sax/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider-owl-sax/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider-owl-sax2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider-owl-sax2/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider-sql-generic/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider-sql-generic/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider-sql-jdbc/src/main/java" charset="UTF-8" />
