@@ -10,6 +10,7 @@
       <excludeFolder url="file://$MODULE_DIR$/resources/wordnet/html" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/treebolic-glue-android/gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/treebolic-glue-android/build" />
     </content>
   </component>
 </module>
