@@ -202,7 +202,7 @@
 	</xsl:template>
 
 	<xsl:template
-		match="hypernym|hyponym|instance.hypernym|instance.hyponym|part.holonym|part.meronym|member.holonym|member.meronym|substance.holonym|substance.meronym|entail|cause">
+		match="hypernym|hyponym|hypernym_instance|hyponym_instance|holonym_part|meronym_part|holonym_member|meronym_member|holonym_substance|meronym_substance|entails|causes">
 		<xsl:element name="node">
 			<xsl:attribute name="id"><xsl:value-of select="generate-id()" /></xsl:attribute>
 			<xsl:element name="label">
