@@ -16,10 +16,10 @@ import treebolic.annotations.Nullable;
 public class SettingsDialog extends JDialog
 {
 	/**
-	 * Link panel
+	 * Relation panel
 	 */
 	@Nullable
-	private final LinkFilterSettingsPane linkFilterSettingsPane;
+	private final RelationFilterSettingsPane relationFilterSettingsPane;
 
 	/**
 	 * Color settings pane
@@ -48,22 +48,22 @@ public class SettingsDialog extends JDialog
 	 *
 	 * @param settings      settings
 	 * @param owner         frame owner
-	 * @param hasLinkFilter whether to put link filter settings panel
+	 * @param hasRelationFilter whether to put relation filter settings panel
 	 * @param hasColors     whether dialog has color settings panel
 	 */
-	public SettingsDialog(final Properties settings, final Frame owner, final boolean hasLinkFilter, final boolean hasColors)
+	public SettingsDialog(final Properties settings, final Frame owner, final boolean hasRelationFilter, final boolean hasColors)
 	{
 		super(owner);
-		this.linkFilterSettingsPane = hasLinkFilter ? new LinkFilterSettingsPane(settings) : null;
+		this.relationFilterSettingsPane = hasRelationFilter ? new RelationFilterSettingsPane(settings) : null;
 		this.colorsSettingsPane = hasColors ? new ColorSettingsPane(settings) : null;
 
 		setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
 		setTitle(Messages.getString("SettingsDialog.title"));
 
 		@NonNull final JTabbedPane tabbedPane = new JTabbedPane();
-		if (hasLinkFilter)
+		if (hasRelationFilter)
 		{
-			tabbedPane.add(Messages.getString("SettingsDialog.links"), this.linkFilterSettingsPane);
+			tabbedPane.add(Messages.getString("SettingsDialog.relations"), this.relationFilterSettingsPane);
 		}
 		if (hasColors)
 		{
@@ -139,9 +139,9 @@ public class SettingsDialog extends JDialog
 
 	private void save()
 	{
-		if (SettingsDialog.this.linkFilterSettingsPane != null)
+		if (SettingsDialog.this.relationFilterSettingsPane != null)
 		{
-			SettingsDialog.this.linkFilterSettingsPane.get();
+			SettingsDialog.this.relationFilterSettingsPane.get();
 		}
 		if (SettingsDialog.this.colorsSettingsPane != null)
 		{
@@ -154,9 +154,9 @@ public class SettingsDialog extends JDialog
 	{
 		if (show)
 		{
-			if (this.linkFilterSettingsPane != null)
+			if (this.relationFilterSettingsPane != null)
 			{
-				this.linkFilterSettingsPane.set();
+				this.relationFilterSettingsPane.set();
 			}
 			if (this.colorsSettingsPane != null)
 			{
@@ -204,7 +204,7 @@ public class SettingsDialog extends JDialog
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
-		System.out.println("FILTER: " + settings.getProperty(LinkReference.KEYRELATIONFILTER));
+		System.out.println("FILTER: " + settings.getProperty(RelationReference.KEYRELATIONFILTER));
 
 		System.exit(0);
 	}

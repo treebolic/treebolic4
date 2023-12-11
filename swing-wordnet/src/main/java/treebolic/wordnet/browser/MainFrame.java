@@ -99,7 +99,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		@Nullable final URL referenceIconUrl = treebolic.browser2.MainFrame.class.getResource("images/help.png");
 		assert referenceIconUrl != null;
 		referenceMenu.setIcon(new ImageIcon(referenceIconUrl));
-		for (@NonNull final LinkReference reference : LinkReference.values())
+		for (@NonNull final RelationReference reference : RelationReference.values())
 		{
 			final String key = reference.getHelpKey();
 			if (key == null)
@@ -143,7 +143,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		// filter
 		@NonNull final JMenuItem filterSettingsItem = new JMenuItem();
 		filterSettingsItem.setAccelerator(KeyStroke.getKeyStroke('L', InputEvent.ALT_DOWN_MASK));
-		filterSettingsItem.setText(Messages.getString("MainFrame.links"));
+		filterSettingsItem.setText(Messages.getString("MainFrame.relations"));
 		@Nullable final URL filterSettingsIconUrl = MainFrame.class.getResource("images/filter.png");
 		assert filterSettingsIconUrl != null;
 		filterSettingsItem.setIcon(new ImageIcon(filterSettingsIconUrl));
@@ -152,25 +152,25 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		menu.addSeparator();
 
 		// max
-		@NonNull final JMenuItem maxLinksItem = new JMenuItem();
-		maxLinksItem.setAccelerator(KeyStroke.getKeyStroke('M', InputEvent.ALT_DOWN_MASK));
-		maxLinksItem.setText(Messages.getString("MainFrame.maxlinks"));
-		@Nullable final URL maxLinksIconUrl = MainFrame.class.getResource("images/max.png");
-		assert maxLinksIconUrl != null;
-		maxLinksItem.setIcon(new ImageIcon(maxLinksIconUrl));
-		maxLinksItem.addActionListener(e -> {
-			final String string = ask(Messages.getString("MainFrame.maxlinks"), MainFrame.this.settings.getProperty("link_maxlinks"));//$NON-NLS-2$
+		@NonNull final JMenuItem maxRelationsItem = new JMenuItem();
+		maxRelationsItem.setAccelerator(KeyStroke.getKeyStroke('M', InputEvent.ALT_DOWN_MASK));
+		maxRelationsItem.setText(Messages.getString("MainFrame.maxrelations"));
+		@Nullable final URL maxRelationsIconUrl = MainFrame.class.getResource("images/max.png");
+		assert maxRelationsIconUrl != null;
+		maxRelationsItem.setIcon(new ImageIcon(maxRelationsIconUrl));
+		maxRelationsItem.addActionListener(e -> {
+			final String string = ask(Messages.getString("MainFrame.maxrelationss"), MainFrame.this.settings.getProperty("relation_maxrelations"));//$NON-NLS-2$
 			try
 			{
 				Integer.parseInt(string);
-				MainFrame.this.settings.setProperty("link_maxlinks", string);
+				MainFrame.this.settings.setProperty("relation_maxrelations", string);
 			}
 			catch (final NumberFormatException e2)
 			{
 				//
 			}
 		});
-		menu.add(maxLinksItem);
+		menu.add(maxRelationsItem);
 		@NonNull final JMenuItem maxRecurseItem = new JMenuItem();
 		maxRecurseItem.setAccelerator(KeyStroke.getKeyStroke('R', InputEvent.ALT_DOWN_MASK));
 		maxRecurseItem.setText(Messages.getString("MainFrame.maxrecurse"));
@@ -178,11 +178,11 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		assert maxRecurseIconUrl != null;
 		maxRecurseItem.setIcon(new ImageIcon(maxRecurseIconUrl));
 		maxRecurseItem.addActionListener(e -> {
-			final String string = ask(Messages.getString("MainFrame.maxrecurse"), MainFrame.this.settings.getProperty("link_maxrecurse"));//$NON-NLS-2$
+			final String string = ask(Messages.getString("MainFrame.maxrecurse"), MainFrame.this.settings.getProperty("relation_maxrecurse"));//$NON-NLS-2$
 			try
 			{
 				Integer.parseInt(string);
-				MainFrame.this.settings.setProperty("link_maxrecurse", string);
+				MainFrame.this.settings.setProperty("relation_maxrecurse", string);
 			}
 			catch (final NumberFormatException e2)
 			{
@@ -330,7 +330,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	 */
 	private void filterSettings()
 	{
-		@NonNull final LinkFilterSettingsDialog dialog = new LinkFilterSettingsDialog(this.settings, null);
+		@NonNull final RelationFilterSettingsDialog dialog = new RelationFilterSettingsDialog(this.settings, null);
 		dialog.setModal(false);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
@@ -350,7 +350,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	protected void help()
 	{
 		@NonNull final JComponent pane = makeBrowserPane(this.getClass().getResource("doc/index.html"), true);
-		addTab(pane, Messages.getString("MainFrame.help"), Messages.getString("MainFrame.helplinks"));//$NON-NLS-2$
+		addTab(pane, Messages.getString("MainFrame.help"), Messages.getString("MainFrame.helprelations"));//$NON-NLS-2$
 	}
 
 	/**
