@@ -24,6 +24,6 @@ public class Provider extends treebolic.provider.wordnet.jwi.condensed.Provider
 	public Provider() throws IOException
 	{
 		super();
-		this.features |= FEATURE_TYPEDLINK_RAISE_RECURSE_AS_SIBLING;
+		this.features |= FEATURE_TYPEDRELATION_RAISE_RECURSE_AS_SIBLING;
 	}
 }

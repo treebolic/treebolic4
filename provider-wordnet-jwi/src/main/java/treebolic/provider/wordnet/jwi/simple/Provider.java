@@ -35,7 +35,7 @@ public class Provider extends BaseProvider implements IProvider
 	public Provider() throws IOException
 	{
 		super();
-		this.features |= FEATURE_COLLAPSE_CATEGORIES | FEATURE_SYNSET_FORGET_MEMBERS_NODE_IF_SINGLE_MEMBER | FEATURE_SEMLINKS_MERGE_SINGLE_LINKED_SYNSET_TO_LINK;
+		this.features |= FEATURE_COLLAPSE_CATEGORIES | FEATURE_SYNSET_FORGET_MEMBERS_NODE_IF_SINGLE_MEMBER | FEATURE_SEMRELATIONS_MERGE_SINGLE_RELATED_SYNSET_TO_RELATION;
 	}
 
 	// S E T T I N G S
@@ -121,13 +121,13 @@ public class Provider extends BaseProvider implements IProvider
 				// sense node
 				@NonNull final TreeMutableNode senseNode = makeSenseNode(posNode, senseData, tagCountTotal);
 
-				// synset node (ignore links)
+				// synset node (ignore relations)
 				walkSynset(senseNode, senseData.synset, i, 0);
 
-				// links
-				final Map<IPointer, List<ISynsetID>> semLinks = senseData.synset.synset.getRelatedMap();
-				final Map<IPointer, List<IWordID>> lexLinks = senseData.sense.getRelatedMap();
-				walkLinks(senseNode, semLinks, lexLinks, i, 0, recurse, edges);
+				// relations
+				final Map<IPointer, List<ISynsetID>> semRelations = senseData.synset.synset.getRelatedMap();
+				final Map<IPointer, List<IWordID>> lexRelations = senseData.sense.getRelatedMap();
+				walkRelations(senseNode, semRelations, lexRelations, i, 0, recurse, edges);
 
 				// sense filter
 				if (senseFilter != null)

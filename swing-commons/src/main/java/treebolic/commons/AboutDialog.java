@@ -31,7 +31,7 @@ public class AboutDialog extends JDialog
 	/**
 	 * Copyright notice
 	 */
-	static final String copyright = "Copyright © 2001-2017";
+	static final String copyright = "Copyright © 2001-2024";
 
 	/**
 	 * Constructor

@@ -27,7 +27,7 @@ public class Provider extends treebolic.provider.wordnet.jwi.simple.Provider
 	public Provider() throws IOException
 	{
 		super();
-		this.features |= FEATURE_COLLAPSE_LINKS;
+		this.features |= FEATURE_COLLAPSE_RELATIONS;
 	}
 
 	// S E T T I N G S

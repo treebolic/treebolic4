@@ -39,7 +39,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
     static protected final long FEATURE_COLLAPSE_CATEGORIES = 0x00000001; // forget 'category' node
 
-    static protected final long FEATURE_COLLAPSE_LINKS = 0x00000002; // forget 'links' node
+    static protected final long FEATURE_COLLAPSE_RELATIONS = 0x00000002; // forget 'relations' node
 
     static protected final long FEATURE_SYNSET_FORGET_MEMBERS_NODE = 0x00000010; // attach all members to parent without 'members' node
 
@@ -47,19 +47,19 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
     static protected final long FEATURE_SYNSET_MERGE_SINGLE_MEMBER_TO_PARENT_IF_NOT_BASE_LEVEL = 0x00000040; // raise and coalesce single member with parent
 
-    static protected final long FEATURE_TYPEDLINK_RAISE_SINGLE_MEMBER_TO_SYNSET = 0x00000100;
+    static protected final long FEATURE_TYPEDRELATION_RAISE_SINGLE_MEMBER_TO_SYNSET = 0x00000100;
 
-    static protected final long FEATURE_TYPEDLINK_FORGET_LINK_NODE = 0x00000200;
+    static protected final long FEATURE_TYPEDRELATION_FORGET_RELATION_NODE = 0x00000200;
 
-    static protected final long FEATURE_TYPEDLINK_RAISE_RECURSE_AS_SIBLING = 0x00000400;
+    static protected final long FEATURE_TYPEDRELATION_RAISE_RECURSE_AS_SIBLING = 0x00000400;
 
-    static protected final long FEATURE_LINKEDSYNSET1_FORGET_LINK_NODE = 0x00001000; // attach linked synset to parent without 'link' node
+    static protected final long FEATURE_RELATEDSYNSET1_FORGET_RELATION_NODE = 0x00001000; // attach related synset to parent without 'relation' node
 
-    static protected final long FEATURE_SEMLINKS_MERGE_SINGLE_LINKED_SYNSET_TO_LINK = 0x00002000; // raise and coalesce single linked synset with 'link' node
+    static protected final long FEATURE_SEMRELATIONS_MERGE_SINGLE_RELATED_SYNSET_TO_RELATION = 0x00002000; // raise and coalesce single related synset with 'relation' node
 
     static protected final long FEATURE_MULTILINE_RAISE_MEMBERS_TO_SYNSET = 0x10000000; // multiple line label
 
-    static protected final long FEATURE_MULTILINE_RAISE_MEMBERS_TO_LINKED_SYNSET = 0x20000000; // multiple line label
+    static protected final long FEATURE_MULTILINE_RAISE_MEMBERS_TO_RELATED_SYNSET = 0x20000000; // multiple line label
 
     // L A B E L S
 
@@ -79,19 +79,19 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     static public final String LABEL_SYNSET = "synset";
 
     /**
-     * Label links
+     * Label relations
      */
-    static public final String LABEL_LINKS = "links";
+    static public final String LABEL_RELATIONS = "relations";
 
     /**
      * Label words
      */
-    static public final String LABEL_MEMBERS = "words";
+    static public final String LABEL_WORDS = "words";
 
     /**
      * Label word
      */
-    static public final String LABEL_MEMBER = "word";
+    static public final String LABEL_WORD = "word";
 
     /**
      * Label stem
@@ -107,22 +107,22 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     static protected final int EDGE_STYLE_TREE = IEdge.SOLID | IEdge.FROMTRIANGLE | IEdge.FROMFILL;
 
     @SuppressWarnings({"WeakerAccess"})
-    static protected final int EDGE_STYLE_MEMBER = IEdge.DASH | IEdge.STROKEDEF | IEdge.TOCIRCLE | IEdge.TOFILL | IEdge.TODEF;
+    static protected final int EDGE_STYLE_WORD = IEdge.DASH | IEdge.STROKEDEF | IEdge.TOCIRCLE | IEdge.TOFILL | IEdge.TODEF;
 
     @SuppressWarnings({"WeakerAccess"})
-    static protected final int EDGE_STYLE_MEMBERS = IEdge.SOLID | IEdge.STROKEDEF | IEdge.TOCIRCLE | IEdge.TOFILL | IEdge.TODEF;
+    static protected final int EDGE_STYLE_WORDS = IEdge.SOLID | IEdge.STROKEDEF | IEdge.TOCIRCLE | IEdge.TOFILL | IEdge.TODEF;
 
     @SuppressWarnings({"WeakerAccess"})
     static protected final int EDGE_STYLE_SYNSET = IEdge.SOLID | IEdge.STROKEDEF | IEdge.TOCIRCLE | IEdge.TOFILL | IEdge.TODEF;
 
     @SuppressWarnings({"WeakerAccess"})
-    static protected final int EDGE_STYLE_LINK = IEdge.SOLID | IEdge.STROKEDEF | IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.TODEF | IEdge.FROMDEF;
+    static protected final int EDGE_STYLE_RELATION = IEdge.SOLID | IEdge.STROKEDEF | IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.TODEF | IEdge.FROMDEF;
 
     @SuppressWarnings({"WeakerAccess"})
     static protected final int EDGE_STYLE_LEX = IEdge.SOLID | IEdge.STROKEDEF;
 
     @SuppressWarnings({"WeakerAccess"})
-    static protected final int EDGE_STYLE_LINKS = IEdge.SOLID | IEdge.STROKEDEF | IEdge.FROMCIRCLE | IEdge.FROMFILL | IEdge.FROMDEF;
+    static protected final int EDGE_STYLE_RELATIONS = IEdge.SOLID | IEdge.STROKEDEF | IEdge.FROMCIRCLE | IEdge.FROMFILL | IEdge.FROMDEF;
 
     @SuppressWarnings({"WeakerAccess"})
     static protected final int EDGE_STYLE_ETC = IEdge.DOT | IEdge.STROKEDEF | IEdge.TOTRIANGLE | IEdge.TOFILL | IEdge.TODEF;
@@ -145,15 +145,15 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     // L I N K S
 
     /**
-     * WordNet link/relation
+     * WordNet relation
      */
-    public enum Link
+    public enum Relation
     {
         // @formatter:off
 		/** Hypernym */ HYPERNYM(Pointer.HYPERNYM, "+ generic", "hypernym", ImageIndex.HYPERNYM.ordinal(), true), //
-		/** Hypernym instance */ HYPERNYM_INSTANCE(Pointer.HYPERNYM_INSTANCE, "hypernym instance", "hypernym", ImageIndex.HYPERNYM_INSTANCE.ordinal(), false), //
+		/** Hypernym instance */ HYPERNYM_INSTANCE(Pointer.HYPERNYM_INSTANCE, "instance hypernym", "hypernym", ImageIndex.HYPERNYM_INSTANCE.ordinal(), false), //
 		/** Hyponym */ HYPONYM(Pointer.HYPONYM, "+ specific", "hyponym", ImageIndex.HYPONYM.ordinal(), true), //
-		/** Hyponym instance */ HYPONYM_INSTANCE(Pointer.HYPONYM_INSTANCE, "hyponym instance", "hyponym", ImageIndex.HYPONYM_INSTANCE.ordinal(), false), //
+		/** Hyponym instance */ HYPONYM_INSTANCE(Pointer.HYPONYM_INSTANCE, "instance hyponym", "hyponym", ImageIndex.HYPONYM_INSTANCE.ordinal(), false), //
 
 		/** Member holonym */ HOLONYM_MEMBER(Pointer.HOLONYM_MEMBER, "is member of", "holonym", ImageIndex.HOLONYM_MEMBER.ordinal(), true), //
 		/** Substance holonym */ HOLONYM_SUBSTANCE(Pointer.HOLONYM_SUBSTANCE, "is substance of", "holonym", ImageIndex.HOLONYM_SUBSTANCE.ordinal(), true), //
@@ -165,30 +165,30 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
 		/** Antonym */ ANTONYM(Pointer.ANTONYM, "opposite", "antonym", ImageIndex.ANTONYM.ordinal(), false), //
 
-		/** Entails */ ENTAILS(Pointer.ENTAILMENT, "entails", "entail", ImageIndex.ENTAILMENT.ordinal(), true), //
-		/** Is entailed by */ IS_ENTAILED_BY(Pointer.IS_ENTAILED, "is entailed by", "entailed", ImageIndex.IS_ENTAILED_BY.ordinal(), true), //
-		/** Causes */ CAUSES(Pointer.CAUSE, "causes", "cause", ImageIndex.CAUSE.ordinal(), true), //
-		/** Is caused by */ IS_CAUSED_BY(Pointer.IS_CAUSED, "is caused by", "caused", ImageIndex.IS_CAUSED_BY.ordinal(), true), //
+		/** Entails */ ENTAILS(Pointer.ENTAILMENT, "entails", "entails", ImageIndex.ENTAILS.ordinal(), true), //
+		/** Is entailed by */ ENTAILED(Pointer.IS_ENTAILED, "is entailed by", "entailed", ImageIndex.IS_ENTAILED_BY.ordinal(), true), //
+		/** Causes */ CAUSES(Pointer.CAUSE, "causes", "causes", ImageIndex.CAUSES.ordinal(), true), //
+		/** Is caused by */ CAUSED(Pointer.IS_CAUSED, "is caused by", "caused", ImageIndex.CAUSED.ordinal(), true), //
 
-		/** Similar to */ SIMILAR_TO(Pointer.SIMILAR_TO, "similar to", "similar", ImageIndex.SIMILAR_TO.ordinal(), false), //
-		/** Also see */ ALSO_SEE(Pointer.ALSO_SEE, "also see", "alsosee", ImageIndex.ALSO_SEE.ordinal(), false), //
+		/** Similar to */ SIMILAR_TO(Pointer.SIMILAR_TO, "similar to", "similar", ImageIndex.SIMILAR.ordinal(), false), //
+		/** Also */ ALSO(Pointer.ALSO_SEE, "also see", "also", ImageIndex.ALSO.ordinal(), false), //
 		/** Attribute */ ATTRIBUTE(Pointer.ATTRIBUTE, "attribute", "attribute", ImageIndex.ATTRIBUTE.ordinal(), false), //
 		/** Pertainym */ PERTAINYM(Pointer.PERTAINYM, "pertains to", "pertainym", ImageIndex.PERTAINYM.ordinal(), false), //
-		/** Derivationally related */ DERIVATIONALLY_RELATED(Pointer.DERIVATIONALLY_RELATED, "derivation", "derivation", ImageIndex.DERIVATIONALLY_RELATED.ordinal(), false), //
-		/** Derived from adjective */ DERIVED_FROM_ADJ(Pointer.DERIVED_FROM_ADJ, "derived from", "adjderived", ImageIndex.DERIVED_FROM_ADJ.ordinal(), false), //
+		/** Derivation */ DERIVATION(Pointer.DERIVATIONALLY_RELATED, "derivation", "derivation", ImageIndex.DERIVATION.ordinal(), false), //
+		/** Derived from adjective */ DERIVATION_ADJ(Pointer.DERIVED_FROM_ADJ, "derived from adjective", "derivation_adj", ImageIndex.DERIVATION_ADJ.ordinal(), false), //
 
-		/** Verb group */ VERB_GROUP(Pointer.VERB_GROUP, "verb group", "verbgroup", ImageIndex.VERB_GROUP.ordinal(), false), //
+		/** Verb group */ VERB_GROUP(Pointer.VERB_GROUP, "verb group", "verbgroup", ImageIndex.VERBGROUP.ordinal(), false), //
 		/** Participle */ PARTICIPLE(Pointer.PARTICIPLE, "participle", "participle", ImageIndex.PARTICIPLE.ordinal(), false), //
 
 		/** Domain */ DOMAIN(Pointer.DOMAIN, "domain", "domain", ImageIndex.DOMAIN.ordinal(), false), //
-		/** Topic */ TOPIC(Pointer.TOPIC, "domain-topic", "domain", ImageIndex.TOPIC.ordinal(), false), //
-		/** Usage */ USAGE(Pointer.USAGE, "domain-usage", "domain", ImageIndex.USAGE.ordinal(), false), //
-		/** Region */ REGION(Pointer.REGION, "domain-region", "domain", ImageIndex.REGION.ordinal(), false), //
+		/** Topic */ DOMAIN_TOPIC(Pointer.TOPIC, "domain topic", "domain", ImageIndex.DOMAIN_TOPIC.ordinal(), false), //
+		/** Usage */ DOMAIN_USAGE(Pointer.USAGE, "is exemplified by", "domain", ImageIndex.DOMAIN_USAGE.ordinal(), false), //
+		/** Region */ DOMAIN_REGION(Pointer.REGION, "domain region", "domain", ImageIndex.DOMAIN_REGION.ordinal(), false), //
 
-		/** Member */ MEMBER(Pointer.MEMBER, "domain member", "member", ImageIndex.MEMBER.ordinal(), false), //
-		/** Topic member */ TOPIC_MEMBER(Pointer.TOPIC_MEMBER, "member-topic", "member", ImageIndex.TOPIC_MEMBER.ordinal(), false), //
-		/** Usage member */ USAGE_MEMBER(Pointer.USAGE_MEMBER, "member-usage", "member", ImageIndex.USAGE_MEMBER.ordinal(), false), //
-		/** Region member */ REGION_MEMBER(Pointer.REGION_MEMBER, "member-region", "member", ImageIndex.REGION_MEMBER.ordinal(), false); //
+		/** Member */ HASDOMAIN(Pointer.MEMBER, "has domain", "has domain", ImageIndex.HASDOMAIN.ordinal(), false), //
+		/** Topic member */ HASDOMAIN_TOPIC(Pointer.TOPIC_MEMBER, "has topic", "hasdomain", ImageIndex.HASDOMAIN_TOPIC.ordinal(), false), //
+		/** Usage member */ HASDOMAIN_USAGE(Pointer.USAGE_MEMBER, "exemplifies", "hasdomain", ImageIndex.HASDOMAIN_USAGE.ordinal(), false), //
+		/** Region member */ HASDOMAIN_REGION(Pointer.REGION_MEMBER, "has region", "hasdomain", ImageIndex.HASDOMAIN_REGION.ordinal(), false); //
 		// @formatter:on
 
         /**
@@ -225,7 +225,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
          * @param imageIndex image index
          * @param recurses   recurses flag
          */
-        Link(final Pointer pointer, final String label, final String tag, final int imageIndex, final boolean recurses)
+        Relation(final Pointer pointer, final String label, final String tag, final int imageIndex, final boolean recurses)
         {
             this.pointer = pointer;
             this.label = label;
@@ -237,7 +237,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         /**
          * Mask
          *
-         * @return link mask
+         * @return relation mask
          */
         public long mask()
         {
@@ -248,7 +248,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
          * Test
          *
          * @param bitmap bits
-         * @return true if the link's bit is set
+         * @return true if the relation's bit is set
          */
         @SuppressWarnings({"BooleanMethodIsAlwaysInverted", "WeakerAccess"})
         public boolean test(final long bitmap)
@@ -257,13 +257,13 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         }
 
         /**
-         * Parse pointer for link
+         * Parse pointer for relation
          *
          * @param pointer pointer
-         * @return link
+         * @return relation
          */
         @NonNull
-        static public Link valueOf(@NonNull final IPointer pointer)
+        static public Relation valueOf(@NonNull final IPointer pointer)
         {
             final String symbol = pointer.getSymbol();
             switch (symbol.charAt(0))
@@ -271,16 +271,16 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
                 case '@':
                     if (symbol.length() > 1 && symbol.charAt(1) == 'i')
                     {
-                        return Link.HYPERNYM_INSTANCE;
+                        return Relation.HYPERNYM_INSTANCE;
                     }
-                    return Link.HYPERNYM;
+                    return Relation.HYPERNYM;
 
                 case '~':
                     if (symbol.length() > 1 && symbol.charAt(1) == 'i')
                     {
-                        return Link.HYPONYM_INSTANCE;
+                        return Relation.HYPONYM_INSTANCE;
                     }
-                    return Link.HYPONYM;
+                    return Relation.HYPONYM;
 
                 case '#':
                     if (symbol.length() > 1)
@@ -288,11 +288,11 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
                         switch (symbol.charAt(1))
                         {
                             case 'm':
-                                return Link.HOLONYM_MEMBER;
+                                return Relation.HOLONYM_MEMBER;
                             case 's':
-                                return Link.HOLONYM_SUBSTANCE;
+                                return Relation.HOLONYM_SUBSTANCE;
                             case 'p':
-                                return Link.HOLONYM_PART;
+                                return Relation.HOLONYM_PART;
                         }
                     }
                     break;
@@ -303,58 +303,58 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
                         switch (symbol.charAt(1))
                         {
                             case 'm':
-                                return Link.MERONYM_MEMBER;
+                                return Relation.MERONYM_MEMBER;
                             case 's':
-                                return Link.MERONYM_SUBSTANCE;
+                                return Relation.MERONYM_SUBSTANCE;
                             case 'p':
-                                return Link.MERONYM_PART;
+                                return Relation.MERONYM_PART;
                         }
                     }
                     break;
 
                 case '^':
-                    return Link.ALSO_SEE;
+                    return Relation.ALSO;
 
                 case '!':
-                    return Link.ANTONYM;
+                    return Relation.ANTONYM;
 
                 case '>':
                     if (symbol.length() > 1 && symbol.charAt(1) == '^')
                     {
-                        return Link.IS_CAUSED_BY;
+                        return Relation.CAUSED;
                     }
-                    return Link.CAUSES;
+                    return Relation.CAUSES;
 
                 case '*':
                     if (symbol.length() > 1 && symbol.charAt(1) == '^')
                     {
-                        return Link.IS_ENTAILED_BY;
+                        return Relation.ENTAILED;
                     }
-                    return Link.ENTAILS;
+                    return Relation.ENTAILS;
 
                 case '<':
-                    return Link.PARTICIPLE;
+                    return Relation.PARTICIPLE;
 
                 case '$':
-                    return Link.VERB_GROUP;
+                    return Relation.VERB_GROUP;
 
                 case '&':
-                    return Link.SIMILAR_TO;
+                    return Relation.SIMILAR_TO;
 
                 case '=':
-                    return Link.ATTRIBUTE;
+                    return Relation.ATTRIBUTE;
 
                 case '+':
-                    return Link.DERIVATIONALLY_RELATED;
+                    return Relation.DERIVATION;
 
                 case '\\':
                     if (pointer.getName().startsWith("Pertainym"))
                     {
-                        return Link.PERTAINYM;
+                        return Relation.PERTAINYM;
                     }
                     else if (pointer.getName().startsWith("Derived from adjective"))
                     {
-                        return Link.DERIVED_FROM_ADJ;
+                        return Relation.DERIVATION_ADJ;
                     }
                     break;
 
@@ -364,14 +364,14 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
                         switch (symbol.charAt(1))
                         {
                             case 'r':
-                                return Link.REGION;
+                                return Relation.DOMAIN_REGION;
                             case 'c':
-                                return Link.TOPIC;
+                                return Relation.DOMAIN_TOPIC;
                             case 'u':
-                                return Link.USAGE;
+                                return Relation.DOMAIN_USAGE;
                         }
                     }
-                    return Link.DOMAIN;
+                    return Relation.DOMAIN;
 
                 case '-':
                     if (symbol.length() > 1)
@@ -379,16 +379,16 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
                         switch (symbol.charAt(1))
                         {
                             case 'r':
-                                return Link.REGION_MEMBER;
+                                return Relation.HASDOMAIN_REGION;
 
                             case 'c':
-                                return Link.TOPIC_MEMBER;
+                                return Relation.HASDOMAIN_TOPIC;
 
                             case 'u':
-                                return Link.USAGE_MEMBER;
+                                return Relation.HASDOMAIN_USAGE;
                         }
                     }
-                    return Link.MEMBER;
+                    return Relation.HASDOMAIN;
 
                 default:
             }
@@ -404,7 +404,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     public enum ImageIndex
     {
         // @formatter:off
-		/** Root */ ROOT, /** POS */ POS, /** Category */ CATEGORY, /** Sense */ SENSE, /** Synset */ SYNSET,/** Members */  MEMBERS, /** Links */ LINKS, /** Word */ WORD,
+		/** Root */ ROOT, /** POS */ POS, /** Category */ CATEGORY, /** Sense */ SENSE, /** Synset */ SYNSET, /** Words */ WORDS, /** Word */ WORD,/** Relations */  RELATIONS,
 
 		/** Hypernym */ HYPERNYM, //
 		/** Hypernym instance */ HYPERNYM_INSTANCE, //
@@ -421,82 +421,97 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
 		/** Antonym */ ANTONYM, //
 
-		/** Entails */ ENTAILMENT, //
+		/** Entails */ ENTAILS, //
 		/** Is entailed by */ IS_ENTAILED_BY, //
-		/** Causes */ CAUSE, //
-		/** Is caused by */ IS_CAUSED_BY, //
-		/** Verb group */ VERB_GROUP, //
+		/** Causes */ CAUSES, //
+		/** Is caused by */ CAUSED, //
+		/** Verb group */ VERBGROUP, //
 		/** Participle */ PARTICIPLE, //
 
-		/** Similar to */ SIMILAR_TO, //
-		/** Also see */ ALSO_SEE, //
+		/** Similar to */ SIMILAR, //
+		/** Also see */ ALSO, //
 		/** Attribute */ ATTRIBUTE, //
 		/** Pertainym */ PERTAINYM, //
-		/** Derivationally related */ DERIVATIONALLY_RELATED, //
-		/** Derived from adjective */ DERIVED_FROM_ADJ, //
+		/** Derivationally related */ DERIVATION, //
+		/** Derived from adjective */ DERIVATION_ADJ, //
 
 		/** Domain */ DOMAIN, //
-		/** Topic */ TOPIC, //
-		/** Usage */ USAGE, //
-		/** Region */ REGION, //
+		/** Topic */ DOMAIN_TOPIC, //
+		/** Usage */ DOMAIN_USAGE, //
+		/** Region */ DOMAIN_REGION, //
 
-		/** Member */ MEMBER, //
-		/** Topic member */ TOPIC_MEMBER, //
-		/** Usage member */ USAGE_MEMBER, //
-		/** Region member */ REGION_MEMBER, //
+		/** Member */ HASDOMAIN, //
+		/** Topic member */ HASDOMAIN_TOPIC, //
+		/** Usage member */ HASDOMAIN_USAGE, //
+		/** Region member */ HASDOMAIN_REGION, //
 		// @formatter:on
     }
 
     @Nullable
     static protected final String[] images = new String[]{ //
-            "focus.png", // FOCUS
+            "root.png", // ROOT
 
             "pos.png", // POS
             "category.png", // CATEGORY
             "sense.png", // SENSE
             "synset.png", // SYNSET
-            "members.png", // MEMBERS
-            "links.png", // LINKS
-            "item.png", // WORD
+            "words.png", // WORDS
+            "word.png", // WORD
+            "relations.png", // RELATIONS
 
             "hypernym.png", // HYPERNYM
-            "instance.hypernym.png", // HYPERNYM_INSTANCE
+            "hypernym_instance.png", // HYPERNYM_INSTANCE
             "hyponym.png", // HYPONYM
-            "instance.hyponym.png", // HYPONYM_INSTANCE
+            "hyponym_instance.png", // HYPONYM_INSTANCE
 
-            "member.holonym.png", // HOLONYM_MEMBER
-            "substance.holonym.png", // HOLONYM_SUBSTANCE
-            "part.holonym.png", // HOLONYM_PART
+            "holonym_member.png", // HOLONYM_MEMBER
+            "holonym_substance.png", // HOLONYM_SUBSTANCE
+            "holonym_part.png", // HOLONYM_PART
 
-            "member.meronym.png", // MERONYM_MEMBER
-            "substance.meronym.png", // MERONYM_SUBSTANCE
-            "part.meronym.png", // MERONYM_PART
+            "meronym_member.png", // MERONYM_MEMBER
+            "meronym_substance.png", // MERONYM_SUBSTANCE
+            "meronym_part.png", // MERONYM_PART
 
             "antonym.png", // ANTONYM
 
-            "entail.png", // ENTAILS
+            "entails.png", // ENTAILS
             "entailed.png", // ENTAILED
-            "cause.png", // CAUSE
+            "causes.png", // CAUSE
             "caused.png", // CAUSED
-            "verb.group.png", // VERB_GROUP
+            "verbgroup.png", // VERBGROUP
             "participle.png", // PARTICIPLE
 
             "similar.png", // SIMILAR_TO
-            "also.png", // ALSO_SEE
+            "also.png", // ALSO
             "attribute.png", // ATTRIBUTE
             "pertainym.png", // PERTAINYM
-            "derivation.png", // DERIVATIONALLY_RELATED
-            "adjderived.png", // DERIVED_FROM_ADJ
+            "derivation.png", // DERIVATION
+            "derivation_adj.png", // DERIVATION_ADJ
 
-            "domain.png", // DOMAIN
-            "domain.category.png", // TOPIC
-            "domain.usage.png", // USAGE
-            "domain.region.png", // REGION
+            "domain.png", // DOMAIN IS_DOMAIN
+            "domain_topic.png", // TOPIC DOMAIN_TOPIC IS_DOMAIN_TOPIC ;c
+            "domain_usage.png", // USAGE DOMAIN_USAGE IS_EXEMPLIFIED_BY ;u
+            "domain_region.png", // REGION DOMAIN_REGION IS_DOMAIN_REGION ;r
 
-            "domain.member.png", // MEMBER
-            "domain.member.category.png", // TOPIC_MEMBER
-            "domain.member.usage.png", // USAGE_MEMBER
-            "domain.member.region.png",// REGION_MEMBER
+            "hasdomain_png", // MEMBER HASDOMAIN
+            "hasdomain_topic.png", // TOPIC_MEMBER HASDOMAIN_TOPIC -c
+            "hasdomain_usage.png", // USAGE_MEMBER HASDOMAIN_USAGE EXEMPLIFIES -u
+            "hasdomain_region.png",// REGION_MEMBER HASDOMAIN_REGION -r
+
+            "role_agent.png", // ROLE_AGENT
+            "role_bodypart.png", // ROLE_BODYPART
+            "role_bymeansof.png", // ROLE_BYMEANSOF
+            "role_destination.png", // ROLE_DESTINATION
+            "role_event.png", // ROLE_EVENT
+            "role_instrument.png", // ROLE_INSTRUMENT
+            "role_location.png", // ROLE_LOCATION
+            "role_material.png", // ROLE_MATERIAL
+            "role_property.png", // ROLE_PROPERTY
+            "role_result.png", // ROLE_RESULT
+            "role_state.png", // ROLE_STATE
+            "role_undergoer.png", // ROLE_UNDERGOER
+            "role_uses.png", // ROLE_USES
+            "role_vehicle.png", // ROLE_VEHICLE
     };
 
     /**
@@ -606,34 +621,34 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     static public final int SYNSETEDGE_IDX = 15;
 
     /**
-     * Links background index
+     * Relations background index
      */
-    static public final int LINKSBACKGROUND_IDX = 16;
+    static public final int RELATIONSBACKGROUND_IDX = 16;
 
     /**
-     * Links foreground index
+     * Relations foreground index
      */
-    static public final int LINKSFOREGROUND_IDX = 17;
+    static public final int RELATIONSFOREGROUND_IDX = 17;
 
     /**
-     * Links edge index
+     * Relations edge index
      */
-    static public final int LINKSEDGE_IDX = 18;
+    static public final int RELATIONSEDGE_IDX = 18;
 
     /**
-     * Link background index
+     * Relation background index
      */
-    static public final int LINKBACKGROUND_IDX = 19;
+    static public final int RELATIONBACKGROUND_IDX = 19;
 
     /**
-     * Link foreground index
+     * Relation foreground index
      */
-    static public final int LINKFOREGROUND_IDX = 20;
+    static public final int RELATIONFOREGROUND_IDX = 20;
 
     /**
-     * Link edge index
+     * Relation edge index
      */
-    static public final int LINKEDGE_IDX = 21;
+    static public final int RELATIONEDGE_IDX = 21;
 
     /**
      * Etc background index
@@ -768,12 +783,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         BaseProvider.COLORS0[BaseProvider.SYNSETBACKGROUND_IDX] = Colors.ORANGE;
         BaseProvider.COLORS0[BaseProvider.SYNSETFOREGROUND_IDX] = Colors.BLACK;
         BaseProvider.COLORS0[BaseProvider.SYNSETEDGE_IDX] = 0xFA8072;
-        BaseProvider.COLORS0[BaseProvider.LINKSBACKGROUND_IDX] = Colors.RED;
-        BaseProvider.COLORS0[BaseProvider.LINKSFOREGROUND_IDX] = Colors.WHITE;
-        BaseProvider.COLORS0[BaseProvider.LINKSEDGE_IDX] = Colors.RED;
-        BaseProvider.COLORS0[BaseProvider.LINKBACKGROUND_IDX] = Colors.RED;
-        BaseProvider.COLORS0[BaseProvider.LINKFOREGROUND_IDX] = Colors.WHITE;
-        BaseProvider.COLORS0[BaseProvider.LINKEDGE_IDX] = Colors.RED;
+        BaseProvider.COLORS0[BaseProvider.RELATIONSBACKGROUND_IDX] = Colors.RED;
+        BaseProvider.COLORS0[BaseProvider.RELATIONSFOREGROUND_IDX] = Colors.WHITE;
+        BaseProvider.COLORS0[BaseProvider.RELATIONSEDGE_IDX] = Colors.RED;
+        BaseProvider.COLORS0[BaseProvider.RELATIONBACKGROUND_IDX] = Colors.RED;
+        BaseProvider.COLORS0[BaseProvider.RELATIONFOREGROUND_IDX] = Colors.WHITE;
+        BaseProvider.COLORS0[BaseProvider.RELATIONEDGE_IDX] = Colors.RED;
         BaseProvider.COLORS0[BaseProvider.ETCBACKGROUND_IDX] = Colors.ORANGE;
         BaseProvider.COLORS0[BaseProvider.ETCFOREGROUND_IDX] = Colors.GRAY;
         BaseProvider.COLORS0[BaseProvider.ETCEDGE_IDX] = Colors.ORANGE;
@@ -814,6 +829,11 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     static public final String URLSCHEME = "wordnet:";
 
     /**
+     * Help Scheme prefix
+     */
+    static public final String HELP_URLSCHEME = "help:";
+
+    /**
      * Scheme separator
      */
     static public final char URLSCHEME_AT = '@';
@@ -824,7 +844,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     static private final String DATA_DEFAULT = "OEWN";
 
     /**
-     * Max sibling links
+     * Max sibling relations
      */
     static private final int MAX_RELATED_DEFAULT = 32;
 
@@ -870,12 +890,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
      * Relation filter default value
      */
     @SuppressWarnings({"WeakerAccess"})
-    static public final long FILTER_DEFAULT = Link.HYPERNYM.mask() | Link.HYPONYM.mask() | //
-            Link.HOLONYM_MEMBER.mask() | Link.HOLONYM_SUBSTANCE.mask() | Link.HOLONYM_PART.mask() | //
-            Link.MERONYM_MEMBER.mask() | Link.MERONYM_MEMBER.mask() | Link.MERONYM_MEMBER.mask() | //
-            Link.CAUSES.mask() | Link.IS_CAUSED_BY.mask() | Link.ENTAILS.mask() | Link.IS_ENTAILED_BY.mask() | //
-            Link.SIMILAR_TO.mask() | //
-            Link.ANTONYM.mask();
+    static public final long FILTER_DEFAULT = Relation.HYPERNYM.mask() | Relation.HYPONYM.mask() | //
+            Relation.HOLONYM_MEMBER.mask() | Relation.HOLONYM_SUBSTANCE.mask() | Relation.HOLONYM_PART.mask() | //
+            Relation.MERONYM_MEMBER.mask() | Relation.MERONYM_MEMBER.mask() | Relation.MERONYM_MEMBER.mask() | //
+            Relation.CAUSES.mask() | Relation.CAUSED.mask() | Relation.ENTAILS.mask() | Relation.ENTAILED.mask() | //
+            Relation.SIMILAR_TO.mask() | //
+            Relation.ANTONYM.mask();
 
     // L O A D B A L A N C I N G
 
@@ -894,12 +914,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
      * LoadBalancer : Synsets : Max children nodes at level 0, 1 .. n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for
      * level i to n.
      */
-    static private final int[] MAX_SEMLINKS_AT_LEVEL = {6, 3};
+    static private final int[] MAX_SEMRELATIONS_AT_LEVEL = {6, 3};
 
     /**
      * LoadBalancer : Synsets : Truncation threshold
      */
-    static private final int SEMLINKS_LABEL_TRUNCATE_AT = 3;
+    static private final int SEMRELATIONS_LABEL_TRUNCATE_AT = 3;
 
     /*
      * LoadBalancer : edge color
@@ -1005,9 +1025,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     protected boolean loadBalanceMembers = true;
 
     /**
-     * Load balancing flag for semlinks
+     * Load balancing flag for semrelations
      */
-    protected boolean loadBalanceSemLinks = true;
+    protected boolean loadBalanceSemRelations = true;
 
     /**
      * Members load balancer
@@ -1017,7 +1037,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     /**
      * Synsets load balancer
      */
-    protected LoadBalancer semLinksLoadBalancer;
+    protected LoadBalancer semRelationsLoadBalancer;
 
     /**
      * Font face
@@ -1055,9 +1075,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     protected long filter;
 
     /**
-     * Max links
+     * Max relations
      */
-    protected int maxLinks = BaseProvider.MAX_RELATED_DEFAULT;
+    protected int maxRelations = BaseProvider.MAX_RELATED_DEFAULT;
 
     /**
      * Max recursions
@@ -1115,22 +1135,22 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     protected Integer synsetEdgeColor;
 
     @Nullable
-    protected Integer linksBackgroundColor;
+    protected Integer relationsBackgroundColor;
 
     @Nullable
-    protected Integer linksForegroundColor;
+    protected Integer relationsForegroundColor;
 
     @Nullable
-    protected Integer linksEdgeColor;
+    protected Integer relationsEdgeColor;
 
     @Nullable
-    protected Integer linkBackgroundColor;
+    protected Integer relationBackgroundColor;
 
     @Nullable
-    protected Integer linkForegroundColor;
+    protected Integer relationForegroundColor;
 
     @Nullable
-    protected Integer linkEdgeColor;
+    protected Integer relationEdgeColor;
 
     @Nullable
     protected Integer etcBackgroundColor;
@@ -1194,11 +1214,11 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         this.features = 0;
         this.filter = BaseProvider.FILTER_DEFAULT;
         this.membersLoadBalancer = new LoadBalancer(MAX_MEMBERS_AT_LEVEL, MEMBERS_LABEL_TRUNCATE_AT);
-        this.semLinksLoadBalancer = new LoadBalancer(MAX_SEMLINKS_AT_LEVEL, SEMLINKS_LABEL_TRUNCATE_AT);
+        this.semRelationsLoadBalancer = new LoadBalancer(MAX_SEMRELATIONS_AT_LEVEL, SEMRELATIONS_LABEL_TRUNCATE_AT);
         assert images != null;
         //noinspection ConstantValue
-        this.membersLoadBalancer.setGroupNode(null, this.wordsBackgroundColor, this.wordsForegroundColor, this.wordsEdgeColor, LOADBALANCING_EDGE_STYLE, -1, null, images[ImageIndex.MEMBERS.ordinal()]);
-        this.semLinksLoadBalancer.setGroupNode(null, this.linksBackgroundColor, this.linksForegroundColor, this.linksEdgeColor, LOADBALANCING_EDGE_STYLE, -1, null, images[ImageIndex.SYNSET.ordinal()]);
+        this.membersLoadBalancer.setGroupNode(null, this.wordsBackgroundColor, this.wordsForegroundColor, this.wordsEdgeColor, LOADBALANCING_EDGE_STYLE, -1, null, images[ImageIndex.WORDS.ordinal()]);
+        this.semRelationsLoadBalancer.setGroupNode(null, this.relationsBackgroundColor, this.relationsForegroundColor, this.relationsEdgeColor, LOADBALANCING_EDGE_STYLE, -1, null, images[ImageIndex.SYNSET.ordinal()]);
     }
 
     // P R O V I D E R
@@ -1251,12 +1271,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         this.filter = getLong(parameters, Parameters.KEY_RELATION_FILTER, BaseProvider.FILTER_DEFAULT);
 
         // max
-        this.maxLinks = getInteger(parameters, Parameters.KEY_RELATED_MAX, BaseProvider.MAX_RELATED_DEFAULT);
+        this.maxRelations = getInteger(parameters, Parameters.KEY_RELATED_MAX, BaseProvider.MAX_RELATED_DEFAULT);
         this.maxRecurse = getInteger(parameters, Parameters.KEY_RECURSE_MAX, BaseProvider.MAX_RECURSE_DEFAULT);
 
         // load balancing
-        this.loadBalanceMembers = getBoolean(parameters, Parameters.KEY_LOADBALANCE_MEMBERS, true);
-        this.loadBalanceSemLinks = getBoolean(parameters, Parameters.KEY_LOADBALANCE_SEMLINKS, true);
+        this.loadBalanceMembers = getBoolean(parameters, Parameters.KEY_LOADBALANCE_WORDS, true);
+        this.loadBalanceSemRelations = getBoolean(parameters, Parameters.KEY_LOADBALANCE_SEMRELATIONS, true);
 
         // font
         this.fontFace = BaseProvider.FONTFACE;
@@ -1292,13 +1312,13 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         this.synsetForegroundColor = getColor(parameters, Parameters.KEY_SYNSET_FCOLOR, BaseProvider.COLORS0[BaseProvider.SYNSETFOREGROUND_IDX]);
         this.synsetEdgeColor = getColor(parameters, Parameters.KEY_SYNSET_ECOLOR, BaseProvider.COLORS0[BaseProvider.SYNSETEDGE_IDX]);
 
-        this.linksBackgroundColor = getColor(parameters, Parameters.KEY_LINKS_BCOLOR, BaseProvider.COLORS0[BaseProvider.LINKSBACKGROUND_IDX]);
-        this.linksForegroundColor = getColor(parameters, Parameters.KEY_LINKS_FCOLOR, BaseProvider.COLORS0[BaseProvider.LINKSFOREGROUND_IDX]);
-        this.linksEdgeColor = getColor(parameters, Parameters.KEY_LINKS_ECOLOR, BaseProvider.COLORS0[BaseProvider.LINKSEDGE_IDX]);
+        this.relationsBackgroundColor = getColor(parameters, Parameters.KEY_RELATIONS_BCOLOR, BaseProvider.COLORS0[BaseProvider.RELATIONSBACKGROUND_IDX]);
+        this.relationsForegroundColor = getColor(parameters, Parameters.KEY_RELATIONS_FCOLOR, BaseProvider.COLORS0[BaseProvider.RELATIONSFOREGROUND_IDX]);
+        this.relationsEdgeColor = getColor(parameters, Parameters.KEY_RELATIONS_ECOLOR, BaseProvider.COLORS0[BaseProvider.RELATIONSEDGE_IDX]);
 
-        this.linkBackgroundColor = getColor(parameters, Parameters.KEY_LINK_BCOLOR, BaseProvider.COLORS0[BaseProvider.LINKBACKGROUND_IDX]);
-        this.linkForegroundColor = getColor(parameters, Parameters.KEY_LINK_FCOLOR, BaseProvider.COLORS0[BaseProvider.LINKFOREGROUND_IDX]);
-        this.linkEdgeColor = getColor(parameters, Parameters.KEY_LINK_ECOLOR, BaseProvider.COLORS0[BaseProvider.LINKEDGE_IDX]);
+        this.relationBackgroundColor = getColor(parameters, Parameters.KEY_RELATION_BCOLOR, BaseProvider.COLORS0[BaseProvider.RELATIONBACKGROUND_IDX]);
+        this.relationForegroundColor = getColor(parameters, Parameters.KEY_RELATION_FCOLOR, BaseProvider.COLORS0[BaseProvider.RELATIONFOREGROUND_IDX]);
+        this.relationEdgeColor = getColor(parameters, Parameters.KEY_RELATION_ECOLOR, BaseProvider.COLORS0[BaseProvider.RELATIONEDGE_IDX]);
 
         this.stemBackgroundColor = getColor(parameters, Parameters.KEY_STEM_BCOLOR, BaseProvider.COLORS0[BaseProvider.STEMBACKGROUND_IDX]);
         this.stemForegroundColor = getColor(parameters, Parameters.KEY_STEM_FCOLOR, BaseProvider.COLORS0[BaseProvider.STEMFOREGROUND_IDX]);
@@ -1308,9 +1328,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         this.etcForegroundColor = getColor(parameters, Parameters.KEY_ETC_FCOLOR, BaseProvider.COLORS0[BaseProvider.ETCFOREGROUND_IDX]);
         this.etcEdgeColor = getColor(parameters, Parameters.KEY_ETC_ECOLOR, BaseProvider.COLORS0[BaseProvider.ETCEDGE_IDX]);
 
-        this.wordsBackgroundColor = getColor(parameters, Parameters.KEY_MEMBERS_BCOLOR, BaseProvider.COLORS0[BaseProvider.WORDSBACKGROUND_IDX]);
-        this.wordsForegroundColor = getColor(parameters, Parameters.KEY_MEMBERS_FCOLOR, BaseProvider.COLORS0[BaseProvider.WORDSFOREGROUND_IDX]);
-        this.wordsEdgeColor = getColor(parameters, Parameters.KEY_MEMBERS_ECOLOR, BaseProvider.COLORS0[BaseProvider.WORDSEDGE_IDX]);
+        this.wordsBackgroundColor = getColor(parameters, Parameters.KEY_WORDS_BCOLOR, BaseProvider.COLORS0[BaseProvider.WORDSBACKGROUND_IDX]);
+        this.wordsForegroundColor = getColor(parameters, Parameters.KEY_WORDS_FCOLOR, BaseProvider.COLORS0[BaseProvider.WORDSFOREGROUND_IDX]);
+        this.wordsEdgeColor = getColor(parameters, Parameters.KEY_WORDS_ECOLOR, BaseProvider.COLORS0[BaseProvider.WORDSEDGE_IDX]);
 
         // word colors
         @Nullable final Integer wordBackgroundColor0 = getColor(parameters, Parameters.KEY_WORD_BCOLOR, null);
@@ -1327,7 +1347,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         // remote word colors
         if (this.wordBackgroundColors.length > 1)
         {
-            @Nullable final Integer remoteWordBackgroundColor = getColor(parameters, Parameters.KEY_LINKEDWORD_BCOLOR, null);
+            @Nullable final Integer remoteWordBackgroundColor = getColor(parameters, Parameters.KEY_RELATEDWORD_BCOLOR, null);
             // System.out.printf("new Color(0x%X),", remoteWordBackgroundColor.getRGB() & 0xFFFFFF);
             if (remoteWordBackgroundColor != null)
             {
@@ -1342,7 +1362,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         }
         if (this.wordForegroundColors.length > 1)
         {
-            @Nullable final Integer remoteWordForegroundColor = getColor(parameters, Parameters.KEY_LINKEDWORD_FCOLOR, null);
+            @Nullable final Integer remoteWordForegroundColor = getColor(parameters, Parameters.KEY_RELATEDWORD_FCOLOR, null);
             if (remoteWordForegroundColor != null)
             {
                 this.wordForegroundColors[1] = remoteWordForegroundColor;
@@ -1359,8 +1379,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         this.edgeColor = getColor(parameters, Parameters.KEY_ECOLOR, BaseProvider.COLORS0[BaseProvider.EDGE_IDX]);
 
         // propagate to members load balancer
-        this.membersLoadBalancer.setGroupNode(null, this.wordsBackgroundColor, this.wordsForegroundColor, this.wordsEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.MEMBERS.ordinal(), null, null);
-        this.semLinksLoadBalancer.setGroupNode(null, this.linksBackgroundColor, this.linksForegroundColor, this.linksEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.SYNSET.ordinal(), null, null);
+        this.membersLoadBalancer.setGroupNode(null, this.wordsBackgroundColor, this.wordsForegroundColor, this.wordsEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.WORDS.ordinal(), null, null);
+        this.semRelationsLoadBalancer.setGroupNode(null, this.relationsBackgroundColor, this.relationsForegroundColor, this.relationsEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.SYNSET.ordinal(), null, null);
     }
 
     /**
@@ -1384,23 +1404,23 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     }
 
     /**
-     * Get semLinks load balancing
+     * Get semRelations load balancing
      *
-     * @return semLinks load balancing flag
+     * @return semRelations load balancing flag
      */
-    public boolean isLoadBalanceSemLinks()
+    public boolean isLoadBalanceSemRelations()
     {
-        return this.loadBalanceSemLinks;
+        return this.loadBalanceSemRelations;
     }
 
     /**
-     * Set semLinks load balancing
+     * Set semRelations load balancing
      *
-     * @param flag the semLinks load balancing flag to set
+     * @param flag the semRelations load balancing flag to set
      */
-    public void setLoadBalanceSemLinks(boolean flag)
+    public void setLoadBalanceSemRelations(boolean flag)
     {
-        this.loadBalanceSemLinks = flag;
+        this.loadBalanceSemRelations = flag;
     }
 
     /**
@@ -1811,11 +1831,11 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
             synsetNode.setLabel(BaseProvider.mangleString(BaseProvider.members(synset, ", ")));
             setNodeImage(synsetNode, null, ImageIndex.ROOT);
 
-            // synset node (ignore links)
+            // synset node (ignore relations)
             walkSynset(synsetNode, synset, 0, 0);
 
-            // links
-            walkSemLinks(synsetNode, synset, 0, 0, recurse, edges);
+            // relations
+            walkSemRelations(synsetNode, synset, 0, 0, recurse, edges);
 
             return synsetNode;
         }
@@ -1954,16 +1974,16 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
                         // sense node
                         @NonNull final TreeMutableNode senseNode = makeSenseNode(categoryNode, senseData, tagCountTotal);
 
-                        // synset node (ignore links)
+                        // synset node (ignore relations)
                         walkSynset(senseNode, senseData.synset, i, 0);
 
-                        // links
-                        final Map<IPointer, List<ISynsetID>> semLinks = senseData.synset.synset.getRelatedMap();
-                        final Map<IPointer, List<IWordID>> lexLinks = senseData.sense.getRelatedMap();
-                        walkLinks(senseNode, semLinks, lexLinks, i, 0, recurse, edges);
+                        // relations
+                        final Map<IPointer, List<ISynsetID>> semRelations = senseData.synset.synset.getRelatedMap();
+                        final Map<IPointer, List<IWordID>> lexRelations = senseData.sense.getRelatedMap();
+                        walkRelations(senseNode, semRelations, lexRelations, i, 0, recurse, edges);
 
-                        // walkSemLinks(senseNode, senseData.synset, 0, recurse);
-                        // walkLexLinks(senseNode, senseData.sense, 0);
+                        // walkSemRelations(senseNode, senseData.synset, 0, recurse);
+                        // walkLexRelations(senseNode, senseData.sense, 0);
 
                         i++;
                     }
@@ -1974,7 +1994,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     }
 
     /**
-     * Walk synset content (excluding links)
+     * Walk synset content (excluding relations)
      *
      * @param parentNode parent node
      * @param synset     synset
@@ -2019,8 +2039,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
             // P < m1
             @NonNull final MutableNode node = buildSingleMemberNode(parentNode, synset, level);
 
-            node.setEdgeLabel(LABEL_MEMBER);
-            node.setEdgeStyle(EDGE_STYLE_MEMBER);
+            node.setEdgeLabel(LABEL_WORD);
+            node.setEdgeStyle(EDGE_STYLE_WORD);
             node.setEdgeColor(this.wordsEdgeColor);
             return;
         }
@@ -2072,8 +2092,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         for (@NonNull final IWord word : synset.synset.getWords())
         {
             @NonNull final INode node = makeWordNode(parentNode, word, synset.gloss, level);
-            node.setEdgeLabel(LABEL_MEMBER);
-            node.setEdgeStyle(EDGE_STYLE_MEMBER);
+            node.setEdgeLabel(LABEL_WORD);
+            node.setEdgeStyle(EDGE_STYLE_WORD);
             node.setEdgeColor(this.wordEdgeColor);
         }
     }
@@ -2092,8 +2112,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         for (@NonNull final IWord word : synset.synset.getWords())
         {
             @NonNull final TreeMutableNode node = makeWordNode(null, word, synset.gloss, level);
-            node.setEdgeLabel(LABEL_MEMBER);
-            node.setEdgeStyle(EDGE_STYLE_MEMBER);
+            node.setEdgeLabel(LABEL_WORD);
+            node.setEdgeStyle(EDGE_STYLE_WORD);
             node.setEdgeColor(this.wordEdgeColor);
 
             node.setTarget(node.getLabel());
@@ -2109,45 +2129,45 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     }
 
     /**
-     * Walk semantic and lexical links
+     * Walk semantic and lexical relations
      *
-     * @param parentNode parent node
-     * @param semLinks   sem links
-     * @param lexLinks   lex links
-     * @param index      synset index
-     * @param level      level
-     * @param recurse    recurse
-     * @param edges      edges
+     * @param parentNode   parent node
+     * @param semRelations sem relations
+     * @param lexRelations lex relations
+     * @param index        synset index
+     * @param level        level
+     * @param recurse      recurse
+     * @param edges        edges
      */
-    protected void walkLinks(final TreeMutableNode parentNode, @NonNull final Map<IPointer, List<ISynsetID>> semLinks, @NonNull final Map<IPointer, List<IWordID>> lexLinks, final int index, @SuppressWarnings("SameParameterValue") final int level, final boolean recurse, @NonNull final List<IEdge> edges)
+    protected void walkRelations(final TreeMutableNode parentNode, @NonNull final Map<IPointer, List<ISynsetID>> semRelations, @NonNull final Map<IPointer, List<IWordID>> lexRelations, final int index, @SuppressWarnings("SameParameterValue") final int level, final boolean recurse, @NonNull final List<IEdge> edges)
     {
-        if (semLinks.isEmpty() && lexLinks.isEmpty())
+        if (semRelations.isEmpty() && lexRelations.isEmpty())
         {
             return;
         }
 
         TreeMutableNode anchorNode = parentNode;
 
-        if ((this.features & FEATURE_COLLAPSE_LINKS) == 0)
+        if ((this.features & FEATURE_COLLAPSE_RELATIONS) == 0)
         {
-            // create links node
+            // create relations node
             // P < L < 11 l2 l3
-            @NonNull final String semLabel = links(semLinks.keySet());
-            @NonNull final String lexLabel = links(lexLinks.keySet());
+            @NonNull final String semLabel = relations(semRelations.keySet());
+            @NonNull final String lexLabel = relations(lexRelations.keySet());
             @NonNull final String label = (semLabel.isEmpty() ? "-" : semLabel) + "<br/>/<br/>" + (lexLabel.isEmpty() ? "-" : lexLabel);
-            anchorNode = makeSynsetLinksNode(parentNode, label);
+            anchorNode = makeSynsetRelationsNode(parentNode, label);
         }
 
         // else
-        // do not use links super node
+        // do not use relations super node
         // P < 11 l2 l3
 
-        walkSemLinks(anchorNode, semLinks, index, level, recurse, edges);
-        walkLexLinks(anchorNode, lexLinks, level);
+        walkSemRelations(anchorNode, semRelations, index, level, recurse, edges);
+        walkLexRelations(anchorNode, lexRelations, level);
     }
 
     /**
-     * Walk semantic links of the same type
+     * Walk semantic relations of the same type
      *
      * @param parentNode parent node
      * @param synset     synset
@@ -2156,66 +2176,66 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
      * @param recurse    whether to recurse
      * @param edges      edges
      */
-    protected void walkSemLinks(final TreeMutableNode parentNode, @NonNull final Synset synset, @SuppressWarnings("SameParameterValue") final int index, final int level, final boolean recurse, @NonNull final List<IEdge> edges)
+    protected void walkSemRelations(final TreeMutableNode parentNode, @NonNull final Synset synset, @SuppressWarnings("SameParameterValue") final int index, final int level, final boolean recurse, @NonNull final List<IEdge> edges)
     {
-        final Map<IPointer, List<ISynsetID>> semLinks = synset.synset.getRelatedMap();
-        if (!semLinks.isEmpty())
+        final Map<IPointer, List<ISynsetID>> semRelations = synset.synset.getRelatedMap();
+        if (!semRelations.isEmpty())
         {
-            @NonNull final TreeMutableNode linksNode = makeSynsetLinksNode(parentNode, links(semLinks.keySet()));
-            walkSemLinks(linksNode, semLinks, index, level, recurse, edges);
+            @NonNull final TreeMutableNode relationsNode = makeSynsetRelationsNode(parentNode, relations(semRelations.keySet()));
+            walkSemRelations(relationsNode, semRelations, index, level, recurse, edges);
         }
     }
 
     /**
-     * Walk semantic links
+     * Walk semantic relations
      *
-     * @param parentNode parent node
-     * @param semLinks   linked synset ids classified by pointer
-     * @param index      index
-     * @param level      recursion level
-     * @param recurse    whether to recurse
-     * @param edges      edges
+     * @param parentNode   parent node
+     * @param semRelations related synset ids classified by pointer
+     * @param index        index
+     * @param level        recursion level
+     * @param recurse      whether to recurse
+     * @param edges        edges
      */
-    protected void walkSemLinks(final TreeMutableNode parentNode, @NonNull final Map<IPointer, List<ISynsetID>> semLinks, final int index, final int level, final boolean recurse, @NonNull final List<IEdge> edges)
+    protected void walkSemRelations(final TreeMutableNode parentNode, @NonNull final Map<IPointer, List<ISynsetID>> semRelations, final int index, final int level, final boolean recurse, @NonNull final List<IEdge> edges)
     {
-        // P=links node L
+        // P=relations node L
 
         // iterate pointers
-        for (@NonNull final IPointer pointer : semLinks.keySet())
+        for (@NonNull final IPointer pointer : semRelations.keySet())
         {
-            @NonNull final Link link = Link.valueOf(pointer);
-            if (!link.test(this.filter))
+            @NonNull final Relation relation = Relation.valueOf(pointer);
+            if (!relation.test(this.filter))
             {
                 continue;
             }
 
-            // linked synset(s)
-            final List<ISynsetID> linkedSynsetIds = semLinks.get(link.pointer);
-            if (linkedSynsetIds != null)
+            // related synset(s)
+            final List<ISynsetID> relatedSynsetIds = semRelations.get(relation.pointer);
+            if (relatedSynsetIds != null)
             {
-                if ((this.features & FEATURE_SEMLINKS_MERGE_SINGLE_LINKED_SYNSET_TO_LINK) != 0)
+                if ((this.features & FEATURE_SEMRELATIONS_MERGE_SINGLE_RELATED_SYNSET_TO_RELATION) != 0)
                 {
                     // P < l=s1
-                    // do not make synset node when only one synset is linked, attach synset content to link node directly
-                    final boolean singleSynset = linkedSynsetIds.size() == 1;
+                    // do not make synset node when only one synset is relateded, attach synset content to relation node directly
+                    final boolean singleSynset = relatedSynsetIds.size() == 1;
                     if (singleSynset)
                     {
                         // single synset (no load balancing)
-                        @NonNull final Iterator<ISynsetID> it = linkedSynsetIds.iterator();
+                        @NonNull final Iterator<ISynsetID> it = relatedSynsetIds.iterator();
                         if (it.hasNext())
                         {
-                            // linked synset node
-                            final ISynsetID linkedSynsetId = it.next();
-                            final ISynset linkedSynset0 = this.dictionary.getSynset(linkedSynsetId);
-                            if (linkedSynset0 != null)
+                            // related synset node
+                            final ISynsetID relatedSynsetId = it.next();
+                            final ISynset relatedSynset0 = this.dictionary.getSynset(relatedSynsetId);
+                            if (relatedSynset0 != null)
                             {
-                                @NonNull final Synset linkedSynset = new Synset(linkedSynset0);
+                                @NonNull final Synset relatedSynset = new Synset(relatedSynset0);
 
-                                // link node l
-                                @NonNull final TreeMutableNode linkNode = makeLinkNode(parentNode, link);
+                                // relation node l
+                                @NonNull final TreeMutableNode relationNode = makeRelationNode(parentNode, relation);
 
-                                // populate linked synset node
-                                walkLinkedSynset1(linkNode, linkedSynset, link, index, level + 1, recurse && link.recurses, edges);
+                                // populate related synset node
+                                walkRelatedSynset1(relationNode, relatedSynset, relation, index, level + 1, recurse && relation.recurses, edges);
                             }
                         }
                         continue;
@@ -2226,159 +2246,159 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
                 // P < l < s1 s2 s3
                 @Nullable INode etcNode = null;
 
-                final int n = linkedSynsetIds.size();
+                final int n = relatedSynsetIds.size();
                 int i = 0;
 
                 @Nullable List<INode> childNodes = new ArrayList<>();
-                @NonNull final Iterator<ISynsetID> it = linkedSynsetIds.iterator();
+                @NonNull final Iterator<ISynsetID> it = relatedSynsetIds.iterator();
                 while (it.hasNext())
                 {
-                    // linked synset node
-                    final ISynsetID linkedSynsetId = it.next();
-                    final ISynset linkedSynset0 = this.dictionary.getSynset(linkedSynsetId);
-                    if (linkedSynset0 == null)
+                    // related synset node
+                    final ISynsetID relatedSynsetId = it.next();
+                    final ISynset relatedSynset0 = this.dictionary.getSynset(relatedSynsetId);
+                    if (relatedSynset0 == null)
                     {
                         continue;
                     }
-                    @NonNull final Synset linkedSynset = new Synset(linkedSynset0);
-                    @NonNull final TreeMutableNode linkedSynsetNode = makeSynsetNode(null, linkedSynset);
+                    @NonNull final Synset relatedSynset = new Synset(relatedSynset0);
+                    @NonNull final TreeMutableNode relatedSynsetNode = makeSynsetNode(null, relatedSynset);
 
-                    // populate linked synset node
-                    walkLinkedSynset1(linkedSynsetNode, linkedSynset, link, index, level + 1, recurse && link.recurses, edges);
+                    // populate related synset node
+                    walkRelatedSynset1(relatedSynsetNode, relatedSynset, relation, index, level + 1, recurse && relation.recurses, edges);
                     @NonNull final String tag = Integer.toString(i + 1);
-                    linkedSynsetNode.setTarget(tag);
-                    // linkedSynsetNode.setLabel(tag);
+                    relatedSynsetNode.setTarget(tag);
+                    // relatedSynsetNode.setLabel(tag);
 
                     // list
-                    childNodes.add(linkedSynsetNode);
+                    childNodes.add(relatedSynsetNode);
 
                     // limit
-                    if (++i >= this.maxLinks && i < n)
+                    if (++i >= this.maxRelations && i < n)
                     {
-                        etcNode = makeEtcLinkNode(null, link, n, it);
+                        etcNode = makeEtcRelationNode(null, relation, n, it);
                         break;
                     }
                 }
 
-                // semlinks nodes
-                if (this.loadBalanceSemLinks)
+                // semRelations nodes
+                if (this.loadBalanceSemRelations)
                 {
-                    childNodes = this.semLinksLoadBalancer.buildHierarchy(childNodes, link.imageIndex);
+                    childNodes = this.semRelationsLoadBalancer.buildHierarchy(childNodes, relation.imageIndex);
                 }
 
-                // link node l
-                @NonNull final TreeMutableNode linkNode = makeLinkNode(parentNode, link);
+                // relation node l
+                @NonNull final TreeMutableNode relationNode = makeRelationNode(parentNode, relation);
                 if (childNodes != null)
                 {
-                    linkNode.addChildren(childNodes);
+                    relationNode.addChildren(childNodes);
                 }
 
                 // etc node
                 if (etcNode != null)
                 {
-                    linkNode.addChild(etcNode);
+                    relationNode.addChild(etcNode);
                 }
             }
         }
     }
 
     /**
-     * Walk linked synset called from walkSemLinks
+     * Walk related synset called from walkSemRelations
      *
-     * @param parentNode   parent node
-     * @param linkedSynset synset
-     * @param link         link
-     * @param index        synset index
-     * @param level        recursion level
-     * @param recurse      recurse
-     * @param edges        edges
+     * @param parentNode    parent node
+     * @param relatedSynset synset
+     * @param relation      relation
+     * @param index         synset index
+     * @param level         recursion level
+     * @param recurse       recurse
+     * @param edges         edges
      */
-    protected void walkLinkedSynset1(@NonNull final TreeMutableNode parentNode, @NonNull final Synset linkedSynset, @NonNull final Link link, final int index, final int level, final boolean recurse, @NonNull final List<IEdge> edges)
+    protected void walkRelatedSynset1(@NonNull final TreeMutableNode parentNode, @NonNull final Synset relatedSynset, @NonNull final Relation relation, final int index, final int level, final boolean recurse, @NonNull final List<IEdge> edges)
     {
         // synset : members
-        walkSynset(parentNode, linkedSynset, index, level);
+        walkSynset(parentNode, relatedSynset, index, level);
 
         // similar to
-        if (link.pointer == Pointer.SIMILAR_TO && linkedSynset.synset.isAdjectiveHead())
+        if (relation.pointer == Pointer.SIMILAR_TO && relatedSynset.synset.isAdjectiveHead())
         {
-            walkAntonymFromHeadAdjective(parentNode, linkedSynset, level);
+            walkAntonymFromHeadAdjective(parentNode, relatedSynset, level);
         }
 
         // recurse
         if (recurse && level < this.maxRecurse)
         {
-            // iterate linked synsets
-            final List<ISynsetID> linkedSynsetIds = linkedSynset.synset.getRelatedSynsets(link.pointer);
-            if (!linkedSynsetIds.isEmpty())
+            // iterate related synsets
+            final List<ISynsetID> relatedSynsetIds = relatedSynset.synset.getRelatedSynsets(relation.pointer);
+            if (!relatedSynsetIds.isEmpty())
             {
                 @NonNull TreeMutableNode anchorNode = parentNode;
-                if ((this.features & FEATURE_LINKEDSYNSET1_FORGET_LINK_NODE) == 0)
+                if ((this.features & FEATURE_RELATEDSYNSET1_FORGET_RELATION_NODE) == 0)
                 {
                     // P < l < s
-                    anchorNode = makeLinkNode(parentNode, link);
+                    anchorNode = makeRelationNode(parentNode, relation);
                 }
 
                 // else if FEATURE_RAISE_RECURSE_TO_SYNSET_AT_BASE_LEVEL
                 // P < s
-                walkTypedLink(anchorNode, linkedSynsetIds, link, level + 1, edges);
+                walkTypedRelation(anchorNode, relatedSynsetIds, relation, level + 1, edges);
             }
         }
     }
 
     /**
-     * Walk lexical links
+     * Walk lexical relations
      *
      * @param parentNode parent node
      * @param sense      sense
      * @param level      recursion level
      */
-    protected void walkLexLinks(final TreeMutableNode parentNode, @NonNull final IWord sense, final int level)
+    protected void walkLexRelations(final TreeMutableNode parentNode, @NonNull final IWord sense, final int level)
     {
-        final Map<IPointer, List<IWordID>> lexLinks = sense.getRelatedMap();
-        if (!lexLinks.isEmpty())
+        final Map<IPointer, List<IWordID>> lexRelations = sense.getRelatedMap();
+        if (!lexRelations.isEmpty())
         {
-            @NonNull final TreeMutableNode linksNode = makeSynsetLinksNode(parentNode, links(lexLinks.keySet()));
-            walkLexLinks(linksNode, lexLinks, level);
+            @NonNull final TreeMutableNode relationsNode = makeSynsetRelationsNode(parentNode, relations(lexRelations.keySet()));
+            walkLexRelations(relationsNode, lexRelations, level);
         }
     }
 
     /**
-     * Walk lexical links
+     * Walk lexical relations
      *
-     * @param parentNode parent node
-     * @param lexLinks   linked sense ids classified by pointer
-     * @param level      current recursion level
+     * @param parentNode   parent node
+     * @param lexRelations related sense ids classified by pointer
+     * @param level        current recursion level
      */
-    protected void walkLexLinks(final TreeMutableNode parentNode, @NonNull final Map<IPointer, List<IWordID>> lexLinks, final int level)
+    protected void walkLexRelations(final TreeMutableNode parentNode, @NonNull final Map<IPointer, List<IWordID>> lexRelations, final int level)
     {
         // iterate pointers
-        for (@NonNull final IPointer pointer : lexLinks.keySet())
+        for (@NonNull final IPointer pointer : lexRelations.keySet())
         {
-            @NonNull final Link link = Link.valueOf(pointer);
-            if (!link.test(this.filter))
+            @NonNull final Relation relation = Relation.valueOf(pointer);
+            if (!relation.test(this.filter))
             {
                 continue;
             }
 
-            @NonNull final INode linkNode = makeLinkNode(parentNode, link);
+            @NonNull final INode relationNode = makeRelationNode(parentNode, relation);
 
-            // iterate linked senses
-            final List<IWordID> linkedSenseIds = lexLinks.get(link.pointer);
-            if (linkedSenseIds != null)
+            // iterate related senses
+            final List<IWordID> relatedSenseIds = lexRelations.get(relation.pointer);
+            if (relatedSenseIds != null)
             {
-                for (@Nullable final IWordID linkedSenseId : linkedSenseIds)
+                for (@Nullable final IWordID relatedSenseId : relatedSenseIds)
                 {
-                    if (linkedSenseId == null)
+                    if (relatedSenseId == null)
                     {
                         continue;
                     }
 
                     // lex node
                     /* final INode lexNode = */
-                    makeLexNode(linkNode, linkedSenseId, level);
+                    makeLexNode(relationNode, relatedSenseId, level);
 
                     // synset
-                    // final Synset synset = new Synset(linkedSynset);
+                    // final Synset synset = new Synset(relatedSynset);
                     // final INode synsetNode = makeSynsetNode(lexNode, synset);
                     // walkSynset(synsetNode, synset, level);
                 }
@@ -2387,118 +2407,118 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     }
 
     /**
-     * Walk links following only one type
+     * Walk relations following only one type
      *
-     * @param parentNode      parent node
-     * @param linkedSynsetIds linked synset ids
-     * @param link            link
-     * @param level           recursion level
-     * @param edges           edges
+     * @param parentNode       parent node
+     * @param relatedSynsetIds related synset ids
+     * @param relation         relation
+     * @param level            recursion level
+     * @param edges            edges
      */
-    protected void walkTypedLink(@NonNull final TreeMutableNode parentNode, @NonNull final List<ISynsetID> linkedSynsetIds, @NonNull final Link link, final int level, @NonNull final List<IEdge> edges)
+    protected void walkTypedRelation(@NonNull final TreeMutableNode parentNode, @NonNull final List<ISynsetID> relatedSynsetIds, @NonNull final Relation relation, final int level, @NonNull final List<IEdge> edges)
     {
-        // iterate linked synsets
+        // iterate related synsets
         @Nullable INode etcNode = null;
 
         int i = 0;
-        final int n = linkedSynsetIds.size();
+        final int n = relatedSynsetIds.size();
         @Nullable List<INode> childNodes = new ArrayList<>();
-        @NonNull final Iterator<ISynsetID> it = linkedSynsetIds.iterator();
+        @NonNull final Iterator<ISynsetID> it = relatedSynsetIds.iterator();
         while (it.hasNext())
         {
-            final ISynsetID linkedSynsetId = it.next();
-            final ISynset linkedSynset0 = this.dictionary.getSynset(linkedSynsetId);
-            if (linkedSynset0 == null)
+            final ISynsetID relatedSynsetId = it.next();
+            final ISynset relatedSynset0 = this.dictionary.getSynset(relatedSynsetId);
+            if (relatedSynset0 == null)
             {
                 continue;
             }
 
             // synset
-            @NonNull final Synset linkedSynset = new Synset(linkedSynset0);
+            @NonNull final Synset relatedSynset = new Synset(relatedSynset0);
             @NonNull final String tag = Integer.toString(i + 1);
 
             // node for synset
-            TreeMutableNode linkedSynsetNode;
-            if ((this.features & FEATURE_TYPEDLINK_RAISE_RECURSE_AS_SIBLING) != 0)
+            TreeMutableNode relatedSynsetNode;
+            if ((this.features & FEATURE_TYPEDRELATION_RAISE_RECURSE_AS_SIBLING) != 0)
             {
                 // l < s1(=M < m1 m2 m3)->l1 s2(=M < m1 m2 <m3)->l2
                 // members super node
-                linkedSynsetNode = buildMembersNode(linkedSynset, level);
+                relatedSynsetNode = buildMembersNode(relatedSynset, level);
             }
             else
             {
-                if ((this.features & FEATURE_TYPEDLINK_RAISE_SINGLE_MEMBER_TO_SYNSET) != 0 && hasSingleMember(linkedSynset))
+                if ((this.features & FEATURE_TYPEDRELATION_RAISE_SINGLE_MEMBER_TO_SYNSET) != 0 && hasSingleMember(relatedSynset))
                 {
-                    linkedSynsetNode = buildSingleMemberNode(null, linkedSynset, level);
-                    linkedSynsetNode.setEdgeLabel(null);
-                    linkedSynsetNode.setEdgeColor(this.linkBackgroundColor);
-                    setTreeEdgeImage(linkedSynsetNode, null, ImageIndex.values()[link.imageIndex]);
+                    relatedSynsetNode = buildSingleMemberNode(null, relatedSynset, level);
+                    relatedSynsetNode.setEdgeLabel(null);
+                    relatedSynsetNode.setEdgeColor(this.relationBackgroundColor);
+                    setTreeEdgeImage(relatedSynsetNode, null, ImageIndex.values()[relation.imageIndex]);
                 }
                 else
                 {
                     // l < (s1 < l1) (s2 < l2) (s3 < l3)
                     // synset node
-                    linkedSynsetNode = makeSynsetNode(null, linkedSynset);
-                    linkedSynsetNode.setEdgeLabel(null);
-                    linkedSynsetNode.setEdgeColor(this.linkBackgroundColor);
-                    setTreeEdgeImage(linkedSynsetNode, null, ImageIndex.values()[link.imageIndex]);
+                    relatedSynsetNode = makeSynsetNode(null, relatedSynset);
+                    relatedSynsetNode.setEdgeLabel(null);
+                    relatedSynsetNode.setEdgeColor(this.relationBackgroundColor);
+                    setTreeEdgeImage(relatedSynsetNode, null, ImageIndex.values()[relation.imageIndex]);
 
                     // members
-                    walkSynset(linkedSynsetNode, linkedSynset, i, level);
+                    walkSynset(relatedSynsetNode, relatedSynset, i, level);
                 }
             }
 
             // list
-            linkedSynsetNode.setTarget(tag);
-            childNodes.add(linkedSynsetNode);
+            relatedSynsetNode.setTarget(tag);
+            childNodes.add(relatedSynsetNode);
 
             // recurse
             if (level < this.maxRecurse)
             {
-                // iterate linked synsets
-                final List<ISynsetID> childLinkedSynsetIds = linkedSynset.synset.getRelatedSynsets(link.pointer);
-                if (!childLinkedSynsetIds.isEmpty())
+                // iterate related synsets
+                final List<ISynsetID> childRelatedSynsetIds = relatedSynset.synset.getRelatedSynsets(relation.pointer);
+                if (!childRelatedSynsetIds.isEmpty())
                 {
-                    if ((this.features & FEATURE_TYPEDLINK_RAISE_RECURSE_AS_SIBLING) != 0)
+                    if ((this.features & FEATURE_TYPEDRELATION_RAISE_RECURSE_AS_SIBLING) != 0)
                     {
-                        @NonNull final TreeMutableNode linkNode = makeLinkNode(null, link);
-                        walkTypedLink(linkNode, childLinkedSynsetIds, link, level + 1, edges);
-                        linkNode.setLabel(tag);
-                        linkNode.setTarget(tag);
-                        childNodes.add(linkNode);
+                        @NonNull final TreeMutableNode relationNode = makeRelationNode(null, relation);
+                        walkTypedRelation(relationNode, childRelatedSynsetIds, relation, level + 1, edges);
+                        relationNode.setLabel(tag);
+                        relationNode.setTarget(tag);
+                        childNodes.add(relationNode);
 
-                        @NonNull final MutableEdge edge = new MutableEdge(linkedSynsetNode, linkNode);
-                        edge.setLabel(link.label);
+                        @NonNull final MutableEdge edge = new MutableEdge(relatedSynsetNode, relationNode);
+                        edge.setLabel(relation.label);
                         edge.setColor(this.edgeColor);
                         edge.setStyle(EDGE_STYLE_EDGE);
                         edges.add(edge);
                     }
                     else
                     {
-                        @NonNull TreeMutableNode anchorNode = linkedSynsetNode;
-                        if ((this.features & FEATURE_TYPEDLINK_FORGET_LINK_NODE) == 0)
+                        @NonNull TreeMutableNode anchorNode = relatedSynsetNode;
+                        if ((this.features & FEATURE_TYPEDRELATION_FORGET_RELATION_NODE) == 0)
                         {
-                            anchorNode = makeLinkNode(linkedSynsetNode, link);
+                            anchorNode = makeRelationNode(relatedSynsetNode, relation);
                         }
-                        walkTypedLink(anchorNode, childLinkedSynsetIds, link, level + 1, edges);
+                        walkTypedRelation(anchorNode, childRelatedSynsetIds, relation, level + 1, edges);
                         anchorNode.setTarget(tag);
                     }
                 }
             }
 
             // limit
-            if (++i >= this.maxLinks && i < n)
+            if (++i >= this.maxRelations && i < n)
             {
-                etcNode = makeEtcLinkNode(null, link, n, it);
+                etcNode = makeEtcRelationNode(null, relation, n, it);
                 break;
             }
         }
 
-        // semlinks nodes
-        if (this.loadBalanceSemLinks)
+        // semRelations nodes
+        if (this.loadBalanceSemRelations)
 
         {
-            childNodes = this.semLinksLoadBalancer.buildHierarchy(childNodes, link.imageIndex);
+            childNodes = this.semRelationsLoadBalancer.buildHierarchy(childNodes, relation.imageIndex);
         }
 
         parentNode.addChildren(childNodes);
@@ -2524,16 +2544,16 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         {
             final IWord head = synset.synset.getWord(1);
             final List<IWordID> antonymSenseIds = head.getRelatedWords(Pointer.ANTONYM);
-            @Nullable INode antonymLinkNode = null;
+            @Nullable INode antonymRelationNode = null;
 
             // follow up antonyms
             for (@NonNull final IWordID antonymSenseId : antonymSenseIds)
             {
-                if (antonymLinkNode == null)
+                if (antonymRelationNode == null)
                 {
-                    antonymLinkNode = makeLinkNode(parentNode, Link.ANTONYM);
+                    antonymRelationNode = makeRelationNode(parentNode, Relation.ANTONYM);
                 }
-                makeLexNode(antonymLinkNode, antonymSenseId, level + 1);
+                makeLexNode(antonymRelationNode, antonymSenseId, level + 1);
             }
         }
     }
@@ -2555,8 +2575,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
         {
             @NonNull final INode node = makeWordNode(membersNode, word, synset.gloss, level);
 
-            node.setEdgeLabel(LABEL_MEMBER);
-            node.setEdgeStyle(EDGE_STYLE_MEMBER);
+            node.setEdgeLabel(LABEL_WORD);
+            node.setEdgeStyle(EDGE_STYLE_WORD);
             node.setEdgeColor(this.wordEdgeColor);
         }
         return membersNode;
@@ -2708,11 +2728,11 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     @NonNull
     protected TreeMutableNode makeSynsetMembersNode(final INode parent, @NonNull final Synset synset)
     {
-        @NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), null, ImageIndex.MEMBERS.ordinal(), this.wordsBackgroundColor, this.wordsForegroundColor);
+        @NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), null, ImageIndex.WORDS.ordinal(), this.wordsBackgroundColor, this.wordsForegroundColor);
         node.setContent("<div class='members'>" + BaseProvider.members(synset, ", ") + "</div>");
         node.setLink(BaseProvider.URLSCHEME + BaseProvider.URLSCHEME_AT + synset.synset.getID().toString());
-        node.setEdgeLabel(LABEL_MEMBERS);
-        node.setEdgeStyle(EDGE_STYLE_MEMBERS);
+        node.setEdgeLabel(LABEL_WORDS);
+        node.setEdgeStyle(EDGE_STYLE_WORDS);
         node.setEdgeColor(this.wordsEdgeColor);
         return node;
     }
@@ -2739,41 +2759,41 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     }
 
     /**
-     * Make links group node
+     * Make relations group node
      *
      * @param parent   parent node
      * @param pointers pointers
      * @return node
      */
     @NonNull
-    protected TreeMutableNode makeSynsetLinksNode(final INode parent, final String pointers)
+    protected TreeMutableNode makeSynsetRelationsNode(final INode parent, final String pointers)
     {
-        @NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), null, ImageIndex.LINKS.ordinal(), this.linksBackgroundColor, this.linksForegroundColor);
+        @NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), null, ImageIndex.RELATIONS.ordinal(), this.relationsBackgroundColor, this.relationsForegroundColor);
         node.setContent(pointers);
-        node.setEdgeLabel(LABEL_LINKS);
-        node.setEdgeStyle(EDGE_STYLE_LINKS);
-        node.setEdgeColor(this.linksEdgeColor);
+        node.setEdgeLabel(LABEL_RELATIONS);
+        node.setEdgeStyle(EDGE_STYLE_RELATIONS);
+        node.setEdgeColor(this.relationsEdgeColor);
         return node;
     }
 
     /**
-     * Make link node
+     * Make relation node
      *
-     * @param parent parent node
-     * @param link   link
+     * @param parent   parent node
+     * @param relation relation
      * @return node
      */
     @NonNull
-    protected TreeMutableNode makeLinkNode(final INode parent, @NonNull final Link link)
+    protected TreeMutableNode makeRelationNode(final INode parent, @NonNull final Relation relation)
     {
-        final int imageIndex = link.imageIndex;
-        final String label = link.label;
-        @NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), imageIndex != -1 ? null : label, imageIndex, this.linkBackgroundColor, this.linkForegroundColor);
-        node.setContent("<div class='reference'>" + link.label + "</div>");
-        node.setLink("help:" + link.tag);
+        final int imageIndex = relation.imageIndex;
+        final String label = relation.label;
+        @NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), imageIndex != -1 ? null : label, imageIndex, this.relationBackgroundColor, this.relationForegroundColor);
+        node.setContent("<div class='reference'>" + relation.label + "</div>");
+        node.setLink(HELP_URLSCHEME + relation.tag);
         node.setEdgeLabel(label);
-        node.setEdgeStyle(EDGE_STYLE_LINK);
-        node.setEdgeColor(this.linkEdgeColor);
+        node.setEdgeStyle(EDGE_STYLE_RELATION);
+        node.setEdgeColor(this.relationEdgeColor);
         return node;
     }
 
@@ -2822,22 +2842,22 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     }
 
     /**
-     * Make etcetera link node
+     * Make etcetera relation node
      *
-     * @param parent parent node
-     * @param link   link
-     * @param count  count of links
-     * @param it     current iterator
+     * @param parent   parent node
+     * @param relation relation
+     * @param count    count of relations
+     * @param it       current iterator
      * @return node
      */
     @NonNull
     @SuppressWarnings("UnusedReturnValue")
-    protected MutableNode makeEtcLinkNode(final INode parent, @NonNull final Link link, final int count, @NonNull final Iterator<ISynsetID> it)
+    protected MutableNode makeEtcRelationNode(final INode parent, @NonNull final Relation relation, final int count, @NonNull final Iterator<ISynsetID> it)
     {
-        final int imageIndex = link.imageIndex;
-        final String label = link.label;
-        @NonNull final String content = makeEtcContent(link, count, it);
-        @NonNull final MutableNode node = new MutableNode(parent, BaseProvider.makeNodeId(), "+ " + (count - this.maxLinks), imageIndex, this.etcBackgroundColor, this.etcForegroundColor);
+        final int imageIndex = relation.imageIndex;
+        final String label = relation.label;
+        @NonNull final String content = makeEtcContent(relation, count, it);
+        @NonNull final MutableNode node = new MutableNode(parent, BaseProvider.makeNodeId(), "+ " + (count - this.maxRelations), imageIndex, this.etcBackgroundColor, this.etcForegroundColor);
         node.setContent(content);
         node.setEdgeLabel(label);
         node.setEdgeStyle(EDGE_STYLE_ETC);
@@ -2848,18 +2868,18 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     /**
      * Make etc content
      *
-     * @param link  link
-     * @param count linked synset count
-     * @param it    current iterator of linked synset
+     * @param relation relation
+     * @param count    related synset count
+     * @param it       current iterator of related synset
      * @return content
      */
     @NonNull
-    protected String makeEtcContent(@NonNull final Link link, final int count, @NonNull final Iterator<ISynsetID> it)
+    protected String makeEtcContent(@NonNull final Relation relation, final int count, @NonNull final Iterator<ISynsetID> it)
     {
         @NonNull final StringBuilder sb = new StringBuilder();
         sb.append("<div class='more'>") //
-                .append(link.label) //
-                .append(" links: ") //
+                .append(relation.label) //
+                .append(" relations: ") //
                 .append(count) //
                 .append("</div>");
         while (it.hasNext())
@@ -2926,13 +2946,13 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     }
 
     /**
-     * Get links
+     * Get relations
      *
      * @param pointers pointers
-     * @return links
+     * @return relations
      */
     @NonNull
-    static protected String links(@NonNull final Set<IPointer> pointers)
+    static protected String relations(@NonNull final Set<IPointer> pointers)
     {
         @NonNull final StringBuilder sb = new StringBuilder();
         boolean first = true;

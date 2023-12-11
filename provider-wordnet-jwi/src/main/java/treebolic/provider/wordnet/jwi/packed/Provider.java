@@ -37,7 +37,7 @@ public class Provider extends treebolic.provider.wordnet.jwi.condensed.Provider
 	public Provider() throws IOException
 	{
 		super();
-		this.features |= FEATURE_LINKEDSYNSET1_FORGET_LINK_NODE | FEATURE_MULTILINE_RAISE_MEMBERS_TO_SYNSET | FEATURE_MULTILINE_RAISE_MEMBERS_TO_LINKED_SYNSET;
+		this.features |= FEATURE_RELATEDSYNSET1_FORGET_RELATION_NODE | FEATURE_MULTILINE_RAISE_MEMBERS_TO_SYNSET | FEATURE_MULTILINE_RAISE_MEMBERS_TO_RELATED_SYNSET;
 	}
 
 	// S E T T I N G S
@@ -79,67 +79,67 @@ public class Provider extends treebolic.provider.wordnet.jwi.condensed.Provider
 		// do not assume anything about tree edge
 	}
 
-	// FEATURE_MULTILINE_RAISE_MEMBERS_TO_LINKED_SYNSET
+	// FEATURE_MULTILINE_RAISE_MEMBERS_TO_RELATED_SYNSET
 	@Override
-	protected void walkTypedLink(@NonNull final TreeMutableNode parentNode, @NonNull final List<ISynsetID> linkedSynsetIds, @NonNull final Link link, final int level, @NonNull final List<IEdge> edges)
+	protected void walkTypedRelation(@NonNull final TreeMutableNode parentNode, @NonNull final List<ISynsetID> relatedSynsetIds, @NonNull final Relation relation, final int level, @NonNull final List<IEdge> edges)
 	{
-		// iterate linked synsets
+		// iterate related synsets
 		@Nullable INode etcNode = null;
 
 		int i = 0;
-		final int n = linkedSynsetIds.size();
+		final int n = relatedSynsetIds.size();
 		@Nullable List<INode> childNodes = new ArrayList<>();
-		@NonNull final Iterator<ISynsetID> it = linkedSynsetIds.iterator();
+		@NonNull final Iterator<ISynsetID> it = relatedSynsetIds.iterator();
 		while (it.hasNext())
 		{
-			final ISynsetID linkedSynsetId = it.next();
-			final ISynset linkedSynset0 = this.dictionary.getSynset(linkedSynsetId);
-			if (linkedSynset0 == null)
+			final ISynsetID relatedSynsetId = it.next();
+			final ISynset relatedSynset0 = this.dictionary.getSynset(relatedSynsetId);
+			if (relatedSynset0 == null)
 			{
 				continue;
 			}
 
-			@NonNull final Synset linkedSynset = new Synset(linkedSynset0);
-			// System.out.println(level + " " + new String(new char[level]).replace('\0', '\t') + membersToString(linkedSynset));
+			@NonNull final Synset relatedSynset = new Synset(relatedSynset0);
+			// System.out.println(level + " " + new String(new char[level]).replace('\0', '\t') + membersToString(relatedSynset));
 
 			// synset node
 			@NonNull final String tag = Integer.toString(i + 1);
 
-			@NonNull final TreeMutableNode linkedSynsetNode = makeSynsetNode(null, linkedSynset);
-			linkedSynsetNode.setLabel(/* tag + '\n' + */ membersAsLines(linkedSynset));
+			@NonNull final TreeMutableNode relatedSynsetNode = makeSynsetNode(null, relatedSynset);
+			relatedSynsetNode.setLabel(/* tag + '\n' + */ membersAsLines(relatedSynset));
 
-			decorateAsWord(linkedSynsetNode, level);
-			setNodeImage(linkedSynsetNode, null, null);
-			linkedSynsetNode.setEdgeLabel(null);
-			linkedSynsetNode.setEdgeColor(this.linkBackgroundColor);
-			setTreeEdgeImage(linkedSynsetNode, null, ImageIndex.values()[link.imageIndex]);
+			decorateAsWord(relatedSynsetNode, level);
+			setNodeImage(relatedSynsetNode, null, null);
+			relatedSynsetNode.setEdgeLabel(null);
+			relatedSynsetNode.setEdgeColor(this.relationBackgroundColor);
+			setTreeEdgeImage(relatedSynsetNode, null, ImageIndex.values()[relation.imageIndex]);
 
-			linkedSynsetNode.setTarget(tag);
-			childNodes.add(linkedSynsetNode);
+			relatedSynsetNode.setTarget(tag);
+			childNodes.add(relatedSynsetNode);
 
 			// recurse
 			if (level < this.maxRecurse)
 			{
-				// iterate linked synsets
-				final List<ISynsetID> childLinkedSynsetIds = linkedSynset.synset.getRelatedSynsets(link.pointer);
-				if (!childLinkedSynsetIds.isEmpty())
+				// iterate related synsets
+				final List<ISynsetID> childRelatedSynsetIds = relatedSynset.synset.getRelatedSynsets(relation.pointer);
+				if (!childRelatedSynsetIds.isEmpty())
 				{
-					walkTypedLink(linkedSynsetNode, childLinkedSynsetIds, link, level + 1, edges);
+					walkTypedRelation(relatedSynsetNode, childRelatedSynsetIds, relation, level + 1, edges);
 				}
 			}
 
 			// limit
-			if (++i >= this.maxLinks && i < n)
+			if (++i >= this.maxRelations && i < n)
 			{
-				etcNode = makeEtcLinkNode(null, link, n, it);
+				etcNode = makeEtcRelationNode(null, relation, n, it);
 				break;
 			}
 		}
 
-		// semlinks nodes
-		if (this.loadBalanceSemLinks)
+		// semrelations nodes
+		if (this.loadBalanceSemRelations)
 		{
-			childNodes = this.semLinksLoadBalancer.buildHierarchy(childNodes, link.imageIndex);
+			childNodes = this.semRelationsLoadBalancer.buildHierarchy(childNodes, relation.imageIndex);
 		}
 
 		parentNode.addChildren(childNodes);

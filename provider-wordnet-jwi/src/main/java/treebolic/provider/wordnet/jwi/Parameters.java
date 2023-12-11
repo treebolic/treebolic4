@@ -42,14 +42,14 @@ public class Parameters
 	static public final String KEY_RECURSE_MAX = "recurse_max";
 
 	/**
-	 * Load balance members
+	 * Load balance words
 	 */
-	public static final String KEY_LOADBALANCE_MEMBERS = "loadbalance_members";
+	public static final String KEY_LOADBALANCE_WORDS = "loadbalance_words";
 
 	/**
-	 * Load balance semlinks
+	 * Load balance semrelations
 	 */
-	public static final String KEY_LOADBALANCE_SEMLINKS = "loadbalance_semlinks";
+	public static final String KEY_LOADBALANCE_SEMRELATIONS = "loadbalance_semrelations";
 
 	/**
 	 * Back color
@@ -152,49 +152,49 @@ public class Parameters
 	static public final String KEY_SYNSET_ECOLOR = "synset_ecolor";
 
 	/**
-	 * Links background color
+	 * Relations background color
 	 */
-	static public final String KEY_LINKS_BCOLOR = "links_bcolor";
+	static public final String KEY_RELATIONS_BCOLOR = "relations_bcolor";
 
 	/**
-	 * Links forecolor
+	 * Relations forecolor
 	 */
-	static public final String KEY_LINKS_FCOLOR = "links_fcolor";
+	static public final String KEY_RELATIONS_FCOLOR = "relations_fcolor";
 
 	/**
-	 * Links edge color
+	 * Relations edge color
 	 */
-	static public final String KEY_LINKS_ECOLOR = "links_ecolor";
+	static public final String KEY_RELATIONS_ECOLOR = "relations_ecolor";
 
 	/**
-	 * Link background color
+	 * Relation background color
 	 */
-	static public final String KEY_LINK_BCOLOR = "link_bcolor";
+	static public final String KEY_RELATION_BCOLOR = "relation_bcolor";
 
 	/**
-	 * Link foreground color
+	 * Relation foreground color
 	 */
-	static public final String KEY_LINK_FCOLOR = "link_fcolor";
+	static public final String KEY_RELATION_FCOLOR = "relation_fcolor";
 
 	/**
-	 * Link edge color
+	 * Relation edge color
 	 */
-	static public final String KEY_LINK_ECOLOR = "link_ecolor";
+	static public final String KEY_RELATION_ECOLOR = "relation_ecolor";
 
 	/**
-	 * Member background color
+	 * Words background color
 	 */
-	static public final String KEY_MEMBERS_BCOLOR = "members_bcolor";
+	static public final String KEY_WORDS_BCOLOR = "words_bcolor";
 
 	/**
-	 * Member foreground color
+	 * Words foreground color
 	 */
-	static public final String KEY_MEMBERS_FCOLOR = "members_fcolor";
+	static public final String KEY_WORDS_FCOLOR = "words_fcolor";
 
 	/**
-	 * Member edge color
+	 * Words edge color
 	 */
-	static public final String KEY_MEMBERS_ECOLOR = "members_ecolor";
+	static public final String KEY_WORDS_ECOLOR = "words_ecolor";
 
 	/**
 	 * Word background color
@@ -212,14 +212,14 @@ public class Parameters
 	static public final String KEY_WORD_ECOLOR = "word_ecolor";
 
 	/**
-	 * Linked word background color
+	 * Related word background color
 	 */
-	static public final String KEY_LINKEDWORD_BCOLOR = "linkedword_bcolor";
+	static public final String KEY_RELATEDWORD_BCOLOR = "relatedword_bcolor";
 
 	/**
-	 * Linked word foreground color
+	 * Related word foreground color
 	 */
-	static public final String KEY_LINKEDWORD_FCOLOR = "linkedword_fcolor";
+	static public final String KEY_RELATEDWORD_FCOLOR = "relatedword_fcolor";
 
 	/**
 	 * Stem background color
