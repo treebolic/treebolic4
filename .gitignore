@@ -6,3 +6,7 @@
 **/dependency-reduced-pom.xml
 /swing-wordnet/database/
 /swing-fungi/database/
+
+/resources/wordnet/xml/all.xml
+/resources/wordnet/html/
+/resources/wordnet/artwork/archive/
