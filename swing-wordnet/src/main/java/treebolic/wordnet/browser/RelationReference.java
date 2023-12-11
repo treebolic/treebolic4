@@ -15,7 +15,7 @@ import treebolic.annotations.NonNull;
 /**
  * @author Bernard Bou
  */
-public enum LinkReference
+public enum RelationReference
 {
 	// @formatter:off
 	/** Hypernym */ HYPERNYM("hypernym"), //
@@ -33,35 +33,35 @@ public enum LinkReference
 
 	/** Antonym */ ANTONYM("antonym"), //
 
-	/** Entails */ ENTAILS("entail"), //
-	/** Is entailed by */ IS_ENTAILED_BY("entailed"), //
-	/** Causes */ CAUSES("cause"), //
-	/** Is caused by */ IS_CAUSED_BY("caused"), //
+	/** Entails */ ENTAILS("entails"), //
+	/** Is entailed by */ ENTAILED("entailed"), //
+	/** Causes */ CAUSES("causes"), //
+	/** Is caused by */ CAUSED("caused"), //
 
-	/** Similar to */ SIMILAR_TO("similar"), //
-	/** Also see */ ALSO_SEE("alsosee"), //
+	/** Similar to */ SIMILAR("similar"), //
+	/** Also see */ ALSO("also"), //
 	/** Attribute */ ATTRIBUTE("attribute"), //
 	/** Pertainym */ PERTAINYM("pertainym"), //
-	/** Derivationally related */ DERIVATIONALLY_RELATED("derivation"), //
-	/** Derived from adjective */ DERIVED_FROM_ADJ("adjderived"), //
+	/** Derivationally related */ DERIVATION("derivation"), //
+	/** Derived from adjective */ DERIVATION_ADJ("derivation_adj"), //
 
 	/** Verb group */ VERB_GROUP("verbgroup"), //
 	/** Participle */ PARTICIPLE("participle"), //
 
 	/** Domain */ DOMAIN("domain"), //
-	/** Topic */ TOPIC(null), //
-	/** Usage */ USAGE(null), //
-	/** Region */ REGION(null), //
+	/** Domain Topic */ DOMAIN_TOPIC(null), //
+	/** Domain Usage */ DOMAIN_USAGE(null), //
+	/** Domain Region */ DOMAIN_REGION(null), //
 
-	/** Member */ MEMBER("member"), //
-	/** Topic member */ TOPIC_MEMBER(null), //
-	/** Usage member */ USAGE_MEMBER(null), //
-	/** Region member */ REGION_MEMBER(null); //
+	/** Has domain */ HASDOMAIN("hasdomain"), //
+	/** Has domain Topic member */ HASDOMAIN_TOPIC(null), //
+	/** Has domain Usage */ HASDOMAIN_USAGE(null), //
+	/** Has domain Region */ HASDOMAIN_REGION(null); //
 	// @formatter:off
 
 	private final String helpKey;
 
-	LinkReference(final String helpKey)
+	RelationReference(final String helpKey)
 	{
 		this.helpKey = helpKey;
 	}
@@ -72,7 +72,7 @@ public enum LinkReference
 	 */
 	@NonNull public String getLabel()
 	{
-		return Messages.getString("LinkReference." + this.name().toLowerCase());
+		return Messages.getString("RelationReference." + this.name().toLowerCase());
 	}
 
 	/**
@@ -88,14 +88,14 @@ public enum LinkReference
 	/**
 	 * Get labels
 	 *
-	 * @param refs link references
+	 * @param refs relation references
 	 * @return array of labels
 	 */
-	@NonNull public static String[] getLabels(@NonNull final LinkReference... refs)
+	@NonNull public static String[] getLabels(@NonNull final RelationReference... refs)
 	{
 		@NonNull String[] strings = new String[refs.length];
 		int i = 0;
-		for (@NonNull LinkReference ref : refs)
+		for (@NonNull RelationReference ref : refs)
 		{
 			strings[i] = ref.getLabel();
 			i++;
@@ -131,7 +131,7 @@ public enum LinkReference
 	static public long all()
 	{
 		long m = 0;
-		for (@NonNull final LinkReference r : LinkReference.values())
+		for (@NonNull final RelationReference r : RelationReference.values())
 		{
 			m |= r.mask();
 		}
@@ -154,10 +154,10 @@ public enum LinkReference
 				MERONYM_PART.mask() | //
 				ANTONYM.mask() | //
 				ENTAILS.mask() | //
-				IS_ENTAILED_BY.mask() | //
+				ENTAILED.mask() | //
 				CAUSES.mask() | //
-				IS_CAUSED_BY.mask() | //
-				SIMILAR_TO.mask();
+				CAUSED.mask() | //
+				SIMILAR.mask();
 	}
 
 	/**

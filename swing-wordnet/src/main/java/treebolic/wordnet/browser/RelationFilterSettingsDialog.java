@@ -13,7 +13,7 @@ import treebolic.annotations.NonNull;
  *
  * @author Bernard Bou
  */
-public class LinkFilterSettingsDialog extends SettingsDialog
+public class RelationFilterSettingsDialog extends SettingsDialog
 {
 	/**
 	 * Constructor
@@ -21,7 +21,7 @@ public class LinkFilterSettingsDialog extends SettingsDialog
 	 * @param settings settings
 	 * @param owner    frame owner
 	 */
-	public LinkFilterSettingsDialog(final Properties settings, final Frame owner)
+	public RelationFilterSettingsDialog(final Properties settings, final Frame owner)
 	{
 		super(settings, owner, true, false);
 	}
@@ -44,7 +44,7 @@ public class LinkFilterSettingsDialog extends SettingsDialog
 			exception.printStackTrace();
 		}
 
-		@NonNull final LinkFilterSettingsDialog dialog = new LinkFilterSettingsDialog(settings, null);
+		@NonNull final RelationFilterSettingsDialog dialog = new RelationFilterSettingsDialog(settings, null);
 		dialog.setModal(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
