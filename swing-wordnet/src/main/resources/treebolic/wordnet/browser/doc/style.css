@@ -1,0 +1,253 @@
+/* WordNet Relations */
+
+* {
+	color: black;
+	font-family: Arial,sans-serif;
+}
+
+body {
+	background-color: #F3F1E2;
+	font-size: small;
+	padding: 0px;
+}
+
+.toc {
+	display: none;
+}
+
+.main {
+	width: 100%;
+}
+
+/******* hyperlink and anchor tag styles *******/
+
+a:relation,a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/********* custom *********/
+
+.header {
+	background-color: gray;
+	color: orange;
+}
+
+.menu {
+	background-color: orange;
+}
+
+.title {
+	font-size: xx-large;
+	font-weight: bold;
+	letter-spacing: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: orange;
+}
+
+.relation {
+	visibility: visible;
+	width: 100%;
+	margin-bottom: 100px;
+}
+
+.relationheader {
+    float: right;
+}
+
+.relationimage {
+	width: 36px;
+}
+
+.name {
+	font-size: x-large;
+	font-weight: bold;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-left: 25px;
+	padding-right: 25px;
+	background-color: orange;
+	color: black;
+	vertical-align: middle;
+}
+
+.description {
+	font-size: large;
+	margin-top: 20px;
+}
+
+.colfeatures {
+    width: 50%;
+	margin: 20px;
+}
+
+.colother {
+    width: 50%;
+	margin: 20px;
+}
+
+.features {
+    float: left;
+}
+
+.inverse {
+    float: right;
+}
+
+.see {
+    float: right;
+}
+
+.featureimage {
+	margin-right: 20px;
+	vertical-align: middle;
+}
+
+.otherimage {
+	vertical-align: middle;
+}
+
+.type {
+}
+
+.symmetric {
+}
+
+.domain {
+	background-color: #00cc99;
+}
+
+.logical {
+	background-color: #E5E2B3;
+	font-style: italic;
+	margin-top: 20px;
+}
+
+.def {
+	color: gray;
+}
+
+.cond {
+	color: gray;
+}
+
+.exampletable {
+}
+
+.examples {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.example {
+}
+
+.from {
+	font-size: small;
+	font-family: serif;
+	border-style:solid;
+	border-width: 1;
+}
+
+.to {
+	background-color: #FFFF99;
+	font-size: small;
+	font-family: serif;
+	border-style:solid;
+	border-width: 1;
+}
+
+.fromguide {
+	background-color: #FF8099;
+	font-size: small;
+	font-family: sans-serif;
+	border-style:solid;
+	border-width: 1;
+}
+
+.toguide {
+	background-color: #FF0099;
+	font-size: small;
+	font-family: sans-serif;
+	border-style:solid;
+	border-width: 1;
+}
+
+.phrasetable {
+}
+
+.phrases {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.fromphrase {
+	font-size: small;
+	font-family: serif;
+	font-style: bold;
+	border-style:solid;
+	border-width: 1;
+}
+
+.relphrase {
+	font-size: small;
+	font-family: sans-serif;
+}
+
+.tophrase {
+	font-size: small;
+	font-family: serif;
+	font-style: bold;
+	border-style:solid;
+	border-width: 1;
+}
+
+.gloss {
+	color: gray;
+	font-size: small;
+	font-style: italic;
+}
+
+.backimage {
+	background-repeat: repeat;
+}
+
+.inline-image {
+    width: "32px";
+    height: "32px";
+    vertical-align:middle;
+}
+
+.splash {
+	height: 100%;
+	background-color: #E5E2B3;
+	background-repeat: no-repeat;
+	background-position: center center;
+    background-attachment: fixed;
+	background-image: url('./images/splash.png');
+}
+
+.selectorname {
+	margin-left:10px;
+}
+
+.toright {
+	float: right;
+}
+
+.toright {
+	float: right;
+}
+
+.full-width {
+	width: 100%;
+}
+/*
+table td:last-child {
+    width: 100%;
+}
+*/
