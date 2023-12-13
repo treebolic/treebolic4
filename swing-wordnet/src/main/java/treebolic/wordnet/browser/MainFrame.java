@@ -159,7 +159,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 		assert maxRelationsIconUrl != null;
 		maxRelationsItem.setIcon(new ImageIcon(maxRelationsIconUrl));
 		maxRelationsItem.addActionListener(e -> {
-			final String string = ask(Messages.getString("MainFrame.maxrelationss"), MainFrame.this.settings.getProperty("relation_maxrelations"));//$NON-NLS-2$
+			final String string = ask(Messages.getString("MainFrame.maxrelations"), MainFrame.this.settings.getProperty("relation_maxrelations"));//$NON-NLS-2$
 			try
 			{
 				Integer.parseInt(string);
@@ -349,7 +349,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	@Override
 	protected void help()
 	{
-		@NonNull final JComponent pane = makeBrowserPane(this.getClass().getResource("doc/index.html"), true);
+		@NonNull final JComponent pane = makeBrowserPane(this.getClass().getResource("doc/toc.html"), true);
 		addTab(pane, Messages.getString("MainFrame.help"), Messages.getString("MainFrame.helprelations"));//$NON-NLS-2$
 	}
 

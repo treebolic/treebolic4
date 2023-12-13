@@ -61,6 +61,7 @@ a:hover {
 
 .relationimage {
 	width: 36px;
+	vertical-align: middle;
 }
 
 .name {
