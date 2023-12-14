@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- launch4j installer -->
+<!-- Bernard Bou -->
+<!-- 1313ou@gmail.com -->
+<!-- 2017-12-31 -->
+
+<project name="treebolic-installer-launch4j" default="default" basedir=".">
+
+	<property name="app" value="treebolic-wordnet" />
+	<property name="installer" value="${app}-installer" />
+
+	<!-- env -->
+	<property environment="env" />
+	<property name="launch4j.home" location="${env.LAUNCH4J_HOME}" />
+	<echo>${env.LAUNCH4J_HOME}</echo>
+	<echo>${launch4j.home}</echo>
+
+	<target name="init">
+		<tstamp />
+	</target>
+
+	<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="${launch4j.home}/launch4j.jar:${launch4j.home}/lib/xstream.jar" />
+
+	<target name="default" depends="clean, make-conf, make-exe">
+		<echo>done</echo>
+	</target>
+
+	<target name="default2" depends="clean, make-link, make-exe">
+		<echo>done</echo>
+	</target>
+
+	<target name="make-exe">
+		<launch4j configFile="./launch4j.xml" />
+	</target>
+
+	<target name="get-latest-version">
+		<resources id="latest.installer">
+			<last>
+				<sort>
+					<date xmlns="antlib:org.apache.tools.ant.types.resources.comparators" />
+					<resources>
+						<fileset dir=".">
+							<include name="${installer}-*.jar" />
+						</fileset>
+					</resources>
+				</sort>
+			</last>
+		</resources>
+		<echo-resources refid="latest.installer" />
+		<echo>${latest.installer.result}</echo>
+		<get-version src="${latest.installer.result}" installer="${installer}" result="installer-version"/>
+		<echo>version=${installer-version}</echo>
+	</target>
+
+	<target name="make-conf" depends="get-latest-version">
+		<echo>version=${installer-version}</echo>
+		<copy file="launch4j-template.xml" tofile="launch4j.xml" overwrite="true">
+			<filterset>
+				<filter token="APP" value="${app}" />
+				<filter token="VERSION" value="${installer-version}" />
+			</filterset>
+		</copy>
+	</target>
+
+	<target name="make-link" depends="get-latest-version">
+		<symlink action="delete" link="${installer}.jar" failonerror="false" />
+		<symlink action="single" link="${installer}.jar" resource="${latest.installer.result}" overwrite="true" />
+	</target>
+
+	<target name="clean" description="clean up">
+		<symlink action="delete" link="${installer}.jar" failonerror="false" />
+		<delete file="${installer}.exe" />
+	</target>
+
+	<!-- get version -->
+	
+	<macrodef name="get-version">
+		<attribute name="src" />
+		<attribute name="installer" />
+		<attribute name="result" />
+		<sequential>
+			<script language="javascript">
+	   			project.setProperty( "@{result}", "@{src}".split("@{installer}")[1].replace(".jar", ""));
+	  		</script>
+		</sequential>
+	</macrodef>
+
+	<!-- DEBUG -->
+
+	<macrodef name="echo-resources">
+		<attribute name="refid" />
+		<sequential>
+			<pathconvert pathsep="${line.separator} " property="@{refid}.result">
+				<path>
+					<resources refid="@{refid}" />
+				</path>
+			</pathconvert>
+			<echo>[resources] @{refid}</echo>
+			<echo> ${@{refid}.result}</echo>
+		</sequential>
+	</macrodef>
+
+</project>

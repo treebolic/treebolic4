@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+
+<izpack:shortcuts version="5.0"
+                  xmlns:izpack="http://izpack.org/schema/shortcuts"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://izpack.org/schema/shortcuts http://izpack.org/schema/5.0/izpack-shortcuts-5.0.xsd">
+
+  <programGroup defaultName='Treebolic WordNet' location='applications'/>
+
+  <shortcut 
+	name='Treebolic WordNet' 
+	programGroup='yes' 
+	desktop='yes' 
+	applications='yes' 
+	startMenu='yes' 
+	startup='no' 
+	target='javaw'
+	commandLine='-jar "$INSTALL_PATH\treebolic-wordnet-3.9.0.jar"' 
+	workingDirectory='$INSTALL_PATH'
+	description='Treebolic WordNet' 
+	iconFile='$INSTALL_PATH\treebolic-wordnet.ico' 
+	iconIndex='0'
+	initialState='normal'
+	encoding='UTF-8'
+	type='Application'
+	terminal='false' >
+	<createForPack name='treebolic-wordnet'/>
+  </shortcut>
+
+</izpack:shortcuts>
+
