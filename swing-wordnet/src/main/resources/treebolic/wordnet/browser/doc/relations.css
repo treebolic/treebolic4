@@ -11,13 +11,11 @@ body {
 	padding: 0px;
 }
 
-.toc {
-	display: none;
+/*
+table td:last-child {
+    width: 100%;
 }
-
-.main {
-	width: 100%;
-}
+*/
 
 /******* hyperlink and anchor tag styles *******/
 
@@ -48,6 +46,18 @@ a:hover {
 	padding-right: 10px;
 	color: orange;
 }
+
+/* P A G E */
+
+.toc {
+	display: none;
+}
+
+.main {
+	width: 100%;
+}
+
+/* R E L A T I O N */
 
 .relation {
 	visibility: visible;
@@ -81,18 +91,16 @@ a:hover {
 	margin-top: 20px;
 }
 
-.colfeatures {
-    width: 50%;
-	margin: 20px;
-}
-
-.colother {
-    width: 50%;
-	margin: 20px;
-}
+/* FEATURES */
 
 .features {
     float: left;
+}
+
+.type {
+}
+
+.symmetric {
 }
 
 .inverse {
@@ -112,29 +120,34 @@ a:hover {
 	vertical-align: middle;
 }
 
-.type {
+.colfeatures {
+    width: 50%;
+	margin: 20px;
 }
 
-.symmetric {
+.colother {
+    width: 50%;
+	margin: 20px;
 }
 
-.domain {
-	background-color: #00cc99;
-}
+/* LOGICAL */
 
 .logical {
-	background-color: #E5E2B3;
 	font-style: italic;
 	margin-top: 20px;
 }
 
 .def {
-	color: gray;
+	background-color: #F5F2C3;
+	color: black;
 }
 
 .cond {
-	color: gray;
+	background-color: #E5E2B3;
+	color: dark-gray;
 }
+
+/* EXAMPLES */
 
 .exampletable {
 }
@@ -162,6 +175,14 @@ a:hover {
 	border-width: 1;
 }
 
+.gloss {
+	color: gray;
+	font-size: small;
+	font-style: italic;
+}
+
+/* guides */
+
 .fromguide {
 	background-color: #FF8099;
 	font-size: small;
@@ -177,6 +198,8 @@ a:hover {
 	border-style:solid;
 	border-width: 1;
 }
+
+/* phrases */
 
 .phrasetable {
 }
@@ -207,11 +230,7 @@ a:hover {
 	border-width: 1;
 }
 
-.gloss {
-	color: gray;
-	font-size: small;
-	font-style: italic;
-}
+/** GENERAL */
 
 .backimage {
 	background-repeat: repeat;
@@ -229,7 +248,7 @@ a:hover {
 	background-repeat: no-repeat;
 	background-position: center center;
     background-attachment: fixed;
-	background-image: url('./images/splash.png');
+	background-image: url('images/splash.png');
 }
 
 .selectorname {
@@ -240,15 +259,10 @@ a:hover {
 	float: right;
 }
 
-.toright {
-	float: right;
+.totop {
+	100%;vertical-align: top;
 }
 
 .full-width {
 	width: 100%;
 }
-/*
-table td:last-child {
-    width: 100%;
-}
-*/
