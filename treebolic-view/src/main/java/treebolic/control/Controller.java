@@ -479,7 +479,8 @@ public class Controller extends Commander
 			assert this.widget != null;
 			@Nullable final String edit = this.widget.getTarget();
 			expandedLink = PopupMenu.expandMacro(link, edit, node);
-			// TODO expandedLink = Controller.decode(expandedLink);
+			// already decoded
+			// expandedLink = Controller.decode(expandedLink);
 		}
 		return expandedLink;
 	}
