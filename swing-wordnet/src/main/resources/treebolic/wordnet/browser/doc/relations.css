@@ -59,6 +59,8 @@ a:hover {
 
 /* R E L A T I O N */
 
+/* HEADER */
+
 .relation {
 	visibility: visible;
 	width: 100%;
@@ -66,7 +68,6 @@ a:hover {
 }
 
 .relationheader {
-    float: right;
 }
 
 .relationimage {
@@ -74,7 +75,7 @@ a:hover {
 	vertical-align: middle;
 }
 
-.name {
+.relationname {
 	font-size: x-large;
 	font-weight: bold;
 	margin-left: 10px;
@@ -85,6 +86,8 @@ a:hover {
 	color: black;
 	vertical-align: middle;
 }
+
+/* DESCRIPTION */
 
 .description {
 	font-size: large;
