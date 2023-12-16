@@ -97,7 +97,8 @@ public class Provider extends BaseProvider implements IProvider
 
 				// senseentry
 				final ISenseEntry senseEntry = this.dictionary.getSenseEntry(sensekey);
-				// TODO should not be null but happens if the sensekey is not in the index
+				// should not be null but happens if the sensekey is not in the index
+				assert senseEntry != null;
 
 				// sensenum, tagcount
 				final int senseNum = senseEntry.getSenseNumber();

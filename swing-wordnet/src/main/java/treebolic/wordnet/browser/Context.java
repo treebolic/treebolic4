@@ -63,8 +63,6 @@ public class Context extends treebolic.browser2.Context
         catch (MalformedURLException mue)
         {
             this.dataDirUrl = null;
-
-            // TODO
             mue.printStackTrace();
         }
     }
