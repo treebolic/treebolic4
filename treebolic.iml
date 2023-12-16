@@ -2,15 +2,15 @@
 <module version="4">
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$" dumb="true">
-      <excludeFolder url="file://$MODULE_DIR$/archive" />
-      <excludeFolder url="file://$MODULE_DIR$/treebolic-glue-android/.gradle" />
-      <excludeFolder url="file://$MODULE_DIR$/treebolic-glue-android/artwork" />
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/archive" />
       <excludeFolder url="file://$MODULE_DIR$/data" />
       <excludeFolder url="file://$MODULE_DIR$/resources/wordnet/html" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
-      <excludeFolder url="file://$MODULE_DIR$/treebolic-glue-android/gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/treebolic-glue-android/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/treebolic-glue-android/artwork" />
       <excludeFolder url="file://$MODULE_DIR$/treebolic-glue-android/build" />
+      <excludeFolder url="file://$MODULE_DIR$/treebolic-glue-android/gradle" />
     </content>
   </component>
 </module>

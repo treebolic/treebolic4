@@ -798,6 +798,7 @@
         <option value="$PROJECT_DIR$/treebolic-iface/pom.xml" />
       </set>
     </option>
+    <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="treebolic.annotations.Nullable" />
