@@ -66,7 +66,7 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 		// Android
 		@Nullable final URL androidImageUrl = AboutDialog.class.getResource("images/android.png");
 		assert androidImageUrl != null;
-		@NonNull final JLabel androidImage = new JLabel("<HTML><FONT color=\"#808080\">" + Messages.getString("AboutDialog.also") + "</FONT><B>Android</B></FONT></HTML>", new ImageIcon(androidImageUrl), SwingConstants.CENTER);
+		@NonNull final JLabel androidImage = new JLabel("<HTML><FONT color=\"#808080\">" + Messages.getString("AboutDialog.also") + " </FONT><B>Android</B></FONT></HTML>", new ImageIcon(androidImageUrl), SwingConstants.CENTER);
 		androidImage.setHorizontalTextPosition(SwingConstants.CENTER);
 		androidImage.setVerticalTextPosition(SwingConstants.BOTTOM);
 

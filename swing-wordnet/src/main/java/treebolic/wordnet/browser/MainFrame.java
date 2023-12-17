@@ -349,7 +349,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 	@Override
 	protected void help()
 	{
-		@NonNull final JComponent pane = makeBrowserPane(this.getClass().getResource("doc/index-frames.html"), true);
+		@NonNull final JComponent pane = makeBrowserPane(this.getClass().getResource("doc/toc.html"), true);
 		addTab(pane, Messages.getString("MainFrame.help"), Messages.getString("MainFrame.helprelations"));//$NON-NLS-2$
 	}
 

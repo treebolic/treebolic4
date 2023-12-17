@@ -790,6 +790,7 @@
         <option value="$PROJECT_DIR$/swing-wordnet/pom.xml" />
         <option value="$PROJECT_DIR$/swing-wordnet2/pom.xml" />
         <option value="$PROJECT_DIR$/swing-files/pom.xml" />
+        <option value="$PROJECT_DIR$/swing-wordnet2-installer/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -805,7 +806,7 @@
     <option name="myDefaultNotNull" value="treebolic.annotations.NonNull" />
     <option name="myNullables">
       <value>
-        <list size="16">
+        <list size="18">
           <item index="0" class="java.lang.String" itemvalue="treebolic.annotations.Nullable" />
           <item index="1" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
           <item index="2" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
@@ -822,12 +823,14 @@
           <item index="13" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
           <item index="14" class="java.lang.String" itemvalue="io.reactivex.annotations.Nullable" />
           <item index="15" class="java.lang.String" itemvalue="org.jspecify.nullness.Nullable" />
+          <item index="16" class="java.lang.String" itemvalue="org.jspecify.annotations.Nullable" />
+          <item index="17" class="java.lang.String" itemvalue="jakarta.annotation.Nullable" />
         </list>
       </value>
     </option>
     <option name="myNotNulls">
       <value>
-        <list size="16">
+        <list size="18">
           <item index="0" class="java.lang.String" itemvalue="treebolic.annotations.NonNull" />
           <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
           <item index="2" class="java.lang.String" itemvalue="androidx.annotation.NonNull" />
@@ -844,6 +847,8 @@
           <item index="13" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
           <item index="14" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
           <item index="15" class="java.lang.String" itemvalue="org.jspecify.nullness.NonNull" />
+          <item index="16" class="java.lang.String" itemvalue="org.jspecify.annotations.NonNull" />
+          <item index="17" class="java.lang.String" itemvalue="jakarta.annotation.Nonnull" />
         </list>
       </value>
     </option>
