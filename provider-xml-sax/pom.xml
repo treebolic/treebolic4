@@ -10,7 +10,7 @@
 	<parent>
 		<artifactId>treebolic</artifactId>
 		<groupId>io.github.treebolic</groupId>
-		<version>4.1-5</version>
+		<version>4.1-6</version>
 	</parent>
 
 	<artifactId>provider-xml-sax</artifactId>
