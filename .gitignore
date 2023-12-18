@@ -4,6 +4,8 @@
 **/target/
 **/data
 **/dependency-reduced-pom.xml
+**/*.jar
+
 /swing-wordnet/database/
 /swing-fungi/database/
 
