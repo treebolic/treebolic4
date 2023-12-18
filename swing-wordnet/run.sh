@@ -6,5 +6,5 @@
 
 here=`readlink -f $0`
 here=`dirname "${here}"`
-version=4.1-5
-java -jar "${here}/treebolic-wordnet-${version}.jar"
+version=4.1-6
+java -jar "${here}/swing-wordnet-${version}-uber.jar"
