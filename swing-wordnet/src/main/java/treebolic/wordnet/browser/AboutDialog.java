@@ -98,7 +98,7 @@ public class AboutDialog extends treebolic.commons.AboutDialog
 	static public void main(@NonNull final String[] args)
 	{
 		Laf.lookAndFeel(args);
-		@NonNull final Properties settings = treebolic.browser2.MainFrame.makeSettings(Persist.loadSettings(MainFrame.getStaticPersistName()), args);
+		@NonNull final Properties settings = treebolic.browser2.MainFrame.makeSettings(Persist.loadSettings(args[0]), args);
 		@NonNull final AboutDialog dialog = new AboutDialog(settings.getProperty("data", null));
 		dialog.setModal(true);
 		dialog.setVisible(true);

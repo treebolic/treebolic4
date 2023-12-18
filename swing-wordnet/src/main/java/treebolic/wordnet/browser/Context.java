@@ -108,7 +108,7 @@ public class Context extends treebolic.browser2.Context
     @Override
     public Properties getParameters()
     {
-        return this.browser.getParameters();
+        return this.browser.getSettings();
     }
 
     @Override
@@ -146,7 +146,7 @@ public class Context extends treebolic.browser2.Context
         if (linkUrl.startsWith("internal:help:"))
         {
             @NonNull final String link = linkUrl.substring(14);
-            @NonNull final JComponent pane = this.browser.makeBrowserPane(this.getClass().getResource("doc/" + link + ".html"), true);
+            @NonNull final JComponent pane = this.browser.makeBrowserPane(MainFrame.class.getResource("doc/" + link + ".html"), true);
             this.browser.addTab(pane, link, linkUrl);
             return true;
         }

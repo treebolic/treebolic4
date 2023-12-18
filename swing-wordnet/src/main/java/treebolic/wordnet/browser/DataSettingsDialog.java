@@ -255,14 +255,14 @@ public class DataSettingsDialog extends JDialog
 	static public void main(final String[] args)
 	{
 		UIManager.put("swing.boldMetal", false);
-		@NonNull final Properties settings = Persist.getSettings(MainFrame.getStaticPersistName());
+		@NonNull final Properties settings = Persist.getSettings(args[0]);
 		@NonNull final DataSettingsDialog dialog = new DataSettingsDialog(settings);
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		if (dialog.ok)
 		{
-			Persist.saveSettings(MainFrame.getStaticPersistName(), settings);
+			Persist.saveSettings(args[0], settings);
 		}
 		System.exit(0);
 	}

@@ -237,7 +237,7 @@ public class Context implements IContext
 	@Override
 	public Properties getParameters()
 	{
-		return this.browser.getParameters();
+		return this.browser.getSettings();
 	}
 
 	@Nullable
