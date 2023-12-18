@@ -43,6 +43,12 @@ public class Context extends treebolic.browser2.Context
     private URL dataDirUrl;
 
     /**
+     * Images directory
+     */
+    @Nullable
+    private URL imageDirUrl;
+
+    /**
      * Constructor
      *
      * @param application application mainframe
@@ -58,24 +64,35 @@ public class Context extends treebolic.browser2.Context
         // data URL
         try
         {
-            this.dataDirUrl = makeDataDir(base, userHome).toURI().toURL();
+            this.dataDirUrl = toDir(base, userHome).toURI().toURL();
         }
         catch (MalformedURLException mue)
         {
             this.dataDirUrl = null;
             mue.printStackTrace();
         }
+
+        // image URL
+        try
+        {
+            this.imageDirUrl = toDir(imageBase, userHome).toURI().toURL();
+        }
+        catch (MalformedURLException mue)
+        {
+            this.imageDirUrl = null;
+            mue.printStackTrace();
+        }
     }
 
     /**
-     * Make data dir
+     * Make data/image dir
      *
      * @param base     base
      * @param userHome use user home
      * @return data dir
      */
     @NonNull
-    public static File makeDataDir(@Nullable final String base, final boolean userHome)
+    public static File toDir(@Nullable final String base, final boolean userHome)
     {
         if (base == null || base.isEmpty())
         {
@@ -120,7 +137,7 @@ public class Context extends treebolic.browser2.Context
     @Override
     public URL getImagesBase()
     {
-        return this.dataDirUrl;
+        return this.imageDirUrl;
     }
 
     @Override

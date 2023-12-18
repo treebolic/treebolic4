@@ -309,7 +309,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
                 final String base = this.settings.getProperty("base");
                 final String userHomeStr = this.settings.getProperty("userhome", null);
                 final boolean userHome = userHomeStr == null || Boolean.parseBoolean(userHomeStr);
-                @NonNull final File cacheHome = Context.makeDataDir(base, userHome);
+                @NonNull final File cacheHome = Context.toDir(base, userHome);
 
                 try
                 {
