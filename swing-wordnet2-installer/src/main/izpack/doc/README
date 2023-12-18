@@ -1,0 +1,21 @@
+Treebolic WordNet
+=================
+
+Make sure Java 8 is installed on the system.
+
+Download the **treebolic-wordnet-[version]-install.jar** installer JAR file.
+
+Windows
+-------
+Right-Click the JAR file and "Open". This will launch the
+JAR file with the Java Virtual Machine.
+
+In case this fails you can fall back on the command line:
+
+	java -jar treebolic-wordnet-<version>-install.jar
+
+Others
+------
+Make the JAR file executable under Linux and Unix-like systems
+
+	java -jar treebolic-wordnet-<version>-install.jar
