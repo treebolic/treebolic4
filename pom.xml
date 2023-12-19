@@ -11,7 +11,7 @@
 	<groupId>io.github.treebolic</groupId>
 	<artifactId>treebolic</artifactId>
 	<packaging>pom</packaging>
-	<version>4.1-6</version>
+	<version>4.1-7</version>
 
 	<name>treebolic</name>
 	<description>Treebolic top project</description>
@@ -43,23 +43,24 @@
 		<module>provider-gxl</module>
 		<module>provider-wordnet-jwi</module>
 		<module>provider-wordnet-jwi2</module>
+		<module>provider-files</module>
+		<module>provider-graphviz</module>
+
 		<module>transformer-xml</module>
 
 		<module>treebolic-glue-swing</module>
+		<module>treebolic-lib-swing</module>
 
 		<module>swing-studio</module>
+		<module>swing-commons</module>
 		<module>swing-application</module>
+		<module>swing-browser</module>
+		<module>swing-browser-search</module>
 
-		<!-- <module>swing-application-xml-dom</module>-->
+    <!-- <module>swing-application-xml-dom</module>-->
 		<!-- <module>swing-application-xml-stax</module>-->
 		<!-- <module>swing-application-owl</module>-->
 		<!-- <module>swing-application-owl2</module>-->
-
-		<module>swing-commons</module>
-		<module>swing-browser</module>
-		<module>swing-browser-search</module>
-		<module>provider-files</module>
-		<module>provider-graphviz</module>
 
 	</modules>
 
@@ -67,7 +68,7 @@
 		<maven.compiler.source>8</maven.compiler.source>
 		<maven.compiler.target>8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<revision>4.1-6</revision>
+		<revision>4.1-7</revision>
 	</properties>
 
 	<build>

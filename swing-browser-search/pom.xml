@@ -10,7 +10,7 @@
 	<parent>
 		<artifactId>treebolic</artifactId>
 		<groupId>io.github.treebolic</groupId>
-		<version>4.1-6</version>
+		<version>4.1-7</version>
 	</parent>
 
 	<artifactId>swing-browser-search</artifactId>
@@ -66,6 +66,9 @@
 		</profile>
 		<profile>
 			<id>with-owl</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
 			<dependencies>
 				<dependency>
 					<groupId>io.github.treebolic</groupId>
