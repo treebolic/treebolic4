@@ -6,5 +6,5 @@
 
 here=`readlink -f $0`
 here=`dirname "${here}"`
-version=4.1-6
+version=4.1-7
 java -jar "${here}/swing-wordnet-${version}-uber.jar"
