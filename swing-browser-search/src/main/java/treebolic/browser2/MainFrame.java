@@ -44,7 +44,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
     /**
      * Main pane
      */
-    @NonNull
+    @Nullable
     private JComponent mainPane;
 
     /**
@@ -179,6 +179,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
         @NonNull final JMenuItem closeAllMenuItem = makeItem(Messages.getString("MainFrame.close"), "close.png", Code.CLOSEALL, 0);
         @NonNull final JMenuItem serializeMenuItem = makeItem(Messages.getString("MainFrame.serialize"), "serialize.png", Code.SERIALIZE, 0);
         @NonNull final JMenuItem settingsMenuItem = makeItem(Messages.getString("MainFrame.settings"), "settings.png", Code.SETTINGS, 0);
+        @NonNull final JMenuItem pathsItem = makeItem(Messages.getString("MainFrame.datapaths"), "settings.png", Code.PATHS, 0);
         @NonNull final JMenuItem aboutMenuItem = makeItem(Messages.getString("MainFrame.about"), "about.png", Code.ABOUT, 0);
         @NonNull final JMenuItem helpMenuItem = makeItem(Messages.getString("MainFrame.help"), "help.png", Code.HELP, 0);
 
@@ -198,6 +199,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
             @NonNull final JMenu optionsMenu = new JMenu();
             optionsMenu.setText(Messages.getString("MainFrame.menu_options"));
             optionsMenu.add(settingsMenuItem);
+            optionsMenu.add(pathsItem);
 
             menu.add(filesMenu);
             menu.add(optionsMenu);
@@ -208,9 +210,10 @@ public class MainFrame extends JFrame implements HyperlinkListener
             menu.add(closeAllMenuItem);
             menu.add(serializeMenuItem);
             menu.add(settingsMenuItem);
+            menu.add(pathsItem);
             menu.add(aboutMenuItem);
             menu.add(helpMenuItem);
-        }
+         }
         return menu;
     }
 
@@ -508,7 +511,7 @@ public class MainFrame extends JFrame implements HyperlinkListener
      */
     private enum Code
     {
-        SERIALIZE, CLOSEALL, SETTINGS, ABOUT, HELP
+        SERIALIZE, CLOSEALL, SETTINGS, PATHS, ABOUT, HELP
     }
 
     /**
@@ -575,6 +578,11 @@ public class MainFrame extends JFrame implements HyperlinkListener
             case SETTINGS:
             {
                 settings();
+                break;
+            }
+            case PATHS:
+            {
+                paths();
                 break;
             }
             case HELP:
@@ -719,6 +727,19 @@ public class MainFrame extends JFrame implements HyperlinkListener
         {
             Persist.saveSettings(getPersistName(), this.settings);
         }
+    }
+
+    /**
+     * Paths
+     */
+    protected void paths()
+    {
+        @NonNull final String[] lines = {
+                "pwd=" + System.getProperty("user.dir"),
+                "base=" + this.settings.getProperty("base", "null"),
+                "images=" + this.settings.getProperty("images", "null"),
+        };
+        JOptionPane.showMessageDialog(null, lines, Messages.getString("MainFrame.datapaths"), JOptionPane.INFORMATION_MESSAGE);
     }
 
     // H E L P E R S
