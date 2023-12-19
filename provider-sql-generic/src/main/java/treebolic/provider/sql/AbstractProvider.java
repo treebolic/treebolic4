@@ -160,27 +160,27 @@ public abstract class AbstractProvider< //
 	/**
 	 * Get nodes SQL statement
 	 */
-	static private final String DEFAULT_NODES_SQL = "SELECT * FROM %nodes%;";
+	static private final String DEFAULT_NODES_SQL = "SELECT * FROM ${nodes};";
 
 	/**
 	 * Get tree edges SQL statement
 	 */
-	static private final String DEFAULT_TREEEDGES_SQL = "SELECT * FROM %edges% WHERE %istree% = 1;";
+	static private final String DEFAULT_TREEEDGES_SQL = "SELECT * FROM ${edges} WHERE ${istree} = 1;";
 
 	/**
 	 * Get edges SQL statement
 	 */
-	static private final String DEFAULT_EDGES_SQL = "SELECT * FROM %edges% WHERE %istree% = 0;";
+	static private final String DEFAULT_EDGES_SQL = "SELECT * FROM ${edges} WHERE ${istree} = 0;";
 
 	/**
 	 * Get settings SQL statement
 	 */
-	static private final String DEFAULT_SETTINGS_SQL = "SELECT * FROM %settings%;";
+	static private final String DEFAULT_SETTINGS_SQL = "SELECT * FROM ${settings};";
 
 	/**
 	 * Get menu item SQL statement
 	 */
-	static private final String DEFAULT_MENU_SQL = "SELECT * FROM %menu% WHERE %menuid% = 0;";
+	static private final String DEFAULT_MENU_SQL = "SELECT * FROM ${menu} WHERE ${menuid} = 0;";
 
 	/**
 	 * Goto url scheme
@@ -604,7 +604,6 @@ public abstract class AbstractProvider< //
 		nodesCursor.close();
 
 		// T R E E . E D G E S
-		@NonNull final List<TreeMutableNode> parentLessNodes = new ArrayList<>();
 		final C treeEdgesCursor = db.query(treeEdgesSql);
 		final int fromIndex = treeEdgesCursor.getColumnIndex(fromName);
 		final int toIndex = treeEdgesCursor.getColumnIndex(toName);
@@ -632,13 +631,6 @@ public abstract class AbstractProvider< //
 				continue;
 			}
 
-			// root candidate
-			if (fromNode == null)
-			{
-				parentLessNodes.add(toNode);
-				continue;
-			}
-
 			// make tree
 			@NonNull List<INode> children = fromNode.getChildren();
 			children.add(toNode);
@@ -655,6 +647,17 @@ public abstract class AbstractProvider< //
 					lineFlag.toString(), hiddenFlag == null ? null : hiddenFlag.toString()));
 		}
 		treeEdgesCursor.close();
+
+		// scan nodes for orphans
+		@NonNull final List<TreeMutableNode> parentLessNodes = new ArrayList<>();
+		for(TreeMutableNode node2 : nodesById.values())
+		{
+			// root candidate
+			if (node2.getParent() == null)
+			{
+				parentLessNodes.add(node2);
+			}
+		}
 
 		// if one root return it
 		TreeMutableNode rootNode;
