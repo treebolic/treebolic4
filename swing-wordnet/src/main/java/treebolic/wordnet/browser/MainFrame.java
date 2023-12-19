@@ -134,15 +134,6 @@ public class MainFrame extends treebolic.browser2.MainFrame
         dataSettingsItem.addActionListener(e -> dataSettings());
         menu.add(dataSettingsItem);
 
-        @NonNull final JMenuItem datapathSettingsItem = new JMenuItem();
-        datapathSettingsItem.setAccelerator(KeyStroke.getKeyStroke('P', InputEvent.ALT_DOWN_MASK));
-        datapathSettingsItem.setText(Messages.getString("MainFrame.datapath"));
-        @Nullable final URL datapathSettingsIconUrl = MainFrame.class.getResource("images/data.png");
-        assert datapathSettingsIconUrl != null;
-        datapathSettingsItem.setIcon(new ImageIcon(datapathSettingsIconUrl));
-        datapathSettingsItem.addActionListener(e -> datapathSettings());
-        menu.add(datapathSettingsItem);
-
         menu.addSeparator();
 
         // colors
@@ -327,19 +318,6 @@ public class MainFrame extends treebolic.browser2.MainFrame
                 }
             }
         }
-    }
-
-    /**
-     * Data path settings
-     */
-    protected void datapathSettings()
-    {
-        @NonNull final String[] lines = {
-                "pwd=" + System.getProperty("user.dir"),
-                "base=" + this.settings.getProperty("base", "null"),
-                "images=" + this.settings.getProperty("images", "null"),
-        };
-        JOptionPane.showMessageDialog(null, lines, Messages.getString("MainFrame.datapath"), JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
