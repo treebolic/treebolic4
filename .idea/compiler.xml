@@ -43,6 +43,7 @@
         <module name="swing-application-owl" />
         <module name="swing-browser" />
         <module name="swing-application-xml-dom" />
+        <module name="treebolic-lib-swing" />
         <module name="provider-text-indent-tree" />
         <module name="provider-xml-dom" />
         <module name="treebolic-graph" />
