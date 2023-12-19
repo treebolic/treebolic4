@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="wordnet-browser2 (WordNet) (Browser2 noargs)" type="Application" factoryName="Application" folderName="Browsers">
+    <option name="ALTERNATIVE_JRE_PATH" value="11 (3)" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <option name="MAIN_CLASS_NAME" value="treebolic.wordnet.Browser2" />
+    <module name="swing-wordnet2" />
+    <option name="VM_PARAMETERS" value="-ea" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/swing-wordnet" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

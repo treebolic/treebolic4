@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="browser (SQL)(test)" type="Application" factoryName="Application" folderName="Browsers">
+    <option name="ALTERNATIVE_JRE_PATH" value="11 (3)" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <classpathModifications>
+      <entry path="$PROJECT_DIR$/treebolic-mutable/target/treebolic-mutable-4.1-7.jar" />
+      <entry path="$PROJECT_DIR$/provider-sql-jdbc/target/provider-sql-jdbc-4.1-7.jar" />
+      <entry path="$PROJECT_DIR$/provider-sql-generic/target/provider-sql-generic-4.1-7.jar" />
+      <entry path="$PROJECT_DIR$/provider-sql-jdbc/sqlite-jdbc-3.8.7.jar" />
+    </classpathModifications>
+    <option name="MAIN_CLASS_NAME" value="treebolic.Browser" />
+    <module name="swing-browser" />
+    <option name="PROGRAM_PARAMETERS" value="provider=treebolic.provider.sql.jdbc.Provider source=test-sqlite.properties base=./ images=./images" />
+    <option name="VM_PARAMETERS" value="-ea" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data/data/sql/test" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

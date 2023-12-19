@@ -1,0 +1,22 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="browser (XML) (SAX)" type="Application" factoryName="Application" folderName="Browsers">
+    <classpathModifications>
+      <entry path="$PROJECT_DIR$/treebolic-mutable/target/treebolic-mutable-4.1-6.jar" />
+      <entry path="$PROJECT_DIR$/provider-xml-sax/target/provider-xml-sax-4.1-6.jar" />
+    </classpathModifications>
+    <option name="MAIN_CLASS_NAME" value="treebolic.Browser" />
+    <module name="swing-browser" />
+    <option name="PROGRAM_PARAMETERS" value="provider=treebolic.provider.xml.sax.Provider source=test.xml" />
+    <option name="VM_PARAMETERS" value="-ea" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/provider-xml-dom" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="treebolic.application.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

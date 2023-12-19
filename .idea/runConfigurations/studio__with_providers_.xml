@@ -1,0 +1,23 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="studio (with providers)" type="Application" factoryName="Application">
+    <classpathModifications>
+      <entry path="$PROJECT_DIR$/provider-owl-sax/target/provider-owl-sax-4.1-7.jar" />
+      <entry path="$PROJECT_DIR$/provider-owl-sax2/target/provider-owl-sax2-4.1-7.jar" />
+      <entry path="$PROJECT_DIR$/provider-sql-jdbc/target/provider-sql-jdbc-4.1-7.jar" />
+      <entry path="$PROJECT_DIR$/provider-sql-generic/target/provider-sql-generic-4.1-7.jar" />
+      <entry path="$PROJECT_DIR$/provider-sql-jdbc/sqlite-jdbc-3.8.7.jar" />
+    </classpathModifications>
+    <option name="MAIN_CLASS_NAME" value="treebolic.Studio" />
+    <module name="swing-studio" />
+    <option name="VM_PARAMETERS" value="-ea" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="treebolic.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
