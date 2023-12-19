@@ -31,7 +31,7 @@ public class Persist
 	static public Properties getSettings(final String persistFile)
 	{
 		@NonNull final Properties settings = Persist.loadSettings(persistFile);
-		if (settings.size() == 0)
+		if (settings.isEmpty())
 		{
 			@Nullable String location = CodeBase.getJarLocation();
 			if (location == null)
@@ -54,8 +54,8 @@ public class Persist
 			{
 				location = location.substring(0, location.length() - 4);
 			}
-			settings.setProperty("base", location + "data/test/");
-			settings.setProperty("images", location + "data/test/images/");
+			settings.setProperty("base", location);
+			settings.setProperty("images", location + "images/");
 			settings.setProperty("help", location + "doc/");
 			settings.setProperty("browser", "firefox");
 		}
