@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Copyright (c) 2022. Bernard Bou
+# Copyright (c) 2023. Bernard Bou
 #
 
 here=`readlink -f $0`
