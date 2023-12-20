@@ -155,7 +155,7 @@ public class DataSettingsDialog extends JDialog
 		// button
 		@NonNull final JButton providerAddButton = new JButton(Messages.getString("DataSettingsDialog.other"));
 		providerAddButton.addActionListener(event -> {
-			final String other = ask(Messages.getString("DataSettingsDialog.prompt_other"), "https://x-englishwordnet.github.io/wndb/oewn_2022.zip");
+			final String other = ask(Messages.getString("DataSettingsDialog.prompt_other"), "https://x-englishwordnet.github.io/wndb/oewn_2023.zip");
 			if (other != null && !other.isEmpty())
 			{
 				if (!isInModel(other, DataSettingsDialog.this.dataComboBox))

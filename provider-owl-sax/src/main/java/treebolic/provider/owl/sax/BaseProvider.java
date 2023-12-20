@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022. Bernard Bou
+ * Copyright (c) 2023. Bernard Bou
  */
 package treebolic.provider.owl.sax;
 
@@ -24,178 +24,179 @@ import treebolic.provider.ProviderUtils;
  */
 public abstract class BaseProvider implements IProvider
 {
-	// S T A T I C . D A T A
+    // S T A T I C . D A T A
 
-	/**
-	 * Provider context
-	 */
-	private IProviderContext context;
+    /**
+     * Provider context
+     */
+    private IProviderContext context;
 
-	/**
-	 * Factory
-	 */
-	private OwlModelFactory factory;
+    /**
+     * Factory
+     */
+    private OwlModelFactory factory;
 
-	/**
-	 * Get factory
-	 *
-	 * @param properties config properties
-	 * @return factory
-	 */
-	abstract protected OwlModelFactory factory(@Nullable Properties properties);
+    /**
+     * Get factory
+     *
+     * @param properties config properties
+     * @return factory
+     */
+    abstract protected OwlModelFactory factory(@Nullable Properties properties);
 
-	/**
-	 * Constructor
-	 */
-	public BaseProvider()
-	{
-		// do nothing
-	}
+    /**
+     * Constructor
+     */
+    public BaseProvider()
+    {
+        // do nothing
+    }
 
-	@Override
-	public void setContext(final IProviderContext context)
-	{
-		this.context = context;
-	}
+    @Override
+    public void setContext(final IProviderContext context)
+    {
+        this.context = context;
+    }
 
-	@Override
-	public void setLocator(final ILocator locator)
-	{
-		// do not need
-	}
+    @Override
+    public void setLocator(final ILocator locator)
+    {
+        // do not need
+    }
 
-	@Override
-	public void setHandle(final Object handle)
-	{
-		// do not need
-	}
+    @Override
+    public void setHandle(final Object handle)
+    {
+        // do not need
+    }
 
-	@Override
-	public Model makeModel(final String source0, final URL base, @NonNull final Properties parameters)
-	{
-		// get owl file
-		String source = source0;
-		if (source == null)
-		{
-			source = parameters.getProperty("source");
-		}
+    @Override
+    public Model makeModel(final String source0, final URL base, @NonNull final Properties parameters)
+    {
+        // get owl file
+        String source = source0;
+        if (source == null)
+        {
+            source = parameters.getProperty("source");
+        }
 
-		// parse OWL file
-		if (source != null)
-		{
-			// settings properties
-			@Nullable Properties properties = getSettings(base, parameters);
+        // parse OWL file
+        if (source != null)
+        {
+            // settings properties
+            @Nullable Properties properties = getSettings(base, parameters);
 
-			// factory
-			if (this.factory == null)
-			{
-				this.factory = factory(properties);
-			}
+            // factory
+            if (this.factory == null)
+            {
+                this.factory = factory(properties);
+            }
 
-			// URL
-			@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
+            // URL
+            @Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 
-			// parse
-			this.context.progress("Loading ..." + (url != null ? url : source), false);
-			@Nullable final Model model = this.factory.makeModel(url != null ? url.toString() : source);
-			if (model != null)
-			{
-				this.context.progress("Loaded " + (url != null ? url : source), false);
-				return model;
-			}
-			this.context.message("Cannot load OWL file <" + (url != null ? url : source) + ">");
-		}
-		return null;
-	}
+            // parse
+            this.context.progress("Loading ..." + (url != null ? url : source), false);
+            @Nullable final Model model = this.factory.makeModel(url != null ? url.toString() : source);
+            if (model != null)
+            {
+                this.context.progress("Loaded " + (url != null ? url : source), false);
+                return model;
+            }
+            this.context.message("Cannot load OWL file <" + (url != null ? url : source) + ">");
+        }
+        return null;
+    }
 
-	@Override
-	public Tree makeTree(final String source0, final URL base, @Nullable final Properties parameters, final boolean checkRecursion)
-	{
-		// get owl file
-		String source = source0;
-		if (source == null && parameters != null)
-		{
-			source = parameters.getProperty("source");
-		}
+    @Override
+    public Tree makeTree(final String source0, final URL base, @Nullable final Properties parameters, final boolean checkRecursion)
+    {
+        // get owl file
+        String source = source0;
+        if (source == null && parameters != null)
+        {
+            source = parameters.getProperty("source");
+        }
 
-		// parse owl file
-		if (source != null)
-		{
-			// URL
-			@Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
+        // parse owl file
+        if (source != null)
+        {
+            // URL
+            @Nullable final URL url = ProviderUtils.makeURL(source, base, parameters, this.context);
 
-			// settings properties
-			@Nullable final Properties properties = getSettings(base, parameters);
+            // settings properties
+            @Nullable final Properties properties = getSettings(base, parameters);
 
-			// parser
-			if (this.factory == null)
-			{
-				this.factory = factory(properties);
-			}
+            // parser
+            if (this.factory == null)
+            {
+                this.factory = factory(properties);
+            }
 
-			// parse
-			this.context.progress("Loading ..." + (url != null ? url : source), false);
-			@Nullable final Tree tree = this.factory.makeTree(url != null ? url.toString() : source);
-			if (tree != null)
-			{
-				this.context.progress("Loaded " + (url != null ? url : source), false);
-				return tree;
-			}
-			this.context.message("Cannot load OWL file <" + (url != null ? url : source) + ">");
-		}
-		return null;
-	}
+            // parse
+            this.context.progress("Loading ..." + (url != null ? url : source), false);
+            @Nullable final Tree tree = this.factory.makeTree(url != null ? url.toString() : source);
+            if (tree != null)
+            {
+                this.context.progress("Loaded " + (url != null ? url : source), false);
+                return tree;
+            }
+            this.context.message("Cannot load OWL file <" + (url != null ? url : source) + ">");
+        }
+        return null;
+    }
 
-	/**
-	 * Get properties in settings file or command-line override
-	 *
-	 * @param base       base
-	 * @param parameters parameters
-	 * @return properties
-	 */
-	@Nullable
-	private Properties getSettings(final URL base, @Nullable final Properties parameters)
-	{
-		// settings properties from configuration file set by settings=file
-		@Nullable Properties properties = null;
-		final String location = parameters == null ? null : parameters.getProperty("settings");
-		if (location != null && !location.isEmpty())
-		{
-			@Nullable final URL url = ProviderUtils.makeURL(location, base, parameters, this.context);
+    /**
+     * Get properties in settings file or command-line override
+     *
+     * @param base       base
+     * @param parameters parameters
+     * @return properties
+     */
+    @Nullable
+    private Properties getSettings(final URL base, @Nullable final Properties parameters)
+    {
+        // settings properties from configuration file set by settings=file
+        @Nullable Properties properties = null;
+        final String location = parameters == null ? null : parameters.getProperty("settings");
+        if (location != null && !location.isEmpty())
+        {
+            @Nullable final URL url = ProviderUtils.makeURL(location, base, parameters, this.context);
 
-			this.context.progress("Loading ..." + (url != null ? url : location), false);
-			try
-			{
-				properties = url != null ? Utils.load(url) : Utils.load(location);
-				this.context.progress("Loaded " + (url != null ? url : location), false);
-			}
-			catch (final IOException e)
-			{
-				this.context.message("Cannot load Settings file <" + (url != null ? url : location) + ">");
-			}
-		}
+            this.context.progress("Loading ..." + (url != null ? url : location), false);
+            try
+            {
+                properties = url != null ? Utils.load(url) : Utils.load(location);
+                this.context.progress("Loaded " + (url != null ? url : location), false);
+            }
+            catch (final IOException e)
+            {
+                this.context.message("Cannot load Settings file <" + (url != null ? url : location) + ">");
+            }
+        }
 
-		// settings properties from command-line override
-		assert parameters != null;
-		for (@NonNull String parameter : parameters.stringPropertyNames())
-		{
-			switch (parameter)
-			{
-				case "source":
-				case "provider":
-				case "base":
-				case "imagebase":
-				case "settings":
-					continue;
-			}
+        // settings properties from command-line override
+        if (parameters != null)
+        {
+            for (@NonNull String parameter : parameters.stringPropertyNames())
+            {
+                switch (parameter)
+                {
+                    case "source":
+                    case "provider":
+                    case "base":
+                    case "imagebase":
+                    case "settings":
+                        continue;
+                }
 
-			if (properties == null)
-			{
-				properties = new Properties();
-			}
-			properties.setProperty(parameter, parameters.getProperty(parameter));
-		}
-
-		return properties;
-	}
+                if (properties == null)
+                {
+                    properties = new Properties();
+                }
+                properties.setProperty(parameter, parameters.getProperty(parameter));
+            }
+        }
+        return properties;
+    }
 }
