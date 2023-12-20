@@ -1,0 +1,85 @@
+<izpack:installation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:izpack="http://izpack.org/schema/installation" xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
+
+  <info>
+    <appname>treebolic-fungi</appname>
+    <appversion>@{appversion}</appversion>
+    <authors>
+      <author email="1313ou@gmail.com" name="Bernard Bou"/>
+    </authors>
+    <url>http://treebolic.sourceforge.net</url>
+    <run-privileged condition="izpack.windowsinstall"/>
+  </info>
+
+  <guiprefs height="460" resizable="no" width="800"/>
+
+  <locale>
+    <langpack iso3="eng"/>
+    <langpack iso3="fra"/>
+  </locale>
+
+  <resources>
+    <res id="LicencePanel.licence" src="legal/license.txt"/>
+    <res id="InfoPanel.info" src="doc/readme.txt"/>
+    <res id="Installer.image" src="images/treebolic-fungi-izpack.png"/>
+    <res id="shortcutSpec.xml" src="shortcut-win.xml"/>
+    <res id="Win_shortcutSpec.xml" src="shortcut-win.xml"/>
+    <res id="Unix_shortcutSpec.xml" src="shortcut-unix.xml"/>
+  </resources>
+
+  <panels>
+    <panel classname="HelloPanel"/>
+    <panel classname="LicencePanel"/>
+    <panel classname="TargetPanel"/>
+    <panel classname="PacksPanel"/>
+    <panel classname="InstallPanel"/>
+    <panel classname="ShortcutPanel"/>
+    <panel classname="FinishPanel"/>
+  </panels>
+
+  <packs>
+
+    <pack name="treebolic-fungi" required="yes" preselected="yes">
+      <description>Treebolic Fungi</description>
+      <file targetdir="$INSTALL_PATH" src="lib/swing-fungi-@{appversion}-uber.jar"/>
+      <file targetdir="$INSTALL_PATH" src="scripts/run.sh"/>
+      <file targetdir="$INSTALL_PATH" src="scripts/run.bat"/>
+      <file targetdir="$INSTALL_PATH" src="images/treebolic-fungi.ico"/>
+      <file targetdir="$INSTALL_PATH" src="images/treebolic-fungi.png"/>
+      <file targetdir="$INSTALL_PATH/doc" src="doc/README.md"/>
+      <file targetdir="$INSTALL_PATH/doc" src="doc/README"/>
+      <file targetdir="$INSTALL_PATH/doc" src="doc/readme.txt"/>
+      <file targetdir="$INSTALL_PATH/legal" src="legal/license.txt"/>
+      <executable targetfile="$INSTALL_PATH/run.sh">
+        <os family="unix"/>
+      </executable>
+      <executable targetfile="$INSTALL_PATH/swing-fungi-@{appversion}-uber.jar">
+        <os family="unix"/>
+      </executable>
+    </pack>
+
+    <pack name="treebolic-fungi-data" required="yes" preselected="yes">
+      <description>Treebolic Fungi Data</description>
+      <fileset targetdir="$INSTALL_PATH/database" dir="database">
+        <include name="**"/>
+      </fileset>
+    </pack>
+
+  </packs>
+
+  <!-- The native libraries to add -->
+  <natives>
+    <native type="izpack" name="ShellLink.dll">
+      <os family="windows"/>
+    </native>
+    <native type="izpack" name="ShellLink_x64.dll">
+      <os family="windows"/>
+    </native>
+    <native type="izpack" name="WinSetupAPI.dll">
+      <os family="windows"/>
+    </native>
+    <native type="izpack" name="WinSetupAPI_x64.dll">
+      <os family="windows"/>
+    </native>
+  </natives>
+
+</izpack:installation>
