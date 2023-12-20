@@ -7,4 +7,4 @@
 here=`readlink -f $0`
 here=`dirname "${here}"`
 version=4.1-7
-java -jar "${here}/treebolic-fungi-${version}.jar"
+java -jar "${here}/swing-fungi-${version}-uber.jar"
