@@ -17,7 +17,7 @@ public class Studio
 	/**
 	 * Version
 	 */
-	static private final String version = "4.0.0";
+	static private final String VERSION = "4.1-7";
 
 	/**
 	 * Constructor
@@ -42,7 +42,7 @@ public class Studio
 	@NonNull
 	static public String getVersion()
 	{
-		return Studio.version;
+		return Studio.VERSION;
 	}
 
 	/**

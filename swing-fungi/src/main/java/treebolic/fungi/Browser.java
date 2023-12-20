@@ -19,7 +19,7 @@ public class Browser
 	/**
 	 * Version : 3.x
 	 */
-	static private final String VERSION = "4.0.0";
+	static private final String VERSION = "4.1-7";
 
 	/**
 	 * Get version

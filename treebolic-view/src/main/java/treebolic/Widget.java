@@ -81,7 +81,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 	/**
 	 * Version : 3.x
 	 */
-	private static final String version = "4.0.0";
+	private static final String VERSION = "4.1-7";
 
 	// C O N T E X T
 
@@ -729,7 +729,7 @@ public class Widget extends Container implements IWidget, IProviderContext
 	@Override
 	public String getVersion()
 	{
-		return Widget.version;
+		return Widget.VERSION;
 	}
 
 	/**
