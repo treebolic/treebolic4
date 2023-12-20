@@ -1,0 +1,19 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="browser2 (OWL)" type="Application" factoryName="Application" folderName="Browsers">
+    <classpathModifications>
+      <entry path="$PROJECT_DIR$/treebolic-mutable/target/treebolic-lib-4.1-6.jar" />
+      <entry path="$PROJECT_DIR$/treebolic-mutable/target/treebolic-mutable-4.1-6.jar" />
+      <entry path="$PROJECT_DIR$/provider-owl-sax/target/provider-owl-sax-4.1-6.jar" />
+      <entry path="$PROJECT_DIR$/provider-owl-sax2/target/provider-owl-sax2-4.1-6.jar" />
+      <entry path="$PROJECT_DIR$/treebolic-loadbalancer/target/treebolic-loadbalancer-4.1-6.jar" />
+    </classpathModifications>
+    <option name="MAIN_CLASS_NAME" value="treebolic.Browser2" />
+    <module name="swing-browser-search" />
+    <option name="PROGRAM_PARAMETERS" value="provider=treebolic.provider.owl.sax.Provider2 source=sumo.owl base=data" />
+    <option name="VM_PARAMETERS" value="-ea" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/provider-owl-sax" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

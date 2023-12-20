@@ -5,7 +5,7 @@
       <entry path="$PROJECT_DIR$/provider-owl-sax2/target/provider-owl-sax2-4.1-7.jar" />
       <entry path="$PROJECT_DIR$/provider-sql-jdbc/target/provider-sql-jdbc-4.1-7.jar" />
       <entry path="$PROJECT_DIR$/provider-sql-generic/target/provider-sql-generic-4.1-7.jar" />
-      <entry path="$PROJECT_DIR$/provider-sql-jdbc/sqlite-jdbc-3.8.7.jar" />
+      <entry path="$PROJECT_DIR$/provider-sql-jdbc/sqlite-jdbc-3.44.1.0.jar" />
     </classpathModifications>
     <option name="MAIN_CLASS_NAME" value="treebolic.Studio" />
     <module name="swing-studio" />
