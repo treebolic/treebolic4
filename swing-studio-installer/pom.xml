@@ -1,30 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
   ~ Copyright (c) 2023. Bernard Bou
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>treebolic</artifactId>
-    <groupId>io.github.treebolic</groupId>
-    <version>4.1-7</version>
-  </parent>
 
-  <artifactId>swing-wordnet2-installer</artifactId>
+  <groupId>io.github.treebolic</groupId>
+  <artifactId>swing-studio-installer</artifactId>
+  <version>4.1-7</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- Installer variables -->
     <izpack.src.dir>${basedir}/src/main/izpack</izpack.src.dir>
+    <data.src.dir>${basedir}/../data</data.src.dir>
     <izpack.staging.dir>${project.build.directory}/staging</izpack.staging.dir>
-    <info.appName>Treebolic WordNet</info.appName>
+    <info.appName>Treebolic Studio</info.appName>
     <appversion>4.1-7</appversion>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>io.github.treebolic</groupId>
-      <artifactId>swing-wordnet2</artifactId>
+      <artifactId>swing-studio</artifactId>
       <version>4.1-7</version>
       <classifier>uber</classifier>
     </dependency>
@@ -57,6 +56,22 @@
                   <include name="**/shortcut-*.xml"/>
                   <replacefilter token="@{appversion}" value="${appversion}"/>
                 </replace>
+              </target>
+            </configuration>
+          </execution>
+          <execution>
+            <id>data</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <copy todir="${izpack.staging.dir}" overwrite="true">
+                  <fileset dir="${data.src.dir}">
+                    <include name="data/**/*.*" />
+                  </fileset>
+                </copy>
               </target>
             </configuration>
           </execution>
@@ -108,7 +123,7 @@
               <baseDir>${izpack.staging.dir}</baseDir>
               <installFile>${izpack.staging.dir}/install.xml</installFile>
               <outputDirectory>${project.build.directory}</outputDirectory>
-              <finalName>treebolic-wordnet-${appversion}</finalName>
+              <finalName>treebolic-studio-${appversion}</finalName>
               <classifier>install</classifier>
               <mkdirs>true</mkdirs>
               <autoIncludeUrl>false</autoIncludeUrl>

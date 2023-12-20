@@ -1,67 +1,132 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (c) 2022. Bernard Bou
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2023. Bernard Bou
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<artifactId>treebolic</artifactId>
-		<groupId>io.github.treebolic</groupId>
-		<version>4.1-7</version>
-	</parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>treebolic</artifactId>
+    <groupId>io.github.treebolic</groupId>
+    <version>4.1-7</version>
+  </parent>
 
-	<artifactId>swing-studio</artifactId>
+  <artifactId>swing-studio</artifactId>
 
-	<properties>
-		<maven.compiler.source>8</maven.compiler.source>
-		<maven.compiler.target>8</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+  <properties>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-mutable</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>provider-xml-dom</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>transformer-xml</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-glue-swing</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>swing-commons</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-view</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-model</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-annotations</artifactId>
-			<version>${revision}</version>
-		</dependency>
-	</dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>io.github.treebolic</groupId>
+      <artifactId>treebolic-mutable</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.treebolic</groupId>
+      <artifactId>provider-xml-dom</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.treebolic</groupId>
+      <artifactId>transformer-xml</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.treebolic</groupId>
+      <artifactId>treebolic-glue-swing</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.treebolic</groupId>
+      <artifactId>swing-commons</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.treebolic</groupId>
+      <artifactId>treebolic-view</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.treebolic</groupId>
+      <artifactId>treebolic-model</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.treebolic</groupId>
+      <artifactId>treebolic-annotations</artifactId>
+      <version>${revision}</version>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>with-owl</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>io.github.treebolic</groupId>
+          <artifactId>provider-owl-sax</artifactId>
+          <version>${revision}</version>
+          <scope>runtime</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>with-sql</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>io.github.treebolic</groupId>
+          <artifactId>provider-sql-jdbc</artifactId>
+          <version>${revision}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.xerial</groupId>
+          <artifactId>sqlite-jdbc</artifactId>
+          <version>3.44.1.0</version>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.4.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>treebolic.Studio</mainClass>
+                  <manifestEntries>
+                    <Build-Number>${revision}</Build-Number>
+                  </manifestEntries>
+                </transformer>
+              </transformers>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>uber</shadedClassifierName>
+              <minimizeJar>false</minimizeJar>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
 
 </project>
