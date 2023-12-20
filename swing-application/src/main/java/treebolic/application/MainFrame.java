@@ -3,18 +3,17 @@
  */
 package treebolic.application;
 
-import java.awt.*;
-import java.io.IOException;
-import java.util.Properties;
+import treebolic.Widget;
+import treebolic.annotations.NonNull;
+import treebolic.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkEvent.EventType;
 import javax.swing.event.HyperlinkListener;
-
-import treebolic.Widget;
-import treebolic.annotations.NonNull;
-import treebolic.annotations.Nullable;
+import java.awt.*;
+import java.io.IOException;
+import java.util.Properties;
 
 /**
  * Application
@@ -40,7 +39,17 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	public MainFrame(final String[] args)
 	{
 		//System.out.println("CLASSPATH=<" + System.getProperty("java.class.path", ".") + ">");
-		this.parameters = makeParameters(args);
+		this(processArgs(args));
+	}
+
+	/**
+	 * Constructor
+	 *
+	 * @param args arguments
+	 */
+	public MainFrame(@Nullable Properties args)
+	{
+		this.parameters = args;
 		setTitle("Treebolic");
 
 		// menu
@@ -169,7 +178,19 @@ public class MainFrame extends JFrame implements HyperlinkListener
 	 * @return parameters
 	 */
 	@Nullable
-	protected Properties makeParameters(@Nullable final String[] args)
+	public Properties makeArgs(@Nullable final String[] args)
+	{
+		return processArgs(args);
+	}
+
+	/**
+	 * Process parameters
+	 *
+	 * @param args command-line arguments
+	 * @return parameters
+	 */
+	@Nullable
+	public static Properties processArgs(@Nullable final String[] args)
 	{
 		// param1=<val> param2=<"val with spaces"> ...
 		if (args == null)
