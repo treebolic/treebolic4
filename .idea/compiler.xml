@@ -51,6 +51,7 @@
         <module name="provider-owl-sax" />
         <module name="provider-files" />
         <module name="transformer-xml" />
+        <module name="swing-studio-installer" />
         <module name="swing-wordnet2-installer" />
         <module name="swing-application" />
         <module name="treebolic-glue" />

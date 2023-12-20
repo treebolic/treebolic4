@@ -67,6 +67,8 @@
     <file url="file://$PROJECT_DIR$/swing-files/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/swing-fungi/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/swing-fungi/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/swing-studio-installer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/swing-studio-installer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/swing-studio/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/swing-studio/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/swing-wordnet/src/main/java" charset="UTF-8" />
@@ -87,6 +89,8 @@
     <file url="file://$PROJECT_DIR$/treebolic-glue/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/treebolic-graph/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/treebolic-graph/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-lib-swing/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/treebolic-lib-swing/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/treebolic-lib/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/treebolic-lib/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/treebolic-loadbalancer/src/main/java" charset="UTF-8" />

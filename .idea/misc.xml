@@ -791,6 +791,8 @@
         <option value="$PROJECT_DIR$/swing-wordnet2/pom.xml" />
         <option value="$PROJECT_DIR$/swing-files/pom.xml" />
         <option value="$PROJECT_DIR$/swing-wordnet2-installer/pom.xml" />
+        <option value="$PROJECT_DIR$/swing-studio-install/pom.xml" />
+        <option value="$PROJECT_DIR$/swing-studio-installer/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
