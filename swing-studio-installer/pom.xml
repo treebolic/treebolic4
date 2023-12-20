@@ -69,7 +69,7 @@
               <target>
                 <copy todir="${izpack.staging.dir}" overwrite="true">
                   <fileset dir="${data.src.dir}">
-                    <include name="data/**/*.*" />
+                    <include name="**/*.*" />
                   </fileset>
                 </copy>
               </target>
