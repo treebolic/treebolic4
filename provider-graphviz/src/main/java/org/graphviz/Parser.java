@@ -215,6 +215,7 @@ public class Parser implements ParserConstants
 			case DIGRAPH:
 			case GRAPH:
 			case STRICT:
+				//noinspection TextLabelInSwitchStatement
 				label_1:
 				while (true)
 				{
@@ -259,6 +260,7 @@ public class Parser implements ParserConstants
 		{
 			case SPACE:
 			case LF:
+				//noinspection TextLabelInSwitchStatement
 				label_2:
 				while (true)
 				{
@@ -1236,11 +1238,11 @@ public class Parser implements ParserConstants
 		pn.setNode(n);
 		if (port != null)
 		{
-			if (!port.getId().equals(""))
+			if (!port.getId().isEmpty())
 			{
 				pn.setPort(port.getId());
 			}
-			else if (!port.getLabel().equals(""))
+			else if (!port.getLabel().isEmpty())
 			{
 				pn.setPort(port.getLabel());
 			}

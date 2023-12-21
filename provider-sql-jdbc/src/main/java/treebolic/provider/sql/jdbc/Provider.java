@@ -23,7 +23,10 @@ import treebolic.provider.sql.AbstractProvider;
  */
 public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.JdbcCursor, SQLException>
 {
-    static class JdbcCursor implements AbstractProvider.Cursor<SQLException>
+    /**
+     * JDBC cursor
+     */
+    static public class JdbcCursor implements AbstractProvider.Cursor<SQLException>
     {
         @NonNull
         private final Statement statement;
@@ -119,11 +122,19 @@ public class Provider extends AbstractProvider<Provider.JdbcDatabase, Provider.J
         }
     }
 
-    static class JdbcDatabase implements AbstractProvider.Database<JdbcCursor, SQLException>
+    /**
+     * JDBC
+     */
+    static public class JdbcDatabase implements AbstractProvider.Database<JdbcCursor, SQLException>
     {
         @Nullable
         private Connection connection;
 
+        /**
+         * Constructor
+         *
+         * @param properties properties
+         */
         public JdbcDatabase(@NonNull Properties properties)
         {
             // url/user/password

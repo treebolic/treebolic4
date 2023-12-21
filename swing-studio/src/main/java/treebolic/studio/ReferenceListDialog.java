@@ -191,7 +191,10 @@ public class ReferenceListDialog extends JDialog
 		 */
 		private final Vector<Entry> entries = new Vector<>();
 
-		static class Entry
+		/**
+		 * Entry
+		 */
+		static public class Entry
 		{
 			/**
 			 * Key

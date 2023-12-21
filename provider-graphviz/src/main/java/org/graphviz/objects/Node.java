@@ -148,7 +148,7 @@ public class Node
 			r.append(this.id.getLabel());
 			r.append("\"");
 		}
-		if (this.attr.size() > 0)
+		if (!this.attr.isEmpty())
 		{
 			r.append(" [");
 			final Enumeration<String> e = this.attr.keys();
@@ -156,7 +156,7 @@ public class Node
 			{
 				final String k = e.nextElement();
 				r.append(k);
-				if (!this.attr.get(k).equals(""))
+				if (!this.attr.get(k).isEmpty())
 				{
 					r.append("=");
 					if (!this.attr.get(k).contains(" "))

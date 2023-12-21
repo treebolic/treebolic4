@@ -147,7 +147,7 @@ public class Provider implements IProvider, ImageDecorator
 	// L O A D B A L A N C I N G
 
 	/**
-	 * LoadBalancer : Max children nodes at level 0, 1 .. n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for level i to n.
+	 * LoadBalancer : Max children nodes at level 0, 1 ... n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for level i to n.
 	 */
 	static private final int[] MAX_AT_LEVEL = {6, 3};
 

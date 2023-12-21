@@ -105,12 +105,12 @@ public class Id
 				return true;
 			}
 			// both ids are empty, but labels are the same
-			else if (eid.getId().equals("") && this.id.equals("") && eid.getLabel().equals(this.label))
+			else if (eid.getId().isEmpty() && this.id.isEmpty() && eid.getLabel().equals(this.label))
 			{
 				return true;
 			}
 			// both ids are empty, and label differs
-			else if (eid.getId().equals("") && this.id.equals("") && !eid.getLabel().equals(this.label))
+			else if (eid.getId().isEmpty() && this.id.isEmpty() && !eid.getLabel().equals(this.label))
 			{
 				return false;
 			}

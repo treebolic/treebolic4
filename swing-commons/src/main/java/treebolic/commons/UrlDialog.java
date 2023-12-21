@@ -160,7 +160,7 @@ public class UrlDialog extends JDialog
 		if (model != null)
 		{
 			@Nullable final Properties parameters = model.getProperties();
-			if (parameters != null && parameters.size() != 0)
+			if (parameters != null && !parameters.isEmpty())
 			{
 				return UrlDialog.properties2Query(parameters);
 			}

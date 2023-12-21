@@ -889,7 +889,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     /**
      * Relation filter default value
      */
-    @SuppressWarnings({"WeakerAccess"})
+    @SuppressWarnings({"WeakerAccess", "PointlessBitwiseExpression"})
     static public final long FILTER_DEFAULT = Relation.HYPERNYM.mask() | Relation.HYPONYM.mask() | //
             Relation.HOLONYM_MEMBER.mask() | Relation.HOLONYM_SUBSTANCE.mask() | Relation.HOLONYM_PART.mask() | //
             Relation.MERONYM_MEMBER.mask() | Relation.MERONYM_MEMBER.mask() | Relation.MERONYM_MEMBER.mask() | //

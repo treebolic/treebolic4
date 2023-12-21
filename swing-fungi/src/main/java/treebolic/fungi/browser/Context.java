@@ -188,6 +188,6 @@ public class Context extends treebolic.application.Context
 	@Override
 	public String getStyle()
 	{
-		return ".content { }" + ".mount {color: #A1B28F; font-size: small; }" + ".link {color: #5576C7; font-size: small; }" + ".linking {color: #007D82; font-size: small; }" + ".searching {color: #007D82; font-size: small; }" + ".more {color: gray; margin-bottom: 5px; }" + "a.active_link {color: black; text-decoration: none; }" + "";
+		return ".content { }" + ".mount {color: #A1B28F; font-size: small; }" + ".link {color: #5576C7; font-size: small; }" + ".linking {color: #007D82; font-size: small; }" + ".searching {color: #007D82; font-size: small; }" + ".more {color: gray; margin-bottom: 5px; }" + "a.active_link {color: black; text-decoration: none; }";
 	}
 }

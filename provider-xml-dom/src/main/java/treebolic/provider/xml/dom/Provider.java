@@ -10,14 +10,12 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Properties;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import sun.net.util.IPAddressUtil;
 import treebolic.ILocator;
 import treebolic.annotations.NonNull;
 import treebolic.annotations.Nullable;

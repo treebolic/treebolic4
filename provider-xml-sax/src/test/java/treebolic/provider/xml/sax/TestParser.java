@@ -10,7 +10,6 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.stream.XMLStreamException;
 
 import treebolic.model.Model;
 import treebolic.model.ModelDump;
@@ -22,10 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class TestParser
 {
-	private static String TEST_FILE = System.getProperty("SOURCE");
+	private static final String TEST_FILE = System.getProperty("SOURCE");
 
 	@Test
-	void testParsers() throws ParserConfigurationException, IOException, SAXException, XMLStreamException
+	void testParsers() throws ParserConfigurationException, IOException, SAXException
 	{
 		long start1 = System.currentTimeMillis();
 		Model model1 = treebolic.provider.xml.dom.Parser.makeModel(TEST_FILE);

@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class TestParser
 {
-    private static String TEST_FILE = System.getProperty("SOURCE");
+    private static final String TEST_FILE = System.getProperty("SOURCE");
 
     @Test
     void testParsers() throws ParserConfigurationException, IOException, SAXException, XMLStreamException

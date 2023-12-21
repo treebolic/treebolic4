@@ -213,7 +213,7 @@ public class Edge
 			r.append(sourceId.getLabel());
 			r.append("\"");
 		}
-		if (!this.source.getPort().equals(""))
+		if (!this.source.getPort().isEmpty())
 		{
 			r.append(":\"");
 			r.append(this.source.getPort());
@@ -233,23 +233,23 @@ public class Edge
 		assert targetNode != null;
 		@Nullable Id targetId = targetNode.getId();
 		assert targetId != null;
-		if (!targetId.getId().equals(""))
+		if (!targetId.getId().isEmpty())
 		{
 			r.append(targetId.getId());
 		}
-		else if (!targetId.getLabel().equals(""))
+		else if (!targetId.getLabel().isEmpty())
 		{
 			r.append("\"");
 			r.append(targetId.getLabel());
 			r.append("\"");
 		}
-		if (!this.target.getPort().equals(""))
+		if (!this.target.getPort().isEmpty())
 		{
 			r.append(":\"");
 			r.append(this.target.getPort());
 			r.append("\"");
 		}
-		if (this.attributes.size() > 0)
+		if (!this.attributes.isEmpty())
 		{
 			r.append(" [");
 			final Enumeration<String> e = this.attributes.keys();
@@ -257,7 +257,7 @@ public class Edge
 			{
 				final String k = e.nextElement();
 				r.append(k);
-				if (!this.attributes.get(k).equals(""))
+				if (!this.attributes.get(k).isEmpty())
 				{
 					r.append("=");
 					if (!this.attributes.get(k).contains(" "))

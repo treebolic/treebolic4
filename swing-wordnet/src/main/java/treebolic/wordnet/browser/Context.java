@@ -152,8 +152,7 @@ public class Context extends treebolic.browser2.Context
                 ".linking {color: #007D82; font-size: small; }" + //
                 ".searching {color: #007D82; font-size: small; }" + //
                 ".more {color: gray; margin-bottom: 5px; }" + //
-                "a.active_link {color: black; text-decoration: none; }" + //
-                "";
+                "a.active_link {color: black; text-decoration: none; }";
     }
 
     @Override

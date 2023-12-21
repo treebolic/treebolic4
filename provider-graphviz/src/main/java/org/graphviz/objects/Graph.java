@@ -247,7 +247,7 @@ public class Graph
 	 */
 	public void setType(final int type)
 	{
-		if (this.graphs.size() != 0)
+		if (!this.graphs.isEmpty())
 		{
 			for (@NonNull Graph graph : this.graphs)
 			{
@@ -300,17 +300,17 @@ public class Graph
 			r.append("graph ");
 		}
 		assert this.id != null;
-		if (!this.id.getId().equals(""))
+		if (!this.id.getId().isEmpty())
 		{
 			r.append(this.id.getId());
 		}
-		else if (!this.id.getLabel().equals(""))
+		else if (!this.id.getLabel().isEmpty())
 		{
 			r.append(this.id.getLabel());
 		}
 		r.append(" {\n");
 
-		if (this.attributes.size() > 0)
+		if (!this.attributes.isEmpty())
 		{
 			final Enumeration<String> e = this.attributes.keys();
 			String k;
@@ -318,7 +318,7 @@ public class Graph
 			{
 				k = e.nextElement();
 				r.append(k);
-				if (!this.attributes.get(k).equals(""))
+				if (!this.attributes.get(k).isEmpty())
 				{
 					r.append("=");
 					if (!this.attributes.get(k).contains(" "))
@@ -336,7 +336,7 @@ public class Graph
 			}
 		}
 
-		if (this.genericNodeAttributes.size() > 0)
+		if (!this.genericNodeAttributes.isEmpty())
 		{
 			final Enumeration<String> e = this.genericNodeAttributes.keys();
 			String k;
@@ -345,7 +345,7 @@ public class Graph
 			{
 				k = e.nextElement();
 				r.append(k);
-				if (!this.genericNodeAttributes.get(k).equals(""))
+				if (!this.genericNodeAttributes.get(k).isEmpty())
 				{
 					r.append("=");
 					if (!this.genericNodeAttributes.get(k).contains(" "))
@@ -365,7 +365,7 @@ public class Graph
 			r.append("];\n");
 		}
 
-		if (this.genericEdgeAttributes.size() > 0)
+		if (!this.genericEdgeAttributes.isEmpty())
 		{
 			final Enumeration<String> e = this.genericEdgeAttributes.keys();
 			String k;
@@ -374,7 +374,7 @@ public class Graph
 			{
 				k = e.nextElement();
 				r.append(k);
-				if (!this.genericEdgeAttributes.get(k).equals(""))
+				if (!this.genericEdgeAttributes.get(k).isEmpty())
 				{
 					r.append("=");
 					if (!this.genericEdgeAttributes.get(k).contains(" "))
@@ -394,7 +394,7 @@ public class Graph
 			r.append("];\n");
 		}
 
-		if (this.genericGraphAttributes.size() > 0)
+		if (!this.genericGraphAttributes.isEmpty())
 		{
 			final Enumeration<String> e = this.genericGraphAttributes.keys();
 			String k;
@@ -403,7 +403,7 @@ public class Graph
 			{
 				k = e.nextElement();
 				r.append(k);
-				if (!this.genericGraphAttributes.get(k).equals(""))
+				if (!this.genericGraphAttributes.get(k).isEmpty())
 				{
 					r.append("=");
 					if (!this.genericGraphAttributes.get(k).contains(" "))
@@ -422,21 +422,21 @@ public class Graph
 			r.delete(r.length() - 2, r.length());
 			r.append("];\n");
 		}
-		if (this.nodes.size() > 0)
+		if (!this.nodes.isEmpty())
 		{
 			for (@NonNull Node node : this.nodes)
 			{
 				r.append(node);
 			}
 		}
-		if (this.edges.size() > 0)
+		if (!this.edges.isEmpty())
 		{
 			for (@NonNull Edge edge : this.edges)
 			{
 				r.append(edge);
 			}
 		}
-		if (this.graphs.size() > 0)
+		if (!this.graphs.isEmpty())
 		{
 			for (@NonNull Graph graph : this.graphs)
 			{

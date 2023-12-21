@@ -116,7 +116,7 @@ public class PopupMenu extends treebolic.glue.component.PopupMenu
             {
                 int menuLabelIndex = -1;
                 @Nullable String menuLabel = null;
-                boolean prepend = menuItem.label != null && (menuItem.label.length() == 0 || Character.isLowerCase(menuItem.label.charAt(0)));
+                boolean prepend = menuItem.label != null && (menuItem.label.isEmpty() || Character.isLowerCase(menuItem.label.charAt(0)));
                 assert menuItem.action != null;
                 switch (menuItem.action)
                 {
