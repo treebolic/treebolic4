@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Test relative to absolute replacement
  */
-public class TestAbsolutreUrls
+public class TestAbsoluteUrls
 {
 	/**
 	 * Test if replacement words with single quotes
