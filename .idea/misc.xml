@@ -752,6 +752,20 @@
     <pattern value="treebolic.provider.files.Provider" method="setNodeImage" />
     <pattern value="treebolic.provider.files.Provider" method="setTreeEdgeImage" />
     <pattern value="treebolic.provider.wordnet.jwi.BaseDataManager" method="deploy" />
+    <pattern value="treebolic.wordnet.browser.RelationReference" method="all" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseDataManager" method="coreCheck" />
+    <pattern value="treebolic.wordnet.browser.RelationReference" method="getLabels" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="isLoadBalanceSemRelations" />
+    <pattern value="treebolic.wordnet.browser2.MainFrame2" method="MainFrame2" />
+    <pattern value="treebolic.application.MainFrame" method="makeArgs" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="setLoadBalanceSemRelations" />
+    <pattern value="treebolic.provider.wordnet.jwi.BaseProvider" method="walkLexRelations" />
+    <pattern value="treebolic.provider.owl.sax.Provider2" method="factory" />
+    <pattern value="treebolic.provider.owl.sax.Provider2" />
+    <pattern value="treebolic.provider.owl.sax.OwlModelFactory2" method="makeModel" />
+    <pattern value="treebolic.provider.owl.sax.OwlModelFactory2" method="setEdgeImage" />
+    <pattern value="treebolic.provider.owl.sax.OwlModelFactory2" method="setNodeImage" />
+    <pattern value="treebolic.provider.owl.sax.OwlModelFactory2" method="setTreeEdgeImage" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
