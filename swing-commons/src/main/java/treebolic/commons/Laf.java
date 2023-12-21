@@ -165,7 +165,7 @@ public class Laf
 	/**
 	 * Set current theme
 	 *
-	 * @param className LAF class name (may have overridden 'setCurrentTheme()')
+	 * @param className LAF class name, may have overridden 'setCurrentTheme()'
 	 * @param theme     theme
 	 */
 	static void setCurrentTheme(final String className, @NonNull final MetalTheme theme)

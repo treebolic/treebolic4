@@ -26,8 +26,7 @@ public class Progress extends treebolic.glue.component.Progress implements Compo
 	/*
 	 * Put message
 	 *
-	 * @param message
-	 *            message
+	 * @param message message
 	 */
 	// public void put(final String message, final boolean fail);
 }

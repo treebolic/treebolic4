@@ -1185,12 +1185,9 @@ public class Painter extends AbstractPainter
 	//	/**
 	//	 * Draw point
 	//	 *
-	//	 * @param x
-	//	 *        x
-	//	 * @param y
-	//	 *        y
-	//	 * @param color
-	//	 *        color
+	//	 * @param x x
+	//	 * @param y y
+	//	 * @param color color
 	//	 */
 	//	private void drawPoint(double x, double y, final Color color)
 	//	{

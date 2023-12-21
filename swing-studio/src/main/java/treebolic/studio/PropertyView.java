@@ -1239,7 +1239,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	}
 
 	/**
-	 * Node features
+	 * Node features.
 	 * feature[0] id:String
 	 * feature[1] type:AttributeType
 	 * feature[2] isMandatory:Boolean
@@ -1289,7 +1289,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	};
 
 	/**
-	 * Top element features
+	 * Top element features.
 	 * feature[0] id:String
 	 * feature[1] type:AttributeType
 	 * feature[2] isMandatory:Boolean
@@ -1336,7 +1336,7 @@ public class PropertyView extends treebolic.propertyview.PropertyView implements
 	};
 
 	/**
-	 * Nodes features
+	 * Nodes features.
 	 * feature[0] id:String
 	 * feature[1] type:AttributeType
 	 * feature[2] isMandatory:Boolean
