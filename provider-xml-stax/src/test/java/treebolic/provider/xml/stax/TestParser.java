@@ -17,25 +17,28 @@ import treebolic.model.ModelDump;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test Parser
+ */
 public class TestParser
 {
-	private static String TEST_FILE = System.getProperty("SOURCE");
+    private static String TEST_FILE = System.getProperty("SOURCE");
 
-	@Test
-	void testParsers() throws ParserConfigurationException, IOException, SAXException, XMLStreamException
-	{
-		long start1 = System.currentTimeMillis();
-		Model model1 = treebolic.provider.xml.dom.Parser.makeModel(TEST_FILE);
-		long end1 = System.currentTimeMillis();
-		String dump1 = ModelDump.toString(model1);
-		long start2 = System.currentTimeMillis();
-		Model model2 = treebolic.provider.xml.stax.Parser.makeModel(TEST_FILE);
-		long end2 = System.currentTimeMillis();
-		String dump2 = ModelDump.toString(model2);
-		System.out.println("DOM " + (end1 - start1) + " ms");
-		//System.out.println(dump1);
-		System.out.println("STAX " + (end2 - start2) + " ms");
-		//System.out.println(dump2);
-		assertEquals(dump1, dump2);
-	}
+    @Test
+    void testParsers() throws ParserConfigurationException, IOException, SAXException, XMLStreamException
+    {
+        long start1 = System.currentTimeMillis();
+        Model model1 = treebolic.provider.xml.dom.Parser.makeModel(TEST_FILE);
+        long end1 = System.currentTimeMillis();
+        String dump1 = ModelDump.toString(model1);
+        long start2 = System.currentTimeMillis();
+        Model model2 = treebolic.provider.xml.stax.Parser.makeModel(TEST_FILE);
+        long end2 = System.currentTimeMillis();
+        String dump2 = ModelDump.toString(model2);
+        System.out.println("DOM " + (end1 - start1) + " ms");
+        //System.out.println(dump1);
+        System.out.println("STAX " + (end2 - start2) + " ms");
+        //System.out.println(dump2);
+        assertEquals(dump1, dump2);
+    }
 }

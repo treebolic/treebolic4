@@ -17,6 +17,9 @@ import treebolic.model.ModelDump;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test Parser
+ */
 public class TestParser
 {
 	private static String TEST_FILE = System.getProperty("SOURCE");

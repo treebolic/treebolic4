@@ -9,13 +9,26 @@ import treebolic.wordnet.browser.MainFrame;
 
 import java.util.Properties;
 
+/**
+ * MainFrame that overrides provider and persist names
+ */
 public class MainFrame2 extends MainFrame
 {
+    /**
+     * Constructor
+     *
+     * @param args command-line arguments
+     */
     public MainFrame2(@NonNull String[] args)
     {
         super(args);
     }
 
+    /**
+     * Constructor
+     *
+     * @param args command-line arguments
+     */
     public MainFrame2(@NonNull Properties args)
     {
         super(args);
