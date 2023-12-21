@@ -21,6 +21,16 @@
   <dependencies>
     <dependency>
       <groupId>io.github.treebolic</groupId>
+      <artifactId>treebolic-view</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.treebolic</groupId>
+      <artifactId>treebolic-model</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.treebolic</groupId>
       <artifactId>treebolic-mutable</artifactId>
       <version>${revision}</version>
     </dependency>
@@ -42,16 +52,6 @@
     <dependency>
       <groupId>io.github.treebolic</groupId>
       <artifactId>swing-commons</artifactId>
-      <version>${revision}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.github.treebolic</groupId>
-      <artifactId>treebolic-view</artifactId>
-      <version>${revision}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.github.treebolic</groupId>
-      <artifactId>treebolic-model</artifactId>
       <version>${revision}</version>
     </dependency>
     <dependency>
