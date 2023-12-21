@@ -900,7 +900,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     // L O A D B A L A N C I N G
 
     /**
-     * LoadBalancer : Members : Max children nodes at level 0, 1 .. n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for
+     * LoadBalancer : Members : Max children nodes at level 0, 1 ... n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for
      * level i to n.
      */
     static private final int[] MAX_MEMBERS_AT_LEVEL = {6, 3};
@@ -911,7 +911,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
     static private final int MEMBERS_LABEL_TRUNCATE_AT = 3;
 
     /**
-     * LoadBalancer : Synsets : Max children nodes at level 0, 1 .. n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for
+     * LoadBalancer : Synsets : Max children nodes at level 0, 1 ... n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for
      * level i to n.
      */
     static private final int[] MAX_SEMRELATIONS_AT_LEVEL = {6, 3};
@@ -2546,7 +2546,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
             final List<IWordID> antonymSenseIds = head.getRelatedWords(Pointer.ANTONYM);
             @Nullable INode antonymRelationNode = null;
 
-            // follow up antonyms
+            // follow up on antonyms
             for (@NonNull final IWordID antonymSenseId : antonymSenseIds)
             {
                 if (antonymRelationNode == null)
