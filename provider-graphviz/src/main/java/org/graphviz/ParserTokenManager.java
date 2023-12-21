@@ -106,9 +106,9 @@ public class ParserTokenManager implements ParserConstants
 			{
 				final int hiByte = this.curChar >> 8;
 				final int i1 = hiByte >> 6;
-				final long l1 = 1L << (hiByte & 077);
+				final long l1 = 1L << (hiByte & 0x3F);
 				final int i2 = (this.curChar & 0xff) >> 6;
-				final long l2 = 1L << (this.curChar & 077);
+				final long l2 = 1L << (this.curChar & 0x3F);
 				do
 				{
 					if (this.jjstateSet[--i] == 0)
@@ -794,7 +794,7 @@ public class ParserTokenManager implements ParserConstants
 			}
 			else if (this.curChar < 128)
 			{
-				final long l = 1L << (this.curChar & 077);
+				final long l = 1L << (this.curChar & 63);
 				do
 				{
 					switch (this.jjstateSet[--i])
@@ -839,9 +839,9 @@ public class ParserTokenManager implements ParserConstants
 			{
 				final int hiByte = this.curChar >> 8;
 				final int i1 = hiByte >> 6;
-				final long l1 = 1L << (hiByte & 077);
+				final long l1 = 1L << (hiByte & 0x3F);
 				final int i2 = (this.curChar & 0xff) >> 6;
-				final long l2 = 1L << (this.curChar & 077);
+				final long l2 = 1L << (this.curChar & 0x3F);
 				do
 				{
 					if (this.jjstateSet[--i] == 4)
@@ -1153,7 +1153,7 @@ public class ParserTokenManager implements ParserConstants
 					{
 						this.input_stream.backup(curPos - this.jjmatchedPos - 1);
 					}
-					if ((ParserTokenManager.jjtoToken[this.jjmatchedKind >> 6] & 1L << (this.jjmatchedKind & 077)) != 0L)
+					if ((ParserTokenManager.jjtoToken[this.jjmatchedKind >> 6] & 1L << (this.jjmatchedKind & 0x3F)) != 0L)
 					{
 						matchedToken = jjFillToken();
 						TokenLexicalActions(matchedToken);
@@ -1163,7 +1163,7 @@ public class ParserTokenManager implements ParserConstants
 						}
 						return matchedToken;
 					}
-					else if ((ParserTokenManager.jjtoSkip[this.jjmatchedKind >> 6] & 1L << (this.jjmatchedKind & 077)) != 0L)
+					else if ((ParserTokenManager.jjtoSkip[this.jjmatchedKind >> 6] & 1L << (this.jjmatchedKind & 0x3F)) != 0L)
 					{
 						if (ParserTokenManager.jjnewLexState[this.jjmatchedKind] != -1)
 						{
