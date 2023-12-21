@@ -274,13 +274,7 @@ public class ReferenceListDialog extends JDialog
 			return 2;
 		}
 
-		@Override
-		public boolean isCellEditable(final int y, final int x)
-		{
-			return false;
-		}
-
-		@Override
+        @Override
 		public Object getValueAt(final int y, final int x)
 		{
 			return this.entries.get(y);
