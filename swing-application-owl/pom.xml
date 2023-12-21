@@ -104,8 +104,8 @@
             <option>-libraryjars ${java.home}/jmods</option>
           </options>
           <libs>
-            <!--						<lib>${java.home}/lib/rt.jar</lib>-->
-            <!--						<lib>${java.home}/lib/jsse.jar</lib>-->
+            <!-- <lib>${java.home}/lib/rt.jar</lib> -->
+            <!-- <lib>${java.home}/lib/jsse.jar</lib> -->
           </libs>
         </configuration>
       </plugin>
