@@ -14,6 +14,10 @@
       <module fileurl="file://$PROJECT_DIR$/provider-xml-dom/provider-xml-dom.iml" filepath="$PROJECT_DIR$/provider-xml-dom/provider-xml-dom.iml" />
       <module fileurl="file://$PROJECT_DIR$/provider-xml-sax/provider-xml-sax.iml" filepath="$PROJECT_DIR$/provider-xml-sax/provider-xml-sax.iml" />
       <module fileurl="file://$PROJECT_DIR$/provider-xml-stax/provider-xml-stax.iml" filepath="$PROJECT_DIR$/provider-xml-stax/provider-xml-stax.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swing-application-owl/swing-application-owl.iml" filepath="$PROJECT_DIR$/swing-application-owl/swing-application-owl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swing-application-owl-jena/swing-application-owl-jena.iml" filepath="$PROJECT_DIR$/swing-application-owl-jena/swing-application-owl-jena.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swing-application-owl-sax/swing-application-owl-sax.iml" filepath="$PROJECT_DIR$/swing-application-owl-sax/swing-application-owl-sax.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swing-application-owl2/swing-application-owl2.iml" filepath="$PROJECT_DIR$/swing-application-owl2/swing-application-owl2.iml" />
       <module fileurl="file://$PROJECT_DIR$/swing-fungi/swing-fungi.iml" filepath="$PROJECT_DIR$/swing-fungi/swing-fungi.iml" />
       <module fileurl="file://$PROJECT_DIR$/swing-studio/swing-studio.iml" filepath="$PROJECT_DIR$/swing-studio/swing-studio.iml" />
       <module fileurl="file://$PROJECT_DIR$/swing-wordnet/swing-wordnet.iml" filepath="$PROJECT_DIR$/swing-wordnet/swing-wordnet.iml" />

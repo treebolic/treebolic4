@@ -2216,7 +2216,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
                 if ((this.features & FEATURE_SEMRELATIONS_MERGE_SINGLE_RELATED_SYNSET_TO_RELATION) != 0)
                 {
                     // P < l=s1
-                    // do not make synset node when only one synset is relateded, attach synset content to relation node directly
+                    // do not make synset node when only one synset is related, attach synset content to relation node directly
                     final boolean singleSynset = relatedSynsetIds.size() == 1;
                     if (singleSynset)
                     {
