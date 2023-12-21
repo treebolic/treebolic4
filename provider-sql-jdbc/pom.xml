@@ -24,18 +24,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-model</artifactId>
-			<version>${revision}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>treebolic-mutable</artifactId>
-			<version>${revision}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
 			<artifactId>provider-sql-generic</artifactId>
 			<version>${revision}</version>
 			<scope>compile</scope>
