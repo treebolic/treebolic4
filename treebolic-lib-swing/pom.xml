@@ -7,7 +7,7 @@
   <parent>
     <groupId>io.github.treebolic</groupId>
     <artifactId>treebolic</artifactId>
-    <version>4.1-7</version>
+    <version>4.1-8</version>
   </parent>
 
   <artifactId>treebolic-lib-swing</artifactId>
@@ -22,17 +22,17 @@
     <dependency>
       <groupId>io.github.treebolic</groupId>
       <artifactId>treebolic-model</artifactId>
-      <version>4.1-7</version>
+      <version>4.1-8</version>
     </dependency>
     <dependency>
       <groupId>io.github.treebolic</groupId>
       <artifactId>treebolic-view</artifactId>
-      <version>4.1-7</version>
+      <version>4.1-8</version>
     </dependency>
     <dependency>
       <groupId>io.github.treebolic</groupId>
       <artifactId>treebolic-glue-swing</artifactId>
-      <version>4.1-7</version>
+      <version>4.1-8</version>
     </dependency>
   </dependencies>
 

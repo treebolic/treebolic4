@@ -7,7 +7,7 @@
   <parent>
     <artifactId>treebolic</artifactId>
     <groupId>io.github.treebolic</groupId>
-    <version>4.1-7</version>
+    <version>4.1-8</version>
   </parent>
 
   <artifactId>swing-wordnet2-installer</artifactId>
@@ -18,14 +18,14 @@
     <izpack.src.dir>${basedir}/src/main/izpack</izpack.src.dir>
     <izpack.staging.dir>${project.build.directory}/staging</izpack.staging.dir>
     <info.appName>Treebolic WordNet</info.appName>
-    <appversion>4.1-7</appversion>
+    <appversion>4.1-8</appversion>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>io.github.treebolic</groupId>
       <artifactId>swing-wordnet2</artifactId>
-      <version>4.1-7</version>
+      <version>4.1-8</version>
       <classifier>uber</classifier>
     </dependency>
   </dependencies>
