@@ -6,5 +6,5 @@
 
 here=`readlink -f $0`
 here=`dirname "${here}"`
-version=4.1-8
+version=4.1-10
 java -jar "${here}/swing-studio-${version}-uber.jar"
