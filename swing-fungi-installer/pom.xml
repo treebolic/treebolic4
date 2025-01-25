@@ -7,7 +7,7 @@
   <parent>
     <artifactId>treebolic</artifactId>
     <groupId>io.github.treebolic</groupId>
-    <version>4.1-8</version>
+    <version>4.1-10</version>
   </parent>
 
   <artifactId>swing-fungi-installer</artifactId>
@@ -19,14 +19,14 @@
     <data.src.dir>${basedir}/../swing-fungi/database</data.src.dir>
     <izpack.staging.dir>${project.build.directory}/staging</izpack.staging.dir>
     <info.appName>Treebolic Fungi</info.appName>
-    <appversion>4.1-8</appversion>
+    <appversion>4.1-10</appversion>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>io.github.treebolic</groupId>
       <artifactId>swing-fungi</artifactId>
-      <version>4.1-8</version>
+      <version>4.1-10</version>
       <classifier>uber</classifier>
     </dependency>
   </dependencies>

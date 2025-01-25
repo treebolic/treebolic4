@@ -10,7 +10,7 @@
 	<parent>
 		<artifactId>treebolic</artifactId>
 		<groupId>io.github.treebolic</groupId>
-		<version>4.1-8</version>
+		<version>4.1-10</version>
 	</parent>
 
 	<artifactId>provider-sql-generic</artifactId>
@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
 			<artifactId>treebolic-loadbalancer</artifactId>
-			<version>4.1-8</version>
+			<version>4.1-10</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>

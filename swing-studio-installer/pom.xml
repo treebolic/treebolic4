@@ -8,7 +8,7 @@
 
   <groupId>io.github.treebolic</groupId>
   <artifactId>swing-studio-installer</artifactId>
-  <version>4.1-8</version>
+  <version>4.1-10</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,14 +17,14 @@
     <data.src.dir>${basedir}/../data</data.src.dir>
     <izpack.staging.dir>${project.build.directory}/staging</izpack.staging.dir>
     <info.appName>Treebolic Studio</info.appName>
-    <appversion>4.1-8</appversion>
+    <appversion>4.1-10</appversion>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>io.github.treebolic</groupId>
       <artifactId>swing-studio</artifactId>
-      <version>4.1-8</version>
+      <version>4.1-10</version>
       <classifier>uber</classifier>
     </dependency>
   </dependencies>
