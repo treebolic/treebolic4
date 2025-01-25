@@ -9,54 +9,26 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="provider-text-indent" />
+        <module name="treebolic-glue-iface" />
         <module name="treebolic-loadbalancer" />
-        <module name="swing-files" />
         <module name="treebolic-mutable" />
-        <module name="swing-application-owl-jena" />
-        <module name="provider-graphviz" />
         <module name="treebolic-model" />
+        <module name="provider-wordnet-kwi" />
         <module name="swing-wordnet" />
         <module name="provider-wordnet-jwi" />
-        <module name="provider-gxl" />
-        <module name="provider-sql-jdbc" />
         <module name="provider-wordnet-jwi2" />
-        <module name="swing-studio" />
         <module name="treebolic-glue-swing" />
-        <module name="swing-application-xml-stax" />
-        <module name="provider-owl-sax2" />
+        <module name="swing-browser" />
+        <module name="treebolic-lib-swing" />
         <module name="swing-browser-search" />
-        <module name="provider-owl-owlapi" />
         <module name="swing-wordnet2" />
         <module name="swing-commons" />
-        <module name="provider-sql-generic" />
-        <module name="swing-application-xml-sax" />
-        <module name="treebolic-annotations" />
-        <module name="provider-xml-sax" />
-        <module name="swing-fungi" />
-        <module name="swing-application-owl2" />
-        <module name="treebolic-glue-iface" />
-        <module name="provider-text-pair" />
-        <module name="provider-xml-stax" />
-        <module name="provider-owl-jena" />
-        <module name="provider-owl-owlapi2" />
-        <module name="swing-application-owl" />
-        <module name="swing-browser" />
-        <module name="swing-application-xml-dom" />
-        <module name="treebolic-lib-swing" />
-        <module name="swing-fungi-installer" />
-        <module name="provider-text-indent-tree" />
-        <module name="provider-xml-dom" />
         <module name="treebolic-graph" />
         <module name="treebolic-view" />
-        <module name="provider-owl-sax" />
-        <module name="provider-files" />
-        <module name="transformer-xml" />
-        <module name="swing-studio-installer" />
+        <module name="treebolic-annotations" />
         <module name="swing-wordnet2-installer" />
         <module name="swing-application" />
         <module name="treebolic-glue" />
-        <module name="swing-application-owl-sax" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -67,9 +39,38 @@
       <module name="browser" target="1.8" />
       <module name="browser2" target="1.8" />
       <module name="commons" target="1.8" />
+      <module name="provider-files" target="1.8" />
+      <module name="provider-graphviz" target="1.8" />
+      <module name="provider-gxl" target="1.8" />
+      <module name="provider-owl-jena" target="1.8" />
+      <module name="provider-owl-owlapi" target="1.8" />
+      <module name="provider-owl-owlapi2" target="1.8" />
+      <module name="provider-owl-sax" target="1.8" />
+      <module name="provider-owl-sax2" target="1.8" />
+      <module name="provider-sql-generic" target="1.8" />
+      <module name="provider-sql-jdbc" target="1.8" />
+      <module name="provider-text-indent" target="1.8" />
+      <module name="provider-text-indent-tree" target="1.8" />
+      <module name="provider-text-pair" target="1.8" />
+      <module name="provider-xml-dom" target="1.8" />
+      <module name="provider-xml-sax" target="1.8" />
+      <module name="provider-xml-stax" target="1.8" />
       <module name="studio" target="1.8" />
+      <module name="swing-application-owl" target="1.8" />
+      <module name="swing-application-owl-jena" target="1.8" />
+      <module name="swing-application-owl-sax" target="1.8" />
+      <module name="swing-application-owl2" target="1.8" />
       <module name="swing-application-xml" target="1.8" />
+      <module name="swing-application-xml-dom" target="1.8" />
+      <module name="swing-application-xml-sax" target="1.8" />
+      <module name="swing-application-xml-stax" target="1.8" />
+      <module name="swing-files" target="1.8" />
+      <module name="swing-fungi" target="1.8" />
+      <module name="swing-fungi-installer" target="1.8" />
+      <module name="swing-studio" target="1.8" />
+      <module name="swing-studio-installer" target="1.8" />
       <module name="swing.application" target="1.8" />
+      <module name="transformer-xml" target="1.8" />
       <module name="treebolic-iface" target="1.8" />
     </bytecodeTargetLevel>
   </component>

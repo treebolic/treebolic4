@@ -2,28 +2,24 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/provider-graphviz/provider-graphviz.iml" filepath="$PROJECT_DIR$/provider-graphviz/provider-graphviz.iml" />
-      <module fileurl="file://$PROJECT_DIR$/provider-owl-jena/provider-owl-jena.iml" filepath="$PROJECT_DIR$/provider-owl-jena/provider-owl-jena.iml" />
-      <module fileurl="file://$PROJECT_DIR$/provider-owl-owlapi/provider-owl-owlapi.iml" filepath="$PROJECT_DIR$/provider-owl-owlapi/provider-owl-owlapi.iml" />
-      <module fileurl="file://$PROJECT_DIR$/provider-owl-owlapi2/provider-owl-owlapi2.iml" filepath="$PROJECT_DIR$/provider-owl-owlapi2/provider-owl-owlapi2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/provider-owl-sax/provider-owl-sax.iml" filepath="$PROJECT_DIR$/provider-owl-sax/provider-owl-sax.iml" />
-      <module fileurl="file://$PROJECT_DIR$/provider-owl-sax2/provider-owl-sax2.iml" filepath="$PROJECT_DIR$/provider-owl-sax2/provider-owl-sax2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/provider-sql-jdbc/provider-sql-jdbc.iml" filepath="$PROJECT_DIR$/provider-sql-jdbc/provider-sql-jdbc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider-files/provider-files.iml" filepath="$PROJECT_DIR$/provider-files/provider-files.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider-gxl/provider-gxl.iml" filepath="$PROJECT_DIR$/provider-gxl/provider-gxl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider-sql-generic/provider-sql-generic.iml" filepath="$PROJECT_DIR$/provider-sql-generic/provider-sql-generic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider-text-indent/provider-text-indent.iml" filepath="$PROJECT_DIR$/provider-text-indent/provider-text-indent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider-text-indent-tree/provider-text-indent-tree.iml" filepath="$PROJECT_DIR$/provider-text-indent-tree/provider-text-indent-tree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider-text-pair/provider-text-pair.iml" filepath="$PROJECT_DIR$/provider-text-pair/provider-text-pair.iml" />
       <module fileurl="file://$PROJECT_DIR$/provider-wordnet-jwi/provider-wordnet-jwi.iml" filepath="$PROJECT_DIR$/provider-wordnet-jwi/provider-wordnet-jwi.iml" />
       <module fileurl="file://$PROJECT_DIR$/provider-wordnet-jwi2/provider-wordnet-jwi2.iml" filepath="$PROJECT_DIR$/provider-wordnet-jwi2/provider-wordnet-jwi2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/provider-xml-dom/provider-xml-dom.iml" filepath="$PROJECT_DIR$/provider-xml-dom/provider-xml-dom.iml" />
-      <module fileurl="file://$PROJECT_DIR$/provider-xml-sax/provider-xml-sax.iml" filepath="$PROJECT_DIR$/provider-xml-sax/provider-xml-sax.iml" />
-      <module fileurl="file://$PROJECT_DIR$/provider-xml-stax/provider-xml-stax.iml" filepath="$PROJECT_DIR$/provider-xml-stax/provider-xml-stax.iml" />
-      <module fileurl="file://$PROJECT_DIR$/swing-application-owl/swing-application-owl.iml" filepath="$PROJECT_DIR$/swing-application-owl/swing-application-owl.iml" />
-      <module fileurl="file://$PROJECT_DIR$/swing-application-owl-jena/swing-application-owl-jena.iml" filepath="$PROJECT_DIR$/swing-application-owl-jena/swing-application-owl-jena.iml" />
-      <module fileurl="file://$PROJECT_DIR$/swing-application-owl-sax/swing-application-owl-sax.iml" filepath="$PROJECT_DIR$/swing-application-owl-sax/swing-application-owl-sax.iml" />
-      <module fileurl="file://$PROJECT_DIR$/swing-application-owl2/swing-application-owl2.iml" filepath="$PROJECT_DIR$/swing-application-owl2/swing-application-owl2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/swing-fungi/swing-fungi.iml" filepath="$PROJECT_DIR$/swing-fungi/swing-fungi.iml" />
-      <module fileurl="file://$PROJECT_DIR$/swing-studio/swing-studio.iml" filepath="$PROJECT_DIR$/swing-studio/swing-studio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swing-application-xml-dom/swing-application-xml-dom.iml" filepath="$PROJECT_DIR$/swing-application-xml-dom/swing-application-xml-dom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swing-application-xml-sax/swing-application-xml-sax.iml" filepath="$PROJECT_DIR$/swing-application-xml-sax/swing-application-xml-sax.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swing-application-xml-stax/swing-application-xml-stax.iml" filepath="$PROJECT_DIR$/swing-application-xml-stax/swing-application-xml-stax.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swing-files/swing-files.iml" filepath="$PROJECT_DIR$/swing-files/swing-files.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swing-fungi-installer/swing-fungi-installer.iml" filepath="$PROJECT_DIR$/swing-fungi-installer/swing-fungi-installer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swing-studio-installer/swing-studio-installer.iml" filepath="$PROJECT_DIR$/swing-studio-installer/swing-studio-installer.iml" />
       <module fileurl="file://$PROJECT_DIR$/swing-wordnet/swing-wordnet.iml" filepath="$PROJECT_DIR$/swing-wordnet/swing-wordnet.iml" />
       <module fileurl="file://$PROJECT_DIR$/swing-wordnet2/swing-wordnet2.iml" filepath="$PROJECT_DIR$/swing-wordnet2/swing-wordnet2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/transformer-xml/transformer-xml.iml" filepath="$PROJECT_DIR$/transformer-xml/transformer-xml.iml" />
       <module fileurl="file://$PROJECT_DIR$/treebolic.iml" filepath="$PROJECT_DIR$/treebolic.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/604478746/treebolic-glue-android.iml" filepath="$PROJECT_DIR$/.idea/modules/604478746/treebolic-glue-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/treebolic-glue-swing/treebolic-glue-swing.iml" filepath="$PROJECT_DIR$/treebolic-glue-swing/treebolic-glue-swing.iml" />
     </modules>
   </component>

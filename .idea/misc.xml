@@ -808,6 +808,7 @@
         <option value="$PROJECT_DIR$/swing-studio-install/pom.xml" />
         <option value="$PROJECT_DIR$/swing-studio-installer/pom.xml" />
         <option value="$PROJECT_DIR$/swing-fungi-installer/pom.xml" />
+        <option value="$PROJECT_DIR$/provider-wordnet-kwi/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -816,7 +817,6 @@
         <option value="$PROJECT_DIR$/treebolic-iface/pom.xml" />
       </set>
     </option>
-    <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="treebolic.annotations.Nullable" />
