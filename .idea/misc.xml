@@ -809,6 +809,7 @@
         <option value="$PROJECT_DIR$/swing-studio-installer/pom.xml" />
         <option value="$PROJECT_DIR$/swing-fungi-installer/pom.xml" />
         <option value="$PROJECT_DIR$/provider-wordnet-kwi/pom.xml" />
+        <option value="$PROJECT_DIR$/provider-wordnet-kwi2/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

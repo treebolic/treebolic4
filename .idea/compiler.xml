@@ -15,6 +15,7 @@
         <module name="treebolic-model" />
         <module name="provider-wordnet-kwi" />
         <module name="swing-wordnet" />
+        <module name="provider-wordnet-kwi2" />
         <module name="provider-wordnet-jwi" />
         <module name="provider-wordnet-jwi2" />
         <module name="treebolic-glue-swing" />
