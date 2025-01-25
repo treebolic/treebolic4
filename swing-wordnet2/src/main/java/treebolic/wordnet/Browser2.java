@@ -31,7 +31,7 @@ public class Browser2 extends Browser
         Laf.lookAndFeel(args);
         Properties args2 = treebolic.browser2.MainFrame.makeArgs(args);
         if (!args2.containsKey("provider"))
-            args2.put("provider", "treebolic.provider.wordnet.jwi.compact.Provider2");
+            args2.put("provider", "treebolic.provider.wordnet.kwi.compact.Provider2");
         if (!args2.containsKey("base"))
             args2.put("base", "database");
         new MainFrame2(args2);

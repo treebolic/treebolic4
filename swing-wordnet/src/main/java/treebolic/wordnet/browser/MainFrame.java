@@ -24,7 +24,7 @@ import treebolic.commons.Persist;
 import treebolic.commons.SettingsDialog;
 import treebolic.glue.component.SearchTool;
 import treebolic.glue.component.Statusbar;
-import treebolic.provider.wordnet.jwi.DataManager;
+import treebolic.provider.wordnet.kwi.DataManager;
 
 /**
  * Browser main frame
@@ -59,7 +59,7 @@ public class MainFrame extends treebolic.browser2.MainFrame
 
     protected String getDefaultProvider()
     {
-        return "treebolic.provider.wordnet.jwi.compact.Provider";
+        return "treebolic.provider.wordnet.kwi.compact.Provider";
     }
 
     @NonNull

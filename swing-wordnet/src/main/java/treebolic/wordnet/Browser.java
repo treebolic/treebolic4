@@ -53,7 +53,7 @@ public class Browser
         Laf.lookAndFeel(args);
         Properties args2 = makeArgs(args);
         if (!args2.containsKey("provider"))
-            args2.put("provider", "treebolic.provider.wordnet.jwi.compact.Provider");
+            args2.put("provider", "treebolic.provider.wordnet.kwi.compact.Provider");
         if (!args2.containsKey("base"))
             args2.put("base", "database");
         if (!args2.containsKey("images"))

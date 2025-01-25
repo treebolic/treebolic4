@@ -38,7 +38,7 @@ public class MainFrame2 extends MainFrame
     @Override
     protected final String getDefaultProvider()
     {
-        return "treebolic.provider.wordnet.jwi.compact.Provider2";
+        return "treebolic.provider.wordnet.kwi.compact.Provider2";
     }
 
     @NonNull
