@@ -33,6 +33,7 @@ public class Provider2 extends treebolic.provider.wordnet.kwi.concise.Provider
 		super();
 		this.membersLoadBalancer.setGroupNode(null, this.wordsBackgroundColor, this.wordsForegroundColor, this.wordsEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.WORDS.ordinal(), null, null);
 		this.semRelationsLoadBalancer.setGroupNode(null, this.relationsBackgroundColor, this.relationsForegroundColor, this.relationsEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.SYNSET.ordinal(), null, null);
+		this.lexRelationsLoadBalancer.setGroupNode(null, this.relationsBackgroundColor, this.relationsForegroundColor, this.relationsEdgeColor, LOADBALANCING_EDGE_STYLE, ImageIndex.SENSE.ordinal(), null, null);
 	}
 
 	// I N T E R F A C E

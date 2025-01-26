@@ -188,7 +188,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		/** Member */ HASDOMAIN(Pointer.getMEMBER(), "has domain", "has domain", ImageIndex.HASDOMAIN.ordinal(), false), //
 		/** Topic member */ HASDOMAIN_TOPIC(Pointer.getTOPIC_MEMBER(), "has topic", "hasdomain", ImageIndex.HASDOMAIN_TOPIC.ordinal(), false), //
 		/** Usage member */ HASDOMAIN_USAGE(Pointer.getUSAGE_MEMBER(), "exemplifies", "hasdomain", ImageIndex.HASDOMAIN_USAGE.ordinal(), false), //
-		/** Region member */ HASDOMAIN_REGION(Pointer.getREGION_MEMBER(), "has region", "hasdomain", ImageIndex.HASDOMAIN_REGION.ordinal(), false); //
+		/** Region member */ HASDOMAIN_REGION(Pointer.getREGION_MEMBER(), "has region", "hasdomain", ImageIndex.HASDOMAIN_REGION.ordinal(), false), //
+
+		/** Collocation */ COLLOCATION(Pointer.getCOLLOCATION(), "collocation", "collocation", ImageIndex.COLLOCATION.ordinal(), false); //
 		// @formatter:on
 
 		/**
@@ -241,7 +243,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		 */
 		public long mask()
 		{
-			return 1 << ordinal();
+			return 1L << ordinal();
 		}
 
 		/**
@@ -253,7 +255,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		@SuppressWarnings({"BooleanMethodIsAlwaysInverted", "WeakerAccess"})
 		public boolean test(final long bitmap)
 		{
-			return (bitmap & (1 << ordinal())) != 0;
+			return (bitmap & (1L << ordinal())) != 0;
 		}
 
 		/**
@@ -346,6 +348,9 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 
 				case '+':
 					return Relation.DERIVATION;
+
+				case '`':
+					return Relation.COLLOCATION;
 
 				case '\\':
 					if (pointer.getName().startsWith("Pertainym"))
@@ -444,6 +449,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		/** Topic member */ HASDOMAIN_TOPIC, //
 		/** Usage member */ HASDOMAIN_USAGE, //
 		/** Region member */ HASDOMAIN_REGION, //
+
+		/** Region member */ COLLOCATION, //
 		// @formatter:on
 	}
 
@@ -497,6 +504,8 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			"hasdomain_topic.png", // TOPIC_MEMBER HASDOMAIN_TOPIC -c
 			"hasdomain_usage.png", // USAGE_MEMBER HASDOMAIN_USAGE EXEMPLIFIES -u
 			"hasdomain_region.png",// REGION_MEMBER HASDOMAIN_REGION -r
+
+			"collocation.png", // COLLOCATION `
 
 			"role_agent.png", // ROLE_AGENT
 			"role_bodypart.png", // ROLE_BODYPART
@@ -917,9 +926,20 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	static private final int[] MAX_SEMRELATIONS_AT_LEVEL = {6, 3};
 
 	/**
+	 * LoadBalancer : Senses : Max children nodes at level 0, 1 ... n. Level 0 is just above leaves. Level > 0 is upward from leaves. Last value i holds for
+	 * level i to n.
+	 */
+	static private final int[] MAX_LEXRELATIONS_AT_LEVEL = {8, 8};
+
+	/**
 	 * LoadBalancer : Synsets : Truncation threshold
 	 */
 	static private final int SEMRELATIONS_LABEL_TRUNCATE_AT = 3;
+
+	/**
+	 * LoadBalancer : Senses : Truncation threshold
+	 */
+	static private final int LEXRELATIONS_LABEL_TRUNCATE_AT = 3;
 
 	/*
 	 * LoadBalancer : edge color
@@ -1030,14 +1050,24 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	protected boolean loadBalanceSemRelations = true;
 
 	/**
+	 * Load balancing flag for lexrelations
+	 */
+	protected boolean loadBalanceLexRelations = true;
+
+	/**
 	 * Members load balancer
 	 */
 	protected LoadBalancer membersLoadBalancer;
 
 	/**
-	 * Synsets load balancer
+	 * Semantic relations load balancer
 	 */
 	protected LoadBalancer semRelationsLoadBalancer;
+
+	/**
+	 * Lexical relations load balancer
+	 */
+	protected LoadBalancer lexRelationsLoadBalancer;
 
 	/**
 	 * Font face
@@ -1215,6 +1245,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		this.filter = BaseProvider.FILTER_DEFAULT;
 		this.membersLoadBalancer = new LoadBalancer(MAX_MEMBERS_AT_LEVEL, MEMBERS_LABEL_TRUNCATE_AT);
 		this.semRelationsLoadBalancer = new LoadBalancer(MAX_SEMRELATIONS_AT_LEVEL, SEMRELATIONS_LABEL_TRUNCATE_AT);
+		this.lexRelationsLoadBalancer = new LoadBalancer(MAX_LEXRELATIONS_AT_LEVEL, LEXRELATIONS_LABEL_TRUNCATE_AT);
 		assert images != null;
 		//noinspection ConstantValue
 		this.membersLoadBalancer.setGroupNode(null, this.wordsBackgroundColor, this.wordsForegroundColor, this.wordsEdgeColor, LOADBALANCING_EDGE_STYLE, -1, null, images[ImageIndex.WORDS.ordinal()]);
@@ -2380,13 +2411,13 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			{
 				continue;
 			}
-
-			@NonNull final INode relationNode = makeRelationNode(parentNode, relation);
+			@NonNull final TreeMutableNode relationNode = makeRelationNode(parentNode, relation);
 
 			// iterate related senses
 			final List<SenseID> relatedSenseIds = lexRelations.get(relation.pointer);
 			if (relatedSenseIds != null)
 			{
+				List<INode> childNodes = new ArrayList<>();
 				for (@Nullable final SenseID relatedSenseId : relatedSenseIds)
 				{
 					if (relatedSenseId == null)
@@ -2395,13 +2426,26 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 					}
 
 					// lex node
-					/* final INode lexNode = */
-					makeLexNode(relationNode, relatedSenseId, level);
+					final INode lexNode = makeLexNode(null, relatedSenseId, level);
+					childNodes.add(lexNode);
 
 					// synset
 					// final Synset synset = new Synset(relatedSynset);
 					// final INode synsetNode = makeSynsetNode(lexNode, synset);
 					// walkSynset(synsetNode, synset, level);
+				}
+
+				// semRelations nodes
+				if (this.loadBalanceLexRelations)
+				{
+					childNodes = this.lexRelationsLoadBalancer.buildHierarchy(childNodes, relation.imageIndex);
+				}
+
+				// relation node l
+				//@NonNull final TreeMutableNode relationNode = makeRelationNode(parentNode, relation);
+				if (childNodes != null)
+				{
+					relationNode.addChildren(childNodes);
 				}
 			}
 		}

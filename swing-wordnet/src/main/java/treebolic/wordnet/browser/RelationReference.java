@@ -56,7 +56,9 @@ public enum RelationReference
 	/** Has domain */ HASDOMAIN("hasdomain"), //
 	/** Has domain Topic member */ HASDOMAIN_TOPIC(null), //
 	/** Has domain Usage */ HASDOMAIN_USAGE(null), //
-	/** Has domain Region */ HASDOMAIN_REGION(null); //
+	/** Has domain Region */ HASDOMAIN_REGION(null), //
+
+	/** Collocation */ COLLOCATION("collocation"); //
 	// @formatter:off
 
 	private final String helpKey;
@@ -110,7 +112,7 @@ public enum RelationReference
 	 */
 	public long mask()
 	{
-		return 1 << ordinal();
+		return 1L << ordinal();
 	}
 
 	/**
@@ -121,7 +123,7 @@ public enum RelationReference
 	 */
 	public boolean test(final long bitmap)
 	{
-		return (bitmap & (1 << ordinal())) != 0;
+		return (bitmap & (1L << ordinal())) != 0;
 	}
 
 	/**

@@ -191,6 +191,7 @@ public class RelationFilterSettingsPane extends JPanel
 
 	private void fromCheckBoxes()
 	{
+		this.filter = 0;
 		int i = 0;
 		for (@NonNull final RelationReference relation : RelationReference.values())
 		{
