@@ -135,6 +135,8 @@
       <entry_point TYPE="field" FQNAME="org.graphviz.TokenMgrError errorCode" />
       <entry_point TYPE="field" FQNAME="org.graphviz.TokenMgrError LOOP_DETECTED" />
       <entry_point TYPE="field" FQNAME="org.graphviz.TokenMgrError STATIC_LEXER_ERROR" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.wordnet.kwi.Parameters KEY_PROVIDER" />
+      <entry_point TYPE="field" FQNAME="treebolic.provider.wordnet.kwi.Parameters KEY_SOURCE" />
     </entry_points>
     <pattern value="treebolic.glue.Worker" method="doInBackground" />
     <pattern value="treebolic.glue.Worker" method="job" />
@@ -766,6 +768,15 @@
     <pattern value="treebolic.provider.owl.sax.OwlModelFactory2" method="setEdgeImage" />
     <pattern value="treebolic.provider.owl.sax.OwlModelFactory2" method="setNodeImage" />
     <pattern value="treebolic.provider.owl.sax.OwlModelFactory2" method="setTreeEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.kwi.BaseDataManager" method="coreCheck" />
+    <pattern value="treebolic.provider.wordnet.kwi.BaseProvider" method="isLoadBalanceMembers" />
+    <pattern value="treebolic.provider.wordnet.kwi.BaseProvider" method="isLoadBalanceSemRelations" />
+    <pattern value="treebolic.provider.wordnet.kwi.BaseProvider" method="membersOf" />
+    <pattern value="treebolic.provider.wordnet.kwi.BaseProvider" method="membersToString" />
+    <pattern value="treebolic.provider.wordnet.kwi.BaseProvider" method="setEdgeImage" />
+    <pattern value="treebolic.provider.wordnet.kwi.BaseProvider" method="setLoadBalanceMembers" />
+    <pattern value="treebolic.provider.wordnet.kwi.BaseProvider" method="setLoadBalanceSemRelations" />
+    <pattern value="treebolic.provider.wordnet.kwi.BaseProvider" method="walkLexRelations" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
