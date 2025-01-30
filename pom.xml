@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Copyright (c) 2023. Bernard Bou
   -->
@@ -11,7 +11,7 @@
 	<groupId>io.github.treebolic</groupId>
 	<artifactId>treebolic</artifactId>
 	<packaging>pom</packaging>
-	<version>4.1-10</version>
+	<version>4.2-0</version>
 
 	<name>treebolic</name>
 	<description>Treebolic top project</description>
@@ -41,8 +41,10 @@
 		<module>provider-text-indent</module>
 		<module>provider-text-indent-tree</module>
 		<module>provider-gxl</module>
-		<module>provider-wordnet-jwi</module>
-		<module>provider-wordnet-jwi2</module>
+    <module>provider-wordnet-jwi</module>
+    <module>provider-wordnet-jwi2</module>
+    <module>provider-wordnet-kwi</module>
+    <module>provider-wordnet-kwi2</module>
 		<module>provider-files</module>
 		<module>provider-graphviz</module>
 
@@ -68,7 +70,7 @@
 		<maven.compiler.source>8</maven.compiler.source>
 		<maven.compiler.target>8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<revision>4.1-10</revision>
+		<revision>4.2-0</revision>
 	</properties>
 
 	<build>

@@ -10,7 +10,7 @@
 	<parent>
 		<artifactId>treebolic</artifactId>
 		<groupId>io.github.treebolic</groupId>
-		<version>4.1-10</version>
+		<version>4.2-0</version>
 	</parent>
 
 	<artifactId>swing-wordnet</artifactId>
