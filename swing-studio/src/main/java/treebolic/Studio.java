@@ -17,7 +17,7 @@ public class Studio
 	/**
 	 * Version
 	 */
-	static private final String VERSION = "4.1-10";
+	static private final String VERSION = "4.2-0";
 
 	/**
 	 * Constructor
