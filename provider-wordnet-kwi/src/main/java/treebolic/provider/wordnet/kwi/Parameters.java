@@ -52,6 +52,11 @@ public class Parameters
 	public static final String KEY_LOADBALANCE_SEMRELATIONS = "loadbalance_semrelations";
 
 	/**
+	 * Load balance lexrelations
+	 */
+	public static final String KEY_LOADBALANCE_LEXRELATIONS = "loadbalance_lexrelations";
+
+	/**
 	 * Back color
 	 */
 	static public final String KEY_BACKCOLOR = "backcolor";

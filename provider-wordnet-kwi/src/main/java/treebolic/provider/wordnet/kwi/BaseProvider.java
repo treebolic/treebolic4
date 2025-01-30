@@ -1308,6 +1308,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		// load balancing
 		this.loadBalanceMembers = getBoolean(parameters, Parameters.KEY_LOADBALANCE_WORDS, true);
 		this.loadBalanceSemRelations = getBoolean(parameters, Parameters.KEY_LOADBALANCE_SEMRELATIONS, true);
+		this.loadBalanceLexRelations = getBoolean(parameters, Parameters.KEY_LOADBALANCE_LEXRELATIONS, true);
 
 		// font
 		this.fontFace = BaseProvider.FONTFACE;
@@ -2587,7 +2588,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		final boolean isHead = synset.synset.isAdjectiveHead();
 		if (isHead)
 		{
-			final Synset.Sense head = synset.synset.getSenses()[1];
+			final Synset.Sense head = synset.synset.getSenses()[0];
 			final List<SenseID> antonymSenseIds = head.getRelatedSenseFor(Pointer.getANTONYM());
 			@Nullable INode antonymRelationNode = null;
 
