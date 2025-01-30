@@ -71,7 +71,7 @@ public class Provider extends treebolic.provider.wordnet.kwi.condensed.Provider
 		@NonNull final String lemmas = membersAsLines(synset);
 		parentNode.setLabel(/* Integer.toString(index) + '\n' + */ lemmas);
 		parentNode.setContent(glossContent(synset.gloss));
-		parentNode.setLink(BaseProvider.URLSCHEME + BaseProvider.URLSCHEME_AT + synset.synset.getID().toString());
+		parentNode.setLink(BaseProvider.URLSCHEME + BaseProvider.URLSCHEME_AT + synset.synset.getID());
 
 		decorateAsWord(parentNode, level);
 		setNodeImage(parentNode, null, null);
