@@ -72,6 +72,7 @@
       <module name="swing-studio-installer" target="1.8" />
       <module name="swing.application" target="1.8" />
       <module name="transformer-xml" target="1.8" />
+      <module name="treebolic-glue-android" target="17" />
       <module name="treebolic-iface" target="1.8" />
     </bytecodeTargetLevel>
   </component>
