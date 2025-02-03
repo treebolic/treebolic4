@@ -110,7 +110,7 @@ public class Provider extends treebolic.provider.wordnet.kwi.condensed.Provider
 			decorateAsWord(relatedSynsetNode, level);
 			setNodeImage(relatedSynsetNode, null, null);
 			relatedSynsetNode.setEdgeLabel(null);
-			relatedSynsetNode.setEdgeColor(this.relationBackgroundColor);
+			relatedSynsetNode.setEdgeColor(this.semRelationBackgroundColor);
 			setTreeEdgeImage(relatedSynsetNode, null, ImageIndex.values()[relation.imageIndex]);
 
 			relatedSynsetNode.setTarget(tag);

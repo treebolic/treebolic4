@@ -645,129 +645,144 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	static public final int RELATIONSEDGE_IDX = 18;
 
 	/**
-	 * Relation background index
+	 * Semantic relation background index
 	 */
-	static public final int RELATIONBACKGROUND_IDX = 19;
+	static public final int SEMRELATIONBACKGROUND_IDX = 19;
 
 	/**
-	 * Relation foreground index
+	 * Semantic relation foreground index
 	 */
-	static public final int RELATIONFOREGROUND_IDX = 20;
+	static public final int SEMRELATIONFOREGROUND_IDX = 20;
 
 	/**
-	 * Relation edge index
+	 * Semantic relation edge index
 	 */
-	static public final int RELATIONEDGE_IDX = 21;
+	static public final int SEMRELATIONEDGE_IDX = 21;
+
+	/**
+	 * Lexical relation background index
+	 */
+	static public final int LEXRELATIONBACKGROUND_IDX = 22;
+
+	/**
+	 * Lexical relation foreground index
+	 */
+	static public final int LEXRELATIONFOREGROUND_IDX = 23;
+
+	/**
+	 * Lexical relation edge index
+	 */
+	static public final int LEXRELATIONEDGE_IDX = 24;
 
 	/**
 	 * Etc background index
 	 */
-	static public final int ETCBACKGROUND_IDX = 22;
+	static public final int ETCBACKGROUND_IDX = 25;
 
 	/**
 	 * Etc foreground index
 	 */
-	static public final int ETCFOREGROUND_IDX = 23;
+	static public final int ETCFOREGROUND_IDX = 26;
 
 	/**
 	 * Etc edge index
 	 */
-	static public final int ETCEDGE_IDX = 24;
+	static public final int ETCEDGE_IDX = 27;
 
 	/**
 	 * Stem background index
 	 */
-	static public final int STEMBACKGROUND_IDX = 25;
+	static public final int STEMBACKGROUND_IDX = 28;
 
 	/**
 	 * Stem foreground index
 	 */
-	static public final int STEMFOREGROUND_IDX = 26;
+	static public final int STEMFOREGROUND_IDX = 29;
 
 	/**
 	 * Stem edge index
 	 */
-	static public final int STEMEDGE_IDX = 27;
+	static public final int STEMEDGE_IDX = 30;
 
 	/**
 	 * Words background index
 	 */
-	static public final int WORDSBACKGROUND_IDX = 28;
+	static public final int WORDSBACKGROUND_IDX = 31;
 
 	/**
 	 * Words foreground index
 	 */
-	static public final int WORDSFOREGROUND_IDX = 29;
+	static public final int WORDSFOREGROUND_IDX = 32;
 
 	/**
 	 * Words edge index
 	 */
-	static public final int WORDSEDGE_IDX = 30;
+	static public final int WORDSEDGE_IDX = 33;
 
 	/**
 	 * Word background index
 	 */
-	static public final int WORDBACKGROUND_IDX = 31;
+	static public final int WORDBACKGROUND_IDX = 34;
 
 	/**
 	 * Word background1 index
 	 */
-	static public final int WORDBACKGROUND1_IDX = 32;
+	static public final int WORDBACKGROUND1_IDX = 35;
 
 	/**
 	 * Word background2 index
 	 */
-	static public final int WORDBACKGROUND2_IDX = 33;
+	static public final int WORDBACKGROUND2_IDX = 36;
 
 	/**
 	 * Word background3 index
 	 */
-	static public final int WORDBACKGROUND3_IDX = 34;
+	static public final int WORDBACKGROUND3_IDX = 37;
 
 	/**
 	 * Word background4 index
 	 */
-	static public final int WORDBACKGROUND4_IDX = 35;
+	static public final int WORDBACKGROUND4_IDX = 38;
 
 	/**
 	 * Word foreground index
 	 */
-	static public final int WORDFOREGROUND_IDX = 36;
+	static public final int WORDFOREGROUND_IDX = 39;
 
 	/**
 	 * Word foreground1 index
 	 */
-	static public final int WORDFOREGROUND1_IDX = 37;
+	static public final int WORDFOREGROUND1_IDX = 40;
 
 	/**
 	 * Word foreground2 index
 	 */
-	static public final int WORDFOREGROUND2_IDX = 38;
+	static public final int WORDFOREGROUND2_IDX = 41;
 
 	/**
 	 * Word foreground3 index
 	 */
-	static public final int WORDFOREGROUND3_IDX = 39;
+	static public final int WORDFOREGROUND3_IDX = 42;
 
 	/**
 	 * Word foreground4 index
 	 */
-	static public final int WORDFOREGROUND4_IDX = 40;
+	static public final int WORDFOREGROUND4_IDX = 43;
 
 	/**
 	 * Word edge index
 	 */
-	static public final int WORDEDGE_IDX = 41;
+	static public final int WORDEDGE_IDX = 44;
 
 	/**
 	 * Edge index
 	 */
-	static public final int EDGE_IDX = 42;
+	static public final int EDGE_IDX = 45;
 
 	/**
 	 * Count
 	 */
-	static public final int COLORS0_COUNT = 43;
+	static public final int COLORS0_COUNT = 46;
 
 	/**
 	 * Initial colors
@@ -795,9 +810,12 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		BaseProvider.COLORS0[BaseProvider.RELATIONSBACKGROUND_IDX] = Colors.RED;
 		BaseProvider.COLORS0[BaseProvider.RELATIONSFOREGROUND_IDX] = Colors.WHITE;
 		BaseProvider.COLORS0[BaseProvider.RELATIONSEDGE_IDX] = Colors.RED;
-		BaseProvider.COLORS0[BaseProvider.RELATIONBACKGROUND_IDX] = Colors.RED;
-		BaseProvider.COLORS0[BaseProvider.RELATIONFOREGROUND_IDX] = Colors.WHITE;
-		BaseProvider.COLORS0[BaseProvider.RELATIONEDGE_IDX] = Colors.RED;
+		BaseProvider.COLORS0[BaseProvider.SEMRELATIONBACKGROUND_IDX] = Colors.RED;
+		BaseProvider.COLORS0[BaseProvider.SEMRELATIONFOREGROUND_IDX] = Colors.WHITE;
+		BaseProvider.COLORS0[BaseProvider.SEMRELATIONEDGE_IDX] = Colors.RED;
+		BaseProvider.COLORS0[BaseProvider.LEXRELATIONBACKGROUND_IDX] = 0xB5835A;
+		BaseProvider.COLORS0[BaseProvider.LEXRELATIONFOREGROUND_IDX] = Colors.BLACK;
+		BaseProvider.COLORS0[BaseProvider.LEXRELATIONEDGE_IDX] = 0xB5835A;
 		BaseProvider.COLORS0[BaseProvider.ETCBACKGROUND_IDX] = Colors.ORANGE;
 		BaseProvider.COLORS0[BaseProvider.ETCFOREGROUND_IDX] = Colors.GRAY;
 		BaseProvider.COLORS0[BaseProvider.ETCEDGE_IDX] = Colors.ORANGE;
@@ -1174,13 +1192,22 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	protected Integer relationsEdgeColor;
 
 	@Nullable
-	protected Integer relationBackgroundColor;
+	protected Integer semRelationBackgroundColor;
 
 	@Nullable
-	protected Integer relationForegroundColor;
+	protected Integer semRelationForegroundColor;
 
 	@Nullable
-	protected Integer relationEdgeColor;
+	protected Integer semRelationEdgeColor;
+
+	@Nullable
+	protected Integer lexRelationBackgroundColor;
+
+	@Nullable
+	protected Integer lexRelationForegroundColor;
+
+	@Nullable
+	protected Integer lexRelationEdgeColor;
 
 	@Nullable
 	protected Integer etcBackgroundColor;
@@ -1348,9 +1375,13 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 		this.relationsForegroundColor = getColor(parameters, Parameters.KEY_RELATIONS_FCOLOR, BaseProvider.COLORS0[BaseProvider.RELATIONSFOREGROUND_IDX]);
 		this.relationsEdgeColor = getColor(parameters, Parameters.KEY_RELATIONS_ECOLOR, BaseProvider.COLORS0[BaseProvider.RELATIONSEDGE_IDX]);
 
-		this.relationBackgroundColor = getColor(parameters, Parameters.KEY_RELATION_BCOLOR, BaseProvider.COLORS0[BaseProvider.RELATIONBACKGROUND_IDX]);
-		this.relationForegroundColor = getColor(parameters, Parameters.KEY_RELATION_FCOLOR, BaseProvider.COLORS0[BaseProvider.RELATIONFOREGROUND_IDX]);
-		this.relationEdgeColor = getColor(parameters, Parameters.KEY_RELATION_ECOLOR, BaseProvider.COLORS0[BaseProvider.RELATIONEDGE_IDX]);
+		this.semRelationBackgroundColor = getColor(parameters, Parameters.KEY_SEM_RELATION_BCOLOR, BaseProvider.COLORS0[BaseProvider.SEMRELATIONBACKGROUND_IDX]);
+		this.semRelationForegroundColor = getColor(parameters, Parameters.KEY_SEM_RELATION_FCOLOR, BaseProvider.COLORS0[BaseProvider.SEMRELATIONFOREGROUND_IDX]);
+		this.semRelationEdgeColor = getColor(parameters, Parameters.KEY_SEM_RELATION_ECOLOR, BaseProvider.COLORS0[BaseProvider.SEMRELATIONEDGE_IDX]);
+
+		this.lexRelationBackgroundColor = getColor(parameters, Parameters.KEY_LEX_RELATION_BCOLOR, BaseProvider.COLORS0[BaseProvider.LEXRELATIONBACKGROUND_IDX]);
+		this.lexRelationForegroundColor = getColor(parameters, Parameters.KEY_LEX_RELATION_FCOLOR, BaseProvider.COLORS0[BaseProvider.LEXRELATIONFOREGROUND_IDX]);
+		this.lexRelationEdgeColor = getColor(parameters, Parameters.KEY_LEX_RELATION_ECOLOR, BaseProvider.COLORS0[BaseProvider.LEXRELATIONEDGE_IDX]);
 
 		this.stemBackgroundColor = getColor(parameters, Parameters.KEY_STEM_BCOLOR, BaseProvider.COLORS0[BaseProvider.STEMBACKGROUND_IDX]);
 		this.stemForegroundColor = getColor(parameters, Parameters.KEY_STEM_FCOLOR, BaseProvider.COLORS0[BaseProvider.STEMFOREGROUND_IDX]);
@@ -2265,7 +2296,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 								@NonNull final SynsetData relatedSynset = new SynsetData(relatedSynset0);
 
 								// relation node l
-								@NonNull final TreeMutableNode relationNode = makeRelationNode(parentNode, relation);
+								@NonNull final TreeMutableNode relationNode = makeRelationNode(parentNode, relation, false);
 
 								// populate related synset node
 								walkRelatedSynset1(relationNode, relatedSynset, relation, index, level + 1, recurse && relation.recurses, edges);
@@ -2320,7 +2351,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 				}
 
 				// relation node l
-				@NonNull final TreeMutableNode relationNode = makeRelationNode(parentNode, relation);
+				@NonNull final TreeMutableNode relationNode = makeRelationNode(parentNode, relation, false);
 				if (childNodes != null)
 				{
 					relationNode.addChildren(childNodes);
@@ -2368,7 +2399,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 				if ((this.features & FEATURE_RELATEDSYNSET1_FORGET_RELATION_NODE) == 0)
 				{
 					// P < l < s
-					anchorNode = makeRelationNode(parentNode, relation);
+					anchorNode = makeRelationNode(parentNode, relation, false);
 				}
 
 				// else if FEATURE_RAISE_RECURSE_TO_SYNSET_AT_BASE_LEVEL
@@ -2412,7 +2443,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			{
 				continue;
 			}
-			@NonNull final TreeMutableNode relationNode = makeRelationNode(parentNode, relation);
+			@NonNull final TreeMutableNode relationNode = makeRelationNode(parentNode, relation, true);
 
 			// iterate related senses
 			final List<SenseID> relatedSenseIds = lexRelations.get(relation.pointer);
@@ -2497,7 +2528,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 				{
 					relatedSynsetNode = buildSingleMemberNode(null, relatedSynset, level);
 					relatedSynsetNode.setEdgeLabel(null);
-					relatedSynsetNode.setEdgeColor(this.relationBackgroundColor);
+					relatedSynsetNode.setEdgeColor(this.semRelationBackgroundColor);
 					setTreeEdgeImage(relatedSynsetNode, null, ImageIndex.values()[relation.imageIndex]);
 				}
 				else
@@ -2506,7 +2537,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 					// synset node
 					relatedSynsetNode = makeSynsetNode(null, relatedSynset);
 					relatedSynsetNode.setEdgeLabel(null);
-					relatedSynsetNode.setEdgeColor(this.relationBackgroundColor);
+					relatedSynsetNode.setEdgeColor(this.semRelationBackgroundColor);
 					setTreeEdgeImage(relatedSynsetNode, null, ImageIndex.values()[relation.imageIndex]);
 
 					// members
@@ -2527,7 +2558,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 				{
 					if ((this.features & FEATURE_TYPEDRELATION_RAISE_RECURSE_AS_SIBLING) != 0)
 					{
-						@NonNull final TreeMutableNode relationNode = makeRelationNode(null, relation);
+						@NonNull final TreeMutableNode relationNode = makeRelationNode(null, relation, false);
 						walkTypedRelation(relationNode, childRelatedSynsetIds, relation, level + 1, edges);
 						relationNode.setLabel(tag);
 						relationNode.setTarget(tag);
@@ -2544,7 +2575,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 						@NonNull TreeMutableNode anchorNode = relatedSynsetNode;
 						if ((this.features & FEATURE_TYPEDRELATION_FORGET_RELATION_NODE) == 0)
 						{
-							anchorNode = makeRelationNode(relatedSynsetNode, relation);
+							anchorNode = makeRelationNode(relatedSynsetNode, relation, false);
 						}
 						walkTypedRelation(anchorNode, childRelatedSynsetIds, relation, level + 1, edges);
 						anchorNode.setTarget(tag);
@@ -2597,7 +2628,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 			{
 				if (antonymRelationNode == null)
 				{
-					antonymRelationNode = makeRelationNode(parentNode, Relation.ANTONYM);
+					antonymRelationNode = makeRelationNode(parentNode, Relation.ANTONYM, true);
 				}
 				makeLexNode(antonymRelationNode, antonymSenseId, level + 1);
 			}
@@ -2830,16 +2861,16 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 * @return node
 	 */
 	@NonNull
-	protected TreeMutableNode makeRelationNode(final INode parent, @NonNull final Relation relation)
+	protected TreeMutableNode makeRelationNode(final INode parent, @NonNull final Relation relation, final boolean isLexical)
 	{
 		final int imageIndex = relation.imageIndex;
 		final String label = relation.label;
-		@NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), imageIndex != -1 ? null : label, imageIndex, this.relationBackgroundColor, this.relationForegroundColor);
+		@NonNull final TreeMutableNode node = new TreeMutableNode(parent, BaseProvider.makeNodeId(), imageIndex != -1 ? null : label, imageIndex, this.semRelationBackgroundColor, this.semRelationForegroundColor);
 		node.setContent("<div class='reference'>" + relation.label + "</div>");
 		node.setLink(HELP_URLSCHEME + relation.tag);
 		node.setEdgeLabel(label);
 		node.setEdgeStyle(EDGE_STYLE_RELATION);
-		node.setEdgeColor(this.relationEdgeColor);
+		node.setEdgeColor(isLexical ? this.lexRelationEdgeColor : this.semRelationEdgeColor);
 		return node;
 	}
 

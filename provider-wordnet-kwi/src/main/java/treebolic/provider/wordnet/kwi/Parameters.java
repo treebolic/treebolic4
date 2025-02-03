@@ -174,17 +174,32 @@ public class Parameters
 	/**
 	 * Relation background color
 	 */
-	static public final String KEY_RELATION_BCOLOR = "relation_bcolor";
+	static public final String KEY_SEM_RELATION_BCOLOR = "sem_relation_bcolor";
 
 	/**
 	 * Relation foreground color
 	 */
-	static public final String KEY_RELATION_FCOLOR = "relation_fcolor";
+	static public final String KEY_SEM_RELATION_FCOLOR = "sem_relation_fcolor";
 
 	/**
 	 * Relation edge color
 	 */
-	static public final String KEY_RELATION_ECOLOR = "relation_ecolor";
+	static public final String KEY_SEM_RELATION_ECOLOR = "sem_relation_ecolor";
+
+	/**
+	 * Relation background color
+	 */
+	static public final String KEY_LEX_RELATION_BCOLOR = "lex_relation_bcolor";
+
+	/**
+	 * Relation foreground color
+	 */
+	static public final String KEY_LEX_RELATION_FCOLOR = "lex_relation_fcolor";
+
+	/**
+	 * Relation edge color
+	 */
+	static public final String KEY_LEX_RELATION_ECOLOR = "lex_relation_ecolor";
 
 	/**
 	 * Words background color
