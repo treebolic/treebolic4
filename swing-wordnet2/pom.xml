@@ -13,69 +13,75 @@
         <version>4.2-1</version>
     </parent>
 
-	<artifactId>swing-wordnet2</artifactId>
-	<packaging>jar</packaging>
+    <artifactId>swing-wordnet2</artifactId>
+    <packaging>jar</packaging>
 
-	<properties>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-	<dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>io.github.treebolic</groupId>
+            <artifactId>swing-wordnet</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.treebolic</groupId>
+            <artifactId>swing-browser-search</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.treebolic</groupId>
+            <artifactId>swing-commons</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.treebolic</groupId>
+            <artifactId>provider-wordnet-kwi2</artifactId>
+            <version>${revision}</version>
+        </dependency>
 		<dependency>
 			<groupId>io.github.treebolic</groupId>
-			<artifactId>swing-wordnet</artifactId>
-			<version>${revision}</version>
+			<artifactId>oewn-wn31</artifactId>
+			<version>1.2026-1</version>
+			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>swing-browser-search</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>swing-commons</artifactId>
-			<version>${revision}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.treebolic</groupId>
-			<artifactId>provider-wordnet-kwi2</artifactId>
-			<version>${revision}</version>
-		</dependency>
-	</dependencies>
+    </dependencies>
 
-	<build>
-		<plugins>
+    <build>
+        <plugins>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.5.1</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<transformers>
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>treebolic.wordnet.Browser2</mainClass>
-									<manifestEntries>
-										<Build-Number>${revision}</Build-Number>
-									</manifestEntries>
-								</transformer>
-							</transformers>
-							<shadedArtifactAttached>true</shadedArtifactAttached>
-							<shadedClassifierName>uber</shadedClassifierName>
-							<minimizeJar>false</minimizeJar>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>treebolic.wordnet.Browser2</mainClass>
+                                    <manifestEntries>
+                                        <Build-Number>${revision}</Build-Number>
+                                    </manifestEntries>
+                                </transformer>
+                            </transformers>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedClassifierName>uber</shadedClassifierName>
+                            <minimizeJar>false</minimizeJar>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
-		</plugins>
-	</build>
+        </plugins>
+    </build>
 
 </project>
