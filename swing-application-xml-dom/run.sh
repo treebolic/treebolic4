@@ -1,5 +1,5 @@
 #!/bin/bash
 
-revision=4.2-0
+revision=4.2-1
 java -jar target/swing-application-xml-${revision}-uber.jar $@
 
