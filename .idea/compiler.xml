@@ -26,6 +26,7 @@
         <module name="swing-commons" />
         <module name="treebolic-graph" />
         <module name="treebolic-view" />
+        <module name="oewn-wn31" />
         <module name="treebolic-annotations" />
         <module name="swing-wordnet2-installer" />
         <module name="swing-application" />
@@ -72,7 +73,6 @@
       <module name="swing-studio-installer" target="1.8" />
       <module name="swing.application" target="1.8" />
       <module name="transformer-xml" target="1.8" />
-      <module name="treebolic-glue-android" target="17" />
       <module name="treebolic-iface" target="1.8" />
     </bytecodeTargetLevel>
   </component>
