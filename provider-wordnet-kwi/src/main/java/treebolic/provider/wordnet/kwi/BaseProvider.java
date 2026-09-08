@@ -2858,6 +2858,7 @@ public abstract class BaseProvider implements IProvider, ImageDecorator
 	 *
 	 * @param parent   parent node
 	 * @param relation relation
+	 * @param isLexical whether this relation is used in a lexical context
 	 * @return node
 	 */
 	@NonNull

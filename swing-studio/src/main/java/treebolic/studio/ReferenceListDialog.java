@@ -218,6 +218,7 @@ public class ReferenceListDialog extends JDialog
 			 *
 			 * @param key   key
 			 * @param value value
+			 * @param valueCount value count
 			 */
 			public Entry(@NonNull final String key, @NonNull final String value, final int valueCount)
 			{
