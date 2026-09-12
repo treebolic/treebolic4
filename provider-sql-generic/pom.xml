@@ -14,6 +14,8 @@
 	</parent>
 
 	<artifactId>provider-sql-generic</artifactId>
+	<name>Generic Treebolic SQL Provider</name>
+	<description>Generic SQL provider for Treebolic</description>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>

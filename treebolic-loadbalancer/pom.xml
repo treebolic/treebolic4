@@ -14,6 +14,8 @@
 	</parent>
 
 	<artifactId>treebolic-loadbalancer</artifactId>
+	<name>Load Balancer</name>
+	<description>Balances load over Treebolic nodes</description>
 	<packaging>jar</packaging>
 
 	<properties>

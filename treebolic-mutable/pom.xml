@@ -14,6 +14,8 @@
 	</parent>
 
 	<artifactId>treebolic-mutable</artifactId>
+	<name>Treebolic Mutable Model</name>
+	<description>Treebolic Mutable Model</description>
 	<packaging>jar</packaging>
 
 	<properties>

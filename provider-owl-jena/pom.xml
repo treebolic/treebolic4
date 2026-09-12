@@ -14,6 +14,8 @@
 	</parent>
 
 	<artifactId>provider-owl-jena</artifactId>
+	<name>Treebolic Jena OWL Provider</name>
+	<description>OWL provider for Treebolic that uses Jena</description>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>

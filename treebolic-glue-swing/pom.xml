@@ -14,6 +14,8 @@
 	</parent>
 
 	<artifactId>treebolic-glue-swing</artifactId>
+	<name>Treebolic Glue to Swing</name>
+	<description>Treebolic glue interface to Swing</description>
 	<packaging>jar</packaging>
 
 	<properties>

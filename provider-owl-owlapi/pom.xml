@@ -14,6 +14,8 @@
 	</parent>
 
 	<artifactId>provider-owl-owlapi</artifactId>
+	<name>Treebolic OWLAPI OWL Provider</name>
+	<description>OWL provider for Treebolic that uses OWLAPI</description>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>

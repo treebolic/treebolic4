@@ -11,6 +11,8 @@
   </parent>
 
   <artifactId>swing-studio</artifactId>
+  <name>Treebolic Studio</name>
+  <description>Treebolic Studio edits Treebolic data</description>
 
   <properties>
     <maven.compiler.source>8</maven.compiler.source>

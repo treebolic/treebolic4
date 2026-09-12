@@ -14,6 +14,8 @@
 	</parent>
 
 	<artifactId>provider-text-indent</artifactId>
+	<name>Indented Text Treebolic Provider</name>
+	<description>Provider for Treebolic that uses indentation</description>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>

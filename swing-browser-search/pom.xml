@@ -14,6 +14,8 @@
 	</parent>
 
 	<artifactId>swing-browser-search</artifactId>
+	<name>Base Swing Search Application</name>
+	<description>Basic Swing Search Application</description>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>

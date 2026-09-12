@@ -14,6 +14,8 @@
 	</parent>
 
 	<artifactId>provider-files</artifactId>
+	<name>Treebolic Files Provider</name>
+	<description>Files provider for Treebolic</description>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>

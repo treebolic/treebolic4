@@ -11,6 +11,8 @@
 
 	<artifactId>treebolic-annotations</artifactId>
 	<packaging>jar</packaging>
+	<name>Treebolic Annotations</name>
+	<description>Defines annotations used in Treebolic</description>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>

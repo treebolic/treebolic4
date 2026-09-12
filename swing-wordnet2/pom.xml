@@ -14,6 +14,8 @@
     </parent>
 
     <artifactId>swing-wordnet2</artifactId>
+    <name>Treebolic WordNet Search for Swing</name>
+    <description>Treebolic WordNet for Swing, uses search interface</description>
     <packaging>jar</packaging>
 
     <properties>
