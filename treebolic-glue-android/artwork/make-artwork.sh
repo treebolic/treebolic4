@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+# Copyright (c) 2026. Bernard Bou
+#
+
 source "../../../make-artwork-lib.sh"
 
 toolbar="toolbar_*.svg"
