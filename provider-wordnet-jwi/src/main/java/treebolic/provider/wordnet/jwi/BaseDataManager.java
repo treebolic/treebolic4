@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019. Bernard Bou <1313ou@gmail.com>
+ * Copyright (c) 2019-2025. Bernard Bou
  */
 
 package treebolic.provider.wordnet.jwi;
@@ -29,14 +29,20 @@ public abstract class BaseDataManager
             "data.noun", "data.verb", "data.adj", "data.adv", //
             "index.noun", "index.verb", "index.adj", "index.adv", "index.sense", //
             "noun.exc", "verb.exc", "adj.exc", "adv.exc", // "cousin.exc", //
-            "sentidx.vrb", "sents.vrb", "verb.Framestext", //
+			"sentidx.vrb", "sents.vrb", // "verb.Framestext", //
             "cntlist", "cntlist.rev",};
 
     static private final String[] CORE_WORDNET_FILES = { //
             "data.noun", "data.verb", "data.adj", "data.adv", //
             "index.noun", "index.verb", "index.adj", "index.adv", "index.sense", //
             "noun.exc", "verb.exc", "adj.exc", "adv.exc", //
-            "sentidx.vrb", "sents.vrb", "verb.Framestext",};
+            "sentidx.vrb", "sents.vrb"};
+
+    static private final String[] WN31_FILES = { //
+            "verb.Framestext"};
+
+    static private final String[] OEWN_FILES = { //
+            "verbFrames.twt, verbTemplates.txt"};
 
     static private final Set<String> WORDNET_FILESET = new HashSet<>(Arrays.asList(WORDNET_FILES));
 
@@ -66,26 +72,35 @@ public abstract class BaseDataManager
      *
      * @param dir dir
      */
-    public static void cleanup(@NonNull final File dir)
-    {
+    public static void cleanup(@NonNull final File dir) {
+        cleanup(dir, WORDNET_FILESET);
+    }
+
+    /**
+     * Empty dir
+     *
+     * @param files files to check
+     * @param dir   dir
+     */
+    public static void cleanup(@NonNull final File dir, Set<String> files) {
         System.out.println("Clean up " + dir);
         // clean up
         @Nullable String[] entries = dir.list();
-        if (entries != null)
-        {
-            for (@NonNull String entry : entries)
-            {
+		if (entries != null)
+		{
+			for (@NonNull String entry : entries)
+			{
                 @NonNull final File file = new File(dir.getPath(), entry);
-                if (WORDNET_FILESET.contains(file.getName()))
-                {
+				if (files.contains(file.getName()))
+				{
                     //noinspection ResultOfMethodCallIgnored
                     file.delete();
                 }
             }
         }
         @NonNull final File file = new File(dir.getPath(), "build");
-        if (file.exists())
-        {
+		if (file.exists())
+		{
             //noinspection ResultOfMethodCallIgnored
             file.delete();
         }
@@ -97,18 +112,8 @@ public abstract class BaseDataManager
      * @param dir dir
      * @return true if cache is valid
      */
-    public static boolean coreCheck(final File dir)
-    {
-        // check if each file exists
-        for (@NonNull final String entry : BaseDataManager.CORE_WORDNET_FILES)
-        {
-            @NonNull final File file = new File(dir, entry);
-            if (!file.exists())
-            {
-                return false;
-            }
-        }
-        return true;
+    public static boolean coreCheck(final File dir) {
+        return check(dir, BaseDataManager.CORE_WORDNET_FILES);
     }
 
     /**
@@ -117,14 +122,44 @@ public abstract class BaseDataManager
      * @param dir dir
      * @return true if cache is valid
      */
-    public static boolean check(final File dir)
-    {
+    public static boolean check(final File dir) {
+        return check(dir, BaseDataManager.WORDNET_FILES);
+    }
+
+    /**
+     * Check for existence of WordNet 3.1-specific files
+     *
+     * @param dir dir
+     * @return true if cache is valid
+     */
+    public static boolean checkWn31(final File dir) {
+        return check(dir, BaseDataManager.WN31_FILES);
+    }
+
+    /**
+     * Check for existence of OEWN-specific files
+     *
+     * @param dir dir
+     * @return true if cache is valid
+     */
+    public static boolean checkOewn(final File dir) {
+        return check(dir, BaseDataManager.OEWN_FILES);
+    }
+
+    /**
+     * Check for existence of files
+     *
+     * @param dir   dir
+     * @param files files to check
+     * @return true if cache is valid
+     */
+    public static boolean check(final File dir, String[] files) {
         // check if each file exists
-        for (@NonNull final String entry : BaseDataManager.WORDNET_FILES)
-        {
+		for (@NonNull final String entry : BaseDataManager.WORDNET_FILES)
+		{
             @NonNull final File file = new File(dir, entry);
-            if (!file.exists())
-            {
+			if (!file.exists())
+			{
                 return false;
             }
         }
@@ -142,11 +177,11 @@ public abstract class BaseDataManager
      */
     @NonNull
     @SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
-    public static File expand(@NonNull final URL zipUrl, @SuppressWarnings("SameParameterValue") final String pathPrefixFilter, @NonNull final File destDir) throws IOException
-    {
+	public static File expand(@NonNull final URL zipUrl, @SuppressWarnings("SameParameterValue") final String pathPrefixFilter, @NonNull final File destDir) throws IOException
+	{
         System.out.println("Expand " + zipUrl);
-        try (@NonNull InputStream is = zipUrl.openStream())
-        {
+		try (@NonNull InputStream is = zipUrl.openStream())
+		{
             return BaseDataManager.expand(is, pathPrefixFilter, destDir);
         }
     }
@@ -161,12 +196,12 @@ public abstract class BaseDataManager
      * @throws IOException io exception
      */
     @NonNull
-    public static File expand(@NonNull final InputStream inputStream, final String pathPrefixFilter0, @NonNull final File destDir) throws IOException
-    {
+	public static File expand(@NonNull final InputStream inputStream, final String pathPrefixFilter0, @NonNull final File destDir) throws IOException
+	{
         // prefix
         String pathPrefixFilter = pathPrefixFilter0;
-        if (pathPrefixFilter != null && !pathPrefixFilter.isEmpty() && pathPrefixFilter.charAt(0) == File.separatorChar)
-        {
+		if (pathPrefixFilter != null && !pathPrefixFilter.isEmpty() && pathPrefixFilter.charAt(0) == File.separatorChar)
+		{
             pathPrefixFilter = pathPrefixFilter.substring(1);
         }
 
@@ -175,18 +210,18 @@ public abstract class BaseDataManager
         destDir.mkdir();
 
         // read and expand entries
-        try (@NonNull ZipInputStream zipInputStream = new ZipInputStream(inputStream))
-        {
+		try (@NonNull ZipInputStream zipInputStream = new ZipInputStream(inputStream))
+		{
             // get the zipped file list entry
             @NonNull final byte[] buffer = new byte[1024];
             @Nullable ZipEntry entry = zipInputStream.getNextEntry();
-            while (entry != null)
-            {
-                if (!entry.isDirectory())
-                {
+			while (entry != null)
+			{
+				if (!entry.isDirectory())
+				{
                     @NonNull final String entryName = entry.getName();
-                    if (pathPrefixFilter == null || entryName.startsWith(pathPrefixFilter))
-                    {
+					if (pathPrefixFilter == null || entryName.startsWith(pathPrefixFilter))
+					{
                         // flatten zip hierarchy
                         @NonNull final File file = new File(destDir + File.separator + new File(entryName).getName());
 
@@ -197,11 +232,11 @@ public abstract class BaseDataManager
                         // output
 
                         // copy
-                        try (@NonNull FileOutputStream outputStream = new FileOutputStream(file))
-                        {
+						try (@NonNull FileOutputStream outputStream = new FileOutputStream(file))
+						{
                             int len;
-                            while ((len = zipInputStream.read(buffer)) > 0)
-                            {
+							while ((len = zipInputStream.read(buffer)) > 0)
+							{
                                 outputStream.write(buffer, 0, len);
                             }
                         }

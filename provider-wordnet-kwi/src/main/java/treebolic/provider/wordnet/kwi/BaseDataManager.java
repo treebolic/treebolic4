@@ -29,14 +29,20 @@ public abstract class BaseDataManager
 			"data.noun", "data.verb", "data.adj", "data.adv", //
 			"index.noun", "index.verb", "index.adj", "index.adv", "index.sense", //
 			"noun.exc", "verb.exc", "adj.exc", "adv.exc", // "cousin.exc", //
-			"sentidx.vrb", "sents.vrb", "verb.Framestext", //
+			"sentidx.vrb", "sents.vrb", // "verb.Framestext", //
 			"cntlist", "cntlist.rev",};
 
 	static private final String[] CORE_WORDNET_FILES = { //
 			"data.noun", "data.verb", "data.adj", "data.adv", //
 			"index.noun", "index.verb", "index.adj", "index.adv", "index.sense", //
 			"noun.exc", "verb.exc", "adj.exc", "adv.exc", //
-			"sentidx.vrb", "sents.vrb", "verb.Framestext",};
+            "sentidx.vrb", "sents.vrb"};
+
+    static private final String[] WN31_FILES = { //
+            "verb.Framestext"};
+
+    static private final String[] OEWN_FILES = { //
+            "verbFrames.twt, verbTemplates.txt"};
 
 	static private final Set<String> WORDNET_FILESET = new HashSet<>(Arrays.asList(WORDNET_FILES));
 
@@ -66,8 +72,17 @@ public abstract class BaseDataManager
 	 *
 	 * @param dir dir
 	 */
-	public static void cleanup(@NonNull final File dir)
-	{
+    public static void cleanup(@NonNull final File dir) {
+        cleanup(dir, WORDNET_FILESET);
+    }
+
+    /**
+     * Empty dir
+     *
+     * @param files files to check
+     * @param dir   dir
+     */
+    public static void cleanup(@NonNull final File dir, Set<String> files) {
 		System.out.println("Clean up " + dir);
 		// clean up
 		@Nullable String[] entries = dir.list();
@@ -76,7 +91,7 @@ public abstract class BaseDataManager
 			for (@NonNull String entry : entries)
 			{
 				@NonNull final File file = new File(dir.getPath(), entry);
-				if (WORDNET_FILESET.contains(file.getName()))
+				if (files.contains(file.getName()))
 				{
 					//noinspection ResultOfMethodCallIgnored
 					file.delete();
@@ -97,18 +112,8 @@ public abstract class BaseDataManager
 	 * @param dir dir
 	 * @return true if cache is valid
 	 */
-	public static boolean coreCheck(final File dir)
-	{
-		// check if each file exists
-		for (@NonNull final String entry : BaseDataManager.CORE_WORDNET_FILES)
-		{
-			@NonNull final File file = new File(dir, entry);
-			if (!file.exists())
-			{
-				return false;
-			}
-		}
-		return true;
+    public static boolean coreCheck(final File dir) {
+        return check(dir, BaseDataManager.CORE_WORDNET_FILES);
 	}
 
 	/**
@@ -117,8 +122,38 @@ public abstract class BaseDataManager
 	 * @param dir dir
 	 * @return true if cache is valid
 	 */
-	public static boolean check(final File dir)
-	{
+    public static boolean check(final File dir) {
+        return check(dir, BaseDataManager.WORDNET_FILES);
+    }
+
+    /**
+     * Check for existence of WordNet 3.1-specific files
+     *
+     * @param dir dir
+     * @return true if cache is valid
+     */
+    public static boolean checkWn31(final File dir) {
+        return check(dir, BaseDataManager.WN31_FILES);
+    }
+
+    /**
+     * Check for existence of OEWN-specific files
+     *
+     * @param dir dir
+     * @return true if cache is valid
+     */
+    public static boolean checkOewn(final File dir) {
+        return check(dir, BaseDataManager.OEWN_FILES);
+    }
+
+    /**
+     * Check for existence of files
+     *
+     * @param dir   dir
+     * @param files files to check
+     * @return true if cache is valid
+     */
+    public static boolean check(final File dir, String[] files) {
 		// check if each file exists
 		for (@NonNull final String entry : BaseDataManager.WORDNET_FILES)
 		{
