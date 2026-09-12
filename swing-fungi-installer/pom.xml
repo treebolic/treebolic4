@@ -3,136 +3,190 @@
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>treebolic</artifactId>
-    <groupId>io.github.treebolic</groupId>
-    <version>4.2-1</version>
-  </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>treebolic</artifactId>
+        <groupId>io.github.treebolic</groupId>
+        <version>4.2-1</version>
+    </parent>
 
-  <artifactId>swing-fungi-installer</artifactId>
+    <artifactId>swing-fungi-installer</artifactId>
+    <name>Treebolic Fungi Swing installer</name>
+    <description>Makes the Treebolic Fungi Swing installer</description>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- Installer variables -->
-    <izpack.src.dir>${basedir}/src/main/izpack</izpack.src.dir>
-    <data.src.dir>${basedir}/../swing-fungi/database</data.src.dir>
-    <izpack.staging.dir>${project.build.directory}/staging</izpack.staging.dir>
-    <info.appName>Treebolic Fungi</info.appName>
-    <appversion>4.2-1</appversion>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Installer variables -->
+        <izpack.src.dir>${basedir}/src/main/izpack</izpack.src.dir>
+        <data.src.dir>${basedir}/../swing-fungi/database</data.src.dir>
+        <izpack.staging.dir>${project.build.directory}/staging</izpack.staging.dir>
+        <info.appName>Treebolic Fungi</info.appName>
+        <appversion>4.2-1</appversion>
+    </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>io.github.treebolic</groupId>
-      <artifactId>swing-fungi</artifactId>
-      <version>4.2-1</version>
-      <classifier>uber</classifier>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>io.github.treebolic</groupId>
+            <artifactId>swing-fungi</artifactId>
+            <version>4.2-1</version>
+            <classifier>uber</classifier>
+        </dependency>
+    </dependencies>
 
-  <build>
-    <plugins>
+    <build>
+        <plugins>
 
-      <!-- copy resources -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.7</version>
-        <executions>
-          <execution>
-            <id>main</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <target>
-                <copy todir="${izpack.staging.dir}" overwrite="true">
-                  <fileset dir="${izpack.src.dir}"/>
-                </copy>
-                <replace dir="${izpack.staging.dir}">
-                  <include name="**/*.sh"/>
-                  <include name="**/*.bat"/>
-                  <include name="**/install.xml"/>
-                  <include name="**/shortcut-*.xml"/>
-                  <replacefilter token="@{appversion}" value="${appversion}"/>
-                </replace>
-              </target>
-            </configuration>
-          </execution>
-          <execution>
-            <id>data</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <target>
-                <copy todir="${izpack.staging.dir}/database" overwrite="true">
-                  <fileset dir="${data.src.dir}"/>
-                </copy>
-              </target>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+            <!-- copy resources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>main</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <copy todir="${izpack.staging.dir}" overwrite="true">
+                                    <fileset dir="${izpack.src.dir}"/>
+                                </copy>
+                                <replace dir="${izpack.staging.dir}">
+                                    <include name="**/*.sh"/>
+                                    <include name="**/*.bat"/>
+                                    <include name="**/install.xml"/>
+                                    <include name="**/shortcut-*.xml"/>
+                                    <replacefilter token="@{appversion}" value="${appversion}"/>
+                                </replace>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>data</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <copy todir="${izpack.staging.dir}/database" overwrite="true">
+                                    <fileset dir="${data.src.dir}"/>
+                                </copy>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
-      <!-- copy dependencies -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.6.1</version>
-        <configuration>
-          <excludeTransitive>false</excludeTransitive>
-          <stripVersion>false</stripVersion>
-          <overWriteReleases>true</overWriteReleases>
-          <overWriteSnapshots>true</overWriteSnapshots>
-          <overWriteIfNewer>true</overWriteIfNewer>
-          <excludeScope>system</excludeScope>
-        </configuration>
-        <executions>
-          <execution>
-            <!-- copy *application* jars to izpack staging lib -->
-            <id>copy-product-dependencies</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${izpack.staging.dir}/lib</outputDirectory>
-              <excludeScope>system</excludeScope> <!-- this excludes tools.jar, e.g. -->
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+            <!-- copy dependencies -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <excludeTransitive>false</excludeTransitive>
+                    <stripVersion>false</stripVersion>
+                    <overWriteReleases>true</overWriteReleases>
+                    <overWriteSnapshots>true</overWriteSnapshots>
+                    <overWriteIfNewer>true</overWriteIfNewer>
+                    <excludeScope>system</excludeScope>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- copy *application* jars to izpack staging lib -->
+                        <id>copy-product-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${izpack.staging.dir}/lib</outputDirectory>
+                            <excludeScope>system</excludeScope> <!-- this excludes tools.jar, e.g. -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
-      <plugin>
-        <groupId>org.codehaus.izpack</groupId>
-        <artifactId>izpack-maven-plugin</artifactId>
-        <version>5.2.6</version>
-        <extensions>true</extensions>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>izpack</goal>
-            </goals>
-            <configuration>
-              <!-- base for relative paths in izpack descriptor -->
-              <baseDir>${izpack.staging.dir}</baseDir>
-              <installFile>${izpack.staging.dir}/install.xml</installFile>
-              <outputDirectory>${project.build.directory}</outputDirectory>
-              <finalName>treebolic-fungi-${appversion}</finalName>
-              <classifier>install</classifier>
-              <mkdirs>true</mkdirs>
-              <autoIncludeUrl>false</autoIncludeUrl>
-              <autoIncludeDevelopers>false</autoIncludeDevelopers>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+            <plugin>
+                <groupId>org.codehaus.izpack</groupId>
+                <artifactId>izpack-maven-plugin</artifactId>
+                <version>5.2.6</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>izpack</goal>
+                        </goals>
+                        <configuration>
+                            <!-- base for relative paths in izpack descriptor -->
+                            <baseDir>${izpack.staging.dir}</baseDir>
+                            <installFile>${izpack.staging.dir}/install.xml</installFile>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <finalName>treebolic-fungi-${appversion}</finalName>
+                            <classifier>install</classifier>
+                            <mkdirs>true</mkdirs>
+                            <autoIncludeUrl>false</autoIncludeUrl>
+                            <autoIncludeDevelopers>false</autoIncludeDevelopers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
-    </plugins>
-  </build>
+            <!-- 1. Create empty placeholder source and javadoc JAR files -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>create-empty-jars</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <touch file="${project.build.directory}/${project.build.finalName}-sources.jar"/>
+                                <touch file="${project.build.directory}/${project.build.finalName}-javadoc.jar"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 2. Attach the generated placeholder JARs to the deployment lifecycle -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-dummy-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>${project.build.directory}/${project.build.finalName}-sources.jar</file>
+                                    <type>jar</type>
+                                    <classifier>sources</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${project.build.directory}/${project.build.finalName}-javadoc.jar</file>
+                                    <type>jar</type>
+                                    <classifier>javadoc</classifier>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
 </project>

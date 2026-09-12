@@ -14,6 +14,8 @@
 	</parent>
 
 	<artifactId>swing-fungi</artifactId>
+	<name>Treebolic Fungi</name>
+	<description>Treebolic application exploring Fungi</description>
 	<packaging>jar</packaging>
 
 	<properties>
